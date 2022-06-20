@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mobileappmarketplace-dev-123858-authRole",
+      "UnauthRoleArn": "arn:aws:iam::202636629342:role/amplify-mobileappmarketplace-dev-123858-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::202636629342:role/amplify-mobileappmarketplace-dev-123858-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
+      "UnauthRoleName": "amplify-mobileappmarketplace-dev-123858-unauthRole",
+      "StackName": "amplify-mobileappmarketplace-dev-123858",
+      "StackId": "arn:aws:cloudformation:us-east-1:202636629342:stack/amplify-mobileappmarketplace-dev-123858/d2905e60-cc41-11ec-97ac-12401d6ea6d5",
+      "AmplifyAppId": "d22h3uk4vvon62"
+    },
+    "categories": {
+      "auth": {
+        "mobileappmarketplacee1e8cc85": {}
+      }
+    }
+  }
+}
