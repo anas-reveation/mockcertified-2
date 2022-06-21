@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">mock-certified</string>
+    <string name="title_activity_main">mock-certified</string>
+    <string name="package_name">com.mockapp.app</string>
+    <string name="custom_url_scheme">com.mockapp.app</string>
+</resources>
