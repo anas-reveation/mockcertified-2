@@ -1,11 +1,11 @@
 import { Auth } from 'aws-amplify';
 
 export default {
-  // SSR AUTH
   async load({ commit }, req) {
     try {
       const user = await Auth.currentAuthenticatedUser();
       const userData = user ? user.attributes : user;
+      console.log('userData', user);
       commit('setUser', userData);
       return user;
     } catch (error) {
@@ -13,7 +13,7 @@ export default {
     }
   },
 
-  async register(_, { email, password }) {
+  async register({ commit }, { email, password }) {
     commit('SET_LOADER', true, { root: true });
     try {
       const user = await Auth.signUp({
@@ -28,7 +28,7 @@ export default {
     }
   },
 
-  async confirmRegistration(_, { email, code }) {
+  async confirmRegistration({ commit }, { email, code }) {
     commit('SET_LOADER', true, { root: true });
 
     try {
@@ -63,9 +63,11 @@ export default {
       await Auth.signOut();
       commit('setUser', null);
       commit('SET_LOADER', false, { root: true });
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);
+      return false;
     }
   },
 };
