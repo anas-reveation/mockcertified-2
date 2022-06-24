@@ -1,21 +1,18 @@
 <template>
-  <nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light mb-4">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1">Mock app</span>
-      <span v-if="isAuthenticated" @click="logout">Logout</span>
+      <NuxtLink class="navbar-brand" to="/home">
+        <img src="@/assets/images/fav.png" height="60" width="60" alt="" />
+      </NuxtLink>
+      <img
+        src="@/assets/images/005-profile-user.png"
+        height="40"
+        class="opacity-75"
+        width="40"
+        alt=""
+      />
     </div>
   </nav>
 </template>
 
-<script>
-import { mapActions, mapState } from 'vuex';
-export default {
-  computed: {
-    ...mapState('auth', ['isAuthenticated']),
-  },
-
-  methods: {
-    ...mapActions('auth', ['logout']),
-  },
-};
-</script>
+<script></script>
