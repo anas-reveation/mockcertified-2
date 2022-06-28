@@ -135,9 +135,9 @@
   </div>
 </template>
 <script>
-import { API } from 'aws-amplify';
-import { getUser } from '../graphql/queries';
 import { mapState } from 'vuex';
+import { API } from 'aws-amplify';
+import { getUser, listQuestions } from '../graphql/queries';
 export default {
   data() {
     return {
@@ -148,6 +148,10 @@ export default {
   },
   computed: {
     ...mapState('auth', ['user']),
+  },
+  mounted() {
+    console.log(this.user);
+    // this.getUserData();
   },
   methods: {
     changeTab(tabName) {
@@ -166,14 +170,13 @@ export default {
     seeResult() {
       this.$router.push('/result');
     },
-    async getUser() {
+    async getUserData() {
       const user = await API.graphql({
         query: getUser,
-        variables: { id: this.user.userSub },
+        variables: { id: this.user.sub },
       });
       if (user) {
-        this.currentUser = user.data.listUsers.items;
-        console.log(this.currentUser);
+        console.log('user from getuser home page', user);
       }
     },
   },

@@ -8,9 +8,6 @@ export const getUser = /* GraphQL */ `
       first_name
       last_name
       email
-      birth_date
-      subject
-      Tests
       createdAt
       updatedAt
     }
@@ -28,9 +25,90 @@ export const listUsers = /* GraphQL */ `
         first_name
         last_name
         email
-        birth_date
-        subject
-        Tests
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getTestManager = /* GraphQL */ `
+  query GetTestManager($id: ID!) {
+    getTestManager(id: $id) {
+      id
+      user_id
+      category
+      title
+      description
+      price
+      time_limit
+      weightage
+      test_data {
+        id
+        test_id
+        question
+        answer
+        explainantion
+        options
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTestManagers = /* GraphQL */ `
+  query ListTestManagers(
+    $filter: ModelTestManagerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTestManagers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_id
+        category
+        title
+        description
+        price
+        time_limit
+        weightage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
+      id
+      test_id
+      question
+      answer
+      explainantion
+      options
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listQuestions = /* GraphQL */ `
+  query ListQuestions(
+    $filter: ModelQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        test_id
+        question
+        answer
+        explainantion
+        options
         createdAt
         updatedAt
       }

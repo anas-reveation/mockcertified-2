@@ -8,7 +8,72 @@ type User @model {
   first_name: String!
   last_name: String!
   email: String!
-  birth_date: String!
-  subject: String!
-  Tests: Int!
 }
+
+type TestManager @model {
+  id: ID!
+  user_id: ID!
+  category: String!
+  title: String!
+  description: String!
+  price: Int!
+  time_limit: Int!
+  weightage: Int!
+  test_data: [Question]
+}
+
+type Question @model {
+  id: ID!
+  test_id: ID!
+  question: String!
+  answer: String!
+  explainantion: String!
+  options: AWSJSON
+}
+
+# type Option @model {
+#   id: ID!
+#   Question_id: ID!
+#   option_A: String!
+#   option_B: String!
+#   option_C: String!
+#   option_D: String!
+#   question: Question
+# }
+
+# {
+#   "data": {
+#     "listQuestions": {
+#       "items": [
+#         {
+#           "explainantion": "Which of the following is not an Array method?",
+#           "answer": "option_D",
+#           "question": "Where is the correct place to insert the use strict expression? ",
+#           "test_id": "d4af0ebc-007d-4c00-9e57-660a00c9d7a0",
+#           "id": "6006565f-9919-4ebe-8465-08e5a76ba7de"
+#         },
+#         {
+#           "explainantion": "As per the w3school therer is no  explaination",
+#           "answer": "option_A",
+#           "question": "A callback function is also known as?",
+#           "test_id": "d4af0ebc-007d-4c00-9e57-660a00c9d7a0",
+#           "id": "8cfbeb0e-6e06-4c4a-994c-4261b3aab656"
+#         },
+#         {
+#           "explainantion": "As per the w3school therer is no  explaination",
+#           "answer": "option_C",
+#           "question": "Where is the correct place to insert the use strict expression? ",
+#           "test_id": "d4af0ebc-007d-4c00-9e57-660a00c9d7a0",
+#           "id": "8cf88d6d-9a21-4bf8-9921-79689112cdfe"
+#         },
+#         {
+#           "explainantion": "As per the w3school therer is no  explaination",
+#           "answer": "option_B",
+#           "question": "Which of the following is not a looping format in javascript? ",
+#           "test_id": "d4af0ebc-007d-4c00-9e57-660a00c9d7a0",
+#           "id": "fa4c5fae-47f2-4bb6-87eb-5ff68f6e12ba"
+#         }
+#       ]
+#     }
+#   }
+# }
