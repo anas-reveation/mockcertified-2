@@ -150,8 +150,7 @@ export default {
     ...mapState('auth', ['user']),
   },
   mounted() {
-    console.log(this.user);
-    // this.getUserData();
+    console.log(this.user.data.getUser);
   },
   methods: {
     changeTab(tabName) {
@@ -169,15 +168,6 @@ export default {
     },
     seeResult() {
       this.$router.push('/result');
-    },
-    async getUserData() {
-      const user = await API.graphql({
-        query: getUser,
-        variables: { id: this.user.sub },
-      });
-      if (user) {
-        console.log('user from getuser home page', user);
-      }
     },
   },
 };

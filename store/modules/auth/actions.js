@@ -3,22 +3,18 @@ import { API } from 'aws-amplify';
 import { getUser } from '../../../graphql/queries';
 
 export default {
-  // async getUserData(userId) {
-  //   const user = await API.graphql({
-  //     query: getUser,
-  //     variables: { id: userId },
-  //   });
-  //   if (user) {
-  //     console.log('user from getuser', user);
-  //   }
-  // },
-
   async load({ commit }, req) {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      const userData = user ? user.attributes : user;
-      console.log('userData', user);
-      commit('setUser', userData);
+      // const userData = user ? user.attributes : user;
+      const userApiData = await API.graphql({
+        query: getUser,
+        variables: { id: user.username },
+      });
+      if (userApiData) {
+        // const userData = user ? userApiData : user;
+        commit('setUser', userApiData);
+      }
       return user;
     } catch (error) {
       commit('setUser', null);
@@ -58,15 +54,14 @@ export default {
 
     try {
       const user = await Auth.signIn(email, password);
-      const userData = user ? user.attributes : user;
-      commit('setUser', userData);
-      // console.log(user.username);
-      // const userApiData = await API.graphql({
-      //   query: getUser,
-      //   variables: { id: 'a164598a-2952-4c0e-a568-178c248009f7' },
-      // });
-      // console.log('user from getuser', userApiData);
-
+      const userApiData = await API.graphql({
+        query: getUser,
+        variables: { id: user.username },
+      });
+      if (userApiData) {
+        // const userData = user ? userApiData : user;
+        commit('setUser', userApiData);
+      }
       commit('SET_LOADER', false, { root: true });
       return user;
     } catch (err) {
