@@ -8,6 +8,13 @@ export const onCreateUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -20,6 +27,13 @@ export const onUpdateUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -32,6 +46,13 @@ export const onDeleteUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -152,6 +173,39 @@ export const onDeleteQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateBoughtHistory = /* GraphQL */ `
+  subscription OnCreateBoughtHistory {
+    onCreateBoughtHistory {
+      id
+      user_id
+      test_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBoughtHistory = /* GraphQL */ `
+  subscription OnUpdateBoughtHistory {
+    onUpdateBoughtHistory {
+      id
+      user_id
+      test_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBoughtHistory = /* GraphQL */ `
+  subscription OnDeleteBoughtHistory {
+    onDeleteBoughtHistory {
+      id
+      user_id
+      test_id
       createdAt
       updatedAt
     }

@@ -11,6 +11,13 @@ export const createUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -26,6 +33,13 @@ export const updateUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -41,6 +55,13 @@ export const deleteUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -179,6 +200,48 @@ export const deleteQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createBoughtHistory = /* GraphQL */ `
+  mutation CreateBoughtHistory(
+    $input: CreateBoughtHistoryInput!
+    $condition: ModelBoughtHistoryConditionInput
+  ) {
+    createBoughtHistory(input: $input, condition: $condition) {
+      id
+      user_id
+      test_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBoughtHistory = /* GraphQL */ `
+  mutation UpdateBoughtHistory(
+    $input: UpdateBoughtHistoryInput!
+    $condition: ModelBoughtHistoryConditionInput
+  ) {
+    updateBoughtHistory(input: $input, condition: $condition) {
+      id
+      user_id
+      test_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBoughtHistory = /* GraphQL */ `
+  mutation DeleteBoughtHistory(
+    $input: DeleteBoughtHistoryInput!
+    $condition: ModelBoughtHistoryConditionInput
+  ) {
+    deleteBoughtHistory(input: $input, condition: $condition) {
+      id
+      user_id
+      test_id
       createdAt
       updatedAt
     }

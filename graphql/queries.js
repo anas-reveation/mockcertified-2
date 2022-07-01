@@ -8,6 +8,13 @@ export const getUser = /* GraphQL */ `
       first_name
       last_name
       email
+      bought_history {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -109,6 +116,35 @@ export const listQuestions = /* GraphQL */ `
         answer
         explainantion
         options
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getBoughtHistory = /* GraphQL */ `
+  query GetBoughtHistory($id: ID!) {
+    getBoughtHistory(id: $id) {
+      id
+      user_id
+      test_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBoughtHistories = /* GraphQL */ `
+  query ListBoughtHistories(
+    $filter: ModelBoughtHistoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBoughtHistories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_id
+        test_id
         createdAt
         updatedAt
       }
