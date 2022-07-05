@@ -11,12 +11,14 @@ export const createUser = /* GraphQL */ `
       first_name
       last_name
       email
-      bought_history {
-        id
-        user_id
-        test_id
-        createdAt
-        updatedAt
+      created_tests {
+        nextToken
+      }
+      purchased_tests {
+        nextToken
+      }
+      attempted_tests {
+        nextToken
       }
       createdAt
       updatedAt
@@ -33,12 +35,14 @@ export const updateUser = /* GraphQL */ `
       first_name
       last_name
       email
-      bought_history {
-        id
-        user_id
-        test_id
-        createdAt
-        updatedAt
+      created_tests {
+        nextToken
+      }
+      purchased_tests {
+        nextToken
+      }
+      attempted_tests {
+        nextToken
       }
       createdAt
       updatedAt
@@ -55,12 +59,14 @@ export const deleteUser = /* GraphQL */ `
       first_name
       last_name
       email
-      bought_history {
-        id
-        user_id
-        test_id
-        createdAt
-        updatedAt
+      created_tests {
+        nextToken
+      }
+      purchased_tests {
+        nextToken
+      }
+      attempted_tests {
+        nextToken
       }
       createdAt
       updatedAt
@@ -75,21 +81,27 @@ export const createTestManager = /* GraphQL */ `
     createTestManager(input: $input, condition: $condition) {
       id
       user_id
-      category
+      created_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       title
       description
       price
       time_limit
-      weightage
-      test_data {
-        id
-        test_id
-        question
-        answer
-        explainantion
-        options
-        createdAt
-        updatedAt
+      questions {
+        nextToken
       }
       createdAt
       updatedAt
@@ -104,21 +116,27 @@ export const updateTestManager = /* GraphQL */ `
     updateTestManager(input: $input, condition: $condition) {
       id
       user_id
-      category
+      created_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       title
       description
       price
       time_limit
-      weightage
-      test_data {
-        id
-        test_id
-        question
-        answer
-        explainantion
-        options
-        createdAt
-        updatedAt
+      questions {
+        nextToken
       }
       createdAt
       updatedAt
@@ -133,21 +151,27 @@ export const deleteTestManager = /* GraphQL */ `
     deleteTestManager(input: $input, condition: $condition) {
       id
       user_id
-      category
+      created_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       title
       description
       price
       time_limit
-      weightage
-      test_data {
-        id
-        test_id
-        question
-        answer
-        explainantion
-        options
-        createdAt
-        updatedAt
+      questions {
+        nextToken
       }
       createdAt
       updatedAt
@@ -161,7 +185,19 @@ export const createQuestion = /* GraphQL */ `
   ) {
     createQuestion(input: $input, condition: $condition) {
       id
+      marks
       test_id
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
       question
       answer
       explainantion
@@ -178,7 +214,19 @@ export const updateQuestion = /* GraphQL */ `
   ) {
     updateQuestion(input: $input, condition: $condition) {
       id
+      marks
       test_id
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
       question
       answer
       explainantion
@@ -195,7 +243,19 @@ export const deleteQuestion = /* GraphQL */ `
   ) {
     deleteQuestion(input: $input, condition: $condition) {
       id
+      marks
       test_id
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
       question
       answer
       explainantion
@@ -205,43 +265,316 @@ export const deleteQuestion = /* GraphQL */ `
     }
   }
 `;
-export const createBoughtHistory = /* GraphQL */ `
-  mutation CreateBoughtHistory(
-    $input: CreateBoughtHistoryInput!
-    $condition: ModelBoughtHistoryConditionInput
+export const createCategory = /* GraphQL */ `
+  mutation CreateCategory(
+    $input: CreateCategoryInput!
+    $condition: ModelCategoryConditionInput
   ) {
-    createBoughtHistory(input: $input, condition: $condition) {
+    createCategory(input: $input, condition: $condition) {
       id
-      user_id
-      test_id
+      name
       createdAt
       updatedAt
     }
   }
 `;
-export const updateBoughtHistory = /* GraphQL */ `
-  mutation UpdateBoughtHistory(
-    $input: UpdateBoughtHistoryInput!
-    $condition: ModelBoughtHistoryConditionInput
+export const updateCategory = /* GraphQL */ `
+  mutation UpdateCategory(
+    $input: UpdateCategoryInput!
+    $condition: ModelCategoryConditionInput
   ) {
-    updateBoughtHistory(input: $input, condition: $condition) {
+    updateCategory(input: $input, condition: $condition) {
       id
-      user_id
-      test_id
+      name
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteBoughtHistory = /* GraphQL */ `
-  mutation DeleteBoughtHistory(
-    $input: DeleteBoughtHistoryInput!
-    $condition: ModelBoughtHistoryConditionInput
+export const deleteCategory = /* GraphQL */ `
+  mutation DeleteCategory(
+    $input: DeleteCategoryInput!
+    $condition: ModelCategoryConditionInput
   ) {
-    deleteBoughtHistory(input: $input, condition: $condition) {
+    deleteCategory(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPurchasedTest = /* GraphQL */ `
+  mutation CreatePurchasedTest(
+    $input: CreatePurchasedTestInput!
+    $condition: ModelPurchasedTestConditionInput
+  ) {
+    createPurchasedTest(input: $input, condition: $condition) {
       id
       user_id
       test_id
+      purchased_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePurchasedTest = /* GraphQL */ `
+  mutation UpdatePurchasedTest(
+    $input: UpdatePurchasedTestInput!
+    $condition: ModelPurchasedTestConditionInput
+  ) {
+    updatePurchasedTest(input: $input, condition: $condition) {
+      id
+      user_id
+      test_id
+      purchased_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePurchasedTest = /* GraphQL */ `
+  mutation DeletePurchasedTest(
+    $input: DeletePurchasedTestInput!
+    $condition: ModelPurchasedTestConditionInput
+  ) {
+    deletePurchasedTest(input: $input, condition: $condition) {
+      id
+      user_id
+      test_id
+      purchased_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAttemptedTest = /* GraphQL */ `
+  mutation CreateAttemptedTest(
+    $input: CreateAttemptedTestInput!
+    $condition: ModelAttemptedTestConditionInput
+  ) {
+    createAttemptedTest(input: $input, condition: $condition) {
+      id
+      user_id
+      attempted_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
+      result {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAttemptedTest = /* GraphQL */ `
+  mutation UpdateAttemptedTest(
+    $input: UpdateAttemptedTestInput!
+    $condition: ModelAttemptedTestConditionInput
+  ) {
+    updateAttemptedTest(input: $input, condition: $condition) {
+      id
+      user_id
+      attempted_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
+      result {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAttemptedTest = /* GraphQL */ `
+  mutation DeleteAttemptedTest(
+    $input: DeleteAttemptedTestInput!
+    $condition: ModelAttemptedTestConditionInput
+  ) {
+    deleteAttemptedTest(input: $input, condition: $condition) {
+      id
+      user_id
+      attempted_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
+      result {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createResult = /* GraphQL */ `
+  mutation CreateResult(
+    $input: CreateResultInput!
+    $condition: ModelResultConditionInput
+  ) {
+    createResult(input: $input, condition: $condition) {
+      id
+      attempted_id
+      question_id
+      question {
+        id
+        marks
+        test_id
+        question
+        answer
+        explainantion
+        options
+        createdAt
+        updatedAt
+      }
+      user_input
+      result_status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateResult = /* GraphQL */ `
+  mutation UpdateResult(
+    $input: UpdateResultInput!
+    $condition: ModelResultConditionInput
+  ) {
+    updateResult(input: $input, condition: $condition) {
+      id
+      attempted_id
+      question_id
+      question {
+        id
+        marks
+        test_id
+        question
+        answer
+        explainantion
+        options
+        createdAt
+        updatedAt
+      }
+      user_input
+      result_status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteResult = /* GraphQL */ `
+  mutation DeleteResult(
+    $input: DeleteResultInput!
+    $condition: ModelResultConditionInput
+  ) {
+    deleteResult(input: $input, condition: $condition) {
+      id
+      attempted_id
+      question_id
+      question {
+        id
+        marks
+        test_id
+        question
+        answer
+        explainantion
+        options
+        createdAt
+        updatedAt
+      }
+      user_input
+      result_status
       createdAt
       updatedAt
     }

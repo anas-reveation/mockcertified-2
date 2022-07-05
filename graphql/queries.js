@@ -8,12 +8,14 @@ export const getUser = /* GraphQL */ `
       first_name
       last_name
       email
-      bought_history {
-        id
-        user_id
-        test_id
-        createdAt
-        updatedAt
+      created_tests {
+        nextToken
+      }
+      purchased_tests {
+        nextToken
+      }
+      attempted_tests {
+        nextToken
       }
       createdAt
       updatedAt
@@ -44,21 +46,27 @@ export const getTestManager = /* GraphQL */ `
     getTestManager(id: $id) {
       id
       user_id
-      category
+      created_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       title
       description
       price
       time_limit
-      weightage
-      test_data {
-        id
-        test_id
-        question
-        answer
-        explainantion
-        options
-        createdAt
-        updatedAt
+      questions {
+        nextToken
       }
       createdAt
       updatedAt
@@ -75,12 +83,11 @@ export const listTestManagers = /* GraphQL */ `
       items {
         id
         user_id
-        category
+        category_id
         title
         description
         price
         time_limit
-        weightage
         createdAt
         updatedAt
       }
@@ -92,7 +99,19 @@ export const getQuestion = /* GraphQL */ `
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {
       id
+      marks
       test_id
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
       question
       answer
       explainantion
@@ -111,6 +130,7 @@ export const listQuestions = /* GraphQL */ `
     listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        marks
         test_id
         question
         answer
@@ -123,28 +143,165 @@ export const listQuestions = /* GraphQL */ `
     }
   }
 `;
-export const getBoughtHistory = /* GraphQL */ `
-  query GetBoughtHistory($id: ID!) {
-    getBoughtHistory(id: $id) {
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
       id
-      user_id
-      test_id
+      name
       createdAt
       updatedAt
     }
   }
 `;
-export const listBoughtHistories = /* GraphQL */ `
-  query ListBoughtHistories(
-    $filter: ModelBoughtHistoryFilterInput
+export const listCategories = /* GraphQL */ `
+  query ListCategories(
+    $filter: ModelCategoryFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBoughtHistories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPurchasedTest = /* GraphQL */ `
+  query GetPurchasedTest($id: ID!) {
+    getPurchasedTest(id: $id) {
+      id
+      user_id
+      test_id
+      purchased_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      test {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        time_limit
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPurchasedTests = /* GraphQL */ `
+  query ListPurchasedTests(
+    $filter: ModelPurchasedTestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPurchasedTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         user_id
         test_id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAttemptedTest = /* GraphQL */ `
+  query GetAttemptedTest($id: ID!) {
+    getAttemptedTest(id: $id) {
+      id
+      user_id
+      attempted_by {
+        id
+        first_name
+        last_name
+        email
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        createdAt
+        updatedAt
+      }
+      result {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAttemptedTests = /* GraphQL */ `
+  query ListAttemptedTests(
+    $filter: ModelAttemptedTestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAttemptedTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_id
+        purchased_id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getResult = /* GraphQL */ `
+  query GetResult($id: ID!) {
+    getResult(id: $id) {
+      id
+      attempted_id
+      question_id
+      question {
+        id
+        marks
+        test_id
+        question
+        answer
+        explainantion
+        options
+        createdAt
+        updatedAt
+      }
+      user_input
+      result_status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listResults = /* GraphQL */ `
+  query ListResults(
+    $filter: ModelResultFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        attempted_id
+        question_id
+        user_input
+        result_status
         createdAt
         updatedAt
       }
