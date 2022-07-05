@@ -9,11 +9,11 @@
           <NuxtLink to="/category"><img src="@/assets/images/002-notebook.png" alt="" /></NuxtLink>
         </div>
         <div class="col">
-          <NuxtLink to="/cart"
-            ><img src="@/assets/images/001-shopping-cart.png" alt="" /><span class="fw-bolder"
-              >(0)</span
-            ></NuxtLink
-          >
+          <NuxtLink to="/cart">
+            <img src="@/assets/images/001-shopping-cart.png" alt="" /><span class="fw-bolder">
+              ({{ cartItems.length }})
+            </span>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -21,8 +21,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
+  computed: {
+    ...mapState('buyer', ['cartItems']),
+  },
+
   methods: {
     ...mapActions('auth', ['logout']),
     async userLogOut() {

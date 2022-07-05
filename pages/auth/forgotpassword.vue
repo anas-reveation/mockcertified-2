@@ -32,14 +32,12 @@
 <script>
 export default {
   layout: 'introLayout',
+
+  middleware: ['authenticated'],
+
   data: () => ({
     email: '',
   }),
-
-  async mounted() {
-    // await this.load();
-    // console.log('first');
-  },
 };
 </script>
 

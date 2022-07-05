@@ -35,6 +35,7 @@ export default {
   plugins: [
     { src: '~/plugins/amplify.js', mode: 'client' },
     { src: '~/plugins/auth.js', mode: 'client' },
+    { src: '~/plugins/getLocalData.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

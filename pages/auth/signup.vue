@@ -106,6 +106,9 @@ const steps = {
 
 export default {
   layout: 'introLayout',
+
+  middleware: ['authenticated'],
+
   data: () => ({
     steps: { ...steps },
     step: steps.register,
@@ -135,7 +138,7 @@ export default {
         this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
       } catch (err) {
-        console.log('err', err);
+        console.error('err', err);
       }
     },
 
@@ -143,9 +146,9 @@ export default {
       try {
         await this.confirmRegistration(this.confirmForm);
         await this.login(this.registerForm);
-        this.$router.push('/');
+        this.$router.push('/dashboard');
       } catch (err) {
-        console.log('err', err);
+        console.error('err', err);
       }
     },
 
@@ -155,9 +158,6 @@ export default {
         first_name: this.registerForm.first_name,
         last_name: this.registerForm.last_name,
         email: this.registerForm.email,
-        birth_date: '22/05/1997',
-        subject: 'maths',
-        Tests: 10,
       };
       await API.graphql({
         query: createUser,

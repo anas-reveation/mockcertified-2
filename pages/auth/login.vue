@@ -38,6 +38,7 @@
       <div class="row mb-4">
         <div class="col">
           <NuxtLink to="/auth/forgotpassword">Forgot password?</NuxtLink>
+          <NuxtLink to="/dashboard">dashboard</NuxtLink>
         </div>
         <div class="col">
           <NuxtLink to="/auth/signup">Register</NuxtLink>
@@ -66,6 +67,9 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   layout: 'introLayout',
+
+  middleware: ['authenticated'],
+
   data: () => ({
     form: {
       email: '',
@@ -73,10 +77,6 @@ export default {
     },
   }),
 
-  async mounted() {
-    // await this.load();
-    // console.log('first');
-  },
   computed: {
     ...mapState(['isLoading']),
   },
@@ -85,9 +85,9 @@ export default {
     async loginLocal() {
       try {
         await this.login(this.form);
-        this.$router.push('/home');
+        this.$router.push('/dashboard');
       } catch (err) {
-        console.log('err', err);
+        console.error('err', err);
       }
     },
   },

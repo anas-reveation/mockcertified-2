@@ -1,7 +1,13 @@
 <template>
-  <div class="container">
+  <div v-if="testDetail" class="container">
     <div class="container-fluid">
-      <img src="@/assets/images/previous.png" class="pb-4" width="30" @click="goBack" alt="" />
+      <img
+        src="@/assets/images/previous.png"
+        class="pb-4"
+        width="30"
+        @click="$router.back()"
+        alt=""
+      />
 
       <img
         class="test-banner-image"
@@ -9,20 +15,21 @@
         alt=""
       />
       <div class="mt-3">
-        <span class="fs-4 fw-bolder text-success">$12.99</span>
+        <span class="fs-4 fw-bolder text-success">${{ testDetail.price }}</span>
 
         <div class="d-flex justify-content-between mb-3 mt-3">
-          <span class="fs-5 fw-bolder text-secondary">Trivia quiz</span>
+          <span class="fs-5 fw-bolder text-secondary"
+            >{{ testDetail.userFirstName }} {{ testDetail.userLastName }}</span
+          >
           <span class="fs-6 fw-bolder text-dark">30 questions</span>
         </div>
 
         <span class="fs-4 fw-bold">Description</span>
         <p class="py-2 text-dark rounded">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nulla qui at iusto earum
-          dolore sunt cum maxime eaque dolorem.
+          {{ testDetail.description }}
         </p>
         <div class="d-flex justify-content-between">
-          <span class="fs-6 fw-bolder text-dark">30 min</span>
+          <span class="fs-6 fw-bolder text-dark">{{ testDetail.time_limit }} min</span>
           <span class="fs-6 fw-bolder text-dark">50 marks</span>
         </div>
         <div class="d-flex justify-content-between gap-2 mt-4">
@@ -36,11 +43,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
+  middleware: ['authenticated'],
+
+  data() {
+    return {
+      testDetail: null,
+    };
+  },
+
+  async asyncData({ params, store, redirect }) {
+    const testId = params.testId;
+    return { testId };
+  },
+
+  async mounted() {
+    this.testDetail = await this.getTestDetail(this.testId);
+  },
+
   methods: {
-    goBack() {
-      this.$router.push('/category');
-    },
+    ...mapActions('testManagement', ['getTestDetail']),
   },
 };
 </script>

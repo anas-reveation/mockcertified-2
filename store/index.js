@@ -1,4 +1,6 @@
 import auth from './modules/auth';
+import buyer from './modules/buyer';
+import testManagement from './modules/testManagement';
 
 const state = () => {
   return {
@@ -8,6 +10,8 @@ const state = () => {
 
 const modules = {
   auth,
+  buyer,
+  testManagement,
 };
 
 const getters = {};
@@ -19,7 +23,7 @@ const mutations = {
 };
 
 const actions = {
-  async nuxtServerInit(ctx, etx) {},
+  // async nuxtServerInit(ctx, etx) {},
 };
 
 export default {

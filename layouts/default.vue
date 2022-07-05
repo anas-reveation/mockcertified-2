@@ -2,7 +2,7 @@
   <div class="">
     <div
       class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute"
-      v-if="isLoading === true"
+      v-if="isLoading"
     >
       <div class="spinner-border" role="status"></div>
     </div>

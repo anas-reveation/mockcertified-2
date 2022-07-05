@@ -15,6 +15,7 @@
 <script>
 export default {
   layout: 'introLayout',
+
   data() {
     return {};
   },

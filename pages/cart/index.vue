@@ -1,51 +1,62 @@
 <template>
-  <div class="container-fluid">
-    <div class="btn shadow w-100 d-flex justify-content-between align-items-center">
-      <img
-        src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010__340.jpg"
-        width="70"
-        height="70"
-        alt=""
-      />
-      <div class="d-flex flex-column">
-        <span class="fs-5 fw-bolder">Test 1</span>
-        <span class="fs-6 fw-normal">40 min</span>
+  <ClientOnly>
+    <div class="container-fluid">
+      <div v-if="cartItems.length <= 0" class="container">
+        <div class="card">
+          <div class="card-header">Your cart is empty</div>
+          <div class="card-body">
+            <h5 class="card-title">No items in your cart</h5>
+            <p class="card-text">Buy a test, click below button</p>
+            <NuxtLink to="/category" class="btn btn-outline-success">Buy a test</NuxtLink>
+          </div>
+        </div>
       </div>
-      <div class="d-flex flex-column">
-        <img src="@/assets/images/minus-button.png" class="m-auto" width="25" height="25" alt="" />
-        <span class="fs-6 fw-bolder">$20.99</span>
-      </div>
-    </div>
-    <div class="btn shadow w-100 d-flex justify-content-between align-items-center">
-      <img
-        src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010__340.jpg"
-        width="70"
-        height="70"
-        alt=""
-      />
-      <div class="d-flex flex-column">
-        <span class="fs-5 fw-bolder">Test 2</span>
-        <span class="fs-6 fw-normal">50 min</span>
-      </div>
-      <div class="d-flex flex-column">
-        <img src="@/assets/images/minus-button.png" class="m-auto" width="25" height="25" alt="" />
-        <span class="fs-6 fw-bolder">$25.99</span>
-      </div>
-    </div>
 
-    <div class="d-flex justify-content-center mt-5 mb-5">
-      <span class="fs-5 fw-bolder me-3"> Total: </span>
-      <span class="fs-5 fw-bold text-success"> $46.99 </span>
-    </div>
+      <div v-else>
+        <div v-for="item in cartItems" :key="item.id" @click="removeCartItemLocal(item.id)">
+          <TestCard :title="item.title" :price="item.price" :removeItem="true" />
+        </div>
+        <div class="d-flex justify-content-center mt-5 mb-5">
+          <span class="fs-5 fw-bolder me-3"> Total: </span>
+          <span class="fs-5 fw-bold text-success"> ${{ totalPrice }} </span>
+        </div>
 
-    <button type="submit" class="btn btn-primary btn-color w-100 py-2 mb-4">
-      Proceed To Checkout
-    </button>
-  </div>
+        <button type="submit" class="btn btn-primary btn-color w-100 py-2 mb-4">
+          Proceed To Checkout
+        </button>
+      </div>
+    </div>
+  </ClientOnly>
 </template>
 
 <script>
-export default {};
+import { mapState, mapMutations } from 'vuex';
+
+export default {
+  middleware: ['authenticated'],
+
+  computed: {
+    ...mapState('buyer', ['cartItems']),
+
+    totalPrice() {
+      let total = 0;
+      if (this.cartItems.length > 0) {
+      }
+      this.cartItems.map((item) => {
+        total += item.price;
+      });
+      return total;
+    },
+  },
+
+  methods: {
+    ...mapMutations('buyer', ['removeCartItem']),
+
+    removeCartItemLocal(id) {
+      this.removeCartItem(id);
+    },
+  },
+};
 </script>
 
 <style scoped>

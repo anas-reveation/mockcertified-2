@@ -7,16 +7,15 @@ export default {
     try {
       const user = await Auth.currentAuthenticatedUser();
       // const userData = user ? user.attributes : user;
-      const userApiData = await API.graphql({
+      const userGraphql = await API.graphql({
         query: getUser,
         variables: { id: user.username },
       });
-      if (userApiData) {
-        // const userData = user ? userApiData : user;
-        commit('setUser', userApiData);
-      }
+      const userData = userGraphql.data.getUser;
+      commit('setUser', userData);
       return user;
     } catch (error) {
+      console.error('error', error);
       commit('setUser', null);
     }
   },
@@ -54,14 +53,12 @@ export default {
 
     try {
       const user = await Auth.signIn(email, password);
-      const userApiData = await API.graphql({
+      const userGraphql = await API.graphql({
         query: getUser,
         variables: { id: user.username },
       });
-      if (userApiData) {
-        // const userData = user ? userApiData : user;
-        commit('setUser', userApiData);
-      }
+      const userData = userGraphql.data.getUser;
+      commit('setUser', userData);
       commit('SET_LOADER', false, { root: true });
       return user;
     } catch (err) {
