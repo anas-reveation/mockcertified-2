@@ -5,6 +5,9 @@ import testManagement from './modules/testManagement';
 const state = () => {
   return {
     isLoading: false,
+    selectedTest: null,
+    allPurchasedTests: [],
+    allAttemptedTests: [],
   };
 };
 
@@ -19,6 +22,14 @@ const getters = {};
 const mutations = {
   SET_LOADER(state, isLoading) {
     state.isLoading = isLoading;
+  },
+
+  setAllPurchasedTests(state, allPurchasedTests) {
+    state.allPurchasedTests = allPurchasedTests;
+  },
+
+  selectTest(state, test) {
+    state.selectedTest = test;
   },
 };
 

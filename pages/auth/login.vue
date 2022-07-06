@@ -38,7 +38,6 @@
       <div class="row mb-4">
         <div class="col">
           <NuxtLink to="/auth/forgotpassword">Forgot password?</NuxtLink>
-          <NuxtLink to="/dashboard">dashboard</NuxtLink>
         </div>
         <div class="col">
           <NuxtLink to="/auth/signup">Register</NuxtLink>

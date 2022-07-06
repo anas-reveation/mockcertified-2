@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed-bottom d-flex justify-content-between">
-    <div class="container text-center fixed-bottom bg-white py-3">
+  <div class="d-flex justify-content-between">
+    <div class="container text-center bg-white py-3">
       <div class="row">
         <div class="col">
           <img class="opacity-75" src="@/assets/images/003-exit.png" alt="" @click="userLogOut" />
@@ -44,4 +44,12 @@ a {
   text-decoration: none;
   color: black;
 }
+/* 
+.fixed-bottom {
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+} */
 </style>

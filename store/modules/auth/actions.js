@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
+
 import { getUser } from '../../../graphql/queries';
 
 export default {
@@ -73,6 +74,7 @@ export default {
     try {
       await Auth.signOut();
       commit('setUser', null);
+      commit('buyer/clearCart', false, { root: true });
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {

@@ -1,18 +1,45 @@
 import { API } from 'aws-amplify';
-import { getUser, listQuestions, listTestManagers, getTestManager } from '../../../graphql/queries';
+import {
+  getUser,
+  listCategories,
+  listQuestions,
+  listTestManagers,
+  getTestManager,
+} from '~/graphql/queries';
+import { purchasedTests, getTestDetail } from '~/ManualGraphql/queries';
 
 export default {
-  async getTests({ commit }) {
+  async getAllPurchasedTests({ commit, rootState }) {
+    const user_id = rootState.auth.user.id;
+    try {
+      const allPurchasedTestsData = await API.graphql({
+        query: purchasedTests,
+        variables: { id: user_id },
+      });
+      const allPurchasedTests = allPurchasedTestsData.data.getUser.purchased_tests.items
+        ? allPurchasedTestsData.data.getUser.purchased_tests.items
+        : [];
+      commit('SET_LOADER', false, { root: true });
+      commit('setAllPurchasedTests', allPurchasedTests, { root: true });
+
+      return allPurchasedTests;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.error('ERR', err);
+    }
+  },
+
+  async getAllCategories({ commit }) {
     commit('SET_LOADER', true, { root: true });
 
     try {
-      const allTestData = await API.graphql({
-        query: listTestManagers,
+      const allCategoriesData = await API.graphql({
+        query: listCategories,
       });
-      const allTest = allTestData.data.listTestManagers.items;
+      const allCategories = allCategoriesData.data.listCategories.items;
       commit('SET_LOADER', false, { root: true });
 
-      return allTest;
+      return allCategories;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);
@@ -20,12 +47,12 @@ export default {
   },
 
   async getTestsByCategory({ commit }, payload) {
-    const category = payload;
+    const category_id = payload;
     commit('SET_LOADER', true, { root: true });
 
     try {
       const filter = {
-        category: { eq: category },
+        category_id: { eq: category_id },
       };
 
       const allTestByCategoryData = await API.graphql({
@@ -48,7 +75,7 @@ export default {
 
     try {
       const testQueryData = await API.graphql({
-        query: getTestManager,
+        query: getTestDetail,
         variables: { id: testId },
       });
       let testData = testQueryData.data.getTestManager;

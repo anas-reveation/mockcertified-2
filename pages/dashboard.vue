@@ -28,26 +28,21 @@
     </div>
     <div class="mt-3">
       <div
-        v-if="attemptedOpen"
-        v-for="test in attemptedTests"
-        :key="test.id"
-        @click="redirectPage(test.id)"
-      >
-        <TestCard :title="test.title" :timeLimit="test.time_limit" />
-      </div>
-      <div
         v-if="allTestOpen"
-        v-for="test in allTests"
+        v-for="test in allPurchasedTests"
         :key="test.id"
-        @click="redirectPage(test.id)"
+        @click="redirectPage(test)"
       >
-        <TestCard :title="test.title" :timeLimit="test.time_limit" />
+        <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
       </div>
+      <!-- <div v-if="allTestOpen" v-for="test in allTests" :key="test.id" @click="redirectPage(test)">
+        <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
+      </div> -->
     </div>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -56,23 +51,29 @@ export default {
       currentUser: {},
       attemptedOpen: true,
       allTestOpen: false,
-      attemptedTests: [],
-      allTests: [],
+      // attemptedTests: [],
+      // allTests: [],
     };
   },
 
   computed: {
     ...mapState('auth', ['user']),
+    ...mapState(['allPurchasedTests']),
   },
 
   async mounted() {
-    const allTests = await this.getTests();
-    this.attemptedTests = allTests;
-    this.allTests = allTests;
+    if (this.allPurchasedTests.length <= 0) {
+      await this.getAllPurchasedTests();
+      return;
+    }
+    // this.attemptedTests = allTests;
+    // this.allTests = allTests;
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTests']),
+    ...mapActions('testManagement', ['getAllPurchasedTests']),
+
+    ...mapMutations(['selectTest']),
 
     changeTab(tabName) {
       if (tabName === 'attempted') {
@@ -85,8 +86,9 @@ export default {
       }
     },
 
-    redirectPage(id) {
-      this.$router.push(`/test/${id}`);
+    redirectPage(test) {
+      this.selectTest(test.test);
+      this.$router.push(`/test/${test.id}`);
     },
 
     attempt() {

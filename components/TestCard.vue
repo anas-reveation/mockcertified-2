@@ -7,7 +7,7 @@
       alt=""
     />
     <div class="d-flex flex-column">
-      <span class="fs-5 fw-bolder">{{ title }}</span>
+      <span class="fs-5 fw-bolder text-capitalize">{{ title }}</span>
       <span v-if="timeLimit" class="fs-6 fw-normal">{{ timeLimit }} min</span>
     </div>
 

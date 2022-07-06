@@ -17,16 +17,16 @@
     <div
       v-for="category in allCategoriesFilter"
       :key="category.id"
-      @click="redirectPage(category.category)"
+      @click="redirectPage(category.id)"
     >
-      <TestCard :title="category.category" :timeLimit="category.time_limit" />
+      <TestCard :title="category.name" />
     </div>
   </div>
 </template>
 
 <script>
 // TODO Fetch all test with category
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -40,23 +40,19 @@ export default {
 
   watch: {
     searchQuery(newValue) {
-      // this.$emit("input", newValue);
-      console.log('newValue', newValue);
       this.allCategoriesFilter = this.allCategories.filter((item) =>
-        item.category.toLowerCase().match(newValue.toLowerCase()),
+        item.name.toLowerCase().match(newValue.toLowerCase()),
       );
-      console.log('thissss', this.temp);
     },
   },
 
   async mounted() {
-    const allTests = await this.getTests();
-    this.allCategories = allTests;
-    this.allCategoriesFilter = allTests;
+    this.allCategories = await this.getAllCategories();
+    this.allCategoriesFilter = this.allCategories;
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTests']),
+    ...mapActions('testManagement', ['getAllCategories']),
     redirectPage(id) {
       this.$router.push(`/category/${id}`);
     },

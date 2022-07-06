@@ -10,8 +10,6 @@ export default async function ({ store, route, redirect, req }) {
 
     const loginSignUpRoute = route.path.match(/\/auth\/*/g) ? true : false;
 
-    console.log('isAuthenticated', isAuthenticated);
-    console.log('isAuthenticated', loginSignUpRoute);
     if (!isAuthenticated && (dashboardRoute || categoryRoute || testRoute || cartRoute)) {
       redirect('/');
     }

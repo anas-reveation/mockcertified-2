@@ -16,4 +16,12 @@ export default {
       value: JSON.stringify(state.cartItems),
     });
   },
+
+  async clearCart(state) {
+    state.cartItems = [];
+    await Storage.set({
+      key: 'cartItems',
+      value: JSON.stringify(state.cartItems),
+    });
+  },
 };
