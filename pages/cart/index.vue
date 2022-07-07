@@ -21,16 +21,49 @@
           <span class="fs-5 fw-bold text-success"> ${{ totalPrice }} </span>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-color w-100 py-2 mb-4">
+        <button
+          class="btn btn-color text-white w-100 py-2 mb-4"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#checkoutModal"
+        >
           Proceed To Checkout
         </button>
+      </div>
+
+      <div class="modal fade" id="checkoutModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content px-3 py-3 bg-white">
+            <h2 class="text-left">Checkout detail</h2>
+            <div>
+              <p class="py-3 fw-bolder">Click below checkout button to confirm</p>
+              <div class="d-flex justify-content-between">
+                <span class="py-3">{{ cartItems.length }} items</span>
+                <span class="py-3 fw-bolder text-success">Total: ${{ totalPrice }}</span>
+              </div>
+            </div>
+            <div class="link">
+              <button class="mb-2 btn btn-dark w-100" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-color w-100"
+                data-bs-dismiss="modal"
+                @click="checkoutLocal"
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </ClientOnly>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   middleware: ['authenticated'],
@@ -50,18 +83,19 @@ export default {
   },
 
   methods: {
+    ...mapActions('buyer', ['checkout']),
     ...mapMutations('buyer', ['removeCartItem']),
 
     removeCartItemLocal(id) {
       this.removeCartItem(id);
     },
+
+    async checkoutLocal() {
+      const res = await this.checkout(this.cartItems);
+      if (res) {
+        this.$router.push('/dashboard');
+      }
+    },
   },
 };
 </script>
-
-<style scoped>
-.btn-color {
-  background-color: #11a49b !important;
-  color: white;
-}
-</style>

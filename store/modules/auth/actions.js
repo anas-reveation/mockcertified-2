@@ -75,6 +75,8 @@ export default {
       await Auth.signOut();
       commit('setUser', null);
       commit('buyer/clearCart', false, { root: true });
+      commit('setAllPurchasedTests', [], { root: true });
+      commit('setAllAttemptedTests', [], { root: true });
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {

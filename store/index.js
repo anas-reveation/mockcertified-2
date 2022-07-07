@@ -28,6 +28,10 @@ const mutations = {
     state.allPurchasedTests = allPurchasedTests;
   },
 
+  setAllAttemptedTests(state, allAttemptedTests) {
+    state.allAttemptedTests = allAttemptedTests;
+  },
+
   selectTest(state, test) {
     state.selectedTest = test;
   },

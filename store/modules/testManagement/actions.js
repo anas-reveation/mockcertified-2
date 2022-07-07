@@ -1,16 +1,12 @@
 import { API } from 'aws-amplify';
-import {
-  getUser,
-  listCategories,
-  listQuestions,
-  listTestManagers,
-  getTestManager,
-} from '~/graphql/queries';
+import { getUser, listCategories, listQuestions, listTestManagers } from '~/graphql/queries';
 import { purchasedTests, getTestDetail } from '~/ManualGraphql/queries';
 
 export default {
   async getAllPurchasedTests({ commit, rootState }) {
     const user_id = rootState.auth.user.id;
+    commit('SET_LOADER', true, { root: true });
+
     try {
       const allPurchasedTestsData = await API.graphql({
         query: purchasedTests,

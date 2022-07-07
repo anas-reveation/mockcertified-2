@@ -8,36 +8,58 @@
     >
       <button
         :class="
-          attemptedOpen
+          purchasedTestOpen
             ? 'btn tabs btn-active-color shadow flex-fill p-2'
             : 'btn tabs flex-fill p-2'
         "
-        @click="changeTab('attempted')"
+        @click="changeTab('purchasedTestOpen')"
       >
-        Attempted
+        Purchased
       </button>
 
       <button
         :class="
-          allTestOpen ? 'btn tabs btn-active-color shadow flex-fill p-2' : 'btn tabs flex-fill p-2'
+          attemptedOpen
+            ? 'btn tabs btn-active-color shadow flex-fill p-2'
+            : 'btn tabs flex-fill p-2'
         "
-        @click="changeTab('all')"
+        @click="changeTab('attemptedOpen')"
       >
-        All Tests
+        Attempted
       </button>
     </div>
     <div class="mt-3">
       <div
-        v-if="allTestOpen"
+        v-if="purchasedTestOpen"
         v-for="test in allPurchasedTests"
         :key="test.id"
         @click="redirectPage(test)"
       >
         <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
       </div>
-      <!-- <div v-if="allTestOpen" v-for="test in allTests" :key="test.id" @click="redirectPage(test)">
-        <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
-      </div> -->
+    </div>
+
+    <div v-if="noTest" class="container">
+      <div class="card">
+        <!-- <div class="card-header">No test available</div> -->
+        <div class="card-body">
+          <h5 class="card-title">No test available</h5>
+          <p v-if="purchasedTestOpen" class="card-text">Want to buy? Click below button</p>
+          <div v-else>
+            <p class="card-text">Give a test from your purchased test</p>
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              @click="changeTab('purchasedTestOpen')"
+            >
+              Attempt a test
+            </button>
+          </div>
+          <NuxtLink v-if="purchasedTestOpen" to="/category" class="btn btn-outline-success">
+            Buy a test
+          </NuxtLink>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,26 +70,26 @@ export default {
 
   data() {
     return {
-      currentUser: {},
-      attemptedOpen: true,
-      allTestOpen: false,
-      // attemptedTests: [],
-      // allTests: [],
+      purchasedTestOpen: false,
+      attemptedOpen: false,
+      noTest: false,
     };
   },
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['allPurchasedTests']),
+    ...mapState(['allPurchasedTests', 'allAttemptedTests']),
   },
 
   async mounted() {
+    this.changeTab('purchasedTestOpen');
     if (this.allPurchasedTests.length <= 0) {
       await this.getAllPurchasedTests();
-      return;
     }
-    // this.attemptedTests = allTests;
-    // this.allTests = allTests;
+    if (this.allAttemptedTests.length <= 0) {
+      // await this.getAllAttemptedTests();
+    }
+    this.allPurchasedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
   },
 
   methods: {
@@ -76,19 +98,22 @@ export default {
     ...mapMutations(['selectTest']),
 
     changeTab(tabName) {
-      if (tabName === 'attempted') {
-        this.attemptedOpen = true;
-        this.allTestOpen = false;
-      }
-      if (tabName === 'all') {
+      if (tabName === 'purchasedTestOpen') {
         this.attemptedOpen = false;
-        this.allTestOpen = true;
+        this.purchasedTestOpen = true;
+        this.allPurchasedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
+      }
+
+      if (tabName === 'attemptedOpen') {
+        this.attemptedOpen = true;
+        this.purchasedTestOpen = false;
+        this.allAttemptedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
       }
     },
 
     redirectPage(test) {
       this.selectTest(test.test);
-      this.$router.push(`/test/${test.id}`);
+      this.$router.push(`/test/${test.test.id}`);
     },
 
     attempt() {

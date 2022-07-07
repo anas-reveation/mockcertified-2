@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute"
+      class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute z_index"
       v-if="isLoading"
     >
       <div class="spinner-border" role="status"></div>
@@ -33,5 +33,9 @@ export default {
 
 .margin_bottom {
   margin-bottom: 70px;
+}
+
+.z_index {
+  z-index: 1000;
 }
 </style>

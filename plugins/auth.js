@@ -26,4 +26,8 @@ export default async ({ store }) => {
   Vue.prototype.$auth = authService;
   Vue.$auth = authService;
   await store.dispatch('auth/load');
+  const isAuthenticated = store.state.auth.isAuthenticated;
+  if (isAuthenticated) {
+    await store.dispatch('testManagement/getAllPurchasedTests');
+  }
 };

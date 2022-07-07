@@ -10,7 +10,7 @@
       />
 
       <img
-        class="test-banner-image"
+        class="w-100 rounded"
         src="https://cdn.pixabay.com/photo/2015/11/15/07/47/geometry-1044090__340.jpg"
         alt=""
       />
@@ -59,6 +59,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['allPurchasedTests']),
     ...mapState('buyer', ['cartItems']),
 
     totalMarks() {
@@ -82,6 +83,16 @@ export default {
 
     addToCartLocal() {
       const test_id = this.testDetail.id;
+      // If user already purchased this test
+      const isPurchased = this.allPurchasedTests.some(function (purchasedItem) {
+        return purchasedItem.test.id === test_id;
+      });
+      if (isPurchased) {
+        alert('Already purchased');
+        return;
+      }
+
+      // If user already have this test in cart
       const isExists = this.cartItems.some(function (cartItem) {
         return cartItem.id === test_id;
       });
@@ -94,9 +105,3 @@ export default {
   },
 };
 </script>
-<style>
-.test-banner-image {
-  width: 100%;
-  border-radius: 10px;
-}
-</style>

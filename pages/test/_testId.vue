@@ -10,7 +10,7 @@
       />
 
       <img
-        class="test-banner-image"
+        class="w-100 rounded"
         src="https://cdn.pixabay.com/photo/2015/11/15/07/47/geometry-1044090__340.jpg"
         alt=""
       />
@@ -34,12 +34,7 @@
           <span class="fs-6 fw-bolder text-dark">{{ selectedTest.time_limit }} min</span>
           <span class="fs-6 fw-bolder text-dark">{{ totalMarks }} marks</span>
         </div>
-        <button type="button" class="btn w-100 py-2 my-2 btn-color shadow">Add to Cart</button>
-        <!-- <div class="d-flex justify-content-between gap-2 mt-4">
-          <button type="button" class="btn w-100 py-2 btn-color shadow">Preview</button>
-
-          <button type="button" class="btn w-100 py-2 btn-color shadow">Add to Cart</button>
-        </div> -->
+        <button type="button" class="btn w-100 py-2 my-2 btn-color shadow">Attempt test</button>
       </div>
     </div>
   </div>
@@ -78,9 +73,3 @@ export default {
   },
 };
 </script>
-<style>
-.test-banner-image {
-  width: 100%;
-  border-radius: 10px;
-}
-</style>
