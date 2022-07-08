@@ -14,11 +14,11 @@
 
       <div v-else>
         <div v-for="item in cartItems" :key="item.id" @click="removeCartItemLocal(item.id)">
-          <TestCard :title="item.title" :price="item.price" :removeItem="true" />
+          <TestCard :title="item.title" :price="formatPrice(item.price)" :removeItem="true" />
         </div>
         <div class="d-flex justify-content-center mt-5 mb-5">
           <span class="fs-5 fw-bolder me-3"> Total: </span>
-          <span class="fs-5 fw-bold text-success"> ${{ totalPrice }} </span>
+          <span class="fs-5 fw-bold text-success"> ${{ formatPrice(totalPrice) }} </span>
         </div>
 
         <button
@@ -39,7 +39,9 @@
               <p class="py-3 fw-bolder">Click below checkout button to confirm</p>
               <div class="d-flex justify-content-between">
                 <span class="py-3">{{ cartItems.length }} items</span>
-                <span class="py-3 fw-bolder text-success">Total: ${{ totalPrice }}</span>
+                <span class="py-3 fw-bolder text-success">
+                  Total: ${{ formatPrice(totalPrice) }}
+                </span>
               </div>
             </div>
             <div class="link">
@@ -85,6 +87,10 @@ export default {
   methods: {
     ...mapActions('buyer', ['checkout']),
     ...mapMutations('buyer', ['removeCartItem']),
+
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
 
     removeCartItemLocal(id) {
       this.removeCartItem(id);

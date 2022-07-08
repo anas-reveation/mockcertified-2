@@ -231,14 +231,19 @@ export const getAttemptedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      purchased_id
-      purchased_test {
+      test_id
+      test {
         id
         user_id
-        test_id
+        category_id
+        title
+        description
+        price
+        time_limit
         createdAt
         updatedAt
       }
+      status
       result {
         nextToken
       }
@@ -257,7 +262,8 @@ export const listAttemptedTests = /* GraphQL */ `
       items {
         id
         user_id
-        purchased_id
+        test_id
+        status
         createdAt
         updatedAt
       }

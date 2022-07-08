@@ -1,13 +1,20 @@
 <template>
   <div v-if="testDetail" class="container">
     <div class="container-fluid">
-      <img
-        src="@/assets/images/previous.png"
-        class="pb-4"
-        width="30"
-        @click="$router.back()"
-        alt=""
-      />
+      <div class="row">
+        <div class="col-2">
+          <img
+            src="@/assets/images/previous.png"
+            class="pb-4"
+            width="30"
+            @click="$router.back()"
+            alt=""
+          />
+        </div>
+        <div class="col-9 fw-bold text-capitalize">
+          <h1 class="text-left">{{ testDetail.title }}</h1>
+        </div>
+      </div>
 
       <img
         class="w-100 rounded"
@@ -15,7 +22,7 @@
         alt=""
       />
       <div class="mt-3">
-        <span class="fs-4 fw-bolder text-success">${{ testDetail.price }}</span>
+        <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>
 
         <div class="d-flex justify-content-between mb-3 mt-3">
           <span class="fs-5 fw-bolder text-secondary"
@@ -80,6 +87,10 @@ export default {
   methods: {
     ...mapActions('testManagement', ['getTestDetail']),
     ...mapMutations('buyer', ['addToCart']),
+
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
 
     addToCartLocal() {
       const test_id = this.testDetail.id;

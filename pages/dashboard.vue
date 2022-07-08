@@ -28,20 +28,34 @@
         Attempted
       </button>
     </div>
-    <div class="mt-3">
-      <div
-        v-if="purchasedTestOpen"
-        v-for="test in allPurchasedTests"
-        :key="test.id"
-        @click="redirectPage(test)"
-      >
-        <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
+
+    <ClientOnly>
+      <div class="mt-3">
+        <div
+          v-if="purchasedTestOpen"
+          v-for="test in allPurchasedTests"
+          :key="test.id"
+          @click="redirectPage(test)"
+        >
+          <TestCard :title="test.test.title" :timeLimit="test.test.time_limit" />
+        </div>
+        <div
+          v-if="attemptedOpen"
+          v-for="test in allAttemptedTests"
+          :key="test.id"
+          @click="redirectPage(test)"
+        >
+          <TestCard
+            :title="test.test.title"
+            :timeLimit="test.test.time_limit"
+            :testStatus="test.status"
+          />
+        </div>
       </div>
-    </div>
+    </ClientOnly>
 
     <div v-if="noTest" class="container">
       <div class="card">
-        <!-- <div class="card-header">No test available</div> -->
         <div class="card-body">
           <h5 class="card-title">No test available</h5>
           <p v-if="purchasedTestOpen" class="card-text">Want to buy? Click below button</p>
@@ -83,18 +97,12 @@ export default {
 
   async mounted() {
     this.changeTab('purchasedTestOpen');
-    if (this.allPurchasedTests.length <= 0) {
-      await this.getAllPurchasedTests();
-    }
-    if (this.allAttemptedTests.length <= 0) {
-      // await this.getAllAttemptedTests();
-    }
+    await this.getUserTests();
     this.allPurchasedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
   },
 
   methods: {
-    ...mapActions('testManagement', ['getAllPurchasedTests']),
-
+    ...mapActions('testManagement', ['getUserTests']),
     ...mapMutations(['selectTest']),
 
     changeTab(tabName) {

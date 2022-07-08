@@ -419,14 +419,19 @@ export const createAttemptedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      purchased_id
-      purchased_test {
+      test_id
+      test {
         id
         user_id
-        test_id
+        category_id
+        title
+        description
+        price
+        time_limit
         createdAt
         updatedAt
       }
+      status
       result {
         nextToken
       }
@@ -451,14 +456,19 @@ export const updateAttemptedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      purchased_id
-      purchased_test {
+      test_id
+      test {
         id
         user_id
-        test_id
+        category_id
+        title
+        description
+        price
+        time_limit
         createdAt
         updatedAt
       }
+      status
       result {
         nextToken
       }
@@ -483,14 +493,19 @@ export const deleteAttemptedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      purchased_id
-      purchased_test {
+      test_id
+      test {
         id
         user_id
-        test_id
+        category_id
+        title
+        description
+        price
+        time_limit
         createdAt
         updatedAt
       }
+      status
       result {
         nextToken
       }

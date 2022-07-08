@@ -20,7 +20,7 @@ export default {
         });
       });
       commit('buyer/clearCart', false, { root: true });
-      await dispatch('testManagement/getAllPurchasedTests', false, { root: true });
+      await dispatch('testManagement/getUserTests', false, { root: true });
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {

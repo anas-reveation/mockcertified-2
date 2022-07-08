@@ -28,6 +28,6 @@ export default async ({ store }) => {
   await store.dispatch('auth/load');
   const isAuthenticated = store.state.auth.isAuthenticated;
   if (isAuthenticated) {
-    await store.dispatch('testManagement/getAllPurchasedTests');
+    await store.dispatch('testManagement/getUserTests');
   }
 };

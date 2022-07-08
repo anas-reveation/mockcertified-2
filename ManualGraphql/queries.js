@@ -13,8 +13,6 @@ export const purchasedTests = /* GraphQL */ `
             description
             questions {
               items {
-                answer
-                explainantion
                 id
                 marks
                 options
@@ -26,6 +24,32 @@ export const purchasedTests = /* GraphQL */ `
               first_name
               last_name
               id
+            }
+          }
+        }
+      }
+      attempted_tests {
+        items {
+          id
+          status
+          test_id
+          test {
+            id
+            price
+            title
+            time_limit
+            description
+            questions {
+              items {
+                marks
+                options
+                question
+              }
+            }
+            created_by {
+              first_name
+              id
+              last_name
             }
           }
         }

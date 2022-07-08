@@ -4,7 +4,7 @@
       <TestCard
         :title="test.title"
         :timeLimit="test.time_limit"
-        :price="test.price"
+        :price="formatPrice(test.price)"
         :addItem="true"
       />
     </div>
@@ -41,6 +41,10 @@ export default {
 
     redirectPage(id) {
       this.$router.push(`/category/test/${id}`);
+    },
+
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
     },
   },
 };

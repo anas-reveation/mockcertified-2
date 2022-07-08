@@ -54,8 +54,9 @@ type AttemptedTest @model {
   id: ID!
   user_id: ID! @index(name: "byUser")
   attempted_by: User @hasOne(fields: ["user_id"])
-  purchased_id: ID!
-  purchased_test: PurchasedTest @hasOne(fields: ["purchased_id"])
+  test_id: ID!
+  test: TestManager @hasOne(fields: ["test_id"])
+  status: AttemptStatus!
   result: [Result] @hasMany(indexName: "byAttemptedTest", fields: ["id"])
 }
 
@@ -65,5 +66,11 @@ type Result @model {
   question_id: ID!
   question: Question @hasOne(fields: ["question_id"])
   user_input: String!
-  result_status: Boolean!
+  result_status: Boolean
+}
+
+enum AttemptStatus {
+  ABANDONED
+  ATTEMPTED
+  IN_PROGRESS
 }
