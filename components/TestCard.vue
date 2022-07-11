@@ -61,14 +61,14 @@ export default {
     };
   },
   mounted() {
-    if (this.testStatus === 'ATTEMPTED') {
-      this.statusName = 'Attempted';
+    if (this.testStatus === 'COMPLETED') {
+      this.statusName = 'completed';
       this.statusColor = 'text-success';
     } else if (this.testStatus === 'IN_PROGRESS') {
       this.statusName = 'In Progress';
       this.statusColor = 'text-warning';
-    } else if (this.testStatus === 'ABANDONED') {
-      this.statusName = 'Abandoned';
+    } else if (this.testStatus === 'ABORTED') {
+      this.statusName = 'Aborted';
       this.statusColor = 'text-danger';
     }
   },

@@ -162,7 +162,7 @@ export default {
     try {
       const input = {
         id: attempted_id,
-        status: 'ATTEMPTED',
+        status: 'COMPLETED',
       };
       await API.graphql({
         query: updateAttemptedTest,
@@ -177,14 +177,14 @@ export default {
     }
   },
 
-  async abandonedAttemptedTest({ commit }, payload) {
+  async abortedAttemptedTest({ commit }, payload) {
     const attempted_id = payload;
     commit('SET_LOADER', true, { root: true });
 
     try {
       const input = {
         id: attempted_id,
-        status: 'ABANDONED',
+        status: 'ABORTED',
       };
       await API.graphql({
         query: updateAttemptedTest,

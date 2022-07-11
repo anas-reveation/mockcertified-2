@@ -59,7 +59,7 @@
           :to="`/test/start-test/${testDetail.id}`"
           class="btn w-100 py-2 my-2 btn-color shadow"
         >
-          Attempt test
+          Start test
         </NuxtLink>
       </div>
     </div>
@@ -115,7 +115,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['abandonedAttemptedTest']),
+    ...mapActions('testManagement', ['abortedAttemptedTest']),
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
@@ -132,7 +132,7 @@ export default {
     },
 
     async startTestAgain() {
-      const res = await this.abandonedAttemptedTest(this.attemptedId);
+      const res = await this.abortedAttemptedTest(this.attemptedId);
       if (res) {
         this.$router.push(`/test/start-test/${this.testId}`);
       } else {

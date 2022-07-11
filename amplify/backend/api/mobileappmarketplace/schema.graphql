@@ -70,7 +70,7 @@ type Result @model {
 }
 
 enum AttemptStatus {
-  ABANDONED
-  ATTEMPTED
+  ABORTED
+  COMPLETED
   IN_PROGRESS
 }
