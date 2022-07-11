@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center background vh-100">
+  <div v-show="!isDisable" class="container text-center background vh-100">
     <div class="">
       <img src="~/assets/images/fav.png" height="250" width="250" alt="" class="mx-auto mt-12" />
     </div>
@@ -13,16 +13,41 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
   layout: 'introLayout',
 
+  middleware: ['authenticated'],
+
   data() {
-    return {};
+    return {
+      isDisable: true,
+    };
   },
+
+  computed: {
+    ...mapState('auth', ['isAuthenticated']),
+  },
+
+  async mounted() {
+    if (this.isAuthenticated) {
+      this.$router.push('/dashboard');
+      return;
+    }
+    this.isDisable = false;
+
+    const aa = await this.getAllCategories();
+    console.log('aa', aa);
+  },
+
   methods: {
+    ...mapActions('testManagement', ['getAllCategories']),
+
     login() {
       this.$router.push('auth/login');
     },
+
     register() {
       this.$router.push('auth/signup');
     },
