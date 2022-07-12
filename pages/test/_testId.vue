@@ -22,7 +22,10 @@
         alt=""
       />
       <div class="mt-3">
-        <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>
+        <div class="d-flex justify-content-between">
+          <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>
+          <img class="share_icon" src="@/assets/images/share.svg" alt="share" @click="shareTest" />
+        </div>
 
         <div class="d-flex justify-content-between mb-3 mt-3">
           <span class="fs-5 fw-bolder text-secondary"
@@ -67,7 +70,9 @@
 </template>
 
 <script>
+import { Share } from '@capacitor/share';
 import { mapState, mapActions } from 'vuex';
+
 export default {
   middleware: ['authenticated'],
 
@@ -139,6 +144,26 @@ export default {
         alert('something went wrong');
       }
     },
+
+    async shareTest() {
+      const domainOrigin = window.location.origin;
+      const testId = this.testDetail.id;
+      const title = this.testDetail.title;
+      const url = `${domainOrigin}/category/test/${testId}`;
+      await Share.share({
+        title,
+        text: `${title} is Really awesome test`,
+        url,
+        dialogTitle: 'Share with buddies',
+      });
+    },
   },
 };
 </script>
+
+<style scoped>
+.share_icon {
+  width: 40px;
+  height: 30px;
+}
+</style>
