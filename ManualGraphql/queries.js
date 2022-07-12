@@ -1,4 +1,4 @@
-export const purchasedTests = /* GraphQL */ `
+export const userTests = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       purchased_tests {
@@ -41,6 +41,7 @@ export const purchasedTests = /* GraphQL */ `
             description
             questions {
               items {
+                id
                 marks
                 options
                 question
@@ -50,6 +51,13 @@ export const purchasedTests = /* GraphQL */ `
               first_name
               id
               last_name
+            }
+          }
+          result {
+            items {
+              question_id
+              result_status
+              user_input
             }
           }
         }

@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
 import { getUser, listCategories, listTestManagers } from '~/graphql/queries';
-import { purchasedTests, getTestDetail } from '~/ManualGraphql/queries';
+import { userTests, getTestDetail } from '~/ManualGraphql/queries';
 import { createAttemptedTest, createResult, updateAttemptedTest } from '~/graphql/mutations';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 
     try {
       const allPurchasedTestsData = await API.graphql({
-        query: purchasedTests,
+        query: userTests,
         variables: { id: user_id },
       });
 

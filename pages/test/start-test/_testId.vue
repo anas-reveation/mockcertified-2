@@ -8,21 +8,33 @@
       </button>
     </div>
     <!-- END INSTRUCTION -->
+    <!-- @click="$router.push('auth/signup')" -->
 
     <div v-else class="container mt-3">
-      <div class="fixed-top header_timer">
-        <button class="w-100 btn btn-color mb-2" @click="timerEnabled = true">
+      <div class="w-100 d-flex justify-content-between px-3 fixed-top header_timer bg_green">
+        <div class="mb-2">
           {{ timerString }}
-        </button>
+        </div>
+        <div class="" @click="timerEnabled = !timerEnabled">
+          {{ timerEnabled ? 'STOP' : 'RESUME' }}
+        </div>
       </div>
+
       <div
         v-for="(questionItem, index) in allQuestions"
         :key="index"
         v-if="index === questionCounter"
         class="container-fluid text-left margin_top_bottom"
       >
+        <img
+          v-show="timerEnabled === false"
+          src="@/assets/images/previous.png"
+          width="30"
+          @click="goBack"
+          alt=""
+        />
         <p class="fw-bold shadow p-4 mb-5 bg-body rounded">
-          <span>Q{{ index + 1 }} -</span> {{ questionItem.question }}
+          <span>Q{{ questionCounter + 1 }} -</span> {{ questionItem.question }}
         </p>
         <div class="d-flex flex-column mt-2">
           <ul class="list-group">
@@ -42,7 +54,12 @@
       <div class="container-fluid bg-white fixed-bottom footer_height">
         <div class="d-flex flex-row mx-6 justify-content-between">
           <div>
-            <button type="button" class="btn btn-outline-success" @click="submitTest">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              @click="submitTest"
+              :disabled="timerEnabled === false"
+            >
               Submit
             </button>
           </div>
@@ -53,7 +70,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { App as CapacitorApp } from '@capacitor/app';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   layout: 'introLayout',
@@ -73,6 +91,7 @@ export default {
         questionId: null,
         userInput: null,
       },
+      totalQuestions: null,
     };
   },
 
@@ -80,6 +99,10 @@ export default {
     const testId = params.testId;
     const attemptedId = query.attempted_id ? query.attempted_id : null;
     return { testId, attemptedId };
+  },
+
+  fetch() {
+    this.SET_LOADER(true);
   },
 
   watch: {
@@ -110,40 +133,87 @@ export default {
   },
 
   computed: {
-    ...mapState(['allPurchasedTests']),
+    ...mapState(['allPurchasedTests', 'allAttemptedTests']),
   },
 
   async mounted() {
+    this.SET_LOADER(true);
+    CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+      if (!canGoBack) {
+        // TODO
+        console.log('this.timerCount', this.timerCount);
+        CapacitorApp.exitApp();
+      } else {
+        window.history.back();
+      }
+    });
+
     const testId = this.testId;
     const purchasedTest = this.allPurchasedTests.filter((item) => item.test.id === testId);
-    if (purchasedTest.length) {
-      const oneTest = purchasedTest[0];
-      this.purchasedId = oneTest.id;
-      // converted mintues to seoconds
-      this.timerCount = oneTest.test.time_limit * 60;
-      const allQuestions = oneTest.test.questions.items;
-
-      // Parse the options of question & making array of objects on fly (for user's input)
-      this.allQuestions = allQuestions.map((ques) => {
-        const obj = {
-          questionId: ques.id,
-          userInput: null,
-        };
-
-        // this.allQuestionsSubmission.push(obj);
-
-        const parsedData = JSON.parse(ques.options);
-        return {
-          ...ques,
-          options: Object.entries(parsedData),
-        };
-      });
-    } else {
+    if (!purchasedTest.length) {
+      this.SET_LOADER(false);
       this.$router.push('/dashboard');
+      return;
     }
+
+    if (this.attemptedId) {
+      const attemptedTest = this.allAttemptedTests.filter((item) => item.id === this.attemptedId);
+      if (!attemptedTest.length) {
+        this.SET_LOADER(false);
+        this.$router.push('/dashboard');
+        return;
+      }
+      const results = attemptedTest[0].result.items;
+
+      // TODO remaining time
+      // converted mintues to seoconds
+      this.timerCount = attemptedTest[0].test.time_limit * 60;
+
+      this.allQuestions = attemptedTest[0].test.questions.items
+        .map((ques) => {
+          // Check if already given answer to this question
+          const isAlredyGivenAnswer = results.some((result) => {
+            return result.question_id === ques.id;
+          });
+
+          if (!isAlredyGivenAnswer) {
+            const parsedData = JSON.parse(ques.options);
+            return {
+              ...ques,
+              options: Object.entries(parsedData),
+            };
+          }
+        })
+        .filter(Boolean); // Removed the undefined elements
+
+      this.totalQuestions = this.allQuestions.length;
+      this.questionCounter = attemptedTest[0].test.questions.items.length - this.totalQuestions;
+
+      this.SET_LOADER(false);
+      return;
+    }
+
+    const oneTest = purchasedTest[0];
+    this.purchasedId = oneTest.id;
+
+    // converted mintues to seoconds
+    this.timerCount = oneTest.test.time_limit * 60;
+    const allQuestions = oneTest.test.questions.items;
+
+    // Parse the options of question & making array of objects on fly (for user's input)
+    this.allQuestions = allQuestions.map((ques) => {
+      const parsedData = JSON.parse(ques.options);
+      this.SET_LOADER(false);
+      return {
+        ...ques,
+        options: Object.entries(parsedData),
+      };
+    });
+    this.totalQuestions = this.allQuestions.length;
   },
 
   methods: {
+    ...mapMutations(['SET_LOADER']),
     ...mapActions('testManagement', ['startAttemptingTest', 'answerSubmit', 'compeletedTest']),
 
     async startTestFun() {
@@ -159,7 +229,7 @@ export default {
     },
 
     nextQuestion() {
-      if (this.questionCounter < this.allQuestions.length - 1) {
+      if (this.questionCounter < this.totalQuestions - 1) {
         this.questionCounter = this.questionCounter + 1;
         return;
       }
@@ -187,7 +257,7 @@ export default {
           this.selectAnswer.questionId = null;
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
-          if (this.questionCounter >= this.allQuestions.length) {
+          if (this.questionCounter >= this.totalQuestions) {
             const completedRes = await this.compeletedTest(attemptedId);
             if (completedRes) {
               this.$router.push('/dashboard');
@@ -200,12 +270,23 @@ export default {
         alert('please select option');
       }
     },
+
+    goBack() {
+      // TODO
+      console.log('this.timerCount', this.timerCount);
+      this.$router.back();
+    },
   },
 };
 </script>
 
 <style scoped>
 .btn-color {
+  background-color: #11a49b;
+  color: #fff;
+}
+
+.bg_green {
   background-color: #11a49b;
   color: #fff;
 }
