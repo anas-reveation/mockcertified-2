@@ -8,6 +8,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "cap-build": "set NODE_ENV=production&& npm run config && nuxt build --mode development && cap copy",
+    "cap-generate": "set NODE_ENV=production&& npm run config && nuxt generate --mode development && cap copy",
     "generate": "nuxt generate",
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:prettier",

@@ -4,8 +4,7 @@
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {
-    "url": "https://mockapp.com/",
-    "cleartext": true,
-    "androidScheme": "http"
+    "url": "https://mockapp-certified.com",
+    "cleartext": true
   }
 }
