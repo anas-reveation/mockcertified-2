@@ -15,6 +15,22 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# To generate splash screen and icon
+$ npm install -g cordova-res
+cordova-res expects a Cordova-like structure: place one icon and one splash screen file in a top-level resources folder within your project, like so:
+
+resources/
+├──android
+├   ├──icon-foreground.png - 432x432
+├   └──icon-background.png - 432x432
+├── icon.png - 1024x1024
+└── splash.png - 2732x2732
+Next, run the following to generate all images then copy them into the native projects:
+
+cordova-res ios --skip-config --copy
+cordova-res android --skip-config --copy
+
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
