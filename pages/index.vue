@@ -51,13 +51,6 @@ export default {
       return;
     }
     this.isDisable = false;
-
-    const aa = await this.getAllCategories();
-    console.log('aa', aa);
-  },
-
-  methods: {
-    ...mapActions('testManagement', ['getAllCategories']),
   },
 };
 </script>

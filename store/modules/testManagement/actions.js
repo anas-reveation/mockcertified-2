@@ -12,6 +12,7 @@ export default {
       const allPurchasedTestsData = await API.graphql({
         query: userTests,
         variables: { id: user_id },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 
       // Get purchased tests
@@ -41,6 +42,7 @@ export default {
     try {
       const allCategoriesData = await API.graphql({
         query: listCategories,
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
       commit('SET_LOADER', false, { root: true });
@@ -64,6 +66,7 @@ export default {
       const allTestByCategoryData = await API.graphql({
         query: listTestManagers,
         variables: { filter: filter },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allTestByCategory = allTestByCategoryData.data.listTestManagers.items;
       commit('SET_LOADER', false, { root: true });
@@ -83,22 +86,10 @@ export default {
       const testQueryData = await API.graphql({
         query: getTestDetail,
         variables: { id: testId },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-      let testData = testQueryData.data.getTestManager;
-      const userId = testData.user_id;
-
-      const userGraphql = await API.graphql({
-        query: getUser,
-        variables: { id: userId },
-      });
-
-      testData = {
-        ...testData,
-        userFirstName: userGraphql.data.getUser.first_name,
-        userLastName: userGraphql.data.getUser.last_name,
-      };
+      const testData = testQueryData.data.getTestManager;
       commit('SET_LOADER', false, { root: true });
-
       return testData;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
@@ -119,6 +110,7 @@ export default {
       const attemptTestCreateDetail = await API.graphql({
         query: createAttemptedTest,
         variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
       return attemptTestCreateDetail.data.createAttemptedTest;
@@ -144,6 +136,7 @@ export default {
       await API.graphql({
         query: createResult,
         variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
 
@@ -167,6 +160,7 @@ export default {
       await API.graphql({
         query: updateAttemptedTest,
         variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
       return true;
@@ -189,6 +183,7 @@ export default {
       await API.graphql({
         query: updateAttemptedTest,
         variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
       return true;

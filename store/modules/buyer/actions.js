@@ -17,6 +17,7 @@ export default {
         await API.graphql({
           query: createPurchasedTest,
           variables: { input },
+          authMode: 'AMAZON_COGNITO_USER_POOLS',
         });
       });
       commit('buyer/clearCart', false, { root: true });

@@ -11,6 +11,7 @@ export default {
       const userGraphql = await API.graphql({
         query: getUser,
         variables: { id: user.username },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const userData = userGraphql.data.getUser;
       commit('setUser', userData);
@@ -57,6 +58,7 @@ export default {
       const userGraphql = await API.graphql({
         query: getUser,
         variables: { id: user.username },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const userData = userGraphql.data.getUser;
       commit('setUser', userData);

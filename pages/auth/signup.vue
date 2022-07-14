@@ -162,6 +162,7 @@ export default {
       await API.graphql({
         query: createUser,
         variables: { input: newUser },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
     },
   },

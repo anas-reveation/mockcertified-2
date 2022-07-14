@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <form class="d-flex w-100">
+        <form class="d-flex w-100" @submit.prevent="">
           <input
             class="form-control me-2"
             type="search"
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-// TODO Fetch all test with category
 import { mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
