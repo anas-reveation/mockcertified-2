@@ -1,9 +1,17 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-type User @model {
+# input AMPLIFY {
+#   globalAuthRule: AuthRule = { allow: public }
+# } # FOR TESTING ONLY!
+
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   first_name: String!
   last_name: String!
@@ -13,7 +21,14 @@ type User @model {
   attempted_tests: [AttemptedTest] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
-type TestManager @model {
+type TestManager
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   user_id: ID! @index(name: "byUser")
   created_by: User @hasOne(fields: ["user_id"])
@@ -26,7 +41,14 @@ type TestManager @model {
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
 }
 
-type Question @model {
+type Question
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   marks: Int!
   test_id: ID! @index(name: "byTest")
@@ -37,12 +59,26 @@ type Question @model {
   options: AWSJSON!
 }
 
-type Category @model {
+type Category
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   name: String!
 }
 
-type PurchasedTest @model {
+type PurchasedTest
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   user_id: ID! @index(name: "byUser")
   test_id: ID!
@@ -50,7 +86,14 @@ type PurchasedTest @model {
   test: TestManager @hasOne(fields: ["test_id"])
 }
 
-type AttemptedTest @model {
+type AttemptedTest
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   user_id: ID! @index(name: "byUser")
   attempted_by: User @hasOne(fields: ["user_id"])
@@ -60,7 +103,14 @@ type AttemptedTest @model {
   result: [Result] @hasMany(indexName: "byAttemptedTest", fields: ["id"])
 }
 
-type Result @model {
+type Result
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
   id: ID!
   attempted_id: ID! @index(name: "byAttemptedTest")
   question_id: ID!
