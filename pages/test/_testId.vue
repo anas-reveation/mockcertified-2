@@ -16,11 +16,6 @@
         </div>
       </div>
 
-      <img
-        class="w-100 rounded"
-        src="https://cdn.pixabay.com/photo/2015/11/15/07/47/geometry-1044090__340.jpg"
-        alt=""
-      />
       <div class="mt-3">
         <div class="d-flex justify-content-between">
           <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>

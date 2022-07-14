@@ -142,9 +142,10 @@ export default {
       if (!canGoBack) {
         // TODO
         console.log('this.timerCount', this.timerCount);
-        CapacitorApp.exitApp();
+        this.$router.push('/dashboard');
+        // CapacitorApp.exitApp();
       } else {
-        window.history.back();
+        this.$router.push('/dashboard');
       }
     });
 
@@ -274,7 +275,7 @@ export default {
     goBack() {
       // TODO
       console.log('this.timerCount', this.timerCount);
-      this.$router.back();
+      this.$router.push('/dashboard');
     },
   },
 };

@@ -1,23 +1,12 @@
 <template>
-  <div class="btn shadow w-100 d-flex justify-content-between align-items-center">
-    <img
-      src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010__340.jpg"
-      width="70"
-      height="70"
-      alt=""
-    />
-    <div class="d-flex flex-column">
+  <div class="d-flex justify-content-between align-items-center shadow w-100 p-4">
+    <div class="d-flex flex-column text-start">
       <span class="fs-5 fw-bolder text-capitalize text-break">{{ title }}</span>
       <span v-if="timeLimit" class="fs-6 fw-normal">{{ timeLimit }} min</span>
     </div>
 
     <div class="d-flex flex-column">
-      <!-- <img src="@/assets/images/plus.png" class="m-auto" width="25" height="25" alt="" /> -->
-      <span
-        v-if="statusColor"
-        class="fs-6 fw-bolder d-flex justify-content-between align-items-center mx-auto"
-        :class="statusColor"
-      >
+      <span v-if="statusColor" class="fs-6 fw-bolder" :class="statusColor">
         {{ statusName }}
       </span>
       <img
