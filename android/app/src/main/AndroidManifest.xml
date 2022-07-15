@@ -23,13 +23,23 @@
             </intent-filter>
 
             <!-- Start @capacitor/app -->
-            <intent-filter>
+            <!-- <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="@string/custom_url_scheme" />
-            </intent-filter>
+            </intent-filter> -->
             <!-- End @capacitor/app -->
+
+            <!-- Start deeplink (@capacitor/app) -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Domain -->
+                <data android:scheme="https" android:host="develop.d22h3uk4vvon62.amplifyapp.com" />
+            </intent-filter>
+            <!-- End deeplink -->
 
         </activity>
 

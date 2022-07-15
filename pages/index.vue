@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import { App as CapacitorApp } from '@capacitor/app'; // Deep links
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   layout: 'introLayout',
@@ -40,13 +39,6 @@ export default {
   async mounted() {
     if (this.isAuthenticated) {
       this.$router.push('/dashboard');
-
-      CapacitorApp.addListener('appUrlOpen', function (event) {
-        const slug = event.url.split('.com').pop();
-        if (slug) {
-          this.$router.push(slug);
-        }
-      });
 
       return;
     }

@@ -90,9 +90,11 @@ sw.*
 # Vim swap files
 *.swp
 
-
 # package - cordova-res
 resources/
+
+# Keystore
+*.keystore
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

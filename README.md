@@ -82,3 +82,13 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+---
+
+## 'For Deep Link'
+
+To setup deep links [the documentation](https://devdactic.com/setup-deep-links-capacitor/).
+
+## '@capacitor/app configuration'
+
+To setup @capacitor/app (ex: to detect back-button, deeplink, etc... ) [the documentation](https://capacitorjs.com/docs/apis/app).

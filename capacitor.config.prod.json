@@ -4,7 +4,7 @@
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {
-    "url": "https://mockapp-certified.com",
+    "url": "https://develop.d22h3uk4vvon62.amplifyapp.com",
     "cleartext": true
   }
 }

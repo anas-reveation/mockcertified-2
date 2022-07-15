@@ -4,7 +4,7 @@
 	"webDir": "dist",
 	"bundledWebRuntime": false,
 	"server": {
-		"url": "http://192.168.1.4:3000",
+		"url": "https://develop.d22h3uk4vvon62.amplifyapp.com",
 		"cleartext": true
 	}
 }
