@@ -28,7 +28,7 @@ export default async ({ app, route, store }) => {
   await store.dispatch('auth/load');
 
   // Run when app loads
-  await window.onNuxtReady(() => {
+  window.onNuxtReady(() => {
     const isAuthenticated = store.state.auth.isAuthenticated;
     const homeRoute = route.path === '/' ? true : false;
     const dashboardRoute = route.path.match(/\/dashboard\/*/g) ? true : false;
