@@ -33,6 +33,7 @@ export const userTests = /* GraphQL */ `
           id
           status
           test_id
+          remaining_time
           test {
             id
             price

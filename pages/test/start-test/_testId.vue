@@ -120,12 +120,16 @@ export default {
     },
 
     timerCount: {
-      handler(value) {
+      async handler(value, previousValue) {
         if (value > 0 && this.timerEnabled) {
           setTimeout(() => {
             this.timerCount--;
             this.covertTimer(this.timerCount);
           }, 1000);
+        } else if (value <= 0 && previousValue === 1) {
+          await this.compeletedTest(this.attemptedId);
+          await this.setTestRemainingTimeLocal();
+          this.$router.push('/dashboard');
         }
       },
       immediate: true, // This ensures the watcher is triggered upon creation
@@ -134,19 +138,17 @@ export default {
 
   computed: {
     ...mapState(['allPurchasedTests', 'allAttemptedTests']),
+
+    remainingTime() {
+      return (this.timerCount / 60).toFixed(2);
+    },
   },
 
   async mounted() {
     this.SET_LOADER(true);
     CapacitorApp.addListener('backButton', ({ canGoBack }) => {
-      if (!canGoBack) {
-        // TODO
-        console.log('this.timerCount', this.timerCount);
-        this.$router.push('/dashboard');
-        // CapacitorApp.exitApp();
-      } else {
-        this.$router.push('/dashboard');
-      }
+      this.setTestRemainingTimeLocal();
+      this.$router.push('/dashboard');
     });
 
     const testId = this.testId;
@@ -166,9 +168,8 @@ export default {
       }
       const results = attemptedTest[0].result.items;
 
-      // TODO remaining time
       // converted mintues to seoconds
-      this.timerCount = attemptedTest[0].test.time_limit * 60;
+      this.timerCount = Math.round(attemptedTest[0].remaining_time * 60);
 
       this.allQuestions = attemptedTest[0].test.questions.items
         .map((ques) => {
@@ -215,13 +216,19 @@ export default {
 
   methods: {
     ...mapMutations(['SET_LOADER']),
-    ...mapActions('testManagement', ['startAttemptingTest', 'answerSubmit', 'compeletedTest']),
+    ...mapActions('testManagement', [
+      'startAttemptingTest',
+      'answerSubmit',
+      'compeletedTest',
+      'setTestRemainingTime',
+    ]),
 
     async startTestFun() {
       if (!this.attemptedId) {
+        // First time attempting
         const res = await this.startAttemptingTest(this.testId);
         if (res) {
-          this.firstAttemptedId = res.id;
+          this.attemptedId = res.id;
         } else {
           return;
         }
@@ -247,9 +254,8 @@ export default {
 
     async submitTest() {
       if (this.selectAnswer.questionId && this.selectAnswer.userInput) {
-        const attemptedId = this.attemptedId ? this.attemptedId : this.firstAttemptedId;
         const obj = {
-          attemptedId,
+          attemptedId: this.attemptedId,
           questionId: this.selectAnswer.questionId,
           userInput: this.selectAnswer.userInput,
         };
@@ -259,7 +265,8 @@ export default {
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
           if (this.questionCounter >= this.totalQuestions) {
-            const completedRes = await this.compeletedTest(attemptedId);
+            const completedRes = await this.compeletedTest(this.attemptedId);
+            this.setTestRemainingTimeLocal();
             if (completedRes) {
               this.$router.push('/dashboard');
             }
@@ -272,9 +279,15 @@ export default {
       }
     },
 
-    goBack() {
-      // TODO
-      console.log('this.timerCount', this.timerCount);
+    async setTestRemainingTimeLocal() {
+      await this.setTestRemainingTime({
+        attemptedId: this.attemptedId,
+        remainingTime: this.remainingTime,
+      });
+    },
+
+    async goBack() {
+      await this.setTestRemainingTimeLocal();
       this.$router.push('/dashboard');
     },
   },

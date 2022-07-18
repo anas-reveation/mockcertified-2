@@ -432,6 +432,7 @@ export const createAttemptedTest = /* GraphQL */ `
         updatedAt
       }
       status
+      remaining_time
       result {
         nextToken
       }
@@ -469,6 +470,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         updatedAt
       }
       status
+      remaining_time
       result {
         nextToken
       }
@@ -506,6 +508,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         updatedAt
       }
       status
+      remaining_time
       result {
         nextToken
       }

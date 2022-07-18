@@ -244,6 +244,7 @@ export const getAttemptedTest = /* GraphQL */ `
         updatedAt
       }
       status
+      remaining_time
       result {
         nextToken
       }
@@ -264,6 +265,7 @@ export const listAttemptedTests = /* GraphQL */ `
         user_id
         test_id
         status
+        remaining_time
         createdAt
         updatedAt
       }

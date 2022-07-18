@@ -37,6 +37,7 @@ type TestManager
   title: String!
   description: String!
   price: Int!
+  # In minutes
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
 }
@@ -90,7 +91,7 @@ type AttemptedTest
   @model
   @auth(
     rules: [
-      { allow: private, operations: [create, read] }
+      { allow: private, operations: [create, read, update] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
   ) {
@@ -100,6 +101,8 @@ type AttemptedTest
   test_id: ID!
   test: TestManager @hasOne(fields: ["test_id"])
   status: AttemptStatus!
+  # In minutes
+  remaining_time: Float
   result: [Result] @hasMany(indexName: "byAttemptedTest", fields: ["id"])
 }
 

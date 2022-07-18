@@ -193,4 +193,28 @@ export default {
       return false;
     }
   },
+
+  async setTestRemainingTime({ commit }, payload) {
+    const attempted_id = payload.attemptedId;
+    const remaining_time = payload.remainingTime;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const input = {
+        id: attempted_id,
+        remaining_time,
+      };
+      await API.graphql({
+        query: updateAttemptedTest,
+        variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      commit('SET_LOADER', false, { root: true });
+      return true;
+    } catch (err) {
+      console.error(err);
+      commit('SET_LOADER', false, { root: true });
+      return false;
+    }
+  },
 };
