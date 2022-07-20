@@ -1,5 +1,6 @@
 import auth from './modules/auth';
 import buyer from './modules/buyer';
+import seller from './modules/seller';
 import testManagement from './modules/testManagement';
 
 const state = () => {
@@ -14,6 +15,7 @@ const state = () => {
 const modules = {
   auth,
   buyer,
+  seller,
   testManagement,
 };
 
