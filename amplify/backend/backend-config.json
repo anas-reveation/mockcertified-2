@@ -37,7 +37,31 @@
       "providerPlugin": "awscloudformation"
     }
   },
-  "function": {},
+  "function": {
+    "checkAnswer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "mobileappmarketplace",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    }
+  },
   "api": {
     "mobileappmarketplace": {
       "service": "AppSync",
@@ -67,6 +91,9 @@
               "userPoolConfig": {
                 "userPoolId": "authmobileappmarketplacee1e8cc85"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }

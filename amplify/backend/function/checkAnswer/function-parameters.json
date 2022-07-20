@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "auth": {
+      "mobileappmarketplacee1e8cc85": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    "api": {
+      "mobileappmarketplace": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "username",
+      "environmentVariableName": "USERNAME"
+    },
+    {
+      "cloudFormationParameterName": "password",
+      "environmentVariableName": "PASSWORD"
+    }
+  ]
+}

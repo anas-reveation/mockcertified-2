@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "mobileappmarketplacee1e8cc85": {}
+      },
+      "function": {
+        "checkAnswer": {
+          "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
+          "s3Key": "amplify-builds/checkAnswer-42433268397530716645-build.zip"
+        }
       }
     }
   }

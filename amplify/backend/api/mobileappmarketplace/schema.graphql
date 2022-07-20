@@ -48,6 +48,8 @@ type Question
     rules: [
       { allow: private, operations: [create, read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -112,6 +114,8 @@ type Result
     rules: [
       { allow: private, operations: [create, read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+      { allow: public, provider: iam, operations: [read, update] }
+      { allow: public, operations: [read, update] }
     ]
   ) {
   id: ID!

@@ -15,6 +15,9 @@
       {
         "mode": "AMAZON_COGNITO_USER_POOLS",
         "cognitoUserPoolId": "authmobileappmarketplacee1e8cc85"
+      },
+      {
+        "mode": "AWS_IAM"
       }
     ]
   }
