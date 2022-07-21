@@ -18,7 +18,7 @@
       "function": {
         "checkAnswer": {
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
-          "s3Key": "amplify-builds/checkAnswer-42433268397530716645-build.zip"
+          "s3Key": "amplify-builds/checkAnswer-345053414b5863754f76-build.zip"
         }
       }
     }

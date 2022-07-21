@@ -18,8 +18,7 @@ const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEY
  */
 
 exports.handler = async (event) => {
-  const result_id = event.result_id;
-  // console.log(`EVENT: ${JSON.stringify(event)}`);
+  const result_id = event.arguments.result_id;
 
   const getResult = /* GraphQL */ `
     query GetResult($id: ID!) {
@@ -45,14 +44,13 @@ exports.handler = async (event) => {
 
   let statusCode = 200;
   let body;
-  let response;
 
   const headers = {
     'x-api-key': GRAPHQLAPI_KEY_OUTPUT,
   };
 
   try {
-    response = await axios.post(
+    const response = await axios.post(
       GRAPHQL_ENDPOINT,
       {
         query: getResult,
