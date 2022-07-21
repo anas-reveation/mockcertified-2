@@ -131,3 +131,7 @@ enum AttemptStatus {
   COMPLETED
   IN_PROGRESS
 }
+
+type Mutation {
+  addResultStatus(result_id: ID): String @function(name: "checkAnswer-${env}")
+}

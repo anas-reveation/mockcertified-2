@@ -1,7 +1,12 @@
 import { API } from 'aws-amplify';
 import { getUser, listCategories, listTestManagers } from '~/graphql/queries';
 import { userTests, getTestDetail } from '~/ManualGraphql/queries';
-import { createAttemptedTest, createResult, updateAttemptedTest } from '~/graphql/mutations';
+import {
+  createAttemptedTest,
+  createResult,
+  updateAttemptedTest,
+  addResultStatus,
+} from '~/graphql/mutations';
 
 export default {
   async getUserTests({ commit, rootState }) {
@@ -133,11 +138,21 @@ export default {
         attempted_id,
         user_input,
       };
-      await API.graphql({
+
+      const resultData = await API.graphql({
         query: createResult,
         variables: { input },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+
+      const result_id = resultData.data.createResult.id;
+      await API.graphql({
+        query: addResultStatus,
+        variables: {
+          result_id,
+        },
+      });
+
       commit('SET_LOADER', false, { root: true });
 
       return true;
