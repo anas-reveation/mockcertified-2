@@ -28,9 +28,7 @@
 
     <div class="mb-1">
       <label class="form-label">Question list (csv/xml file only)</label>
-      <a href="/questionFormat.csv" target="_blank" download="" class="btn btn-warning">
-        Dowload template
-      </a>
+      <a href="/questionFormat.csv" download="" class="btn btn-warning"> Dowload template </a>
       <input type="file" @change="onChange" required />
     </div>
     <div>
@@ -91,23 +89,46 @@ export default {
 
     pasreFileData(FileData) {
       // Removed first element of an array (It is a heading)
+      const ActualData = FileData;
       FileData.shift();
+      const optionsKey = ['optionA', 'optionB', 'optionC', 'optionD'];
+      let dataError = false;
 
       try {
-        this.questionList = FileData.map((data) => {
-          // Removed extra white spaces
-          const optionA = data[1].replace(/\s+/g, ' ').trim();
-          const optionB = data[2].replace(/\s+/g, ' ').trim();
-          const optionC = data[3].replace(/\s+/g, ' ').trim();
-          const optionD = data[4].replace(/\s+/g, ' ').trim();
+        this.questionList = FileData.map((data, index) => {
+          const options = {
+            optionA: data[1].replace(/\s+/g, ' ').trim(),
+            optionB: data[2].replace(/\s+/g, ' ').trim(),
+            optionC: data[3].replace(/\s+/g, ' ').trim(),
+            optionD: data[4].replace(/\s+/g, ' ').trim(),
+          };
+
+          let answer = null;
+          optionsKey.forEach((option, index2) => {
+            if (option === data[5]) {
+              answer = ActualData[index][index2 + 1].replace(/\s+/g, ' ').trim();
+              return;
+            }
+          });
+
+          if (!answer) {
+            dataError = true;
+          }
+
           const questionObj = {
             question: data[0].replace(/\s+/g, ' ').trim(),
-            options: `{\"option_D\":\"${optionD}\",\"option_B\":\"${optionB}\",\"option_C\":\"${optionC}\",\"option_A\":\"${optionA}\"}`,
-            answer: data[5].replace(/\s+/g, ' ').trim(),
+            options: `{\"option_D\":\"${options.optionD}\",\"option_B\":\"${options.optionB}\",\"option_C\":\"${options.optionC}\",\"option_A\":\"${options.optionA}\"}`,
+            answer,
             explanation: data[6].replace(/\s+/g, ' ').trim(),
           };
           return questionObj;
         });
+
+        if (dataError) {
+          this.questionList = [];
+          alert('Please add your question as per we provided format');
+          return;
+        }
       } catch (err) {
         console.error(err);
         alert('Please add your question as per we provided format');
