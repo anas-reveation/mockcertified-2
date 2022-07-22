@@ -43,7 +43,7 @@
           v-if="attemptedOpen"
           v-for="test in allAttemptedTests"
           :key="test.id"
-          @click="redirectPage(test)"
+          @click="test.status === 'IN_PROGRESS' ? redirectPage(test) : redirectResultPage(test.id)"
         >
           <TestCard
             :title="test.test.title"
@@ -122,6 +122,10 @@ export default {
     redirectPage(test) {
       this.selectTest(test.test);
       this.$router.push(`/test/${test.test.id}`);
+    },
+
+    redirectResultPage(attemptId) {
+      this.$router.push(`/test/result/${attemptId}`);
     },
 
     attempt() {

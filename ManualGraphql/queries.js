@@ -59,6 +59,9 @@ export const userTests = /* GraphQL */ `
               question_id
               result_status
               user_input
+              question {
+                marks
+              }
             }
           }
         }
