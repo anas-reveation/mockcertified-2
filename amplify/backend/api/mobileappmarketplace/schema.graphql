@@ -37,6 +37,7 @@ type TestManager
   title: String!
   description: String!
   price: Int!
+  status: TestManagerStatus @default(value: "IN_PROGRESS")
   # In minutes
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
@@ -130,6 +131,12 @@ enum AttemptStatus {
   ABORTED
   COMPLETED
   IN_PROGRESS
+}
+
+enum TestManagerStatus {
+  APPROVED
+  IN_PROGRESS
+  REJECTED
 }
 
 type Mutation {

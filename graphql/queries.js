@@ -64,6 +64,7 @@ export const getTestManager = /* GraphQL */ `
       title
       description
       price
+      status
       time_limit
       questions {
         nextToken
@@ -87,6 +88,7 @@ export const listTestManagers = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -108,6 +110,7 @@ export const getQuestion = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -191,6 +194,7 @@ export const getPurchasedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -239,6 +243,7 @@ export const getAttemptedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt

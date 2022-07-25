@@ -87,6 +87,7 @@ export const onCreateTestManager = /* GraphQL */ `
       title
       description
       price
+      status
       time_limit
       questions {
         nextToken
@@ -119,6 +120,7 @@ export const onUpdateTestManager = /* GraphQL */ `
       title
       description
       price
+      status
       time_limit
       questions {
         nextToken
@@ -151,6 +153,7 @@ export const onDeleteTestManager = /* GraphQL */ `
       title
       description
       price
+      status
       time_limit
       questions {
         nextToken
@@ -173,6 +176,7 @@ export const onCreateQuestion = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -199,6 +203,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -225,6 +230,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -289,6 +295,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -319,6 +326,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -349,6 +357,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -379,6 +388,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -414,6 +424,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
@@ -449,6 +460,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         title
         description
         price
+        status
         time_limit
         createdAt
         updatedAt
