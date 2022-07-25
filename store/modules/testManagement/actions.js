@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { getUser, listCategories, listTestManagers } from '~/graphql/queries';
+import { listCategories, listTestManagers } from '~/graphql/queries';
 import { userTests, getTestDetail } from '~/ManualGraphql/queries';
 import {
   createAttemptedTest,
@@ -14,26 +14,31 @@ export default {
     commit('SET_LOADER', true, { root: true });
 
     try {
-      const allPurchasedTestsData = await API.graphql({
+      const userTestsData = await API.graphql({
         query: userTests,
         variables: { id: user_id },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 
       // Get purchased tests
-      const allPurchasedTests = allPurchasedTestsData.data.getUser.purchased_tests.items
-        ? allPurchasedTestsData.data.getUser.purchased_tests.items
+      const allPurchasedTests = userTestsData.data.getUser.purchased_tests.items
+        ? userTestsData.data.getUser.purchased_tests.items
         : [];
       commit('setAllPurchasedTests', allPurchasedTests, { root: true });
 
       // Get attempted tests
-      const allAttemptedTests = allPurchasedTestsData.data.getUser.attempted_tests.items
-        ? allPurchasedTestsData.data.getUser.attempted_tests.items
+      const allAttemptedTests = userTestsData.data.getUser.attempted_tests.items
+        ? userTestsData.data.getUser.attempted_tests.items
         : [];
       commit('setAllAttemptedTests', allAttemptedTests, { root: true });
 
-      commit('SET_LOADER', false, { root: true });
+      // Get created tests
+      const allCreatedTests = userTestsData.data.getUser.created_tests.items
+        ? userTestsData.data.getUser.created_tests.items
+        : [];
+      commit('setAllCreatedTests', allCreatedTests, { root: true });
 
+      commit('SET_LOADER', false, { root: true });
       return allPurchasedTests;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });

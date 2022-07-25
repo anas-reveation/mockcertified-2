@@ -66,6 +66,27 @@ export const userTests = /* GraphQL */ `
           }
         }
       }
+      created_tests {
+        items {
+          title
+          category_id
+          description
+          id
+          price
+          time_limit
+          status
+          questions {
+            items {
+              answer
+              explainantion
+              id
+              marks
+              options
+              question
+            }
+          }
+        }
+      }
     }
   }
 `;

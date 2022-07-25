@@ -23,7 +23,9 @@
             <NuxtLink class="nav-link text-black" aria-current="page" to="/create-test">
               Create test
             </NuxtLink>
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/">Tests</NuxtLink>
+            <NuxtLink class="nav-link text-black" aria-current="page" to="/created-test">
+              Created Tests
+            </NuxtLink>
           </li>
         </ul>
         <hr />

@@ -9,6 +9,7 @@ const state = () => {
     selectedTest: null,
     allPurchasedTests: [],
     allAttemptedTests: [],
+    allCreatedTests: [],
   };
 };
 
@@ -32,6 +33,10 @@ const mutations = {
 
   setAllAttemptedTests(state, allAttemptedTests) {
     state.allAttemptedTests = allAttemptedTests;
+  },
+
+  setAllCreatedTests(state, allCreatedTests) {
+    state.allCreatedTests = allCreatedTests;
   },
 
   selectTest(state, test) {
