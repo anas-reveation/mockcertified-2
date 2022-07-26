@@ -33,6 +33,11 @@ export default {
 
   async mounted() {
     this.allTestByCategory = await this.getTestsByCategory(this.categoryId);
+
+    if (!this.allTestByCategory.length) {
+      this.$router.push('/dashboard');
+      return;
+    }
   },
 
   methods: {

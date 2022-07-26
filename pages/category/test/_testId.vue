@@ -35,7 +35,15 @@
           <span class="fs-6 fw-bolder text-dark">{{ testDetail.time_limit }} min</span>
           <span class="fs-6 fw-bolder text-dark">{{ totalMarks }} marks</span>
         </div>
-        <button type="button" class="btn w-100 py-2 my-2 btn-color shadow" @click="addToCartLocal">
+        <button v-if="msgText" type="button" class="btn w-100 py-2 my-2 btn-color shadow">
+          {{ msgText }}
+        </button>
+        <button
+          v-else
+          type="button"
+          class="btn w-100 py-2 my-2 btn-color shadow"
+          @click="addToCartLocal"
+        >
           Add to Cart
         </button>
       </div>
@@ -60,8 +68,9 @@ export default {
   },
 
   computed: {
-    ...mapState(['allPurchasedTests']),
+    ...mapState('auth', ['user']),
     ...mapState('buyer', ['cartItems']),
+    ...mapState(['allPurchasedTests']),
 
     totalMarks() {
       if (this.testDetail) {
@@ -72,14 +81,47 @@ export default {
         return totalMarks;
       }
     },
+
+    msgText() {
+      // If user created this test
+      if (this.testDetail.created_by.id === this.user.id) {
+        return 'You are the creator of this test.';
+      }
+
+      // If user already purchased this test
+      const test_id = this.testDetail.id;
+      const isPurchased = this.allPurchasedTests.some(function (purchasedItem) {
+        return purchasedItem.test.id === test_id;
+      });
+      if (isPurchased) {
+        return 'Already purchased';
+      } else {
+        // If user already have this test in cart
+        const isExists = this.cartItems.some(function (cartItem) {
+          return cartItem.id === test_id;
+        });
+        if (isExists) {
+          return 'Already added';
+        }
+      }
+    },
   },
 
   async mounted() {
     this.testDetail = await this.getTestDetail(this.testId);
+
+    if (!this.testDetail) {
+      this.$router.push('/dashboard');
+      return;
+    }
+
+    if (!this.allPurchasedTests.length) {
+      await this.getUserTests();
+    }
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTestDetail']),
+    ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
     ...mapMutations('buyer', ['addToCart']),
 
     formatPrice(price) {
@@ -87,24 +129,6 @@ export default {
     },
 
     addToCartLocal() {
-      const test_id = this.testDetail.id;
-      // If user already purchased this test
-      const isPurchased = this.allPurchasedTests.some(function (purchasedItem) {
-        return purchasedItem.test.id === test_id;
-      });
-      if (isPurchased) {
-        alert('Already purchased');
-        return;
-      }
-
-      // If user already have this test in cart
-      const isExists = this.cartItems.some(function (cartItem) {
-        return cartItem.id === test_id;
-      });
-      if (isExists) {
-        alert('Already added');
-        return;
-      }
       this.addToCart(this.testDetail);
     },
   },
