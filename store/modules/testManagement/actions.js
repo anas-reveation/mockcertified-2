@@ -71,6 +71,7 @@ export default {
     try {
       const filter = {
         category_id: { eq: category_id },
+        and: { status: { eq: 'APPROVED' } },
       };
 
       const allTestByCategoryData = await API.graphql({
