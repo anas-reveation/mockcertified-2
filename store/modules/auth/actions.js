@@ -7,6 +7,11 @@ export default {
   async load({ commit }, req) {
     try {
       const user = await Auth.currentAuthenticatedUser();
+      const userRole = user.signInUserSession.accessToken.payload['cognito:groups'];
+      if (userRole) {
+        commit('setUserGroup', userRole[0]);
+      }
+
       // const userData = user ? user.attributes : user;
       const userGraphql = await API.graphql({
         query: getUser,
@@ -55,6 +60,12 @@ export default {
 
     try {
       const user = await Auth.signIn(email, password);
+
+      const userRole = user.signInUserSession.accessToken.payload['cognito:groups'];
+      if (userRole) {
+        commit('setUserGroup', userRole[0]);
+      }
+
       const userGraphql = await API.graphql({
         query: getUser,
         variables: { id: user.username },
@@ -79,6 +90,8 @@ export default {
       commit('buyer/clearCart', false, { root: true });
       commit('setAllPurchasedTests', [], { root: true });
       commit('setAllAttemptedTests', [], { root: true });
+      commit('setAllCreatedTests', [], { root: true });
+      commit('setUserGroup', null);
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {

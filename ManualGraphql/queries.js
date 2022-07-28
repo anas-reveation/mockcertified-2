@@ -125,3 +125,41 @@ export const getTestDetail = /* GraphQL */ `
     }
   }
 `;
+
+export const listAllTests = /* GraphQL */ `
+  query ListTestManagers($filter: ModelTestManagerFilterInput, $limit: Int, $nextToken: String) {
+    listTestManagers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        status
+        time_limit
+        createdAt
+        updatedAt
+        questions {
+          items {
+            answer
+            explainantion
+            id
+            marks
+            options
+            question
+          }
+        }
+        created_by {
+          id
+          first_name
+          last_name
+          email
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;

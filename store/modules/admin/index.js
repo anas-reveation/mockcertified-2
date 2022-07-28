@@ -1,20 +1,18 @@
-import authAction from './actions';
-import authMutations from './mutations';
+import adminAction from './actions';
+import adminMutations from './mutations';
 
 const state = () => ({
-  isAuthenticated: false,
-  user: null,
-  userGroup: null,
+  allTests: [],
 });
 
 const getters = {};
 
 const actions = {
-  ...authAction,
+  ...adminAction,
 };
 
 const mutations = {
-  ...authMutations,
+  ...adminMutations,
 };
 
 export default {

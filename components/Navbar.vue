@@ -26,6 +26,16 @@
             <NuxtLink class="nav-link text-black" aria-current="page" to="/created-test">
               Created Tests
             </NuxtLink>
+            <ClientOnly>
+              <NuxtLink
+                v-if="userGroup === 'admins'"
+                class="nav-link text-black"
+                aria-current="page"
+                to="/admin"
+              >
+                admin
+              </NuxtLink>
+            </ClientOnly>
           </li>
         </ul>
         <hr />
@@ -33,3 +43,13 @@
     </div>
   </nav>
 </template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState('auth', ['userGroup']),
+  },
+};
+</script>
