@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
 
-import { getUser } from '../../../graphql/queries';
+import { getUser } from '~/graphql/queries';
 
 export default {
   async load({ commit }, req) {
@@ -27,12 +27,20 @@ export default {
     }
   },
 
-  async register({ commit }, { email, password }) {
+  async register({ commit }, payload) {
+    const username = payload.email;
+    const password = payload.password;
+    const given_name = payload.first_name;
+    const family_name = payload.last_name;
     commit('SET_LOADER', true, { root: true });
     try {
       const user = await Auth.signUp({
-        username: email,
+        username,
         password,
+        attributes: {
+          given_name,
+          family_name,
+        },
       });
       commit('SET_LOADER', false, { root: true });
       return user;
@@ -48,10 +56,11 @@ export default {
     try {
       commit('SET_LOADER', false, { root: true });
       await Auth.confirmSignUp(email, code);
-      return;
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);
+      return false;
     }
   },
 
@@ -77,7 +86,8 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      alert(err.message);
+      console.error('ERR', err.message);
     }
   },
 

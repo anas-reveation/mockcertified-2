@@ -144,7 +144,6 @@ export default {
   watch: {
     registerForm: {
       handler(newValue, oldValue) {
-        console.log('newValue', newValue);
         if (
           newValue.first_name &&
           newValue.last_name &&
@@ -190,8 +189,13 @@ export default {
 
     async confirmLocal() {
       try {
-        await this.confirmRegistration(this.confirmForm);
-        await this.login(this.registerForm);
+        const res = await this.confirmRegistration(this.confirmForm);
+        if (!res) {
+          alert(res.message);
+          return;
+        }
+        const form = { email: this.registerForm.email, password: this.registerForm.password };
+        await this.login(form);
         await this.createUserLocal();
         this.$router.push('/dashboard');
       } catch (err) {
