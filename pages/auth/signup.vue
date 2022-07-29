@@ -48,13 +48,22 @@
           id="password"
           placeholder="Password"
           v-model="registerForm.password"
+          @input="checkPasswordMatch"
           required
         />
       </div>
-      <!-- <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" required />
-      </div> -->
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control fs-5 py-1 border"
+          :class="!passwordMatched && ' border-danger'"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          v-model="registerForm.confirmPassword"
+          @input="checkPasswordMatch"
+          required
+        />
+      </div>
       <div class="row mb-4">
         <div class="col">
           <NuxtLink to="/auth/forgotpassword">Forgot password?</NuxtLink>
@@ -63,7 +72,11 @@
           <NuxtLink to="/auth/login">Log In</NuxtLink>
         </div>
       </div>
-      <button type="submit" class="btn w-100 btn-primary btn-color py-2 mb-4 mt-2 shadow fs-5">
+      <button
+        type="submit"
+        class="btn w-100 btn-primary btn-color py-2 mb-4 mt-2 shadow fs-5"
+        :disabled="isDisabled"
+      >
         Register
       </button>
     </form>
@@ -96,7 +109,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import { API } from 'aws-amplify';
 import { createUser } from '~/graphql/mutations';
 const steps = {
@@ -117,24 +130,57 @@ export default {
       password: null,
       first_name: null,
       last_name: null,
+      confirmPassword: null,
     },
     confirmForm: {
       email: '',
       code: '',
     },
     userId: null,
+    passwordMatched: false,
+    isDisabled: true,
   }),
+
+  watch: {
+    registerForm: {
+      handler(newValue, oldValue) {
+        console.log('newValue', newValue);
+        if (
+          newValue.first_name &&
+          newValue.last_name &&
+          newValue.email &&
+          newValue.password &&
+          newValue.password === newValue.confirmPassword
+        ) {
+          this.isDisabled = false;
+        }
+        // Note: `newValue` will be equal to `oldValue` here
+        // on nested mutations as long as the object itself
+        // hasn't been replaced.
+      },
+      deep: true,
+    },
+  },
 
   methods: {
     ...mapActions('auth', ['register', 'confirmRegistration', 'login']),
 
+    checkPasswordMatch() {
+      if (this.registerForm.password === this.registerForm.confirmPassword) {
+        this.passwordMatched = true;
+      } else {
+        this.passwordMatched = false;
+        this.isDisabled = true;
+      }
+    },
+
     async registerLocal() {
       try {
         const userData = await this.register(this.registerForm);
-        if (userData) {
-          this.userId = userData.userSub;
-          this.createUserLocal();
+        if (!userData) {
+          return;
         }
+        this.userId = userData.userSub;
         this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
       } catch (err) {
@@ -146,6 +192,7 @@ export default {
       try {
         await this.confirmRegistration(this.confirmForm);
         await this.login(this.registerForm);
+        await this.createUserLocal();
         this.$router.push('/dashboard');
       } catch (err) {
         console.error('err', err);
