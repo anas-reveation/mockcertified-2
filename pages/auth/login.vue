@@ -49,7 +49,7 @@
         <button type="submit" class="btn w-100 btn-color py-2 mb-4 shadow">Sign in</button>
         <span class="fs-5 fw-bolder opacity-75 mb-3">Or</span>
         <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn bg-white py-2 mb-4 shadow">
+          <button type="button" class="btn bg-white py-2 mb-4 shadow" @click="facebookAuth">
             <img src="@/assets/images/facebook.png" width="30" alt="" />
           </button>
           <button type="button" class="btn bg-white py-2 mb-4 shadow" @click="googleAuth">
@@ -80,6 +80,7 @@ export default {
   computed: {
     ...mapState(['isLoading']),
   },
+
   methods: {
     ...mapActions('auth', ['login', 'load']),
     async loginLocal() {
@@ -93,6 +94,10 @@ export default {
 
     async googleAuth() {
       Auth.federatedSignIn({ provider: 'Google' });
+    },
+
+    async facebookAuth() {
+      Auth.federatedSignIn({ provider: 'Facebook' });
     },
   },
 };

@@ -61,10 +61,11 @@
     "hostedUI": true,
     "hostedUIDomainName": "state-quiz",
     "authProvidersUserPool": [
+      "Facebook",
       "Google"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://develop.d22h3uk4vvon62.amplifyapp.com/socialAuth/\",\"https://www.mockcertified.com/socialAuth/\"],\"LogoutURLs\":[\"https://develop.d22h3uk4vvon62.amplifyapp.com/auth/login/\",\"https://www.mockcertified.com/auth/login/\"]}",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://alexa.amazon.co.jp/spa/skill/account-linking-status.html?vendorId=M2CYCHA45YYAD8/\",\"https://develop.d22h3uk4vvon62.amplifyapp.com/socialAuth/\",\"https://layla.amazon.com/spa/skill/account-linking-status.html?vendorId=MJXE0IWG9YLLG/\",\"https://www.mockcertified.com/socialAuth/\"],\"LogoutURLs\":[\"http://localhost:3000/auth/login/\",\"https://alexa.amazon.co.jp/spa/skill/account-linking-status.html?vendorId=M2CYCHA45YYAD8/\",\"https://develop.d22h3uk4vvon62.amplifyapp.com/auth/login/\",\"https://layla.amazon.com/spa/skill/account-linking-status.html?vendorId=MJXE0IWG9YLLG/\",\"https://www.mockcertified.com/auth/login/\"]}",
     "authProviders": []
   }
 }
