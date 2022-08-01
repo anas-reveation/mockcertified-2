@@ -52,7 +52,7 @@
           <button type="button" class="btn bg-white py-2 mb-4 shadow">
             <img src="@/assets/images/facebook.png" width="30" alt="" />
           </button>
-          <button type="button" class="btn bg-white py-2 mb-4 shadow">
+          <button type="button" class="btn bg-white py-2 mb-4 shadow" @click="googleAuth">
             <img src="@/assets/images/google.png" width="30" alt="" />
           </button>
         </div>
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { Auth } from 'aws-amplify';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -88,6 +89,10 @@ export default {
       } catch (err) {
         console.error('err', err);
       }
+    },
+
+    async googleAuth() {
+      Auth.federatedSignIn({ provider: 'Google' });
     },
   },
 };

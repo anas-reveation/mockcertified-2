@@ -3,6 +3,8 @@ export type AmplifyDependentResourcesAttributes = {
         "mobileappmarketplacee1e8cc85": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
+            "HostedUIDomain": "string",
+            "OAuthMetadata": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
@@ -28,19 +30,19 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string"
         }
     },
-    "api": {
-        "mobileappmarketplace": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
     "function": {
         "checkAnswer": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        }
+    },
+    "api": {
+        "mobileappmarketplace": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }
