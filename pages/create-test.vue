@@ -27,9 +27,11 @@
     </div>
 
     <div class="mb-1">
-      <label class="form-label">Question list (csv file only)</label>
-      <a href="/questionFormat.csv" download="" class="btn btn-warning"> Dowload template </a>
-      <input type="file" accept=".csv" @change="onChange" required />
+      <label class="form-label">Question list (csv/xml file only)</label>
+      <a href="/questionFormat.csv" download="questionFormat.csv" class="btn btn-warning">
+        Dowload template
+      </a>
+      <input type="file" @change="onChange" required />
     </div>
     <div>
       <button type="submit" class="btn btn-primary">Submit</button>
