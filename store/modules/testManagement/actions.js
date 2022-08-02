@@ -9,7 +9,7 @@ import {
 } from '~/graphql/mutations';
 
 export default {
-  async getUserTests({ commit, rootState }) {
+  async getUserTests({ commit, dispatch, rootState }) {
     const user_id = rootState.auth.user.id;
     commit('SET_LOADER', true, { root: true });
 
@@ -24,19 +24,23 @@ export default {
       const allPurchasedTests = userTestsData.data.getUser.purchased_tests.items
         ? userTestsData.data.getUser.purchased_tests.items
         : [];
-      commit('setAllPurchasedTests', allPurchasedTests, { root: true });
+      const sortedAllPurchasedTests = await dispatch('sortBycreatedAt', allPurchasedTests);
+      commit('setAllPurchasedTests', sortedAllPurchasedTests, { root: true });
 
       // Get attempted tests
       const allAttemptedTests = userTestsData.data.getUser.attempted_tests.items
         ? userTestsData.data.getUser.attempted_tests.items
         : [];
-      commit('setAllAttemptedTests', allAttemptedTests, { root: true });
+      const sortedAllAttemptedTests = await dispatch('sortBycreatedAt', allAttemptedTests);
+
+      commit('setAllAttemptedTests', sortedAllAttemptedTests, { root: true });
 
       // Get created tests
       const allCreatedTests = userTestsData.data.getUser.created_tests.items
         ? userTestsData.data.getUser.created_tests.items
         : [];
-      commit('setAllCreatedTests', allCreatedTests, { root: true });
+      const sortedAllCreatedTests = await dispatch('sortBycreatedAt', allCreatedTests);
+      commit('setAllCreatedTests', sortedAllCreatedTests, { root: true });
 
       commit('SET_LOADER', false, { root: true });
       return allPurchasedTests;
@@ -237,5 +241,14 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return false;
     }
+  },
+
+  // Local function
+  sortBycreatedAt(_none, payload) {
+    return payload.sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
   },
 };

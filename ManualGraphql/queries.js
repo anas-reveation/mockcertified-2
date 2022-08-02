@@ -4,6 +4,7 @@ export const userTests = /* GraphQL */ `
       purchased_tests {
         items {
           id
+          createdAt
           test {
             title
             time_limit
@@ -34,6 +35,7 @@ export const userTests = /* GraphQL */ `
           status
           test_id
           remaining_time
+          createdAt
           test {
             id
             price
@@ -75,6 +77,7 @@ export const userTests = /* GraphQL */ `
           price
           time_limit
           status
+          createdAt
           questions {
             items {
               answer

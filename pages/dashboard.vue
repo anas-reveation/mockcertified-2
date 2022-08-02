@@ -28,6 +28,29 @@
         Attempted
       </button>
     </div>
+    <div v-if="attemptedOpen" class="mt-2 w-100 d-flex justify-content-center">
+      <button
+        class="btn tabs shadow flex-fill p-2 m-1"
+        :class="sortingTabName === 'IN_PROGRESS' && 'btn-active-color'"
+        @click="sortingTabName = 'IN_PROGRESS'"
+      >
+        In progess
+      </button>
+      <button
+        class="btn tabs shadow flex-fill p-2 m-1"
+        :class="sortingTabName === 'COMPLETED' && 'btn-active-color'"
+        @click="sortingTabName = 'COMPLETED'"
+      >
+        completed
+      </button>
+      <button
+        class="btn tabs shadow flex-fill p-2 m-1"
+        :class="sortingTabName === 'ABORTED' && 'btn-active-color'"
+        @click="sortingTabName = 'ABORTED'"
+      >
+        Aborted
+      </button>
+    </div>
 
     <ClientOnly>
       <div class="mt-3">
@@ -41,7 +64,7 @@
         </div>
         <div
           v-if="attemptedOpen"
-          v-for="test in allAttemptedTests"
+          v-for="test in filteredTests"
           :key="test.id"
           @click="test.status === 'IN_PROGRESS' ? redirectPage(test) : redirectResultPage(test.id)"
         >
@@ -87,6 +110,8 @@ export default {
       purchasedTestOpen: false,
       attemptedOpen: false,
       noTest: false,
+      sortingTabName: '',
+      filteredTests: [],
     };
   },
 
@@ -95,10 +120,21 @@ export default {
     ...mapState(['allPurchasedTests', 'allAttemptedTests']),
   },
 
+  watch: {
+    sortingTabName(newValue, _oldValue) {
+      if (newValue) {
+        this.filteredTests = this.allAttemptedTests.filter((test) => test.status === newValue);
+        return;
+      }
+      this.filteredTests = this.allAttemptedTests;
+    },
+  },
+
   async mounted() {
     this.changeTab('purchasedTestOpen');
     await this.getUserTests();
     this.allPurchasedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
+    this.filteredTests = this.allAttemptedTests;
   },
 
   methods: {
@@ -110,11 +146,16 @@ export default {
         this.attemptedOpen = false;
         this.purchasedTestOpen = true;
         this.allPurchasedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
+
+        // Reset filter in attempted section
+        this.filteredTests = this.allAttemptedTests;
+        this.sortingTabName = '';
       }
 
       if (tabName === 'attemptedOpen') {
         this.attemptedOpen = true;
         this.purchasedTestOpen = false;
+        // this.filteredTests = this.allAttemptedTests;
         this.allAttemptedTests.length > 0 ? (this.noTest = false) : (this.noTest = true);
       }
     },
