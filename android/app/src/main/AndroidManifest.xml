@@ -38,6 +38,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Domain -->
                 <data android:scheme="https" android:host="develop.d22h3uk4vvon62.amplifyapp.com" />
+                <!-- -->
+                <data android:scheme="myapp" />
+                <!-- -->
             </intent-filter>
             <!-- End deeplink -->
 
