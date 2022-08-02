@@ -92,3 +92,12 @@ To setup deep links [the documentation](https://devdactic.com/setup-deep-links-c
 ## '@capacitor/app configuration'
 
 To setup @capacitor/app (ex: to detect back-button, deeplink, etc... ) [the documentation](https://capacitorjs.com/docs/apis/app).
+
+## 'Socail Auth'
+
+Set Environment variables in amplify
+
+AMPLIFY_FACEBOOK_CLIENT_ID
+AMPLIFY_FACEBOOK_CLIENT_SECRET
+AMPLIFY_GOOGLE_CLIENT_ID
+AMPLIFY_GOOGLE_CLIENT_SECRET
