@@ -33,6 +33,7 @@ type TestManager
   user_id: ID! @index(name: "byUser")
   created_by: User @hasOne(fields: ["user_id"])
   category_id: ID!
+  sub_category_id: ID!
   category: Category @hasOne(fields: ["category_id"])
   title: String!
   description: String!
@@ -73,6 +74,21 @@ type Category
   ) {
   id: ID!
   name: String!
+  sub_category: [SubCategory] @hasMany(indexName: "byCategory", fields: ["id"])
+}
+
+type SubCategory
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  category_id: ID! @index(name: "byCategory")
+  category: Category @hasOne(fields: ["category_id"])
 }
 
 type PurchasedTest

@@ -78,6 +78,7 @@ export const onCreateTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -111,6 +112,7 @@ export const onUpdateTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -144,6 +146,7 @@ export const onDeleteTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -173,6 +176,7 @@ export const onCreateQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -200,6 +204,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -227,6 +232,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -249,6 +255,9 @@ export const onCreateCategory = /* GraphQL */ `
     onCreateCategory {
       id
       name
+      sub_category {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -259,6 +268,9 @@ export const onUpdateCategory = /* GraphQL */ `
     onUpdateCategory {
       id
       name
+      sub_category {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -269,6 +281,60 @@ export const onDeleteCategory = /* GraphQL */ `
     onDeleteCategory {
       id
       name
+      sub_category {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSubCategory = /* GraphQL */ `
+  subscription OnCreateSubCategory {
+    onCreateSubCategory {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSubCategory = /* GraphQL */ `
+  subscription OnUpdateSubCategory {
+    onUpdateSubCategory {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSubCategory = /* GraphQL */ `
+  subscription OnDeleteSubCategory {
+    onDeleteSubCategory {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -292,6 +358,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -323,6 +390,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -354,6 +422,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -385,6 +454,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -421,6 +491,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -457,6 +528,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price

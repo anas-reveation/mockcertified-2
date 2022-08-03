@@ -95,6 +95,7 @@ export const createTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -131,6 +132,7 @@ export const updateTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -167,6 +169,7 @@ export const deleteTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -199,6 +202,7 @@ export const createQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -229,6 +233,7 @@ export const updateQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -259,6 +264,7 @@ export const deleteQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -284,6 +290,9 @@ export const createCategory = /* GraphQL */ `
     createCategory(input: $input, condition: $condition) {
       id
       name
+      sub_category {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -297,6 +306,9 @@ export const updateCategory = /* GraphQL */ `
     updateCategory(input: $input, condition: $condition) {
       id
       name
+      sub_category {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -310,6 +322,69 @@ export const deleteCategory = /* GraphQL */ `
     deleteCategory(input: $input, condition: $condition) {
       id
       name
+      sub_category {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSubCategory = /* GraphQL */ `
+  mutation CreateSubCategory(
+    $input: CreateSubCategoryInput!
+    $condition: ModelSubCategoryConditionInput
+  ) {
+    createSubCategory(input: $input, condition: $condition) {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSubCategory = /* GraphQL */ `
+  mutation UpdateSubCategory(
+    $input: UpdateSubCategoryInput!
+    $condition: ModelSubCategoryConditionInput
+  ) {
+    updateSubCategory(input: $input, condition: $condition) {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSubCategory = /* GraphQL */ `
+  mutation DeleteSubCategory(
+    $input: DeleteSubCategoryInput!
+    $condition: ModelSubCategoryConditionInput
+  ) {
+    deleteSubCategory(input: $input, condition: $condition) {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -336,6 +411,7 @@ export const createPurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -370,6 +446,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -404,6 +481,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -438,6 +516,7 @@ export const createAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -477,6 +556,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -516,6 +596,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price

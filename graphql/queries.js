@@ -55,6 +55,7 @@ export const getTestManager = /* GraphQL */ `
         updatedAt
       }
       category_id
+      sub_category_id
       category {
         id
         name
@@ -85,6 +86,7 @@ export const listTestManagers = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -107,6 +109,7 @@ export const getQuestion = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -151,6 +154,9 @@ export const getCategory = /* GraphQL */ `
     getCategory(id: $id) {
       id
       name
+      sub_category {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -166,6 +172,41 @@ export const listCategories = /* GraphQL */ `
       items {
         id
         name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getSubCategory = /* GraphQL */ `
+  query GetSubCategory($id: ID!) {
+    getSubCategory(id: $id) {
+      id
+      name
+      category_id
+      category {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSubCategories = /* GraphQL */ `
+  query ListSubCategories(
+    $filter: ModelSubCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSubCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        category_id
         createdAt
         updatedAt
       }
@@ -191,6 +232,7 @@ export const getPurchasedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
@@ -240,6 +282,7 @@ export const getAttemptedTest = /* GraphQL */ `
         id
         user_id
         category_id
+        sub_category_id
         title
         description
         price
