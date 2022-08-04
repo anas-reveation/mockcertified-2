@@ -11,12 +11,31 @@
     <div class="mb-2">
       <label class="form-label">Category</label>
       <select class="form-select" aria-label="Default select example" v-model="formData.categoryId">
-        <option selected value="default" disabled>Open this select menu</option>
+        <option selected value="default" disabled>Select Category</option>
         <option v-for="(category, index) in allCategories" :key="index" :value="category.id">
           {{ category.name }}
         </option>
       </select>
     </div>
+
+    <div class="mb-2">
+      <label class="form-label">Sub Category</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        v-model="formData.subCategoryId"
+      >
+        <option selected value="default" disabled>Select Sub Category</option>
+        <option
+          v-for="(subCategory, index) in allSubCategories"
+          :key="index"
+          :value="subCategory.id"
+        >
+          {{ subCategory.name }}
+        </option>
+      </select>
+    </div>
+
     <div class="mb-2">
       <label class="form-label">Price ($ USD)</label>
       <input type="number" class="form-control" min="1" v-model="formData.price" required />
@@ -52,12 +71,23 @@ export default {
         title: null,
         description: null,
         categoryId: 'default',
+        subCategoryId: 'default',
         price: null,
         timeLimit: null,
       },
       allCategories: [],
+      allSubCategories: [],
       questionList: null,
     };
+  },
+
+  watch: {
+    // whenever question changes, this function will run
+    'formData.categoryId'(newValue, _oldValue) {
+      this.subCategoryId = 'default';
+      const category = this.allCategories.find((category) => category.id === newValue);
+      this.allSubCategories = category.sub_category.items;
+    },
   },
 
   async mounted() {
@@ -138,8 +168,8 @@ export default {
     },
 
     async testSubmit() {
-      if (this.formData.categoryId === 'default') {
-        alert('Please select category');
+      if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
+        alert('Please select category and sub category');
         return;
       }
       this.formData.title = this.formData.title.toLowerCase();

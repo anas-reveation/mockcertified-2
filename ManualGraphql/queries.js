@@ -166,3 +166,36 @@ export const listAllTests = /* GraphQL */ `
     }
   }
 `;
+
+export const getCategoryDetail = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    getCategory(id: $id) {
+      id
+      name
+      sub_category {
+        items {
+          id
+          name
+          category_id
+        }
+      }
+    }
+  }
+`;
+
+export const listCategoriesDetail = /* GraphQL */ `
+  query ListCategories($filter: ModelCategoryFilterInput, $limit: Int, $nextToken: String) {
+    listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        sub_category {
+          items {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;

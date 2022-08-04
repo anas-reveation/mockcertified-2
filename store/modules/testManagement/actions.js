@@ -1,6 +1,11 @@
 import { API } from 'aws-amplify';
-import { listCategories, listTestManagers } from '~/graphql/queries';
-import { userTests, getTestDetail } from '~/ManualGraphql/queries';
+import { listTestManagers } from '~/graphql/queries';
+import {
+  userTests,
+  getTestDetail,
+  getCategoryDetail,
+  listCategoriesDetail,
+} from '~/ManualGraphql/queries';
 import {
   createAttemptedTest,
   createResult,
@@ -55,7 +60,7 @@ export default {
 
     try {
       const allCategoriesData = await API.graphql({
-        query: listCategories,
+        query: listCategoriesDetail,
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
@@ -68,25 +73,45 @@ export default {
     }
   },
 
-  async getTestsByCategory({ commit }, payload) {
-    const category_id = payload;
+  async getAllSubCategories({ commit }, payload) {
+    const categoryId = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const allSubCategoriesData = await API.graphql({
+        query: getCategoryDetail,
+        variables: { id: categoryId },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const allSubCategories = allSubCategoriesData.data.getCategory.sub_category.items;
+      commit('SET_LOADER', false, { root: true });
+
+      return allSubCategories;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.error('ERR', err);
+    }
+  },
+
+  async getTestsBySubCategory({ commit }, payload) {
+    const subCategoryId = payload;
     commit('SET_LOADER', true, { root: true });
 
     try {
       const filter = {
-        category_id: { eq: category_id },
+        sub_category_id: { eq: subCategoryId },
         and: { status: { eq: 'APPROVED' } },
       };
 
-      const allTestByCategoryData = await API.graphql({
+      const allTestsData = await API.graphql({
         query: listTestManagers,
         variables: { filter: filter },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-      const allTestByCategory = allTestByCategoryData.data.listTestManagers.items;
+      const allTests = allTestsData.data.listTestManagers.items;
       commit('SET_LOADER', false, { root: true });
 
-      return allTestByCategory;
+      return allTests;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);
