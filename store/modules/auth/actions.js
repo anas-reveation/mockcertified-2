@@ -59,7 +59,7 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      alert(err.message);    
     }
   },
 
@@ -72,7 +72,7 @@ export default {
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      alert(err.message);
       return false;
     }
   },
@@ -100,7 +100,6 @@ export default {
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       alert(err.message);
-      console.error('ERR', err.message);
     }
   },
 

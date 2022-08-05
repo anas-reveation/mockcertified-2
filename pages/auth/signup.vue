@@ -15,6 +15,8 @@
           id="firstName"
           aria-describedby="emailHelp"
           placeholder="First Name"
+          pattern="[a-zA-Z]*"
+          title="It should contain only text"
           v-model="registerForm.first_name"
           required
         />
@@ -26,6 +28,8 @@
           id="lastName"
           aria-describedby="emailHelp"
           placeholder="Last Name"
+          pattern="[a-zA-Z]*"
+          title="It should contain only text"
           v-model="registerForm.last_name"
           required
         />
