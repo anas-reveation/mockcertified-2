@@ -141,6 +141,7 @@ export const listAllTests = /* GraphQL */ `
         price
         status
         time_limit
+        reject_description
         createdAt
         updatedAt
         questions {

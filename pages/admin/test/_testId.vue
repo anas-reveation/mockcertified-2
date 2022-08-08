@@ -54,13 +54,65 @@
         </div>
       </div>
 
+      <div v-if="testDetail.reject_description">
+        <span class="fw-bold"> Reject Description</span>:- {{ testDetail.reject_description }}
+      </div>
+
       <div v-if="testDetail.status === 'IN_PROGRESS'">
         <button class="btn btn-primary" type="button" @click="approveRejectTestLocal('approve')">
           Approve
         </button>
-        <button class="btn btn-danger" type="button" @click="approveRejectTestLocal('reject')">
+        <button
+          class="btn btn-danger"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
           Reject
         </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="approveRejectTestLocal('reject')">
+                  <label for="">Reject Description</label>
+                  <textarea class="w-100" v-model="rejectDescription" required />
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      :data-bs-dismiss="rejectDescription && 'modal'"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +126,7 @@ export default {
   data() {
     return {
       testDetail: null,
+      rejectDescription: null,
     };
   },
 
@@ -100,7 +153,6 @@ export default {
     }
 
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
-
     if (!this.testDetail) {
       this.$router.push('/dashboard');
       return;
@@ -123,10 +175,21 @@ export default {
     },
 
     async approveRejectTestLocal(status) {
-      const params = {
+      let params = {
         testId: this.testId,
         status,
       };
+
+      if (status === 'reject' && !this.rejectDescription) {
+        alert('Please fill reject decription');
+        return;
+      } else if (status === 'reject' && this.rejectDescription) {
+        params = {
+          ...params,
+          rejectDescription: this.rejectDescription,
+        };
+      }
+
       window.scrollTo(0, 0);
       const res = await this.approveRejectTest(params);
       if (res) {

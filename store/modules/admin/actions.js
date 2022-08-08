@@ -26,6 +26,7 @@ export default {
   async approveRejectTest({ commit, dispatch }, payload) {
     const test_id = payload.testId;
     const statusName = payload.status;
+    const rejectDescription = payload.rejectDescription ? payload.rejectDescription : null;
 
     commit('SET_LOADER', true, { root: true });
 
@@ -39,10 +40,16 @@ export default {
     }
 
     try {
-      const input = {
+      let input = {
         id: test_id,
         status,
       };
+      if (rejectDescription) {
+        input = {
+          ...input,
+          reject_description: rejectDescription,
+        };
+      }
       await API.graphql({
         query: updateTestManager,
         variables: { input },

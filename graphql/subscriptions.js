@@ -87,6 +87,7 @@ export const onCreateTestManager = /* GraphQL */ `
       }
       title
       description
+      reject_description
       price
       status
       time_limit
@@ -121,6 +122,7 @@ export const onUpdateTestManager = /* GraphQL */ `
       }
       title
       description
+      reject_description
       price
       status
       time_limit
@@ -155,6 +157,7 @@ export const onDeleteTestManager = /* GraphQL */ `
       }
       title
       description
+      reject_description
       price
       status
       time_limit
@@ -179,6 +182,7 @@ export const onCreateQuestion = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -207,6 +211,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -235,6 +240,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -361,6 +367,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -393,6 +400,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -425,6 +433,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -457,6 +466,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -494,6 +504,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -531,6 +542,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit

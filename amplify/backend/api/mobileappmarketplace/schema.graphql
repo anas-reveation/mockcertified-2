@@ -37,6 +37,10 @@ type TestManager
   category: Category @hasOne(fields: ["category_id"])
   title: String!
   description: String!
+  reject_description: String
+    @auth(
+      rules: [{ allow: groups, groups: ["admins"], operations: [create, read, update, delete] }]
+    )
   price: Int!
   status: TestManagerStatus @default(value: "IN_PROGRESS")
   # In minutes

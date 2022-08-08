@@ -64,6 +64,7 @@ export const getTestManager = /* GraphQL */ `
       }
       title
       description
+      reject_description
       price
       status
       time_limit
@@ -89,6 +90,7 @@ export const listTestManagers = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -112,6 +114,7 @@ export const getQuestion = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -235,6 +238,7 @@ export const getPurchasedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
@@ -285,6 +289,7 @@ export const getAttemptedTest = /* GraphQL */ `
         sub_category_id
         title
         description
+        reject_description
         price
         status
         time_limit
