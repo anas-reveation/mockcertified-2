@@ -8,6 +8,7 @@ export const getUser = /* GraphQL */ `
       first_name
       last_name
       email
+      stripe_seller_id
       created_tests {
         nextToken
       }
@@ -34,6 +35,7 @@ export const listUsers = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -51,6 +53,7 @@ export const getTestManager = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -228,6 +231,7 @@ export const getPurchasedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -278,6 +282,7 @@ export const getAttemptedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }

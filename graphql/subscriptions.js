@@ -8,6 +8,7 @@ export const onCreateUser = /* GraphQL */ `
       first_name
       last_name
       email
+      stripe_seller_id
       created_tests {
         nextToken
       }
@@ -29,6 +30,7 @@ export const onUpdateUser = /* GraphQL */ `
       first_name
       last_name
       email
+      stripe_seller_id
       created_tests {
         nextToken
       }
@@ -50,6 +52,7 @@ export const onDeleteUser = /* GraphQL */ `
       first_name
       last_name
       email
+      stripe_seller_id
       created_tests {
         nextToken
       }
@@ -74,6 +77,7 @@ export const onCreateTestManager = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -109,6 +113,7 @@ export const onUpdateTestManager = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -144,6 +149,7 @@ export const onDeleteTestManager = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -357,6 +363,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -390,6 +397,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -423,6 +431,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -455,6 +464,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -493,6 +503,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }
@@ -531,6 +542,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         first_name
         last_name
         email
+        stripe_seller_id
         createdAt
         updatedAt
       }

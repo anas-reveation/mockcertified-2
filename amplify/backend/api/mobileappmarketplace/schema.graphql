@@ -16,6 +16,7 @@ type User
   first_name: String!
   last_name: String!
   email: String!
+  stripe_seller_id: String
   created_tests: [TestManager] @hasMany(indexName: "byUser", fields: ["id"])
   purchased_tests: [PurchasedTest] @hasMany(indexName: "byUser", fields: ["id"])
   attempted_tests: [AttemptedTest] @hasMany(indexName: "byUser", fields: ["id"])
