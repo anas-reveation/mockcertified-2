@@ -8,7 +8,7 @@ type User
   @model
   @auth(
     rules: [
-      { allow: private, operations: [create, read] }
+      { allow: private, operations: [create, read, update] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
   ) {
@@ -39,9 +39,6 @@ type TestManager
   title: String!
   description: String!
   reject_description: String
-    @auth(
-      rules: [{ allow: groups, groups: ["admins"], operations: [create, read, update, delete] }]
-    )
   price: Int!
   status: TestManagerStatus @default(value: "IN_PROGRESS")
   # In minutes
