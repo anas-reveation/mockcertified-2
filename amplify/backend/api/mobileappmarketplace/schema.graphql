@@ -157,6 +157,10 @@ enum TestManagerStatus {
   REJECTED
 }
 
+type Query {
+  onboardingStripe: String @function(name: "onboardingStripe-${env}")
+}
+
 type Mutation {
   addResultStatus(result_id: ID): String @function(name: "checkAnswer-${env}")
 }
