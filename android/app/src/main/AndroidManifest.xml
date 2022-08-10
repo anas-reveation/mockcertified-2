@@ -45,6 +45,11 @@
             <!-- End deeplink -->
 
         </activity>
+        
+        <!-- Facebook -->
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <!-- Facebook -->
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -55,6 +60,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
+        
     </application>
 
     <!-- Permissions -->

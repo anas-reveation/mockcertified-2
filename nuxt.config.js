@@ -12,6 +12,11 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      {
+        name: 'google-signin-client_id',
+        content: '584395129581-4jensnf5hileelk0hifr198e2g5sdcjk.apps.googleusercontent.com',
+      },
+      { name: 'google-signin-scope', content: 'profile email openid' },
     ],
     script: [
       {
