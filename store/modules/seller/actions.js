@@ -1,5 +1,6 @@
 import { API } from 'aws-amplify';
-import { createTestManager, createQuestion } from '~/graphql/mutations';
+import { onboardingStripe } from '~/graphql/queries';
+import { createTestManager, createQuestion, updateUser } from '~/graphql/mutations';
 
 export default {
   async createTest({ commit, rootState, dispatch }, payload) {
@@ -56,6 +57,38 @@ export default {
       });
       return true;
     } catch (err) {
+      console.error('ERR', err);
+      return false;
+    }
+  },
+
+  async stripeOnboarding({ commit, rootState }) {
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const stripeURLData = await API.graphql({
+        query: onboardingStripe,
+      });
+      const parsedData = stripeURLData.data.onboardingStripe;
+      const arr = parsedData.split(',');
+      const arr2 = arr[1].split('=');
+      const arr3 = arr2[1];
+      const url = arr3.slice(0, -1);
+      console.log('url', url);
+      const id = url.split('/');
+      const user_id = rootState.auth.user.id;
+      const input = {
+        id: user_id,
+        stripe_seller_id: id[5],
+      };
+      await API.graphql({
+        query: updateUser,
+        variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      commit('SET_LOADER', false, { root: true });
+      return url;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);
       return false;
     }
