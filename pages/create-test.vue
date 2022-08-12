@@ -67,7 +67,7 @@
     </form>
     <div v-else>
       <div>
-        <label><h2>Please Create your Stripe Express Seller Account</h2></label>
+        <label><h2>Please create your stripe express seller account</h2></label>
       </div>
       <div class="mb-2">
         <button type="button " @click="stripeOnboardingLocal" class="btn btn-primary">
@@ -113,7 +113,6 @@ export default {
   },
   async mounted() {
     this.allCategories = await this.getAllCategories();
-    console.log(this.user.stripe_seller_id);
     if (this.user.stripe_seller_id) {
       this.getStripeIdStatus(this.user.stripe_seller_id);
     }
@@ -205,6 +204,7 @@ export default {
         window.open(res);
       }
     },
+
     async getStripeIdStatus(id) {
       let token =
         'sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E';
@@ -214,7 +214,6 @@ export default {
         },
       };
       const result = await this.$axios.get(`https://api.stripe.com/v1/accounts/${id}`, config);
-      console.log(result.data.details_submitted);
       if (!result.data.details_submitted) {
         return false;
       } else {

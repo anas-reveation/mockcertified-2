@@ -76,15 +76,18 @@ export default {
       console.log('url', url);
       const id = url.split('/');
       const user_id = rootState.auth.user.id;
+      const stripe_seller_id = id[5];
       const input = {
         id: user_id,
-        stripe_seller_id: id[5],
+        stripe_seller_id,
       };
       await API.graphql({
         query: updateUser,
         variables: { input },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+
+      commit('auth/setStripeSeller', stripe_seller_id, { root: true });
       commit('SET_LOADER', false, { root: true });
       return url;
     } catch (err) {

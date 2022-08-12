@@ -33,7 +33,7 @@
                 aria-current="page"
                 to="/admin"
               >
-                admin
+                Admin
               </NuxtLink>
             </ClientOnly>
           </li>
