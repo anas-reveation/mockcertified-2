@@ -1,3 +1,4 @@
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -14,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       {
         name: 'google-signin-client_id',
-        content: '584395129581-4jensnf5hileelk0hifr198e2g5sdcjk.apps.googleusercontent.com',
+        content: process.env.GOOGLE_CLIENT_ID,
       },
       { name: 'google-signin-scope', content: 'profile email openid' },
     ],
@@ -31,6 +32,10 @@ export default {
         href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
       },
     ],
+  },
+
+  env: {
+    FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
