@@ -1,113 +1,133 @@
 <template>
-  <div class="container-fluid text-center background vh-100">
-    <div class="">
-      <img src="~/assets/images/fav.png" height="150" width="150" alt="" class="mx-auto mt-12" />
-    </div>
-    <form
-      v-if="step === steps.register"
-      class="container margin-top-form"
-      @submit.prevent="registerLocal"
-    >
-      <div class="mb-3">
+  <div class="container px-4">
+    <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
+    <h1 class="mt-5 mb-4 heading">Register</h1>
+
+    <form v-if="step === steps.register" class="wrapper" @submit.prevent="registerLocal">
+      <div class="mb-4 input-data">
         <input
           type="text"
-          class="form-control fs-5 py-1"
           id="firstName"
-          aria-describedby="emailHelp"
-          placeholder="First Name"
+          class="border border-2 border-primary rounded"
           pattern="[a-zA-Z]*"
           title="It should contain only text"
           v-model="registerForm.first_name"
           required
         />
+        <label>First Name</label>
       </div>
-      <div class="mb-3">
+
+      <div class="mb-4 input-data">
         <input
           type="text"
-          class="form-control fs-5 py-1"
           id="lastName"
-          aria-describedby="emailHelp"
-          placeholder="Last Name"
+          class="border border-2 border-primary rounded"
           pattern="[a-zA-Z]*"
           title="It should contain only text"
           v-model="registerForm.last_name"
           required
         />
+        <label>Last Name</label>
       </div>
-      <div class="mb-3">
+
+      <div class="mb-4 input-data">
         <input
           type="email"
-          class="form-control fs-5 py-1"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Email"
+          class="border border-2 border-primary rounded"
           v-model="registerForm.email"
           required
         />
+        <label>Email</label>
       </div>
-      <div class="mb-3">
+
+      <div class="mb-4 input-data">
         <input
           type="password"
-          class="form-control fs-5 py-1"
-          id="password"
-          placeholder="Password"
+          class="border border-2 border-primary rounded"
           v-model="registerForm.password"
           @input="checkPasswordMatch"
           required
         />
+        <label>Password</label>
       </div>
-      <div class="mb-3">
+
+      <div class="mb-4 input-data">
         <input
           type="password"
-          class="form-control fs-5 py-1 border"
+          class="border border-2 border-primary rounded"
           :class="!passwordMatched && ' border-danger'"
-          id="confirmPassword"
-          placeholder="Confirm Password"
           v-model="registerForm.confirmPassword"
           @input="checkPasswordMatch"
           required
         />
+        <label>Confirm Password</label>
       </div>
-      <div class="row mb-4">
-        <div class="col">
-          <NuxtLink to="/auth/forgotpassword">Forgot password?</NuxtLink>
-        </div>
-        <div class="col">
-          <NuxtLink to="/auth/login">Log In</NuxtLink>
-        </div>
+
+      <div class="text-center mt-2">
+        <button
+          type="submit"
+          class="btn border border-2 border-dark fw-bold px-3"
+          :class="isDisabled ? 'btn-gray' : 'btn-secondary'"
+          :disabled="isDisabled"
+        >
+          Register
+        </button>
       </div>
-      <button
-        type="submit"
-        class="btn w-100 btn-primary btn-color py-2 mb-4 mt-2 shadow fs-5"
-        :disabled="isDisabled"
-      >
-        Register
-      </button>
+
+      <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+
+      <div class="mt-2 row">
+        <!-- <button
+          type="button"
+          class="col btn btn-secondary fw-bold border border-2 border-dark p-2 mx-3 text-start"
+        >
+          <span class="p-1 bg-white border border-2 rounded">
+            <img src="@/assets/images/google.png" alt="google" width="20" />
+          </span>
+          Google
+        </button>
+        <button
+          type="button"
+          class="col btn btn-secondary fw-bold border border-2 border-dark p-2 mx-3 text-start"
+        >
+          <span class="p-1 bg-white border border-2 rounded">
+            <img src="@/assets/images/facebook.png" alt="facebook" width="20" />
+          </span>
+          Facebook
+        </button> -->
+
+        <p class="mt-4 text-center">
+          Already have an account ? <NuxtLink to="/auth/login" class="fw-bolder">Login</NuxtLink>
+        </p>
+      </div>
     </form>
 
-    <form v-else class="container" @submit.prevent="confirmLocal">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <form v-else class="wrapper" @submit.prevent="confirmLocal">
+      <div class="mb-4 input-data">
         <input
           type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          class="border border-2 border-primary rounded"
           v-model="confirmForm.email"
           required
         />
+        <label>Email</label>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Code</label>
+
+      <div class="mb-4 input-data">
         <input
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          type="text"
+          class="border border-2 border-primary rounded"
           v-model="confirmForm.code"
           required
         />
+        <label>Code</label>
       </div>
-      <button type="submit" class="btn py-2 mb-4 shadow">Confirm</button>
+
+      <div class="text-center mt-2">
+        <button type="submit" class="btn btn-secondary border border-2 border-dark fw-bold px-3">
+          Confirm
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -224,19 +244,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.btn-color {
-  background-color: #11a49b !important;
-  color: white !important;
-}
-a {
-  text-decoration: none;
-  color: #11a49b;
-}
-.background {
-  background: rgb(226, 226, 226);
-}
-.margin-top-form {
-  margin-top: 30%;
-}
+<style scoped lang="scss">
+@import '~/assets/css/auth.scss';
 </style>

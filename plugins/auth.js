@@ -34,6 +34,8 @@ export default async ({ app, route, store }) => {
 
     const homeRoute = route.path === '/' ? true : false;
     const dashboardRoute = route.path.match(/\/dashboard\/*/g) ? true : false;
+    const attemptedTestRoute = route.path.match(/\/attempted-test\/*/g) ? true : false;
+    const purchasedTestRoute = route.path.match(/\/purchased-test\/*/g) ? true : false;
     const categoryRoute = route.path.match(/\/category\/*/g) ? true : false;
     const testRoute = route.path.match(/\/test\/*/g) ? true : false;
     const cartRoute = route.path.match(/\/cart\/*/g) ? true : false;
@@ -50,7 +52,9 @@ export default async ({ app, route, store }) => {
         cartRoute ||
         createTestRoute ||
         createdTestRoute ||
-        adminRoute)
+        adminRoute ||
+        attemptedTestRoute ||
+        purchasedTestRoute)
     ) {
       app.router.push('/');
     }

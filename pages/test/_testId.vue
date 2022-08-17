@@ -1,53 +1,52 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-          <img
-            src="@/assets/images/previous.png"
-            class="pb-4"
-            width="30"
-            @click="$router.back()"
-            alt=""
-          />
-        </div>
-        <div class="col-9 fw-bold text-capitalize">
-          <h1 class="text-left">{{ testDetail.title }}</h1>
-        </div>
+    <div class="row justify-content-between">
+      <h1 class="col text-capitalize">{{ testDetail.title }}</h1>
+      <div class="col text-end">
+        <img
+          src="@/assets/images/share_icon.svg"
+          alt="share"
+          height="30"
+          width="30"
+          @click="shareTest"
+        />
       </div>
+    </div>
+    <p class="my-2 font_family_roboto">
+      {{ testDetail.time_limit }} min • {{ testDetail.questions.items.length }} questions •
+      {{ totalMarks }} marks •
+    </p>
 
-      <div class="mt-3">
-        <div class="d-flex justify-content-between">
-          <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>
-          <img class="share_icon" src="@/assets/images/share.svg" alt="share" @click="shareTest" />
-        </div>
+    <div class="row justify-content-between mt-3">
+      <div class="col-9 fs-5 text-capitalize fw-bold">
+        <img
+          src="@/assets/images/profile_icon.svg"
+          alt="share"
+          class="me-2"
+          height="30"
+          width="30"
+        />
+        {{ testDetail.created_by.first_name }} {{ testDetail.created_by.last_name }}
+      </div>
+      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
+    </div>
 
-        <div class="d-flex justify-content-between mb-3 mt-3">
-          <span class="fs-5 fw-bolder text-secondary"
-            >{{ testDetail.created_by.first_name }} {{ testDetail.created_by.last_name }}</span
-          >
-          <span class="fs-6 fw-bolder text-dark"
-            >{{ testDetail.questions.items.length }} questions</span
-          >
-        </div>
+    <div class="mt-3">
+      <h3>Description</h3>
+      <p>{{ testDetail.description }}</p>
 
-        <span class="fs-4 fw-bold">Description</span>
-        <p class="py-2 text-dark rounded">
-          {{ testDetail.description }}
-        </p>
-        <div class="d-flex justify-content-between">
-          <span class="fs-6 fw-bolder text-dark">{{ testDetail.time_limit }} min</span>
-          <span class="fs-6 fw-bolder text-dark">{{ totalMarks }} marks</span>
-        </div>
-
+      <div class="text-center">
         <div v-if="testStatus">
           <NuxtLink
             :to="`/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-            class="btn w-100 py-2 my-2 btn-color shadow"
+            class="btn btn-secondary border border-2 border-dark fw-bold w-50"
           >
             {{ testStatus }}
           </NuxtLink>
-          <button class="btn w-100 py-2 my-2 btn-color shadow" @click="startTestAgain">
+          <button
+            class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3"
+            @click="startTestAgain"
+          >
             Start over
           </button>
         </div>
@@ -55,9 +54,9 @@
         <NuxtLink
           v-else
           :to="`/test/start-test/${testDetail.id}`"
-          class="btn w-100 py-2 my-2 btn-color shadow"
+          class="btn btn-secondary border border-2 border-dark fw-bold w-50"
         >
-          Start test
+          Start
         </NuxtLink>
       </div>
     </div>
@@ -155,10 +154,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.share_icon {
-  width: 40px;
-  height: 30px;
-}
-</style>

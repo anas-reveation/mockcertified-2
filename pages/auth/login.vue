@@ -1,71 +1,79 @@
 <template>
-  <div>
-    <div
-      class="vw-100 vh-100 d-flex justify-content-center align-items-center spinner-bg position-absolute opacity-50"
-      v-if="isLoading === true"
-    >
-      <div class="spinner-grow" role="status"></div>
-    </div>
-    <form class="container text-center background vh-100" @submit.prevent="loginLocal">
-      <div class="">
-        <img src="~/assets/images/fav.png" height="250" width="250" alt="" class="mx-auto mt-12" />
-      </div>
-      <!-- Email input -->
-      <div class="form-outline mb-4 padding-top">
+  <div class="container px-4">
+    <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
+    <h1 class="my-5 pt-5 heading">Login</h1>
+
+    <form class="wrapper" @submit.prevent="loginLocal">
+      <div class="mb-4 input-data">
         <input
           type="email"
-          id="form2Example1"
-          class="form-control py-2 shadow-sm"
-          placeholder="Email"
-          required
+          class="border border-2 border-primary rounded"
           v-model="form.email"
+          required
         />
+        <label>Email</label>
       </div>
 
-      <!-- Password input -->
-      <div class="form-outline mb-4">
+      <div class="mb-4 input-data">
         <input
           type="password"
-          id="form2Example2"
-          class="form-control py-2 shadow-sm"
-          required
+          class="border border-2 border-primary rounded"
           v-model="form.password"
-          placeholder="Password"
+          required
         />
+        <label>Password</label>
       </div>
 
-      <!-- 2 column grid layout for inline styling -->
-      <div class="row mb-4">
-        <div class="col">
-          <NuxtLink to="/auth/forgotpassword">Forgot password?</NuxtLink>
-        </div>
-        <div class="col">
-          <NuxtLink to="/auth/signup">Register</NuxtLink>
-        </div>
+      <div class="text-end">
+        <NuxtLink to="/auth/forgotpassword"> Forgot Password? </NuxtLink>
       </div>
 
-      <!-- Submit button -->
-      <div class="d-flex flex-column">
-        <button type="submit" class="btn w-100 btn-color py-2 mb-4 shadow">Sign in</button>
-        <span class="fs-5 fw-bolder opacity-75 mb-3">Or</span>
-        <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn bg-white py-2 mb-4 shadow" @click="facebookAuth">
-            <img src="@/assets/images/facebook.png" width="30" alt="" />
-          </button>
-          <button type="button" class="btn bg-white py-2 mb-4 shadow" @click="googleAuth">
-            <img src="@/assets/images/google.png" width="30" alt="" />
-          </button>
-        </div>
+      <div class="text-center mt-2">
+        <button
+          type="submit"
+          class="btn border border-2 border-dark fw-bold px-3"
+          :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
+          :disabled="!form.email || !form.password"
+        >
+          Login
+        </button>
+      </div>
+
+      <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+
+      <div class="mt-2">
+        <!-- <button
+          type="button"
+          class="btn btn-secondary fw-bold border border-2 border-dark p-3 mt-2 w-100 text-start"
+        >
+          <span class="p-1 bg-white border border-2 rounded">
+            <img src="@/assets/images/google.png" alt="google" width="20" />
+          </span>
+          Continue with Google
+        </button>
+        <br />
+        <button
+          type="button"
+          class="btn btn-secondary fw-bold border border-2 border-dark p-3 mt-2 w-100 text-start"
+        >
+          <span class="p-1 bg-white border border-2 rounded">
+            <img src="@/assets/images/facebook.png" alt="facebook" width="20" />
+          </span>
+          Continue with Facebook
+        </button> -->
+
+        <p class="mt-4 text-center">
+          New to Mockcertified ? <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
+        </p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+// import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { Capacitor } from '@capacitor/core';
-// import Plugin from '@capacitor/core';
 import { Auth } from 'aws-amplify';
 import { Http } from '@capacitor-community/http';
 import { mapState, mapActions } from 'vuex';
@@ -80,7 +88,6 @@ export default {
       email: '',
       password: '',
     },
-    // fbLogin:
   }),
 
   computed: {
@@ -89,7 +96,7 @@ export default {
 
   async mounted() {
     if (Capacitor.getPlatform() === 'web') {
-      GoogleAuth.initialize();
+      //   GoogleAuth.initialize();
       await FacebookLogin.initialize({ appId: '743811610173678' });
     }
   },
@@ -176,19 +183,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.btn-color {
-  background-color: #11a49b !important;
-  color: white;
-}
-.background {
-  background: rgb(226, 226, 226);
-}
-a {
-  text-decoration: none;
-  color: #11a49b;
-}
-.padding-top {
-  padding-top: 30%;
-}
+<style scoped lang="scss">
+@import '~/assets/css/auth.scss';
 </style>

@@ -7,8 +7,16 @@
       <div class="spinner-border" role="status"></div>
     </div>
     <Navbar />
-    <Nuxt class="margin_bottom" />
-    <FooterNavbar class="fixed-bottom footer_height" />
+    <Nuxt class="margin_bottom px-4" />
+
+    <div class="fixed-bottom footer_height">
+      <div v-if="!ishiddenAlexa" class="position-relative">
+        <div class="position-absolute bottom-0 end-0 mb-2">
+          <img src="@/assets/images/alexa.svg" alt="alexa-icon" />
+        </div>
+      </div>
+      <FooterNavbar />
+    </div>
   </div>
 </template>
 
@@ -16,8 +24,26 @@
 import { mapState } from 'vuex';
 
 export default {
+  data() {
+    return {
+      ishiddenAlexa: false,
+    };
+  },
+
   computed: {
     ...mapState(['user', 'isLoading']),
+  },
+
+  watch: {
+    '$route.path': {
+      handler: function (path) {
+        path.match(/\/test\/*/g + /\/start-test\/*/g)
+          ? (this.ishiddenAlexa = true)
+          : (this.ishiddenAlexa = false);
+      },
+      deep: true,
+      immediate: true,
+    },
   },
 };
 </script>
@@ -28,14 +54,23 @@ export default {
 }
 
 .footer_height {
-  height: 70px;
+  height: 60px;
 }
 
 .margin_bottom {
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 
 .z_index {
   z-index: 1000;
+}
+
+.z_index2 {
+  z-index: 1020;
+}
+
+.jj {
+  bottom: 12rem;
+  /* bottom: 2rem; */
 }
 </style>

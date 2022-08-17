@@ -55,10 +55,8 @@
       </div>
 
       <div class="mb-1">
-        <label class="form-label">Question list (csv/xml file only)</label>
-        <a href="/questionFormat.csv" download="questionFormat.csv" class="btn btn-warning">
-          Dowload template
-        </a>
+        <label class="form-label">Question list (csv file only)</label>
+        <button type="button" class="btn btn-warning" @click="downloadCsv">Dowload template</button>
         <input type="file" @change="onChange" required />
       </div>
       <div>
@@ -70,7 +68,12 @@
         <label><h2>Please create your stripe express seller account</h2></label>
       </div>
       <div class="mb-2">
-        <button type="button " @click="stripeOnboardingLocal" class="btn btn-primary">
+        <button
+          type="button"
+          @click="stripeOnboardingLocal"
+          class="btn btn-primary"
+          :disabled="isDisable"
+        >
           Submit
         </button>
       </div>
@@ -80,8 +83,8 @@
 
 <script>
 import * as XLSX from 'xlsx';
-import { mapActions, mapState } from 'vuex';
-// import { Browser } from '@capacitor/browser';
+import { mapState, mapActions } from 'vuex';
+
 export default {
   middleware: ['authenticated'],
   data() {
@@ -98,6 +101,7 @@ export default {
       allSubCategories: [],
       questionList: null,
       isAccountActive: false,
+      isDisable: true,
     };
   },
   watch: {
@@ -108,18 +112,28 @@ export default {
       this.allSubCategories = category.sub_category.items;
     },
   },
+
   computed: {
     ...mapState('auth', ['user']),
   },
+
   async mounted() {
     this.allCategories = await this.getAllCategories();
     if (this.user.stripe_seller_id) {
       this.getStripeIdStatus(this.user.stripe_seller_id);
     }
+    this.isDisable = false;
   },
+
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding']),
+
+    downloadCsv() {
+      let url = `https://${process.env.DOMAIN}/download-csv`;
+      window.open(url);
+    },
+
     onChange(event) {
       this.file = event.target.files ? event.target.files[0] : null;
       if (this.file) {
@@ -138,6 +152,7 @@ export default {
         reader.readAsBinaryString(this.file);
       }
     },
+
     pasreFileData(FileData) {
       // Removed first element of an array (It is a heading)
       const ActualData = FileData;
@@ -180,6 +195,7 @@ export default {
         alert('Please add your question as per we provided format');
       }
     },
+
     async testSubmit() {
       if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
         alert('Please select category and sub category');

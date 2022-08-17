@@ -1,17 +1,33 @@
 <template>
-  <div v-show="!isDisable" class="container text-center background vh-100">
-    <div class="">
-      <img src="~/assets/images/fav.png" height="250" width="250" alt="" class="mx-auto mt-12" />
+  <div>
+    <div class="text-end p-2">
+      <img src="@/assets/images/logo.svg" alt="logo" />
     </div>
-    <div class="d-grid gap-2 padding-top">
+    <div
+      v-show="!isDisable"
+      class="container d-flex flex-column justify-content-center align-items-center vh-100"
+    >
+      <div>
+        <img
+          src="~/assets/images/Illustration.svg"
+          height="250"
+          width="250"
+          alt=""
+          class="mx-auto mt-12"
+        />
+      </div>
       <button
-        class="btn py-2 shadow mb-1 bg-body rounded"
+        class="btn text-primary border border-2 border-primary rounded w-75 py-2 mt-5 mb-4"
         type="button"
         @click="$router.push('auth/login')"
       >
-        Log In
+        Login
       </button>
-      <button class="btn mt-2 py-2 btn-color" type="button" @click="$router.push('auth/signup')">
+      <button
+        class="btn btn-secondary border border-2 border-dark rounded fw-bold w-75 py-2 mb-1"
+        type="button"
+        @click="$router.push('auth/signup')"
+      >
         Register
       </button>
     </div>
@@ -46,16 +62,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.padding-top {
-  padding-top: 50%;
-}
-.btn-color {
-  background-color: #11a49b !important;
-  color: white;
-}
-.background {
-  background: rgb(226, 226, 226);
-}
-</style>

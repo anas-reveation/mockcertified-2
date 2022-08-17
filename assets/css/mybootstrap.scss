@@ -1,1 +1,14 @@
+// All of your custom SCSS variables go first
+$secondary: #becbfa;
+$primary: #6782e1;
+$font-size-root: 20px;
+$font-weight-bold: 500;
+$font-family-sans-serif: 'Lora' system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+  Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol', 'Noto Color Emoji';
+
+.font_family_roboto {
+  font-family: 'Roboto';
+}
+
 @import '~bootstrap/scss/bootstrap';

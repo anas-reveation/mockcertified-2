@@ -1,62 +1,44 @@
 <template>
-  <div class="container-fluid">
-    <span class="fs-2 fw-bold d-block"></span>
-    <div
-      class="mt-2 w-100 d-flex justify-content-center"
-      role="group"
-      aria-label="Basic radio toggle button group"
-    >
-      <button
-        :class="
-          isApprovedOpen
-            ? 'btn tabs btn-active-color shadow flex-fill p-2'
-            : 'btn tabs flex-fill p-2'
-        "
-        @click="changeTab('isApprovedOpen')"
+  <div class="container">
+    <div class="mb-2 w-100 d-flex justify-content-center overflow-scroll">
+      <div
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+        :class="isApprovedOpen && 'bg-secondary text-dark'"
+        @click="changeTabName('isApprovedOpen')"
       >
         Approved
-      </button>
-
-      <button
-        :class="
-          isInProgressOpen
-            ? 'btn tabs btn-active-color shadow flex-fill p-2'
-            : 'btn tabs flex-fill p-2'
-        "
-        @click="changeTab('isInProgressOpen')"
+      </div>
+      <div
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+        :class="isInProgressOpen && 'bg-secondary text-dark'"
+        @click="changeTabName('isInProgressOpen')"
       >
-        In Progess
-      </button>
-
-      <button
-        :class="
-          isRejectedOpen
-            ? 'btn tabs btn-active-color shadow flex-fill p-2'
-            : 'btn tabs flex-fill p-2'
-        "
-        @click="changeTab('isRejectedOpen')"
+        Ongoing
+      </div>
+      <div
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+        :class="isRejectedOpen === 'ABORTED' && 'bg-secondary text-dark'"
+        @click="changeTabName('isRejectedOpen')"
       >
         Rejected
-      </button>
+      </div>
     </div>
 
-    <ClientOnly>
-      <div class="mt-3" v-if="filteredTests.length">
-        <div v-for="test in filteredTests" :key="test.id" @click="redirectPage(test.id)">
-          <TestCard :title="test.title" :timeLimit="test.time_limit" />
-        </div>
-      </div>
+    <div v-if="!filteredTests.length" class="mt-4 px-3">
+      <h1>No Test Available</h1>
+    </div>
 
-      <div v-else class="container mt-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">No test available</h5>
-          </div>
-        </div>
-      </div>
-    </ClientOnly>
+    <div v-for="test in filteredTests" :key="test.id" class="mb-3" @click="redirectPage(test.id)">
+      <TestCards
+        :title="test.title"
+        :description="`${test.time_limit} mins • ${
+          test.questions.items.length
+        } questions • ${totalMarks(test.questions.items)} marks`"
+      />
+    </div>
   </div>
 </template>
+
 <script>
 import { mapState, mapActions } from 'vuex';
 export default {
@@ -93,13 +75,13 @@ export default {
     if (!this.allCreatedTests.length) {
       await this.getUserTests();
     }
-    this.changeTab('isApprovedOpen');
+    this.changeTabName('isApprovedOpen');
   },
 
   methods: {
     ...mapActions('testManagement', ['getUserTests']),
 
-    changeTab(tabName) {
+    changeTabName(tabName) {
       if (tabName === 'isApprovedOpen') {
         this.isApprovedOpen = true;
         this.isInProgressOpen = false;
@@ -116,6 +98,14 @@ export default {
         this.isInProgressOpen = false;
         this.filteredTests = this.rejectedTests;
       }
+    },
+
+    totalMarks(questionsArr) {
+      let totalMarks = 0;
+      questionsArr.map((ques) => {
+        totalMarks += ques.marks;
+      });
+      return totalMarks;
     },
 
     redirectPage(id) {

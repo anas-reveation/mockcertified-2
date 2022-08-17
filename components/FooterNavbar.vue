@@ -1,18 +1,53 @@
 <template>
-  <div class="d-flex justify-content-between">
+  <div class="box_shadow">
     <div class="container text-center bg-white py-3">
       <div class="row">
         <div class="col">
-          <img class="opacity-75" src="@/assets/images/003-exit.png" alt="" @click="userLogOut" />
+          <NuxtLink
+            to="/category"
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
+            <div
+              class="active_line mb-1"
+              :class="$route.path.match(/\/category\/*/g) && 'bg-primary'"
+            />
+            <img class="opacity-75" src="@/assets/images/home.svg" alt="home" />
+          </NuxtLink>
         </div>
         <div class="col">
-          <NuxtLink to="/category"><img src="@/assets/images/002-notebook.png" alt="" /></NuxtLink>
+          <NuxtLink
+            to="/attempted-test"
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
+            <div
+              class="active_line mb-1"
+              :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
+            />
+            <img class="opacity-75" src="@/assets/images/reattempt_icon.svg" alt="reload" />
+          </NuxtLink>
         </div>
         <div class="col">
-          <NuxtLink to="/cart">
-            <img src="@/assets/images/001-shopping-cart.png" alt="" /><span class="fw-bolder">
-              ({{ cartItems.length }})
-            </span>
+          <NuxtLink
+            to="/purchased-test"
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
+            <div
+              class="active_line mb-1"
+              :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
+            />
+            <img src="@/assets/images/give_test.svg" alt="give_test" />
+          </NuxtLink>
+        </div>
+        <div class="col">
+          <NuxtLink to="/cart" class="d-flex flex-column align-items-center justify-content-center">
+            <div
+              class="active_line mb-1"
+              :class="$route.path.match(/\/cart\/*/g) && 'bg-primary'"
+            />
+            <div>
+              <img src="@/assets/images/cart.svg" alt="cart" />
+              <span class="bg-secondary cart_item rounded"> {{ cartItems.length }} </span>
+            </div>
           </NuxtLink>
         </div>
       </div>
@@ -44,12 +79,25 @@ a {
   text-decoration: none;
   color: black;
 }
-/* 
-.fixed-bottom {
-    position: sticky;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1030;
-} */
+
+.box_shadow {
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cart_item {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  font-size: 13px;
+  line-height: 15px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.active_line {
+  width: 40px;
+  height: 4px;
+}
 </style>

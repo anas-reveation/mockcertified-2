@@ -1,64 +1,59 @@
 <template>
-  <div class="container" v-if="testDetail">
-    <div class="container-fluid">
+  <div v-if="testDetail" class="container">
+    <div class="row justify-content-between">
+      <h1 class="col text-capitalize">{{ testDetail.title }}</h1>
+      <div class="col text-end">
+        <img src="@/assets/images/share_icon.svg" alt="share" height="30" width="30" />
+      </div>
+    </div>
+    <p class="my-2">
+      {{ testDetail.time_limit }} min • {{ totalQuestions }} questions • {{ totalMarks }} marks •
+    </p>
+
+    <div class="container border border-2 border-primary rounded mt-4 p-4">
+      <p class="fs-4 fw-bold">Result</p>
       <div class="row">
-        <div class="col-2">
-          <img
-            src="@/assets/images/previous.png"
-            class="pb-4"
-            width="30"
-            @click="$router.back()"
-            alt=""
-          />
-        </div>
-        <div class="col-9 fw-bold text-capitalize">
-          <h1 class="text-left">{{ testDetail.title }}</h1>
-        </div>
-      </div>
-      <div class="result-banner shadow d-flex flex-column align-items-center">
-        <div
-          class="score opacity-75 border border-success border-5 rounded-circle d-flex justify-content-center align-items-center"
-        >
-          <span class="fs-4 fw-bolder">{{ percentage }}%</span>
-        </div>
-        <div
-          class="ps-3 pe-3 w-100 d-flex justify-content-between align-items-center gap-3 flex-grow-1"
-        >
-          <div class="d-flex flex-column justify-content-between mb-3 mt-3">
-            <span class="fs-5 fw-bolder text-secondary mb-3">
-              {{ `${totalScore}/${totalMarks}` }} Score
-            </span>
-            <span class="fs-6 fw-bolder text-dark">{{ attemptedQuestions }} Attempted</span>
+        <div class="col-8">
+          <div class="row">
+            <div class="col">
+              <p>Test Score: {{ totalScore }}/{{ totalMarks }}</p>
+              <p>Attempted: {{ attemptedQuestions }}/{{ totalQuestions }}</p>
+              <p>Correct: {{ correctAnswer }}/{{ attemptedQuestions }}</p>
+              <p>Incorrect: {{ attemptedQuestions - correctAnswer }}/{{ attemptedQuestions }}</p>
+            </div>
+            <div class="col-2">
+              <div class="vr h-100 bg-primary border border-3"></div>
+            </div>
           </div>
-          <div class="d-flex flex-column justify-content-between mb-3 mt-3">
-            <span class="fs-5 fw-bolder text-secondary mb-3">{{ correctAnswer }} Correct</span>
-            <span class="fs-6 fw-bolder text-dark"
-              >{{ attemptedQuestions - correctAnswer }} Incorrect</span
-            >
+        </div>
+        <div class="col-4">
+          <div
+            class="d-flex justify-content-center align-items-center border border-5 border-primary text-center rounded-circle number_circle"
+          >
+            <span>{{ percentage }}%</span>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="d-flex justify-content-between mt-3">
-        <div class="fs-5 fw-bolder text-secondary text-capitalize">
-          {{ `${testDetail.created_by.first_name} ${testDetail.created_by.last_name}` }}
-        </div>
-        <div>
-          <img
-            class="share_icon"
-            src="@/assets/images/share.svg"
-            alt="share"
-            @click="shareResult"
-          />
-        </div>
+    <div class="row justify-content-between mt-3">
+      <div class="col-9 fs-5 text-capitalize fw-bold">
+        <img
+          src="@/assets/images/profile_icon.svg"
+          class="me-2"
+          alt="share"
+          @click="shareResult"
+          height="30"
+          width="30"
+        />
+        {{ `${testDetail.created_by.first_name} ${testDetail.created_by.last_name}` }}
       </div>
+      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
+    </div>
 
-      <div class="mt-3">
-        <span class="fs-4 fw-bold">Description</span>
-        <p class="py-2 text-dark rounded">
-          {{ testDetail.description }}
-        </p>
-      </div>
+    <div class="mt-3 pb-3">
+      <h4>Description</h4>
+      <p>{{ testDetail.description }}</p>
     </div>
   </div>
 </template>
@@ -72,6 +67,7 @@ export default {
     return {
       attemptedQuestions: null,
       correctAnswer: null,
+      totalQuestions: 0,
       totalMarks: 0,
       totalScore: 0,
       percentage: 0,
@@ -97,6 +93,7 @@ export default {
       return;
     }
     this.testDetail = attemptedTest[0].test;
+    this.totalQuestions = this.testDetail.questions.items.length;
     this.attemptedQuestions = attemptedTest[0].result.items.length;
 
     let totalMarks = 0;
@@ -125,6 +122,10 @@ export default {
       this.$router.push('/test-screen');
     },
 
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
+
     async shareResult() {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
@@ -140,21 +141,10 @@ export default {
   },
 };
 </script>
-<style>
-.result-banner {
-  width: 100%;
-  min-width: 280px;
-  min-height: 280px;
-  border-radius: 10px;
-}
 
-.score {
-  width: 100px;
-  height: 100px;
-}
-
-.share_icon {
-  width: 40px;
-  height: 30px;
+<style scoped>
+.number_circle {
+  width: 86px;
+  height: 86px;
 }
 </style>

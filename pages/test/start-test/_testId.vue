@@ -1,68 +1,77 @@
 <template>
   <div>
     <!-- START INSTRUCTION -->
+    <Navbar v-if="!startTest" />
     <div v-if="!startTest" class="container mt-3">
       <TestInstructions />
-      <button type="button" class="btn w-100 mt-3 btn-color mb-3" @click="startTestFun">
-        Start Test
-      </button>
+      <div class="text-center">
+        <button
+          type="button"
+          class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3 mb-3"
+          @click="startTestFun"
+        >
+          Start
+        </button>
+      </div>
     </div>
     <!-- END INSTRUCTION -->
-    <!-- @click="$router.push('auth/signup')" -->
 
-    <div v-else class="container mt-3">
-      <div class="w-100 d-flex justify-content-between px-3 fixed-top header_timer bg_green">
-        <div class="mb-2">
+    <div v-else class="container mt-4">
+      <div class="row container-fluid fixed-top bg-white pt-3">
+        <div class="col">
+          <img
+            v-if="timerEnabled === false"
+            src="@/assets/images/back_icon.svg"
+            alt="back_icon"
+            @click="goBack"
+          />
           {{ timerString }}
         </div>
-        <div class="" @click="timerEnabled = !timerEnabled">
-          {{ timerEnabled ? 'STOP' : 'RESUME' }}
-        </div>
+        <button
+          class="col-4 btn text-primary border-2 border-primary px-1"
+          @click="timerEnabled = !timerEnabled"
+        >
+          {{ timerEnabled ? 'PAUSE' : 'RESUME' }}
+        </button>
+        <hr class="bg-primary border border-3 w-100 mt-2" />
       </div>
 
       <div
         v-for="(questionItem, index) in allQuestions"
         :key="index"
         v-if="index === questionCounter"
-        class="container-fluid text-left margin_top_bottom"
+        class="container-fluid text-left mt-5 pt-5 margin_top_bottom"
       >
-        <img
-          v-show="timerEnabled === false"
-          src="@/assets/images/previous.png"
-          width="30"
-          @click="goBack"
-          alt=""
-        />
-        <p class="fw-bold shadow p-4 mb-5 bg-body rounded">
-          <span>Q{{ questionCounter + 1 }} -</span> {{ questionItem.question }}
-        </p>
+        <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
+        <p class="fw-bold my-4">{{ questionItem.question }}</p>
         <div class="d-flex flex-column mt-2">
           <ul class="list-group">
             <li
               v-for="(value, index2) in questionItem.options"
               :key="index2"
-              class="list-group-item border border-success mb-4 p-3"
-              :class="selectAnswer.userInput === value[1] ? 'btn-color' : 'bg-white text-success'"
+              class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-4 p-3"
+              :class="
+                selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
+              "
               @click="selectOption(questionItem.id, value[1])"
             >
-              {{ index2 + 1 }}) {{ value[1] }}
+              {{ index2 + 1 }}. {{ value[1] }}
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="container-fluid bg-white fixed-bottom footer_height">
-        <div class="d-flex flex-row mx-6 justify-content-between">
-          <div>
-            <button
-              type="button"
-              class="btn btn-outline-success"
-              @click="submitTest"
-              :disabled="timerEnabled === false"
-            >
-              Submit
-            </button>
-          </div>
+      <div class="container-fluid bg-white fixed-bottom p-2 footer_height">
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            :class="timerEnabled && selectAnswer.userInput ? 'btn-secondary' : 'btn-gray'"
+            @click="submitTest"
+            :disabled="timerEnabled === false"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
@@ -295,22 +304,12 @@ export default {
 </script>
 
 <style scoped>
-.btn-color {
-  background-color: #11a49b;
-  color: #fff;
-}
-
-.bg_green {
-  background-color: #11a49b;
-  color: #fff;
-}
-
 .header_timer {
   height: 30px;
 }
 
 .footer_height {
-  height: 50px;
+  height: 60px;
 }
 
 .margin_top_bottom {
