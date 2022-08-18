@@ -53,14 +53,6 @@ export default {
   background: #656565 !important;
 }
 
-.footer_height {
-  height: 60px;
-}
-
-.margin_bottom {
-  margin-bottom: 60px;
-}
-
 .z_index {
   z-index: 1000;
 }
@@ -69,8 +61,13 @@ export default {
   z-index: 1020;
 }
 
-.jj {
-  bottom: 12rem;
-  /* bottom: 2rem; */
+/* Proceed to checkout button is related that is in "cart" page */
+.footer_height {
+  height: 80px;
 }
+
+.margin_bottom {
+  margin-bottom: 80px;
+}
+/* Proceed to checkout button is related that is in "cart" page */
 </style>

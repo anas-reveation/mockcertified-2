@@ -1,7 +1,7 @@
 <template>
   <div v-if="testDetail" class="container">
     <div class="row justify-content-between">
-      <h1 class="col text-capitalize">{{ testDetail.title }}</h1>
+      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
       <div class="col text-end">
         <img src="@/assets/images/share_icon.svg" alt="share" height="30" width="30" />
       </div>
@@ -11,7 +11,7 @@
     </p>
 
     <div class="container border border-2 border-primary rounded mt-4 p-4">
-      <p class="fs-4 fw-bold">Result</p>
+      <p class="fs-4 fw-bolder">Result</p>
       <div class="row">
         <div class="col-8">
           <div class="row">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="row justify-content-between mt-3">
-      <div class="col-9 fs-5 text-capitalize fw-bold">
+      <div class="col-9 fs-5 text-capitalize fw-bolder">
         <img
           src="@/assets/images/profile_icon.svg"
           class="me-2"
@@ -48,11 +48,13 @@
         />
         {{ `${testDetail.created_by.first_name} ${testDetail.created_by.last_name}` }}
       </div>
-      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
+      <span class="col-3 text-primary fw-bolder text-end">
+        ${{ formatPrice(testDetail.price) }}
+      </span>
     </div>
 
     <div class="mt-3 pb-3">
-      <h4>Description</h4>
+      <h4 class="fw-bolder">Description</h4>
       <p>{{ testDetail.description }}</p>
     </div>
   </div>

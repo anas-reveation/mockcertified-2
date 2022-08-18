@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div class="mb-3">
       <h2 class="ms-3">Instructions</h2>
     </div>

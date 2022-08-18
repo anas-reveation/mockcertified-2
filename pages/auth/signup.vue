@@ -42,18 +42,25 @@
 
       <div class="mb-4 input-data">
         <input
-          type="password"
+          :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded"
           v-model="registerForm.password"
           @input="checkPasswordMatch"
           required
         />
         <label>Password</label>
+        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+          <img
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+        </div>
       </div>
 
       <div class="mb-4 input-data">
         <input
-          type="password"
+          :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded"
           :class="!passwordMatched && ' border-danger'"
           v-model="registerForm.confirmPassword"
@@ -61,6 +68,13 @@
           required
         />
         <label>Confirm Password</label>
+        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+          <img
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+        </div>
       </div>
 
       <div class="text-center mt-2">
@@ -163,6 +177,7 @@ export default {
     userId: null,
     passwordMatched: false,
     isDisabled: true,
+    isPasswordVisible: false,
   }),
 
   watch: {
@@ -206,6 +221,7 @@ export default {
         this.userId = userData.userSub;
         this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
+        alert('Check your email');
       } catch (err) {
         console.error('err', err);
       }
@@ -222,6 +238,7 @@ export default {
         await this.login(form);
         await this.createUserLocal();
         this.$router.push('/dashboard');
+        alert('Successfully registered account');
       } catch (err) {
         console.error('err', err);
       }

@@ -1,67 +1,85 @@
 <template>
-  <div class="background vh-100 text-center">
-    <div class="">
-      <img src="~/assets/images/fav.png" height="250" width="250" alt="" class="mx-auto mt-12" />
-    </div>
-    <form v-if="pageCount === 0" class="container mt-5" @submit.prevent="resetPassword">
-      <div class="mb-3">
+  <div>
+    <div class="container">
+      <img
+        class="position-absolute top-0 end-0 oval_img"
+        src="@/assets/images/oval.jpg"
+        alt="oval"
+      />
+      <h1 class="my-5 fw-bold font_size">
+        Rest
+        <br />
+        Password
+      </h1>
+      <p>
+        Enter the email associated with your account and we will send a verification code to reset
+        your password
+      </p>
+
+      <form v-if="pageCount === 0" @submit.prevent="resetPassword">
+        <label for="email" class="fw-bolder my-3 font_size2"> Email address: </label>
         <input
           type="email"
-          class="form-control fs-5 py-1"
+          class="border border-2 border-primary rounded form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Email"
           v-model="email"
           required
         />
-      </div>
-      <button type="submit" class="btn w-100 btn-color py-2 mb-4 shadow fs-5">
-        Reset Password
-      </button>
-    </form>
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-secondary border border-2 border-dark w-50">
+            Send
+          </button>
+        </div>
+      </form>
 
-    <!-- PAGE 2 -->
-    <form v-else class="container mt-5" @submit.prevent="newPasswordSubmit">
-      <div class="mb-3">
-        <input
-          type="text"
-          class="form-control fs-5 py-1"
-          placeholder="Code"
-          v-model="code"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <input
-          type="password"
-          class="form-control fs-5 py-1"
-          placeholder="Password"
-          v-model="password"
-          @input="checkPasswordMatch"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <input
-          type="password"
-          class="form-control fs-5 py-1"
-          :class="!passwordMatched && ' border-danger'"
-          placeholder="Confirm Password"
-          v-model="confirmPassword"
-          @input="checkPasswordMatch"
-          required
-        />
-      </div>
-      <button type="submit" class="btn w-100 btn-color py-2 mb-4 shadow fs-5">Confirm</button>
-    </form>
+      <!-- PAGE 2 -->
+      <form v-else class="wrapper" @submit.prevent="newPasswordSubmit">
+        <div class="mb-4 input-data">
+          <input
+            type="text"
+            class="border border-2 border-primary rounded"
+            v-model="code"
+            required
+          />
+          <label>Code</label>
+        </div>
 
-    <div class="row mb-4">
-      <div class="col">
-        <NuxtLink class="" to="/auth/signup">Register</NuxtLink>
-      </div>
-      <div class="col">
-        <NuxtLink to="/auth/login">Log In</NuxtLink>
-      </div>
+        <div class="mb-4 input-data">
+          <input
+            type="password"
+            class="border border-2 border-primary rounded"
+            v-model="password"
+            @input="checkPasswordMatch"
+            required
+          />
+          <label>Enter new password</label>
+        </div>
+
+        <div class="mb-4 input-data">
+          <input
+            type="password"
+            class="border border-2 border-primary rounded"
+            :class="!passwordMatched && 'border-danger'"
+            v-model="confirmPassword"
+            @input="checkPasswordMatch"
+            required
+          />
+          <label>Confirm new Password</label>
+        </div>
+
+        <div class="text-center mt-2">
+          <button
+            type="submit"
+            class="btn border border-2 border-dark fw-bold px-3"
+            :class="!code || !password || !confirmPassword ? 'btn-gray' : 'btn-secondary'"
+            :disabled="!code || !password || !confirmPassword"
+          >
+            Rest Password
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -115,18 +133,32 @@ export default {
       try {
         await Auth.forgotPasswordSubmit(this.email, this.code, this.password);
         this.SET_LOADER(false);
+        alert('Password successfully changed');
         this.$router.push('/auth/login');
       } catch (err) {
         this.SET_LOADER(false);
         console.error('ERR', err);
+        alert('Something went wrong please try later');
       }
     },
   },
 };
 </script>
 
+<style scoped lang="scss">
+@import '~/assets/css/auth.scss';
+
+.font_size {
+  font-size: 36px;
+}
+
+.font_size2 {
+  font-size: 24px;
+}
+</style>
+
 <style scoped>
-.btn-color {
+/* .btn-color {
   background-color: #11a49b !important;
   color: white;
 }
@@ -142,5 +174,5 @@ a {
 }
 .spinner-bg {
   background: #656565 !important;
-}
+} */
 </style>

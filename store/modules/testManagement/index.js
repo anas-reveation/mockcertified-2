@@ -1,7 +1,9 @@
 import testManagementAction from './actions';
 import testManagementMutations from './mutations';
 
-const state = () => ({});
+const state = () => ({
+  categoryName: null,
+});
 
 const getters = {};
 

@@ -15,21 +15,21 @@
     <div v-else>
       <div class="mb-2 w-100 d-flex justify-content-center overflow-scroll">
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
           :class="sortingTabName === 'IN_PROGRESS' && 'bg-secondary text-dark'"
           @click="changeTabName('IN_PROGRESS')"
         >
           Ongoing
         </div>
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
           :class="sortingTabName === 'COMPLETED' && 'bg-secondary text-dark'"
           @click="changeTabName('COMPLETED')"
         >
           Completed
         </div>
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
+          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
           :class="sortingTabName === 'ABORTED' && 'bg-secondary text-dark'"
           @click="changeTabName('ABORTED')"
         >

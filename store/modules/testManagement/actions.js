@@ -1,10 +1,10 @@
 import { API } from 'aws-amplify';
-import { listTestManagers } from '~/graphql/queries';
 import {
   userTests,
   getTestDetail,
   getCategoryDetail,
   listCategoriesDetail,
+  listAllTests,
 } from '~/ManualGraphql/queries';
 import {
   createAttemptedTest,
@@ -84,6 +84,11 @@ export default {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allSubCategories = allSubCategoriesData.data.getCategory.sub_category.items;
+
+      // get category name
+      const categoryName = allSubCategoriesData.data.getCategory.name;
+      commit('setCategoryName', categoryName);
+
       commit('SET_LOADER', false, { root: true });
 
       return allSubCategories;
@@ -104,7 +109,7 @@ export default {
       };
 
       const allTestsData = await API.graphql({
-        query: listTestManagers,
+        query: listAllTests,
         variables: { filter: filter },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
@@ -213,6 +218,7 @@ export default {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
+      alert('Successfully completed test');
       return true;
     } catch (err) {
       console.error(err);

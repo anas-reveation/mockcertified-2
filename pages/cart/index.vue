@@ -1,61 +1,68 @@
 <template>
   <ClientOnly>
-    <div class="container-fluid">
-      <div v-if="cartItems.length <= 0" class="container">
-        <div class="card">
-          <div class="card-header">Your cart is empty</div>
-          <div class="card-body">
-            <h5 class="card-title">No items in your cart</h5>
-            <p class="card-text">Buy a test, click below button</p>
-            <NuxtLink to="/category" class="btn btn-outline-success">Buy a test</NuxtLink>
-          </div>
+    <div class="container">
+      <div v-if="!cartItems.length" class="card">
+        <div class="card-header">Your cart is empty</div>
+        <div class="card-body">
+          <h5 class="card-title">No items in your cart</h5>
+          <p class="card-text">Buy a test, click below button</p>
+          <NuxtLink to="/category" class="btn btn-secondary border border-2 border-dark"
+            >Buy a test</NuxtLink
+          >
         </div>
       </div>
 
-      <div v-else>
-        <div v-for="item in cartItems" :key="item.id" @click="removeCartItemLocal(item.id)">
-          <TestCard :title="item.title" :price="formatPrice(item.price)" :removeItem="true" />
+      <div v-else class="margin_bottom2">
+        <div class="mb-2">
+          <span class="fs-5 fw-bolder"> Amount: </span>
+          <span class="fs-5 fw-bolder text-primary"> ${{ formatPrice(totalPrice) }} </span>
         </div>
-        <div class="d-flex justify-content-center mt-5 mb-5">
-          <span class="fs-5 fw-bolder me-3"> Total: </span>
-          <span class="fs-5 fw-bold text-success"> ${{ formatPrice(totalPrice) }} </span>
+        <div v-for="item in cartItems" :key="item.id" class="mb-3">
+          <TestCards
+            :title="item.title"
+            :price="`$${formatPrice(item.price)}`"
+            :removeItem="true"
+            :description="`${item.time_limit} mins • ${
+              item.questions.items.length
+            } questions • ${totalMarks(item.questions.items)} marks`"
+            :testId="item.id"
+          />
         </div>
 
-        <button
-          class="btn btn-color text-white w-100 py-2 mb-4"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#checkoutModal"
-        >
-          Proceed To Checkout
-        </button>
+        <div class="bg-white text-center fixed-bottom p-2 margin_bottom">
+          <button
+            class="btn text-dark border border-2 border-dark w-75 py-2 bg_btn"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#checkoutModal"
+          >
+            Proceed To Checkout
+          </button>
+        </div>
       </div>
 
       <div class="modal fade" id="checkoutModal">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content px-3 py-3 bg-white">
-            <h2 class="text-left">Checkout detail</h2>
-            <div>
-              <p class="py-3 fw-bolder">Click below checkout button to confirm</p>
-              <div class="d-flex justify-content-between">
-                <span class="py-3">{{ cartItems.length }} items</span>
-                <span class="py-3 fw-bolder text-success">
-                  Total: ${{ formatPrice(totalPrice) }}
-                </span>
-              </div>
-            </div>
-            <div class="link">
-              <button class="mb-2 btn btn-dark w-100" data-bs-dismiss="modal">Cancel</button>
-            </div>
-            <div>
+            <h2 class="fw-bolder">Checkout Detail</h2>
+            <p>
+              No. of items: <span class="text-primary fw-bolder">{{ cartItems.length }}</span>
+            </p>
+            <p>
+              Amount to be paid:
+              <span class="text-primary fw-bolder">${{ formatPrice(totalPrice) }}</span>
+            </p>
+            <div class="text-center">
               <button
                 type="button"
-                class="btn btn-color w-100"
+                class="btn border border-2 border-dark w-75 bg_btn"
                 data-bs-dismiss="modal"
                 @click="checkoutLocal"
               >
-                Checkout
+                Confirm Checkout
               </button>
+
+              <button class="my-2 btn btn-dark w-75" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -65,7 +72,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   middleware: ['authenticated'],
@@ -86,14 +93,17 @@ export default {
 
   methods: {
     ...mapActions('buyer', ['checkout']),
-    ...mapMutations('buyer', ['removeCartItem']),
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
     },
 
-    removeCartItemLocal(id) {
-      this.removeCartItem(id);
+    totalMarks(questionsArr) {
+      let totalMarks = 0;
+      questionsArr.map((ques) => {
+        totalMarks += ques.marks;
+      });
+      return totalMarks;
     },
 
     async checkoutLocal() {
@@ -105,3 +115,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg_btn {
+  background: #94e4bd;
+}
+
+/* FooterNavbar is related style is in default layout */
+.margin_bottom {
+  margin-bottom: 80px;
+}
+
+.margin_bottom2 {
+  margin-bottom: 9rem;
+}
+/* FooterNavbar is related style is in default layout */
+</style>

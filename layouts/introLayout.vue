@@ -6,7 +6,7 @@
     >
       <div class="spinner-border" role="status"></div>
     </div>
-    <Nuxt />
+    <Nuxt class="px-4" />
   </div>
 </template>
 

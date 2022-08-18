@@ -2,22 +2,22 @@
   <div class="container">
     <div class="mb-2 w-100 d-flex justify-content-center overflow-scroll">
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
-        :class="isApprovedOpen && 'bg-secondary text-dark'"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        :class="isApprovedOpen && 'bg-secondary border-dark text-dark'"
         @click="changeTabName('isApprovedOpen')"
       >
         Approved
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
-        :class="isInProgressOpen && 'bg-secondary text-dark'"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        :class="isInProgressOpen && 'bg-secondary border-dark text-dark'"
         @click="changeTabName('isInProgressOpen')"
       >
         Ongoing
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-2 m-1"
-        :class="isRejectedOpen === 'ABORTED' && 'bg-secondary text-dark'"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        :class="isRejectedOpen && 'bg-secondary border-dark text-dark'"
         @click="changeTabName('isRejectedOpen')"
       >
         Rejected
@@ -31,6 +31,7 @@
     <div v-for="test in filteredTests" :key="test.id" class="mb-3" @click="redirectPage(test.id)">
       <TestCards
         :title="test.title"
+        :price="`$${formatPrice(test.price)}`"
         :description="`${test.time_limit} mins • ${
           test.questions.items.length
         } questions • ${totalMarks(test.questions.items)} marks`"
@@ -106,6 +107,10 @@ export default {
         totalMarks += ques.marks;
       });
       return totalMarks;
+    },
+
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
     },
 
     redirectPage(id) {

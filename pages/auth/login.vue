@@ -16,12 +16,19 @@
 
       <div class="mb-4 input-data">
         <input
-          type="password"
+          :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded"
           v-model="form.password"
           required
         />
         <label>Password</label>
+        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+          <img
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+        </div>
       </div>
 
       <div class="text-end">
@@ -88,6 +95,7 @@ export default {
       email: '',
       password: '',
     },
+    isPasswordVisible: false,
   }),
 
   computed: {

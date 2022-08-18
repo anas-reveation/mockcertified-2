@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- START INSTRUCTION -->
-    <Navbar v-if="!startTest" />
-    <div v-if="!startTest" class="container mt-3">
+    <Navbar v-if="!startTest" class="px-0" />
+    <div v-if="!startTest" class="mt-3">
       <TestInstructions />
       <div class="text-center">
         <button
@@ -16,9 +16,9 @@
     </div>
     <!-- END INSTRUCTION -->
 
-    <div v-else class="container mt-4">
-      <div class="row container-fluid fixed-top bg-white pt-3">
-        <div class="col">
+    <div v-else class="mt-4">
+      <div class="row fixed-top bg-white px-4 pt-3">
+        <div class="col-8">
           <img
             v-if="timerEnabled === false"
             src="@/assets/images/back_icon.svg"
@@ -262,6 +262,8 @@ export default {
     },
 
     async submitTest() {
+      window.scrollTo(0, 0);
+
       if (this.selectAnswer.questionId && this.selectAnswer.userInput) {
         const obj = {
           attemptedId: this.attemptedId,

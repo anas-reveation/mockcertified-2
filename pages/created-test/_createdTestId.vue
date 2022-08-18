@@ -1,59 +1,54 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-          <img
-            src="@/assets/images/previous.png"
-            class="pb-4"
-            width="30"
-            @click="$router.back()"
-            alt=""
-          />
-        </div>
-        <div class="col-9 fw-bold text-capitalize">
-          <h1 class="text-left">{{ testDetail.title }}</h1>
-        </div>
+    <div class="row justify-content-between">
+      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
+      <div class="col text-end">
+        <img
+          src="@/assets/images/share_icon.svg"
+          alt="share"
+          height="30"
+          width="30"
+          @click="shareTest"
+        />
       </div>
-      <div class="mt-3">
-        <div class="d-flex justify-content-between mb-3 mt-3">
-          <span class="fs-5 fw-bolder text-success"> ${{ formatPrice(testDetail.price) }} </span>
-          <span class="fs-6 fw-bolder text-dark"> {{ testQuestions.length }} questions </span>
-        </div>
+    </div>
+    <p class="my-2 font_family_roboto">
+      {{ testDetail.time_limit }} min• {{ testDetail.questions.items.length }} questions•
+      {{ totalMarks }} marks•
+    </p>
 
-        <span class="fs-4 fw-bold">Description</span>
-        <p class="py-2 text-dark rounded">
-          {{ testDetail.description }}
-        </p>
-        <div class="d-flex justify-content-between">
-          <span class="fs-6 fw-bolder text-dark">{{ testDetail.time_limit }} min</span>
-          <span class="fs-6 fw-bolder text-dark">{{ totalMarks }} marks</span>
-        </div>
+    <div class="row justify-content-between mt-3">
+      <div class="col-9 fs-5 text-capitalize fw-bold">
+        <img
+          src="@/assets/images/profile_icon.svg"
+          alt="share"
+          class="me-2"
+          height="30"
+          width="30"
+        />
+        {{ user.first_name }} {{ user.last_name }}
       </div>
-      <hr />
-      <div>
-        <p class="fs-3 fw-bolder text-dark">Questions</p>
+      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
+    </div>
 
-        <div v-for="(question, index) in testQuestions" :key="index" class="mb-3">
-          <div class="fw-bold">{{ index + 1 }}) {{ question.question }}</div>
-          <div>
-            <div v-for="(option, index2) in question.options" :key="index2" class="ms-2">
-              {{ index2 + 1 }} {{ option[1] }}
-            </div>
-            <div>
-              <div><span class="fw-bold">Answer</span>:- {{ question.answer }}</div>
-              <div><span class="fw-bold">Explanation</span>:- {{ question.explainantion }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="mt-3">
+      <h3 class="fw-bolder">Description</h3>
+      <p>{{ testDetail.description }}</p>
+    </div>
+
+    <div v-for="(question, index) in testQuestions" :key="index">
+      <TestQuestion :question="question" />
     </div>
   </div>
 </template>
 
 <script>
+import { Share } from '@capacitor/share';
 import { mapState, mapActions } from 'vuex';
+import TestQuestion from '~/components/TestQuestion.vue';
+
 export default {
+  components: { TestQuestion },
   middleware: ['authenticated'],
 
   data() {
@@ -68,6 +63,7 @@ export default {
   },
 
   computed: {
+    ...mapState('auth', ['user']),
     ...mapState(['allCreatedTests']),
 
     totalMarks() {
@@ -105,6 +101,19 @@ export default {
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
+    },
+
+    async shareTest() {
+      const domainOrigin = window.location.origin;
+      const testId = this.testDetail.id;
+      const title = this.testDetail.title;
+      const url = `${domainOrigin}/category/test/${testId}`;
+      await Share.share({
+        title,
+        text: `${title} is Really awesome test`,
+        url,
+        dialogTitle: 'Share with buddies',
+      });
     },
   },
 };

@@ -65,9 +65,9 @@
             <div class="p-1" @click="userLogOut()">Logout</div>
           </li>
         </ul>
-        <hr />
       </div>
     </div>
+    <div class="bg-primary w-100 mt-2 hr_line" />
   </nav>
 </template>
 
@@ -90,3 +90,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.hr_line {
+  height: 2px;
+}
+</style>

@@ -1,25 +1,42 @@
 <template>
-  <div class="container-fluid">
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <form class="d-flex w-100" @submit.prevent="">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            v-model="searchQuery"
-          />
-          <button class="btn btn-outline-success" type="button">Search</button>
-        </form>
+  <div class="container">
+    <form class="row position-relative" @submit.prevent="">
+      <div class="position-absolute search_icon_position">
+        <img src="@/assets/images/search_icon.svg" alt="search-icon" width="30" height="30" />
       </div>
-    </nav>
+      <input
+        class="col form-control bg_input border border-2 border-primary rounded-pill me-2 text_indent"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        v-model="searchQuery"
+      />
+      <button class="col-3 btn btn-primary text-white rounded-pill px-2" type="button">
+        Search
+      </button>
+    </form>
+
+    <h1 class="fw-bolder mt-3">Categories</h1>
+
     <div
       v-for="category in allCategoriesFilter"
       :key="category.id"
+      class="border border-2 border-primary rounded-pill mt-3 p-2"
       @click="redirectPage(category.id)"
     >
-      <TestCard :title="category.name" />
+      <div class="row">
+        <span class="col-3">
+          <img
+            src="https://techaide.global/uploads/image/case-2.png"
+            alt="category"
+            width="40"
+            height="30"
+          />
+        </span>
+        <span class="col text-start">
+          {{ category.name }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +69,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
+
     redirectPage(id) {
       this.$router.push(`/category/${id}`);
     },
@@ -59,9 +77,18 @@ export default {
 };
 </script>
 
-<style>
-.btn-color {
-  background-color: #11a49b !important;
-  color: white;
+<style scoped>
+.bg_input {
+  background-color: #e9edfb;
+}
+
+.search_icon_position {
+  top: 5px;
+  left: -7px;
+  width: 35px;
+}
+
+.text_indent {
+  text-indent: 25px;
 }
 </style>

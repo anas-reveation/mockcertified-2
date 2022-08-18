@@ -101,7 +101,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -139,7 +139,6 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getUserTests']),
-    ...mapMutations(['selectTest']),
 
     changeTab(tabName) {
       if (tabName === 'purchasedTestOpen') {
@@ -161,7 +160,6 @@ export default {
     },
 
     redirectPage(test) {
-      this.selectTest(test.test);
       this.$router.push(`/test/${test.test.id}`);
     },
 

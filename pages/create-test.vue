@@ -1,22 +1,33 @@
 <template>
-  <div>
+  <div class="container">
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
-      class="container"
+      class="wrapper"
       @submit.prevent="testSubmit"
     >
-      <div class="mb-2">
+      <div class="mb-4 input-data">
+        <input
+          type="email"
+          class="border border-2 border-primary rounded form-control"
+          v-model="formData.title"
+          required
+        />
         <label class="form-label">Title</label>
-        <input type="text" class="form-control" v-model="formData.title" required />
       </div>
-      <div class="mb-2">
+
+      <div class="mb-4 input-data">
+        <input
+          type="text"
+          class="border border-2 border-primary rounded form-control"
+          v-model="formData.description"
+          required
+        />
         <label class="form-label">Description</label>
-        <input type="text" class="form-control" v-model="formData.description" required />
       </div>
-      <div class="mb-2">
-        <label class="form-label">Category</label>
+
+      <div class="mb-4 input-data">
         <select
-          class="form-select"
+          class="form-select border border-2 border-primary rounded"
           aria-label="Default select example"
           v-model="formData.categoryId"
         >
@@ -25,12 +36,12 @@
             {{ category.name }}
           </option>
         </select>
+        <label class="form-label fixed_up">Category</label>
       </div>
 
-      <div class="mb-2">
-        <label class="form-label">Sub Category</label>
+      <div class="mb-4 input-data">
         <select
-          class="form-select"
+          class="form-select border border-2 border-primary rounded"
           aria-label="Default select example"
           v-model="formData.subCategoryId"
         >
@@ -43,24 +54,44 @@
             {{ subCategory.name }}
           </option>
         </select>
+        <label class="form-label fixed_up">Sub Category</label>
       </div>
 
-      <div class="mb-2">
+      <div class="mb-4 input-data">
+        <input
+          type="number"
+          class="border border-2 border-primary rounded form-control"
+          min="1"
+          v-model="formData.price"
+          required
+        />
         <label class="form-label">Price ($ USD)</label>
-        <input type="number" class="form-control" min="1" v-model="formData.price" required />
-      </div>
-      <div class="mb-2">
-        <label class="form-label">Time Limit (in mintues)</label>
-        <input type="number" class="form-control" min="1" v-model="formData.timeLimit" required />
       </div>
 
-      <div class="mb-1">
-        <label class="form-label">Question list (csv file only)</label>
-        <button type="button" class="btn btn-warning" @click="downloadCsv">Dowload template</button>
-        <input type="file" @change="onChange" required />
+      <div class="mb-4 input-data">
+        <input
+          type="number"
+          class="border border-2 border-primary rounded form-control"
+          min="1"
+          v-model="formData.timeLimit"
+          required
+        />
+        <label class="form-label">Time Limit (in min)</label>
       </div>
-      <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+      <div class="mb-2 input-data border border-2 border-primary rounded">
+        <input class="container" type="file" @change="onChange" required />
+        <label class="form-label fixed_up">Question list (csv file only)</label>
+      </div>
+
+      <button type="button" class="btn text-white mb-2 bg_clr_blue" @click="downloadCsv">
+        Dowload template
+      </button>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-secondary border border-2 border-dark w-50 mb-2">
+          Submit
+        </button>
       </div>
     </form>
     <div v-else>
@@ -71,7 +102,7 @@
         <button
           type="button"
           @click="stripeOnboardingLocal"
-          class="btn btn-primary"
+          class="btn btn-secondary border border-2 border-dark"
           :disabled="isDisable"
         >
           Submit
@@ -209,6 +240,7 @@ export default {
       const res = await this.createTest(obj);
       if (res) {
         this.$router.push('/dashboard');
+        alert('Test submitted');
       }
     },
     async stripeOnboardingLocal() {
@@ -240,3 +272,64 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.bg_clr_blue {
+  background: #1877cf;
+}
+
+.underline_hr {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.underline_hr span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.wrapper .input-data {
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+
+.wrapper .input-data input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  outline-color: #6782e1;
+}
+
+.input-data input:focus ~ label,
+.input-data input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #000;
+}
+
+.wrapper .input-data label {
+  position: absolute;
+  top: 3px;
+  left: 0.8rem;
+  color: #000;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before {
+  transform: scaleX(1);
+}
+
+.fixed_up {
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #000;
+}
+</style>

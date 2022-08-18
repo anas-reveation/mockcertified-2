@@ -1,119 +1,113 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-          <img
-            src="@/assets/images/previous.png"
-            class="pb-4"
-            width="30"
-            @click="$router.back()"
-            alt=""
-          />
-        </div>
-        <div class="col-9 fw-bold text-capitalize">
-          <h1 class="text-left">{{ testDetail.title }}</h1>
-        </div>
+    <div class="row justify-content-between">
+      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
+    </div>
+    <p class="my-2 font_family_roboto">
+      {{ testDetail.time_limit }} min• {{ testDetail.questions.items.length }} questions•
+      {{ totalMarks }} marks•
+    </p>
+
+    <div class="row justify-content-between mt-3">
+      <div class="col-9 fs-5 text-capitalize fw-bold">
+        <img
+          src="@/assets/images/profile_icon.svg"
+          alt="share"
+          class="me-2"
+          height="30"
+          width="30"
+        />
+        {{ testDetail.created_by.first_name }} {{ testDetail.created_by.last_name }}
       </div>
-      <div class="mt-3">
-        <div class="d-flex justify-content-between">
-          <span class="fs-4 fw-bolder text-success">${{ formatPrice(testDetail.price) }}</span>
-        </div>
+      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
+    </div>
 
-        <div class="d-flex justify-content-between mb-3 mt-3">
-          <span class="fs-5 fw-bolder text-secondary">
-            {{ testDetail.created_by.first_name }} {{ testDetail.created_by.last_name }}
-          </span>
-          <span class="fs-6 fw-bolder text-dark"> {{ testQuestions.length }} questions </span>
-        </div>
+    <div class="mt-3">
+      <h3 class="fw-bolder">Description</h3>
+      <p>{{ testDetail.description }}</p>
+    </div>
 
-        <span class="fs-4 fw-bold">Description</span>
-        <p class="py-2 text-dark rounded">
-          {{ testDetail.description }}
-        </p>
-        <div class="d-flex justify-content-between">
-          <span class="fs-6 fw-bolder text-dark">{{ testDetail.time_limit }} min</span>
-          <span class="fs-6 fw-bolder text-dark">{{ totalMarks }} marks</span>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <p class="fs-3 fw-bolder text-dark">Questions</p>
+    <div class="pb-2" v-for="(question, index) in testQuestions" :key="index">
+      <TestQuestion :question="question" />
+    </div>
 
-        <div v-for="(question, index) in testQuestions" :key="index" class="mb-3">
-          <div class="fw-bold">{{ index + 1 }}) {{ question.question }}</div>
-          <div>
-            <div v-for="(option, index2) in question.options" :key="index2" class="ms-2">
-              {{ index2 + 1 }} {{ option[1] }}
-            </div>
-            <div>
-              <div><span class="fw-bold">Answer</span>:- {{ question.answer }}</div>
-              <div><span class="fw-bold">Explanation</span>:- {{ question.explainantion }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="pb-3" v-if="testDetail.reject_description">
+      <span class="fw-bolder"> Reject Description</span>:- {{ testDetail.reject_description }}
+    </div>
 
-      <div v-if="testDetail.reject_description">
-        <span class="fw-bold"> Reject Description</span>:- {{ testDetail.reject_description }}
-      </div>
-
-      <div v-if="testDetail.status === 'IN_PROGRESS'">
-        <button class="btn btn-primary" type="button" @click="approveRejectTestLocal('approve')">
+    <div v-if="testDetail.status === 'IN_PROGRESS'">
+      <div class="text-center">
+        <button
+          class="btn btn-secondary border border-2 border-dark w-50"
+          type="button"
+          @click="approveRejectTestLocal('approve')"
+        >
           Approve
         </button>
+
+        <form class="wrapper my-3">
+          <div class="mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-primary rounded form-control"
+              v-model="rejectDescription"
+              required
+            />
+            <label class="form-label">Reason of Rejection</label>
+          </div>
+        </form>
+
         <button
-          class="btn btn-danger"
+          class="btn border border-2 border-danger text-danger w-50 mb-2"
           type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          :disabled="!rejectDescription"
         >
           Reject
         </button>
+      </div>
 
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <!-- Modal -->
+      <!-- <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
 
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form @submit.prevent="approveRejectTestLocal('reject')">
-                  <label for="">Reject Description</label>
-                  <textarea class="w-100" v-model="rejectDescription" required />
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form @submit.prevent="approveRejectTestLocal('reject')">
+                <label for="">Reject Description</label>
+                <textarea class="w-100" v-model="rejectDescription" required />
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Close
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      :data-bs-dismiss="rejectDescription && 'modal'"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    :data-bs-dismiss="rejectDescription && 'modal'"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -188,6 +182,11 @@ export default {
           ...params,
           rejectDescription: this.rejectDescription,
         };
+      } else if (status === 'approve') {
+        const isApproved = confirm('Press a button!');
+        if (!isApproved) {
+          return;
+        }
       }
 
       window.scrollTo(0, 0);
@@ -199,3 +198,60 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.underline_hr {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.underline_hr span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.wrapper .input-data {
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+
+.wrapper .input-data input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  outline-color: #6782e1;
+}
+
+.input-data input:focus ~ label,
+.input-data input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #000;
+}
+
+.wrapper .input-data label {
+  position: absolute;
+  top: 3px;
+  left: 0.8rem;
+  color: #000;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before {
+  transform: scaleX(1);
+}
+
+.fixed_up {
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #000;
+}
+</style>
