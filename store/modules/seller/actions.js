@@ -16,6 +16,8 @@ export default {
         description: testDetail.description,
         price: testDetail.price,
         time_limit: testDetail.timeLimit,
+        category_id: testDetail.categoryId,
+        sub_category_id: testDetail.subCategoryId,
       };
       const createdtest = await API.graphql({
         query: createTestManager,
