@@ -1,66 +1,38 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="row justify-content-between">
-      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
-      <div class="col text-end">
-        <img
-          src="@/assets/images/share_icon.svg"
-          alt="share"
-          height="30"
-          width="30"
-          @click="shareTest"
-        />
-      </div>
-    </div>
-    <p class="my-2 font_family_roboto">
-      {{ testDetail.time_limit }} min • {{ testDetail.questions.items.length }} questions •
-      {{ totalMarks }} marks •
-    </p>
+    <TestDetail
+      :title="testDetail.title"
+      :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
+      ${totalMarks} marks•`"
+      :description="testDetail.description"
+      :price="testDetail.price"
+      :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+      :shareFunc="shareTest"
+    />
 
-    <div class="row justify-content-between mt-3">
-      <div class="col-9 fs-5 text-capitalize fw-bolder">
-        <img
-          src="@/assets/images/profile_icon.svg"
-          alt="share"
-          class="me-2"
-          height="30"
-          width="30"
-        />
-        {{ testDetail.created_by.first_name }} {{ testDetail.created_by.last_name }}
-      </div>
-      <span class="col-3 text-primary fw-bolder text-end">
-        ${{ formatPrice(testDetail.price) }}
-      </span>
-    </div>
-
-    <div class="mt-3">
-      <h3 class="fw-bolder">Description</h3>
-      <p>{{ testDetail.description }}</p>
-
-      <div class="text-center">
-        <div v-if="testStatus">
-          <NuxtLink
-            :to="`/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-            class="btn btn-secondary border border-2 border-dark fw-bold w-50"
-          >
-            {{ testStatus }}
-          </NuxtLink>
-          <button
-            class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3"
-            @click="startTestAgain"
-          >
-            Start over
-          </button>
-        </div>
-
+    <div class="text-center">
+      <div v-if="testStatus">
         <NuxtLink
-          v-else
-          :to="`/test/start-test/${testDetail.id}`"
+          :to="`/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
           class="btn btn-secondary border border-2 border-dark fw-bold w-50"
         >
-          Start
+          {{ testStatus }}
         </NuxtLink>
+        <button
+          class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3"
+          @click="startTestAgain"
+        >
+          Start over
+        </button>
       </div>
+
+      <NuxtLink
+        v-else
+        :to="`/test/start-test/${testDetail.id}`"
+        class="btn btn-secondary border border-2 border-dark fw-bold w-50"
+      >
+        Start
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -117,10 +89,6 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['abortedAttemptedTest']),
-
-    formatPrice(price) {
-      return parseFloat(price).toFixed(2);
-    },
 
     totalMarksCal(test) {
       if (test) {

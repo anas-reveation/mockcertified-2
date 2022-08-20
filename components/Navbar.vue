@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light mb-4 jj">
-    <div class="container-fluid">
+    <div class="container">
       <NuxtLink class="navbar-brand" to="/dashboard">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
       </NuxtLink>
@@ -16,10 +16,17 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       />
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+        <span
+          class="position-absolute bottom-0 end-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+        >
+          <img src="@/assets/images/dropdown_menu_icon.svg" alt="dropdown" />
+        </span>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
             <NuxtLink class="nav-link text-black" aria-current="page" to="/create-test">
               <span
                 class="p-1"

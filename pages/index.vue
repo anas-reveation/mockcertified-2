@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div class="text-end p-2">
-      <img src="@/assets/images/logo.svg" alt="logo" />
+  <div class="position-relative">
+    <div class="position-absolute top-0 end-0 p-2">
+      <NuxtLink to="/">
+        <img src="@/assets/images/logo.svg" alt="logo" />
+      </NuxtLink>
     </div>
     <div
       v-show="!isDisable"

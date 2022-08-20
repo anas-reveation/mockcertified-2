@@ -16,7 +16,7 @@
       </button>
     </form>
 
-    <h1 class="fw-bolder mt-3">Categories</h1>
+    <h1 class="fw-bolder mt-3 font_size_24">Categories</h1>
 
     <div
       v-for="category in allCategoriesFilter"
@@ -26,12 +26,7 @@
     >
       <div class="row">
         <span class="col-3">
-          <img
-            src="https://techaide.global/uploads/image/case-2.png"
-            alt="category"
-            width="40"
-            height="30"
-          />
+          <img :src="category.image" alt="category" class="rounded-circle category_image" />
         </span>
         <span class="col text-start">
           {{ category.name }}
@@ -42,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -62,8 +57,15 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState('testManagement', ['categories']),
+  },
+
   async mounted() {
-    this.allCategories = await this.getAllCategories();
+    if (!this.categories.length) {
+      await this.getAllCategories();
+    }
+    this.allCategories = this.categories;
     this.allCategoriesFilter = this.allCategories;
   },
 
@@ -90,5 +92,11 @@ export default {
 
 .text_indent {
   text-indent: 25px;
+}
+
+.category_image {
+  object-fit: contain;
+  width: 35px;
+  height: 35px;
 }
 </style>

@@ -177,6 +177,7 @@ export const getCategoryDetail = /* GraphQL */ `
         items {
           id
           name
+          image
           category_id
         }
       }
@@ -190,10 +191,12 @@ export const listCategoriesDetail = /* GraphQL */ `
       items {
         id
         name
+        image
         sub_category {
           items {
             id
             name
+            image
           }
         }
       }

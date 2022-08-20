@@ -3,6 +3,9 @@ import testManagementMutations from './mutations';
 
 const state = () => ({
   categoryName: null,
+  categories: [],
+  featuredTests: [],
+  recentlyAddedTests: [],
 });
 
 const getters = {};

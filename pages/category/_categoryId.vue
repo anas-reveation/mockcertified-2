@@ -23,7 +23,9 @@
     </form>
 
     <p class="mt-2">
-      Categories
+      <NuxtLink to="/category">
+        <span>Categories</span>
+      </NuxtLink>
       <span
         v-for="(item, index) in breadCrum"
         :key="index"
@@ -41,16 +43,9 @@
       >
         <div class="row">
           <span class="col-3">
-            <img
-              src="https://techaide.global/uploads/image/case-2.png"
-              alt="category"
-              width="40"
-              height="30"
-            />
+            <img :src="category.image" alt="category" class="rounded-circle category_image" />
           </span>
-          <span class="col text-start">
-            {{ category.name }}
-          </span>
+          <span class="col text-start"> {{ category.name }}</span>
         </div>
       </div>
     </div>
@@ -187,5 +182,11 @@ export default {
 
 .text_indent {
   text-indent: 25px;
+}
+
+.category_image {
+  object-fit: contain;
+  width: 35px;
+  height: 35px;
 }
 </style>

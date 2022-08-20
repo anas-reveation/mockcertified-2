@@ -86,6 +86,7 @@ export const onCreateTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -94,6 +95,7 @@ export const onCreateTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -122,6 +124,7 @@ export const onUpdateTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -130,6 +133,7 @@ export const onUpdateTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -158,6 +162,7 @@ export const onDeleteTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -166,6 +171,7 @@ export const onDeleteTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -191,6 +197,7 @@ export const onCreateQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -220,6 +227,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -249,6 +257,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -267,6 +276,7 @@ export const onCreateCategory = /* GraphQL */ `
     onCreateCategory {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -280,6 +290,7 @@ export const onUpdateCategory = /* GraphQL */ `
     onUpdateCategory {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -293,6 +304,7 @@ export const onDeleteCategory = /* GraphQL */ `
     onDeleteCategory {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -307,9 +319,11 @@ export const onCreateSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -324,9 +338,11 @@ export const onUpdateSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -341,9 +357,11 @@ export const onDeleteSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -377,6 +395,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -411,6 +430,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -445,6 +465,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -479,6 +500,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -518,6 +540,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -557,6 +580,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt

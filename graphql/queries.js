@@ -67,6 +67,7 @@ export const getTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -75,6 +76,7 @@ export const getTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -101,6 +103,7 @@ export const listTestManagers = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -125,6 +128,7 @@ export const getQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -165,6 +169,7 @@ export const getCategory = /* GraphQL */ `
     getCategory(id: $id) {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -183,6 +188,7 @@ export const listCategories = /* GraphQL */ `
       items {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -196,9 +202,11 @@ export const getSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -218,6 +226,7 @@ export const listSubCategories = /* GraphQL */ `
         id
         name
         category_id
+        image
         createdAt
         updatedAt
       }
@@ -250,6 +259,7 @@ export const getPurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -302,6 +312,7 @@ export const getAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt

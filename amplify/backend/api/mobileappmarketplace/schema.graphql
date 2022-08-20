@@ -41,6 +41,7 @@ type TestManager
   reject_description: String
   price: Int!
   status: TestManagerStatus @default(value: "IN_PROGRESS")
+  tags: [String]
   # In minutes
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
@@ -76,6 +77,7 @@ type Category
   ) {
   id: ID!
   name: String!
+  image: String
   sub_category: [SubCategory] @hasMany(indexName: "byCategory", fields: ["id"])
 }
 
@@ -90,6 +92,7 @@ type SubCategory
   id: ID!
   name: String!
   category_id: ID! @index(name: "byCategory")
+  image: String
   category: Category @hasOne(fields: ["category_id"])
 }
 

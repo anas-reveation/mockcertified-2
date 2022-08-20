@@ -1,7 +1,13 @@
 <template>
   <div class="container px-4">
+    <div class="position-absolute top-0 end-0 p-2">
+      <NuxtLink to="/">
+        <img src="@/assets/images/logo.svg" alt="logo" />
+      </NuxtLink>
+    </div>
+
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="mt-5 mb-4 heading">Register</h1>
+    <h1 class="mt-5 mb-4 font_size_36">Register</h1>
 
     <form v-if="step === steps.register" class="wrapper" @submit.prevent="registerLocal">
       <div class="mb-4 input-data">

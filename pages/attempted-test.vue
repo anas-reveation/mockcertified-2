@@ -13,7 +13,7 @@
     </div>
 
     <div v-else>
-      <div class="mb-2 w-100 d-flex justify-content-center overflow-scroll">
+      <div class="mb-2 w-100 d-flex justify-content-center">
         <div
           class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
           :class="sortingTabName === 'IN_PROGRESS' && 'bg-secondary text-dark'"

@@ -4,15 +4,18 @@
       <div class="row">
         <div class="col">
           <NuxtLink
-            to="/category"
+            to="/dashboard"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
               class="active_line mb-1"
-              :class="$route.path.match(/\/category\/*/g) && 'bg-primary'"
+              :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
             />
             <img class="m-1" src="@/assets/images/home.svg" alt="home" />
-            <span v-if="$route.path.match(/\/category\/*/g)" class="text-primary pb-2 font_size_10">
+            <span
+              v-if="$route.path.match(/\/dashboard\/*/g)"
+              class="text-primary pb-2 font_size_10"
+            >
               Home
             </span>
           </NuxtLink>
@@ -59,9 +62,11 @@
               class="active_line mb-1"
               :class="$route.path.match(/\/cart\/*/g) && 'bg-primary'"
             />
-            <div>
+            <div class="position-relative">
               <img class="m-1" src="@/assets/images/cart.svg" alt="cart" />
-              <span class="bg-secondary rounded cart_item"> {{ cartItems.length }} </span>
+              <span class="bg-secondary rounded position-absolute top-0 end-0 cart_item">
+                {{ cartItems.length }}
+              </span>
             </div>
 
             <span v-if="$route.path.match(/\/cart\/*/g)" class="text-primary pb-2 font_size_10">
@@ -118,9 +123,5 @@ a {
 .active_line {
   width: 40px;
   height: 4px;
-}
-
-.font_size_10 {
-  font-size: 10px;
 }
 </style>

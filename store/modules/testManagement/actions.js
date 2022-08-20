@@ -1,4 +1,4 @@
-import { API } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import {
   userTests,
   getTestDetail,
@@ -6,6 +6,7 @@ import {
   listCategoriesDetail,
   listAllTests,
 } from '~/ManualGraphql/queries';
+
 import {
   createAttemptedTest,
   createResult,
@@ -55,6 +56,55 @@ export default {
     }
   },
 
+  async getRecentlyAddedTests({ commit }) {
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const filter = {
+        status: { eq: 'APPROVED' },
+      };
+
+      // "graphqlOperation" using this because we have to limit after filter
+      const allRecentlyAddedTestData = await API.graphql({
+        ...graphqlOperation(listAllTests, {
+          filter,
+          limit: 10,
+        }),
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
+      const allRecentlyAddedTest = allRecentlyAddedTestData.data.listTestManagers.items;
+      commit('setRecentlyAddedTests', allRecentlyAddedTest);
+      commit('SET_LOADER', false, { root: true });
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.error('ERR', err);
+    }
+  },
+
+  async getAllFeaturedTest({ commit }) {
+    commit('SET_LOADER', true, { root: true });
+
+    const filter = {
+      tags: { contains: 'FEATURED' },
+      and: { status: { eq: 'APPROVED' } },
+    };
+
+    try {
+      const allFeaturedTestData = await API.graphql({
+        query: listAllTests,
+        variables: { filter: filter, limit: 5 },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const allFeaturedTest = allFeaturedTestData.data.listTestManagers.items;
+      commit('setFeaturedTests', allFeaturedTest);
+      commit('SET_LOADER', false, { root: true });
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.error('ERR', err);
+    }
+  },
+
   async getAllCategories({ commit }) {
     commit('SET_LOADER', true, { root: true });
 
@@ -64,8 +114,8 @@ export default {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
+      commit('setCategories', allCategories);
       commit('SET_LOADER', false, { root: true });
-
       return allCategories;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });

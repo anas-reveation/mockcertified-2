@@ -7,7 +7,9 @@
     >
       <div class="mb-4 input-data">
         <input
-          type="email"
+          type="text"
+          pattern="[a-zA-Z]*"
+          title="It should contain only text"
           class="border border-2 border-primary rounded form-control"
           v-model="formData.title"
           required
@@ -161,7 +163,7 @@ export default {
     ...mapActions('seller', ['createTest', 'stripeOnboarding']),
 
     downloadCsv() {
-      let url = `https://${process.env.DOMAIN}/download-csv`;
+      let url = process.env.QUESTION_TEMPLATE_CSV;
       window.open(url);
     },
 

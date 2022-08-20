@@ -1,40 +1,14 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="row justify-content-between">
-      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
-      <div class="col text-end">
-        <img
-          src="@/assets/images/share_icon.svg"
-          alt="share"
-          height="30"
-          width="30"
-          @click="shareTest"
-        />
-      </div>
-    </div>
-    <p class="my-2 font_family_roboto">
-      {{ testDetail.time_limit }} min• {{ testDetail.questions.items.length }} questions•
-      {{ totalMarks }} marks•
-    </p>
-
-    <div class="row justify-content-between mt-3">
-      <div class="col-9 fs-5 text-capitalize fw-bold">
-        <img
-          src="@/assets/images/profile_icon.svg"
-          alt="share"
-          class="me-2"
-          height="30"
-          width="30"
-        />
-        {{ user.first_name }} {{ user.last_name }}
-      </div>
-      <span class="col-3 text-primary fw-bold text-end">${{ formatPrice(testDetail.price) }}</span>
-    </div>
-
-    <div class="mt-3">
-      <h3 class="fw-bolder">Description</h3>
-      <p>{{ testDetail.description }}</p>
-    </div>
+    <TestDetail
+      :title="testDetail.title"
+      :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
+      ${totalMarks} marks•`"
+      :description="testDetail.description"
+      :price="testDetail.price"
+      :fullName="`${user.first_name} ${user.last_name}`"
+      :shareFunc="shareTest"
+    />
 
     <div v-for="(question, index) in testQuestions" :key="index">
       <TestQuestion :question="question" />
@@ -98,10 +72,6 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getUserTests']),
-
-    formatPrice(price) {
-      return parseFloat(price).toFixed(2);
-    },
 
     async shareTest() {
       const domainOrigin = window.location.origin;

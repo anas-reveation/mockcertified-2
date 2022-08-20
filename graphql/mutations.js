@@ -103,6 +103,7 @@ export const createTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -111,6 +112,7 @@ export const createTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -142,6 +144,7 @@ export const updateTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -150,6 +153,7 @@ export const updateTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -181,6 +185,7 @@ export const deleteTestManager = /* GraphQL */ `
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -189,6 +194,7 @@ export const deleteTestManager = /* GraphQL */ `
       reject_description
       price
       status
+      tags
       time_limit
       questions {
         nextToken
@@ -217,6 +223,7 @@ export const createQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -249,6 +256,7 @@ export const updateQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -281,6 +289,7 @@ export const deleteQuestion = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -302,6 +311,7 @@ export const createCategory = /* GraphQL */ `
     createCategory(input: $input, condition: $condition) {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -318,6 +328,7 @@ export const updateCategory = /* GraphQL */ `
     updateCategory(input: $input, condition: $condition) {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -334,6 +345,7 @@ export const deleteCategory = /* GraphQL */ `
     deleteCategory(input: $input, condition: $condition) {
       id
       name
+      image
       sub_category {
         nextToken
       }
@@ -351,9 +363,11 @@ export const createSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -371,9 +385,11 @@ export const updateSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -391,9 +407,11 @@ export const deleteSubCategory = /* GraphQL */ `
       id
       name
       category_id
+      image
       category {
         id
         name
+        image
         createdAt
         updatedAt
       }
@@ -430,6 +448,7 @@ export const createPurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -467,6 +486,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -504,6 +524,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -541,6 +562,7 @@ export const createAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -583,6 +605,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
@@ -625,6 +648,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         reject_description
         price
         status
+        tags
         time_limit
         createdAt
         updatedAt
