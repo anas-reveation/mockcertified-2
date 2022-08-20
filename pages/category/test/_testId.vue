@@ -10,8 +10,10 @@
       :shareFunc="shareTest"
     />
 
-    <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
-    <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
+    <div v-if="isPurchased || isUserOwner">
+      <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
+      <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
+    </div>
 
     <div v-else class="text-center">
       <button
