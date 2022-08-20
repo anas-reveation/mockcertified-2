@@ -137,8 +137,8 @@ export default {
       return totalMarks;
     },
 
-    redirectPage(test) {
-      this.$router.push(`/test/${test.test.id}`);
+    redirectPage(id) {
+      this.$router.push(`/test/${id}`);
     },
 
     attempt() {
