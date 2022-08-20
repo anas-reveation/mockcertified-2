@@ -1,18 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="!filteredTests.length" class="px-3">
-      <h1>No Test Attempted</h1>
-      <p>
-        Want to give a test?
-        <br />
-        Click on the button below!
-      </p>
-      <NuxtLink to="/purchased-test" class="btn btn-secondary border border-2 border-dark rounded">
-        Purchased Test
-      </NuxtLink>
-    </div>
-
-    <div v-else>
+    <div>
       <div class="mb-2 w-100 d-flex justify-content-center">
         <div
           class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
@@ -37,39 +25,55 @@
         </div>
       </div>
 
-      <div class="mb-2 row justify-content-end">
-        <div class="col text-end">
-          <span>Sort by :</span>
-          <select class="border border-primary rounded" v-model="sortBy">
-            <option value="date">Date</option>
-            <option value="duration">Duration</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <span class="border border-primary rounded px-2" @click="isAscending = !isAscending">
-            <img
-              v-if="isAscending"
-              src="@/assets/images/arrow_up.svg"
-              alt="up-arrow"
-              class="mb-1"
-            />
-            <img v-else src="@/assets/images/arrow_down.svg" alt="down-arroe" class="mb-1" />
-          </span>
-        </div>
+      <div v-if="!filteredTests.length" class="px-3">
+        <h1>No Test Attempted</h1>
+        <p>
+          Want to give a test?
+          <br />
+          Click on the button below!
+        </p>
+        <NuxtLink
+          to="/purchased-test"
+          class="btn btn-secondary border border-2 border-dark rounded"
+        >
+          Purchased Test
+        </NuxtLink>
       </div>
+      <div v-else>
+        <div class="mb-2 row justify-content-end">
+          <div class="col text-end">
+            <span>Sort by :</span>
+            <select class="border border-primary rounded" v-model="sortBy">
+              <option value="date">Date</option>
+              <option value="duration">Duration</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <span class="border border-primary rounded px-2" @click="isAscending = !isAscending">
+              <img
+                v-if="isAscending"
+                src="@/assets/images/arrow_up.svg"
+                alt="up-arrow"
+                class="mb-1"
+              />
+              <img v-else src="@/assets/images/arrow_down.svg" alt="down-arroe" class="mb-1" />
+            </span>
+          </div>
+        </div>
 
-      <div
-        v-for="test in filteredTests"
-        :key="test.id"
-        class="mb-3"
-        @click="test.status === 'IN_PROGRESS' ? redirectPage(test) : redirectResultPage(test.id)"
-      >
-        <TestCards
-          :title="test.test.title"
-          :description="`${test.test.time_limit} mins • ${
-            test.test.questions.items.length
-          } questions • ${totalMarks(test.test.questions.items)} marks`"
-        />
+        <div
+          v-for="test in filteredTests"
+          :key="test.id"
+          class="mb-3"
+          @click="test.status === 'IN_PROGRESS' ? redirectPage(test) : redirectResultPage(test.id)"
+        >
+          <TestCards
+            :title="test.test.title"
+            :description="`${test.test.time_limit} mins • ${
+              test.test.questions.items.length
+            } questions • ${totalMarks(test.test.questions.items)} marks`"
+          />
+        </div>
       </div>
     </div>
   </div>

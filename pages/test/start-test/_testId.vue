@@ -39,7 +39,7 @@
       <div
         v-for="(questionItem, index) in allQuestions"
         :key="index"
-        v-if="index === questionCounter"
+        v-if="index === showCounter"
         class="container-fluid text-left mt-5 pt-5 margin_top_bottom"
       >
         <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       startTest: false,
+      showCounter: 0,
       questionCounter: 0,
       allQuestions: [],
       allQuestionsSubmission: [],
@@ -116,6 +117,7 @@ export default {
 
   watch: {
     startTest(_value) {
+      window.scrollTo(0, 0);
       this.timerEnabled = true;
     },
 
@@ -275,7 +277,10 @@ export default {
           this.selectAnswer.questionId = null;
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
-          if (this.questionCounter >= this.totalQuestions) {
+          this.showCounter += 1;
+          console.log('this.questionCounter', this.questionCounter);
+          console.log('this.totalQuestions', this.totalQuestions);
+          if (this.showCounter > this.totalQuestions - 1) {
             const completedRes = await this.compeletedTest(this.attemptedId);
             this.setTestRemainingTimeLocal();
             if (completedRes) {
