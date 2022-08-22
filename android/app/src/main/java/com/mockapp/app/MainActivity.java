@@ -1,4 +1,4 @@
-package com.mockapp.app;
+package com.mockcertified.app;
 
 import com.getcapacitor.BridgeActivity;
 

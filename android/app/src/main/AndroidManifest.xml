@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mockapp.app">
+    package="com.mockcertified.app">
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="com.mockapp.app.MainActivity"
+            android:name="com.mockcertified.app.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask">
@@ -39,7 +39,7 @@
                 <!-- Domain -->
                 <data android:scheme="https" android:host="develop.d22h3uk4vvon62.amplifyapp.com" />
                 <!-- -->
-                <data android:scheme="myapp" />
+                <data android:scheme="mockcertified" android:host="com.mockcertified.app" />
                 <!-- -->
             </intent-filter>
             <!-- End deeplink -->

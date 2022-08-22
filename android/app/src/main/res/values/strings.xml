@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">mock-certified</string>
-    <string name="title_activity_main">mock-certified</string>
-    <string name="package_name">com.mockapp.app</string>
-    <string name="custom_url_scheme">com.mockapp.app</string>
+    <string name="app_name">Mockcertified</string>
+    <string name="title_activity_main">Mockcertified</string>
+    <string name="package_name">com.mockcertified.app</string>
+    <string name="custom_url_scheme">com.mockcertified.app</string>
     <string name="facebook_app_id">743811610173678</string>
     <string name="facebook_client_token">3d9412b991230ba89b0a4bb0a906faac</string>
     <string name="server_client_id">584395129581-4jensnf5hileelk0hifr198e2g5sdcjk.apps.googleusercontent.com</string>

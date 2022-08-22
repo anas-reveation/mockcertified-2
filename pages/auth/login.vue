@@ -7,7 +7,7 @@
     </div>
 
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="my-5 pt-5 font_size_36">Login</h1>
+    <h1 class="my-5 font_size_36">Login</h1>
 
     <form class="wrapper" @submit.prevent="loginLocal">
       <div class="mb-4 input-data">
@@ -20,7 +20,7 @@
         <label>Email</label>
       </div>
 
-      <div class="mb-4 input-data">
+      <div class="mb-2 input-data">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded"

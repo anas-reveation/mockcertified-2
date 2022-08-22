@@ -26,7 +26,7 @@
           <img src="@/assets/images/dropdown_menu_icon.svg" alt="dropdown" />
         </span>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item text-capitalize">
             <NuxtLink class="nav-link text-black" aria-current="page" to="/create-test">
               <span
                 class="p-1"
@@ -35,10 +35,12 @@
                   'bg-secondary border border-dark rounded'
                 "
               >
-                Create a new test
+                Create A New Test
               </span>
             </NuxtLink>
+          </li>
 
+          <li class="nav-item text-capitalize">
             <NuxtLink class="nav-link text-black" aria-current="page" to="/created-test">
               <span
                 class="p-1"
@@ -50,7 +52,8 @@
                 Created Tests
               </span>
             </NuxtLink>
-
+          </li>
+          <li class="nav-item text-capitalize">
             <ClientOnly>
               <NuxtLink
                 v-if="userGroup === 'admins'"
@@ -68,7 +71,8 @@
                 </span>
               </NuxtLink>
             </ClientOnly>
-
+          </li>
+          <li class="nav-item text-capitalize">
             <div class="p-1" @click="userLogOut()">Logout</div>
           </li>
         </ul>

@@ -7,7 +7,7 @@
       </div>
     </div>
     <p class="my-2">
-      {{ testDetail.time_limit }} min • {{ totalQuestions }} questions • {{ totalMarks }} marks •
+      {{ testDetail.time_limit }} min • {{ totalQuestions }} questions • {{ totalMarks }} marks
     </p>
 
     <div class="container border border-2 border-primary rounded mt-4 p-4">

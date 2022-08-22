@@ -6,7 +6,7 @@
         :class="isInProgressOpen && 'bg-secondary border-dark text-dark'"
         @click="changeTabName('isInProgressOpen')"
       >
-        Ongoing
+        Pending
       </div>
       <div
         class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"

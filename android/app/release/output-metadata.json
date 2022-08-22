@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.mockapp.app",
+  "applicationId": "com.mockcertified.app",
   "variantName": "release",
   "elements": [
     {

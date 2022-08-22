@@ -1,6 +1,6 @@
 {
-  "appId": "com.mockapp.app",
-  "appName": "mock-certified",
+  "appId": "com.mockcertified.app",
+  "appName": "Mockcertified",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {

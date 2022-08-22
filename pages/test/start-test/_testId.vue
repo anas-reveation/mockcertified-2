@@ -284,7 +284,7 @@ export default {
             const completedRes = await this.compeletedTest(this.attemptedId);
             this.setTestRemainingTimeLocal();
             if (completedRes) {
-              this.$router.push('/dashboard');
+              this.$router.push(`/result/${this.attemptedId}`);
             }
           }
         } else {
