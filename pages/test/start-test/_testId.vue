@@ -140,7 +140,7 @@ export default {
         } else if (value <= 0 && previousValue === 1) {
           await this.compeletedTest(this.attemptedId);
           await this.setTestRemainingTimeLocal();
-          this.$router.push('/dashboard');
+          this.$router.push(`/test/result/${this.attemptedId}`);
         }
       },
       immediate: true, // This ensures the watcher is triggered upon creation
@@ -159,14 +159,14 @@ export default {
     this.SET_LOADER(true);
     CapacitorApp.addListener('backButton', ({ canGoBack }) => {
       this.setTestRemainingTimeLocal();
-      this.$router.push('/dashboard');
+      this.$router.push('/purchased-test');
     });
 
     const testId = this.testId;
     const purchasedTest = this.allPurchasedTests.filter((item) => item.test.id === testId);
     if (!purchasedTest.length) {
       this.SET_LOADER(false);
-      this.$router.push('/dashboard');
+      this.$router.push('/purchased-test');
       return;
     }
 
@@ -174,7 +174,7 @@ export default {
       const attemptedTest = this.allAttemptedTests.filter((item) => item.id === this.attemptedId);
       if (!attemptedTest.length) {
         this.SET_LOADER(false);
-        this.$router.push('/dashboard');
+        this.$router.push('/purchased-test');
         return;
       }
       const results = attemptedTest[0].result.items;
@@ -278,13 +278,13 @@ export default {
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
           this.showCounter += 1;
-          console.log('this.questionCounter', this.questionCounter);
-          console.log('this.totalQuestions', this.totalQuestions);
           if (this.showCounter > this.totalQuestions - 1) {
             const completedRes = await this.compeletedTest(this.attemptedId);
             this.setTestRemainingTimeLocal();
             if (completedRes) {
-              this.$router.push(`/result/${this.attemptedId}`);
+              console.log('first');
+              this.$router.push(`/test/result/${this.attemptedId}`);
+              alert('Successfully completed test');
             }
           }
         } else {
@@ -304,7 +304,7 @@ export default {
 
     async goBack() {
       await this.setTestRemainingTimeLocal();
-      this.$router.push('/dashboard');
+      this.$router.push('/purchased-test');
     },
   },
 };

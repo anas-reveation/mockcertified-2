@@ -253,7 +253,7 @@ export default {
     }
   },
 
-  async compeletedTest({ commit }, payload) {
+  async compeletedTest({ commit, dispatch }, payload) {
     const attempted_id = payload;
     commit('SET_LOADER', true, { root: true });
 
@@ -267,8 +267,8 @@ export default {
         variables: { input },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+      await dispatch('getUserTests');
       commit('SET_LOADER', false, { root: true });
-      alert('Successfully completed test');
       return true;
     } catch (err) {
       console.error(err);

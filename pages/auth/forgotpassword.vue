@@ -85,7 +85,7 @@
           :class="!code || !password || !confirmPassword ? 'btn-gray' : 'btn-secondary'"
           :disabled="!code || !password || !confirmPassword"
         >
-          Rest Password
+          Reset Password
         </button>
       </div>
     </form>
