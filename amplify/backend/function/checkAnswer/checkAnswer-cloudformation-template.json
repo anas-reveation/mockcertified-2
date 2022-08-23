@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.5.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -15,22 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "authmobileappmarketplacee1e8cc85UserPoolId": {
-      "Type": "String",
-      "Default": "authmobileappmarketplacee1e8cc85UserPoolId"
-    },
-    "apimobileappmarketplaceGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apimobileappmarketplaceGraphQLAPIIdOutput"
-    },
-    "apimobileappmarketplaceGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apimobileappmarketplaceGraphQLAPIEndpointOutput"
-    },
-    "apimobileappmarketplaceGraphQLAPIKeyOutput": {
-      "Type": "String",
-      "Default": "apimobileappmarketplaceGraphQLAPIKeyOutput"
     }
   },
   "Conditions": {
@@ -85,18 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "AUTH_MOBILEAPPMARKETPLACEE1E8CC85_USERPOOLID": {
-              "Ref": "authmobileappmarketplacee1e8cc85UserPoolId"
-            },
-            "API_MOBILEAPPMARKETPLACE_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apimobileappmarketplaceGraphQLAPIIdOutput"
-            },
-            "API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apimobileappmarketplaceGraphQLAPIEndpointOutput"
-            },
-            "API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT": {
-              "Ref": "apimobileappmarketplaceGraphQLAPIKeyOutput"
             }
           }
         },
@@ -117,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mobileappmarketplaceLambdaRole80685751",
+            "mobileappmarketplaceLambdaRole7372359a",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mobileappmarketplaceLambdaRole80685751",
+                  "mobileappmarketplaceLambdaRole7372359a",
                   "-",
                   {
                     "Ref": "env"
@@ -188,190 +160,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "cognito-idp:ConfirmSignUp",
-                "cognito-idp:AdminCreateUser",
-                "cognito-idp:CreateUserImportJob",
-                "cognito-idp:AdminSetUserSettings",
-                "cognito-idp:AdminLinkProviderForUser",
-                "cognito-idp:CreateIdentityProvider",
-                "cognito-idp:AdminConfirmSignUp",
-                "cognito-idp:AdminDisableUser",
-                "cognito-idp:AdminRemoveUserFromGroup",
-                "cognito-idp:SetUserMFAPreference",
-                "cognito-idp:SetUICustomization",
-                "cognito-idp:SignUp",
-                "cognito-idp:VerifyUserAttribute",
-                "cognito-idp:SetRiskConfiguration",
-                "cognito-idp:StartUserImportJob",
-                "cognito-idp:AdminSetUserPassword",
-                "cognito-idp:AssociateSoftwareToken",
-                "cognito-idp:CreateResourceServer",
-                "cognito-idp:RespondToAuthChallenge",
-                "cognito-idp:CreateUserPoolClient",
-                "cognito-idp:AdminUserGlobalSignOut",
-                "cognito-idp:GlobalSignOut",
-                "cognito-idp:AddCustomAttributes",
-                "cognito-idp:CreateGroup",
-                "cognito-idp:CreateUserPool",
-                "cognito-idp:AdminForgetDevice",
-                "cognito-idp:AdminAddUserToGroup",
-                "cognito-idp:AdminRespondToAuthChallenge",
-                "cognito-idp:ForgetDevice",
-                "cognito-idp:CreateUserPoolDomain",
-                "cognito-idp:AdminEnableUser",
-                "cognito-idp:AdminUpdateDeviceStatus",
-                "cognito-idp:StopUserImportJob",
-                "cognito-idp:InitiateAuth",
-                "cognito-idp:AdminInitiateAuth",
-                "cognito-idp:AdminSetUserMFAPreference",
-                "cognito-idp:ConfirmForgotPassword",
-                "cognito-idp:SetUserSettings",
-                "cognito-idp:VerifySoftwareToken",
-                "cognito-idp:AdminDisableProviderForUser",
-                "cognito-idp:SetUserPoolMfaConfig",
-                "cognito-idp:ChangePassword",
-                "cognito-idp:ConfirmDevice",
-                "cognito-idp:AdminResetUserPassword",
-                "cognito-idp:ResendConfirmationCode",
-                "cognito-identity:Describe*",
-                "cognito-identity:Get*",
-                "cognito-identity:List*",
-                "cognito-idp:Describe*",
-                "cognito-idp:AdminGetDevice",
-                "cognito-idp:AdminGetUser",
-                "cognito-idp:AdminList*",
-                "cognito-idp:List*",
-                "cognito-sync:Describe*",
-                "cognito-sync:Get*",
-                "cognito-sync:List*",
-                "iam:ListOpenIdConnectProviders",
-                "iam:ListRoles",
-                "sns:ListPlatformApplications",
-                "cognito-idp:ForgotPassword",
-                "cognito-idp:UpdateAuthEventFeedback",
-                "cognito-idp:UpdateResourceServer",
-                "cognito-idp:UpdateUserPoolClient",
-                "cognito-idp:AdminUpdateUserAttributes",
-                "cognito-idp:UpdateUserAttributes",
-                "cognito-idp:UpdateUserPoolDomain",
-                "cognito-idp:UpdateIdentityProvider",
-                "cognito-idp:UpdateGroup",
-                "cognito-idp:AdminUpdateAuthEventFeedback",
-                "cognito-idp:UpdateDeviceStatus",
-                "cognito-idp:UpdateUserPool"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:cognito-idp:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":userpool/",
-                      {
-                        "Ref": "authmobileappmarketplacee1e8cc85UserPoolId"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:GraphQL"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apimobileappmarketplaceGraphQLAPIIdOutput"
-                      },
-                      "/types/Query/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apimobileappmarketplaceGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apimobileappmarketplaceGraphQLAPIIdOutput"
-                      },
-                      "/types/Subscription/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

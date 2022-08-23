@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "SET NODE_ENV=development&& npm run config && nuxt",
+    "dev": "set NODE_ENV=development&& npm run config && nuxt",
     "config": "node ./generate_capacitor_config.js",
     "build": "nuxt build",
     "start": "nuxt start",

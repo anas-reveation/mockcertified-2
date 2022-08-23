@@ -13,13 +13,15 @@ Amplify Params - DO NOT EDIT */
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 exports.handler = async (event) => {
+  let statusCode = 200;
+  let body;
   function generateAccountLink(accountID, origin) {
     return stripe.accountLinks
       .create({
         type: 'account_onboarding',
         account: accountID,
-        refresh_url: `${origin}`,
-        return_url: `${origin}`,
+        refresh_url: `${origin}/?status=failed`,
+        return_url: `${origin}/?status=success&account_id=${accountID}`,
       })
       .then((link) => link.url);
   }
@@ -27,8 +29,19 @@ exports.handler = async (event) => {
     const account = await stripe.accounts.create({ type: 'express' });
     const origin = process.env.DOMAIN_ORIGIN + '/';
     const accountLinkURL = await generateAccountLink(account.id, origin);
-    return { statusCode: 200, body: accountLinkURL };
+    statusCode = 200;
+    body = { message: 'success', account_link: accountLinkURL, account_id: account.id };
   } catch (err) {
-    return { statusCode: 500, body: err };
+    statusCode = 500;
+    body = {
+      message: err,
+    };
   }
+
+  const returnValue = {
+    statusCode,
+    body,
+  };
+
+  return JSON.stringify(returnValue);
 };

@@ -31,13 +31,13 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "checkAnswer": {
+        "onboardingStripe": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "onboardingStripe": {
+        "checkAnswer": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
