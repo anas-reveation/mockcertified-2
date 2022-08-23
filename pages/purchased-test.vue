@@ -13,25 +13,23 @@
     </div>
 
     <div v-else>
-      <div class="mb-2 row justify-content-end">
-        <div class="col text-end">
-          <span>Sort by :</span>
-          <select class="border border-primary rounded" v-model="sortBy">
-            <option value="date">Date</option>
-            <option value="duration">Duration</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <span class="border border-primary rounded px-2" @click="isAscending = !isAscending">
-            <img
-              v-if="isAscending"
-              src="@/assets/images/arrow_up.svg"
-              alt="up-arrow"
-              class="mb-1"
-            />
-            <img v-else src="@/assets/images/arrow_down.svg" alt="down-arroe" class="mb-1" />
-          </span>
-        </div>
+      <div class="text-end mb-2">
+        <span>Sort by :</span>
+        <select class="border border-primary rounded" v-model="sortBy">
+          <option value="date">Date</option>
+          <option value="duration">Duration</option>
+        </select>
+        <span class="border border-primary rounded px-1" @click="isAscending = !isAscending">
+          <img v-if="isAscending" src="@/assets/images/arrow_up.svg" alt="up-arrow" class="mb-1" />
+          <img v-else src="@/assets/images/arrow_up_gray.svg" alt="up-arrow" class="mb-1" />
+          <img
+            v-if="!isAscending"
+            src="@/assets/images/arrow_down.svg"
+            alt="down-arroe"
+            class="mb-1"
+          />
+          <img v-else src="@/assets/images/arrow_down_gray.svg" alt="down-arroe" class="mb-1" />
+        </span>
       </div>
 
       <div v-for="test in filteredTests" :key="test.id" @click="redirectPage(test)" class="mb-3">

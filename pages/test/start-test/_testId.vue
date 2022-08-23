@@ -43,13 +43,13 @@
         class="container-fluid text-left mt-5 pt-5 margin_top_bottom"
       >
         <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
-        <p class="fw-bold my-4">{{ questionItem.question }}</p>
+        <p class="fw-bold my-2">{{ questionItem.question }}</p>
         <div class="d-flex flex-column mt-2">
           <ul class="list-group">
             <li
               v-for="(value, index2) in questionItem.options"
               :key="index2"
-              class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-4 p-3"
+              class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-2 p-2"
               :class="
                 selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
               "
@@ -282,7 +282,6 @@ export default {
             const completedRes = await this.compeletedTest(this.attemptedId);
             this.setTestRemainingTimeLocal();
             if (completedRes) {
-              console.log('first');
               this.$router.push(`/test/result/${this.attemptedId}`);
               alert('Successfully completed test');
             }

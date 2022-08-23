@@ -133,6 +133,7 @@ export default {
       } catch (err) {
         this.SET_LOADER(false);
         console.error('ERR', err);
+        alert('Email is not registered');
       }
     },
 

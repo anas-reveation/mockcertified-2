@@ -3,7 +3,7 @@
     <TestDetail
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
-      ${totalMarks} marks•`"
+      ${totalMarks} marks`"
       :description="testDetail.description"
       :price="testDetail.price"
       :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"

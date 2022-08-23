@@ -16,11 +16,24 @@
           id="firstName"
           class="border border-2 border-primary rounded"
           pattern="[a-zA-Z]*"
-          title="It should contain only text"
           v-model="registerForm.first_name"
           required
         />
-        <label>First Name</label>
+        <label>
+          First Name
+          <img
+            v-if="!errors.firstName.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.firstName.isVisiable = !errors.firstName.isVisiable"
+          />
+        </label>
+        <div
+          v-if="errors.firstName.isVisiable"
+          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.firstName.msg }}
+        </div>
       </div>
 
       <div class="mb-4 input-data">
@@ -33,7 +46,21 @@
           v-model="registerForm.last_name"
           required
         />
-        <label>Last Name</label>
+        <label>
+          Last Name
+          <img
+            v-if="!errors.lastName.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.lastName.isVisiable = !errors.lastName.isVisiable"
+          />
+        </label>
+        <div
+          v-if="errors.lastName.isVisiable"
+          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.lastName.msg }}
+        </div>
       </div>
 
       <div class="mb-4 input-data">
@@ -43,10 +70,24 @@
           v-model="registerForm.email"
           required
         />
-        <label>Email</label>
+        <label>
+          Email
+          <img
+            v-if="!errors.email.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.email.isVisiable = !errors.email.isVisiable"
+          />
+        </label>
+        <div
+          v-if="errors.email.isVisiable"
+          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.email.msg }}
+        </div>
       </div>
 
-      <div class="mb-4 input-data">
+      <div class="mb-4 input-data position-relative">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded"
@@ -54,13 +95,27 @@
           @input="checkPasswordMatch"
           required
         />
-        <label>Password</label>
+        <label>
+          Password
+          <img
+            v-if="!errors.password.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.password.isVisiable = !errors.password.isVisiable"
+          />
+        </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
             alt="eye"
           />
+        </div>
+        <div
+          v-if="errors.password.isVisiable"
+          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.password.msg }}
         </div>
       </div>
 
@@ -73,7 +128,15 @@
           @input="checkPasswordMatch"
           required
         />
-        <label>Confirm Password</label>
+        <label>
+          Confirm Password
+          <img
+            v-if="!errors.password.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.password.isVisiable = !errors.password.isVisiable"
+          />
+        </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
             class="position-absolute bottom-50 end-0 p-2"
@@ -81,6 +144,14 @@
             alt="eye"
           />
         </div>
+      </div>
+
+      <div>
+        <input type="checkbox" v-model="registerForm.userAgreement" />
+        I accept the
+        <NuxtLink to="/" class="fw-bolder text-decoration-underline">terms & conditions</NuxtLink>
+        and
+        <NuxtLink to="/" class="fw-bolder text-decoration-underline">privacy policies</NuxtLink>
       </div>
 
       <div class="text-center mt-2">
@@ -171,10 +242,11 @@ export default {
     step: steps.register,
     registerForm: {
       email: null,
-      password: null,
       first_name: null,
       last_name: null,
+      password: null,
       confirmPassword: null,
+      userAgreement: false,
     },
     confirmForm: {
       email: '',
@@ -184,6 +256,30 @@ export default {
     passwordMatched: false,
     isDisabled: true,
     isPasswordVisible: false,
+    passwordDetail: false,
+
+    errors: {
+      firstName: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Avoid using spaces or numericals',
+      },
+      lastName: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Avoid using spaces or numericals',
+      },
+      email: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Invalid email address',
+      },
+      password: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Minimum password length required is 8 characters with at least 1 capital letter, 1 number and 1 special character (for security purposes)',
+      },
+    },
   }),
 
   watch: {
@@ -194,9 +290,15 @@ export default {
           newValue.last_name &&
           newValue.email &&
           newValue.password &&
-          newValue.password === newValue.confirmPassword
+          newValue.userAgreement &&
+          newValue.password === newValue.confirmPassword &&
+          this.errors.firstName.isValid &&
+          this.errors.lastName.isValid &&
+          this.errors.password.isValid
         ) {
           this.isDisabled = false;
+        } else {
+          this.isDisabled = true;
         }
         // Note: `newValue` will be equal to `oldValue` here
         // on nested mutations as long as the object itself
@@ -204,10 +306,46 @@ export default {
       },
       deep: true,
     },
+
+    'registerForm.first_name'(newValue, _oldValue) {
+      this.errors.firstName.isValid = this.checkFirstLastName(newValue);
+    },
+
+    'registerForm.last_name'(newValue, _oldValue) {
+      this.errors.lastName.isValid = this.checkFirstLastName(newValue);
+    },
+
+    'registerForm.email'(newValue, _oldValue) {
+      // if (!newValue) {
+      //   this.errors.email.isValid = true;
+      //   return;
+      // }
+      this.errors.email.isValid =
+        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+          newValue,
+        );
+    },
+
+    'registerForm.password'(newValue, _oldValue) {
+      // if (!newValue) {
+      //   this.errors.password.isValid = true;
+      //   return;
+      // }
+      this.errors.password.isValid = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
+        newValue,
+      );
+    },
   },
 
   methods: {
     ...mapActions('auth', ['register', 'confirmRegistration', 'login']),
+
+    checkFirstLastName(newValue) {
+      let res = /^[a-zA-Z]+$/.test(newValue);
+      // if (!newValue) return true;
+      if (res) return true;
+      return false;
+    },
 
     checkPasswordMatch() {
       if (this.registerForm.password === this.registerForm.confirmPassword) {
@@ -269,4 +407,9 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/auth.scss';
+
+.password_format_position {
+  left: 4.5rem;
+  bottom: 2.5rem;
+}
 </style>
