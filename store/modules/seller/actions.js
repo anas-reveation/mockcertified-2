@@ -70,9 +70,10 @@ export default {
       const stripeURLData = await API.graphql({
         query: onboardingStripe,
       });
-      const parsedData = stripeURLData.data.onboardingStripe;
+      const parsedData = JSON.parse(stripeURLData.data.onboardingStripe);
       const user_id = rootState.auth.user.id;
-      const stripe_seller_id = parsedData.account_id;
+      const url = parsedData.body.account_link;
+      const stripe_seller_id = parsedData.body.account_id;
       const input = {
         id: user_id,
         stripe_seller_id,
