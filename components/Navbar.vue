@@ -53,6 +53,34 @@
               </span>
             </NuxtLink>
           </li>
+
+          <li class="nav-item text-capitalize">
+            <NuxtLink class="nav-link text-black" aria-current="page" to="/terms-conditions">
+              <span
+                class="p-1"
+                :class="
+                  $route.path.match(/\/terms-conditions\/*/g) &&
+                  'bg-secondary border border-dark rounded'
+                "
+              >
+                Terms and Conditions
+              </span>
+            </NuxtLink>
+          </li>
+
+          <li class="nav-item text-capitalize">
+            <NuxtLink class="nav-link text-black" aria-current="page" to="/privacy-policy">
+              <span
+                class="p-1"
+                :class="
+                  $route.path.match(/\/privacy-policy\/*/g) &&
+                  'bg-secondary border border-dark rounded'
+                "
+              >
+                Privacy policy
+              </span>
+            </NuxtLink>
+          </li>
           <li class="nav-item text-capitalize">
             <ClientOnly>
               <NuxtLink

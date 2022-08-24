@@ -1,62 +1,103 @@
 <template>
   <div v-if="testDetail" class="container">
-    <div class="row justify-content-between">
-      <h1 class="col fw-bolder text-capitalize">{{ testDetail.title }}</h1>
-      <div class="col text-end">
-        <img src="@/assets/images/share_icon.svg" alt="share" height="30" width="30" />
-      </div>
-    </div>
-    <p class="my-2">
-      {{ testDetail.time_limit }} min • {{ totalQuestions }} questions • {{ totalMarks }} marks
-    </p>
-
-    <div class="container border border-2 border-primary rounded mt-4 p-4">
-      <p class="fs-4 fw-bolder">Result</p>
-      <div class="row">
-        <div class="col-8">
+    <TestDetail
+      :title="testDetail.title"
+      :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
+      ${totalMarks} marks`"
+      :description="testDetail.description"
+      :price="testDetail.price"
+      :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+      :shareFunc="shareTest"
+    >
+      <template>
+        <div class="container border border-2 border-primary rounded mt-4 p-4">
+          <p class="fs-4 fw-bolder">Result</p>
           <div class="row">
-            <div class="col">
-              <p>Test Score: {{ totalScore }}/{{ totalMarks }}</p>
-              <p>Attempted: {{ attemptedQuestions }}/{{ totalQuestions }}</p>
-              <p>Correct: {{ correctAnswer }}/{{ attemptedQuestions }}</p>
-              <p>Incorrect: {{ attemptedQuestions - correctAnswer }}/{{ attemptedQuestions }}</p>
+            <div class="col-8">
+              <div class="row">
+                <div class="col">
+                  <p>Test Score: {{ totalScore }}/{{ totalMarks }}</p>
+                  <p>Attempted: {{ attemptedQuestions }}/{{ totalQuestions }}</p>
+                  <p>Correct: {{ correctAnswer }}/{{ attemptedQuestions }}</p>
+                  <p>
+                    Incorrect: {{ attemptedQuestions - correctAnswer }}/{{ attemptedQuestions }}
+                  </p>
+                </div>
+                <div class="col-2">
+                  <div class="vr h-100 bg-primary border border-3"></div>
+                </div>
+              </div>
             </div>
-            <div class="col-2">
-              <div class="vr h-100 bg-primary border border-3"></div>
+            <div class="col-4">
+              <div
+                class="d-flex justify-content-center align-items-center border border-5 border-primary text-center rounded-circle number_circle"
+              >
+                <span>{{ percentage }}%</span>
+              </div>
             </div>
+          </div>
+
+          <!-- Button trigger modal -->
+          <div class="text-center mt-3">
+            <button
+              type="button"
+              class="btn btn-secondary border border-2 border-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#reviewAnswers"
+            >
+              Review Answers
+            </button>
           </div>
         </div>
-        <div class="col-4">
-          <div
-            class="d-flex justify-content-center align-items-center border border-5 border-primary text-center rounded-circle number_circle"
-          >
-            <span>{{ percentage }}%</span>
+      </template>
+    </TestDetail>
+
+    <div class="text-center pb-3">
+      <NuxtLink
+        :to="`/test/${testDetail.id}`"
+        class="btn btn-secondary border border-2 border-dark"
+        @click=""
+      >
+        Start Again
+      </NuxtLink>
+    </div>
+
+    <!-- Start Modal -->
+    <div
+      class="modal fade"
+      id="reviewAnswers"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="reviewAnswersLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bolder" id="reviewAnswersLabel">Review Questions</h5>
+            <span data-bs-dismiss="modal" aria-label="Close">
+              <img src="@/assets/images/circle-cross.svg" alt="" />
+            </span>
           </div>
+          <div class="modal-body">
+            <div v-for="(question, index) in allQuestions" :key="index">
+              <TestQuestion :question="question" :index="index + 1" />
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary border-2 border-dark"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div> -->
         </div>
       </div>
     </div>
-
-    <div class="row justify-content-between mt-3">
-      <div class="col-9 fs-5 text-capitalize fw-bolder">
-        <img
-          src="@/assets/images/profile_icon.svg"
-          class="me-2"
-          alt="share"
-          @click="shareResult"
-          height="30"
-          width="30"
-        />
-        {{ `${testDetail.created_by.first_name} ${testDetail.created_by.last_name}` }}
-      </div>
-      <span class="col-3 text-primary fw-bolder text-end">
-        ${{ formatPrice(testDetail.price) }}
-      </span>
-    </div>
-
-    <div class="mt-3 pb-3">
-      <h4 class="fw-bolder">Description</h4>
-      <p>{{ testDetail.description }}</p>
-    </div>
+    <!-- End Modal -->
   </div>
 </template>
 
@@ -68,6 +109,7 @@ export default {
   data() {
     return {
       attemptedQuestions: null,
+      allQuestions: [],
       correctAnswer: null,
       totalQuestions: 0,
       totalMarks: 0,
@@ -105,12 +147,26 @@ export default {
     this.totalMarks = totalMarks;
 
     let totalScore = 0;
-    const correctAnswer = attemptedTest[0].result.items.filter((res) => {
+
+    const correctAnswer = attemptedTest[0].result.items.filter((res, index) => {
+      // Array of question that is attempted
+      const options = res.question.options;
+      const parsedData = JSON.parse(options);
+      const questionDetail = {
+        ...res.question,
+        options: Object.entries(parsedData),
+        resultStatus: res.result_status,
+        userInput: res.user_input,
+      };
+      this.allQuestions.push(questionDetail);
+
+      // Checking answer
       if (res.result_status === true) {
         totalScore += res.question.marks;
         return res;
       }
     });
+
     this.totalScore = totalScore;
     this.correctAnswer = correctAnswer.length;
     this.percentage = ((this.totalScore / this.totalMarks) * 100).toFixed(2);
@@ -128,7 +184,7 @@ export default {
       return parseFloat(price).toFixed(2);
     },
 
-    async shareResult() {
+    async shareTest() {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;

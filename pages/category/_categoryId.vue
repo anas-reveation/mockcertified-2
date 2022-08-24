@@ -42,7 +42,7 @@
         @click="getAllTests(category.id, category.name)"
       >
         <div class="row">
-          <span class="col-3">
+          <span class="col-2">
             <img :src="category.image" alt="category" class="rounded-circle category_image" />
           </span>
           <span class="col text-start"> {{ category.name }}</span>

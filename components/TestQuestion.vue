@@ -1,13 +1,17 @@
 <template>
   <div class="text-left">
-    <h1 class="fw-bolder">Question</h1>
-    <p class="fw-bolder my-4">{{ question.question }}</p>
+    <h3 class="fw-bolder font_size_24">Question {{ index }}</h3>
+    <p>{{ question.question }}</p>
     <div class="d-flex flex-column mt-2">
       <ul class="list-group">
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-4"
+          class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
+          :class="[
+            question.userInput && bgColor(question.userInput, value[1]),
+            value[1] === question.answer && 'bg_green',
+          ]"
         >
           {{ index2 + 1 }}. {{ value[1] }}
         </li>
@@ -15,8 +19,10 @@
     </div>
 
     <div>
-      <p><span class="fw-bolder">Answer</span>: {{ question.answer }}</p>
-      <p><span class="fw-bolder">Explanation</span>: {{ question.explainantion }}</p>
+      <div v-if="question.answer"><span class="fw-bolder">Answer</span>: {{ question.answer }}</div>
+      <div v-if="question.explainantion">
+        <span class="fw-bolder">Explanation</span>: {{ question.explainantion }}
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +31,27 @@
 export default {
   props: {
     question: Object,
+    index: Number,
+  },
+
+  methods: {
+    bgColor(userInput, value, answer) {
+      if (!userInput) return '';
+      if (userInput === value && this.question.resultStatus) {
+        return 'bg_green';
+      } else if (userInput === value) {
+        return 'bg_gray ';
+      }
+    },
   },
 };
 </script>
+
+<style scoped>
+.bg_green {
+  background: #94e4bd;
+}
+.bg_gray {
+  background: #b3b3b3;
+}
+</style>

@@ -3,14 +3,14 @@
     <TestDetail
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
-      ${totalMarks} marks•`"
+      ${totalMarks} marks`"
       :description="testDetail.description"
       :price="testDetail.price"
       :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
     />
 
     <div class="pb-2" v-for="(question, index) in testQuestions" :key="index">
-      <TestQuestion :question="question" />
+      <TestQuestion :question="question" :index="index + 1" />
     </div>
 
     <div class="pb-3" v-if="testDetail.reject_description">

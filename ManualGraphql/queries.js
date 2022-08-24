@@ -48,6 +48,7 @@ export const userTests = /* GraphQL */ `
                 marks
                 options
                 question
+                answer
               }
             }
             created_by {
@@ -62,7 +63,11 @@ export const userTests = /* GraphQL */ `
               result_status
               user_input
               question {
+                options
+                question
                 marks
+                answer
+                explainantion
               }
             }
           }

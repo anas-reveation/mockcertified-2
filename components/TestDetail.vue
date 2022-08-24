@@ -16,6 +16,8 @@
       {{ shortDescription }}
     </p>
 
+    <slot />
+
     <div class="row justify-content-between mt-3">
       <h3 class="fw-bolder">Created by:</h3>
       <div class="col-9 fs-5 text-capitalize fw-bolder">
@@ -32,6 +34,7 @@
         {{ formatedPrice }}
       </span>
     </div>
+
     <div class="mt-3">
       <h3 class="fw-bolder">Description</h3>
       <p>{{ description }}</p>

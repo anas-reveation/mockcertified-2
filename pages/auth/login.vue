@@ -30,8 +30,15 @@
         <label>Password</label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
+            v-if="isPasswordVisible"
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+          <img
+            v-else
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_not_visible.svg"
             alt="eye"
           />
         </div>

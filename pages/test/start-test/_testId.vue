@@ -28,7 +28,7 @@
           {{ timerString }}
         </div>
         <button
-          class="col-4 btn text-primary border-2 border-primary px-1"
+          class="col-4 btn text-primary border-2 border-primary p-0"
           @click="timerEnabled = !timerEnabled"
         >
           {{ timerEnabled ? 'PAUSE' : 'RESUME' }}

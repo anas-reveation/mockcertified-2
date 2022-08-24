@@ -7,9 +7,9 @@
     </div>
 
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="mt-5 mb-4 font_size_36">Register</h1>
 
     <form v-if="step === steps.register" class="wrapper" @submit.prevent="registerLocal">
+      <h1 class="mt-5 mb-4 font_size_36">Register</h1>
       <div class="mb-4 input-data">
         <input
           type="text"
@@ -30,7 +30,7 @@
         </label>
         <div
           v-if="errors.firstName.isVisiable"
-          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.firstName.msg }}
         </div>
@@ -57,7 +57,7 @@
         </label>
         <div
           v-if="errors.lastName.isVisiable"
-          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.lastName.msg }}
         </div>
@@ -81,7 +81,7 @@
         </label>
         <div
           v-if="errors.email.isVisiable"
-          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.email.msg }}
         </div>
@@ -106,14 +106,21 @@
         </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
+            v-if="isPasswordVisible"
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+          <img
+            v-else
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_not_visible.svg"
             alt="eye"
           />
         </div>
         <div
           v-if="errors.password.isVisiable"
-          class="position-absolute p-1 bg-secondary border border-2 border-dark rounded font_family_roboto font_size_14 password_format_position"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.password.msg }}
         </div>
@@ -139,8 +146,15 @@
         </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
+            v-if="isPasswordVisible"
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+          <img
+            v-else
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_not_visible.svg"
             alt="eye"
           />
         </div>
@@ -149,9 +163,13 @@
       <div>
         <input type="checkbox" v-model="registerForm.userAgreement" />
         I accept the
-        <NuxtLink to="/" class="fw-bolder text-decoration-underline">terms & conditions</NuxtLink>
+        <NuxtLink to="/terms-conditions" class="fw-bolder text-decoration-underline">
+          terms & conditions
+        </NuxtLink>
         and
-        <NuxtLink to="/" class="fw-bolder text-decoration-underline">privacy policies</NuxtLink>
+        <NuxtLink to="/privacy-policy" class="fw-bolder text-decoration-underline">
+          privacy policies
+        </NuxtLink>
       </div>
 
       <div class="text-center mt-2">
@@ -194,15 +212,17 @@
     </form>
 
     <form v-else class="wrapper" @submit.prevent="confirmLocal">
-      <div class="mb-4 input-data">
-        <input
-          type="email"
-          class="border border-2 border-primary rounded"
-          v-model="confirmForm.email"
-          required
-        />
-        <label>Email</label>
-      </div>
+      <h1 class="mt-5 mb-4 font_size_36">
+        Verification
+        <br />
+        Code
+      </h1>
+
+      <p>Please enter the verification code sent to your email</p>
+
+      <label for="verficationCode" class="fw-bolder mb-2 font_size_24">
+        Enter Verification Code :
+      </label>
 
       <div class="mb-4 input-data">
         <input
@@ -309,10 +329,16 @@ export default {
 
     'registerForm.first_name'(newValue, _oldValue) {
       this.errors.firstName.isValid = this.checkFirstLastName(newValue);
+      if (this.errors.firstName.isValid) {
+        this.errors.firstName.isVisiable = false;
+      }
     },
 
     'registerForm.last_name'(newValue, _oldValue) {
       this.errors.lastName.isValid = this.checkFirstLastName(newValue);
+      if (this.errors.lastName.isValid) {
+        this.errors.lastName.isVisiable = false;
+      }
     },
 
     'registerForm.email'(newValue, _oldValue) {
@@ -324,6 +350,10 @@ export default {
         /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
           newValue,
         );
+
+      if (this.errors.email.isValid) {
+        this.errors.email.isVisiable = false;
+      }
     },
 
     'registerForm.password'(newValue, _oldValue) {
@@ -334,6 +364,10 @@ export default {
       this.errors.password.isValid = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
         newValue,
       );
+
+      if (this.errors.password.isValid) {
+        this.errors.password.isVisiable = false;
+      }
     },
   },
 

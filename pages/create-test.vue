@@ -107,7 +107,7 @@
           class="btn btn-secondary border border-2 border-dark"
           :disabled="isDisable"
         >
-          Submit
+          Connect
         </button>
       </div>
     </div>
@@ -189,6 +189,7 @@ export default {
     pasreFileData(FileData) {
       // Removed first element of an array (It is a heading)
       const ActualData = FileData;
+      console.log('FileData', FileData);
       FileData.shift();
       const optionsKey = ['optionA', 'optionB', 'optionC', 'optionD'];
       let dataError = false;
