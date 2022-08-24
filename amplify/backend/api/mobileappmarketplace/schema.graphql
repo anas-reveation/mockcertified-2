@@ -166,5 +166,5 @@ type Query {
 
 type Mutation {
   addResultStatus(result_id: ID): String @function(name: "checkAnswer-${env}")
+  checkoutStripeUrl(test_id: ID!, token: String!): String @function(name: "stripeCheckout-${env}")
 }
-   

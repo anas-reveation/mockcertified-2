@@ -6,6 +6,11 @@ export const addResultStatus = /* GraphQL */ `
     addResultStatus(result_id: $result_id)
   }
 `;
+export const checkoutStripeUrl = /* GraphQL */ `
+  mutation CheckoutStripeUrl($test_id: ID!, $token: String!) {
+    checkoutStripeUrl(test_id: $test_id, token: $token)
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
