@@ -1,12 +1,22 @@
-const axios = require('axios');
+/* Amplify Params - DO NOT EDIT
+	API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT
+	API_MOBILEAPPMARKETPLACE_GRAPHQLAPIIDOUTPUT
+	API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT
+	AUTH_MOBILEAPPMARKETPLACEE1E8CC85_USERPOOLID
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */
 
-const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
-const GRAPHQL_API_KEY = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIIDOUTPUT;
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
-const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
+
+const axios = require('axios');
+
+const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
+// const GRAPHQL_API_KEY = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIIDOUTPUT;
+// const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
+const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
 
 exports.handler = async (event) => {
   const result_id = event.arguments.result_id;
@@ -80,16 +90,18 @@ exports.handler = async (event) => {
       status: 200,
     };
   } catch (error) {
-    statusCode = 400;
+    statusCode = 500;
     body = {
       message: 'something went wrong',
-      status: 400,
+      status: 500,
     };
     console.log('error', error);
   }
 
-  return {
+  const returnValue = {
     statusCode,
-    body: JSON.stringify(body),
+    body,
   };
+
+  return JSON.stringify(returnValue);
 };

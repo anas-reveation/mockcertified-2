@@ -2,13 +2,28 @@
 // this is an auto generated file. This will be overwritten
 
 export const addResultStatus = /* GraphQL */ `
-  mutation AddResultStatus($result_id: ID) {
+  mutation AddResultStatus($result_id: ID!) {
     addResultStatus(result_id: $result_id)
   }
 `;
 export const checkoutStripeUrl = /* GraphQL */ `
-  mutation CheckoutStripeUrl($test_id: ID!, $token: String!) {
-    checkoutStripeUrl(test_id: $test_id, token: $token)
+  mutation CheckoutStripeUrl(
+    $test_id: ID!
+    $token: String!
+    $success_redirect_url: String!
+    $cancel_redirect_url: String!
+  ) {
+    checkoutStripeUrl(
+      test_id: $test_id
+      token: $token
+      success_redirect_url: $success_redirect_url
+      cancel_redirect_url: $cancel_redirect_url
+    )
+  }
+`;
+export const verifyTestPayment = /* GraphQL */ `
+  mutation VerifyTestPayment($session_id: String!, $token: String!) {
+    verifyTestPayment(session_id: $session_id, token: $token)
   }
 `;
 export const createUser = /* GraphQL */ `

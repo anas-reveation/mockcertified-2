@@ -37,13 +37,19 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "checkAnswer": {
+        "stripeCheckout": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "stripeCheckout": {
+        "verifyPayment": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "checkAnswer": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

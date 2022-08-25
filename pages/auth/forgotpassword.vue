@@ -37,42 +37,83 @@
     <!-- PAGE 2 -->
     <form v-else class="wrapper" @submit.prevent="newPasswordSubmit">
       <div class="mb-4 input-data">
-        <input type="text" class="border border-2 border-primary rounded" v-model="code" required />
+        <input
+          type="text"
+          class="border border-2 border-primary rounded py-3"
+          v-model="code"
+          required
+        />
         <label>Code</label>
       </div>
 
       <div class="mb-4 input-data">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="password"
           @input="checkPasswordMatch"
           required
         />
-        <label>Enter new password</label>
+        <label>
+          Enter new password
+          <img
+            v-if="!errors.password.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.password.isVisiable = !errors.password.isVisiable"
+          />
+        </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
+            v-if="isPasswordVisible"
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
             alt="eye"
           />
+          <img
+            v-else
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_not_visible.svg"
+            alt="eye"
+          />
+        </div>
+        <div
+          v-if="errors.password.isVisiable"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.password.msg }}
         </div>
       </div>
 
       <div class="mb-4 input-data">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           :class="!passwordMatched && 'border-danger'"
           v-model="confirmPassword"
           @input="checkPasswordMatch"
           required
         />
-        <label>Confirm new Password</label>
+        <label>
+          Confirm new Password
+          <img
+            v-if="!errors.password.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.password.isVisiable = !errors.password.isVisiable"
+          />
+        </label>
         <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
           <img
+            v-if="isPasswordVisible"
             class="position-absolute bottom-50 end-0 p-2"
             src="@/assets/images/password_visible.svg"
+            alt="eye"
+          />
+          <img
+            v-else
+            class="position-absolute bottom-50 end-0 p-2"
+            src="@/assets/images/password_not_visible.svg"
             alt="eye"
           />
         </div>
@@ -82,8 +123,12 @@
         <button
           type="submit"
           class="btn border border-2 border-dark fw-bold px-3"
-          :class="!code || !password || !confirmPassword ? 'btn-gray' : 'btn-secondary'"
-          :disabled="!code || !password || !confirmPassword"
+          :class="
+            !code || !password || !confirmPassword || !errors.password.isValid
+              ? 'btn-gray'
+              : 'btn-secondary'
+          "
+          :disabled="!code || !password || !confirmPassword || !errors.password.isValid"
         >
           Reset Password
         </button>
@@ -109,7 +154,30 @@ export default {
     code: null,
     passwordMatched: false,
     isPasswordVisible: false,
+    errors: {
+      password: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Minimum password length required is 8 characters with at least 1 capital letter, 1 number and 1 special character (for security purposes)',
+      },
+    },
   }),
+
+  watch: {
+    password(newValue, _oldValue) {
+      // if (!newValue) {
+      //   this.errors.password.isValid = true;
+      //   return;
+      // }
+      this.errors.password.isValid = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
+        newValue,
+      );
+
+      if (this.errors.password.isValid) {
+        this.errors.password.isVisiable = false;
+      }
+    },
+  },
 
   methods: {
     ...mapMutations(['SET_LOADER']),
@@ -128,7 +196,7 @@ export default {
       try {
         await Auth.forgotPassword(this.email);
         this.SET_LOADER(false);
-        alert('Check your email');
+        alert('Check your email for the verification code');
         this.pageCount += 1;
       } catch (err) {
         this.SET_LOADER(false);
@@ -157,4 +225,9 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/auth.scss';
+
+.password_format_position {
+  left: 4.5rem;
+  bottom: 2.5rem;
+}
 </style>

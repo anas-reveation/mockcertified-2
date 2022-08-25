@@ -4,6 +4,10 @@ export default {
     state.user = user;
   },
 
+  setJwtToken(state, jwtToken) {
+    state.jwtToken = jwtToken;
+  },
+
   setUserGroup(state, groupName) {
     state.userGroup = groupName;
   },

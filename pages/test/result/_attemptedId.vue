@@ -75,14 +75,19 @@
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bolder" id="reviewAnswersLabel">Review Questions</h5>
+            <h5 class="modal-title fw-bolder" id="reviewAnswersLabel">Questions</h5>
             <span data-bs-dismiss="modal" aria-label="Close">
               <img src="@/assets/images/circle-cross.svg" alt="" />
             </span>
           </div>
           <div class="modal-body">
             <div v-for="(question, index) in allQuestions" :key="index">
-              <TestQuestion :question="question" :index="index + 1" />
+              <TestQuestion
+                :question="question"
+                :index="index + 1"
+                :questionVisible="false"
+                class="mb-2"
+              />
             </div>
           </div>
           <!-- <div class="modal-footer">

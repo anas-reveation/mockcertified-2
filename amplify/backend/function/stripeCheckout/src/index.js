@@ -15,6 +15,7 @@ Amplify Params - DO NOT EDIT */
  */
 
 const axios = require('axios');
+const jwt_decode = require('jwt-decode');
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -31,12 +32,35 @@ const getTestDetailQuery = /* GraphQL */ `
   }
 `;
 
+const getUserTestQuery = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      purchased_tests {
+        items {
+          test_id
+        }
+      }
+      created_tests {
+        items {
+          id
+        }
+      }
+    }
+  }
+`;
+
 exports.handler = async (event) => {
-  const testId = event.arguments.test_id;
-  const jwtToken = event.arguments.token;
   let statusCode = 200;
   let body;
   try {
+    const testId = event.arguments.test_id;
+    const jwtToken = event.arguments.token;
+    const successRedirectUrl = event.arguments.success_redirect_url;
+    const cancelRedirectUrl = event.arguments.cancel_redirect_url;
+
+    const decoded = jwt_decode(jwtToken);
+    const customerId = decoded.sub;
+
     const getTestDetail = async (id) => {
       const paramsObj = {
         query: getTestDetailQuery,
@@ -56,15 +80,51 @@ exports.handler = async (event) => {
         title: testRes.title,
         price: testRes.price,
         sellerId: testRes.created_by.stripe_seller_id,
+        userId: testRes.created_by.id,
       };
       return detail;
     };
 
+    const creatorPurchased = async () => {
+      const paramsObj = {
+        query: getUserTestQuery,
+        variables: {
+          id: customerId,
+        },
+      };
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      };
+      const response = await axios.post(GRAPHQL_ENDPOINT, paramsObj, headers);
+      const createdTests = response.data.data.getUser.created_tests.items;
+      let isCreator = false;
+      createdTests.forEach((testIdLocal) => {
+        if (testIdLocal.id === testId) {
+          isCreator = true;
+          return;
+        }
+      });
+      let isPurchased = false;
+      if (!isCreator) {
+        const purchasedTests = response.data.data.getUser.purchased_tests.items;
+        purchasedTests.forEach((testIdLocal) => {
+          if (testIdLocal.test_id === testId) {
+            isPurchased = true;
+            return;
+          }
+        });
+      }
+
+      return isCreator || isPurchased;
+    };
+
     // Start STRIPE
-    const stripePayment = async (title, basePrice, sellerId) => {
+    const stripePayment = async (title, basePrice, sellerId, userId) => {
       const quantity = 1;
       const calculateApplicationFeeAmount = 0.1 * (basePrice * 100) * quantity;
-      const domainURL = process.env.DOMAIN_ORIGIN;
+      // const domainURL = process.env.DOMAIN_ORIGIN;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -72,10 +132,15 @@ exports.handler = async (event) => {
             name: title,
             quantity,
             currency: 'USD',
-            amount: basePrice * 100, // Keep the amount on the server to prevent customers from manipulating on client
+            amount: basePrice * 100,
+            // Keep the amount on the server to prevent customers from manipulating on client
           },
         ],
-
+        metadata: {
+          seller_id: userId,
+          customer_id: customerId,
+          test_id: testId,
+        },
         payment_intent_data: {
           application_fee_amount: calculateApplicationFeeAmount,
           // The account receiving the funds, as passed from the client.
@@ -84,23 +149,31 @@ exports.handler = async (event) => {
           },
         },
         // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-        success_url: `${domainURL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${domainURL}/payment-canceled`,
+        success_url: `${successRedirectUrl}/?session_id={CHECKOUT_SESSION_ID}&token=${jwtToken}`,
+        cancel_url: `${cancelRedirectUrl}/`,
       });
 
       return session;
     };
     // End STRIPE
 
-    const testDetail = await getTestDetail(testId);
-    const sessionData = await stripePayment(
-      testDetail.title,
-      testDetail.price,
-      testDetail.sellerId,
-    );
+    const isCreatorPurchased = await creatorPurchased();
 
-    statusCode = 200;
-    body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+    if (!isCreatorPurchased) {
+      const testDetail = await getTestDetail(testId);
+      const sessionData = await stripePayment(
+        testDetail.title,
+        testDetail.price,
+        testDetail.sellerId,
+        testDetail.userId,
+      );
+
+      statusCode = 200;
+      body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+    } else {
+      statusCode = 409;
+      body = { message: 'already exist' };
+    }
   } catch (err) {
     console.log('ERROR ->', err);
     statusCode = 500;

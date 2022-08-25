@@ -1,7 +1,10 @@
 <template>
   <div class="text-left">
-    <h3 class="fw-bolder font_size_24">Question {{ index }}</h3>
-    <p>{{ question.question }}</p>
+    <h3 v-if="questionVisible" class="fw-bolder font_size_24">Question {{ index }}</h3>
+    <p>
+      <span v-if="!questionVisible" class="fw-bolder">{{ index }}. </span>
+      {{ question.question }}
+    </p>
     <div class="d-flex flex-column mt-2">
       <ul class="list-group">
         <li
@@ -10,7 +13,7 @@
           class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
           :class="[
             question.userInput && bgColor(question.userInput, value[1]),
-            value[1] === question.answer && 'bg_green',
+            value[1].toLowerCase() === question.answer.toLowerCase() && 'bg_green',
           ]"
         >
           {{ index2 + 1 }}. {{ value[1] }}
@@ -32,10 +35,16 @@ export default {
   props: {
     question: Object,
     index: Number,
+    questionVisible: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   methods: {
-    bgColor(userInput, value, answer) {
+    bgColor(userInputParams, valueParams) {
+      const userInput = userInputParams.toLowerCase();
+      const value = valueParams.toLowerCase();
       if (!userInput) return '';
       if (userInput === value && this.question.resultStatus) {
         return 'bg_green';

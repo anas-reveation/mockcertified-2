@@ -13,7 +13,7 @@
       <div class="mb-4 input-data">
         <input
           type="email"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="form.email"
           required
         />
@@ -23,7 +23,7 @@
       <div class="mb-2 input-data">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="form.password"
           required
         />

@@ -8,6 +8,7 @@ export default {
   async load({ commit, dispatch }, req) {
     try {
       const user = await Auth.currentAuthenticatedUser();
+      const jwtToken = user.signInUserSession.accessToken.jwtToken;
       const userRole = user.signInUserSession.accessToken.payload['cognito:groups'];
       if (userRole) {
         commit('setUserGroup', userRole[0]);
@@ -33,6 +34,7 @@ export default {
       }
 
       commit('setUser', userData);
+      commit('setJwtToken', jwtToken);
       return user;
     } catch (error) {
       console.error('error', error);
@@ -59,7 +61,7 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      alert(err.message);    
+      alert(err.message);
     }
   },
 
@@ -82,6 +84,7 @@ export default {
 
     try {
       const user = await Auth.signIn(email, password);
+      const jwtToken = user.signInUserSession.accessToken.jwtToken;
 
       const userRole = user.signInUserSession.accessToken.payload['cognito:groups'];
       if (userRole) {
@@ -94,7 +97,9 @@ export default {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const userData = userGraphql.data.getUser;
+
       commit('setUser', userData);
+      commit('setJwtToken', jwtToken);
       commit('SET_LOADER', false, { root: true });
       return user;
     } catch (err) {

@@ -236,16 +236,21 @@ export default {
       });
 
       const result_id = resultData.data.createResult.id;
-      await API.graphql({
+      const addResultStatusData = await API.graphql({
         query: addResultStatus,
         variables: {
           result_id,
         },
       });
 
-      commit('SET_LOADER', false, { root: true });
+      const parsedData = JSON.parse(addResultStatusData.data.addResultStatus);
+      if (parsedData.statusCode === '200' || parsedData.statusCode === 200) {
+        commit('SET_LOADER', false, { root: true });
+        return true;
+      }
 
-      return true;
+      commit('SET_LOADER', false, { root: true });
+      return false;
     } catch (err) {
       console.error(err);
       commit('SET_LOADER', false, { root: true });

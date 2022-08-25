@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -14,6 +14,15 @@
       "Type": "String"
     },
     "s3Key": {
+      "Type": "String"
+    },
+    "stripeSecretKey": {
+      "Type": "String"
+    },
+    "stripePublishableKey": {
+      "Type": "String"
+    },
+    "domainOrigin": {
       "Type": "String"
     },
     "authmobileappmarketplacee1e8cc85UserPoolId": {
@@ -63,12 +72,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "checkAnswer",
+            "verifyPayment",
             {
               "Fn::Join": [
                 "",
                 [
-                  "checkAnswer",
+                  "verifyPayment",
                   "-",
                   {
                     "Ref": "env"
@@ -97,6 +106,15 @@
             },
             "API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apimobileappmarketplaceGraphQLAPIKeyOutput"
+            },
+            "STRIPE_SECRET_KEY": {
+              "Ref": "stripeSecretKey"
+            },
+            "STRIPE_PUBLISHABLE_KEY": {
+              "Ref": "stripePublishableKey"
+            },
+            "DOMAIN_ORIGIN": {
+              "Ref": "domainOrigin"
             }
           }
         },
@@ -117,12 +135,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mobileappmarketplaceLambdaRole0433e598",
+            "mobileappmarketplaceLambdaRolea350a601",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mobileappmarketplaceLambdaRole0433e598",
+                  "mobileappmarketplaceLambdaRolea350a601",
                   "-",
                   {
                     "Ref": "env"

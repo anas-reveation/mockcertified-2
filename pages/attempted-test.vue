@@ -26,18 +26,25 @@
       </div>
 
       <div v-if="!filteredTests.length" class="px-3">
-        <h1>No Test Attempted</h1>
+        <h1 class="fw-bold font_size_32">No Test Available</h1>
         <p>
           Want to give a test?
           <br />
           Click on the button below!
         </p>
-        <NuxtLink
-          to="/purchased-test"
-          class="btn btn-secondary border border-2 border-dark rounded"
-        >
-          Purchased Test
-        </NuxtLink>
+        <div class="text-center">
+          <img
+            src="@/assets/images/girl_illustration.png"
+            alt="girl_illustration"
+            class="girl_illustration"
+          />
+          <NuxtLink
+            to="/purchased-test"
+            class="btn btn-secondary border border-2 border-dark rounded"
+          >
+            Purchased Test
+          </NuxtLink>
+        </div>
       </div>
       <div v-else>
         <div class="text-end mb-2">
@@ -160,3 +167,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.girl_illustration {
+  object-fit: contain;
+  height: 200px;
+  width: 200px;
+}
+</style>

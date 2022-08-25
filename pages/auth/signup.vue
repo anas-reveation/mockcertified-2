@@ -14,7 +14,7 @@
         <input
           type="text"
           id="firstName"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           pattern="[a-zA-Z]*"
           v-model="registerForm.first_name"
           required
@@ -40,7 +40,7 @@
         <input
           type="text"
           id="lastName"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           pattern="[a-zA-Z]*"
           title="It should contain only text"
           v-model="registerForm.last_name"
@@ -66,7 +66,7 @@
       <div class="mb-4 input-data">
         <input
           type="email"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="registerForm.email"
           required
         />
@@ -90,7 +90,7 @@
       <div class="mb-4 input-data position-relative">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="registerForm.password"
           @input="checkPasswordMatch"
           required
@@ -129,7 +129,7 @@
       <div class="mb-4 input-data">
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           :class="!passwordMatched && ' border-danger'"
           v-model="registerForm.confirmPassword"
           @input="checkPasswordMatch"
@@ -227,7 +227,7 @@
       <div class="mb-4 input-data">
         <input
           type="text"
-          class="border border-2 border-primary rounded"
+          class="border border-2 border-primary rounded py-3"
           v-model="confirmForm.code"
           required
         />
@@ -399,7 +399,7 @@ export default {
         this.userId = userData.userSub;
         this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
-        alert('Check your email');
+        alert('Check your email for the verification code');
       } catch (err) {
         console.error('err', err);
       }
