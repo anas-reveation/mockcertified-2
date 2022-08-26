@@ -149,7 +149,7 @@ exports.handler = async (event) => {
           },
         },
         // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-        success_url: `${successRedirectUrl}/?session_id={CHECKOUT_SESSION_ID}&token=${jwtToken}`,
+        success_url: `${successRedirectUrl}?session_id={CHECKOUT_SESSION_ID}&token=${jwtToken}`,
         cancel_url: `${cancelRedirectUrl}/`,
       });
 
