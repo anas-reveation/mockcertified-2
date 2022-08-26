@@ -2,7 +2,7 @@
   <div class="container">
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
-      class="wrapper"
+      class="wrapper mt-3"
       @submit.prevent="testSubmit"
     >
       <div class="mb-4 input-data">
@@ -82,7 +82,7 @@
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">
-        <input class="container" type="file" @change="onChange" required />
+        <input class="container" type="file" ref="fileupload" @change="onChange" required />
         <label class="form-label fixed_up">Question list (csv file only)</label>
       </div>
 
@@ -91,7 +91,21 @@
       </button>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-secondary border border-2 border-dark w-50 mb-2">
+        <button
+          v-if="questionList.length"
+          type="button"
+          class="btn btn-secondary border border-2 border-dark w-70 mb-2"
+          data-bs-toggle="modal"
+          data-bs-target="#reviewQuestion"
+        >
+          Review Question
+        </button>
+        <button
+          type="submit"
+          class="btn border border-2 border-dark w-50 mb-2"
+          :class="!isDisableBtn && 'btn-secondary'"
+          :disabled="isDisableBtn"
+        >
           Submit
         </button>
       </div>
@@ -111,6 +125,40 @@
         </button>
       </div>
     </div>
+
+    <!-- Start Modal -->
+    <div
+      class="modal fade"
+      id="reviewQuestion"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="reviewQuestionLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
+            <span data-bs-dismiss="modal" aria-label="Close">
+              <img src="@/assets/images/circle-cross.svg" alt="" />
+            </span>
+          </div>
+          <div v-if="questionList.length" class="modal-body">
+            <div v-for="(question, index) in reviewQuestions" :key="index">
+              <TestQuestion
+                :question="question"
+                :index="index + 1"
+                :questionVisible="false"
+                class="mb-2"
+                :isReviewQuestion="true"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
   </div>
 </template>
 
@@ -132,9 +180,11 @@ export default {
       },
       allCategories: [],
       allSubCategories: [],
-      questionList: null,
+      questionList: [],
+      reviewQuestions: [],
       isAccountActive: false,
       isDisable: true,
+      isDisableBtn: true,
     };
   },
   watch: {
@@ -143,6 +193,27 @@ export default {
       this.subCategoryId = 'default';
       const category = this.allCategories.find((category) => category.id === newValue);
       this.allSubCategories = category.sub_category.items;
+    },
+
+    formData: {
+      handler(newValue, _oldValue) {
+        if (
+          newValue.title &&
+          newValue.description &&
+          newValue.price &&
+          newValue.timeLimit &&
+          newValue.categoryId !== 'default' &&
+          newValue.subCategoryId !== 'default'
+        ) {
+          this.isDisableBtn = false;
+        } else {
+          this.isDisableBtn = true;
+        }
+        // Note: `newValue` will be equal to `oldValue` here
+        // on nested mutations as long as the object itself
+        // hasn't been replaced.
+      },
+      deep: true,
     },
   },
 
@@ -187,47 +258,91 @@ export default {
     },
 
     pasreFileData(FileData) {
-      // Removed first element of an array (It is a heading)
-      const ActualData = FileData;
-      console.log('FileData', FileData);
-      FileData.shift();
-      const optionsKey = ['optionA', 'optionB', 'optionC', 'optionD'];
-      let dataError = false;
-      try {
-        this.questionList = FileData.map((data, index) => {
-          const options = {
-            optionA: data[1].replace(/\s+/g, ' ').trim(),
-            optionB: data[2].replace(/\s+/g, ' ').trim(),
-            optionC: data[3].replace(/\s+/g, ' ').trim(),
-            optionD: data[4].replace(/\s+/g, ' ').trim(),
-          };
-          let answer = null;
-          optionsKey.forEach((option, index2) => {
-            if (option === data[5]) {
-              answer = ActualData[index][index2 + 1].replace(/\s+/g, ' ').trim();
-              return;
-            }
-          });
-          if (!answer) {
-            dataError = true;
+      let isFormatted = true;
+
+      for (let i = 0; i < FileData.length; i++) {
+        const row = FileData[i];
+        let questionObj = {
+          question: null,
+          options: [],
+          answer: null,
+          explanation: null,
+        };
+
+        // Individual Question
+        for (let j = 0; j < row.length; j++) {
+          // Skipping header (first row from loop)
+          if (i === 0) {
+            continue;
           }
-          const questionObj = {
-            question: data[0].replace(/\s+/g, ' ').trim(),
-            options: `{\"option_D\":\"${options.optionD}\",\"option_B\":\"${options.optionB}\",\"option_C\":\"${options.optionC}\",\"option_A\":\"${options.optionA}\"}`,
-            answer,
-            explanation: data[6].replace(/\s+/g, ' ').trim(),
-          };
-          return questionObj;
-        });
-        if (dataError) {
-          this.questionList = [];
-          alert('Please add your question as per we provided format');
-          return;
+          // header of this column
+          const header = FileData[0][j];
+          const col = row[j];
+
+          if (header && header === 'question' && col) {
+            questionObj.question = col.replace(/\s+/g, ' ').trim();
+          } else if (header && header === 'answer' && col && col.startsWith('option_')) {
+            questionObj.answer = col.replace(/\s+/g, ' ').trim();
+          } else if (header && header === 'explanation' && col) {
+            questionObj.explanation = col.replace(/\s+/g, ' ').trim();
+          } else if (header && header.startsWith('option_') && col) {
+            const alphabet = String.fromCharCode(64 + j);
+            const optionKey = 'option_' + alphabet;
+            let optionObj = {};
+            optionObj[optionKey] = col.replace(/\s+/g, ' ').trim();
+            questionObj.options.push(optionObj);
+          }
         }
-      } catch (err) {
-        console.error(err);
-        alert('Please add your question as per we provided format');
+        // skipping header
+        if (i === 0) {
+          continue;
+        }
+
+        if (
+          !questionObj.question ||
+          !questionObj.answer ||
+          !questionObj.explanation ||
+          !questionObj.options.length
+        ) {
+          isFormatted = false;
+          alert('Wrong formatted file');
+          break;
+        }
+        let mergedAllOptions = {};
+        let isSelectedAnswer = false;
+        questionObj.options.forEach((obj) => {
+          Object.keys(obj).forEach(function (key) {
+            // do something with obj[key]
+            if (key === questionObj.answer) {
+              questionObj.answer = obj[key];
+              isSelectedAnswer = true;
+            }
+            return;
+          });
+
+          // Merging options into one object
+          mergedAllOptions = {
+            ...mergedAllOptions,
+            ...obj,
+          };
+        });
+        if (!isSelectedAnswer) {
+          this.questionList = [];
+          alert("You haven't selected correct option");
+          break;
+        }
+
+        questionObj.options = JSON.stringify(mergedAllOptions);
+        this.questionList.push(questionObj);
       }
+
+      if (!isFormatted) {
+        this.questionList = [];
+        return;
+      }
+
+      console.log('questionList', this.questionList);
+      this.reviewQuestionsFunc();
     },
 
     async testSubmit() {
@@ -244,8 +359,11 @@ export default {
       if (res) {
         this.$router.push('/dashboard');
         alert('Test submitted');
+      } else {
+        alert('Something is missing in your test');
       }
     },
+
     async stripeOnboardingLocal() {
       if (!this.isAccountActive && this.user.stripe_seller_id) {
         const res = await this.stripeOnboarding();
@@ -271,6 +389,22 @@ export default {
         this.isAccountActive = true;
         return true;
       }
+    },
+
+    reviewQuestionsFunc() {
+      this.questionList.filter((res, index) => {
+        // Array of question that is attempted
+        console.log('res', res);
+        const options = res.options;
+        const parsedData = JSON.parse(options);
+        const questionDetail = {
+          ...res,
+          // spelling mistake
+          explainantion: res.explanation,
+          options: Object.entries(parsedData),
+        };
+        this.reviewQuestions.push(questionDetail);
+      });
     },
   },
 };

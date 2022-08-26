@@ -43,53 +43,11 @@
           class="btn border border-2 border-danger text-danger w-50 mb-2"
           type="button"
           :disabled="!rejectDescription"
+          @click="approveRejectTestLocal('reject')"
         >
           Reject
         </button>
       </div>
-
-      <!-- Modal -->
-      <!-- <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Reject</h5>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form @submit.prevent="approveRejectTestLocal('reject')">
-                <label for="">Reject Description</label>
-                <textarea class="w-100" v-model="rejectDescription" required />
-
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    :data-bs-dismiss="rejectDescription && 'modal'"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -165,7 +123,7 @@ export default {
           rejectDescription: this.rejectDescription,
         };
       } else if (status === 'approve') {
-        const isApproved = confirm('Press a button!');
+        const isApproved = confirm('Are you sure?');
         if (!isApproved) {
           return;
         }

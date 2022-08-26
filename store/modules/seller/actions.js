@@ -26,9 +26,20 @@ export default {
       });
       const testId = createdtest.data.createTestManager.id;
 
-      questionList.forEach(async (question) => {
-        await dispatch('createQuestion', { testId, questionDetail: question });
-      });
+      let isValid;
+      for (let i = 0; i < questionList.length; i++) {
+        isValid = await dispatch('createQuestion', {
+          testId,
+          questionDetail: questionList[i],
+        });
+        if (!isValid) {
+          break;
+        }
+      }
+      if (!isValid) {
+        commit('SET_LOADER', false, { root: true });
+        return isValid;
+      }
 
       commit('SET_LOADER', false, { root: true });
       return true;

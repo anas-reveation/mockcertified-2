@@ -58,10 +58,7 @@ export default {
         jwtToken: this.jwtToken,
       });
       this.isVisible = true;
-      return;
     }
-    this.$router.push('/');
-    return;
   },
 
   methods: {

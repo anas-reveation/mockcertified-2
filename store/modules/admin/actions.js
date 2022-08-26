@@ -13,8 +13,12 @@ export default {
       });
 
       const allTests = allTestsData.data.listTestManagers.items;
-      commit('setAllTests', allTests);
+      const sortedAllTests = await dispatch('testManagement/sortBycreatedAt', allTests, {
+        root: true,
+      });
+      commit('setAllTests', sortedAllTests);
       commit('SET_LOADER', false, { root: true });
+
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });

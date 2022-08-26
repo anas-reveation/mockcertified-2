@@ -12,7 +12,7 @@
           :key="index2"
           class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
           :class="[
-            question.userInput && bgColor(question.userInput, value[1]),
+            !isReviewQuestion && question.userInput && bgColor(question.userInput, value[1]),
             value[1].toLowerCase() === question.answer.toLowerCase() && 'bg_green',
           ]"
         >
@@ -23,6 +23,7 @@
 
     <div>
       <div v-if="question.answer"><span class="fw-bolder">Answer</span>: {{ question.answer }}</div>
+      <!-- Spelling mistake "explainantion" -->
       <div v-if="question.explainantion">
         <span class="fw-bolder">Explanation</span>: {{ question.explainantion }}
       </div>
@@ -39,6 +40,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    isReviewQuestion: false,
   },
 
   methods: {
