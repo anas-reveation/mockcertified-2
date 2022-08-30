@@ -67,14 +67,14 @@
                 :class="$route.path.match(/\/account\/*/g) && 'bg-primary'"
               />
               <div class="position-relative">
-                <img class="m-1" src="@/assets/images/stripe_logo.svg" alt="stripe_logo" />
+                <img class="m-1" src="@/assets/images/wallet.svg" alt="stripe_logo" />
               </div>
 
               <span
                 v-if="$route.path.match(/\/account\/*/g)"
                 class="text-primary pb-2 font_size_10"
               >
-                Account
+                Balance
               </span>
             </NuxtLink>
           </div>
