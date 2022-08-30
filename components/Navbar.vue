@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light mb-2">
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light mb-2">
     <div class="container">
       <NuxtLink class="navbar-brand" to="/dashboard">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />

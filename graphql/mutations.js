@@ -21,11 +21,6 @@ export const checkoutStripeUrl = /* GraphQL */ `
     )
   }
 `;
-export const verifyTestPayment = /* GraphQL */ `
-  mutation VerifyTestPayment($session_id: String!, $token: String!) {
-    verifyTestPayment(session_id: $session_id, token: $token)
-  }
-`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!

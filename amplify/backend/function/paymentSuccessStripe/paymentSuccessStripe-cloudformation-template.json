@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -14,15 +14,6 @@
       "Type": "String"
     },
     "s3Key": {
-      "Type": "String"
-    },
-    "stripeSecretKey": {
-      "Type": "String"
-    },
-    "stripePublishableKey": {
-      "Type": "String"
-    },
-    "domainOrigin": {
       "Type": "String"
     },
     "authmobileappmarketplacee1e8cc85UserPoolId": {
@@ -40,6 +31,15 @@
     "apimobileappmarketplaceGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apimobileappmarketplaceGraphQLAPIKeyOutput"
+    },
+    "stripeSecretKey": {
+      "Type": "String"
+    },
+    "stripePublishableKey": {
+      "Type": "String"
+    },
+    "signingSecretWebhook": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -72,12 +72,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "verifyPayment",
+            "paymentSuccessStripe",
             {
               "Fn::Join": [
                 "",
                 [
-                  "verifyPayment",
+                  "paymentSuccessStripe",
                   "-",
                   {
                     "Ref": "env"
@@ -113,8 +113,8 @@
             "STRIPE_PUBLISHABLE_KEY": {
               "Ref": "stripePublishableKey"
             },
-            "DOMAIN_ORIGIN": {
-              "Ref": "domainOrigin"
+            "SIGNING_SECRET_WEBHOOK": {
+              "Ref": "signingSecretWebhook"
             }
           }
         },
@@ -135,12 +135,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mobileappmarketplaceLambdaRolea350a601",
+            "mobileappmarketplaceLambdaRolebe763019",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mobileappmarketplaceLambdaRolea350a601",
+                  "mobileappmarketplaceLambdaRolebe763019",
                   "-",
                   {
                     "Ref": "env"

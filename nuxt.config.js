@@ -4,7 +4,7 @@ export default {
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Mock Certified App',
+    title: 'Mockcertified App',
     htmlAttrs: {
       lang: 'en',
     },

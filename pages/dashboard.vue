@@ -138,7 +138,7 @@ export default {
     },
 
     redirectPage(id) {
-      this.$router.push(`/test/${id}`);
+      this.$router.push(`/category/test/${id}`);
     },
 
     attempt() {

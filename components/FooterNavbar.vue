@@ -56,24 +56,29 @@
             </span>
           </NuxtLink>
         </div>
-        <div class="col">
-          <NuxtLink to="/cart" class="d-flex flex-column align-items-center justify-content-center">
-            <div
-              class="active_line mb-1"
-              :class="$route.path.match(/\/cart\/*/g) && 'bg-primary'"
-            />
-            <div class="position-relative">
-              <img class="m-1" src="@/assets/images/cart.svg" alt="cart" />
-              <span class="bg-secondary rounded position-absolute top-0 end-0 cart_item">
-                {{ cartItems.length }}
-              </span>
-            </div>
+        <ClientOnly>
+          <div v-if="user && user.stripe_seller_id" class="col">
+            <NuxtLink
+              to="/account"
+              class="d-flex flex-column align-items-center justify-content-center"
+            >
+              <div
+                class="active_line mb-1"
+                :class="$route.path.match(/\/account\/*/g) && 'bg-primary'"
+              />
+              <div class="position-relative">
+                <img class="m-1" src="@/assets/images/stripe_logo.svg" alt="stripe_logo" />
+              </div>
 
-            <span v-if="$route.path.match(/\/cart\/*/g)" class="text-primary pb-2 font_size_10">
-              Cart
-            </span>
-          </NuxtLink>
-        </div>
+              <span
+                v-if="$route.path.match(/\/account\/*/g)"
+                class="text-primary pb-2 font_size_10"
+              >
+                Account
+              </span>
+            </NuxtLink>
+          </div>
+        </ClientOnly>
       </div>
     </div>
   </div>
@@ -83,6 +88,7 @@
 import { mapState, mapActions } from 'vuex';
 export default {
   computed: {
+    ...mapState('auth', ['user']),
     ...mapState('buyer', ['cartItems']),
   },
 

@@ -27,9 +27,9 @@
         v-else
         type="button"
         class="btn btn-secondary border border-2 border-dark w-50"
-        @click="addToCartLocal"
+        @click="buyNowLocal"
       >
-        Add to Cart
+        Buy Now
       </button>
     </div>
   </div>
@@ -114,11 +114,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
-    ...mapMutations('buyer', ['addToCart']),
-
-    addToCartLocal() {
-      this.addToCart(this.testDetail);
-    },
+    ...mapActions('buyer', ['buyNow']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
@@ -131,6 +127,13 @@ export default {
         url,
         dialogTitle: 'Share with buddies',
       });
+    },
+
+    async buyNowLocal() {
+      const res = await this.buyNow({ testId: this.testDetail.id });
+      if (res) {
+        this.$router.push('/dashboard');
+      }
     },
   },
 };

@@ -70,7 +70,7 @@
         }
       ]
     },
-    "verifyPayment": {
+    "checkAnswer": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -93,7 +93,7 @@
         }
       ]
     },
-    "checkAnswer": {
+    "paymentSuccessStripe": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

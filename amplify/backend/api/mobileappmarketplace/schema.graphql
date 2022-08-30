@@ -102,6 +102,7 @@ type PurchasedTest
     rules: [
       { allow: private, operations: [create, read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+      { allow: public, operations: [create] }
     ]
   ) {
   id: ID!
@@ -172,7 +173,4 @@ type Mutation {
     success_redirect_url: String!
     cancel_redirect_url: String!
   ): String @function(name: "stripeCheckout-${env}")
-  verifyTestPayment(session_id: String!, token: String!): String
-    @function(name: "verifyPayment-${env}")
 }
-   

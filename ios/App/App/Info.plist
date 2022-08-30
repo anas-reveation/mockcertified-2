@@ -78,7 +78,7 @@
 	<key>FacebookClientToken</key>
 	<string>3d9412b991230ba89b0a4bb0a906faac</string>
 	<key>FacebookDisplayName</key>
-	<string>Mock Certified</string>
+	<string>Mockcertified</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

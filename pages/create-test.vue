@@ -224,7 +224,7 @@ export default {
   async mounted() {
     this.allCategories = await this.getAllCategories();
     if (this.user.stripe_seller_id) {
-      this.getStripeIdStatus(this.user.stripe_seller_id);
+      await this.getStripeIdStatus(this.user.stripe_seller_id);
     }
     this.isDisable = false;
   },
@@ -235,7 +235,7 @@ export default {
 
     downloadCsv() {
       let url = process.env.QUESTION_TEMPLATE_CSV;
-      window.open(url);
+      this.newWindowsOpen(url);
     },
 
     onChange(event) {
@@ -341,7 +341,6 @@ export default {
         return;
       }
 
-      console.log('questionList', this.questionList);
       this.reviewQuestionsFunc();
     },
 
@@ -367,10 +366,10 @@ export default {
     async stripeOnboardingLocal() {
       if (!this.isAccountActive && this.user.stripe_seller_id) {
         const res = await this.stripeOnboarding();
-        window.open(res);
+        this.newWindowsOpen(res);
       } else if (!this.isAccountActive && !this.user.stripe_seller_id) {
         const res = await this.stripeOnboarding();
-        window.open(res);
+        this.newWindowsOpen(res);
       }
     },
 
@@ -394,7 +393,6 @@ export default {
     reviewQuestionsFunc() {
       this.questionList.filter((res, index) => {
         // Array of question that is attempted
-        console.log('res', res);
         const options = res.options;
         const parsedData = JSON.parse(options);
         const questionDetail = {
@@ -405,6 +403,10 @@ export default {
         };
         this.reviewQuestions.push(questionDetail);
       });
+    },
+
+    newWindowsOpen(url) {
+      window.open(url);
     },
   },
 };

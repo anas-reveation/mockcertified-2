@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="container px-4">
+  <div class="container px-4">
     <div class="position-absolute top-0 end-0 p-2">
       <NuxtLink to="/">
         <img src="@/assets/images/logo.svg" alt="logo" />
@@ -35,34 +35,22 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   layout: 'introLayout',
 
-  data() {
-    return {
-      isVisible: false,
-    };
-  },
-
-  async asyncData({ query }) {
-    const sessionId = query.session_id ? query.session_id : null;
-    const jwtToken = query.token ? query.token : null;
-    return { sessionId, jwtToken };
+  computed: {
+    ...mapState('auth', ['isAuthenticated']),
   },
 
   async mounted() {
-    if (this.sessionId && this.jwtToken) {
-      await this.verifyCheckout({
-        sessionId: this.sessionId,
-        jwtToken: this.jwtToken,
-      });
-      this.isVisible = true;
+    if (this.isAuthenticated) {
+      await this.getUserTests();
     }
   },
 
   methods: {
-    ...mapActions('buyer', ['verifyCheckout']),
+    ...mapActions('testManagement', ['getUserTests']),
   },
 };
 </script>

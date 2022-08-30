@@ -27,8 +27,8 @@
       "environmentVariableName": "STRIPE_PUBLISHABLE_KEY"
     },
     {
-      "cloudFormationParameterName": "domainOrigin",
-      "environmentVariableName": "DOMAIN_ORIGIN"
+      "cloudFormationParameterName": "signingSecretWebhook",
+      "environmentVariableName": "SIGNING_SECRET_WEBHOOK"
     }
   ]
 }
