@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="balanceDetail" class="container">
     <p class="fw-bolder font_size_32">
       Your Account
       <br />
@@ -8,20 +8,39 @@
     <span>Click on the button to know your current balance</span>
 
     <p class="font_size_36">
-      <span class="fw-bolder">$</span> <span class="text-muted">00.00</span>
+      <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail.amount }}</span>
     </p>
 
     <div class="text-center">
-      <button class="btn btn-secondary border border-2 border-dark w-75 mb-3">
-        Check your Balance
-      </button>
       <button class="btn border border-2 border-primary text-primary w-75">View your Payout</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
+
+  data() {
+    return {
+      balanceDetail: null,
+    };
+  },
+
+  async mounted() {
+    await this.getBalanceLocal();
+  },
+
+  methods: {
+    ...mapActions('seller', ['getBalanceDetail']),
+
+    async getBalanceLocal() {
+      const res = await this.getBalanceDetail();
+      if (res) {
+        this.balanceDetail = res;
+      }
+    },
+  },
 };
 </script>

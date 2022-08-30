@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { onboardingStripe } from '~/graphql/queries';
+import { onboardingStripe, getBalance } from '~/graphql/queries';
 import { createTestManager, createQuestion, updateUser } from '~/graphql/mutations';
 
 export default {
@@ -98,6 +98,27 @@ export default {
       commit('auth/setStripeSeller', stripe_seller_id, { root: true });
       commit('SET_LOADER', false, { root: true });
       return url;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.error('ERR', err);
+      return false;
+    }
+  },
+
+  async getBalanceDetail({ commit, rootState }) {
+    const seller_id = rootState.auth.user.stripe_seller_id;
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const getBanalceData = await API.graphql({
+        query: getBalance,
+        variables: {
+          seller_id,
+        },
+      });
+      const parsedData = JSON.parse(getBanalceData.data.getBalance);
+      const balanceDetail = parsedData.body.balance_detail[0];
+      commit('SET_LOADER', false, { root: true });
+      return balanceDetail;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       console.error('ERR', err);

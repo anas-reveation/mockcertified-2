@@ -163,6 +163,7 @@ enum TestManagerStatus {
 
 type Query {
   onboardingStripe: String @function(name: "onboardingStripe-${env}")
+  getBalance(seller_id: String!): String @function(name: "getBalance-${env}")
 }
 
 type Mutation {
@@ -174,3 +175,4 @@ type Mutation {
     cancel_redirect_url: String!
   ): String @function(name: "stripeCheckout-${env}")
 }
+      

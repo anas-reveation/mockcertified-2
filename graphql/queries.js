@@ -6,6 +6,11 @@ export const onboardingStripe = /* GraphQL */ `
     onboardingStripe
   }
 `;
+export const getBalance = /* GraphQL */ `
+  query GetBalance($seller_id: String!) {
+    getBalance(seller_id: $seller_id)
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
