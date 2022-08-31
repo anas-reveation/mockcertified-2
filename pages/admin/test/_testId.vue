@@ -115,16 +115,36 @@ export default {
       };
 
       if (status === 'reject' && !this.rejectDescription) {
-        alert('Please fill reject decription');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Please fill reject decription',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
         return;
       } else if (status === 'reject' && this.rejectDescription) {
+        const res = await this.$swal.fire({
+          title: 'Do you want to reject the test?',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        });
+        if (!res.isConfirmed) {
+          return;
+        }
         params = {
           ...params,
           rejectDescription: this.rejectDescription,
         };
       } else if (status === 'approve') {
-        const isApproved = confirm('Are you sure?');
-        if (!isApproved) {
+        const res = await this.$swal.fire({
+          title: 'Do you want to approve the test?',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        });
+        if (!res.isConfirmed) {
           return;
         }
       }

@@ -283,14 +283,38 @@ export default {
             this.setTestRemainingTimeLocal();
             if (completedRes) {
               this.$router.push(`/test/result/${this.attemptedId}`);
-              alert('Successfully completed test');
+              this.$swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Successfully completed test',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+              });
             }
           }
         } else {
-          alert('something went wrong');
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 3000,
+          });
         }
       } else {
-        alert('please select option');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'please select option',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 

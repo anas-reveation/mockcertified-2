@@ -52,7 +52,15 @@ export default {
       return allPurchasedTests;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -78,7 +86,15 @@ export default {
       commit('SET_LOADER', false, { root: true });
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -101,7 +117,15 @@ export default {
       commit('SET_LOADER', false, { root: true });
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -119,7 +143,15 @@ export default {
       return allCategories;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -144,7 +176,15 @@ export default {
       return allSubCategories;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -169,7 +209,15 @@ export default {
       return allTests;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -188,7 +236,15 @@ export default {
       return testData;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -210,8 +266,16 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return attemptTestCreateDetail.data.createAttemptedTest;
     } catch (err) {
-      console.error(err);
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -252,8 +316,16 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return false;
     } catch (err) {
-      console.error(err);
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -276,8 +348,16 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {
-      console.error(err);
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -299,8 +379,16 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {
-      console.error(err);
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -323,8 +411,16 @@ export default {
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {
-      console.error(err);
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },

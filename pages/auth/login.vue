@@ -125,11 +125,9 @@ export default {
   methods: {
     ...mapActions('auth', ['login', 'load']),
     async loginLocal() {
-      try {
-        await this.login(this.form);
+      const res = await this.login(this.form);
+      if (res) {
         this.$router.push('/dashboard');
-      } catch (err) {
-        console.error('err', err);
       }
     },
 

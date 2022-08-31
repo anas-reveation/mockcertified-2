@@ -64,6 +64,7 @@
           type="number"
           class="border border-2 border-primary rounded form-control"
           min="1"
+          @keydown="priceValidation"
           v-model="formData.price"
           required
         />
@@ -151,7 +152,6 @@
                 :index="index + 1"
                 :questionVisible="false"
                 class="mb-2"
-                :isReviewQuestion="true"
               />
             </div>
           </div>
@@ -233,6 +233,10 @@ export default {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding']),
 
+    priceValidation(event) {
+      ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
+    },
+
     downloadCsv() {
       let url = process.env.QUESTION_TEMPLATE_CSV;
       this.newWindowsOpen(url);
@@ -305,7 +309,15 @@ export default {
           !questionObj.options.length
         ) {
           isFormatted = false;
-          alert('Wrong formatted file');
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Invalid file formatted',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 3000,
+          });
           break;
         }
         let mergedAllOptions = {};
@@ -328,7 +340,15 @@ export default {
         });
         if (!isSelectedAnswer) {
           this.questionList = [];
-          alert("You haven't selected correct option");
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'warning',
+            title: "You haven't selected correct option",
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 3000,
+          });
           break;
         }
 
@@ -346,7 +366,15 @@ export default {
 
     async testSubmit() {
       if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
-        alert('Please select category and sub category');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Please select category and sub category',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
         return;
       }
       this.formData.title = this.formData.title.toLowerCase();
@@ -357,9 +385,25 @@ export default {
       const res = await this.createTest(obj);
       if (res) {
         this.$router.push('/dashboard');
-        alert('Test submitted');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Test submitted',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       } else {
-        alert('Something is missing in your test');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 

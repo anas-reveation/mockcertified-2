@@ -61,7 +61,15 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      alert(err.message);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: err.message,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
     }
   },
 
@@ -74,7 +82,15 @@ export default {
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      alert(err.message);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: err.message,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -104,7 +120,16 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      alert(err.message);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: err.message,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
     }
   },
 
@@ -123,7 +148,15 @@ export default {
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return false;
     }
   },
@@ -148,7 +181,15 @@ export default {
       return userData;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.error('ERR', err);
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       return null;
     }
   },

@@ -121,7 +121,15 @@ export default {
   async mounted() {
     this.allSubCategory = await this.getAllSubCategories(this.categoryId);
     if (!this.allSubCategory.length) {
-      alert('No tests available');
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'warning',
+        title: 'No tests available',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
       this.$router.back();
       return;
     }
@@ -147,7 +155,15 @@ export default {
       this.breadCrum.push(obj);
       this.allTestBySubCategory = await this.getTestsBySubCategory(subCategoryId);
       if (!this.allTestBySubCategory.length) {
-        alert('No tests available');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'No tests available',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
         this.$router.back();
         return;
       }

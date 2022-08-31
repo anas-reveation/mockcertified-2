@@ -6,7 +6,7 @@
     >
       <div class="spinner-border" role="status"></div>
     </div>
-    <Navbar />
+    <Navbar class="z_index2" />
     <Nuxt class="margin_bottom px-4" />
 
     <div class="fixed-bottom footer_height">
@@ -58,7 +58,7 @@ export default {
 }
 
 .z_index2 {
-  z-index: 1020;
+  z-index: 999;
 }
 
 /* Proceed to checkout button is related that is in "cart" page */

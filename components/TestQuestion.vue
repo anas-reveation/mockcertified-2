@@ -12,7 +12,7 @@
           :key="index2"
           class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
           :class="[
-            !isReviewQuestion && question.userInput && bgColor(question.userInput, value[1]),
+            question.userInput && bgColor(question.userInput, value[1]),
             value[1].toLowerCase() === question.answer.toLowerCase() && 'bg_green',
           ]"
         >
@@ -40,7 +40,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    isReviewQuestion: false,
   },
 
   methods: {

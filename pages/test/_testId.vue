@@ -105,7 +105,15 @@ export default {
       if (res) {
         this.$router.push(`/test/start-test/${this.testId}`);
       } else {
-        alert('something went wrong');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 

@@ -399,9 +399,25 @@ export default {
         this.userId = userData.userSub;
         this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
-        alert('Check your email for the verification code');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Check your email for the verification code',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       } catch (err) {
-        console.error('err', err);
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 
@@ -409,16 +425,40 @@ export default {
       try {
         const res = await this.confirmRegistration(this.confirmForm);
         if (!res) {
-          alert(res.message);
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 3000,
+          });
           return;
         }
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
         await this.createUserLocal();
         this.$router.push('/dashboard');
-        alert('Successfully registered account');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Successfully registered account',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       } catch (err) {
-        console.error('err', err);
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 

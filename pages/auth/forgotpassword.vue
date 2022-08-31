@@ -196,12 +196,27 @@ export default {
       try {
         await Auth.forgotPassword(this.email);
         this.SET_LOADER(false);
-        alert('Check your email for the verification code');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Check your email for the verification code',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
         this.pageCount += 1;
       } catch (err) {
         this.SET_LOADER(false);
-        console.error('ERR', err);
-        alert('Email is not registered');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Email is not registered',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
 
@@ -211,12 +226,27 @@ export default {
       try {
         await Auth.forgotPasswordSubmit(this.email, this.code, this.password);
         this.SET_LOADER(false);
-        alert('Password successfully changed');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Password successfully changed',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
         this.$router.push('/auth/login');
       } catch (err) {
         this.SET_LOADER(false);
-        console.error('ERR', err);
-        alert('Something went wrong please try later');
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong please try later',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
       }
     },
   },
