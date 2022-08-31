@@ -11,6 +11,11 @@ export const getBalance = /* GraphQL */ `
     getBalance(seller_id: $seller_id)
   }
 `;
+export const redirectPayoutDashboard = /* GraphQL */ `
+  query RedirectPayoutDashboard($seller_id: String!) {
+    redirectPayoutDashboard(seller_id: $seller_id)
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {

@@ -5,14 +5,14 @@
       <br />
       Balance
     </p>
-    <span>Click on the button to know your current balance</span>
-
     <p class="font_size_36">
-      <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail.amount }}</span>
+      <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
     </p>
 
     <div class="text-center">
-      <button class="btn border border-2 border-primary text-primary w-75">View your Payout</button>
+      <button @click="getRedirectlink" class="btn border border-2 border-primary text-primary w-75">
+        View your Payout
+      </button>
     </div>
   </div>
 </template>
@@ -33,12 +33,19 @@ export default {
   },
 
   methods: {
-    ...mapActions('seller', ['getBalanceDetail']),
+    ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard']),
 
     async getBalanceLocal() {
       const res = await this.getBalanceDetail();
       if (res) {
-        this.balanceDetail = res;
+        this.balanceDetail = parseFloat(res.amount) / 100;
+      }
+    },
+    async getRedirectlink() {
+      const res = await this.redirectExpressDashboard();
+      if (res) {
+        let url = res.body.link.url;
+        window.open(url);
       }
     },
   },

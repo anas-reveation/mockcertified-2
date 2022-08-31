@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { onboardingStripe, getBalance } from '~/graphql/queries';
+import { onboardingStripe, getBalance, redirectPayoutDashboard } from '~/graphql/queries';
 import { createTestManager, createQuestion, updateUser } from '~/graphql/mutations';
 
 export default {
@@ -145,6 +145,35 @@ export default {
       return balanceDetail;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+  async redirectExpressDashboard({ commit, rootState }) {
+    const seller_id = rootState.auth.user.stripe_seller_id;
+    console.log(seller_id);
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const getLink = await API.graphql({
+        query: redirectPayoutDashboard,
+        variables: {
+          seller_id,
+        },
+      });
+      const parsedData = JSON.parse(getLink.data.redirectPayoutDashboard);
+      commit('SET_LOADER', false, { root: true });
+      return parsedData;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      console.log(err);
       this.$swal.fire({
         toast: true,
         position: 'top-end',
