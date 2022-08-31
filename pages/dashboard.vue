@@ -6,7 +6,7 @@
           <h2 class="fw-bolder font_size_24">Featured</h2>
         </div>
         <div class="col-4 text-end">
-          <NuxtLink to="/category" class="text-primary fw-bolder">see all</NuxtLink>
+          <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
           <h2 class="fw-bolder font_size_24">Categories</h2>
         </div>
         <div class="col-4 text-end">
-          <NuxtLink to="/category" class="text-primary fw-bolder">see all</NuxtLink>
+          <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
           <h2 class="fw-bolder font_size_24">Recently Added</h2>
         </div>
         <div class="col-4 text-end">
-          <NuxtLink to="/category" class="text-primary fw-bolder">see all</NuxtLink>
+          <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
         </div>
       </div>
 

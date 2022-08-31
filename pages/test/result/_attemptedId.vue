@@ -2,7 +2,7 @@
   <div v-if="testDetail" class="container">
     <TestDetail
       :title="testDetail.title"
-      :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
+      :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
       ${totalMarks} marks`"
       :description="testDetail.description"
       :price="testDetail.price"
@@ -23,7 +23,16 @@
               <div class="position-relative apexchart_donut">
                 <!-- Start image -->
                 <span class="position-absolute donut_image">
-                  <img v-if="percentage >= 75" src="@/assets/images/rolleyes.svg" alt="" />
+                  <img
+                    v-if="percentage >= 90"
+                    src="@/assets/images/partyboto.svg"
+                    alt="partyboto"
+                  />
+                  <img
+                    v-if="percentage < 90 && percentage >= 75"
+                    src="@/assets/images/loving.svg"
+                    alt=""
+                  />
                   <img
                     v-if="percentage < 75 && percentage > 35"
                     src="@/assets/images/rolleyes.svg"
@@ -58,7 +67,10 @@
             </div>
             <div class="col px-0">
               <p class="font_size_14">
-                <span v-if="percentage >= 75" class="text-success">GOOD JOB!</span>
+                <span v-if="percentage >= 90" class="text-success">GREAT JOB!</span>
+                <span v-else-if="percentage < 90 && percentage >= 75" class="text-success">
+                  GOOD JOB!
+                </span>
                 <span v-else class="text-danger">TRY AGAIN!</span>
               </p>
               <p class="font_size_14">Percentage: {{ percentage }}%</p>

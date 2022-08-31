@@ -2,7 +2,7 @@
   <div v-if="testDetail" class="container">
     <TestDetail
       :title="testDetail.title"
-      :shortDescription="`${testDetail.time_limit} min• ${testDetail.questions.items.length} questions•
+      :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
       ${totalMarks} marks`"
       :description="testDetail.description"
       :price="testDetail.price"

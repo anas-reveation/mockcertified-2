@@ -18,7 +18,7 @@
 
     <div v-else class="mt-4">
       <div class="row fixed-top bg-white px-4 pt-3">
-        <div class="col-8">
+        <div class="col-8 text-primary">
           <img
             v-if="timerEnabled === false"
             src="@/assets/images/back_icon.svg"
@@ -28,12 +28,15 @@
           {{ timerString }}
         </div>
         <button
-          class="col-4 btn text-primary border-2 border-primary p-0"
+          class="col-4 btn border-2 border-primary p-0"
+          :class="!timerEnabled ? 'bg-primary text-white' : 'text-primary'"
           @click="timerEnabled = !timerEnabled"
         >
           {{ timerEnabled ? 'PAUSE' : 'RESUME' }}
         </button>
-        <hr class="bg-primary border border-3 w-100 mt-2" />
+        <!-- <hr class="bg-primary border border-3 w-100 mt-2" /> -->
+
+        <div class="bg-primary w-100 mt-2 hr_line" />
       </div>
 
       <div
@@ -345,5 +348,9 @@ export default {
 .margin_top_bottom {
   margin-top: 40px;
   margin-bottom: 50px;
+}
+
+.hr_line {
+  height: 2px;
 }
 </style>
