@@ -10,30 +10,64 @@
       :shareFunc="shareTest"
     >
       <template>
-        <div class="container border border-2 border-primary rounded mt-4 p-4">
-          <p class="fs-4 fw-bolder">Result</p>
-          <div class="row">
-            <div class="col-8">
-              <div class="row">
-                <div class="col">
-                  <p>Test Score: {{ totalScore }}/{{ totalMarks }}</p>
-                  <p>Attempted: {{ attemptedQuestions }}/{{ totalQuestions }}</p>
-                  <p>Correct: {{ correctAnswer }}/{{ attemptedQuestions }}</p>
-                  <p>
-                    Incorrect: {{ attemptedQuestions - correctAnswer }}/{{ attemptedQuestions }}
-                  </p>
-                </div>
-                <div class="col-2">
-                  <div class="vr h-100 bg-primary border border-3"></div>
+        <div class="container border border-2 border-primary rounded mt-4 p-3">
+          <span class="fw-bolder">
+            Result
+            <br />
+          </span>
+          <span class="text-muted font_family_roboto font_size_14">
+            attempted on {{ attemptedTimeStamp }}
+          </span>
+          <div class="row mt-2">
+            <div class="col px-0">
+              <div class="position-relative apexchart_donut">
+                <!-- Start image -->
+                <span class="position-absolute donut_image">
+                  <img v-if="percentage >= 75" src="@/assets/images/rolleyes.svg" alt="" />
+                  <img
+                    v-if="percentage < 75 && percentage > 35"
+                    src="@/assets/images/rolleyes.svg"
+                    alt=""
+                  />
+                  <img v-if="percentage <= 35" src="@/assets/images/cry.svg" alt="" />
+                </span>
+                <!-- End image -->
+
+                <apexchart type="donut" width="380" :options="chartOptions" :series="series">
+                </apexchart>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <div>
+                  <div class="d-flex">
+                    <span class="mt-1 me-2 bg-primary color_box"></span>
+                    <span>Correct</span>
+                  </div>
+                  <div class="d-flex">
+                    <span class="mt-1 me-2 bg-secondary color_box"></span>
+                    <span>Wrong</span>
+                  </div>
+                  <div class="d-flex">
+                    <span class="mt-1 me-2 color_box" style="background: #492ac2"></span>
+                    <span>Skipped</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-4">
-              <div
-                class="d-flex justify-content-center align-items-center border border-5 border-primary text-center rounded-circle number_circle"
-              >
-                <span>{{ percentage }}%</span>
-              </div>
+            <div class="col-1 px-0">
+              <div class="vr h-100 bg-primary border border-3"></div>
+            </div>
+            <div class="col px-0">
+              <p class="font_size_14">
+                <span v-if="percentage >= 75" class="text-success">GOOD JOB!</span>
+                <span v-else class="text-danger">TRY AGAIN!</span>
+              </p>
+              <p class="font_size_14">Percentage: {{ percentage }}%</p>
+              <p class="font_size_14">Test Score: {{ totalScore }}/{{ totalMarks }}</p>
+              <p class="font_size_14">Attempted: {{ attemptedQuestions }}/{{ totalQuestions }}</p>
+              <p class="font_size_14">Correct: {{ correctAnswer }}/{{ attemptedQuestions }}</p>
+              <p class="font_size_14">
+                Incorrect: {{ attemptedQuestions - correctAnswer }}/{{ attemptedQuestions }}
+              </p>
             </div>
           </div>
 
@@ -90,15 +124,6 @@
               />
             </div>
           </div>
-          <!-- <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary border-2 border-dark"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -121,6 +146,61 @@ export default {
       totalScore: 0,
       percentage: 0,
       testDetail: null,
+      attemptedTimeStamp: null,
+      // chart
+      series: [0, 0, 0],
+      chartOptions: {
+        chart: {
+          width: 200,
+          type: 'donut',
+        },
+        colors: ['#6782E1', '#BECBFA', '#492AC2'],
+        plotOptions: {
+          pie: {
+            startAngle: -90,
+            endAngle: 270,
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        fill: {
+          type: 'gradient',
+        },
+        legend: {
+          show: false,
+          // formatter: function (val, opts) {
+          //   return val + ' - ' + opts.w.globals.series[opts.seriesIndex];
+          // },
+        },
+        // title: {
+        //   text: 'Gradient Donut with custom Start-angle',
+        // },
+        responsive: [
+          {
+            breakpoint: 1005,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+          {
+            breakpoint: 450,
+            options: {
+              chart: {
+                width: 150,
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+        ],
+      },
     };
   },
 
@@ -141,6 +221,8 @@ export default {
       this.$router.push('/dashboard');
       return;
     }
+    this.attemptedTimeStamp = new Date(attemptedTest[0].createdAt).toDateString();
+
     this.testDetail = attemptedTest[0].test;
     this.totalQuestions = this.testDetail.questions.items.length;
     this.attemptedQuestions = attemptedTest[0].result.items.length;
@@ -175,6 +257,9 @@ export default {
     this.totalScore = totalScore;
     this.correctAnswer = correctAnswer.length;
     this.percentage = ((this.totalScore / this.totalMarks) * 100).toFixed(2);
+    this.series[0] = this.correctAnswer;
+    this.series[1] = this.attemptedQuestions - this.correctAnswer;
+    this.series[2] = this.totalQuestions - this.attemptedQuestions;
     this.SET_LOADER(false);
   },
 
@@ -206,8 +291,25 @@ export default {
 </script>
 
 <style scoped>
-.number_circle {
+.color_box {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.apexchart_donut > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donut_image {
+  top: 30%;
+  right: 39%;
+}
+
+/* .number_circle {
   width: 86px;
   height: 86px;
-}
+} */
 </style>

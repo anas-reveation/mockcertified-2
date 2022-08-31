@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-between">
-      <h1 class="col fw-bolder text-capitalize">{{ title }}</h1>
+      <h1 class="col fw-bolder text-capitalize font_size_32">{{ title }}</h1>
       <div v-if="shareFunc" class="col text-end">
         <img
           src="@/assets/images/share_icon.svg"
@@ -12,7 +12,7 @@
         />
       </div>
     </div>
-    <p class="my-2 font_family_roboto">
+    <p class="my-2 font_family_roboto font_size_16">
       {{ shortDescription }}
     </p>
 
@@ -37,7 +37,7 @@
 
     <div class="mt-3">
       <h3 class="fw-bolder">Description</h3>
-      <p>{{ description }}</p>
+      <p class="font_size_16">{{ description }}</p>
     </div>
   </div>
 </template>

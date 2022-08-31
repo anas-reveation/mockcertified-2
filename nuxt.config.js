@@ -47,6 +47,7 @@ export default {
     { src: '~/plugins/auth.js', mode: 'client' },
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/getLocalData.js', mode: 'client' },
+    { src: '~/plugins/vue-apexcharts.js', mode: 'client' },
     { src: '~/plugins/deepLink.js', mode: 'client' },
   ],
 
