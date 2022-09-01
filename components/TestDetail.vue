@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-between">
-      <h1 class="col fw-bolder text-capitalize font_size_32">{{ title }}</h1>
+      <h1 class="col fw-bolder text-capitalize pe-0 font_size_32">{{ title }}</h1>
       <div v-if="shareFunc" class="col-2 text-end">
         <img
           src="@/assets/images/share_icon.svg"
@@ -24,7 +24,7 @@
         <img
           src="@/assets/images/profile_icon.svg"
           alt="share"
-          class="me-1"
+          class="me-1 mb-1"
           height="30"
           width="30"
         />

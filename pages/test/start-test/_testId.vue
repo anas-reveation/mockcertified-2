@@ -1,80 +1,82 @@
 <template>
-  <div>
-    <!-- START INSTRUCTION -->
-    <Navbar v-if="!startTest" class="px-0" />
-    <div v-if="!startTest" class="mt-3">
-      <TestInstructions />
-      <div class="text-center">
-        <button
-          type="button"
-          class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3 mb-3"
-          @click="startTestFun"
-        >
-          Start
-        </button>
-      </div>
-    </div>
-    <!-- END INSTRUCTION -->
-
-    <div v-else class="mt-4">
-      <div class="row fixed-top bg-white px-4 pt-3">
-        <div class="col-8 text-primary">
-          <img
-            v-if="timerEnabled === false"
-            src="@/assets/images/back_icon.svg"
-            alt="back_icon"
-            @click="goBack"
-          />
-          {{ timerString }}
-        </div>
-        <button
-          class="col-4 btn border-2 border-primary p-0"
-          :class="!timerEnabled ? 'bg-primary text-white' : 'text-primary'"
-          @click="timerEnabled = !timerEnabled"
-        >
-          {{ timerEnabled ? 'PAUSE' : 'RESUME' }}
-        </button>
-        <!-- <hr class="bg-primary border border-3 w-100 mt-2" /> -->
-
-        <div class="bg-primary w-100 mt-2 hr_line" />
-      </div>
-
-      <div
-        v-for="(questionItem, index) in allQuestions"
-        :key="index"
-        v-if="index === showCounter"
-        class="container-fluid text-left mt-5 pt-5 margin_top_bottom"
-      >
-        <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
-        <p class="fw-bold my-2">{{ questionItem.question }}</p>
-        <div class="d-flex flex-column mt-2">
-          <ul class="list-group">
-            <li
-              v-for="(value, index2) in questionItem.options"
-              :key="index2"
-              class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-2 p-2"
-              :class="
-                selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
-              "
-              @click="selectOption(questionItem.id, value[1])"
-            >
-              {{ index2 + 1 }}. {{ value[1] }}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="container-fluid bg-white fixed-bottom p-2 footer_height">
+  <div class="remove_padding_x">
+    <Navbar v-if="!startTest" />
+    <div>
+      <!-- START INSTRUCTION -->
+      <div v-if="!startTest" class="px-4 mt-3">
+        <TestInstructions />
         <div class="text-center">
           <button
             type="button"
-            class="btn btn-outline-dark"
-            :class="timerEnabled && selectAnswer.userInput ? 'btn-secondary' : 'btn-gray'"
-            @click="submitTest"
-            :disabled="timerEnabled === false"
+            class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3 mb-3"
+            @click="startTestFun"
           >
-            Submit
+            Start
           </button>
+        </div>
+      </div>
+      <!-- END INSTRUCTION -->
+
+      <div v-else class="mt-4">
+        <div class="fixed-top bg-white pt-3">
+          <div class="row px-4">
+            <div class="col-8 text-primary">
+              <img
+                v-if="timerEnabled === false"
+                src="@/assets/images/back_icon.svg"
+                alt="back_icon"
+                @click="goBack"
+              />
+              {{ timerString }}
+            </div>
+            <button
+              class="col-4 btn border-2 border-primary p-0"
+              :class="!timerEnabled ? 'bg-primary text-white' : 'text-primary'"
+              @click="timerEnabled = !timerEnabled"
+            >
+              {{ timerEnabled ? 'PAUSE' : 'RESUME' }}
+            </button>
+          </div>
+          <div class="bg-primary w-100 mt-2 hr_line" />
+        </div>
+
+        <div
+          v-for="(questionItem, index) in allQuestions"
+          :key="index"
+          v-if="index === showCounter"
+          class="container-fluid text-left mt-5 pt-5 px-4 margin_top_bottom"
+        >
+          <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
+          <p class="fw-bold my-2">{{ questionItem.question }}</p>
+          <div class="d-flex flex-column mt-2">
+            <ul class="list-group">
+              <li
+                v-for="(value, index2) in questionItem.options"
+                :key="index2"
+                class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-2 p-2"
+                :class="
+                  selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
+                "
+                @click="selectOption(questionItem.id, value[1])"
+              >
+                {{ index2 + 1 }}. {{ value[1] }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="container-fluid bg-white fixed-bottom p-2 footer_height">
+          <div class="text-center">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              :class="timerEnabled && selectAnswer.userInput ? 'btn-secondary' : 'btn-gray'"
+              @click="submitTest"
+              :disabled="timerEnabled === false"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -352,5 +354,10 @@ export default {
 
 .hr_line {
   height: 2px;
+}
+
+.remove_padding_x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 </style>

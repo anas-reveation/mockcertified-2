@@ -7,7 +7,7 @@
       <img
         src="@/assets/images/profile_icon.svg"
         height="40"
-        class="opacity-75"
+        class="mt-1 opacity-75"
         width="40"
         alt=""
         data-bs-toggle="collapse"

@@ -1,17 +1,18 @@
 <template>
   <div class="container">
     <form class="row position-relative" @submit.prevent="">
-      <div class="position-absolute search_icon_position">
+      <div v-if="!searchQuery" class="position-absolute search_icon_position">
         <img src="@/assets/images/search_icon.svg" alt="search-icon" width="30" height="30" />
       </div>
       <input
-        class="col form-control bg_input border border-2 border-primary rounded-pill me-2 text_indent"
+        class="col form-control border border-2 border-primary rounded-pill me-2"
+        :class="!searchQuery && 'bg_input text_indent'"
         type="search"
         placeholder="Search"
         aria-label="Search"
         v-model="searchQuery"
       />
-      <button class="col-3 btn btn-primary text-white rounded-pill px-2" type="button">
+      <button class="col-3 btn btn-primary text-white px-2 border_radius_16" type="button">
         Search
       </button>
     </form>
@@ -91,7 +92,7 @@ export default {
 }
 
 .text_indent {
-  text-indent: 25px;
+  text-indent: 35px;
 }
 
 .category_image {
@@ -99,4 +100,9 @@ export default {
   width: 35px;
   height: 35px;
 }
+
+.border_radius_16 {
+  border-radius: 16px;
+}
+
 </style>
