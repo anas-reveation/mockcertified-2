@@ -61,14 +61,14 @@
           </div>
         </div>
 
-        <div>
-          <span
+        <div class="scroll_x">
+          <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-secondary border border-2 border-dark rounded-pill fw-bolder m-1 p-2 d-inline-block text-center text-capitalize font_size_16"
+            class="bg-secondary border border-2 border-dark rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
           >
             <NuxtLink :to="`/category/${category.id}`"> {{ category.name }} </NuxtLink>
-          </span>
+          </div>
         </div>
       </div>
 
@@ -180,3 +180,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.scroll_x {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll_x::-webkit-scrollbar {
+  display: none;
+}
+</style>
