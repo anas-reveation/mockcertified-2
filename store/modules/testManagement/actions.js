@@ -1,11 +1,4 @@
 import { API, graphqlOperation } from 'aws-amplify';
-import {
-  userTests,
-  getTestDetail,
-  getCategoryDetail,
-  listCategoriesDetail,
-  listAllTests,
-} from '~/ManualGraphql/queries';
 
 import {
   createAttemptedTest,
@@ -13,6 +6,13 @@ import {
   updateAttemptedTest,
   addResultStatus,
 } from '~/graphql/mutations';
+import {
+  userTests,
+  getTestDetail,
+  getCategoryDetail,
+  listCategoriesDetail,
+  listAllTests,
+} from '~/ManualGraphql/queries';
 
 export default {
   async getUserTests({ commit, dispatch, rootState }) {
@@ -410,6 +410,38 @@ export default {
       });
       commit('SET_LOADER', false, { root: true });
       return true;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
+  async getTestByQuery({ commit }, payload) {
+    try {
+      const query = payload;
+      commit('SET_LOADER', true, { root: true });
+
+      const filter = {
+        title: { contains: query },
+        and: { status: { eq: 'APPROVED' } },
+      };
+
+      const allTestData = await API.graphql({
+        query: listAllTests,
+        variables: { filter: filter },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      commit('SET_LOADER', false, { root: true });
+      return allTestData.data.listTestManagers.items;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

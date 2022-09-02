@@ -1,0 +1,13 @@
+{
+	"applinks": {
+	  "apps": [],
+	  "details": [
+		{
+		  "appID": "YOURTEAMID.com.mockcertified.app",
+		  "paths": [
+			"*"
+		  ]
+		}
+	  ]
+	}
+  }

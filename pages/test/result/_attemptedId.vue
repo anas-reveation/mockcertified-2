@@ -25,20 +25,20 @@
                 <span class="position-absolute donut_image">
                   <img
                     v-if="percentage >= 90"
-                    src="@/assets/images/partyboto.svg"
-                    alt="partyboto"
+                    src="@/assets/images/very_happy_face.svg"
+                    alt="very_happy_face"
                   />
                   <img
                     v-if="percentage < 90 && percentage >= 75"
-                    src="@/assets/images/loving.svg"
-                    alt=""
+                    src="@/assets/images/happy_face.svg"
+                    alt="happy_face"
                   />
                   <img
                     v-if="percentage < 75 && percentage > 35"
-                    src="@/assets/images/rolleyes.svg"
-                    alt=""
+                    src="@/assets/images/neutral_face.svg"
+                    alt="neutral_face"
                   />
-                  <img v-if="percentage <= 35" src="@/assets/images/cry.svg" alt="" />
+                  <img v-if="percentage <= 35" src="@/assets/images/sad_face.svg" alt="sad_face" />
                 </span>
                 <!-- End image -->
 
@@ -317,7 +317,7 @@ export default {
 
 .donut_image {
   top: 30%;
-  right: 39%;
+  right: 38%;
 }
 
 /* .number_circle {

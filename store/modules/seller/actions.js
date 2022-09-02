@@ -159,7 +159,6 @@ export default {
   },
   async redirectExpressDashboard({ commit, rootState }) {
     const seller_id = rootState.auth.user.stripe_seller_id;
-    console.log(seller_id);
     commit('SET_LOADER', true, { root: true });
     try {
       const getLink = await API.graphql({
@@ -173,7 +172,6 @@ export default {
       return parsedData;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
-      console.log(err);
       this.$swal.fire({
         toast: true,
         position: 'top-end',
