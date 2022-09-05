@@ -37,7 +37,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Domain -->
-                <data android:scheme="https" android:host="develop.d22h3uk4vvon62.amplifyapp.com" />
+                <data android:scheme="https" android:host="www.mockcertified.com" />
                 <!-- -->
                 <data android:scheme="mockcertified" android:host="com.mockcertified.app" />
                 <!-- -->

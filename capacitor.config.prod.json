@@ -4,7 +4,7 @@
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {
-    "url": "https://develop.d22h3uk4vvon62.amplifyapp.com",
+    "url": "https://www.mockcertified.com",
     "cleartext": true
   },
   "plugins": {
