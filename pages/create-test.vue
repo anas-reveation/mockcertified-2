@@ -95,7 +95,7 @@
         <button
           v-if="questionList.length"
           type="button"
-          class="btn btn-secondary border border-2 border-dark w-70 mb-2"
+          class="btn btn-secondary border border-2 border-primary w-70 mb-2"
           data-bs-toggle="modal"
           data-bs-target="#reviewQuestion"
         >
@@ -103,7 +103,7 @@
         </button>
         <button
           type="submit"
-          class="btn border border-2 border-dark w-50 mb-2"
+          class="btn border border-2 border-primary w-50 mb-2"
           :class="!isDisableBtn && 'btn-secondary'"
           :disabled="isDisableBtn"
         >
@@ -119,7 +119,7 @@
         <button
           type="button"
           @click="stripeOnboardingLocal"
-          class="btn btn-secondary border border-2 border-dark"
+          class="btn btn-secondary border border-2 border-primary"
           :disabled="isDisable"
         >
           Connect

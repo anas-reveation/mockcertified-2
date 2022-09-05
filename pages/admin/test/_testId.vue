@@ -20,7 +20,7 @@
     <div v-if="testDetail.status === 'IN_PROGRESS'">
       <div class="text-center">
         <button
-          class="btn btn-secondary border border-2 border-dark w-50"
+          class="btn btn-secondary border border-2 border-primary w-50"
           type="button"
           @click="approveRejectTestLocal('approve')"
         >

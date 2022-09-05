@@ -28,7 +28,7 @@
         required
       />
       <div class="text-center mt-3">
-        <button type="submit" class="btn btn-secondary border border-2 border-dark w-50">
+        <button type="submit" class="btn btn-secondary border border-2 border-primary w-50">
           Send
         </button>
       </div>
@@ -122,7 +122,7 @@
       <div class="text-center mt-2">
         <button
           type="submit"
-          class="btn border border-2 border-dark fw-bold px-3"
+          class="btn border border-2 border-primary fw-bold px-3"
           :class="
             !code || !password || !confirmPassword || !errors.password.isValid
               ? 'btn-gray'

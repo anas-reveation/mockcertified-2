@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondary border border-2 border-dark rounded-1 position-relative px-2 py-1">
+  <div class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1">
     <div class="row">
       <p class="col text-capitalize fw-bolder" v-if="title">{{ title }}</p>
       <p class="col-4 text-capitalize fw-bolder text-end" v-if="price">{{ price }}</p>

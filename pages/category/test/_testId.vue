@@ -19,14 +19,14 @@
       <button
         v-if="msgText"
         type="button"
-        class="btn btn-secondary border border-2 border-dark w-50"
+        class="btn btn-secondary border border-2 border-primary w-50"
       >
         {{ msgText }}
       </button>
       <button
         v-else
         type="button"
-        class="btn btn-secondary border border-2 border-dark w-50"
+        class="btn btn-secondary border border-2 border-primary w-50"
         @click="buyNowLocal"
       >
         Buy Now

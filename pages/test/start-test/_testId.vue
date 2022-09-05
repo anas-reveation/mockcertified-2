@@ -8,7 +8,7 @@
         <div class="text-center">
           <button
             type="button"
-            class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3 mb-3"
+            class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 mb-3"
             @click="startTestFun"
           >
             Start
@@ -53,7 +53,7 @@
               <li
                 v-for="(value, index2) in questionItem.options"
                 :key="index2"
-                class="list-group-item border border-2 border-dark rounded text-dark fw-bold mb-2 p-2"
+                class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2"
                 :class="
                   selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
                 "

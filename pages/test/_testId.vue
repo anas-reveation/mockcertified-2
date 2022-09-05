@@ -14,12 +14,12 @@
       <div v-if="testStatus">
         <NuxtLink
           :to="`/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-          class="btn btn-secondary border border-2 border-dark fw-bold w-50"
+          class="btn btn-secondary border border-2 border-primary fw-bold w-50"
         >
           {{ testStatus }}
         </NuxtLink>
         <button
-          class="btn btn-secondary border border-2 border-dark fw-bold w-50 mt-3"
+          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3"
           @click="startTestAgain"
         >
           Start over
@@ -29,7 +29,7 @@
       <NuxtLink
         v-else
         :to="`/test/start-test/${testDetail.id}`"
-        class="btn btn-secondary border border-2 border-dark fw-bold w-50"
+        class="btn btn-secondary border border-2 border-primary fw-bold w-50"
       >
         Start
       </NuxtLink>

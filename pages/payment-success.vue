@@ -26,7 +26,7 @@
         >
           Go to purchased test
         </NuxtLink>
-        <NuxtLink class="btn btn-secondary border-2 border-dark w-75 mt-3" to="/category">
+        <NuxtLink class="btn btn-secondary border-2 border-primary w-75 mt-3" to="/category">
           Buy more tests
         </NuxtLink>
       </div>

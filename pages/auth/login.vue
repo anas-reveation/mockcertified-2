@@ -51,7 +51,7 @@
       <div class="text-center mt-2">
         <button
           type="submit"
-          class="btn border border-2 border-dark fw-bold px-3"
+          class="btn border border-2 border-primary fw-bold px-3"
           :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
           :disabled="!form.email || !form.password"
         >
@@ -64,7 +64,7 @@
       <div class="mt-2">
         <!-- <button
           type="button"
-          class="btn btn-secondary fw-bold border border-2 border-dark p-3 mt-2 w-100 text-start"
+          class="btn btn-secondary fw-bold border border-2 border-primary p-3 mt-2 w-100 text-start"
         >
           <span class="p-1 bg-white border border-2 rounded">
             <img src="@/assets/images/google.png" alt="google" width="20" />
@@ -74,7 +74,7 @@
         <br />
         <button
           type="button"
-          class="btn btn-secondary fw-bold border border-2 border-dark p-3 mt-2 w-100 text-start"
+          class="btn btn-secondary fw-bold border border-2 border-primary p-3 mt-2 w-100 text-start"
         >
           <span class="p-1 bg-white border border-2 rounded">
             <img src="@/assets/images/facebook.png" alt="facebook" width="20" />

@@ -26,7 +26,7 @@
         Login
       </button>
       <button
-        class="btn btn-secondary border border-2 border-dark rounded fw-bold w-75 py-2 mb-1"
+        class="btn btn-secondary border border-2 border-primary rounded fw-bold w-75 py-2 mb-1"
         type="button"
         @click="$router.push('auth/signup')"
       >

@@ -175,7 +175,7 @@
       <div class="text-center mt-2">
         <button
           type="submit"
-          class="btn border border-2 border-dark fw-bold px-3"
+          class="btn border border-2 border-primary fw-bold px-3"
           :class="isDisabled ? 'btn-gray' : 'btn-secondary'"
           :disabled="isDisabled"
         >
@@ -188,7 +188,7 @@
       <div class="mt-2 row">
         <!-- <button
           type="button"
-          class="col btn btn-secondary fw-bold border border-2 border-dark p-2 mx-3 text-start"
+          class="col btn btn-secondary fw-bold border border-2 border-primary p-2 mx-3 text-start"
         >
           <span class="p-1 bg-white border border-2 rounded">
             <img src="@/assets/images/google.png" alt="google" width="20" />
@@ -197,7 +197,7 @@
         </button>
         <button
           type="button"
-          class="col btn btn-secondary fw-bold border border-2 border-dark p-2 mx-3 text-start"
+          class="col btn btn-secondary fw-bold border border-2 border-primary p-2 mx-3 text-start"
         >
           <span class="p-1 bg-white border border-2 rounded">
             <img src="@/assets/images/facebook.png" alt="facebook" width="20" />
@@ -235,7 +235,7 @@
       </div>
 
       <div class="text-center mt-2">
-        <button type="submit" class="btn btn-secondary border border-2 border-dark fw-bold px-3">
+        <button type="submit" class="btn btn-secondary border border-2 border-primary fw-bold px-3">
           Confirm
         </button>
       </div>

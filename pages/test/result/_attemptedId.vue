@@ -87,7 +87,7 @@
           <div class="text-center mt-3">
             <button
               type="button"
-              class="btn btn-secondary border border-2 border-dark"
+              class="btn btn-secondary border border-2 border-primary"
               data-bs-toggle="modal"
               data-bs-target="#reviewAnswers"
             >
@@ -101,7 +101,7 @@
     <div class="text-center pb-3">
       <NuxtLink
         :to="`/test/${testDetail.id}`"
-        class="btn btn-secondary border border-2 border-dark"
+        class="btn btn-secondary border border-2 border-primary"
         @click=""
       >
         Start Again

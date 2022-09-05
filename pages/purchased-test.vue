@@ -16,7 +16,7 @@
         />
         <NuxtLink
           to="/category"
-          class="btn btn-secondary border border-2 border-dark rounded mt-4 w-50"
+          class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
         >
           Buy a test
         </NuxtLink>

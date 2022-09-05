@@ -65,7 +65,7 @@
           <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-secondary border border-2 border-dark rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
+            class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
           >
             <NuxtLink :to="`/category/${category.id}`"> {{ category.name }} </NuxtLink>
           </div>
