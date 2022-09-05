@@ -45,7 +45,7 @@ export default {
       const res = await this.redirectExpressDashboard();
       if (res) {
         let url = res.body.link.url;
-        window.open(url);
+        window.open(url, '_blank');
       }
     },
   },

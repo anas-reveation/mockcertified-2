@@ -40,9 +40,9 @@
           />
           <NuxtLink
             to="/purchased-test"
-            class="btn btn-secondary border border-2 border-primary rounded"
+            class="btn btn-secondary border border-2 border-primary rounded mt-4"
           >
-            Purchased Test
+            Attempt a test
           </NuxtLink>
         </div>
       </div>

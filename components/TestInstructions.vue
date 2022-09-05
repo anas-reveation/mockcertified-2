@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-3">
-      <h2 class="ms-3">Instructions</h2>
+      <h2 class="ms-3 fw-bolder font_size_32">Instructions</h2>
     </div>
     <ol>
       <li>Lorem ipsum dolor sit amet consectetur itaque?</li>

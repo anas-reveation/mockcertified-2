@@ -32,7 +32,7 @@
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/create-test">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/add.svg" alt="add" />
+                <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
                 Create A New Test
               </span>
             </NuxtLink>
@@ -47,7 +47,7 @@
                 <img
                   src="@/assets/images/created_tests.svg"
                   alt="created_tests"
-                  class="text-primary"
+                  class="me-1 mb-1"
                 />
                 Created Tests
               </span>
@@ -60,7 +60,11 @@
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/terms-conditions">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/terms_conditions.svg" alt="terms_conditions" />
+                <img
+                  src="@/assets/images/terms_conditions.svg"
+                  alt="terms_conditions"
+                  class="me-1 mb-1"
+                />
                 Terms and Conditions
               </span>
             </NuxtLink>
@@ -72,7 +76,7 @@
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/privacy-policy">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" />
+                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1 mb-1" />
                 Privacy policy
               </span>
             </NuxtLink>
@@ -89,7 +93,11 @@
                 to="/admin"
               >
                 <span class="p-1 ms-3">
-                  <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" />
+                  <img
+                    src="@/assets/images/admin_pannel.svg"
+                    alt="admin_pannel"
+                    class="me-1 mb-1"
+                  />
                   Admin Panel
                 </span>
               </NuxtLink>
@@ -97,7 +105,7 @@
           </li>
           <li class="nav-item border-top border-primary text-capitalize py-1 font_size_16">
             <div class="p-1 ms-3" @click="userLogOut()">
-              <img src="@/assets/images/logout.svg" alt="logout" />
+              <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
               Logout
             </div>
           </li>

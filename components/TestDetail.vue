@@ -37,7 +37,13 @@
 
     <div class="mt-3">
       <h3 class="fw-bolder">Description</h3>
-      <p class="font_size_16">{{ description }}</p>
+      <p class="font_size_16">
+        {{ seeMore ? description : truncatePara(description) }}
+        <span v-if="wordLength > wordCount">
+          <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder">See more</span>
+          <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder">...See less</span>
+        </span>
+      </p>
     </div>
   </div>
 </template>
@@ -56,12 +62,17 @@ export default {
   data() {
     return {
       formatedPrice: 0,
+      seeMore: false,
+      wordCount: 55,
+      wordLength: 0,
     };
   },
 
   computed: {},
 
   mounted() {
+    this.wordLength = this.description.trim().split(' ').length;
+
     if (this.price && typeof this.price === 'number') {
       this.formatedPrice = `$${this.formatPrice(this.price)}`;
     } else if (this.price) {
@@ -72,6 +83,12 @@ export default {
   methods: {
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
+    },
+
+    truncatePara(str) {
+      const array = str.trim().split(' ');
+      const ellipsis = array.length > this.wordCount ? '...' : '';
+      return array.slice(0, this.wordCount).join(' ') + ellipsis;
     },
   },
 };

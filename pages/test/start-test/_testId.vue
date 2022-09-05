@@ -3,7 +3,7 @@
     <Navbar v-if="!startTest" />
     <div>
       <!-- START INSTRUCTION -->
-      <div v-if="!startTest" class="px-4 mt-3">
+      <div v-if="!startTest" class="px-2 mt-2">
         <TestInstructions />
         <div class="text-center">
           <button
@@ -44,16 +44,16 @@
           v-for="(questionItem, index) in allQuestions"
           :key="index"
           v-if="index === showCounter"
-          class="container-fluid text-left mt-5 pt-5 px-4 margin_top_bottom"
+          class="container-fluid text-left mt-5 pt-3 px-4 margin_top_bottom"
         >
-          <h1 class="fw-bolder">Question {{ questionCounter + 1 }}</h1>
-          <p class="fw-bold my-2">{{ questionItem.question }}</p>
+          <h1 class="fw-bolder font_size_16">Question {{ questionCounter + 1 }}</h1>
+          <p class="fw-bold my-2 font_size_16">{{ questionItem.question }}</p>
           <div class="d-flex flex-column mt-2">
             <ul class="list-group">
               <li
                 v-for="(value, index2) in questionItem.options"
                 :key="index2"
-                class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2"
+                class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2 font_size_16"
                 :class="
                   selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
                 "
@@ -69,7 +69,7 @@
           <div class="text-center">
             <button
               type="button"
-              class="btn btn-outline-dark"
+              class="btn border-primary"
               :class="timerEnabled && selectAnswer.userInput ? 'btn-secondary' : 'btn-gray'"
               @click="submitTest"
               :disabled="timerEnabled === false"
