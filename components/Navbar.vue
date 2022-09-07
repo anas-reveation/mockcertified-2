@@ -39,7 +39,7 @@
           </li>
 
           <li
-            class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
+            class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black '"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/created-test">
@@ -55,7 +55,7 @@
           </li>
 
           <li
-            class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
+            class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black '"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/terms-conditions">
@@ -71,7 +71,7 @@
           </li>
 
           <li
-            class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
+            class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black '"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/privacy-policy">
@@ -82,7 +82,7 @@
             </NuxtLink>
           </li>
           <li
-            class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
+            class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
           >
             <ClientOnly>
@@ -103,7 +103,7 @@
               </NuxtLink>
             </ClientOnly>
           </li>
-          <li class="nav-item border-top border-primary text-capitalize py-1 font_size_16">
+          <li class="nav-item text-capitalize py-1 font_size_16">
             <div class="p-1 ms-3" @click="userLogOut()">
               <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
               Logout

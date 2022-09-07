@@ -25,11 +25,16 @@ export default {
   data() {
     return {
       balanceDetail: null,
+      url: null,
     };
   },
 
   async mounted() {
     await this.getBalanceLocal();
+    const res = await this.redirectExpressDashboard();
+    if (res) {
+      this.url = res.body.link.url;
+    }
   },
 
   methods: {
@@ -41,11 +46,10 @@ export default {
         this.balanceDetail = parseFloat(res.amount) / 100;
       }
     },
-    async getRedirectlink() {
-      const res = await this.redirectExpressDashboard();
-      if (res) {
-        let url = res.body.link.url;
-        window.open(url, '_blank');
+
+    getRedirectlink() {
+      if (this.url) {
+        window.open(this.url);
       }
     },
   },

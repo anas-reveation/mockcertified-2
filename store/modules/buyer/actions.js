@@ -1,10 +1,6 @@
 import { API } from 'aws-amplify';
 import { checkoutStripeUrl, verifyTestPayment } from '~/graphql/mutations';
 
-const newWindowsOpen = (url) => {
-  window.open(url);
-};
-
 export default {
   async buyNow({ commit, rootState }, payload) {
     const jwtToken = rootState.auth.jwtToken;
@@ -24,10 +20,11 @@ export default {
         },
       });
       const parsedData = JSON.parse(checkoutStripeUrlData.data.checkoutStripeUrl);
-      newWindowsOpen(parsedData.body.url);
-      commit('buyer/clearCart', false, { root: true });
       commit('SET_LOADER', false, { root: true });
-      return true;
+      if (parsedData.body.url) {
+        return parsedData.body.url;
+      }
+      return false;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

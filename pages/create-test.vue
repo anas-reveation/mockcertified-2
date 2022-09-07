@@ -118,7 +118,7 @@
       <div class="mb-2">
         <button
           type="button"
-          @click="stripeOnboardingLocal"
+          @click="redirectToStripe"
           class="btn btn-secondary border border-2 border-primary"
           :disabled="isDisable"
         >
@@ -185,6 +185,7 @@ export default {
       isAccountActive: false,
       isDisable: true,
       isDisableBtn: true,
+      stripeUrl: null,
     };
   },
   watch: {
@@ -225,6 +226,8 @@ export default {
     this.allCategories = await this.getAllCategories();
     if (this.user.stripe_seller_id) {
       await this.getStripeIdStatus(this.user.stripe_seller_id);
+      const res = await this.stripeOnboardingLocal();
+      this.stripeUrl = res;
     }
     this.isDisable = false;
   },
@@ -410,27 +413,31 @@ export default {
     async stripeOnboardingLocal() {
       if (!this.isAccountActive && this.user.stripe_seller_id) {
         const res = await this.stripeOnboarding();
-        this.newWindowsOpen(res);
+        return res;
       } else if (!this.isAccountActive && !this.user.stripe_seller_id) {
         const res = await this.stripeOnboarding();
-        this.newWindowsOpen(res);
+        return res;
       }
     },
 
     async getStripeIdStatus(id) {
-      let token =
-        'sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E';
-      let config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const result = await this.$axios.get(`https://api.stripe.com/v1/accounts/${id}`, config);
-      if (!result.data.details_submitted) {
-        return false;
-      } else {
-        this.isAccountActive = true;
-        return true;
+      try {
+        let token =
+          'sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E';
+        let config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const result = await this.$axios.get(`https://api.stripe.com/v1/accounts/${id}`, config);
+        if (!result.data.details_submitted) {
+          return false;
+        } else {
+          this.isAccountActive = true;
+          return true;
+        }
+      } catch (err) {
+        // console.log('ERROR', err);
       }
     },
 
@@ -447,6 +454,12 @@ export default {
         };
         this.reviewQuestions.push(questionDetail);
       });
+    },
+
+    redirectToStripe() {
+      if (this.stripeUrl) {
+        this.newWindowsOpen(this.stripeUrl);
+      }
     },
 
     newWindowsOpen(url) {

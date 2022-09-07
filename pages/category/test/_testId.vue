@@ -47,6 +47,7 @@ export default {
       testDetail: null,
       isPurchased: false,
       isUserOwner: false,
+      stripeUrl: null,
     };
   },
 
@@ -115,6 +116,7 @@ export default {
   methods: {
     ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
     ...mapActions('buyer', ['buyNow']),
+    ...mapMutations('buyer', ['clearCart']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
@@ -132,8 +134,24 @@ export default {
     async buyNowLocal() {
       const res = await this.buyNow({ testId: this.testDetail.id });
       if (res) {
-        this.$router.push('/dashboard');
+        this.stripeUrl = res;
+        this.confirmFunc();
+        // this.$router.push('/dashboard')  ;
       }
+    },
+
+    confirmFunc() {
+      this.$swal
+        .fire({
+          title: 'Confirm Checkout',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            window.open(this.stripeUrl);
+          }
+        });
     },
   },
 };
