@@ -225,7 +225,7 @@ export default {
   async mounted() {
     this.allCategories = await this.getAllCategories();
     if (this.user.stripe_seller_id) {
-      await this.getStripeIdStatus(this.user.stripe_seller_id);
+      await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
     }
@@ -234,7 +234,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
-    ...mapActions('seller', ['createTest', 'stripeOnboarding']),
+    ...mapActions('seller', ['createTest', 'stripeOnboarding', 'getStripeIdStatus']),
 
     priceValidation(event) {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
@@ -420,27 +420,14 @@ export default {
       }
     },
 
-    async getStripeIdStatus(id) {
-      try {
-        let token =
-          'sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E';
-        let config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const result = await this.$axios.get(`https://api.stripe.com/v1/accounts/${id}`, config);
-        if (!result.data.details_submitted) {
-          return false;
-        } else {
-          this.isAccountActive = true;
-          return true;
-        }
-      } catch (err) {
-        // console.log('ERROR', err);
+    async getStripeIdStatusLocal() {
+      const res = await this.getStripeIdStatus();
+      if (res == 'active') {
+        this.isAccountActive = true;
+      } else if (res == 'notActive') {
+        this.isAccountActive = false;
       }
     },
-
     reviewQuestionsFunc() {
       this.questionList.filter((res, index) => {
         // Array of question that is attempted

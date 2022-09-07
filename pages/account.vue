@@ -33,6 +33,7 @@ export default {
     await this.getBalanceLocal();
     const res = await this.redirectExpressDashboard();
     if (res) {
+      console.log(res);
       this.url = res.body.link.url;
     }
   },

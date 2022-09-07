@@ -1,5 +1,10 @@
 import { API } from 'aws-amplify';
-import { onboardingStripe, getBalance, redirectPayoutDashboard } from '~/graphql/queries';
+import {
+  onboardingStripe,
+  getBalance,
+  redirectPayoutDashboard,
+  getStripeIdStatus,
+} from '~/graphql/queries';
 import { createTestManager, createQuestion, updateUser } from '~/graphql/mutations';
 
 export default {
@@ -170,6 +175,35 @@ export default {
       const parsedData = JSON.parse(getLink.data.redirectPayoutDashboard);
       commit('SET_LOADER', false, { root: true });
       return parsedData;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+  async getStripeIdStatus({ commit, rootState }) {
+    const seller_id = rootState.auth.user.stripe_seller_id;
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const getStatus = await API.graphql({
+        query: getStripeIdStatus,
+        variables: {
+          seller_id,
+        },
+      });
+      const parsedData = JSON.parse(getStatus.data.getStripeIdStatus);
+      commit('SET_LOADER', false, { root: true });
+      return parsedData.body.status;
+
+      // return balanceDetail;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

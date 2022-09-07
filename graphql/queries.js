@@ -16,6 +16,11 @@ export const redirectPayoutDashboard = /* GraphQL */ `
     redirectPayoutDashboard(seller_id: $seller_id)
   }
 `;
+export const getStripeIdStatus = /* GraphQL */ `
+  query GetStripeIdStatus($seller_id: String!) {
+    getStripeIdStatus(seller_id: $seller_id)
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {

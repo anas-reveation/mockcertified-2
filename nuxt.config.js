@@ -78,13 +78,13 @@ export default {
     fallback: true,
   },
 
-  render: {
-    static: {
-      setHeaders: (resp, path) => {
-        if (resp.req.originalUrl === '/.well-known/apple-app-site-association') {
-          resp.setHeader('Content-Type', 'application/json');
-        }
-      },
-    },
-  },
+  // render: {
+  //   static: {
+  //     setHeaders: (resp, path) => {
+  //       if (resp.req.originalUrl === '/.well-known/apple-app-site-association') {
+  //         resp.setHeader('Content-Type', 'application/json');
+  //       }
+  //     },
+  //   },
+  // },
 };
