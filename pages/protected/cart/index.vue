@@ -6,7 +6,7 @@
         <div class="card-body">
           <h5 class="card-title">No items in your cart</h5>
           <p class="card-text">Buy a test, click below button</p>
-          <NuxtLink to="/category" class="btn btn-secondary border border-2 border-dark"
+          <NuxtLink to="/protected/category" class="btn btn-secondary border border-2 border-dark"
             >Buy a test</NuxtLink
           >
         </div>
@@ -109,7 +109,7 @@ export default {
     async checkoutLocal() {
       const res = await this.checkout(this.cartItems);
       if (res) {
-        this.$router.push('/dashboard');
+        this.$router.push('/protected/dashboard');
       }
     },
   },

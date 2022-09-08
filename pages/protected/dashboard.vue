@@ -29,7 +29,9 @@
             <h2 class="fw-bolder font_size_24">Featured</h2>
           </div>
           <div class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
+            <NuxtLink to="/protected/category" class="text-primary fw-bolder font_size_16"
+              >See all</NuxtLink
+            >
           </div>
         </div>
 
@@ -57,7 +59,9 @@
             <h2 class="fw-bolder font_size_24">Categories</h2>
           </div>
           <div class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
+            <NuxtLink to="/protected/category" class="text-primary fw-bolder font_size_16">
+              See all
+            </NuxtLink>
           </div>
         </div>
 
@@ -67,7 +71,7 @@
             :key="index"
             class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
           >
-            <NuxtLink :to="`/category/${category.id}`"> {{ category.name }} </NuxtLink>
+            <NuxtLink :to="`/protected/category/${category.id}`"> {{ category.name }} </NuxtLink>
           </div>
         </div>
       </div>
@@ -78,7 +82,9 @@
             <h2 class="fw-bolder font_size_24">Recently Added</h2>
           </div>
           <div class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
+            <NuxtLink to="/protected/category" class="text-primary fw-bolder font_size_16">
+              See all
+            </NuxtLink>
           </div>
         </div>
 
@@ -158,11 +164,7 @@ export default {
     },
 
     redirectPage(id) {
-      this.$router.push(`/category/test/${id}`);
-    },
-
-    attempt() {
-      this.$router.push('/attempt');
+      this.$router.push(`/protected/category/test/${id}`);
     },
 
     async searchQueryFunc() {

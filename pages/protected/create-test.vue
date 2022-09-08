@@ -387,7 +387,7 @@ export default {
       };
       const res = await this.createTest(obj);
       if (res) {
-        this.$router.push('/dashboard');
+        this.$router.push('/protected/dashboard');
         this.$swal.fire({
           toast: true,
           position: 'top-end',

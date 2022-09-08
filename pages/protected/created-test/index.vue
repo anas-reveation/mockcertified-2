@@ -3,17 +3,17 @@
     <div class="mb-2 w-100 d-flex justify-content-center">
       <div
         class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
-        :class="isInProgressOpen && 'bg-secondary text-dark'"
-        @click="changeTabName('isInProgressOpen')"
-      >
-        Pending
-      </div>
-      <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
         :class="isApprovedOpen && 'bg-secondary text-dark'"
         @click="changeTabName('isApprovedOpen')"
       >
         Approved
+      </div>
+      <div
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        :class="isInProgressOpen && 'bg-secondary text-dark'"
+        @click="changeTabName('isInProgressOpen')"
+      >
+        Ongoing
       </div>
       <div
         class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
@@ -25,7 +25,7 @@
     </div>
 
     <div v-if="!filteredTests.length" class="mt-4 px-3">
-      <h2>No Test Available</h2>
+      <h1>No Test Available</h1>
     </div>
 
     <div v-for="test in filteredTests" :key="test.id" class="mb-3" @click="redirectPage(test.id)">
@@ -39,6 +39,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapState, mapActions } from 'vuex';
 export default {
@@ -55,28 +56,31 @@ export default {
   },
 
   computed: {
-    ...mapState('admin', ['allTests']),
+    ...mapState('auth', ['user']),
+    ...mapState(['allCreatedTests']),
 
     approvedTests() {
-      return this.allTests.filter((test) => test.status === 'APPROVED');
+      return this.allCreatedTests.filter((test) => test.status === 'APPROVED');
     },
 
     inProgressTests() {
-      return this.allTests.filter((test) => test.status === 'IN_PROGRESS');
+      return this.allCreatedTests.filter((test) => test.status === 'IN_PROGRESS');
     },
 
     rejectedTests() {
-      return this.allTests.filter((test) => test.status === 'REJECTED');
+      return this.allCreatedTests.filter((test) => test.status === 'REJECTED');
     },
   },
 
   async mounted() {
-    await this.getAllTests();
-    this.changeTabName('isInProgressOpen');
+    if (!this.allCreatedTests.length) {
+      await this.getUserTests();
+    }
+    this.changeTabName('isApprovedOpen');
   },
 
   methods: {
-    ...mapActions('admin', ['getAllTests']),
+    ...mapActions('testManagement', ['getUserTests']),
 
     changeTabName(tabName) {
       if (tabName === 'isApprovedOpen') {
@@ -110,7 +114,7 @@ export default {
     },
 
     redirectPage(id) {
-      this.$router.push(`/admin/test/${id}`);
+      this.$router.push(`/protected/created-test/${id}`);
     },
   },
 };

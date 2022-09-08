@@ -127,7 +127,7 @@ export default {
     async loginLocal() {
       const res = await this.login(this.form);
       if (res) {
-        this.$router.push('/dashboard');
+        this.$router.push('/protected/dashboard');
       }
     },
 

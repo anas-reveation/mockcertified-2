@@ -100,7 +100,7 @@
 
     <div class="text-center pb-3">
       <NuxtLink
-        :to="`/test/${testDetail.id}`"
+        :to="`/protected/test/${testDetail.id}`"
         class="btn btn-secondary border border-2 border-primary"
         @click=""
       >
@@ -230,7 +230,7 @@ export default {
     const attemptedTest = this.allAttemptedTests.filter((item) => item.id === this.attemptedId);
     if (!attemptedTest.length) {
       this.SET_LOADER(false);
-      this.$router.push('/dashboard');
+      this.$router.push('/protected/dashboard');
       return;
     }
     this.attemptedTimeStamp = new Date(attemptedTest[0].createdAt).toDateString();
@@ -279,7 +279,7 @@ export default {
     ...mapMutations(['SET_LOADER']),
 
     attempt() {
-      this.$router.push('/test-screen');
+      this.$router.push('/protected/test-screen');
     },
 
     formatPrice(price) {
@@ -290,7 +290,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
+      const url = `${domainOrigin}/protected/category/test/${testId}`;
       await Share.share({
         title,
         text: `Hurray, I got ${this.percentage}% in ${title} test`,

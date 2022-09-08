@@ -56,7 +56,7 @@ export default {
 
   async mounted() {
     if (this.isAuthenticated) {
-      this.$router.push('/dashboard');
+      this.$router.push('/protected/dashboard');
 
       return;
     }

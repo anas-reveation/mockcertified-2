@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col">
           <NuxtLink
-            to="/dashboard"
+            to="/protected/dashboard"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
@@ -22,7 +22,7 @@
         </div>
         <div class="col">
           <NuxtLink
-            to="/attempted-test"
+            to="/protected/attempted-test"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
@@ -40,7 +40,7 @@
         </div>
         <div class="col">
           <NuxtLink
-            to="/purchased-test"
+            to="/protected/purchased-test"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
@@ -59,7 +59,7 @@
         <ClientOnly>
           <div v-if="user && user.stripe_seller_id" class="col">
             <NuxtLink
-              to="/account"
+              to="/protected/account"
               class="d-flex flex-column align-items-center justify-content-center"
             >
               <div

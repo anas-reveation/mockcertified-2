@@ -59,7 +59,7 @@ export default {
     ...mapActions('testManagement', ['getAllCategories']),
 
     redirectPage(id) {
-      this.$router.push(`/category/${id}`);
+      this.$router.push(`/protected/category/${id}`);
     },
   },
 };

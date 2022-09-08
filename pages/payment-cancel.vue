@@ -20,7 +20,10 @@
       </p>
 
       <div class="mt-5d">
-        <NuxtLink class="btn btn-white border-2 border-primary text-primary w-75" to="/category">
+        <NuxtLink
+          class="btn btn-white border-2 border-primary text-primary w-75"
+          to="/protected/category"
+        >
           Go to category
         </NuxtLink>
       </div>

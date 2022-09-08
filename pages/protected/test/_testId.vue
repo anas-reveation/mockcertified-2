@@ -13,7 +13,7 @@
     <div class="text-center">
       <div v-if="testStatus">
         <NuxtLink
-          :to="`/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
+          :to="`/protected/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
           class="btn btn-secondary border border-2 border-primary fw-bold w-50"
         >
           {{ testStatus }}
@@ -28,7 +28,7 @@
 
       <NuxtLink
         v-else
-        :to="`/test/start-test/${testDetail.id}`"
+        :to="`/protected/test/start-test/${testDetail.id}`"
         class="btn btn-secondary border border-2 border-primary fw-bold w-50"
       >
         Start
@@ -103,7 +103,7 @@ export default {
     async startTestAgain() {
       const res = await this.abortedAttemptedTest(this.attemptedId);
       if (res) {
-        this.$router.push(`/test/start-test/${this.testId}`);
+        this.$router.push(`/protected/test/start-test/${this.testId}`);
       } else {
         this.$swal.fire({
           toast: true,
@@ -121,7 +121,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
+      const url = `${domainOrigin}/protected/category/test/${testId}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,

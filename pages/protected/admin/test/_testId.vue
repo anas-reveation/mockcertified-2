@@ -88,7 +88,7 @@ export default {
 
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
     if (!this.testDetail) {
-      this.$router.push('/dashboard');
+      this.$router.push('/protected/dashboard');
       return;
     }
 
@@ -152,7 +152,7 @@ export default {
       window.scrollTo(0, 0);
       const res = await this.approveRejectTest(params);
       if (res) {
-        this.$router.push('/admin');
+        this.$router.push('/protected/admin');
       }
     },
   },

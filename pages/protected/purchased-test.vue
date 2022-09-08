@@ -15,7 +15,7 @@
           class="boy_illustration"
         />
         <NuxtLink
-          to="/category"
+          to="/protected/category"
           class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
         >
           Buy a test
@@ -105,7 +105,7 @@ export default {
     },
 
     redirectPage(test) {
-      this.$router.push(`/test/${test.test.id}`);
+      this.$router.push(`/protected/test/${test.test.id}`);
     },
   },
 };

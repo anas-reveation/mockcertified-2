@@ -39,7 +39,7 @@
             class="girl_illustration"
           />
           <NuxtLink
-            to="/purchased-test"
+            to="/protected/purchased-test"
             class="btn btn-secondary border border-2 border-primary rounded mt-4"
           >
             Attempt a test
@@ -158,11 +158,11 @@ export default {
     },
 
     redirectPage(test) {
-      this.$router.push(`/test/${test.test.id}`);
+      this.$router.push(`/protected/test/${test.test.id}`);
     },
 
     redirectResultPage(attemptId) {
-      this.$router.push(`/test/result/${attemptId}`);
+      this.$router.push(`/protected/test/result/${attemptId}`);
     },
   },
 };

@@ -22,11 +22,14 @@
       <div class="mt-5d">
         <NuxtLink
           class="btn btn-white border-2 border-primary text-primary w-75"
-          to="/purchased-test"
+          to="/protected/purchased-test"
         >
           Go to purchased test
         </NuxtLink>
-        <NuxtLink class="btn btn-secondary border-2 border-primary w-75 mt-3" to="/category">
+        <NuxtLink
+          class="btn btn-secondary border-2 border-primary w-75 mt-3"
+          to="/protected/category"
+        >
           Buy more tests
         </NuxtLink>
       </div>

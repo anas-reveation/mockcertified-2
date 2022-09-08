@@ -3,7 +3,7 @@
     <SearcBar v-model="searchQuery" />
 
     <p class="mt-2">
-      <NuxtLink to="/category">
+      <NuxtLink to="/protected/category">
         <span>Categories</span>
       </NuxtLink>
       <span
@@ -125,7 +125,7 @@ export default {
     ...mapMutations('buyer', ['addToCart']),
 
     redirectPage(id) {
-      this.$router.push(`/category/test/${id}`);
+      this.$router.push(`/protected/category/test/${id}`);
     },
 
     async getAllTests(subCategoryId, name) {

@@ -104,7 +104,7 @@ export default {
     this.testDetail = await this.getTestDetail(this.testId);
 
     if (!this.testDetail) {
-      this.$router.push('/dashboard');
+      this.$router.push('/protected/dashboard');
       return;
     }
 
@@ -122,7 +122,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
+      const url = `${domainOrigin}/protected/category/test/${testId}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,
@@ -136,7 +136,7 @@ export default {
       if (res) {
         this.stripeUrl = res;
         this.confirmFunc();
-        // this.$router.push('/dashboard')  ;
+        // this.$router.push('/protected/dashboard')  ;
       }
     },
 

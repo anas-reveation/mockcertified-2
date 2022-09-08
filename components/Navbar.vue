@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2">
     <div class="container px-0">
-      <NuxtLink class="navbar-brand ms-2" to="/dashboard">
+      <NuxtLink class="navbar-brand ms-2" to="/protected/dashboard">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
       </NuxtLink>
       <img
@@ -30,7 +30,7 @@
             class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/create-test">
+            <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/create-test">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
                 Create A New Test
@@ -42,7 +42,7 @@
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black '"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/created-test">
+            <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/created-test">
               <span class="p-1 ms-3">
                 <img
                   src="@/assets/images/created_tests.svg"
@@ -82,16 +82,12 @@
             </NuxtLink>
           </li>
           <li
+            v-if="userGroup === 'admins'"
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
           >
             <ClientOnly>
-              <NuxtLink
-                v-if="userGroup === 'admins'"
-                class="nav-link text-black"
-                aria-current="page"
-                to="/admin"
-              >
+              <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/admin">
                 <span class="p-1 ms-3">
                   <img
                     src="@/assets/images/admin_pannel.svg"
