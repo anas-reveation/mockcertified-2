@@ -21,10 +21,19 @@ export default {
       });
       const parsedData = JSON.parse(checkoutStripeUrlData.data.checkoutStripeUrl);
       commit('SET_LOADER', false, { root: true });
-      if (parsedData.body.url) {
-        return parsedData.body.url;
+      if (parsedData.statusCode !== 200) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
       }
-      return false;
+      return parsedData.body.url;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

@@ -162,6 +162,7 @@ export default {
       return false;
     }
   },
+
   async redirectExpressDashboard({ commit, rootState }) {
     const seller_id = rootState.auth.user.stripe_seller_id;
     commit('SET_LOADER', true, { root: true });
@@ -174,7 +175,19 @@ export default {
       });
       const parsedData = JSON.parse(getLink.data.redirectPayoutDashboard);
       commit('SET_LOADER', false, { root: true });
-      return parsedData;
+      if (parsedData.statusCode !== 200) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
+      }
+      return parsedData.body.link.url;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
@@ -189,6 +202,7 @@ export default {
       return false;
     }
   },
+
   async getStripeIdStatus({ commit, rootState }) {
     const seller_id = rootState.auth.user.stripe_seller_id;
     commit('SET_LOADER', true, { root: true });

@@ -81,12 +81,12 @@
               </span>
             </NuxtLink>
           </li>
-          <li
-            v-if="userGroup === 'admins'"
-            class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-            :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
-          >
-            <ClientOnly>
+          <ClientOnly>
+            <li
+              v-if="userGroup === 'admins'"
+              class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
+              :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
+            >
               <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/admin">
                 <span class="p-1 ms-3">
                   <img
@@ -97,8 +97,8 @@
                   Admin Panel
                 </span>
               </NuxtLink>
-            </ClientOnly>
-          </li>
+            </li>
+          </ClientOnly>
           <li class="nav-item text-capitalize py-1 font_size_16">
             <div class="p-1 ms-3" @click="userLogOut()">
               <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />

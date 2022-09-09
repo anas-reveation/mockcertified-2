@@ -33,7 +33,7 @@ export default {
     await this.getBalanceLocal();
     const res = await this.redirectExpressDashboard();
     if (res) {
-      this.url = res.body.link.url;
+      this.url = res;
     }
   },
 
@@ -44,6 +44,7 @@ export default {
       const res = await this.getBalanceDetail();
       if (res) {
         this.balanceDetail = parseFloat(res.amount) / 100;
+        this.balanceDetail = parseFloat(this.balanceDetail).toFixed(2);
       }
     },
 
