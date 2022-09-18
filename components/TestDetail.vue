@@ -19,7 +19,7 @@
     <slot />
 
     <div class="row justify-content-between mt-3">
-      <h3 class="fw-bolder">Created by:</h3>
+      <h3 class="fw-bolder font_size_20">Created by:</h3>
       <div class="col-9 text-capitalize fw-bolder">
         <img
           src="@/assets/images/profile_icon.svg"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="mt-3">
-      <h3 class="fw-bolder">Description</h3>
+      <h3 class="fw-bolder font_size_20">Description</h3>
       <p class="font_size_16">
         {{ seeMore ? description : truncatePara(description) }}
         <span v-if="wordLength > wordCount">

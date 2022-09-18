@@ -89,7 +89,7 @@
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded py-3"
-          :class="!passwordMatched && 'border-danger'"
+          :class="!passwordMatched && confirmPassword.length && 'border-danger'"
           v-model="confirmPassword"
           @input="checkPasswordMatch"
           required
@@ -150,7 +150,7 @@ export default {
     pageCount: 0,
     email: '',
     password: null,
-    confirmPassword: null,
+    confirmPassword: '',
     code: null,
     passwordMatched: false,
     isPasswordVisible: false,

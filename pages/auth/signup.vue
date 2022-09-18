@@ -130,7 +130,7 @@
         <input
           :type="isPasswordVisible ? 'text' : 'password'"
           class="border border-2 border-primary rounded py-3"
-          :class="!passwordMatched && ' border-danger'"
+          :class="!passwordMatched && registerForm.confirmPassword.length && ' border-danger'"
           v-model="registerForm.confirmPassword"
           @input="checkPasswordMatch"
           required
@@ -163,13 +163,13 @@
       <div>
         <input type="checkbox" v-model="registerForm.userAgreement" />
         I accept the
-        <NuxtLink to="/terms-conditions" class="fw-bolder text-decoration-underline">
+        <span @click="newWindowsOpen" class="fw-bolder text-decoration-underline">
           terms & conditions
-        </NuxtLink>
+        </span>
         and
-        <NuxtLink to="/privacy-policy" class="fw-bolder text-decoration-underline">
+        <span @click="newWindowsOpen('pp')" class="fw-bolder text-decoration-underline">
           privacy policies
-        </NuxtLink>
+        </span>
       </div>
 
       <div class="text-center mt-2">
@@ -265,7 +265,7 @@ export default {
       first_name: null,
       last_name: null,
       password: null,
-      confirmPassword: null,
+      confirmPassword: '',
       userAgreement: false,
     },
     confirmForm: {
@@ -474,6 +474,15 @@ export default {
         variables: { input: newUser },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+    },
+
+    newWindowsOpen(params) {
+      const domain = process.env.DOMAIN;
+      if (params === 'pp') {
+        window.open(`https://${domain}/privacy-policy`);
+      } else {
+        window.open(`https://${domain}/terms-conditions`);
+      }
     },
   },
 };
