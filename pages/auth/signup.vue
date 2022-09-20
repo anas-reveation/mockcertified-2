@@ -30,7 +30,16 @@
         </label>
         <div
           v-if="errors.firstName.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+          class="
+            position-absolute
+            p-1
+            bg-white
+            text-danger
+            border border-2 border-danger
+            rounded
+            font_family_roboto font_size_14
+            password_format_position
+          "
         >
           {{ errors.firstName.msg }}
         </div>
@@ -57,7 +66,16 @@
         </label>
         <div
           v-if="errors.lastName.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+          class="
+            position-absolute
+            p-1
+            bg-white
+            text-danger
+            border border-2 border-danger
+            rounded
+            font_family_roboto font_size_14
+            password_format_position
+          "
         >
           {{ errors.lastName.msg }}
         </div>
@@ -81,7 +99,16 @@
         </label>
         <div
           v-if="errors.email.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+          class="
+            position-absolute
+            p-1
+            bg-white
+            text-danger
+            border border-2 border-danger
+            rounded
+            font_family_roboto font_size_14
+            password_format_position
+          "
         >
           {{ errors.email.msg }}
         </div>
@@ -120,7 +147,16 @@
         </div>
         <div
           v-if="errors.password.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+          class="
+            position-absolute
+            p-1
+            bg-white
+            text-danger
+            border border-2 border-danger
+            rounded
+            font_family_roboto font_size_14
+            password_format_position
+          "
         >
           {{ errors.password.msg }}
         </div>
@@ -247,6 +283,7 @@
 import { mapActions } from 'vuex';
 import { API } from 'aws-amplify';
 import { createUser } from '~/graphql/mutations';
+import { Browser } from '@capacitor/browser';
 const steps = {
   register: 'REGISTER',
   confirm: 'CONFIRM',
@@ -476,12 +513,12 @@ export default {
       });
     },
 
-    newWindowsOpen(params) {
+    async newWindowsOpen(params) {
       const domain = process.env.DOMAIN;
       if (params === 'pp') {
-        window.open(`https://${domain}/privacy-policy`);
+        await Browser.open({ url: `https://${domain}/privacy-policy` });
       } else {
-        window.open(`https://${domain}/terms-conditions`);
+        await Browser.open({ url: `https://${domain}/terms-conditions` });
       }
     },
   },

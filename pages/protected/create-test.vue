@@ -165,6 +165,7 @@
 <script>
 import * as XLSX from 'xlsx';
 import { mapState, mapActions } from 'vuex';
+import { Browser } from '@capacitor/browser';
 
 export default {
   middleware: ['authenticated'],
@@ -449,8 +450,8 @@ export default {
       }
     },
 
-    newWindowsOpen(url) {
-      window.open(url);
+    async newWindowsOpen(url) {
+      await Browser.open({ url: url });
     },
   },
 };

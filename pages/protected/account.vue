@@ -19,6 +19,8 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { Browser } from '@capacitor/browser';
+
 export default {
   middleware: ['authenticated'],
 
@@ -48,9 +50,9 @@ export default {
       }
     },
 
-    getRedirectlink() {
+    async getRedirectlink() {
       if (this.url) {
-        window.open(this.url);
+        await Browser.open({ url: this.url });
       }
     },
   },

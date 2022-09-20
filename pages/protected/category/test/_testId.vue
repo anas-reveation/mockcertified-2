@@ -38,7 +38,7 @@
 <script>
 import { Share } from '@capacitor/share';
 import { mapState, mapActions, mapMutations } from 'vuex';
-
+import { Browser } from '@capacitor/browser';
 export default {
   middleware: ['authenticated'],
 
@@ -147,9 +147,9 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes',
         })
-        .then((result) => {
+        .then(async (result) => {
           if (result.isConfirmed) {
-            window.open(this.stripeUrl);
+            await Browser.open({ url: this.stripeUrl });
           }
         });
     },
