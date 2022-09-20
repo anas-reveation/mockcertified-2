@@ -16,6 +16,7 @@ type User
   first_name: String!
   last_name: String!
   email: String!
+  user_agreement: Boolean @default(value: "true")
   stripe_seller_id: String
   created_tests: [TestManager] @hasMany(indexName: "byUser", fields: ["id"])
   purchased_tests: [PurchasedTest] @hasMany(indexName: "byUser", fields: ["id"])
@@ -178,4 +179,3 @@ type Mutation {
     cancel_redirect_url: String!
   ): String @function(name: "stripeCheckout-${env}")
 }
-     
