@@ -427,7 +427,7 @@ export default {
 
   async getTestByQuery({ commit }, payload) {
     try {
-      const query = payload;
+      const query = payload.toLowerCase().replace(/\s+/g, ' ').trim();
       commit('SET_LOADER', true, { root: true });
 
       const filter = {
@@ -441,7 +441,19 @@ export default {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
-      return allTestData.data.listTestManagers.items;
+      const testList = allTestData.data.listTestManagers.items;
+      if (testList && !testList.length) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'No test found',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+      }
+      return testList;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

@@ -8,7 +8,6 @@
       <div class="mb-4 input-data">
         <input
           type="text"
-          pattern="[a-zA-Z]*"
           title="It should contain only text"
           class="border border-2 border-primary rounded form-control"
           v-model="formData.title"
@@ -29,12 +28,17 @@
 
       <div class="mb-4 input-data">
         <select
-          class="form-select border border-2 border-primary rounded"
+          class="form-select border border-2 border-primary rounded text-capitalize"
           aria-label="Default select example"
           v-model="formData.categoryId"
         >
           <option selected value="default" disabled>Select Category</option>
-          <option v-for="(category, index) in allCategories" :key="index" :value="category.id">
+          <option
+            v-for="(category, index) in allCategories"
+            :key="index"
+            :value="category.id"
+            class="text-capitalize"
+          >
             {{ category.name }}
           </option>
         </select>
@@ -43,7 +47,7 @@
 
       <div class="mb-4 input-data">
         <select
-          class="form-select border border-2 border-primary rounded"
+          class="form-select border border-2 border-primary rounded text-capitalize"
           aria-label="Default select example"
           v-model="formData.subCategoryId"
         >
@@ -52,6 +56,7 @@
             v-for="(subCategory, index) in allSubCategories"
             :key="index"
             :value="subCategory.id"
+            class="text-capitalize"
           >
             {{ subCategory.name }}
           </option>
@@ -64,7 +69,7 @@
           type="number"
           class="border border-2 border-primary rounded form-control"
           min="1"
-          @keydown="priceValidation"
+          @keydown="numberValidation"
           v-model="formData.price"
           required
         />
@@ -76,10 +81,25 @@
           type="number"
           class="border border-2 border-primary rounded form-control"
           min="1"
+          @keydown="numberValidation"
           v-model="formData.timeLimit"
           required
         />
-        <label class="form-label">Time Limit (in min)</label>
+        <label class="form-label">
+          Time Limit (in min)
+          <img
+            v-if="!errors.timeLimit.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.timeLimit.isVisiable = !errors.timeLimit.isVisiable"
+          />
+        </label>
+        <div
+          v-if="errors.timeLimit.isVisiable"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.timeLimit.msg }}
+        </div>
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">
@@ -187,14 +207,40 @@ export default {
       isDisable: true,
       isDisableBtn: true,
       stripeUrl: null,
+
+      errors: {
+        timeLimit: {
+          isValid: true,
+          isVisiable: false,
+          msg: 'Maximum 300 min.',
+        },
+      },
     };
   },
+
   watch: {
-    // whenever question changes, this function will run
+    'formData.title'(newValue, oldValue) {
+      let result = /\d/.test(newValue);
+      if (result) {
+        this.formData.title = oldValue;
+      }
+    },
+
     'formData.categoryId'(newValue, _oldValue) {
       this.subCategoryId = 'default';
       const category = this.allCategories.find((category) => category.id === newValue);
       this.allSubCategories = category.sub_category.items;
+    },
+
+    'formData.timeLimit'(newValue, _oldValue) {
+      if (newValue > 300) {
+        this.errors.timeLimit.isValid = false;
+      } else {
+        this.errors.timeLimit.isValid = true;
+      }
+      if (this.errors.timeLimit.isValid) {
+        this.errors.timeLimit.isVisiable = false;
+      }
     },
 
     formData: {
@@ -205,7 +251,9 @@ export default {
           newValue.price &&
           newValue.timeLimit &&
           newValue.categoryId !== 'default' &&
-          newValue.subCategoryId !== 'default'
+          newValue.subCategoryId !== 'default' &&
+          this.errors.timeLimit.isValid &&
+          this.errors.title.isValid
         ) {
           this.isDisableBtn = false;
         } else {
@@ -224,7 +272,14 @@ export default {
   },
 
   async mounted() {
-    this.allCategories = await this.getAllCategories();
+    const allCategories = await this.getAllCategories();
+
+    // Start Moving "other" category at end
+    const category = allCategories.find((category) => category.name === 'other');
+    this.allCategories = allCategories.filter((category) => category.name !== 'other');
+    this.allCategories.push(category);
+    // End Moving "other" category at end
+
     if (this.user.stripe_seller_id) {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
@@ -237,7 +292,7 @@ export default {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding', 'getStripeIdStatus']),
 
-    priceValidation(event) {
+    numberValidation(event) {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
     },
 
@@ -381,7 +436,8 @@ export default {
         });
         return;
       }
-      this.formData.title = this.formData.title.toLowerCase();
+
+      this.formData.title = this.formData.title.toLowerCase().replace(/\s+/g, ' ').trim();
       const obj = {
         testDetail: this.formData,
         questionList: this.questionList,
@@ -515,5 +571,16 @@ export default {
   transform: translateY(-20px);
   font-size: 15px;
   color: #000;
+}
+
+.password_format_position {
+  left: 8rem;
+  bottom: 2.5rem;
+}
+
+.wrapper .input-data label {
+  img {
+    pointer-events: auto;
+  }
 }
 </style>
