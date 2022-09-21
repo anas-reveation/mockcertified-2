@@ -5,7 +5,7 @@
       ],
       "target": {
         "namespace": "android_app",
-        "package_name": "com.mockcertified.app",
+        "package_name": "com.mockcertified.mockcertified",
         "sha256_cert_fingerprints": [
           "FF:59:98:DD:FA:E2:39:5B:CF:97:88:E4:55:40:37:16:29:25:5E:AC:BB:75:22:C3:BA:C8:A5:91:3B:4F:08:43"
         ]

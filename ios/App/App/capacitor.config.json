@@ -1,5 +1,5 @@
 {
-	"appId": "com.mockcertified.app",
+	"appId": "com.mockcertified.mockcertified",
 	"appName": "Mockcertified",
 	"webDir": "dist",
 	"bundledWebRuntime": false,
