@@ -29,6 +29,8 @@
           <li
             class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/create-test">
               <span class="p-1 ms-3">
@@ -41,6 +43,8 @@
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black '"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/created-test">
               <span class="p-1 ms-3">
@@ -57,6 +61,8 @@
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black '"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/terms-conditions">
               <span class="p-1 ms-3">
@@ -73,6 +79,8 @@
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black '"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
           >
             <NuxtLink class="nav-link text-black" aria-current="page" to="/privacy-policy">
               <span class="p-1 ms-3">
@@ -86,6 +94,8 @@
               v-if="userGroup === 'admins'"
               class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
               :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
             >
               <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/admin">
                 <span class="p-1 ms-3">
@@ -99,7 +109,11 @@
               </NuxtLink>
             </li>
           </ClientOnly>
-          <li class="nav-item text-capitalize py-1 font_size_16">
+          <li
+            class="nav-item text-capitalize py-1 font_size_16"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
             <div class="p-1 ms-3" @click="userLogOut()">
               <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
               Logout

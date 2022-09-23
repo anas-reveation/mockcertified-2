@@ -52,7 +52,7 @@
               v-if="$route.path.match(/\/purchased-test\/*/g)"
               class="text-primary pb-2 font_size_10"
             >
-              Attempt
+              Purchased
             </span>
           </NuxtLink>
         </div>
