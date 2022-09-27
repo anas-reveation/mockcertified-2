@@ -12,8 +12,9 @@
     <form class="wrapper" @submit.prevent="loginLocal">
       <div class="mb-4 input-data">
         <input
-          type="email"
+          type="text"
           class="border border-2 border-primary rounded py-3"
+          :class="!errors.email.isValid && 'border-danger'"
           v-model="form.email"
           required
         />
@@ -53,7 +54,7 @@
           type="submit"
           class="btn border border-2 border-primary fw-bold px-3"
           :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
-          :disabled="!form.email || !form.password"
+          :disabled="!form.email || !form.password || !errors.email.isValid"
         >
           Login
         </button>
@@ -109,10 +110,31 @@ export default {
       password: '',
     },
     isPasswordVisible: false,
+
+    errors: {
+      email: {
+        isValid: true,
+        isVisiable: false,
+        msg: 'Invalid email address',
+      },
+    },
   }),
 
   computed: {
     ...mapState(['isLoading']),
+  },
+
+  watch: {
+    'form.email'(newValue, _oldValue) {
+      this.errors.email.isValid =
+        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+          newValue,
+        );
+
+      if (this.errors.email.isValid) {
+        this.errors.email.isVisiable = false;
+      }
+    },
   },
 
   async mounted() {

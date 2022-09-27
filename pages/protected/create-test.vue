@@ -108,7 +108,7 @@
       </div>
 
       <button type="button" class="btn text-white mb-2 bg_clr_blue" @click="downloadCsv">
-        Dowload template
+        Download template
       </button>
 
       <div class="text-center">
@@ -252,8 +252,7 @@ export default {
           newValue.timeLimit &&
           newValue.categoryId !== 'default' &&
           newValue.subCategoryId !== 'default' &&
-          this.errors.timeLimit.isValid &&
-          this.errors.title.isValid
+          this.errors.timeLimit.isValid
         ) {
           this.isDisableBtn = false;
         } else {
@@ -264,6 +263,12 @@ export default {
         // hasn't been replaced.
       },
       deep: true,
+    },
+
+    questionList(newValue, _oldValue) {
+      if (newValue.length <= 0) {
+        this.isDisableBtn = true;
+      }
     },
   },
 
@@ -303,7 +308,7 @@ export default {
 
     onChange(event) {
       this.file = event.target.files ? event.target.files[0] : null;
-      if (this.file) {
+      if (this.file && this.file.type == 'text/csv') {
         const reader = new FileReader();
         reader.onload = (e) => {
           /* Parse data */
@@ -317,6 +322,8 @@ export default {
           this.pasreFileData(data);
         };
         reader.readAsBinaryString(this.file);
+      } else {
+        this.questionList = [];
       }
     },
 

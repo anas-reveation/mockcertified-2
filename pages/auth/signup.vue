@@ -30,16 +30,7 @@
         </label>
         <div
           v-if="errors.firstName.isVisiable"
-          class="
-            position-absolute
-            p-1
-            bg-white
-            text-danger
-            border border-2 border-danger
-            rounded
-            font_family_roboto font_size_14
-            password_format_position
-          "
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.firstName.msg }}
         </div>
@@ -66,16 +57,7 @@
         </label>
         <div
           v-if="errors.lastName.isVisiable"
-          class="
-            position-absolute
-            p-1
-            bg-white
-            text-danger
-            border border-2 border-danger
-            rounded
-            font_family_roboto font_size_14
-            password_format_position
-          "
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.lastName.msg }}
         </div>
@@ -83,7 +65,7 @@
 
       <div class="mb-4 input-data">
         <input
-          type="email"
+          type="text"
           class="border border-2 border-primary rounded py-3"
           v-model="registerForm.email"
           required
@@ -99,16 +81,7 @@
         </label>
         <div
           v-if="errors.email.isVisiable"
-          class="
-            position-absolute
-            p-1
-            bg-white
-            text-danger
-            border border-2 border-danger
-            rounded
-            font_family_roboto font_size_14
-            password_format_position
-          "
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.email.msg }}
         </div>
@@ -147,16 +120,7 @@
         </div>
         <div
           v-if="errors.password.isVisiable"
-          class="
-            position-absolute
-            p-1
-            bg-white
-            text-danger
-            border border-2 border-danger
-            rounded
-            font_family_roboto font_size_14
-            password_format_position
-          "
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
         >
           {{ errors.password.msg }}
         </div>
