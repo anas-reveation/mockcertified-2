@@ -771,3 +771,45 @@ export const deleteResult = /* GraphQL */ `
     }
   }
 `;
+export const createPromotion = /* GraphQL */ `
+  mutation CreatePromotion(
+    $input: CreatePromotionInput!
+    $condition: ModelPromotionConditionInput
+  ) {
+    createPromotion(input: $input, condition: $condition) {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePromotion = /* GraphQL */ `
+  mutation UpdatePromotion(
+    $input: UpdatePromotionInput!
+    $condition: ModelPromotionConditionInput
+  ) {
+    updatePromotion(input: $input, condition: $condition) {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePromotion = /* GraphQL */ `
+  mutation DeletePromotion(
+    $input: DeletePromotionInput!
+    $condition: ModelPromotionConditionInput
+  ) {
+    deletePromotion(input: $input, condition: $condition) {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;

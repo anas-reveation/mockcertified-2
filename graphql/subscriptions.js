@@ -679,3 +679,36 @@ export const onDeleteResult = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePromotion = /* GraphQL */ `
+  subscription OnCreatePromotion {
+    onCreatePromotion {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePromotion = /* GraphQL */ `
+  subscription OnUpdatePromotion {
+    onUpdatePromotion {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePromotion = /* GraphQL */ `
+  subscription OnDeletePromotion {
+    onDeletePromotion {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;

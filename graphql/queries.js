@@ -130,6 +130,40 @@ export const listTestManagers = /* GraphQL */ `
     }
   }
 `;
+export const listTestsByStatus = /* GraphQL */ `
+  query ListTestsByStatus(
+    $status: TestManagerStatus!
+    $sortDirection: ModelSortDirection
+    $filter: ModelTestManagerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTestsByStatus(
+      status: $status
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        price
+        status
+        tags
+        time_limit
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getQuestion = /* GraphQL */ `
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {
@@ -404,6 +438,35 @@ export const listResults = /* GraphQL */ `
         question_id
         user_input
         result_status
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPromotion = /* GraphQL */ `
+  query GetPromotion($id: ID!) {
+    getPromotion(id: $id) {
+      id
+      promotion_code
+      discount_percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPromotions = /* GraphQL */ `
+  query ListPromotions(
+    $filter: ModelPromotionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPromotions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        promotion_code
+        discount_percentage
         createdAt
         updatedAt
       }

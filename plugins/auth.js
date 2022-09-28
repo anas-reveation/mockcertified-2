@@ -42,11 +42,11 @@ export default async ({ app, route, store }) => {
     }
 
     if (isAuthenticated && (homeRoute || authRoute)) {
-      app.router.push('/protected/dashboard');
+      app.router.push('/dashboard');
     }
 
     if (userGroup !== 'admins' && adminRoute) {
-      app.router.push('/protected/dashboard');
+      app.router.push('/dashboard');
     }
   });
 };

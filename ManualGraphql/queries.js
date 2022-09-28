@@ -173,6 +173,57 @@ export const listAllTests = /* GraphQL */ `
   }
 `;
 
+export const listTestsByStatus = /* GraphQL */ `
+  query ListTestsByStatus(
+    $status: TestManagerStatus!
+    $sortDirection: ModelSortDirection
+    $filter: ModelTestManagerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTestsByStatus(
+      status: $status
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_id
+        category_id
+        title
+        description
+        price
+        status
+        time_limit
+        reject_description
+        createdAt
+        updatedAt
+        questions {
+          items {
+            answer
+            explainantion
+            id
+            marks
+            options
+            question
+          }
+        }
+        created_by {
+          id
+          first_name
+          last_name
+          email
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
 export const getCategoryDetail = /* GraphQL */ `
   query GetCategory($id: ID!) {
     getCategory(id: $id) {

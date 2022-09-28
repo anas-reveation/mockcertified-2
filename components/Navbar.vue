@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2">
     <div class="container px-0">
-      <NuxtLink class="navbar-brand ms-2" to="/protected/dashboard">
+      <NuxtLink class="navbar-brand ms-2" to="/dashboard">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
       </NuxtLink>
       <img
@@ -16,7 +16,12 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       />
-      <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+      <div
+        class="collapse navbar-collapse position-relative"
+        :class="isNavbarVisible && 'show'"
+        ref="navbarDiv"
+        id="navbarSupportedContent"
+      >
         <span
           class="position-absolute bottom-0 end-0"
           data-bs-toggle="collapse"
@@ -78,7 +83,7 @@
 
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-            :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black '"
+            :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black'"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
           >
@@ -89,7 +94,29 @@
               </span>
             </NuxtLink>
           </li>
+
           <ClientOnly>
+            <li
+              class="nav-item text-capitalize py-1 font_size_16"
+              :class="[
+                $route.path.match(/\/contact-us\/*/g) && 'bg-secondary fill_black',
+                isAuthenticated && 'border-bottom border-primary',
+              ]"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+            >
+              <NuxtLink class="nav-link text-black" aria-current="page" to="/contact-us">
+                <span class="p-1 ms-3">
+                  <img
+                    src="@/assets/images/contact-us-icon.svg"
+                    alt="contact-us"
+                    class="me-1 mb-1"
+                  />
+                  Contact Us
+                </span>
+              </NuxtLink>
+            </li>
+
             <li
               v-if="userGroup === 'admins'"
               class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
@@ -108,34 +135,39 @@
                 </span>
               </NuxtLink>
             </li>
+
+            <li
+              v-if="isAuthenticated"
+              class="nav-item text-capitalize py-1 font_size_16"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+            >
+              <div class="p-1 ms-3" @click="userLogOut()">
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
+                Logout
+              </div>
+            </li>
           </ClientOnly>
-          <li
-            class="nav-item text-capitalize py-1 font_size_16"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-          >
-            <div class="p-1 ms-3" @click="userLogOut()">
-              <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
-              Logout
-            </div>
-          </li>
         </ul>
       </div>
     </div>
-    <div class="bg-primary w-100 mt-2 hr_line" />
+    <div class="bg-primary w-100 hr_line" />
   </nav>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   computed: {
-    ...mapState('auth', ['userGroup']),
+    ...mapState('auth', ['userGroup', 'isAuthenticated']),
+    ...mapState(['isNavbarVisible']),
   },
 
   methods: {
     ...mapActions('auth', ['logout']),
+    ...mapMutations(['setIsNavbarVisible']),
+
     async userLogOut() {
       const res = await this.logout();
       if (res) {

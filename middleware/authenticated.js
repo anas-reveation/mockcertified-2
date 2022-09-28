@@ -13,11 +13,11 @@ export default async function ({ store, route, redirect, req }) {
     }
 
     if (isAuthenticated && (homeRoute || authRoute)) {
-      redirect('/protected/dashboard');
+      redirect('/dashboard');
     }
 
     if (userGroup !== 'admins' && adminRoute) {
-      redirect('/protected/dashboard');
+      redirect('/dashboard');
     }
   }
 }

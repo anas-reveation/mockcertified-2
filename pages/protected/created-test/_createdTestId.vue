@@ -57,7 +57,7 @@ export default {
     this.testDetail = this.allCreatedTests.find((test) => test.id === this.createdTestId);
 
     if (!this.testDetail) {
-      this.$router.push('/protected/dashboard');
+      this.$router.push('/dashboard');
       return;
     }
 
@@ -77,7 +77,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/protected/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testId}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,

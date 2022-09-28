@@ -125,7 +125,7 @@
           type="submit"
           class="btn border border-2 border-primary w-50 mb-2"
           :class="!isDisableBtn && 'btn-secondary'"
-          :disabled="isDisableBtn"
+          :disabled="isDisableBtn || questionList.length <= 0"
         >
           Submit
         </button>
@@ -285,7 +285,7 @@ export default {
     this.allCategories.push(category);
     // End Moving "other" category at end
 
-    if (this.user.stripe_seller_id) {
+    if (!this.user.stripe_seller_id) {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
@@ -443,6 +443,18 @@ export default {
         });
         return;
       }
+      if (this.questionList.length <= 0) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Please submit questions',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return;
+      }
 
       this.formData.title = this.formData.title.toLowerCase().replace(/\s+/g, ' ').trim();
       const obj = {
@@ -451,7 +463,7 @@ export default {
       };
       const res = await this.createTest(obj);
       if (res) {
-        this.$router.push('/protected/dashboard');
+        this.$router.push('/dashboard');
         this.$swal.fire({
           toast: true,
           position: 'top-end',

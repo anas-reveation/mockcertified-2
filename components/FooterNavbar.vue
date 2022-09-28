@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col">
           <NuxtLink
-            to="/protected/dashboard"
+            to="/dashboard"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div

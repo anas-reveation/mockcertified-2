@@ -11,6 +11,8 @@ const state = () => {
     allPurchasedTests: [],
     allAttemptedTests: [],
     allCreatedTests: [],
+    isNavbarVisible: false,
+    redirectUrl: '',
   };
 };
 
@@ -44,10 +46,26 @@ const mutations = {
   selectTest(state, test) {
     state.selectedTest = test;
   },
+
+  setRedirectUrl(state, params) {
+    state.redirectUrl = params;
+  },
+
+  clearRedirectUrl(state, params) {
+    state.redirectUrl = '';
+  },
+
+  setIsNavbarVisible(state, params) {
+    state.isNavbarVisible = params;
+  },
 };
 
 const actions = {
   // async nuxtServerInit(ctx, etx) {},
+
+  setIsNavbarVisible({ commit }, payload) {
+    commit('setIsNavbarVisible', payload);
+  },
 };
 
 export default {

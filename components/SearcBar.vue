@@ -7,6 +7,7 @@
       class="col form-control border border-2 border-primary rounded-pill me-2"
       :class="!value && 'bg_input text_indent'"
       type="search"
+      maxlength="80"
       placeholder="Search"
       aria-label="Search"
       :value="value"

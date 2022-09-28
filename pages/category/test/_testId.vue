@@ -23,14 +23,25 @@
       >
         {{ msgText }}
       </button>
-      <button
-        v-else
-        type="button"
-        class="btn btn-secondary border border-2 border-primary w-50"
-        @click="buyNowLocal"
-      >
-        Buy Now
-      </button>
+
+      <div v-else>
+        <button
+          v-if="isAuthenticated"
+          type="button"
+          class="btn btn-secondary border border-2 border-primary w-50"
+          @click="buyNowLocal"
+        >
+          Buy Now
+        </button>
+        <button
+          v-else
+          type="button"
+          class="btn btn-secondary border border-2 border-primary w-50"
+          @click="redirectLogin"
+        >
+          Login
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +68,7 @@ export default {
   },
 
   computed: {
-    ...mapState('auth', ['user']),
+    ...mapState('auth', ['user', 'isAuthenticated']),
     ...mapState('buyer', ['cartItems']),
     ...mapState(['allPurchasedTests']),
 
@@ -73,7 +84,7 @@ export default {
 
     msgText() {
       // If user created this test
-      if (this.testDetail.created_by.id === this.user.id) {
+      if (this.isAuthenticated && this.testDetail.created_by.id === this.user.id) {
         // return "You're the creator";
         this.isUserOwner = true;
         return;
@@ -104,11 +115,11 @@ export default {
     this.testDetail = await this.getTestDetail(this.testId);
 
     if (!this.testDetail) {
-      this.$router.push('/protected/dashboard');
+      this.$router.push('/dashboard');
       return;
     }
 
-    if (!this.allPurchasedTests.length) {
+    if (this.isAuthenticated && !this.allPurchasedTests.length) {
       await this.getUserTests();
     }
   },
@@ -116,13 +127,13 @@ export default {
   methods: {
     ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
     ...mapActions('buyer', ['buyNow']),
-    ...mapMutations('buyer', ['clearCart']),
+    ...mapMutations(['setRedirectUrl']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/protected/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testId}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,
@@ -136,7 +147,7 @@ export default {
       if (res) {
         this.stripeUrl = res;
         this.confirmFunc();
-        // this.$router.push('/protected/dashboard')  ;
+        // this.$router.push('/dashboard')  ;
       }
     },
 
@@ -152,6 +163,11 @@ export default {
             await Browser.open({ url: this.stripeUrl });
           }
         });
+    },
+
+    redirectLogin() {
+      this.setRedirectUrl(`/category/test/${this.testId}`);
+      this.$router.push('/auth/login');
     },
   },
 };

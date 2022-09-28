@@ -1,7 +1,7 @@
 <template>
   <div class="container px-4">
     <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/">
+      <NuxtLink to="/dashboard">
         <img src="@/assets/images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>

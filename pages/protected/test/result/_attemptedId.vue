@@ -230,7 +230,7 @@ export default {
     const attemptedTest = this.allAttemptedTests.filter((item) => item.id === this.attemptedId);
     if (!attemptedTest.length) {
       this.SET_LOADER(false);
-      this.$router.push('/protected/dashboard');
+      this.$router.push('/dashboard');
       return;
     }
     this.attemptedTimeStamp = new Date(attemptedTest[0].createdAt).toDateString();
@@ -290,7 +290,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/protected/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testId}`;
       await Share.share({
         title,
         text: `Hurray, I got ${this.percentage}% in ${title} test`,

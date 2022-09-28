@@ -88,7 +88,7 @@ export default {
 
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
     if (!this.testDetail) {
-      this.$router.push('/protected/dashboard');
+      this.$router.push('/dashboard');
       return;
     }
 

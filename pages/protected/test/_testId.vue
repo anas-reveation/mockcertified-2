@@ -121,7 +121,7 @@ export default {
       const domainOrigin = window.location.origin;
       const testId = this.testDetail.id;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/protected/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testId}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,

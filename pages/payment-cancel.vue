@@ -1,7 +1,7 @@
 <template>
   <div class="container px-4">
     <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/">
+      <NuxtLink to="/dashboard">
         <img src="@/assets/images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>
@@ -20,10 +20,7 @@
       </p>
 
       <div class="mt-5d">
-        <NuxtLink
-          class="btn btn-white border-2 border-primary text-primary w-75"
-          to="/protected/category"
-        >
+        <NuxtLink class="btn btn-white border-2 border-primary text-primary w-75" to="/category">
           Go to category
         </NuxtLink>
       </div>

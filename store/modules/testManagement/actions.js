@@ -1,4 +1,6 @@
-import { API, graphqlOperation } from 'aws-amplify';
+import { API } from 'aws-amplify';
+
+import { listTestsByStatus } from '~/ManualGraphql/queries';
 
 import {
   createAttemptedTest,
@@ -6,6 +8,7 @@ import {
   updateAttemptedTest,
   addResultStatus,
 } from '~/graphql/mutations';
+
 import {
   userTests,
   getTestDetail,
@@ -66,22 +69,13 @@ export default {
 
   async getRecentlyAddedTests({ commit }) {
     commit('SET_LOADER', true, { root: true });
-
     try {
-      const filter = {
-        status: { eq: 'APPROVED' },
-      };
-
-      // "graphqlOperation" using this because we have to limit after filter
       const allRecentlyAddedTestData = await API.graphql({
-        ...graphqlOperation(listAllTests, {
-          filter,
-          limit: 10,
-        }),
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: listTestsByStatus,
+        variables: { status: 'APPROVED', limit: 1 },
       });
 
-      const allRecentlyAddedTest = allRecentlyAddedTestData.data.listTestManagers.items;
+      const allRecentlyAddedTest = allRecentlyAddedTestData.data.listTestsByStatus.items;
       commit('setRecentlyAddedTests', allRecentlyAddedTest);
       commit('SET_LOADER', false, { root: true });
     } catch (err) {
@@ -103,16 +97,15 @@ export default {
 
     const filter = {
       tags: { contains: 'FEATURED' },
-      and: { status: { eq: 'APPROVED' } },
     };
 
     try {
       const allFeaturedTestData = await API.graphql({
-        query: listAllTests,
-        variables: { filter: filter, limit: 5 },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        query: listTestsByStatus,
+        variables: { status: 'APPROVED', filter: filter },
       });
-      const allFeaturedTest = allFeaturedTestData.data.listTestManagers.items;
+
+      const allFeaturedTest = allFeaturedTestData.data.listTestsByStatus.items;
       commit('setFeaturedTests', allFeaturedTest);
       commit('SET_LOADER', false, { root: true });
     } catch (err) {
@@ -135,7 +128,7 @@ export default {
     try {
       const allCategoriesData = await API.graphql({
         query: listCategoriesDetail,
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
       commit('setCategories', allCategories);
@@ -163,7 +156,7 @@ export default {
       const allSubCategoriesData = await API.graphql({
         query: getCategoryDetail,
         variables: { id: categoryId },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allSubCategories = allSubCategoriesData.data.getCategory.sub_category.items;
 
@@ -201,7 +194,7 @@ export default {
       const allTestsData = await API.graphql({
         query: listAllTests,
         variables: { filter: filter },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allTests = allTestsData.data.listTestManagers.items;
       commit('SET_LOADER', false, { root: true });
@@ -229,7 +222,7 @@ export default {
       const testQueryData = await API.graphql({
         query: getTestDetail,
         variables: { id: testId },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const testData = testQueryData.data.getTestManager;
       commit('SET_LOADER', false, { root: true });
@@ -438,7 +431,7 @@ export default {
       const allTestData = await API.graphql({
         query: listAllTests,
         variables: { filter: filter },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });
       const testList = allTestData.data.listTestManagers.items;

@@ -1,7 +1,7 @@
 <template>
   <div class="position-relative">
     <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/">
+      <NuxtLink to="/dashboard">
         <img src="@/assets/images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>
@@ -56,7 +56,7 @@ export default {
 
   async mounted() {
     if (this.isAuthenticated) {
-      this.$router.push('/protected/dashboard');
+      this.$router.push('/dashboard');
 
       return;
     }

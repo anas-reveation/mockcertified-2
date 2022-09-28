@@ -8,6 +8,7 @@ type User
   @model
   @auth(
     rules: [
+      { allow: public, operations: [read] }
       { allow: private, operations: [create, read, update] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
@@ -27,6 +28,7 @@ type TestManager
   @model
   @auth(
     rules: [
+      { allow: public, operations: [read] }
       { allow: private, operations: [create, read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
@@ -41,7 +43,9 @@ type TestManager
   description: String!
   reject_description: String
   price: Int!
-  status: TestManagerStatus @default(value: "IN_PROGRESS")
+  status: TestManagerStatus
+    @default(value: "IN_PROGRESS")
+    @index(name: "testsByStatus", queryField: "listTestsByStatus")
   tags: [String]
   # In minutes
   time_limit: Int!
@@ -72,6 +76,7 @@ type Category
   @model
   @auth(
     rules: [
+      { allow: public, operations: [read] }
       { allow: private, operations: [read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
@@ -86,6 +91,7 @@ type SubCategory
   @model
   @auth(
     rules: [
+      { allow: public, operations: [read] }
       { allow: private, operations: [read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
@@ -150,6 +156,19 @@ type Result
   result_status: Boolean
 }
 
+type Promotion
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read, update] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  promotion_code: String!
+  discount_percentage: Float!
+}
+
 enum AttemptStatus {
   ABORTED
   COMPLETED
@@ -179,3 +198,4 @@ type Mutation {
     cancel_redirect_url: String!
   ): String @function(name: "stripeCheckout-${env}")
 }
+ 

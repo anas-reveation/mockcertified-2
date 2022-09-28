@@ -11,7 +11,7 @@
 
     <div class="text-center">
       <button @click="getRedirectlink" class="btn border border-2 border-primary text-primary w-75">
-        View your Payout
+        View your payout
       </button>
     </div>
   </div>

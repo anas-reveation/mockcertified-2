@@ -97,7 +97,7 @@ import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { Capacitor } from '@capacitor/core';
 import { Auth } from 'aws-amplify';
 import { Http } from '@capacitor-community/http';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   layout: 'introLayout',
@@ -121,7 +121,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'redirectUrl']),
   },
 
   watch: {
@@ -146,10 +146,15 @@ export default {
 
   methods: {
     ...mapActions('auth', ['login', 'load']),
+    ...mapMutations(['clearRedirectUrl']),
+
     async loginLocal() {
       const res = await this.login(this.form);
-      if (res) {
-        this.$router.push('/protected/dashboard');
+      if (res && this.redirectUrl) {
+        this.$router.push(this.redirectUrl);
+        this.clearRedirectUrl();
+      } else if (res) {
+        this.$router.push('/dashboard');
       }
     },
 
