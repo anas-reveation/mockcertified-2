@@ -10,6 +10,7 @@
         v-for="(item, index) in breadCrum"
         :key="index"
         :class="index === breadCrum.length - 1 && 'fw-bolder'"
+        @click="goingBack(index)"
       >
         > {{ item.name }}
       </span>
@@ -126,6 +127,20 @@ export default {
 
     redirectPage(id) {
       this.$router.push(`/category/test/${id}`);
+    },
+
+    async goingBack(index) {
+      this.allTestBySubCategory = [];
+      this.allCategoriesFilter = [];
+      this.breadCrum = [];
+      if (index !== this.breadCrum.length - 1) {
+        this.allSubCategory = await this.getAllSubCategories(this.categoryId);
+        this.allCategoriesFilter = this.allSubCategory;
+        const obj = {
+          name: this.categoryName,
+        };
+        this.breadCrum.push(obj);
+      }
     },
 
     async getAllTests(subCategoryId, name) {

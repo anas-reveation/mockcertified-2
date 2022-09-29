@@ -34,24 +34,26 @@
           <li
             class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
+            @click="redirect('/protected/create-test')"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/create-test">
+            <a class="nav-link text-black" aria-current="page">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
                 Create A New Test
               </span>
-            </NuxtLink>
+            </a>
           </li>
 
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-            :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black '"
+            :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black'"
+            @click="redirect('/protected/created-test')"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/created-test">
+            <a class="nav-link text-black" aria-current="page">
               <span class="p-1 ms-3">
                 <img
                   src="@/assets/images/created_tests.svg"
@@ -60,16 +62,17 @@
                 />
                 Created Tests
               </span>
-            </NuxtLink>
+            </a>
           </li>
 
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-            :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black '"
+            :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black'"
+            @click="redirect('/terms-conditions')"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/terms-conditions">
+            <a class="nav-link text-black" aria-current="page">
               <span class="p-1 ms-3">
                 <img
                   src="@/assets/images/terms_conditions.svg"
@@ -78,21 +81,22 @@
                 />
                 Terms and Conditions
               </span>
-            </NuxtLink>
+            </a>
           </li>
 
           <li
             class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
             :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black'"
+            @click="redirect('/privacy-policy')"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
           >
-            <NuxtLink class="nav-link text-black" aria-current="page" to="/privacy-policy">
+            <a class="nav-link text-black" aria-current="page">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1 mb-1" />
                 Privacy policy
               </span>
-            </NuxtLink>
+            </a>
           </li>
 
           <ClientOnly>
@@ -102,10 +106,11 @@
                 $route.path.match(/\/contact-us\/*/g) && 'bg-secondary fill_black',
                 isAuthenticated && 'border-bottom border-primary',
               ]"
+              @click="redirect('/contact-us')"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
             >
-              <NuxtLink class="nav-link text-black" aria-current="page" to="/contact-us">
+              <a class="nav-link text-black" aria-current="page">
                 <span class="p-1 ms-3">
                   <img
                     src="@/assets/images/contact-us-icon.svg"
@@ -114,17 +119,18 @@
                   />
                   Contact Us
                 </span>
-              </NuxtLink>
+              </a>
             </li>
 
             <li
               v-if="userGroup === 'admins'"
               class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
               :class="$route.path.match(/\/admin\/*/g) && 'bg-secondary fill_black'"
+              @click="redirect('/protected/admin')"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
             >
-              <NuxtLink class="nav-link text-black" aria-current="page" to="/protected/admin">
+              <a class="nav-link text-black" aria-current="page">
                 <span class="p-1 ms-3">
                   <img
                     src="@/assets/images/admin_pannel.svg"
@@ -133,16 +139,17 @@
                   />
                   Admin Panel
                 </span>
-              </NuxtLink>
+              </a>
             </li>
 
             <li
               v-if="isAuthenticated"
               class="nav-item text-capitalize py-1 font_size_16"
+              @click="userLogOut()"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
             >
-              <div class="p-1 ms-3" @click="userLogOut()">
+              <div class="p-1 ms-3">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
                 Logout
               </div>
@@ -164,6 +171,10 @@ export default {
     ...mapState(['isNavbarVisible']),
   },
 
+  mounted() {
+    console.log('this.$refs.navbarDiv', this.$refs);
+  },
+
   methods: {
     ...mapActions('auth', ['logout']),
     ...mapMutations(['setIsNavbarVisible']),
@@ -173,6 +184,10 @@ export default {
       if (res) {
         this.$router.push('/auth/login');
       }
+    },
+
+    redirect(url) {
+      this.$router.push(url);
     },
   },
 };

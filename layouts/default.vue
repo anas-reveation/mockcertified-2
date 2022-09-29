@@ -6,10 +6,14 @@
     >
       <div class="spinner-border" role="status"></div>
     </div>
-    <Navbar class="z_index2" />
-    <Nuxt class="margin_bottom px-4" />
 
-    <div class="fixed-bottom footer_height">
+    <Navbar class="z_index2" />
+
+    <div @click="removeClass">
+      <Nuxt class="margin_bottom px-4" />
+    </div>
+
+    <div class="fixed-bottom footer_height" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
         <div class="position-absolute bottom-0 end-0 mb-2">
           <img src="@/assets/images/alexa.svg" alt="alexa-icon" />
@@ -43,6 +47,12 @@ export default {
       },
       deep: true,
       immediate: true,
+    },
+  },
+
+  methods: {
+    removeClass() {
+      this.$root.$children[2].$children[0].$refs['navbarDiv'].classList.remove('show');
     },
   },
 };

@@ -171,6 +171,7 @@ export default {
         return;
       }
       const res = await this.getTestByQuery(this.searchQuery);
+      this.searchQuery = '';
       if (!res) {
         this.allSearchedTest = [];
         return;

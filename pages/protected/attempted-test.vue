@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div v-if="!filteredTests.length" class="px-3">
+      <div v-if="!isLoading && !filteredTests.length" class="px-3">
         <h1 class="fw-bold font_size_32">No Test Available</h1>
         <p>
           Want to give a test?
@@ -104,7 +104,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['allAttemptedTests']),
+    ...mapState(['isLoading', 'allAttemptedTests']),
   },
 
   watch: {

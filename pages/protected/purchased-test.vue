@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="!filteredTests.length">
+    <div v-if="!isLoading && !filteredTests.length">
       <h1 class="fw-bold font_size_32">No Test Available</h1>
       <p>
         Want to buy new tests?
@@ -69,7 +69,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['allPurchasedTests']),
+    ...mapState(['isLoading', 'allPurchasedTests']),
   },
 
   watch: {
