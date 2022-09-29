@@ -277,6 +277,11 @@ export default {
   },
 
   async mounted() {
+    if (this.user.stripe_seller_id || this.user.stripe_seller_id.length < 1) {
+      await this.getStripeIdStatusLocal();
+      const res = await this.stripeOnboardingLocal();
+      this.stripeUrl = res;
+    }
     const allCategories = await this.getAllCategories();
 
     // Start Moving "other" category at end
@@ -285,11 +290,6 @@ export default {
     this.allCategories.push(category);
     // End Moving "other" category at end
 
-    if (!this.user.stripe_seller_id) {
-      await this.getStripeIdStatusLocal();
-      const res = await this.stripeOnboardingLocal();
-      this.stripeUrl = res;
-    }
     this.isDisable = false;
   },
 
