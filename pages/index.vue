@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative">
+  <div v-if="!isDisable" class="position-relative">
     <div class="position-absolute top-0 end-0 p-2">
       <NuxtLink to="/dashboard">
         <img src="@/assets/images/logo.svg" alt="logo" />
@@ -55,12 +55,13 @@ export default {
   },
 
   async mounted() {
-    if (this.isAuthenticated) {
-      this.$router.push('/dashboard');
+    this.$router.push('/dashboard');
+    // if (this.isAuthenticated) {
+    //   this.$router.push('/dashboard');
 
-      return;
-    }
-    this.isDisable = false;
+    //   return;
+    // }
+    // this.isDisable = false;
   },
 };
 </script>

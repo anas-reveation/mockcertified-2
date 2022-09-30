@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div v-if="!filteredTests.length" class="mt-4 px-3">
+    <div v-if="!isLoading && !filteredTests.length" class="mt-4 px-3">
       <h1>No Test Available</h1>
     </div>
 
@@ -57,7 +57,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['allCreatedTests']),
+    ...mapState(['isLoading', 'allCreatedTests']),
 
     approvedTests() {
       return this.allCreatedTests.filter((test) => test.status === 'APPROVED');

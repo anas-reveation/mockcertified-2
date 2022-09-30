@@ -219,12 +219,12 @@ export default {
   },
 
   watch: {
-    'formData.title'(newValue, oldValue) {
-      let result = /\d/.test(newValue);
-      if (result) {
-        this.formData.title = oldValue;
-      }
-    },
+    // 'formData.title'(newValue, oldValue) {
+    //   let result = /\d/.test(newValue);
+    //   if (result) {
+    //     this.formData.title = oldValue;
+    //   }
+    // },
 
     'formData.categoryId'(newValue, _oldValue) {
       this.subCategoryId = 'default';

@@ -101,11 +101,8 @@
 
           <ClientOnly>
             <li
-              class="nav-item text-capitalize py-1 font_size_16"
-              :class="[
-                $route.path.match(/\/contact-us\/*/g) && 'bg-secondary fill_black',
-                isAuthenticated && 'border-bottom border-primary',
-              ]"
+              class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
+              :class="$route.path.match(/\/contact-us\/*/g) && 'bg-secondary fill_black'"
               @click="redirect('/contact-us')"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
@@ -143,16 +140,33 @@
             </li>
 
             <li
+              v-if="!isAuthenticated"
+              class="nav-item text-capitalize py-1 font_size_16"
+              @click="redirect('/auth/login')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+            >
+              <a class="nav-link text-black" aria-current="page">
+                <span class="p-1 ms-3">
+                  <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
+                  Login
+                </span>
+              </a>
+            </li>
+
+            <li
               v-if="isAuthenticated"
               class="nav-item text-capitalize py-1 font_size_16"
               @click="userLogOut()"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
             >
-              <div class="p-1 ms-3">
-                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
-                Logout
-              </div>
+              <a class="nav-link text-black" aria-current="page">
+                <span class="p-1 ms-3">
+                  <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
+                  Logout
+                </span>
+              </a>
             </li>
           </ClientOnly>
         </ul>
