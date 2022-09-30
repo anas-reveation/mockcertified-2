@@ -277,10 +277,15 @@ export default {
   },
 
   async mounted() {
-    if (this.user.stripe_seller_id || this.user.stripe_seller_id.length < 1) {
+    if (this.user.stripe_seller_id) {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
+    } else if (this.user.stripe_seller_id == '') {
+      await this.getStripeIdStatusLocal();
+      const res = await this.stripeOnboardingLocal();
+      this.stripeUrl = res;
+      this.isAccountActive = null;
     }
     const allCategories = await this.getAllCategories();
 
