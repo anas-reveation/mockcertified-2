@@ -23,13 +23,15 @@ exports.handler = async (event) => {
 
   const getResult = /* GraphQL */ `
     query MyQuery {
-      listPromotions {
-        items {
-          id
-          discount_percentage
-          promotion_code
+      query GetResult($id: ID!) {
+      getResult(id: $id) {
+        result_status
+        user_input
+        question {
+          answer
         }
       }
+    }
     }
   `;
 
