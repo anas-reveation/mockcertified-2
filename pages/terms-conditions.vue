@@ -14,7 +14,7 @@
       Conditions
     </h1>
 
-    <div>
+    <div class="word_wrap">
       <!-- <a href="#1">1. AGREEMENT TO TERMS</a> <br />
       <a href="#2">2. INTELLECTUAL PROPERTY RIGHTS</a> <br />
       <a href="#3">3. USER REPRESENTATIONS</a> <br />
@@ -820,5 +820,9 @@ ul {
 
 li {
   font-size: 16px;
+}
+
+.word_wrap {
+  word-wrap: break-word;
 }
 </style>

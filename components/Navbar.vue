@@ -185,10 +185,6 @@ export default {
     ...mapState(['isNavbarVisible']),
   },
 
-  mounted() {
-    console.log('this.$refs.navbarDiv', this.$refs);
-  },
-
   methods: {
     ...mapActions('auth', ['logout']),
     ...mapMutations(['setIsNavbarVisible']),

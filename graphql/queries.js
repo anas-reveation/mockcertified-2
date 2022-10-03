@@ -21,6 +21,11 @@ export const getStripeIdStatus = /* GraphQL */ `
     getStripeIdStatus(seller_id: $seller_id)
   }
 `;
+export const checkPromoCode = /* GraphQL */ `
+  query CheckPromoCode($promocode: String!) {
+    checkPromoCode(promocode: $promocode)
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {

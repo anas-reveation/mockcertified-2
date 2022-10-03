@@ -22,6 +22,8 @@ class AuthService {
 }
 
 export default async ({ app, route, store }) => {
+  store.commit('setPlatform');
+
   const authService = new AuthService(store);
   Vue.prototype.$auth = authService;
   Vue.$auth = authService;

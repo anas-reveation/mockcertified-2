@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="!isLoading && !filteredTests.length">
+    <div v-if="isFetched && !filteredTests.length">
       <h1 class="fw-bold font_size_32">No Test Available</h1>
       <p>
         Want to buy new tests?
@@ -64,6 +64,7 @@ export default {
       filteredTests: [],
       sortBy: 'date',
       isAscending: true,
+      isFetched: false,
     };
   },
 
@@ -91,6 +92,7 @@ export default {
   async mounted() {
     await this.getUserTests();
     this.filteredTests = this.allPurchasedTests;
+    this.isFetched = true;
   },
 
   methods: {

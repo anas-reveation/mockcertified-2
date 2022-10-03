@@ -46,6 +46,8 @@ export default {
         return isValid;
       }
 
+      await dispatch('testManagement/getUserTests', false, { root: true });
+
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {

@@ -4,6 +4,8 @@ import seller from './modules/seller';
 import admin from './modules/admin';
 import testManagement from './modules/testManagement';
 
+import { Capacitor } from '@capacitor/core';
+
 const state = () => {
   return {
     isLoading: false,
@@ -13,6 +15,7 @@ const state = () => {
     allCreatedTests: [],
     isNavbarVisible: false,
     redirectUrl: '',
+    platform: '',
   };
 };
 
@@ -57,6 +60,10 @@ const mutations = {
 
   setIsNavbarVisible(state, params) {
     state.isNavbarVisible = params;
+  },
+
+  setPlatform(state) {
+    state.platform = Capacitor.getPlatform();
   },
 };
 

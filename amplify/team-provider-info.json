@@ -29,7 +29,7 @@
           "stripeSecretKey": "sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E",
           "domainOrigin": "https://develop.d22h3uk4vvon62.amplifyapp.com",
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
-          "s3Key": "amplify-builds/stripeCheckout-484267472f544d33746b-build.zip"
+          "s3Key": "amplify-builds/stripeCheckout-32786264776364733331-build.zip"
         },
         "checkAnswer": {
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
@@ -61,7 +61,7 @@
         },
         "checkPromoCode": {
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
-          "s3Key": "amplify-builds/checkPromoCode-4e63742f2b312b733365-build.zip"
+          "s3Key": "amplify-builds/checkPromoCode-43656358476b2b4d3835-build.zip"
         }
       }
     }

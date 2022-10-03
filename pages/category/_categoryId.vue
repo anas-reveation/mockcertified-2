@@ -57,6 +57,10 @@
         />
       </div>
     </div>
+
+    <div v-if="!allCategoriesFilter.length && !isLoading" class="fw-bolder text-center mt-5">
+      No result found
+    </div>
   </div>
 </template>
 
@@ -92,6 +96,7 @@ export default {
   computed: {
     ...mapState('buyer', ['cartItems']),
     ...mapState('testManagement', ['categoryName']),
+    ...mapState(['isLoading']),
   },
 
   async asyncData({ params }) {

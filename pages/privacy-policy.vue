@@ -14,7 +14,7 @@
       Policy
     </h1>
 
-    <div>
+    <div class="word_wrap">
       <p class="fw-bolder">Last updated September 28, 2022</p>
       <div>
         <p>
@@ -27,8 +27,9 @@
         <ul>
           <li>
             Visit our website at
-            <a href="https://www.mockcertified.com">https://www.mockcertified.com</a>, or any
-            website of ours that links to this privacy notice
+            <span class="text-primary" @click="newWindowsOpen('https://www.mockcertified.com')">
+              https://www.mockcertified.com </span
+            >, or any website of ours that links to this privacy notice
           </li>
           <li>
             Download and use our mobile application (MockCertified), or any other application of
@@ -105,9 +106,14 @@
         <p>
           <span>How do you exercise your rights?</span> The easiest way to exercise your rights is
           by filling out our data subject request form available
-          <a href="https://app.termly.io/notify/c4c4a137-fe9a-44cd-85e0-0f23d28fdbf9">here</a>, or
-          by contacting us. We will consider and act upon any request in accordance with applicable
-          data protection laws.
+          <span
+            class="text-primary"
+            @click="
+              newWindowsOpen('https://app.termly.io/notify/c4c4a137-fe9a-44cd-85e0-0f23d28fdbf9')
+            "
+            >here</span
+          >, or by contacting us. We will consider and act upon any request in accordance with
+          applicable data protection laws.
         </p>
         <p>
           Want to learn more about what MockCertified does with any information we collect? Click
@@ -169,7 +175,9 @@
           make purchases, such as your payment instrument number (such as a credit card number), and
           the security code associated with your payment instrument. All payment data is stored by
           stripe.com. You may find their privacy notice link(s) here:
-          <a href="https://stripe.com/en-ca/privacy">https://stripe.com/en-ca/privacy.</a>
+          <span class="text-primary" @click="newWindowsOpen('https://stripe.com/en-ca/privacy')">
+            https://stripe.com/en-ca/privacy.
+          </span>
         </p>
 
         <p>
@@ -570,17 +578,27 @@
           If you are located in the EEA or UK and you believe we are unlawfully processing your
           personal information, you also have the right to complain to your local data protection
           supervisory authority. You can find their contact details here:
-          <a href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.html">
+          <span
+            class="text-primary"
+            @click="
+              newWindowsOpen(
+                'https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.html',
+              )
+            "
+          >
             https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.html
-          </a>
+          </span>
         </p>
 
         <p>
           If you are located in Switzerland, the contact details for the data protection authorities
           are available here:
-          <a href="https://www.edoeb.admin.ch/edoeb/en/home.html">
+          <span
+            class="text-primary"
+            @click="newWindowsOpen('https://www.edoeb.admin.ch/edoeb/en/home.html')"
+          >
             https://www.edoeb.admin.ch/edoeb/en/home.html.
-          </a>
+          </span>
         </p>
 
         <p id="8">
@@ -634,7 +652,9 @@
           and to reject cookies. If you choose to remove cookies or reject cookies, this could
           affect certain features or services of our Services. To opt out of interest-based
           advertising by advertisers on our Services visit
-          <a href="http://www.aboutads.info/choices/">http://www.aboutads.info/choices/.</a>
+          <span class="text-primary" @click="newWindowsOpen('http://www.aboutads.info/choices/')">
+            http://www.aboutads.info/choices/.
+          </span>
         </p>
 
         <p>
@@ -726,14 +746,25 @@
           the personal information we collect from you, change that information, or delete it. To
           request to review, update, or delete your personal information, please submit a request
           form by clicking
-          <a href="https://app.termly.io/notify/c4c4a137-fe9a-44cd-85e0-0f23d28fdbf9">here</a>.
+          <span
+            class="text-primary"
+            @click="
+              newWindowsOpen('https://app.termly.io/notify/c4c4a137-fe9a-44cd-85e0-0f23d28fdbf9')
+            "
+          >
+            here
+          </span>
         </p>
 
         <p>
           This privacy policy was created using Termly's
-          <a href="https://termly.io/products/privacy-policy-generator/">
+
+          <span
+            class="text-primary"
+            @click="newWindowsOpen('https://termly.io/products/privacy-policy-generator/')"
+          >
             Privacy Policy Generator.
-          </a>
+          </span>
         </p>
       </div>
     </div>
@@ -741,8 +772,16 @@
 </template>
 
 <script>
+import { Browser } from '@capacitor/browser';
+
 export default {
   layout: 'introLayout',
+
+  methods: {
+    async newWindowsOpen(url) {
+      await Browser.open({ url: url });
+    },
+  },
 };
 </script>
 
@@ -772,5 +811,9 @@ li {
 
 a {
   color: blue;
+}
+
+.word_wrap {
+  word-wrap: break-word;
 }
 </style>
