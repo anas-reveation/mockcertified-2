@@ -17,6 +17,8 @@ Amplify Params - DO NOT EDIT */
 const axios = require('axios');
 const jwt_decode = require('jwt-decode');
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
+const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const getTestDetailQuery = /* GraphQL */ `
@@ -52,12 +54,27 @@ const getUserTestQuery = /* GraphQL */ `
 exports.handler = async (event) => {
   let statusCode = 200;
   let body;
+
+  const gotPromoCode = event.arguments.promocode;
+
+  var filter = { promotion_code: { eq: gotPromoCode } };
+  const getAllPromoCodes = /* GraphQL */ `
+    query ListPromotions($filter: ModelPromotionFilterInput) {
+      listPromotions(filter: $filter) {
+        items {
+          id
+          promotion_code
+          discount_percentage
+        }
+      }
+    }
+  `;
+
   try {
     const testId = event.arguments.test_id;
     const jwtToken = event.arguments.token;
     const successRedirectUrl = event.arguments.success_redirect_url;
     const cancelRedirectUrl = event.arguments.cancel_redirect_url;
-
     const decoded = jwt_decode(jwtToken);
     const customerId = decoded.sub;
 
@@ -159,21 +176,62 @@ exports.handler = async (event) => {
 
     const isCreatorPurchased = await creatorPurchased();
 
-    if (!isCreatorPurchased) {
-      const testDetail = await getTestDetail(testId);
-      const sessionData = await stripePayment(
-        testDetail.title,
-        testDetail.price,
-        testDetail.sellerId,
-        testDetail.userId,
-      );
+    // START Check Promocode
 
-      statusCode = 200;
-      body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+    const headers = {
+      'x-api-key': GRAPHQLAPI_KEY_OUTPUT,
+    };
+
+    const response = await axios.post(
+      GRAPHQL_ENDPOINT,
+      {
+        query: getAllPromoCodes,
+        variables: { filter: filter },
+      },
+      {
+        headers,
+      },
+    );
+    const result = response.data.data.listPromotions.items[0];
+    if (!isCreatorPurchased) {
+      if (gotPromoCode) {
+        if (result.discount_percentage) {
+          const testDetail = await getTestDetail(testId);
+          var discount = (testDetail.price * result.discount_percentage) / 100;
+          testDetail.price = testDetail.price - discount;
+
+          const sessionData = await stripePayment(
+            testDetail.title,
+            testDetail.price,
+            testDetail.sellerId,
+            testDetail.userId,
+          );
+          statusCode = 200;
+          body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+        }
+      } else if (
+        !gotPromoCode ||
+        gotPromoCode === undefined ||
+        gotPromoCode === '' ||
+        gotPromoCode === null
+      ) {
+        const testDetail = await getTestDetail(testId);
+        const sessionData = await stripePayment(
+          testDetail.title,
+          testDetail.price,
+          testDetail.sellerId,
+          testDetail.userId,
+        );
+
+        statusCode = 200;
+        body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+      }
     } else {
       statusCode = 409;
       body = { message: 'already exist' };
     }
+
+    // End Check Promocode
   } catch (err) {
     console.log('ERROR ->', err);
     statusCode = 500;

@@ -19,6 +19,7 @@ export default {
           cancel_redirect_url,
         },
       });
+      console.log({testId, jwtToken , success_redirect_url , cancel_redirect_url});
       const parsedData = JSON.parse(checkoutStripeUrlData.data.checkoutStripeUrl);
       commit('SET_LOADER', false, { root: true });
       if (parsedData.statusCode !== 200) {
