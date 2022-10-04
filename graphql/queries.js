@@ -97,6 +97,7 @@ export const getTestManager = /* GraphQL */ `
       title
       description
       reject_description
+      credit
       price
       status
       tags
@@ -124,6 +125,7 @@ export const listTestManagers = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -138,6 +140,7 @@ export const listTestManagers = /* GraphQL */ `
 export const listTestsByStatus = /* GraphQL */ `
   query ListTestsByStatus(
     $status: TestManagerStatus!
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelTestManagerFilterInput
     $limit: Int
@@ -145,6 +148,7 @@ export const listTestsByStatus = /* GraphQL */ `
   ) {
     listTestsByStatus(
       status: $status
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -158,6 +162,7 @@ export const listTestsByStatus = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -183,6 +188,7 @@ export const getQuestion = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -315,6 +321,7 @@ export const getPurchasedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -369,6 +376,7 @@ export const getAttemptedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags

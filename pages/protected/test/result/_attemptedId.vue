@@ -8,6 +8,7 @@
       :price="testDetail.price"
       :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
       :shareFunc="shareTest"
+      :credit="testDetail.credit"
     >
       <template>
         <div class="container border border-2 border-primary rounded mt-4 p-3">

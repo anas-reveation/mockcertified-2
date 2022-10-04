@@ -16,7 +16,6 @@ const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEY
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
 
 exports.handler = async (event) => {
-  console.log(`EVENT: ${JSON.stringify(event)}`);
   const gotPromoCode = event.arguments.promocode;
 
   var filter = { promotion_code: { eq: gotPromoCode } };
@@ -49,14 +48,12 @@ exports.handler = async (event) => {
         headers,
       },
     );
-    console.log(filter);
-    console.log(response.data.data.listPromotions.items[0]);
     let result = response.data.data.listPromotions.items[0];
     if (result) {
       statusCode = 200;
       body = {
         message: 'success',
-        discountPercentage: result,
+        discount_percentage: result.discount_percentage,
         status: 200,
       };
     } else {

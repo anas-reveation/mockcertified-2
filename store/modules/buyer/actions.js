@@ -1,25 +1,34 @@
 import { API } from 'aws-amplify';
-import { checkoutStripeUrl, verifyTestPayment } from '~/graphql/mutations';
+import { checkPromoCode } from '~/graphql/queries';
+import { checkoutStripeUrl } from '~/graphql/mutations';
 
 export default {
   async buyNow({ commit, rootState }, payload) {
     const jwtToken = rootState.auth.jwtToken;
     const testId = payload.testId;
+    const promocode = payload.promocode ? payload.promocode : false;
     commit('SET_LOADER', true, { root: true });
 
     try {
       const success_redirect_url = window.location.origin + '/payment-success';
       const cancel_redirect_url = window.location.origin + '/payment-cancel';
+      let variables = {
+        test_id: testId,
+        token: jwtToken,
+        success_redirect_url,
+        cancel_redirect_url,
+      };
+
+      if (promocode) {
+        variables = {
+          ...variables,
+          promocode,
+        };
+      }
       const checkoutStripeUrlData = await API.graphql({
         query: checkoutStripeUrl,
-        variables: {
-          test_id: testId,
-          token: jwtToken,
-          success_redirect_url,
-          cancel_redirect_url,
-        },
+        variables,
       });
-      console.log({testId, jwtToken , success_redirect_url , cancel_redirect_url});
       const parsedData = JSON.parse(checkoutStripeUrlData.data.checkoutStripeUrl);
       commit('SET_LOADER', false, { root: true });
       if (parsedData.statusCode !== 200) {
@@ -35,6 +44,58 @@ export default {
         return false;
       }
       return parsedData.body.url;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
+  async checkPromoCode({ commit }, payload) {
+    const promocode = payload;
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const promocodeData = await API.graphql({
+        query: checkPromoCode,
+        variables: {
+          promocode,
+        },
+      });
+
+      const parsedData = JSON.parse(promocodeData.data.checkPromoCode);
+      commit('SET_LOADER', false, { root: true });
+      if (parsedData.status !== 200) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Promocode is not valid',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
+      }
+
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Promocode applied',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+
+      return parsedData.discount_percentage;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

@@ -27,6 +27,16 @@
       </div>
 
       <div class="mb-4 input-data">
+        <input
+          type="text"
+          class="border border-2 border-primary rounded form-control"
+          v-model="formData.credit"
+          required
+        />
+        <label class="form-label">Credit</label>
+      </div>
+
+      <div class="mb-4 input-data">
         <select
           class="form-select border border-2 border-primary rounded text-capitalize"
           aria-label="Default select example"
@@ -197,6 +207,7 @@ export default {
         categoryId: 'default',
         subCategoryId: 'default',
         price: null,
+        credit: '',
         timeLimit: null,
       },
       allCategories: [],

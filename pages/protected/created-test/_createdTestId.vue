@@ -8,6 +8,7 @@
       :price="testDetail.price"
       :fullName="`${user.first_name} ${user.last_name}`"
       :shareFunc="shareTest"
+      :credit="testDetail.credit"
     />
 
     <div v-for="(question, index) in testQuestions" :key="index">

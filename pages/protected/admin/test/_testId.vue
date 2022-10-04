@@ -7,6 +7,7 @@
       :description="testDetail.description"
       :price="testDetail.price"
       :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+      :credit="testDetail.credit"
     />
 
     <div class="pb-2" v-for="(question, index) in testQuestions" :key="index">

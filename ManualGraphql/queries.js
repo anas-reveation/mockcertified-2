@@ -12,6 +12,7 @@ export const userTests = /* GraphQL */ `
             category_id
             price
             description
+            credit
             questions {
               items {
                 id
@@ -42,6 +43,7 @@ export const userTests = /* GraphQL */ `
             title
             time_limit
             description
+            credit
             questions {
               items {
                 id
@@ -78,6 +80,7 @@ export const userTests = /* GraphQL */ `
           title
           category_id
           description
+          credit
           id
           price
           time_limit
@@ -121,6 +124,7 @@ export const getTestDetail = /* GraphQL */ `
       }
       title
       description
+      credit
       price
       time_limit
       createdAt
@@ -143,6 +147,7 @@ export const listAllTests = /* GraphQL */ `
         category_id
         title
         description
+        credit
         price
         status
         time_limit

@@ -5,9 +5,10 @@
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
       ${totalMarks} marks`"
       :description="testDetail.description"
-      :price="testDetail.price"
+      :price="newPrice ? newPrice : testDetail.price"
       :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
       :shareFunc="shareTest"
+      :credit="testDetail.credit"
     />
 
     <div v-if="isPurchased || isUserOwner">
@@ -25,14 +26,34 @@
       </button>
 
       <div v-else>
-        <button
-          v-if="isAuthenticated"
-          type="button"
-          class="btn btn-secondary border border-2 border-primary w-50"
-          @click="buyNowLocal"
-        >
-          Buy Now
-        </button>
+        <div v-if="isAuthenticated">
+          <h3 v-if="newPrice" class="fw-bolder font_size_20">
+            New Price -
+            <span class="text-primary fw-bolder"> ${{ newPrice }} </span>
+          </h3>
+          <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
+            <div class="mb-4 input-data">
+              <input
+                type="text"
+                class="border border-2 border-primary rounded form-control"
+                v-model="promocode"
+                required
+              />
+              <button class="btn btn-outline-primary border-2 mt-2" :disabled="!promocode">
+                Apply Code
+              </button>
+            </div>
+          </form>
+
+          <button
+            type="button"
+            class="btn btn-secondary border border-2 border-primary w-50"
+            @click="buyNowLocal"
+          >
+            Buy Now
+          </button>
+        </div>
+
         <button
           v-else
           type="button"
@@ -59,6 +80,8 @@ export default {
       isPurchased: false,
       isUserOwner: false,
       stripeUrl: null,
+      promocode: '',
+      newPrice: null,
     };
   },
 
@@ -126,7 +149,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
-    ...mapActions('buyer', ['buyNow']),
+    ...mapActions('buyer', ['buyNow', 'checkPromoCode']),
     ...mapMutations(['setRedirectUrl']),
 
     async shareTest() {
@@ -143,7 +166,7 @@ export default {
     },
 
     async buyNowLocal() {
-      const res = await this.buyNow({ testId: this.testDetail.id });
+      const res = await this.buyNow({ testId: this.testDetail.id, promocode: this.promocode });
       if (res) {
         this.stripeUrl = res;
         this.confirmFunc();
@@ -168,6 +191,14 @@ export default {
     redirectLogin() {
       this.setRedirectUrl(`/category/test/${this.testId}`);
       this.$router.push('/auth/login');
+    },
+
+    async checkPromoCodeLocal() {
+      const res = await this.checkPromoCode(this.promocode);
+      if (res) {
+        this.newPrice = (this.testDetail.price * res) / 100;
+        this.newPrice = parseFloat(this.newPrice).toFixed(2);
+      }
     },
   },
 };

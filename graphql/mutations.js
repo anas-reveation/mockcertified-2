@@ -129,6 +129,7 @@ export const createTestManager = /* GraphQL */ `
       title
       description
       reject_description
+      credit
       price
       status
       tags
@@ -171,6 +172,7 @@ export const updateTestManager = /* GraphQL */ `
       title
       description
       reject_description
+      credit
       price
       status
       tags
@@ -213,6 +215,7 @@ export const deleteTestManager = /* GraphQL */ `
       title
       description
       reject_description
+      credit
       price
       status
       tags
@@ -242,6 +245,7 @@ export const createQuestion = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -275,6 +279,7 @@ export const updateQuestion = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -308,6 +313,7 @@ export const deleteQuestion = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -468,6 +474,7 @@ export const createPurchasedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -507,6 +514,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -546,6 +554,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -585,6 +594,7 @@ export const createAttemptedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -629,6 +639,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags
@@ -673,6 +684,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         title
         description
         reject_description
+        credit
         price
         status
         tags

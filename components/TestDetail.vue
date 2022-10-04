@@ -45,6 +45,13 @@
         </span>
       </p>
     </div>
+
+    <div class="mt-3">
+      <h3 class="fw-bolder font_size_20">Credit</h3>
+      <p class="font_size_16">
+        {{ credit }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -57,6 +64,10 @@ export default {
     price: Number | String,
     fullName: String,
     shareFunc: Function,
+    credit: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
