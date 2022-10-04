@@ -141,8 +141,7 @@ exports.handler = async (event) => {
     // Start STRIPE
     const stripePayment = async (title, basePrice, sellerId, userId) => {
       const quantity = 1;
-      const calculateApplicationFeeAmount =
-        (commission_percentage * (basePrice * 100) * quantity) / 100;
+      const calculateApplicationFeeAmount = commission_percentage * basePrice * 100 * quantity;
       // const domainURL = process.env.DOMAIN_ORIGIN;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
