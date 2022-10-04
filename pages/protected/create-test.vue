@@ -27,16 +27,6 @@
       </div>
 
       <div class="mb-4 input-data">
-        <input
-          type="text"
-          class="border border-2 border-primary rounded form-control"
-          v-model="formData.credit"
-          required
-        />
-        <label class="form-label">Credit</label>
-      </div>
-
-      <div class="mb-4 input-data">
         <select
           class="form-select border border-2 border-primary rounded text-capitalize"
           aria-label="Default select example"
@@ -78,7 +68,6 @@
         <input
           type="number"
           class="border border-2 border-primary rounded form-control"
-          min="1"
           @keydown="numberValidation"
           v-model="formData.price"
           required
@@ -110,6 +99,15 @@
         >
           {{ errors.timeLimit.msg }}
         </div>
+      </div>
+
+      <div class="mb-4 input-data">
+        <input
+          type="text"
+          class="border border-2 border-primary rounded form-control"
+          v-model="formData.credit"
+        />
+        <label class="form-label">Credit (optional)</label>
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">

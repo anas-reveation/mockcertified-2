@@ -30,9 +30,11 @@
         />
         {{ fullName }}
       </div>
+
       <span v-if="price" class="col-3 text-primary fw-bolder text-end">
         {{ formatedPrice }}
       </span>
+      <span v-else-if="priceZero" class="col-3 text-primary fw-bolder text-end"> $0.00 </span>
     </div>
 
     <div class="mt-3">
@@ -46,7 +48,7 @@
       </p>
     </div>
 
-    <div class="mt-3">
+    <div v-if="credit" class="mt-3">
       <h3 class="fw-bolder font_size_20">Credit</h3>
       <p class="font_size_16">
         {{ credit }}
@@ -76,12 +78,18 @@ export default {
       seeMore: false,
       wordCount: 55,
       wordLength: 0,
+      priceZero: false,
     };
   },
 
   computed: {},
 
   mounted() {
+    if (this.price === 0) {
+      // this.price = '$0.00';
+      this.priceZero = true;
+    }
+
     this.wordLength = this.description.trim().split(' ').length;
 
     if (this.price && typeof this.price === 'number') {

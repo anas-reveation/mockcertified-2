@@ -27,23 +27,25 @@
 
       <div v-else>
         <div v-if="isAuthenticated">
-          <h3 v-if="newPrice" class="fw-bolder font_size_20">
-            New Price -
-            <span class="text-primary fw-bolder"> ${{ newPrice }} </span>
-          </h3>
-          <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
-            <div class="mb-4 input-data">
-              <input
-                type="text"
-                class="border border-2 border-primary rounded form-control"
-                v-model="promocode"
-                required
-              />
-              <button class="btn btn-outline-primary border-2 mt-2" :disabled="!promocode">
-                Apply Code
-              </button>
-            </div>
-          </form>
+          <div v-if="testDetail.price !== 0">
+            <h3 v-if="newPrice" class="fw-bolder font_size_20">
+              New Price -
+              <span class="text-primary fw-bolder"> ${{ newPrice }} </span>
+            </h3>
+            <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
+              <div class="mb-4 input-data">
+                <input
+                  type="text"
+                  class="border border-2 border-primary rounded form-control"
+                  v-model="promocode"
+                  required
+                />
+                <button class="btn btn-outline-primary border-2 mt-2" :disabled="!promocode">
+                  Apply Code
+                </button>
+              </div>
+            </form>
+          </div>
 
           <button
             type="button"
@@ -136,7 +138,6 @@ export default {
 
   async mounted() {
     this.testDetail = await this.getTestDetail(this.testId);
-
     if (!this.testDetail) {
       this.$router.push('/dashboard');
       return;
@@ -149,7 +150,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
-    ...mapActions('buyer', ['buyNow', 'checkPromoCode']),
+    ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
     ...mapMutations(['setRedirectUrl']),
 
     async shareTest() {
@@ -166,12 +167,13 @@ export default {
     },
 
     async buyNowLocal() {
-      const res = await this.buyNow({ testId: this.testDetail.id, promocode: this.promocode });
-      if (res) {
-        this.stripeUrl = res;
-        this.confirmFunc();
-        // this.$router.push('/dashboard')  ;
+      if (this.testDetail.price !== 0) {
+        const res = await this.buyNow({ testId: this.testDetail.id, promocode: this.promocode });
+        if (res) {
+          this.stripeUrl = res;
+        }
       }
+      this.confirmFunc();
     },
 
     confirmFunc() {
@@ -182,8 +184,13 @@ export default {
           confirmButtonText: 'Yes',
         })
         .then(async (result) => {
-          if (result.isConfirmed) {
+          if (result.isConfirmed && this.testDetail.price !== 0) {
             await Browser.open({ url: this.stripeUrl });
+          } else {
+            const res = await this.buyTestFree({ testId: this.testDetail.id });
+            if (res) {
+              this.$router.push('/protected/purchased-test');
+            }
           }
         });
     },

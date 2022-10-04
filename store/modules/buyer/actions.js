@@ -1,5 +1,6 @@
 import { API } from 'aws-amplify';
 import { checkPromoCode } from '~/graphql/queries';
+import { createPurchasedTest } from '~/graphql/mutations';
 import { checkoutStripeUrl } from '~/graphql/mutations';
 
 export default {
@@ -96,6 +97,44 @@ export default {
       });
 
       return parsedData.discount_percentage;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
+  async buyTestFree({ commit, rootState }, payload) {
+    const user_id = rootState.auth.user.id;
+    const input = { test_id: payload.testId, user_id };
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const createPurchasedTestData = await API.graphql({
+        query: createPurchasedTest,
+        variables: {
+          input,
+        },
+      });
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Successfully purchased',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

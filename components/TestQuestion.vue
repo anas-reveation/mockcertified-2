@@ -1,7 +1,7 @@
 <template>
   <div class="text-left">
     <h3 v-if="questionVisible" class="fw-bolder font_size_24">Question {{ index }}</h3>
-    <p>
+    <p :class="!questionVisible && 'fw-bolder'">
       <span v-if="!questionVisible" class="fw-bolder">{{ index }}. </span>
       {{ question.question }}
     </p>
