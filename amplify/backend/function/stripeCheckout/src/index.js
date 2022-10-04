@@ -18,6 +18,7 @@ const axios = require('axios');
 const jwt_decode = require('jwt-decode');
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
 const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
+const commission_percentage = process.env.COMMISSION_PERCENTAGE;
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -140,7 +141,8 @@ exports.handler = async (event) => {
     // Start STRIPE
     const stripePayment = async (title, basePrice, sellerId, userId) => {
       const quantity = 1;
-      const calculateApplicationFeeAmount = 0.1 * (basePrice * 100) * quantity;
+      const calculateApplicationFeeAmount =
+        (commission_percentage * (basePrice * 100) * quantity) / 100;
       // const domainURL = process.env.DOMAIN_ORIGIN;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],

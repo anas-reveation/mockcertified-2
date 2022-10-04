@@ -29,6 +29,10 @@
     {
       "cloudFormationParameterName": "domainOrigin",
       "environmentVariableName": "DOMAIN_ORIGIN"
+    },
+    {
+      "cloudFormationParameterName": "commissionPercentage",
+      "environmentVariableName": "COMMISSION_PERCENTAGE"
     }
   ]
 }

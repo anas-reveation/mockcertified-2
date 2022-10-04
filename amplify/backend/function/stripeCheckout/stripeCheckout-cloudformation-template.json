@@ -16,15 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "stripePublishableKey": {
-      "Type": "String"
-    },
-    "stripeSecretKey": {
-      "Type": "String"
-    },
-    "domainOrigin": {
-      "Type": "String"
-    },
     "authmobileappmarketplacee1e8cc85UserPoolId": {
       "Type": "String",
       "Default": "authmobileappmarketplacee1e8cc85UserPoolId"
@@ -40,6 +31,18 @@
     "apimobileappmarketplaceGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apimobileappmarketplaceGraphQLAPIKeyOutput"
+    },
+    "stripePublishableKey": {
+      "Type": "String"
+    },
+    "stripeSecretKey": {
+      "Type": "String"
+    },
+    "domainOrigin": {
+      "Type": "String"
+    },
+    "commissionPercentage": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -115,6 +118,9 @@
             },
             "DOMAIN_ORIGIN": {
               "Ref": "domainOrigin"
+            },
+            "COMMISSION_PERCENTAGE": {
+              "Ref": "commissionPercentage"
             }
           }
         },
