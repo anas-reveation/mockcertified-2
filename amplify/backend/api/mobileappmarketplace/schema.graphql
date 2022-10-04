@@ -199,6 +199,7 @@ type Mutation {
     token: String!
     success_redirect_url: String!
     cancel_redirect_url: String!
+    promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
  

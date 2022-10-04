@@ -12,12 +12,14 @@ export const checkoutStripeUrl = /* GraphQL */ `
     $token: String!
     $success_redirect_url: String!
     $cancel_redirect_url: String!
+    $promocode: String
   ) {
     checkoutStripeUrl(
       test_id: $test_id
       token: $token
       success_redirect_url: $success_redirect_url
       cancel_redirect_url: $cancel_redirect_url
+      promocode: $promocode
     )
   }
 `;
