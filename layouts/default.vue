@@ -7,7 +7,7 @@
       <div class="spinner-border" role="status"></div>
     </div>
 
-    <Navbar class="z_index2" :class="platform === 'ios' && 'pt-4'" />
+    <Navbar class="z_index2" />
 
     <div @click="removeClass">
       <Nuxt class="margin_bottom px-4" />
@@ -35,7 +35,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading', 'platform']),
+    ...mapState(['isLoading']),
   },
 
   watch: {

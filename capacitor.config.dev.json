@@ -3,7 +3,9 @@
   "appName": "Mockcertified",
   "webDir": "dist",
   "bundledWebRuntime": false,
-
+  "ios": {
+    "contentInset": "always"
+  },
   "plugins": {
     "GoogleAuth": {
       "scopes": ["profile", "email", "openid"],

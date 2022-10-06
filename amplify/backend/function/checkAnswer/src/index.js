@@ -22,8 +22,7 @@ exports.handler = async (event) => {
   const result_id = event.arguments.result_id;
 
   const getResult = /* GraphQL */ `
-    query MyQuery {
-      query GetResult($id: ID!) {
+    query GetResult($id: ID!) {
       getResult(id: $id) {
         result_status
         user_input
@@ -31,7 +30,6 @@ exports.handler = async (event) => {
           answer
         }
       }
-    }
     }
   `;
 
