@@ -83,11 +83,11 @@ export default {
     searchQuery(newValue) {
       if (this.allTestBySubCategory.length) {
         this.allCategoriesFilter = this.allTestBySubCategory.filter((item) =>
-          item.title.toLowerCase().match(newValue.toLowerCase()),
+          item.title.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
         );
       } else {
         this.allCategoriesFilter = this.allSubCategory.filter((item) =>
-          item.name.toLowerCase().match(newValue.toLowerCase()),
+          item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
         );
       }
     },
