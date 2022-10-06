@@ -203,7 +203,7 @@ export default {
     async checkPromoCodeLocal() {
       const res = await this.checkPromoCode(this.promocode);
       if (res) {
-        this.newPrice = (this.testDetail.price * res) / 100;
+        this.newPrice = this.testDetail.price - (this.testDetail.price / 100) * res;
         this.newPrice = parseFloat(this.newPrice).toFixed(2);
       }
     },
