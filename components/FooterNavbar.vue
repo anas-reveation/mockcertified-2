@@ -22,7 +22,7 @@
         </div>
         <div class="col">
           <NuxtLink
-            to="/protected/attempted-test"
+            :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
@@ -40,7 +40,7 @@
         </div>
         <div class="col">
           <NuxtLink
-            to="/protected/purchased-test"
+            :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center"
           >
             <div
@@ -88,7 +88,7 @@
 import { mapState, mapActions } from 'vuex';
 export default {
   computed: {
-    ...mapState('auth', ['user']),
+    ...mapState('auth', ['user', 'isAuthenticated']),
     ...mapState('buyer', ['cartItems']),
   },
 

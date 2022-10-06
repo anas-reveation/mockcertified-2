@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <div class="container-fluid bg-white fixed-bottom p-2 footer_height">
+        <div class="container-fluid bg-white fixed-bottom p-2 mb-1 footer_height">
           <div class="text-center">
             <button
               type="button"
