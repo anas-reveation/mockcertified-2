@@ -241,7 +241,7 @@ export default {
           toast: true,
           position: 'top-end',
           icon: 'error',
-          title: 'Something went wrong please try later',
+          title: 'Invalid code',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 3000,
