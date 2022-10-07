@@ -794,6 +794,7 @@ export const createPromotion = /* GraphQL */ `
       id
       promotion_code
       discount_percentage
+      expiry_date
       createdAt
       updatedAt
     }
@@ -808,6 +809,7 @@ export const updatePromotion = /* GraphQL */ `
       id
       promotion_code
       discount_percentage
+      expiry_date
       createdAt
       updatedAt
     }
@@ -822,6 +824,7 @@ export const deletePromotion = /* GraphQL */ `
       id
       promotion_code
       discount_percentage
+      expiry_date
       createdAt
       updatedAt
     }

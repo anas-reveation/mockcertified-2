@@ -96,7 +96,6 @@ export default {
     }
 
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
-    await this.sendEmail('dishit.dhanesha@reveation.io', this.testDetail.title);
 
     if (!this.testDetail) {
       this.$router.push('/dashboard');
@@ -227,7 +226,7 @@ export default {
       // Handle promise's fulfilled/rejected states
       sendPromise
         .then(function (data) {
-          console.log(data.MessageId);
+          console.log('Success');
         })
         .catch(function (err) {
           console.error(err, err.stack);

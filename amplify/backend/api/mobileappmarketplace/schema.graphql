@@ -169,6 +169,7 @@ type Promotion
   id: ID!
   promotion_code: String!
   discount_percentage: Float!
+  expiry_date: AWSDateTime
 }
 
 enum AttemptStatus {
@@ -202,4 +203,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
- 
+   

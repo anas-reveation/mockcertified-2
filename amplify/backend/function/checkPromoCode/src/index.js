@@ -17,7 +17,6 @@ const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINT
 
 exports.handler = async (event) => {
   const gotPromoCode = event.arguments.promocode;
-
   var filter = { promotion_code: { eq: gotPromoCode } };
   const getAllPromoCodes = /* GraphQL */ `
     query ListPromotions($filter: ModelPromotionFilterInput) {
@@ -26,6 +25,7 @@ exports.handler = async (event) => {
           id
           promotion_code
           discount_percentage
+          expiry_date
         }
       }
     }
@@ -50,12 +50,20 @@ exports.handler = async (event) => {
     );
     let result = response.data.data.listPromotions.items[0];
     if (result) {
-      statusCode = 200;
-      body = {
-        message: 'success',
-        discount_percentage: result.discount_percentage,
-        status: 200,
-      };
+      if (new Date(result.expiry_date) > new Date()) {
+        statusCode = 200;
+        body = {
+          message: 'success',
+          discount_percentage: result.discount_percentage,
+          status: 200,
+        };
+      } else {
+        statusCode = 400;
+        body = {
+          message: 'Promoode Expired',
+          status: 400,
+        };
+      }
     } else {
       statusCode = 404;
       body = {
