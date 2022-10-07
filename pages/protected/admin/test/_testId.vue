@@ -34,6 +34,7 @@
               type="text"
               class="border border-2 border-primary rounded form-control"
               v-model="rejectDescription"
+              required
             />
             <label class="form-label">Reason of Rejection</label>
           </div>
@@ -53,7 +54,15 @@
 </template>
 
 <script>
+var AWS = require('aws-sdk');
+AWS.config.update({
+  region: 'us-east-1',
+  accessKeyId: process.env.AWS_ACCESS_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+});
+
 import { mapState, mapActions } from 'vuex';
+
 export default {
   middleware: ['authenticated'],
 
@@ -87,6 +96,8 @@ export default {
     }
 
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
+    await this.sendEmail('dishit.dhanesha@reveation.io', this.testDetail.title);
+
     if (!this.testDetail) {
       this.$router.push('/dashboard');
       return;
@@ -131,6 +142,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes',
         });
+        this.sendEmail(this.testDetail.created_by.email, this.testDetail.title, false);
         if (!res.isConfirmed) {
           return;
         }
@@ -144,6 +156,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes',
         });
+        this.sendEmail(this.testDetail.created_by.email, this.testDetail.title, true);
         if (!res.isConfirmed) {
           return;
         }
@@ -154,6 +167,71 @@ export default {
       if (res) {
         this.$router.push('/protected/admin');
       }
+    },
+    sendEmail(toEmail, name, status) {
+      if (status) {
+        var params = {
+          Destination: {
+            ToAddresses: [toEmail],
+          },
+          Message: {
+            /* required */
+            Body: {
+              /* required */
+              Html: {
+                Charset: 'UTF-8',
+                Data: '<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2"> <div style="margin:50px auto;width:70%;padding:20px 20px"> <div style="border-bottom:1px solid #eee"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> <p style="font-size:1.1em">Hi,</p> <p>Thank you for creating a test in MockCertified. The test is now available in the app for purchase. Share the test as much as possilbe to earn and spread knowledge</p><p style="font-size:0.9em;">Regards,<br />MockCertified Team</p> <hr style="border:none;border-top:1px solid #eee" /> <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> </div> </div>',
+              },
+              Text: {
+                Charset: 'UTF-8',
+                Data: 'TEXT_FORMAT_BODY',
+              },
+            },
+            Subject: {
+              Charset: 'UTF-8',
+              Data: `Your Test ${name} is approved and availble to users for purchase`,
+            },
+          },
+          Source: 'support@mockcertified.com',
+        };
+      } else {
+        var params = {
+          Destination: {
+            ToAddresses: [toEmail],
+          },
+          Message: {
+            /* required */
+            Body: {
+              /* required */
+              Html: {
+                Charset: 'UTF-8',
+                Data: '<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2"> <div style="margin:50px auto;width:70%;padding:20px 20px"> <div style="border-bottom:1px solid #eee"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> <p style="font-size:1.1em">Hi,</p> <p>Thank you for creating a test in MockCertified. The test is rejected please check the app for the reason and create the test agian.</p><p style="font-size:0.9em;">Regards,<br />MockCertified Team</p> <hr style="border:none;border-top:1px solid #eee" /> <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> </div> </div>',
+              },
+              Text: {
+                Charset: 'UTF-8',
+                Data: 'TEXT_FORMAT_BODY',
+              },
+            },
+            Subject: {
+              Charset: 'UTF-8',
+              Data: `Your Test ${name} is Rejected. Please try again. `,
+            },
+          },
+          Source: 'support@mockcertified.com',
+        };
+      }
+
+      // Create the promise and SES service object
+      var sendPromise = new AWS.SES().sendEmail(params).promise();
+
+      // Handle promise's fulfilled/rejected states
+      sendPromise
+        .then(function (data) {
+          console.log(data.MessageId);
+        })
+        .catch(function (err) {
+          console.error(err, err.stack);
+        });
     },
   },
 };
