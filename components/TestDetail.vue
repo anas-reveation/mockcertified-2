@@ -34,7 +34,9 @@
       <span v-if="price" class="col-3 text-primary fw-bolder text-end">
         {{ formatedPrice }}
       </span>
-      <span v-else-if="priceZero" class="col-3 text-primary fw-bolder text-end"> $0.00 </span>
+      <span v-else-if="priceZero" class="col-3 text-primary fw-bolder text-end text-success">
+        Free
+      </span>
     </div>
 
     <div class="mt-3">
@@ -49,7 +51,7 @@
     </div>
 
     <div v-if="credit" class="mt-3">
-      <h3 class="fw-bolder font_size_20">Credit</h3>
+      <h3 class="fw-bolder font_size_20">Test Material Reference</h3>
       <p class="font_size_16">
         {{ credit }}
       </p>

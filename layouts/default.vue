@@ -52,7 +52,9 @@ export default {
 
   methods: {
     removeClass() {
-      this.$root.$children[1].$children[0].$refs['navbarDiv'].classList.remove('show');
+      try {
+        this.$root.$children[1].$children[0].$refs['navbarDiv'].classList.remove('show');
+      } catch (_err) {}
     },
   },
 };

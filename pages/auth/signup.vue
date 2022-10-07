@@ -362,9 +362,8 @@ export default {
       //   this.errors.password.isValid = true;
       //   return;
       // }
-      this.errors.password.isValid = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
-        newValue,
-      );
+      this.errors.password.isValid =
+        /^(?=.*\d)(?=.*[- ?_!@()`#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(newValue);
 
       if (this.errors.password.isValid) {
         this.errors.password.isVisiable = false;

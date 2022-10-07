@@ -38,7 +38,7 @@ export default {
   watch: {
     searchQuery(newValue) {
       this.allCategoriesFilter = this.allCategories.filter((item) =>
-        item.name.toLowerCase().match(newValue.toLowerCase()),
+        item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
       );
     },
   },

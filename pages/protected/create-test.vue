@@ -107,7 +107,7 @@
           class="border border-2 border-primary rounded form-control"
           v-model="formData.credit"
         />
-        <label class="form-label">Credit (optional)</label>
+        <label class="form-label">Test Material Reference (optional)</label>
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">
@@ -216,7 +216,7 @@ export default {
       isDisable: true,
       isDisableBtn: true,
       stripeUrl: null,
-
+      file: null,
       errors: {
         timeLimit: {
           isValid: true,
@@ -234,6 +234,13 @@ export default {
     //     this.formData.title = oldValue;
     //   }
     // },
+
+    file(newValue, _oldValue) {
+      if (!newValue) {
+        this.questionList = [];
+        this.reviewQuestions = [];
+      }
+    },
 
     'formData.categoryId'(newValue, _oldValue) {
       this.subCategoryId = 'default';

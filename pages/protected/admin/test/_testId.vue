@@ -21,7 +21,7 @@
     <div v-if="testDetail.status === 'IN_PROGRESS'">
       <div class="text-center">
         <button
-          class="btn btn-secondary border border-2 border-primary w-50"
+          class="btn btn-secondary border border-2 border-primary mb-1 w-50"
           type="button"
           @click="approveRejectTestLocal('approve')"
         >
@@ -34,7 +34,6 @@
               type="text"
               class="border border-2 border-primary rounded form-control"
               v-model="rejectDescription"
-              required
             />
             <label class="form-label">Reason of Rejection</label>
           </div>

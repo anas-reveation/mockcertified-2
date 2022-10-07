@@ -42,7 +42,7 @@
           <span>Questions or concerns?</span> Reading this privacy notice will help you understand
           your privacy rights and choices. If you do not agree with our policies and practices,
           please do not use our Services. If you still have any questions or concerns, please
-          contact us at mockcertified@gmail.com.
+          contact us at contactus@mockcertified.com.
         </p>
       </div>
 
@@ -544,7 +544,7 @@
           learn that personal information from users less than 18 years of age has been collected,
           we will deactivate the account and take reasonable measures to promptly delete such data
           from our records. If you become aware of any data we may have collected from children
-          under age 18, please contact us at mockcertified@gmail.com.
+          under age 18, please contact us at contactus@mockcertified.com.
         </p>
       </div>
 
@@ -659,7 +659,7 @@
 
         <p>
           If you have questions or comments about your privacy rights, you may email us at
-          mockcertified@gmail.com.
+          contactus@mockcertified.com.
         </p>
       </div>
 
@@ -727,7 +727,7 @@
 
         <p>
           If you have questions or comments about this notice, you may email us at
-          mockcertified@gmail.com or by post to:
+          contactus@mockcertified.com or by post to:
         </p>
 
         <p>
