@@ -9,6 +9,7 @@
       :fullName="`${user.first_name} ${user.last_name}`"
       :shareFunc="shareTest"
       :credit="testDetail.credit"
+      :rejectDescription="testDetail.reject_description"
     />
 
     <div v-for="(question, index) in testQuestions" :key="index">
@@ -56,7 +57,6 @@ export default {
     }
 
     this.testDetail = this.allCreatedTests.find((test) => test.id === this.createdTestId);
-
     if (!this.testDetail) {
       this.$router.push('/dashboard');
       return;

@@ -80,6 +80,7 @@ export const userTests = /* GraphQL */ `
           title
           category_id
           description
+          reject_description
           credit
           id
           price

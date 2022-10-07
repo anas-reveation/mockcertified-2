@@ -56,6 +56,13 @@
         {{ credit }}
       </p>
     </div>
+
+    <div v-if="rejectDescription" class="mt-3">
+      <h3 class="fw-bolder font_size_20">Rejected</h3>
+      <p class="font_size_16">
+        {{ rejectDescription }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -69,6 +76,10 @@ export default {
     fullName: String,
     shareFunc: Function,
     credit: {
+      type: String,
+      default: '',
+    },
+    rejectDescription: {
       type: String,
       default: '',
     },
