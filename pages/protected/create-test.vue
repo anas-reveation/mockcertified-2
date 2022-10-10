@@ -250,7 +250,11 @@ export default {
     'formData.categoryId'(newValue, _oldValue) {
       this.subCategoryId = 'default';
       const category = this.allCategories.find((category) => category.id === newValue);
-      this.allSubCategories = category.sub_category.items;
+      this.allSubCategories = [...category.sub_category.items].sort(function (a, b) {
+        let textA = a.name.toUpperCase();
+        let textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
     },
 
     'formData.timeLimit'(newValue, _oldValue) {
