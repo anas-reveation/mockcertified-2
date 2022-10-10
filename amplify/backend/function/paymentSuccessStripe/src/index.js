@@ -140,7 +140,7 @@ exports.handler = async (eventLambda) => {
       Source: 'support@mockcertified.com',
     };
     var sendPromise = new AWS.SES().sendEmail(params).promise();
-    await sendPromise;
+    console.log(await sendPromise);
   }
 
   // Handle the event
