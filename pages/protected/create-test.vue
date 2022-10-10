@@ -111,7 +111,7 @@
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">
-        <input class="container" type="file" ref="fileupload" @change="onChange" required />
+        <input class="container" type="file" ref="fileupload" @change="onChange" />
         <label class="form-label fixed_up">Question list (csv file only)</label>
       </div>
 
@@ -543,6 +543,7 @@ export default {
         this.isAccountActive = false;
       }
     },
+
     reviewQuestionsFunc() {
       this.questionList.filter((res, index) => {
         // Array of question that is attempted
