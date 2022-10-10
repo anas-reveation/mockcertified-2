@@ -43,9 +43,9 @@ $font-family-sans-serif: loraRegular;
   font-size: 10px;
 }
 
-body {
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
-}
+// body {
+//   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+//     env(safe-area-inset-left);
+// }
 
 @import '~bootstrap/scss/bootstrap';
