@@ -34,7 +34,6 @@
               type="text"
               class="border border-2 border-primary rounded form-control"
               v-model="rejectDescription"
-              required
             />
             <label class="form-label">Reason of Rejection</label>
           </div>

@@ -2,6 +2,8 @@ require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  // If you don't want to display the progress bar between the routes
+  loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Mockcertified App',

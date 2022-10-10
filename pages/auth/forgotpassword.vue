@@ -128,7 +128,13 @@
               ? 'btn-gray'
               : 'btn-secondary'
           "
-          :disabled="!code || !password || !confirmPassword || !errors.password.isValid"
+          :disabled="
+            !code ||
+            !password ||
+            !confirmPassword ||
+            password !== confirmPassword ||
+            !errors.password.isValid
+          "
         >
           Reset Password
         </button>

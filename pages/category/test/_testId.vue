@@ -28,9 +28,9 @@
       <div v-else>
         <div v-if="isAuthenticated">
           <div v-if="testDetail.price !== 0">
-            <h3 v-if="newPrice" class="fw-bolder font_size_20">
-              New Price -
-              <span class="text-primary fw-bolder"> ${{ newPrice }} </span>
+            <h3 v-if="newPrice" class="fw-bolder text-muted font_size_20">
+              New price -
+              <span class="text-success fw-bolder"> ${{ newPrice }} </span>
             </h3>
             <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
               <div class="mb-4 input-data">
@@ -40,7 +40,10 @@
                   v-model="promocode"
                   required
                 />
-                <button class="btn btn-outline-primary border-2 mt-2" :disabled="!promocode">
+                <button
+                  class="btn border-2 border-dark text-dark mt-2 bg_grey"
+                  :disabled="!promocode"
+                >
                   Apply Code
                 </button>
               </div>
@@ -210,3 +213,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg_grey {
+  background-color: #f3f3f3;
+}
+
+.grey_clr {
+  color: #7f7f7f;
+}
+</style>

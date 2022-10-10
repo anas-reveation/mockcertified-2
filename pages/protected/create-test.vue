@@ -235,7 +235,12 @@ export default {
     //   }
     // },
 
+    'this.$refs.fileupload'(newValue, _oldValue) {
+      console.log('newValue', newValue);
+    },
+
     file(newValue, _oldValue) {
+      console.log('newValue', newValue);
       if (!newValue) {
         this.questionList = [];
         this.reviewQuestions = [];
@@ -308,6 +313,13 @@ export default {
     // Start Moving "other" category at end
     const category = allCategories.find((category) => category.name === 'other');
     this.allCategories = allCategories.filter((category) => category.name !== 'other');
+    // sorting in alphabetically
+    this.allCategories.sort(function (a, b) {
+      let textA = a.name.toUpperCase();
+      let textB = b.name.toUpperCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+    //
     this.allCategories.push(category);
     // End Moving "other" category at end
 
@@ -328,6 +340,7 @@ export default {
     },
 
     onChange(event) {
+      this.file = null;
       this.file = event.target.files ? event.target.files[0] : null;
       if (this.file && this.file.type == 'text/csv') {
         const reader = new FileReader();
@@ -345,10 +358,14 @@ export default {
         reader.readAsBinaryString(this.file);
       } else {
         this.questionList = [];
+        this.reviewQuestions = [];
       }
+      this.$refs.fileupload.value = '';
     },
 
     pasreFileData(FileData) {
+      this.questionList = [];
+      this.reviewQuestions = [];
       let isFormatted = true;
 
       for (let i = 0; i < FileData.length; i++) {
@@ -445,6 +462,7 @@ export default {
 
       if (!isFormatted) {
         this.questionList = [];
+        this.reviewQuestions = [];
         return;
       }
 
