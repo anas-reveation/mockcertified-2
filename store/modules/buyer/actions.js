@@ -73,12 +73,35 @@ export default {
 
       const parsedData = JSON.parse(promocodeData.data.checkPromoCode);
       commit('SET_LOADER', false, { root: true });
-      if (parsedData.status !== 200) {
+      console.log('parsedData.status', parsedData.status);
+      if (parsedData.status === 404) {
         this.$swal.fire({
           toast: true,
           position: 'top-end',
           icon: 'warning',
           title: 'Promocode is not valid',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
+      } else if (parsedData.status === 400) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Promocode is expired',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
+      } else if (parsedData.status === 500) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 3000,
