@@ -1,69 +1,77 @@
 <template>
   <div class="container px-4">
-    <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/">
-        <img src="@/assets/images/logo.svg" alt="logo" />
-      </NuxtLink>
-    </div>
+    <NavbarLogo />
 
-    <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="my-5 font_size_36">Login</h1>
-
-    <form class="wrapper" @submit.prevent="loginLocal">
-      <div class="mb-4 input-data">
-        <input
-          type="text"
-          class="border border-2 border-primary rounded py-3"
-          :class="!errors.email.isValid && 'border-danger'"
-          v-model="form.email"
-          required
-        />
-        <label>Email</label>
-      </div>
-
-      <div class="mb-2 input-data">
-        <input
-          :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded py-3"
-          v-model="form.password"
-          required
-        />
-        <label>Password</label>
-        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
-          <img
-            v-if="isPasswordVisible"
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_visible.svg"
-            alt="eye"
-          />
-          <img
-            v-else
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_not_visible.svg"
-            alt="eye"
-          />
+    <div class="row">
+      <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
+        <div>
+          <img src="~/assets/images/Illustration.svg" class="me-4" />
         </div>
       </div>
+      <div class="col-sm-6">
+        <img
+          class="position-absolute top-0 end-0 d-sm-none oval_img"
+          src="@/assets/images/oval.jpg"
+          alt="oval"
+        />
 
-      <div class="text-end">
-        <NuxtLink to="/auth/forgotpassword"> Forgot Password? </NuxtLink>
-      </div>
+        <form class="wrapper width_res" @submit.prevent="loginLocal">
+          <h1 class="my-5 text-sm-center font_size_36">Login</h1>
 
-      <div class="text-center mt-2">
-        <button
-          type="submit"
-          class="btn border border-2 border-primary fw-bold px-3"
-          :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
-          :disabled="!form.email || !form.password || !errors.email.isValid"
-        >
-          Login
-        </button>
-      </div>
+          <div class="mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-primary rounded py-3"
+              :class="!errors.email.isValid && 'border-danger'"
+              v-model="form.email"
+              required
+            />
+            <label>Email</label>
+          </div>
 
-      <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+          <div class="mb-2 input-data">
+            <input
+              :type="isPasswordVisible ? 'text' : 'password'"
+              class="border border-2 border-primary rounded py-3"
+              v-model="form.password"
+              required
+            />
+            <label>Password</label>
+            <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+              <img
+                v-if="isPasswordVisible"
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_visible.svg"
+                alt="eye"
+              />
+              <img
+                v-else
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_not_visible.svg"
+                alt="eye"
+              />
+            </div>
+          </div>
 
-      <div class="mt-2">
-        <!-- <button
+          <div class="text-end">
+            <NuxtLink to="/auth/forgotpassword"> Forgot Password? </NuxtLink>
+          </div>
+
+          <div class="text-center mt-2">
+            <button
+              type="submit"
+              class="btn border border-2 border-primary fw-bold px-3 login_btn_width"
+              :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
+              :disabled="!form.email || !form.password || !errors.email.isValid"
+            >
+              Login
+            </button>
+          </div>
+
+          <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+
+          <div class="mt-2">
+            <!-- <button
           type="button"
           class="btn btn-secondary fw-bold border border-2 border-primary p-3 mt-2 w-100 text-start"
         >
@@ -83,11 +91,14 @@
           Continue with Facebook
         </button> -->
 
-        <p class="mt-4 text-center">
-          New to Mockcertified ? <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
-        </p>
+            <p class="mt-4 text-center">
+              New to Mockcertified ?
+              <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
+            </p>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -231,4 +242,15 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/auth.scss';
+@import '~/assets/css/bootstrapBreakpoint';
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 75%;
+  }
+
+  .login_btn_width {
+    width: 100%;
+  }
+}
 </style>
