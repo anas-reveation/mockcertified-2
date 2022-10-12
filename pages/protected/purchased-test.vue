@@ -24,7 +24,7 @@
     </div>
 
     <div v-else>
-      <div class="text-end mb-2">
+      <div class="text-sm-start text-end mb-3">
         <span>Sort by :</span>
         <select class="border border-primary rounded" v-model="sortBy">
           <option value="date">Date</option>
@@ -43,13 +43,20 @@
         </span>
       </div>
 
-      <div v-for="test in filteredTests" :key="test.id" @click="redirectPage(test)" class="mb-3">
-        <TestCards
-          :title="test.test.title"
-          :description="`${test.test.time_limit} mins • ${
-            test.test.questions.items.length
-          } questions • ${totalMarks(test.test.questions.items)} marks`"
-        />
+      <div class="row">
+        <div
+          v-for="test in filteredTests"
+          :key="test.id"
+          @click="redirectPage(test)"
+          class="col-sm-4 mb-3"
+        >
+          <TestCards
+            :title="test.test.title"
+            :description="`${test.test.time_limit} mins • ${
+              test.test.questions.items.length
+            } questions • ${totalMarks(test.test.questions.items)} marks`"
+          />
+        </div>
       </div>
     </div>
   </div>

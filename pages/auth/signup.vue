@@ -174,13 +174,13 @@
           <div>
             <input type="checkbox" v-model="registerForm.userAgreement" />
             I accept the
-            <span @click="newWindowsOpen" class="fw-bolder text-decoration-underline">
+            <a href="#" @click="newWindowsOpen" class="fw-bolder text-decoration-underline">
               terms & conditions
-            </span>
+            </a>
             and
-            <span @click="newWindowsOpen('pp')" class="fw-bolder text-decoration-underline">
+            <a href="#" @click="newWindowsOpen('pp')" class="fw-bolder text-decoration-underline">
               privacy policies
-            </span>
+            </a>
           </div>
 
           <div class="text-center mt-2">

@@ -8,7 +8,7 @@
         <div class="text-center">
           <button
             type="button"
-            class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 mb-3"
+            class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 mb-3 width_res"
             @click="startTestFun"
           >
             Start
@@ -338,7 +338,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
 .header_timer {
   height: 30px;
 }
@@ -359,5 +363,12 @@ export default {
 .remove_padding_x {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 25% !important;
+    margin-left: auto;
+  }
 }
 </style>
