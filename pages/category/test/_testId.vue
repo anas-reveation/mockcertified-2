@@ -33,15 +33,15 @@
               <span class="text-success fw-bolder"> ${{ newPrice }} </span>
             </h3>
             <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
-              <div class="mb-4 input-data">
+              <div class="mb-4 input-data text-sm-start">
                 <input
                   type="text"
-                  class="border border-2 border-primary rounded form-control"
+                  class="border border-2 border-primary rounded form-control width_res"
                   v-model="promocode"
                   required
                 />
                 <button
-                  class="btn border-2 border-dark text-dark mt-2 bg_grey"
+                  class="btn border-2 border-dark text-dark mt-2 bg_grey width_res"
                   :disabled="!promocode"
                 >
                   Apply Code
@@ -50,23 +50,26 @@
             </form>
           </div>
 
-          <button
-            type="button"
-            class="btn btn-secondary border border-2 border-primary w-50"
-            @click="buyNowLocal"
-          >
-            Buy Now
-          </button>
+          <div class="text-sm-start">
+            <button
+              type="button"
+              class="btn btn-secondary border border-2 border-primary w-50 width_res"
+              @click="buyNowLocal"
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
 
-        <button
-          v-else
-          type="button"
-          class="btn btn-secondary border border-2 border-primary w-50"
-          @click="redirectLogin"
-        >
-          Login
-        </button>
+        <div v-else class="text-sm-start">
+          <button
+            type="button"
+            class="btn btn-secondary border border-2 border-primary w-50 width_res"
+            @click="redirectLogin"
+          >
+            Login
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -217,12 +220,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
 .bg_grey {
   background-color: #f3f3f3;
 }
 
 .grey_clr {
   color: #7f7f7f;
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 400px !important;
+  }
 }
 </style>

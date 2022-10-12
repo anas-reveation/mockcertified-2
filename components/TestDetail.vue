@@ -29,12 +29,24 @@
           width="30"
         />
         {{ fullName }}
+        <span v-if="price" class="text-primary fw-bolder ms-2 d-none d-sm-inline">
+          {{ formatedPrice }}
+        </span>
+        <span
+          v-else-if="priceZero"
+          class="text-primary fw-bolder text-end text-success d-sm-inline"
+        >
+          Free
+        </span>
       </div>
 
-      <span v-if="price" class="col-3 text-primary fw-bolder text-end">
+      <span v-if="price" class="col-3 text-primary fw-bolder text-end d-sm-none">
         {{ formatedPrice }}
       </span>
-      <span v-else-if="priceZero" class="col-3 text-primary fw-bolder text-end text-success">
+      <span
+        v-else-if="priceZero"
+        class="col-3 text-primary fw-bolder text-end text-success d-sm-none"
+      >
         Free
       </span>
     </div>

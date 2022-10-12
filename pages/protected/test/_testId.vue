@@ -12,15 +12,15 @@
     />
 
     <div class="text-center">
-      <div v-if="testStatus">
+      <div v-if="testStatus" class="d-sm-flex justify-content-start">
         <NuxtLink
           :to="`/protected/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-          class="btn btn-secondary border border-2 border-primary fw-bold w-50"
+          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 width_res"
         >
           {{ testStatus }}
         </NuxtLink>
         <button
-          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3"
+          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 width_res"
           @click="startTestAgain"
         >
           Start over
@@ -133,3 +133,16 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 250px !important;
+    margin-right: 1rem;
+  }
+}
+</style>
