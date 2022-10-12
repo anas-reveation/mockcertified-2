@@ -35,6 +35,7 @@
           <option selected value="default" disabled>Select Category</option>
           <option
             v-for="(category, index) in allCategories"
+            v-if="category"
             :key="index"
             :value="category.id"
             class="text-capitalize"
@@ -315,8 +316,8 @@ export default {
     const allCategories = await this.getAllCategories();
 
     // Start Moving "other" category at end
-    const category = allCategories.find((category) => category.name === 'other');
-    this.allCategories = allCategories.filter((category) => category.name !== 'other');
+    const category = allCategories.find((category) => category.name === 'Other');
+    this.allCategories = allCategories.filter((category) => category.name !== 'Other');
     // sorting in alphabetically
     this.allCategories.sort(function (a, b) {
       let textA = a.name.toUpperCase();

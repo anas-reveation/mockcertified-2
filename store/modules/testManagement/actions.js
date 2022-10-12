@@ -122,7 +122,7 @@ export default {
     }
   },
 
-  async getAllCategories({ commit }) {
+  async getAllCategories({ commit, dispatch }) {
     commit('SET_LOADER', true, { root: true });
 
     try {
@@ -131,7 +131,8 @@ export default {
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
-      commit('setCategories', allCategories);
+      const sortedAllCreatedTests = await dispatch('sortBycreatedAt', allCategories);
+      commit('setCategories', sortedAllCreatedTests.reverse());
       commit('SET_LOADER', false, { root: true });
       return allCategories;
     } catch (err) {

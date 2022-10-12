@@ -254,6 +254,7 @@ export const listCategoriesDetail = /* GraphQL */ `
         id
         name
         image
+        createdAt
         sub_category {
           items {
             id
