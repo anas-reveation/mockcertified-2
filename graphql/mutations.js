@@ -484,6 +484,7 @@ export const createPurchasedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      promocode_id
       createdAt
       updatedAt
     }
@@ -524,6 +525,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      promocode_id
       createdAt
       updatedAt
     }
@@ -564,6 +566,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      promocode_id
       createdAt
       updatedAt
     }

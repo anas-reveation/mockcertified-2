@@ -22,8 +22,8 @@ export const getStripeIdStatus = /* GraphQL */ `
   }
 `;
 export const checkPromoCode = /* GraphQL */ `
-  query CheckPromoCode($promocode: String!) {
-    checkPromoCode(promocode: $promocode)
+  query CheckPromoCode($promocode: String!, $jwt_Token: String!) {
+    checkPromoCode(promocode: $promocode, jwt_Token: $jwt_Token)
   }
 `;
 export const getUser = /* GraphQL */ `
@@ -329,6 +329,7 @@ export const getPurchasedTest = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      promocode_id
       createdAt
       updatedAt
     }
@@ -345,6 +346,7 @@ export const listPurchasedTests = /* GraphQL */ `
         id
         user_id
         test_id
+        promocode_id
         createdAt
         updatedAt
       }
