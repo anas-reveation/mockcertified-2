@@ -102,7 +102,7 @@ exports.handler = async (event) => {
         statusCode = 409;
         body = {
           message: 'Promoode already Used',
-          status: 400,
+          status: 409,
         };
       }
     } else {
