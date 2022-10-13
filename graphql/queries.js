@@ -22,8 +22,8 @@ export const getStripeIdStatus = /* GraphQL */ `
   }
 `;
 export const checkPromoCode = /* GraphQL */ `
-  query CheckPromoCode($promocode: String!, $jwt_Token: String!) {
-    checkPromoCode(promocode: $promocode, jwt_Token: $jwt_Token)
+  query CheckPromoCode($promocode: String!, $jwt_token: String!) {
+    checkPromoCode(promocode: $promocode, jwt_token: $jwt_token)
   }
 `;
 export const getUser = /* GraphQL */ `
