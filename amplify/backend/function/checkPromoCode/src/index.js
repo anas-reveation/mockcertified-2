@@ -12,12 +12,18 @@ Amplify Params - DO NOT EDIT */
  */
 
 const axios = require('axios');
+const jwt_decode = require('jwt-decode');
 const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
 
 exports.handler = async (event) => {
   const gotPromoCode = event.arguments.promocode;
+  const jwtToken = event.arguments.jwt_token;
+  const decoded = jwt_decode(jwtToken);
+  const customerId = decoded.sub;
   var filter = { promotion_code: { eq: gotPromoCode } };
+
+  //Query Start
   const getAllPromoCodes = /* GraphQL */ `
     query ListPromotions($filter: ModelPromotionFilterInput) {
       listPromotions(filter: $filter) {
@@ -30,13 +36,39 @@ exports.handler = async (event) => {
       }
     }
   `;
-
-  let statusCode = 200;
-  let body;
-
+  const getPurchasedPromocode = /* GraphQL */ `
+    query getPurchasedPromocode($user_id: ID!) {
+      listPurchasedTests(filter: { user_id: { eq: $user_id } }) {
+        items {
+          promocode_id
+        }
+      }
+    }
+  `;
+  //Query End
+  const getUsedPromoCodes = async () => {
+    const paramsObj = {
+      query: getPurchasedPromocode,
+      variables: {
+        user_id: customerId,
+      },
+    };
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    };
+    const response = await axios.post(GRAPHQL_ENDPOINT, paramsObj, headers);
+    let arr = response.data.data.listPurchasedTests.items;
+    let result = arr.map((a) => a.promocode_id);
+    return result;
+  };
   const headers = {
     'x-api-key': GRAPHQLAPI_KEY_OUTPUT,
   };
+  let statusCode = 200;
+  let body;
+
   try {
     const response = await axios.post(
       GRAPHQL_ENDPOINT,
@@ -49,18 +81,27 @@ exports.handler = async (event) => {
       },
     );
     let result = response.data.data.listPromotions.items[0];
+    const usedPromocodes = await getUsedPromoCodes();
     if (result) {
-      if (new Date(result.expiry_date) > new Date()) {
-        statusCode = 200;
-        body = {
-          message: 'success',
-          discount_percentage: result.discount_percentage,
-          status: 200,
-        };
+      if (!usedPromocodes.includes(result.id)) {
+        if (new Date(result.expiry_date) > new Date()) {
+          statusCode = 200;
+          body = {
+            message: 'success',
+            discount_percentage: result.discount_percentage,
+            status: 200,
+          };
+        } else {
+          statusCode = 400;
+          body = {
+            message: 'Promoode Expired',
+            status: 400,
+          };
+        }
       } else {
-        statusCode = 400;
+        statusCode = 409;
         body = {
-          message: 'Promoode Expired',
+          message: 'Promoode already Used',
           status: 400,
         };
       }

@@ -62,7 +62,7 @@
         },
         "checkPromoCode": {
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
-          "s3Key": "amplify-builds/checkPromoCode-454f7550314e42516250-build.zip"
+          "s3Key": "amplify-builds/checkPromoCode-4c7850344645646b4865-build.zip"
         }
       }
     }
