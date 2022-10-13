@@ -72,8 +72,8 @@ exports.handler = async (eventLambda) => {
   }
 
   // Start Function
-  const purchaseTest = async (testId, customerId) => {
-    const input = { test_id: testId, user_id: customerId };
+  const purchaseTest = async (testId, customerId, promocodeId) => {
+    const input = { test_id: testId, user_id: customerId, promocode_id: promocodeId };
     const paramsObj = {
       query: createPurchasedTest,
       variables: {
@@ -146,12 +146,12 @@ exports.handler = async (eventLambda) => {
   // Handle the event
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const { customer_id, test_id } = session.metadata;
+    const { customer_id, test_id, promocode_id } = session.metadata;
     const { payment_status } = session;
 
     if (payment_status === 'paid') {
       try {
-        await purchaseTest(test_id, customer_id);
+        await purchaseTest(test_id, customer_id, promocode_id);
         let testdetail = await getTestDetail(test_id);
         sendMail(testdetail.email, testdetail.title);
         message = 'success';

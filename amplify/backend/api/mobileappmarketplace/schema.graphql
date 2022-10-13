@@ -119,6 +119,7 @@ type PurchasedTest
   test_id: ID!
   purchased_by: User @hasOne(fields: ["user_id"])
   test: TestManager @hasOne(fields: ["test_id"])
+  promocode_id: String @default(value: "")
 }
 
 type AttemptedTest

@@ -139,7 +139,7 @@ exports.handler = async (event) => {
     };
 
     // Start STRIPE
-    const stripePayment = async (title, basePrice, sellerId, userId) => {
+    const stripePayment = async (title, basePrice, sellerId, userId, promocodeId) => {
       const quantity = 1;
       const calculateApplicationFeeAmount = commission_percentage * basePrice * 100 * quantity;
       // const domainURL = process.env.DOMAIN_ORIGIN;
@@ -158,6 +158,7 @@ exports.handler = async (event) => {
           seller_id: userId,
           customer_id: customerId,
           test_id: testId,
+          promocode_id: promocodeId,
         },
         payment_intent_data: {
           application_fee_amount: calculateApplicationFeeAmount,
@@ -206,6 +207,7 @@ exports.handler = async (event) => {
             testDetail.price,
             testDetail.sellerId,
             testDetail.userId,
+            result.id,
           );
           statusCode = 200;
           body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
@@ -222,6 +224,7 @@ exports.handler = async (event) => {
           testDetail.price,
           testDetail.sellerId,
           testDetail.userId,
+          '',
         );
 
         statusCode = 200;
