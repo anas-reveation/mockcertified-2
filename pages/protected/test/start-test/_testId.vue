@@ -74,7 +74,7 @@
               @click="submitTest"
               :disabled="timerEnabled === false"
             >
-              Submit
+              {{ nextQuestionText }}
             </button>
           </div>
         </div>
@@ -107,6 +107,7 @@ export default {
         userInput: null,
       },
       totalQuestions: null,
+      nextQuestionText: 'Next',
     };
   },
 
@@ -145,6 +146,15 @@ export default {
         } else if (value <= 0 && previousValue === 1) {
           await this.compeletedTest(this.attemptedId);
           await this.setTestRemainingTimeLocal();
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Times Up',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 3000,
+          });
           this.$router.push(`/protected/test/result/${this.attemptedId}`);
         }
       },
@@ -283,6 +293,13 @@ export default {
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
           this.showCounter += 1;
+
+          // Start Change button text in second last question
+          if (this.showCounter > this.totalQuestions - 2) {
+            this.nextQuestionText = 'Submit';
+          }
+          // End Change button text in second last question
+
           if (this.showCounter > this.totalQuestions - 1) {
             const completedRes = await this.compeletedTest(this.attemptedId);
             this.setTestRemainingTimeLocal();

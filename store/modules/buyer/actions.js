@@ -60,20 +60,22 @@ export default {
     }
   },
 
-  async checkPromoCode({ commit }, payload) {
+  async checkPromoCode({ commit, rootState }, payload) {
     const promocode = payload;
+    const jwt_token = rootState.auth.jwtToken;
+
     commit('SET_LOADER', true, { root: true });
     try {
       const promocodeData = await API.graphql({
         query: checkPromoCode,
         variables: {
           promocode,
+          jwt_token,
         },
       });
 
       const parsedData = JSON.parse(promocodeData.data.checkPromoCode);
       commit('SET_LOADER', false, { root: true });
-      console.log('parsedData.status', parsedData.status);
       if (parsedData.status === 404) {
         this.$swal.fire({
           toast: true,
@@ -91,6 +93,17 @@ export default {
           position: 'top-end',
           icon: 'warning',
           title: 'Promocode is expired',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return false;
+      } else if (parsedData.status === 409) {
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Promocode has already been used.',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 3000,
@@ -121,6 +134,7 @@ export default {
 
       return parsedData.discount_percentage;
     } catch (err) {
+      console.log('err', err);
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
         toast: true,

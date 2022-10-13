@@ -21,26 +21,32 @@
     <div v-if="testDetail.status === 'IN_PROGRESS'">
       <div class="text-center">
         <button
-          class="btn btn-secondary border border-2 border-primary mb-1 w-50"
+          class="btn btn-secondary border border-2 border-primary mb-1 w-50 width_res"
           type="button"
           @click="approveRejectTestLocal('approve')"
         >
           Approve
         </button>
 
-        <form class="wrapper my-3">
-          <div class="mb-4 input-data">
-            <input
-              type="text"
-              class="border border-2 border-primary rounded form-control"
-              v-model="rejectDescription"
-            />
-            <label class="form-label">Reason of Rejection</label>
-          </div>
-        </form>
+        <div class="d-sm-flex justify-content-center">
+          <form class="wrapper my-3">
+            <div class="mb-2 input-data">
+              <input
+                type="text"
+                class="border border-2 border-primary rounded form-control"
+                :class="!rejectDescription.length && 'reject_clr'"
+                v-model="rejectDescription"
+                required
+              />
+              <label class="form-label" :class="!rejectDescription.length && 'reject_clr'"
+                >Reason of Rejection</label
+              >
+            </div>
+          </form>
+        </div>
 
         <button
-          class="btn border border-2 border-danger text-danger w-50 mb-2"
+          class="btn border border-2 border-danger text-danger w-50 mb-2 width_res"
           type="button"
           :disabled="!rejectDescription"
           @click="approveRejectTestLocal('reject')"
@@ -68,7 +74,7 @@ export default {
   data() {
     return {
       testDetail: null,
-      rejectDescription: null,
+      rejectDescription: '',
     };
   },
 
@@ -236,6 +242,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
 .underline_hr {
   width: 100%;
   text-align: center;
@@ -289,5 +299,16 @@ export default {
   transform: translateY(-20px);
   font-size: 15px;
   color: #000;
+}
+
+.reject_clr {
+  background-color: #ededed !important;
+  color: #ededed;
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 220px !important;
+  }
 }
 </style>

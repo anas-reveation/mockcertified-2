@@ -1,18 +1,25 @@
 <template>
   <div v-if="balanceDetail" class="container">
-    <p class="fw-bolder font_size_32">
-      Your Account
-      <br />
-      Balance
-    </p>
-    <p class="font_size_36">
-      <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
-    </p>
+    <div class="d-sm-flex align-items-center justify-content-around mt-3">
+      <div class="">
+        <p class="fw-bolder font_size_32">
+          Your Account
+          <br class="d-sm-none" />
+          Balance
+        </p>
+        <p class="font_size_36">
+          <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
+        </p>
+      </div>
 
-    <div class="text-center">
-      <button @click="getRedirectlink" class="btn border border-2 border-primary text-primary w-75">
-        View your payout
-      </button>
+      <div class="text-center">
+        <button
+          @click="getRedirectlink"
+          class="btn border border-2 border-primary text-primary w-75 width_res"
+        >
+          View your payout
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,3 +65,15 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 100% !important;
+  }
+}
+</style>

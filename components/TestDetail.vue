@@ -34,7 +34,7 @@
         </span>
         <span
           v-else-if="priceZero"
-          class="text-primary fw-bolder text-end text-success d-sm-inline"
+          class="text-primary fw-bolder text-end text-success d-none d-sm-inline"
         >
           Free
         </span>

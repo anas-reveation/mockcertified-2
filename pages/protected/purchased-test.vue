@@ -44,18 +44,15 @@
       </div>
 
       <div class="row">
-        <div
-          v-for="test in filteredTests"
-          :key="test.id"
-          @click="redirectPage(test)"
-          class="col-sm-4 mb-3"
-        >
-          <TestCards
-            :title="test.test.title"
-            :description="`${test.test.time_limit} mins • ${
-              test.test.questions.items.length
-            } questions • ${totalMarks(test.test.questions.items)} marks`"
-          />
+        <div v-for="test in filteredTests" :key="test.id" class="col-sm-6 col-md-4 mb-3">
+          <NuxtLink :to="`/protected/test/${test.test.id}`">
+            <TestCards
+              :title="test.test.title"
+              :description="`${test.test.time_limit} mins • ${
+                test.test.questions.items.length
+              } questions • ${totalMarks(test.test.questions.items)} marks`"
+            />
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -113,9 +110,9 @@ export default {
       return totalMarks;
     },
 
-    redirectPage(test) {
-      this.$router.push(`/protected/test/${test.test.id}`);
-    },
+    // redirectPage(test) {
+    //   this.$router.push(`/protected/test/${test.test.id}`);
+    // },
   },
 };
 </script>

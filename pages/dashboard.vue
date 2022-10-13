@@ -5,20 +5,17 @@
     <div v-if="allSearchedTest.length">
       <p class="font_size_16">Suggestions</p>
 
-      <div
-        v-for="(test, index) in allSearchedTest"
-        :key="index"
-        @click="redirectPage(test.id)"
-        class="mb-3"
-      >
-        <TestCards
-          :title="test.title"
-          :price="`$${formatPrice(test.price)}`"
-          :addToCart="true"
-          :description="`${test.time_limit} mins • ${
-            test.questions.items.length
-          } questions • ${totalMarks(test.questions.items)} marks`"
-        />
+      <div v-for="(test, index) in allSearchedTest" :key="index" class="mb-3">
+        <NuxtLink :to="`/category/test/${test.id}`">
+          <TestCards
+            :title="test.title"
+            :price="`$${formatPrice(test.price)}`"
+            :addToCart="true"
+            :description="`${test.time_limit} mins • ${
+              test.questions.items.length
+            } questions • ${totalMarks(test.questions.items)} marks`"
+          />
+        </NuxtLink>
       </div>
     </div>
 
@@ -33,21 +30,18 @@
           </div>
         </div>
 
-        <div
-          v-for="(test, index) in featuredTests"
-          :key="index"
-          @click="redirectPage(test.id)"
-          class="mb-3"
-        >
-          <TestCards
-            v-if="index === 0"
-            :title="test.title"
-            :price="`$${formatPrice(test.price)}`"
-            :addToCart="true"
-            :description="`${test.time_limit} mins • ${
-              test.questions.items.length
-            } questions • ${totalMarks(test.questions.items)} marks`"
-          />
+        <div v-for="(test, index) in featuredTests" :key="index" class="mb-3">
+          <NuxtLink :to="`/category/test/${test.id}`">
+            <TestCards
+              v-if="index === 0"
+              :title="test.title"
+              :price="`$${formatPrice(test.price)}`"
+              :addToCart="true"
+              :description="`${test.time_limit} mins • ${
+                test.questions.items.length
+              } questions • ${totalMarks(test.questions.items)} marks`"
+            />
+          </NuxtLink>
         </div>
       </div>
 
@@ -86,20 +80,18 @@
           </div>
         </div>
 
-        <div
-          v-for="(test, index) in recentlyAddedTests"
-          :key="index"
-          @click="redirectPage(test.id)"
-        >
-          <TestCards
-            v-if="index === 0"
-            :title="test.title"
-            :price="`$${formatPrice(test.price)}`"
-            :addToCart="true"
-            :description="`${test.time_limit} mins • ${
-              test.questions.items.length
-            } questions • ${totalMarks(test.questions.items)} marks`"
-          />
+        <div v-for="(test, index) in recentlyAddedTests" :key="index">
+          <NuxtLink :to="`/category/test/${test.id}`">
+            <TestCards
+              v-if="index === 0"
+              :title="test.title"
+              :price="`$${formatPrice(test.price)}`"
+              :addToCart="true"
+              :description="`${test.time_limit} mins • ${
+                test.questions.items.length
+              } questions • ${totalMarks(test.questions.items)} marks`"
+            />
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -161,9 +153,9 @@ export default {
       return totalMarks;
     },
 
-    redirectPage(id) {
-      this.$router.push(`/category/test/${id}`);
-    },
+    // redirectPage(id) {
+    //   this.$router.push(`/category/test/${id}`);
+    // },
 
     async searchQueryFunc() {
       if (!this.searchQuery) {

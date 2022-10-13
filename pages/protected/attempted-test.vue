@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <div class="mb-2 w-100 d-flex justify-content-center">
+      <div class="mb-2 w-100 d-flex justify-content-center width_res">
         <div
           class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
           :class="sortingTabName === 'IN_PROGRESS' && 'bg-secondary text-dark'"
@@ -38,6 +38,9 @@
             alt="girl_illustration"
             class="girl_illustration"
           />
+
+          <br />
+
           <NuxtLink
             to="/protected/purchased-test"
             class="btn btn-secondary border border-2 border-primary rounded mt-4"
@@ -47,7 +50,7 @@
         </div>
       </div>
       <div v-else>
-        <div class="text-end mb-2">
+        <div class="text-sm-start text-end mb-2">
           <span>Sort by :</span>
           <select class="border border-primary rounded" v-model="sortBy">
             <option value="date">Date</option>
@@ -71,18 +74,25 @@
           </span>
         </div>
 
-        <div
-          v-for="test in filteredTests"
-          :key="test.id"
-          class="mb-3"
-          @click="test.status === 'IN_PROGRESS' ? redirectPage(test) : redirectResultPage(test.id)"
-        >
-          <TestCards
-            :title="test.test.title"
-            :description="`${test.test.time_limit} mins • ${
-              test.test.questions.items.length
-            } questions • ${totalMarks(test.test.questions.items)} marks`"
-          />
+        <div class="row">
+          <div v-for="test in filteredTests" :key="test.id" class="col-sm-6 col-md-4 mb-3">
+            <NuxtLink v-if="test.status === 'IN_PROGRESS'" :to="`/protected/test/${test.test.id}`">
+              <TestCards
+                :title="test.test.title"
+                :description="`${test.test.time_limit} mins • ${
+                  test.test.questions.items.length
+                } questions • ${totalMarks(test.test.questions.items)} marks`"
+              />
+            </NuxtLink>
+            <NuxtLink v-else :to="`/protected/test/result/${test.id}`">
+              <TestCards
+                :title="test.test.title"
+                :description="`${test.test.time_limit} mins • ${
+                  test.test.questions.items.length
+                } questions • ${totalMarks(test.test.questions.items)} marks`"
+              />
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -159,21 +169,32 @@ export default {
       this.sortingTabName = tabName;
     },
 
-    redirectPage(test) {
-      this.$router.push(`/protected/test/${test.test.id}`);
-    },
+    // redirectPage(test) {
+    //   this.$router.push(`/protected/test/${test.test.id}`);
+    // },
 
-    redirectResultPage(attemptId) {
-      this.$router.push(`/protected/test/result/${attemptId}`);
-    },
+    // redirectResultPage(attemptId) {
+    //   this.$router.push(`/protected/test/result/${attemptId}`);
+    // },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
 .girl_illustration {
   object-fit: contain;
   height: 200px;
   width: 200px;
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 25% !important;
+    margin-left: auto;
+  }
 }
 </style>

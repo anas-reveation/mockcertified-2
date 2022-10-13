@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="mb-2 w-100 d-flex justify-content-center">
+    <div class="mb-2 w-100 d-flex justify-content-center width_res">
       <div
         class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
         :class="isApprovedOpen && 'bg-secondary text-dark'"
@@ -27,15 +27,18 @@
     <div v-if="!isLoading && !filteredTests.length" class="mt-4 px-3">
       <h1>No Test Available</h1>
     </div>
-
-    <div v-for="test in filteredTests" :key="test.id" class="mb-3" @click="redirectPage(test.id)">
-      <TestCards
-        :title="test.title"
-        :price="`$${formatPrice(test.price)}`"
-        :description="`${test.time_limit} mins • ${
-          test.questions.items.length
-        } questions • ${totalMarks(test.questions.items)} marks`"
-      />
+    <div class="row">
+      <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3">
+        <NuxtLink :to="`/protected/created-test/${test.id}`">
+          <TestCards
+            :title="test.title"
+            :price="`$${formatPrice(test.price)}`"
+            :description="`${test.time_limit} mins • ${
+              test.questions.items.length
+            } questions • ${totalMarks(test.questions.items)} marks`"
+          />
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -113,14 +116,18 @@ export default {
       return parseFloat(price).toFixed(2);
     },
 
-    redirectPage(id) {
-      this.$router.push(`/protected/created-test/${id}`);
-    },
+    // redirectPage(id) {
+    //   this.$router.push(`/protected/created-test/${id}`);
+    // },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
 .btn-active-color {
   background-color: #11a49b !important;
   color: white !important;
@@ -131,5 +138,12 @@ export default {
 }
 .tabs {
   border: 1px solid rgb(143, 142, 142);
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 25% !important;
+    margin-left: auto;
+  }
 }
 </style>
