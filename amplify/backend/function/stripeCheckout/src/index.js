@@ -35,6 +35,16 @@ const getTestDetailQuery = /* GraphQL */ `
   }
 `;
 
+const getPurchasedPromocode = /* GraphQL */ `
+  query getPurchasedPromocode($user_id: ID!) {
+    listPurchasedTests(filter: { user_id: { eq: $user_id } }) {
+      items {
+        promocode_id
+      }
+    }
+  }
+`;
+
 const getUserTestQuery = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -91,8 +101,8 @@ exports.handler = async (event) => {
           Authorization: `Bearer ${jwtToken}`,
         },
       };
-
       const response = await axios.post(GRAPHQL_ENDPOINT, paramsObj, headers);
+
       const testRes = response.data.data.getTestManager;
       const detail = {
         title: testRes.title,
@@ -138,6 +148,23 @@ exports.handler = async (event) => {
       return isCreator || isPurchased;
     };
 
+    const getUsedPromoCodes = async (id) => {
+      const paramsObj = {
+        query: getPurchasedPromocode,
+        variables: {
+          user_id: customerId,
+        },
+      };
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      };
+      const response = await axios.post(GRAPHQL_ENDPOINT, paramsObj, headers);
+      let arr = response.data.data.listPurchasedTests.items;
+      let result = arr.map((a) => a.promocode_id);
+      return result;
+    };
     // Start STRIPE
     const stripePayment = async (title, basePrice, sellerId, userId, promocodeId) => {
       const quantity = 1;
@@ -195,7 +222,13 @@ exports.handler = async (event) => {
       },
     );
     const result = response.data.data.listPromotions.items[0];
-    if (!isCreatorPurchased) {
+    const usedPromocodes = await getUsedPromoCodes();
+
+    //Check If promocode Used or not
+    if (usedPromocodes.includes(result.id)) {
+      statusCode = 409;
+      body = { message: 'Promocode already Used' };
+    } else if (!isCreatorPurchased) {
       if (gotPromoCode) {
         if (result.discount_percentage) {
           const testDetail = await getTestDetail(testId);
