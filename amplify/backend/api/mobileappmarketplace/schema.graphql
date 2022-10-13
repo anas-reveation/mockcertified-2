@@ -191,7 +191,8 @@ type Query {
   redirectPayoutDashboard(seller_id: String!): String
     @function(name: "redirectPayoutDashboard-${env}")
   getStripeIdStatus(seller_id: String!): String @function(name: "getStripeIdStatus-${env}")
-  checkPromoCode(promocode: String!): String @function(name: "checkPromoCode-${env}")
+  checkPromoCode(promocode: String!, jwt_Token: String!): String
+    @function(name: "checkPromoCode-${env}")
 }
 
 type Mutation {
@@ -204,4 +205,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-           
+ 

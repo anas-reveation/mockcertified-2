@@ -225,43 +225,42 @@ exports.handler = async (event) => {
     const usedPromocodes = await getUsedPromoCodes();
 
     //Check If promocode Used or not
-    if (usedPromocodes.includes(result.id)) {
-      statusCode = 409;
-      body = { message: 'Promocode already Used' };
-    } else if (!isCreatorPurchased) {
-      if (gotPromoCode) {
-        if (result.discount_percentage) {
-          const testDetail = await getTestDetail(testId);
-          var discount = (testDetail.price * result.discount_percentage) / 100;
-          testDetail.price = testDetail.price - discount;
+    if (!usedPromocodes.includes(result.id)) {
+      if (!isCreatorPurchased) {
+        if (gotPromoCode) {
+          if (result.discount_percentage) {
+            const testDetail = await getTestDetail(testId);
+            var discount = (testDetail.price * result.discount_percentage) / 100;
+            testDetail.price = testDetail.price - discount;
 
+            const sessionData = await stripePayment(
+              testDetail.title,
+              testDetail.price,
+              testDetail.sellerId,
+              testDetail.userId,
+              result.id,
+            );
+            statusCode = 200;
+            body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
+          }
+        } else if (
+          !gotPromoCode ||
+          gotPromoCode === undefined ||
+          gotPromoCode === '' ||
+          gotPromoCode === null
+        ) {
+          const testDetail = await getTestDetail(testId);
           const sessionData = await stripePayment(
             testDetail.title,
             testDetail.price,
             testDetail.sellerId,
             testDetail.userId,
-            result.id,
+            '',
           );
+
           statusCode = 200;
           body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
         }
-      } else if (
-        !gotPromoCode ||
-        gotPromoCode === undefined ||
-        gotPromoCode === '' ||
-        gotPromoCode === null
-      ) {
-        const testDetail = await getTestDetail(testId);
-        const sessionData = await stripePayment(
-          testDetail.title,
-          testDetail.price,
-          testDetail.sellerId,
-          testDetail.userId,
-          '',
-        );
-
-        statusCode = 200;
-        body = { message: 'success', url: sessionData.url, session_id: sessionData.id };
       }
     } else {
       statusCode = 409;
