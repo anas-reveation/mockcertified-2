@@ -23,7 +23,7 @@
       <div class="col-9 text-capitalize fw-bolder">
         <img
           src="@/assets/images/profile_icon.svg"
-          alt="share"
+          alt="user"
           class="me-1 mb-1"
           height="30"
           width="30"

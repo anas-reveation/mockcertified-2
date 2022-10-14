@@ -1,25 +1,27 @@
 <template>
-  <form class="row position-relative mb-3" @submit.prevent="searchQueryFunc">
-    <div v-if="!value" class="position-absolute search_icon_position">
-      <img src="@/assets/images/search_icon.svg" alt="search-icon" width="30" height="30" />
-    </div>
-    <input
-      class="col form-control border border-2 border-primary rounded-pill me-2"
-      :class="!value && 'bg_input text_indent'"
-      type="search"
-      maxlength="80"
-      placeholder="Search"
-      aria-label="Search"
-      :value="value"
-      @input="updateValue($event.target.value)"
-    />
-    <button
-      class="col-3 btn btn-primary text-white px-2 border_radius_16"
-      :type="searchQueryFunc ? 'submit' : 'button'"
-    >
-      Search
-    </button>
-  </form>
+  <div class="d-sm-flex justify-content-center">
+    <form class="row position-relative mb-3 width_res" @submit.prevent="searchQueryFunc">
+      <div v-if="!value" class="position-absolute search_icon_position">
+        <img src="@/assets/images/search_icon.svg" alt="search-icon" width="30" height="30" />
+      </div>
+      <input
+        class="col form-control border border-2 border-primary rounded-pill me-2"
+        :class="!value && 'bg_input text_indent'"
+        type="search"
+        maxlength="80"
+        placeholder="Search"
+        aria-label="Search"
+        :value="value"
+        @input="updateValue($event.target.value)"
+      />
+      <button
+        class="col-3 btn btn-primary text-white px-2 border_radius_16"
+        :type="searchQueryFunc ? 'submit' : 'button'"
+      >
+        Search
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -40,7 +42,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .bg_input {
   background-color: #e9edfb;
 }
@@ -57,5 +61,11 @@ export default {
 
 .border_radius_16 {
   border-radius: 16px;
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 380px !important;
+  }
 }
 </style>

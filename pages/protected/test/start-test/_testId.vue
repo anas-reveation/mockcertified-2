@@ -17,11 +17,12 @@
       </div>
       <!-- END INSTRUCTION -->
 
-      <div v-else class="mt-4">
+      <div v-else class="mt-4 container">
         <div class="fixed-top bg-white pt-3">
           <div class="row px-4">
             <div class="col-8 text-primary">
               <img
+                class="cursor_pointer"
                 v-if="timerEnabled === false"
                 src="@/assets/images/back_icon.svg"
                 alt="back_icon"
@@ -30,7 +31,7 @@
               {{ timerString }}
             </div>
             <button
-              class="col-4 btn border-2 border-primary p-0"
+              class="col-4 btn border-2 border-primary p-0 width_res"
               :class="!timerEnabled ? 'bg-primary text-white' : 'text-primary'"
               @click="timerEnabled = !timerEnabled"
             >
@@ -53,7 +54,7 @@
               <li
                 v-for="(value, index2) in questionItem.options"
                 :key="index2"
-                class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2 font_size_16"
+                class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2 font_size_16 cursor_pointer"
                 :class="
                   selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
                 "
@@ -65,8 +66,8 @@
           </div>
         </div>
 
-        <div class="container-fluid bg-white fixed-bottom p-2 mb-1 footer_height">
-          <div class="text-center">
+        <div class="container bg-white fixed-bottom p-2 mb-1 px-sm-4 footer_height">
+          <div class="text-center text-sm-start">
             <button
               type="button"
               class="btn border-primary"
@@ -370,7 +371,7 @@ export default {
 
 .margin_top_bottom {
   margin-top: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .hr_line {
@@ -380,6 +381,10 @@ export default {
 .remove_padding_x {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.cursor_pointer {
+  cursor: pointer;
 }
 
 @include media-breakpoint-up(sm) {

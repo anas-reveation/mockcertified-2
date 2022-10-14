@@ -37,7 +37,6 @@ export default {
       commit('setJwtToken', jwtToken);
       return user;
     } catch (error) {
-      console.error('error', error);
       commit('setUser', null);
     }
   },
@@ -77,8 +76,8 @@ export default {
     commit('SET_LOADER', true, { root: true });
 
     try {
-      commit('SET_LOADER', false, { root: true });
       await Auth.confirmSignUp(email, code);
+      commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
@@ -87,6 +86,39 @@ export default {
         position: 'top-end',
         icon: 'error',
         title: err.message,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
+  async resendConfirmationCode({ commit }, payload) {
+    // It's an email
+    const username = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      await Auth.resendSignUp(username);
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Check your email for the verification code',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return true;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
         timer: 3000,

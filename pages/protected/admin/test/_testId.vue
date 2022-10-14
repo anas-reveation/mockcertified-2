@@ -230,9 +230,7 @@ export default {
 
       // Handle promise's fulfilled/rejected states
       sendPromise
-        .then(function (data) {
-          console.log('Success');
-        })
+        .then(function (data) {})
         .catch(function (err) {
           console.error(err, err.stack);
         });

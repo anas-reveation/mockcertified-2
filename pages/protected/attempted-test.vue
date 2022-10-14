@@ -35,7 +35,7 @@
         <div class="text-center">
           <img
             src="@/assets/images/girl_illustration.png"
-            alt="girl_illustration"
+            alt="illustration"
             class="girl_illustration"
           />
 

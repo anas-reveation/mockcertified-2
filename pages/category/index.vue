@@ -4,20 +4,22 @@
 
     <h1 class="fw-bolder mt-3 font_size_24">Categories</h1>
 
-    <div
-      v-for="category in allCategoriesFilter"
-      :key="category.id"
-      class="border border-2 border-primary rounded-pill mt-3 p-2"
-      @click="redirectPage(category.id)"
-    >
-      <div class="row">
-        <span class="col-2">
-          <img :src="category.image" alt="category" class="rounded-circle category_image" />
-        </span>
-        <span class="col text-start">
-          {{ category.name }}
-        </span>
-      </div>
+    <div class="row">
+      <NuxtLink
+        :to="`/category/${category.id}`"
+        v-for="category in allCategoriesFilter"
+        :key="category.id"
+        class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+      >
+        <div class="row">
+          <span class="col-2 me-2">
+            <img :src="category.image" alt="category" class="rounded-circle category_image" />
+          </span>
+          <span class="col text-start">
+            {{ category.name }}
+          </span>
+        </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4" />
+          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
         </div>
       </div>
       <div class="col-sm-6">

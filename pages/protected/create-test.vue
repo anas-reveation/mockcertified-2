@@ -120,24 +120,28 @@
         Download template
       </button>
 
-      <div class="text-center">
-        <button
-          v-if="questionList.length"
-          type="button"
-          class="btn btn-secondary border border-2 border-primary w-70 mb-2"
-          data-bs-toggle="modal"
-          data-bs-target="#reviewQuestion"
-        >
-          Review Question
-        </button>
-        <button
-          type="submit"
-          class="btn border border-2 border-primary w-50 mb-2"
-          :class="!isDisableBtn && 'btn-secondary'"
-          :disabled="isDisableBtn || questionList.length <= 0"
-        >
-          Submit
-        </button>
+      <div class="text-center row">
+        <div class="col-sm-6">
+          <button
+            v-if="questionList.length"
+            type="button"
+            class="btn btn-secondary border border-2 border-primary w-50 mb-2 width_res"
+            data-bs-toggle="modal"
+            data-bs-target="#reviewQuestion"
+          >
+            Review Question
+          </button>
+        </div>
+        <div class="col-sm-6">
+          <button
+            type="submit"
+            class="btn border border-2 border-primary w-50 mb-2 width_res"
+            :class="!isDisableBtn && 'btn-secondary'"
+            :disabled="isDisableBtn || questionList.length <= 0"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </form>
     <div v-else>
@@ -171,7 +175,7 @@
           <div class="modal-header">
             <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
             <span data-bs-dismiss="modal" aria-label="Close">
-              <img src="@/assets/images/circle-cross.svg" alt="" />
+              <img src="@/assets/images/circle-cross.svg" alt="circle-cross" />
             </span>
           </div>
           <div v-if="questionList.length" class="modal-body">
@@ -236,12 +240,7 @@ export default {
     //   }
     // },
 
-    'this.$refs.fileupload'(newValue, _oldValue) {
-      console.log('newValue', newValue);
-    },
-
     file(newValue, _oldValue) {
-      console.log('newValue', newValue);
       if (!newValue) {
         this.questionList = [];
         this.reviewQuestions = [];
@@ -578,6 +577,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint';
+
 .bg_clr_blue {
   background: #1877cf;
 }
@@ -645,6 +646,12 @@ export default {
 .wrapper .input-data label {
   img {
     pointer-events: auto;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 250px !important;
   }
 }
 </style>

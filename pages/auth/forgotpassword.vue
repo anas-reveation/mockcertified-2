@@ -1,145 +1,155 @@
 <template>
   <div class="container">
-    <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/">
-        <img src="@/assets/images/logo.svg" alt="logo" />
-      </NuxtLink>
+    <NavbarLogo />
+
+    <div class="row">
+      <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
+        <div>
+          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <img
+          class="position-absolute top-0 end-0 oval_img"
+          src="@/assets/images/oval.jpg"
+          alt="oval"
+        />
+        <h1 class="my-5 fw-bold font_size_36 text-sm-center">
+          Reset
+          <br class="d-sm-none" />
+          Password
+        </h1>
+        <p class="text-sm-center">
+          Enter the email associated with your account and we will send a verification code to reset
+          your password
+        </p>
+
+        <form v-if="pageCount === 0" @submit.prevent="resetPassword" class="width_res">
+          <label for="email" class="fw-bolder my-3 font_size_24"> Email address: </label>
+          <input
+            type="email"
+            class="border border-2 border-primary rounded form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Email"
+            v-model="email"
+            required
+          />
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-secondary border border-2 border-primary w-100">
+              Send
+            </button>
+          </div>
+        </form>
+
+        <!-- PAGE 2 -->
+        <form v-else class="wrapper" @submit.prevent="newPasswordSubmit">
+          <div class="mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-primary rounded py-3"
+              v-model="code"
+              required
+            />
+            <label>Enter verification code</label>
+          </div>
+
+          <div class="mb-4 input-data">
+            <input
+              :type="isPasswordVisible ? 'text' : 'password'"
+              class="border border-2 border-primary rounded py-3"
+              v-model="password"
+              @input="checkPasswordMatch"
+              required
+            />
+            <label>
+              Enter new password
+              <img
+                v-if="!errors.password.isValid"
+                src="@/assets/images/i_button.svg"
+                alt="i-button"
+                @click="errors.password.isVisiable = !errors.password.isVisiable"
+              />
+            </label>
+            <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+              <img
+                v-if="isPasswordVisible"
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_visible.svg"
+                alt="eye"
+              />
+              <img
+                v-else
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_not_visible.svg"
+                alt="eye"
+              />
+            </div>
+            <div
+              v-if="errors.password.isVisiable"
+              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+            >
+              {{ errors.password.msg }}
+            </div>
+          </div>
+
+          <div class="mb-4 input-data">
+            <input
+              :type="isPasswordVisible ? 'text' : 'password'"
+              class="border border-2 border-primary rounded py-3"
+              :class="!passwordMatched && confirmPassword.length && 'border-danger'"
+              v-model="confirmPassword"
+              @input="checkPasswordMatch"
+              required
+            />
+            <label>
+              Confirm new Password
+              <img
+                v-if="!errors.password.isValid"
+                src="@/assets/images/i_button.svg"
+                alt="i-button"
+                @click="errors.password.isVisiable = !errors.password.isVisiable"
+              />
+            </label>
+            <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+              <img
+                v-if="isPasswordVisible"
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_visible.svg"
+                alt="eye"
+              />
+              <img
+                v-else
+                class="position-absolute bottom-50 end-0 p-2"
+                src="@/assets/images/password_not_visible.svg"
+                alt="eye"
+              />
+            </div>
+          </div>
+
+          <div class="text-center mt-2">
+            <button
+              type="submit"
+              class="btn border border-2 border-primary fw-bold px-3 w-100"
+              :class="
+                !code || !password || !confirmPassword || !errors.password.isValid
+                  ? 'btn-gray'
+                  : 'btn-secondary'
+              "
+              :disabled="
+                !code ||
+                !password ||
+                !confirmPassword ||
+                password !== confirmPassword ||
+                !errors.password.isValid
+              "
+            >
+              Reset Password
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="my-5 fw-bold font_size_36">
-      Reset
-      <br />
-      Password
-    </h1>
-    <p>
-      Enter the email associated with your account and we will send a verification code to reset
-      your password
-    </p>
-
-    <form v-if="pageCount === 0" @submit.prevent="resetPassword">
-      <label for="email" class="fw-bolder my-3 font_size_24"> Email address: </label>
-      <input
-        type="email"
-        class="border border-2 border-primary rounded form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        placeholder="Email"
-        v-model="email"
-        required
-      />
-      <div class="text-center mt-3">
-        <button type="submit" class="btn btn-secondary border border-2 border-primary w-50">
-          Send
-        </button>
-      </div>
-    </form>
-
-    <!-- PAGE 2 -->
-    <form v-else class="wrapper" @submit.prevent="newPasswordSubmit">
-      <div class="mb-4 input-data">
-        <input
-          type="text"
-          class="border border-2 border-primary rounded py-3"
-          v-model="code"
-          required
-        />
-        <label>Code</label>
-      </div>
-
-      <div class="mb-4 input-data">
-        <input
-          :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded py-3"
-          v-model="password"
-          @input="checkPasswordMatch"
-          required
-        />
-        <label>
-          Enter new password
-          <img
-            v-if="!errors.password.isValid"
-            src="@/assets/images/i_button.svg"
-            alt="i-button"
-            @click="errors.password.isVisiable = !errors.password.isVisiable"
-          />
-        </label>
-        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
-          <img
-            v-if="isPasswordVisible"
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_visible.svg"
-            alt="eye"
-          />
-          <img
-            v-else
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_not_visible.svg"
-            alt="eye"
-          />
-        </div>
-        <div
-          v-if="errors.password.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-        >
-          {{ errors.password.msg }}
-        </div>
-      </div>
-
-      <div class="mb-4 input-data">
-        <input
-          :type="isPasswordVisible ? 'text' : 'password'"
-          class="border border-2 border-primary rounded py-3"
-          :class="!passwordMatched && confirmPassword.length && 'border-danger'"
-          v-model="confirmPassword"
-          @input="checkPasswordMatch"
-          required
-        />
-        <label>
-          Confirm new Password
-          <img
-            v-if="!errors.password.isValid"
-            src="@/assets/images/i_button.svg"
-            alt="i-button"
-            @click="errors.password.isVisiable = !errors.password.isVisiable"
-          />
-        </label>
-        <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
-          <img
-            v-if="isPasswordVisible"
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_visible.svg"
-            alt="eye"
-          />
-          <img
-            v-else
-            class="position-absolute bottom-50 end-0 p-2"
-            src="@/assets/images/password_not_visible.svg"
-            alt="eye"
-          />
-        </div>
-      </div>
-
-      <div class="text-center mt-2">
-        <button
-          type="submit"
-          class="btn border border-2 border-primary fw-bold px-3"
-          :class="
-            !code || !password || !confirmPassword || !errors.password.isValid
-              ? 'btn-gray'
-              : 'btn-secondary'
-          "
-          :disabled="
-            !code ||
-            !password ||
-            !confirmPassword ||
-            password !== confirmPassword ||
-            !errors.password.isValid
-          "
-        >
-          Reset Password
-        </button>
-      </div>
-    </form>
   </div>
 </template>
 
@@ -260,9 +270,15 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/auth.scss';
+@import '~/assets/css/bootstrapBreakpoint';
 
 .password_format_position {
   left: 4.5rem;
   bottom: 2.5rem;
+}
+@include media-breakpoint-up(sm) {
+  .width_res {
+    width: 75%;
+  }
 }
 </style>

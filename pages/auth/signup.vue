@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4" />
+          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
         </div>
       </div>
       <div class="col-sm-6">
@@ -254,6 +254,15 @@
               Confirm
             </button>
           </div>
+          <div class="text-center mt-2">
+            <button
+              type="button"
+              class="btn btn-secondary border border-2 border-primary fw-bold px-3 login_btn_width"
+              @click="resendCode"
+            >
+              Resend the code
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -389,7 +398,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('auth', ['register', 'confirmRegistration', 'login']),
+    ...mapActions('auth', ['register', 'confirmRegistration', 'login', 'resendConfirmationCode']),
 
     checkFirstLastName(newValue) {
       let res = /^[a-zA-Z]+$/.test(newValue);
@@ -477,6 +486,10 @@ export default {
           timer: 3000,
         });
       }
+    },
+
+    async resendCode() {
+      await this.resendConfirmationCode(this.confirmForm.email);
     },
 
     async createUserLocal() {

@@ -134,7 +134,6 @@ export default {
 
       return parsedData.discount_percentage;
     } catch (err) {
-      console.log('err', err);
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
         toast: true,

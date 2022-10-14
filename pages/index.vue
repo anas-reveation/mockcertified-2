@@ -14,7 +14,7 @@
           src="~/assets/images/Illustration.svg"
           height="250"
           width="250"
-          alt=""
+          alt="Illustration"
           class="mx-auto mt-12"
         />
       </div>

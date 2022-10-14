@@ -9,7 +9,7 @@
         height="40"
         class="opacity-75 me-2 mt-1"
         width="40"
-        alt=""
+        alt="user"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"

@@ -99,7 +99,7 @@
       </template>
     </TestDetail>
 
-    <div class="text-center pb-3">
+    <div class="text-center text-sm-start pb-3">
       <NuxtLink
         :to="`/protected/test/${testDetail.id}`"
         class="btn btn-secondary border border-2 border-primary"
@@ -124,7 +124,7 @@
           <div class="modal-header">
             <h5 class="modal-title fw-bolder" id="reviewAnswersLabel">Questions</h5>
             <span data-bs-dismiss="modal" aria-label="Close">
-              <img src="@/assets/images/circle-cross.svg" alt="" />
+              <img src="@/assets/images/circle-cross.svg" alt="circle-cross" />
             </span>
           </div>
           <div class="modal-body">

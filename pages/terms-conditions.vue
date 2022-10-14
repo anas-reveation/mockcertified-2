@@ -1,10 +1,6 @@
 <template>
   <div class="container px-4">
-    <div class="position-absolute top-0 end-0 p-2">
-      <NuxtLink to="/dashboard">
-        <img src="@/assets/images/logo.svg" alt="logo" />
-      </NuxtLink>
-    </div>
+    <NavbarLogo />
 
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
 
