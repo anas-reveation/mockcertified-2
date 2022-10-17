@@ -389,7 +389,7 @@ export default {
 
 @include media-breakpoint-up(sm) {
   .width_res {
-    width: 25% !important;
+    width: 250px !important;
     margin-left: auto;
   }
 }

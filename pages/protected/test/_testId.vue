@@ -30,7 +30,7 @@
       <NuxtLink
         v-else
         :to="`/protected/test/start-test/${testDetail.id}`"
-        class="btn btn-secondary border border-2 border-primary fw-bold w-50"
+        class="btn btn-secondary border border-2 border-primary fw-bold w-50 width_res"
       >
         Start
       </NuxtLink>

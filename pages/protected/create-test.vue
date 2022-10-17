@@ -293,6 +293,8 @@ export default {
     questionList(newValue, _oldValue) {
       if (newValue.length <= 0) {
         this.isDisableBtn = true;
+      } else {
+        this.isDisableBtn = false;
       }
     },
   },
