@@ -16,7 +16,9 @@
     <div class="fixed-bottom footer_height" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
         <div class="position-absolute bottom-0 end-0 mb-2 alexa_hover">
-          <span class="tooltiptext border border-dark rounded-pill text-dark p-1">
+          <span
+            class="border border-dark rounded-pill text-dark p-1 tooltiptext d-none d-sm-inline"
+          >
             Connect to Alexa
           </span>
           <img src="@/assets/images/alexa.svg" alt="alexa-icon" />
