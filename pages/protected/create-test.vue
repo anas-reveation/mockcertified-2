@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container container_width">
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
       class="wrapper mt-3"
@@ -112,7 +112,7 @@
       </div>
 
       <div class="mb-2 input-data border border-2 border-primary rounded">
-        <input class="container" type="file" ref="fileupload" @change="onChange" />
+        <input class="container" type="file" ref="fileupload" @change="uploadFile" />
         <label class="form-label fixed_up">Question list (csv file only)</label>
       </div>
 
@@ -345,7 +345,7 @@ export default {
       this.newWindowsOpen(url);
     },
 
-    onChange(event) {
+    uploadFile(event) {
       this.file = null;
       this.file = event.target.files ? event.target.files[0] : null;
       if (this.file && this.file.type == 'text/csv') {
@@ -654,6 +654,12 @@ export default {
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 250px !important;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .container_width {
+    width: 50%;
   }
 }
 </style>

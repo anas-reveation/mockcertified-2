@@ -9,28 +9,26 @@
 
     <Navbar class="z_index2" />
 
-    <div @click="removeClass">
+    <div @click="removeClass" :class="isSideNavbarVisible && 'sideNavbarOpen'">
       <Nuxt class="margin_bottom px-4" />
     </div>
 
     <div class="fixed-bottom footer_height" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
-        <div class="position-absolute bottom-0 end-0 mb-2 alexa_hover">
-          <span
-            class="border border-dark rounded-pill text-dark p-1 tooltiptext d-none d-sm-inline"
-          >
+        <div class="position-absolute bottom-0 end-0 mb-2">
+          <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_hover" />
+          <span class="border border-dark rounded-pill text-dark p-1 hide_text">
             Connect to Alexa
           </span>
-          <img src="@/assets/images/alexa.svg" alt="alexa-icon" />
         </div>
       </div>
-      <FooterNavbar />
+      <FooterNavbar class="d-sm-none" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -40,7 +38,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'isSideNavbarVisible']),
   },
 
   watch: {
@@ -56,8 +54,11 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['setIsSideNavbarVisible']),
+
     removeClass() {
       try {
+        this.setIsSideNavbarVisible(false);
         this.$root.$children[1].$children[0].$refs['navbarDiv'].classList.remove('show');
       } catch (_err) {}
     },
@@ -78,6 +79,10 @@ export default {
   z-index: 999;
 }
 
+.sideNavbarOpen {
+  margin-left: 250px;
+}
+
 /* Proceed to checkout button is related that is in "cart" page */
 .footer_height {
   height: 80px;
@@ -88,18 +93,16 @@ export default {
 }
 /* Proceed to checkout button is related that is in "cart" page */
 
-.tooltiptext {
-  visibility: hidden;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  /* position: absolute;
-  z-index: 1;
-  top: -5px;
-  right: 105%; */
+.hide_text {
+  display: none;
 }
 
-.alexa_hover:hover .tooltiptext {
-  visibility: visible;
+.alexa_hover:hover + .hide_text {
+  display: inline;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 105%;
+  width: 200px;
 }
 </style>

@@ -14,6 +14,7 @@ const state = () => {
     allAttemptedTests: [],
     allCreatedTests: [],
     isNavbarVisible: false,
+    isSideNavbarVisible: false,
     redirectUrl: '',
     platform: '',
   };
@@ -60,6 +61,10 @@ const mutations = {
 
   setIsNavbarVisible(state, params) {
     state.isNavbarVisible = params;
+  },
+
+  setIsSideNavbarVisible(state, params) {
+    state.isSideNavbarVisible = params;
   },
 
   setPlatform(state) {

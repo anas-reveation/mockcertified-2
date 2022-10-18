@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <NavbarDesktop class="d-none d-sm-block" /> -->
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2">
+    <NavbarDesktop class="d-none d-sm-block" />
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2 d-sm-none">
       <div class="container px-0">
         <NuxtLink class="navbar-brand ms-2" to="/dashboard">
           <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />

@@ -166,7 +166,7 @@ export default {
           toast: true,
           position: 'top-end',
           icon: 'warning',
-          title: 'No tests availablesss',
+          title: 'No tests available',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 3000,
