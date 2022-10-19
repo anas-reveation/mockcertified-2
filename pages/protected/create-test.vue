@@ -599,7 +599,7 @@ export default {
 }
 
 .wrapper .input-data {
-  height: 40px;
+  // height: 40px;
   width: 100%;
   position: relative;
 }

@@ -1,25 +1,55 @@
 <template>
   <div class="container">
     <div v-if="isFetched && !filteredTests.length">
-      <h1 class="fw-bold font_size_32">No Test Available</h1>
-      <p>
-        Want to buy new tests?
-        <br />
-        Click on the button below!
-      </p>
+      <div class="d-sm-none">
+        <h1 class="fw-bold font_size_32">No Test Available</h1>
+        <p>
+          Want to buy new tests?
+          <br />
+          Click on the button below!
+        </p>
 
-      <div class="text-center">
-        <img
-          src="@/assets/images/boy_illustration.png"
-          alt="boy_illustration"
-          class="boy_illustration"
-        />
-        <NuxtLink
-          to="/category"
-          class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
-        >
-          Buy a test
-        </NuxtLink>
+        <div class="text-center">
+          <img
+            src="@/assets/images/boy_illustration.png"
+            alt="boy_illustration"
+            class="boy_illustration"
+          />
+          <NuxtLink
+            to="/category"
+            class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
+          >
+            Buy a test
+          </NuxtLink>
+        </div>
+      </div>
+      <!-- Desktop -->
+      <div class="d-none d-sm-block">
+        <div class="row mt-5">
+          <div class="col-6">
+            <h1 class="fw-bold font_size_32">No Test Available</h1>
+            <p>
+              Want to buy new tests?
+              <br />
+              Click on the button below!
+            </p>
+            <NuxtLink
+              to="/category"
+              class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
+            >
+              Buy a test
+            </NuxtLink>
+          </div>
+          <div class="col-6">
+            <div class="text-center">
+              <img
+                src="@/assets/images/boy_illustration.png"
+                alt="boy_illustration"
+                class="boy_illustration"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

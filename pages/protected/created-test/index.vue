@@ -2,21 +2,21 @@
   <div class="container">
     <div class="mb-2 w-100 d-flex justify-content-center width_res">
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
         :class="isApprovedOpen && 'bg-secondary text-dark'"
         @click="changeTabName('isApprovedOpen')"
       >
         Approved
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
         :class="isInProgressOpen && 'bg-secondary text-dark'"
         @click="changeTabName('isInProgressOpen')"
       >
         Ongoing
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1"
+        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
         :class="isRejectedOpen && 'bg-secondary text-dark'"
         @click="changeTabName('isRejectedOpen')"
       >

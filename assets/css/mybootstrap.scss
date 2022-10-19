@@ -43,6 +43,10 @@ $font-family-sans-serif: loraRegular;
   font-size: 10px;
 }
 
+.cursor_pointer {
+  cursor: pointer;
+}
+
 // body {
 //   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
 //     env(safe-area-inset-left);

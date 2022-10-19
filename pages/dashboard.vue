@@ -25,9 +25,9 @@
           <div class="col">
             <h2 class="fw-bolder font_size_24">Featured</h2>
           </div>
-          <div class="col-4 text-end">
+          <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
-          </div>
+          </div> -->
         </div>
 
         <VueSlickCarousel
@@ -80,9 +80,9 @@
             <h2 class="fw-bolder font_size_24">Recently Added</h2>
           </div>
           <div class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
+            <!-- <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
               See all
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </div>
 
