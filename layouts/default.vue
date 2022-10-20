@@ -66,7 +66,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .spinner-bg {
   background: #656565 !important;
 }
@@ -84,8 +86,11 @@ export default {
 }
 
 /* Proceed to checkout button is related that is in "cart" page */
-.footer_height {
-  height: 80px;
+
+@include media-breakpoint-down(sm) {
+  .footer_height {
+    height: 80px;
+  }
 }
 
 .margin_bottom {

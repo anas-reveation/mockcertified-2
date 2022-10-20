@@ -158,13 +158,22 @@ export default {
         this.filteredTests = [...this.filteredTests].sort(function (a, b) {
           return a.test.time_limit - b.test.time_limit;
         });
-        return;
+      } else if (newValue === 'date') {
+        this.filteredTests = [...this.filteredTests].sort(function (a, b) {
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        });
+      } else {
+        this.filteredTests = this.allAttemptedTests;
       }
-      this.filteredTests = this.allAttemptedTests;
       this.isAscending = true;
     },
 
     sortingTabName(newValue, _oldValue) {
+      // Start Reset filter
+      this.isAscending = true;
+      this.sortBy = 'date';
+      // End Reset filter
+
       if (newValue) {
         this.filteredTests = this.allAttemptedTests.filter((test) => test.status === newValue);
         return;
