@@ -385,7 +385,7 @@ export default {
       this.questionList = [];
       this.reviewQuestions = [];
       let isFormatted = true;
-
+      console.log('FileData', FileData);
       for (let i = 0; i < FileData.length; i++) {
         const row = FileData[i];
         let questionObj = {
@@ -415,7 +415,7 @@ export default {
             const alphabet = String.fromCharCode(64 + j);
             const optionKey = 'option_' + alphabet;
             let optionObj = {};
-            optionObj[optionKey] = col.replace(/\s+/g, ' ').trim();
+            optionObj[optionKey] = col.toString().replace(/\s+/g, ' ').trim();
             questionObj.options.push(optionObj);
           }
         }

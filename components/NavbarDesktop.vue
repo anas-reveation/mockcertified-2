@@ -211,7 +211,6 @@ export default {
     },
 
     isSideNavbarShowFun() {
-      console.log('first', this.isSideNavbarVisible);
       this.setIsSideNavbarVisible(!this.isSideNavbarVisible);
       // this.isSideNavbarShow = !this.isSideNavbarShow;
     },
