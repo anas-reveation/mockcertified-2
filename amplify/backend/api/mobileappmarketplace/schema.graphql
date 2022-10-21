@@ -173,6 +173,19 @@ type Promotion
   expiry_date: AWSDateTime
 }
 
+type StaticContent
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  body: String!
+}
+
 enum AttemptStatus {
   ABORTED
   COMPLETED
@@ -205,4 +218,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-   
+ 

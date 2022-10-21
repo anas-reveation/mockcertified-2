@@ -491,3 +491,32 @@ export const listPromotions = /* GraphQL */ `
     }
   }
 `;
+export const getStaticContent = /* GraphQL */ `
+  query GetStaticContent($id: ID!) {
+    getStaticContent(id: $id) {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStaticContents = /* GraphQL */ `
+  query ListStaticContents(
+    $filter: ModelStaticContentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStaticContents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        body
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

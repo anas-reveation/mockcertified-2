@@ -29,7 +29,11 @@
               class="active_line mb-1"
               :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
             />
-            <img class="m-1" src="@/assets/images/reattempt_icon.svg" alt="reload" />
+            <img
+              class="m-1 reattempt_icon_size"
+              src="@/assets/images/reattempt_icon.svg"
+              alt="reload"
+            />
             <span
               v-if="$route.path.match(/\/attempted-test\/*/g)"
               class="text-primary pb-2 font_size_10"
@@ -129,5 +133,9 @@ a {
 .active_line {
   width: 40px;
   height: 4px;
+}
+
+.reattempt_icon_size {
+  height: 26px;
 }
 </style>

@@ -730,3 +730,36 @@ export const onDeletePromotion = /* GraphQL */ `
     }
   }
 `;
+export const onCreateStaticContent = /* GraphQL */ `
+  subscription OnCreateStaticContent {
+    onCreateStaticContent {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStaticContent = /* GraphQL */ `
+  subscription OnUpdateStaticContent {
+    onUpdateStaticContent {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStaticContent = /* GraphQL */ `
+  subscription OnDeleteStaticContent {
+    onDeleteStaticContent {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;

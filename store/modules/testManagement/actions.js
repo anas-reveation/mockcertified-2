@@ -1,6 +1,7 @@
 import { API } from 'aws-amplify';
 
 import { listTestsByStatus } from '~/ManualGraphql/queries';
+import { listStaticContents } from '~/graphql/queries';
 
 import {
   createAttemptedTest,
@@ -448,6 +449,34 @@ export default {
         });
       }
       return testList;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
+  async getTestInstruction({ commit }) {
+    try {
+      commit('SET_LOADER', true, { root: true });
+      const staticData = await API.graphql({
+        query: listStaticContents,
+      });
+      const staticDataArray = staticData.data.listStaticContents.items;
+      const testInstruction = staticDataArray.find((obj) => obj.name === 'TestInstruction');
+      if (testInstruction) {
+        return testInstruction.body;
+      }
+      commit('SET_LOADER', false, { root: true });
+      return false;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

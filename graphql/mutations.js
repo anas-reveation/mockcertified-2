@@ -833,3 +833,45 @@ export const deletePromotion = /* GraphQL */ `
     }
   }
 `;
+export const createStaticContent = /* GraphQL */ `
+  mutation CreateStaticContent(
+    $input: CreateStaticContentInput!
+    $condition: ModelStaticContentConditionInput
+  ) {
+    createStaticContent(input: $input, condition: $condition) {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStaticContent = /* GraphQL */ `
+  mutation UpdateStaticContent(
+    $input: UpdateStaticContentInput!
+    $condition: ModelStaticContentConditionInput
+  ) {
+    updateStaticContent(input: $input, condition: $condition) {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStaticContent = /* GraphQL */ `
+  mutation DeleteStaticContent(
+    $input: DeleteStaticContentInput!
+    $condition: ModelStaticContentConditionInput
+  ) {
+    deleteStaticContent(input: $input, condition: $condition) {
+      id
+      name
+      body
+      createdAt
+      updatedAt
+    }
+  }
+`;

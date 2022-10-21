@@ -1,11 +1,11 @@
 <template>
   <div class="remove_padding_x">
     <Navbar v-if="!startTest" />
-    <div>
+    <div :class="isSideNavbarVisible && 'sideNavbarOpen'">
       <!-- START INSTRUCTION -->
       <div v-if="!startTest" class="px-2 mt-2">
-        <TestInstructions />
-        <div class="text-center">
+        <TestInstructions v-if="testInstruction" :bodyContent="testInstruction" />
+        <div v-if="testInstruction" class="text-center">
           <button
             type="button"
             class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 mb-3 width_res"
@@ -109,6 +109,7 @@ export default {
       },
       totalQuestions: null,
       nextQuestionText: 'Next',
+      testInstruction: null,
     };
   },
 
@@ -164,7 +165,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['allPurchasedTests', 'allAttemptedTests']),
+    ...mapState(['allPurchasedTests', 'allAttemptedTests', 'isSideNavbarVisible']),
 
     remainingTime() {
       return (this.timerCount / 60).toFixed(2);
@@ -177,6 +178,8 @@ export default {
       this.setTestRemainingTimeLocal();
       this.$router.push('/protected/purchased-test');
     });
+
+    this.testInstruction = await this.getTestInstruction();
 
     const testId = this.testId;
     const purchasedTest = this.allPurchasedTests.filter((item) => item.test.id === testId);
@@ -217,7 +220,6 @@ export default {
 
       this.totalQuestions = this.allQuestions.length;
       this.questionCounter = attemptedTest[0].test.questions.items.length - this.totalQuestions;
-
       this.SET_LOADER(false);
       return;
     }
@@ -248,6 +250,7 @@ export default {
       'answerSubmit',
       'compeletedTest',
       'setTestRemainingTime',
+      'getTestInstruction',
     ]),
 
     async startTestFun() {

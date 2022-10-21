@@ -111,8 +111,14 @@
         <label class="form-label">Test Material Reference (optional)</label>
       </div>
 
-      <div class="mb-2 input-data border border-2 border-primary rounded">
-        <input class="container" type="file" ref="fileupload" @change="uploadFile" />
+      <div class="mb-4 input-data border border-2 border-primary rounded">
+        <input
+          class="container"
+          type="file"
+          ref="fileupload"
+          @change="uploadFile"
+          @click="resetFileRef"
+        />
         <label class="form-label fixed_up">Question list (csv file only)</label>
       </div>
 
@@ -144,7 +150,7 @@
         </div>
       </div>
     </form>
-    <div v-else>
+    <div v-else-if="!isDisable">
       <div>
         <label><h2>Please create your stripe express seller account</h2></label>
       </div>
@@ -170,7 +176,7 @@
       aria-labelledby="reviewQuestionLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
@@ -340,6 +346,13 @@ export default {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
     },
 
+    // Whenever user tries to a upload file it will reset so latest changes will appear even user select same file again
+    resetFileRef() {
+      this.$refs.fileupload.value = '';
+      this.questionList = [];
+      this.reviewQuestions = [];
+    },
+
     downloadCsv() {
       let url = process.env.QUESTION_TEMPLATE_CSV;
       this.newWindowsOpen(url);
@@ -366,7 +379,6 @@ export default {
         this.questionList = [];
         this.reviewQuestions = [];
       }
-      this.$refs.fileupload.value = '';
     },
 
     pasreFileData(FileData) {
