@@ -1,6 +1,14 @@
 import { API } from 'aws-amplify';
 
-import { listTestsByStatus } from '~/ManualGraphql/queries';
+import {
+  userTests,
+  getTestDetail,
+  getCategoryDetail,
+  listCategoriesDetail,
+  listAllTests,
+  listTestsByStatus,
+} from '~/ManualGraphql/queries';
+
 import { listStaticContents } from '~/graphql/queries';
 
 import {
@@ -9,14 +17,6 @@ import {
   updateAttemptedTest,
   addResultStatus,
 } from '~/graphql/mutations';
-
-import {
-  userTests,
-  getTestDetail,
-  getCategoryDetail,
-  listCategoriesDetail,
-  listAllTests,
-} from '~/ManualGraphql/queries';
 
 export default {
   async getUserTests({ commit, dispatch, rootState }) {
@@ -129,6 +129,7 @@ export default {
     try {
       const allCategoriesData = await API.graphql({
         query: listCategoriesDetail,
+        variables: { variables: { limit: 10000 } },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
@@ -195,7 +196,7 @@ export default {
 
       const allTestsData = await API.graphql({
         query: listAllTests,
-        variables: { filter: filter },
+        variables: { filter: filter, variables: { limit: 10000 } },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allTests = allTestsData.data.listTestManagers.items;
@@ -432,7 +433,7 @@ export default {
 
       const allTestData = await API.graphql({
         query: listAllTests,
-        variables: { filter: filter },
+        variables: { filter: filter, variables: { limit: 10000 } },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       commit('SET_LOADER', false, { root: true });

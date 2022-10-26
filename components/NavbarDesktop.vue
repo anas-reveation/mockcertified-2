@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
-      <a href="#" class="navbar-brand" @click="isSideNavbarShowFun">
+      <NuxtLink to="/dashboard" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
-      </a>
+      </NuxtLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,7 +15,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end pe-5 me-2" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <NuxtLink
             to="/dashboard"
@@ -69,6 +69,14 @@
               />
             </NuxtLink>
           </ClientOnly>
+
+          <div
+            v-if="!isSideNavbarVisible"
+            class="d-flex flex-column align-items-center justify-content-center me-5 mb-3 cursor_pointer"
+            @click="isSideNavbarShowFun"
+          >
+            <img class="m-1" src="@/assets/images/hamburger.svg" alt="hamburger" />
+          </div>
         </div>
       </div>
     </div>
@@ -76,8 +84,17 @@
 
     <!-- Side Navbar -->
     <div v-if="isSideNavbarVisible" class="side_navbar">
-      <ul class="list-unstyled mt-5">
+      <ul class="list-unstyled mt-4">
+        <li class="text-end me-2 mb-3">
+          <img
+            src="@/assets/images/cross.svg"
+            alt="cross"
+            class="cursor_pointer"
+            @click="isSideNavbarShowFun"
+          />
+        </li>
         <li
+          v-if="isAuthenticated"
           class="border-bottom border-primary text-capitalize py-2 font_size_16"
           :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
         >
@@ -90,6 +107,7 @@
         </li>
 
         <li
+          v-if="isAuthenticated"
           class="border-bottom border-primary text-capitalize py-2 font_size_16"
           :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black'"
         >
@@ -212,7 +230,6 @@ export default {
 
     isSideNavbarShowFun() {
       this.setIsSideNavbarVisible(!this.isSideNavbarVisible);
-      // this.isSideNavbarShow = !this.isSideNavbarShow;
     },
   },
 };
@@ -234,6 +251,7 @@ export default {
 
 .side_navbar {
   position: fixed;
+  right: 0;
   width: 250px;
   height: 100%;
   z-index: 1000;

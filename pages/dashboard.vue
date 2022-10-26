@@ -5,17 +5,19 @@
     <div v-if="allSearchedTest.length">
       <p class="font_size_16">Suggestions</p>
 
-      <div v-for="(test, index) in allSearchedTest" :key="index" class="mb-3">
-        <NuxtLink :to="`/category/test/${test.id}`">
-          <TestCards
-            :title="test.title"
-            :price="`$${formatPrice(test.price)}`"
-            :addToCart="true"
-            :description="`${test.time_limit} mins • ${
-              test.questions.items.length
-            } questions • ${totalMarks(test.questions.items)} marks`"
-          />
-        </NuxtLink>
+      <div class="row">
+        <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
+          <NuxtLink :to="`/category/test/${test.id}`">
+            <TestCards
+              :title="test.title"
+              :price="`$${formatPrice(test.price)}`"
+              :addToCart="true"
+              :description="`${test.time_limit} mins • ${
+                test.questions.items.length
+              } questions • ${totalMarks(test.questions.items)} marks`"
+            />
+          </NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -36,7 +38,7 @@
           v-bind="settings"
           v-if="featuredTests.length"
         >
-          <div v-for="(test, index) in featuredTests" :key="index" class="mb-3">
+          <div v-for="(test, index) in featuredTests" :key="index" class="mb-3 px-2">
             <NuxtLink :to="`/category/test/${test.id}`">
               <TestCards
                 :title="test.title"

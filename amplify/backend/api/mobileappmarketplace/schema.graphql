@@ -43,7 +43,7 @@ type TestManager
   description: String!
   reject_description: String
   credit: String
-  price: Int!
+  price: Float!
   status: TestManagerStatus
     @default(value: "IN_PROGRESS")
     @index(name: "testsByStatus", queryField: "listTestsByStatus", sortKeyFields: ["createdAt"])

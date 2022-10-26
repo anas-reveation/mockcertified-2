@@ -33,14 +33,17 @@
             <div class="mb-2 input-data">
               <input
                 type="text"
-                class="border border-2 border-primary rounded form-control"
+                class="border border-dark rounded form-control"
                 :class="!rejectDescription.length && 'reject_clr'"
                 v-model="rejectDescription"
                 required
               />
-              <label class="form-label" :class="!rejectDescription.length && 'reject_clr'"
-                >Reason of Rejection</label
+              <label
+                class="form-label label_clr"
+                :class="!rejectDescription.length && 'reject_clr'"
               >
+                Reason of Rejection
+              </label>
             </div>
           </form>
         </div>
@@ -299,9 +302,13 @@ export default {
   color: #000;
 }
 
+.label_clr {
+  color: #797c7f !important;
+}
+
 .reject_clr {
-  background-color: #ededed !important;
-  color: #ededed;
+  background-color: #f7f7f7 !important;
+  color: #a2a3a5;
 }
 
 @include media-breakpoint-up(sm) {

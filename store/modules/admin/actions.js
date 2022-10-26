@@ -9,6 +9,7 @@ export default {
     try {
       const allTestsData = await API.graphql({
         query: listAllTests,
+        variables: { limit: 10000 },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 

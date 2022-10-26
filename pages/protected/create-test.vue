@@ -69,6 +69,7 @@
         <input
           type="number"
           class="border border-2 border-primary rounded form-control"
+          step=".01"
           @keydown="numberValidation"
           v-model="formData.price"
           required
@@ -385,7 +386,6 @@ export default {
       this.questionList = [];
       this.reviewQuestions = [];
       let isFormatted = true;
-      console.log('FileData', FileData);
       for (let i = 0; i < FileData.length; i++) {
         const row = FileData[i];
         let questionObj = {

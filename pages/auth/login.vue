@@ -91,7 +91,7 @@
           Continue with Facebook
         </button> -->
 
-            <p class="mt-4 text-center">
+            <p v-if="platform === 'web'" class="mt-4 text-center">
               New to Mockcertified ?
               <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
             </p>
@@ -132,7 +132,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['isLoading', 'redirectUrl']),
+    ...mapState(['isLoading', 'redirectUrl', 'platform']),
   },
 
   watch: {
@@ -157,13 +157,11 @@ export default {
 
   methods: {
     ...mapActions('auth', ['login', 'load']),
-    ...mapMutations(['clearRedirectUrl']),
 
     async loginLocal() {
       const res = await this.login(this.form);
       if (res && this.redirectUrl) {
         this.$router.push(this.redirectUrl);
-        this.clearRedirectUrl();
       } else if (res) {
         this.$router.push('/dashboard');
       }

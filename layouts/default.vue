@@ -82,7 +82,7 @@ export default {
 }
 
 .sideNavbarOpen {
-  margin-left: 250px;
+  margin-right: 250px;
 }
 
 /* Proceed to checkout button is related that is in "cart" page */
