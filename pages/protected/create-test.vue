@@ -1,6 +1,6 @@
 <template>
   <div class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12 d-none d-md-block">Create new test</h1>
+    <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create new test</h1>
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
       class="wrapper mt-3"
