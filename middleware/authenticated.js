@@ -4,9 +4,14 @@ export default async function ({ store, route, redirect, req }) {
     const userGroup = store.state.auth.userGroup;
 
     const homeRoute = route.path === '/' ? true : false;
+    const dashboardRoute = route.path.match(/\/dashboard\/*/g) ? true : false;
     const protectedRoute = route.path.match(/\/protected\/*/g) ? true : false;
     const authRoute = route.path.match(/\/auth\/*/g) ? true : false;
     const adminRoute = route.path.match(/\/admin\/*/g) ? true : false;
+
+    if (store.state.platform !== 'web' && dashboardRoute) {
+      redirect('/protected/purchased-test');
+    }
 
     if (!isAuthenticated && protectedRoute) {
       redirect('/');

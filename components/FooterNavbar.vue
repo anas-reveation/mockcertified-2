@@ -2,24 +2,26 @@
   <div class="box_shadow">
     <div class="container text-center bg-white py-3">
       <div class="row">
-        <div class="col">
-          <NuxtLink
-            to="/dashboard"
-            class="d-flex flex-column align-items-center justify-content-center"
-          >
-            <div
-              class="active_line mb-1"
-              :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
-            />
-            <img class="m-1" src="@/assets/images/home.svg" alt="home" />
-            <span
-              v-if="$route.path.match(/\/dashboard\/*/g)"
-              class="text-primary pb-2 font_size_10"
+        <ClientOnly>
+          <div v-if="platform === 'web'" class="col">
+            <NuxtLink
+              to="/dashboard"
+              class="d-flex flex-column align-items-center justify-content-center"
             >
-              Home
-            </span>
-          </NuxtLink>
-        </div>
+              <div
+                class="active_line mb-1"
+                :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
+              />
+              <img class="m-1" src="@/assets/images/home.svg" alt="home" />
+              <span
+                v-if="$route.path.match(/\/dashboard\/*/g)"
+                class="text-primary pb-2 font_size_10"
+              >
+                Home
+              </span>
+            </NuxtLink>
+          </div>
+        </ClientOnly>
         <div class="col">
           <NuxtLink
             :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
@@ -92,8 +94,8 @@
 import { mapState, mapActions } from 'vuex';
 export default {
   computed: {
+    ...mapState(['platform']),
     ...mapState('auth', ['user', 'isAuthenticated']),
-    ...mapState('buyer', ['cartItems']),
   },
 
   methods: {

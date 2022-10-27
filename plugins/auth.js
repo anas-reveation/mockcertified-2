@@ -35,9 +35,14 @@ export default async ({ app, route, store }) => {
     const userGroup = store.state.auth.userGroup;
 
     const homeRoute = route.path === '/' ? true : false;
+    const dashboardRoute = route.path.match(/\/dashboard\/*/g) ? true : false;
     const protectedRoute = route.path.match(/\/protected\/*/g) ? true : false;
     const authRoute = route.path.match(/\/auth\/*/g) ? true : false;
     const adminRoute = route.path.match(/\/admin\/*/g) ? true : false;
+
+    if (store.state.platform !== 'web' && dashboardRoute) {
+      app.router.push('/protected/purchased-test');
+    }
 
     if (!isAuthenticated && protectedRoute) {
       app.router.push('/');

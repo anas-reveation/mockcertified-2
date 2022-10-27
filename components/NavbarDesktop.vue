@@ -17,44 +17,46 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <NuxtLink
-            to="/dashboard"
-            class="d-flex flex-column align-items-center justify-content-center me-5"
-          >
-            <img class="m-1 navbar_icon" src="@/assets/images/home.svg" alt="home" />
-            <span class="pb-2 font_size_10"> Home </span>
-
-            <div
-              class="active_line"
-              :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
-            />
-          </NuxtLink>
-
-          <NuxtLink
-            :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
-            class="d-flex flex-column align-items-center justify-content-center me-5"
-          >
-            <img class="m-1 navbar_icon" src="@/assets/images/reattempt_icon.svg" alt="reload" />
-            <span class="pb-2 font_size_10"> Reattempt </span>
-            <div
-              class="active_line"
-              :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
-            />
-          </NuxtLink>
-          <NuxtLink
-            :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
-            class="d-flex flex-column align-items-center justify-content-center me-5"
-          >
-            <img class="m-1 navbar_icon" src="@/assets/images/give_test.svg" alt="give_test" />
-            <span class="pb-2 font_size_10"> Purchased </span>
-
-            <div
-              class="active_line"
-              :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
-            />
-          </NuxtLink>
-
           <ClientOnly>
+            <NuxtLink
+              v-if="platform === 'web'"
+              to="/dashboard"
+              class="d-flex flex-column align-items-center justify-content-center me-5"
+            >
+              <img class="m-1 navbar_icon" src="@/assets/images/home.svg" alt="home" />
+              <span class="pb-2 font_size_10"> Home </span>
+
+              <div
+                class="active_line"
+                :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
+              />
+            </NuxtLink>
+
+            <NuxtLink
+              :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
+              class="d-flex flex-column align-items-center justify-content-center me-5"
+            >
+              <img class="m-1 navbar_icon" src="@/assets/images/reattempt_icon.svg" alt="reload" />
+              <span class="pb-2 font_size_10"> Reattempt </span>
+              <div
+                class="active_line"
+                :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
+              />
+            </NuxtLink>
+
+            <NuxtLink
+              :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
+              class="d-flex flex-column align-items-center justify-content-center me-5"
+            >
+              <img class="m-1 navbar_icon" src="@/assets/images/give_test.svg" alt="give_test" />
+              <span class="pb-2 font_size_10"> Purchased </span>
+
+              <div
+                class="active_line"
+                :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
+              />
+            </NuxtLink>
+
             <NuxtLink
               v-if="user && user.stripe_seller_id"
               to="/protected/account"
@@ -212,9 +214,8 @@ export default {
   },
 
   computed: {
-    ...mapState(['isSideNavbarVisible']),
+    ...mapState(['isSideNavbarVisible', 'platform']),
     ...mapState('auth', ['user', 'isAuthenticated', 'userGroup']),
-    ...mapState('buyer', ['cartItems']),
   },
 
   methods: {

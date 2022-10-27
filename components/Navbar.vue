@@ -33,43 +33,50 @@
             <img src="@/assets/images/dropdown_menu_icon.svg" alt="dropdown" />
           </span>
           <ul class="navbar-nav me-auto mb-lg-0">
-            <li
-              class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
-              :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
-              @click="redirect('/protected/create-test')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-            >
-              <a class="nav-link text-black" aria-current="page">
-                <span class="p-1 ms-3">
-                  <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
-                  Create A New Test
-                </span>
-              </a>
-            </li>
+            <ClientOnly>
+              <li
+                v-if="isAuthenticated"
+                class="nav-item border-top border-bottom border-primary text-capitalize py-1 font_size_16"
+                :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
+                @click="redirect('/protected/create-test')"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+              >
+                <a class="nav-link text-black" aria-current="page">
+                  <span class="p-1 ms-3">
+                    <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
+                    Create A New Test
+                  </span>
+                </a>
+              </li>
+
+              <li
+                v-if="isAuthenticated"
+                class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
+                :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black'"
+                @click="redirect('/protected/created-test')"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+              >
+                <a class="nav-link text-black" aria-current="page">
+                  <span class="p-1 ms-3">
+                    <img
+                      src="@/assets/images/created_tests.svg"
+                      alt="created_tests"
+                      class="me-1 mb-1"
+                    />
+                    Created Tests
+                  </span>
+                </a>
+              </li>
+            </ClientOnly>
 
             <li
               class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-              :class="$route.path.match(/\/created-test\/*/g) && 'bg-secondary fill_black'"
-              @click="redirect('/protected/created-test')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-            >
-              <a class="nav-link text-black" aria-current="page">
-                <span class="p-1 ms-3">
-                  <img
-                    src="@/assets/images/created_tests.svg"
-                    alt="created_tests"
-                    class="me-1 mb-1"
-                  />
-                  Created Tests
-                </span>
-              </a>
-            </li>
-
-            <li
-              class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-              :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black'"
+              :class="[
+                $route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black',
+                !isAuthenticated && 'border-top',
+              ]"
               @click="redirect('/terms-conditions')"
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
