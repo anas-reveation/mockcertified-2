@@ -93,6 +93,77 @@ import { mapState, mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
+  head() {
+    return {
+      title: 'Your Purchased Mock Test',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'View all your purchased mock test. And start it at anytime.',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Your Purchased Mock Test - Mockcertified App',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'View all your purchased mock test. And start it at anytime.',
+        },
+        {
+          name: 'keywords',
+          content: 'Purchased Mock Test, Mockcertified App',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Your Purchased Mock Test - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: 'View all your purchased mock test. And start it at anytime.',
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
+
   data() {
     return {
       filteredTests: [],
