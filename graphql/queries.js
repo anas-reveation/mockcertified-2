@@ -174,6 +174,58 @@ export const listTestsByStatus = /* GraphQL */ `
     }
   }
 `;
+export const searchTestManagers = /* GraphQL */ `
+  query SearchTestManagers(
+    $filter: SearchableTestManagerFilterInput
+    $sort: [SearchableTestManagerSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTestManagerAggregationInput]
+  ) {
+    searchTestManagers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getQuestion = /* GraphQL */ `
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {

@@ -26,6 +26,7 @@ type User
 
 type TestManager
   @model
+  @searchable
   @auth(
     rules: [
       { allow: public, operations: [read] }
