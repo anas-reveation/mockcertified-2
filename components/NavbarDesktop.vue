@@ -21,7 +21,7 @@
             to="/dashboard"
             class="d-flex flex-column align-items-center justify-content-center me-5"
           >
-            <img class="m-1" src="@/assets/images/home.svg" alt="home" />
+            <img class="m-1 navbar_icon" src="@/assets/images/home.svg" alt="home" />
             <span class="pb-2 font_size_10"> Home </span>
 
             <div
@@ -34,7 +34,7 @@
             :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center me-5"
           >
-            <img class="m-1" src="@/assets/images/reattempt_icon.svg" alt="reload" />
+            <img class="m-1 navbar_icon" src="@/assets/images/reattempt_icon.svg" alt="reload" />
             <span class="pb-2 font_size_10"> Reattempt </span>
             <div
               class="active_line"
@@ -45,7 +45,7 @@
             :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center me-5"
           >
-            <img class="m-1" src="@/assets/images/give_test.svg" alt="give_test" />
+            <img class="m-1 navbar_icon" src="@/assets/images/give_test.svg" alt="give_test" />
             <span class="pb-2 font_size_10"> Purchased </span>
 
             <div
@@ -60,7 +60,7 @@
               to="/protected/account"
               class="d-flex flex-column align-items-center justify-content-center me-5"
             >
-              <img class="m-1" src="@/assets/images/wallet.svg" alt="stripe_logo" />
+              <img class="m-1 navbar_icon" src="@/assets/images/wallet.svg" alt="stripe_logo" />
               <span class="pb-2 font_size_10"> Balance </span>
 
               <div
@@ -75,7 +75,7 @@
             class="d-flex flex-column align-items-center justify-content-center me-5 mb-3 cursor_pointer"
             @click="isSideNavbarShowFun"
           >
-            <img class="m-1" src="@/assets/images/hamburger.svg" alt="hamburger" />
+            <img class="m-1 navbar_icon" src="@/assets/images/hamburger.svg" alt="hamburger" />
           </div>
         </div>
       </div>
@@ -256,5 +256,10 @@ export default {
   height: 100%;
   z-index: 1000;
   background: rgba(103, 130, 225, 0.2) !important;
+}
+
+.navbar_icon {
+  width: 30px;
+  height: 30px;
 }
 </style>

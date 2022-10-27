@@ -7,6 +7,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Mockcertified App',
+    titleTemplate: ' %s - Mockcertified App',
     htmlAttrs: {
       lang: 'en',
     },
@@ -69,7 +70,13 @@ export default {
     '@nuxtjs/axios',
     'vue-sweetalert2/nuxt',
     ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
+    ['@nuxtjs/sitemap'],
+    // ['@nuxtjs/sitemap', { exclude: ['/TermsOfServices'] }],
   ],
+
+  sitemap: {
+    hostname: `https://${process.env.DOMAIN}`,
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

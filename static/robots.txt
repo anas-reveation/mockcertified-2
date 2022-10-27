@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.mockcertified.com/sitemap.xml
+Host: https://www.mockcertified.com/

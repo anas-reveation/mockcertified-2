@@ -25,7 +25,7 @@
         {{ msgText }}
       </button>
 
-      <div v-else>
+      <div v-else-if="platform === 'web'">
         <div v-if="isAuthenticated">
           <div v-if="testDetail.price !== 0">
             <h3 v-if="newPrice" class="fw-bolder text-muted font_size_20">
@@ -101,7 +101,7 @@ export default {
   computed: {
     ...mapState('auth', ['user', 'isAuthenticated']),
     ...mapState('buyer', ['cartItems']),
-    ...mapState(['allPurchasedTests']),
+    ...mapState(['allPurchasedTests', 'platform']),
 
     totalMarks() {
       if (this.testDetail) {
