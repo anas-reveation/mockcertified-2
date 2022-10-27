@@ -1,13 +1,15 @@
 <template>
   <div class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1">
     <div class="row">
-      <p class="col-7 text-capitalize fw-bolder" v-if="title">{{ title }}</p>
-
+      <p class="col-7 text-capitalize fw-bolder mb-0" v-if="title">{{ title }}</p>
       <p class="col-5 text-capitalize fw-bolder text-end text-success" v-if="price === '$0.00'">
         Free
       </p>
       <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">{{ price }}</p>
+      <p class="col-7 mb-0 fs-7 fw-light" v-if="authorName">By-{{ authorName }}</p>
+      <p class="col-7 fs-7 fw-light" v-if="createdAt">{{ getDate(createdAt) }}</p>
     </div>
+
     <span v-if="description" class="font_family_roboto font_size_16">
       {{ description }}
     </span>
@@ -47,7 +49,14 @@ export default {
       type: Boolean,
       default: false,
     },
-
+    createdAt: {
+      type: String,
+      default: null,
+    },
+    authorName: {
+      type: String,
+      default: null,
+    },
     removeItem: {
       type: Boolean,
       default: false,
@@ -59,6 +68,10 @@ export default {
 
     removeCartItemLocal(id) {
       this.removeCartItem(id);
+    },
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
     },
   },
 };

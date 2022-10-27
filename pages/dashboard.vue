@@ -15,6 +15,8 @@
               :description="`${test.time_limit} mins • ${
                 test.questions.items.length
               } questions • ${totalMarks(test.questions.items)} marks`"
+              :createdAt="test.createdAt"
+              :authorName="test.created_by.first_name"
             />
           </NuxtLink>
         </div>

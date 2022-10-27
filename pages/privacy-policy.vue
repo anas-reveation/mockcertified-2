@@ -4,11 +4,7 @@
 
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
 
-    <h1 class="mt-5 mb-4 font_size_36">
-      Privacy
-      <br />
-      Policy
-    </h1>
+    <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-sm-6">Privacy Policy</h1>
 
     <div class="word_wrap">
       <p class="fw-bolder">Last updated September 28, 2022</p>

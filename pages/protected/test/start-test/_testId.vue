@@ -66,8 +66,8 @@
           </div>
         </div>
 
-        <div class="container bg-white fixed-bottom p-2 mb-1 px-sm-4 footer_height">
-          <div class="text-center text-sm-start">
+        <div class="container bg-white fixed_bottom p-2 mb-1 px-sm-4 footer_height">
+          <div class="float-lg-end float-md-end text-center">
             <button
               type="button"
               class="btn border-primary"
@@ -388,6 +388,16 @@ export default {
 
 .cursor_pointer {
   cursor: pointer;
+}
+
+.fixed_bottom {
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+  }
 }
 
 @include media-breakpoint-up(sm) {

@@ -1,5 +1,6 @@
 <template>
   <div class="container container_width">
+    <h1 class="mt-5 mb-4 font_size_36 col-md-12 d-none d-md-block">Create new test</h1>
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
       class="wrapper mt-3"
@@ -608,6 +609,11 @@ export default {
 .underline_hr span {
   background: #fff;
   padding: 0 10px;
+}
+.form-select {
+  font-size: 15px;
+  font-weight: 200;
+  height: 39.8px;
 }
 
 .wrapper .input-data {
