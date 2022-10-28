@@ -48,7 +48,11 @@
               :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
               class="d-flex flex-column align-items-center justify-content-center me-5"
             >
-              <img class="m-1 navbar_icon" src="@/assets/images/give_test.svg" alt="give_test" />
+              <img
+                class="m-1 navbar_icon"
+                src="@/assets/images/purchase_icon.svg"
+                alt="purchase_icon"
+              />
               <span class="pb-2 font_size_10"> Purchased </span>
 
               <div

@@ -53,7 +53,7 @@
               class="active_line mb-1"
               :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
             />
-            <img class="m-1" src="@/assets/images/give_test.svg" alt="give_test" />
+            <img class="m-1" src="@/assets/images/purchase_icon.svg" alt="purchase_icon" />
             <span
               v-if="$route.path.match(/\/purchased-test\/*/g)"
               class="text-primary pb-2 font_size_10"
