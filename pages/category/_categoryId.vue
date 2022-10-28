@@ -120,16 +120,12 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: `${this.categoryName && this.categoryName.description} - Mockcertified App`,
+          content: `${this.categoryName} - Mockcertified App`,
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: `Get a variety of ${
-            this.categoryName && this.categoryName
-          } practise tests. Choose the ${
-            this.categoryName && this.categoryName
-          } sub-categorized designation exam that you desire. And begin your test right now.`,
+          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
         },
 
         {

@@ -57,7 +57,7 @@ export default {
         {
           hid: 'og:title',
           property: 'og:title',
-          content: `${this.testDetail && this.testDetail.description} - Mockcertified App`,
+          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
         },
         {
           hid: 'og:description',
@@ -89,7 +89,7 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: `${this.testDetail && this.testDetail.description} - Mockcertified App`,
+          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
         },
         {
           hid: 'twitter:description',
