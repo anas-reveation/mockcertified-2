@@ -9,7 +9,11 @@
 
     <Navbar class="z_index2" />
 
-    <div @click="removeClass" :class="isSideNavbarVisible && 'sideNavbarOpen'">
+    <!-- <div @click="removeClass" :class="isSideNavbarVisible && 'sideNavbarOpen'">
+      <Nuxt class="margin_bottom px-4" />
+    </div> -->
+
+    <div>
       <Nuxt class="margin_bottom px-4" />
     </div>
 
@@ -54,11 +58,11 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setIsSideNavbarVisible']),
+    // ...mapMutations(['setIsSideNavbarVisible']),
 
     removeClass() {
       try {
-        this.setIsSideNavbarVisible(false);
+        // this.setIsSideNavbarVisible(false);
         this.$root.$children[1].$children[0].$refs['navbarDiv'].classList.remove('show');
       } catch (_err) {}
     },
@@ -81,9 +85,9 @@ export default {
   z-index: 999;
 }
 
-.sideNavbarOpen {
-  margin-right: 250px;
-}
+// .sideNavbarOpen {
+//   margin-right: 250px;
+// }
 
 /* Proceed to checkout button is related that is in "cart" page */
 

@@ -69,29 +69,29 @@
                   </span>
                 </a>
               </li>
-            </ClientOnly>
 
-            <li
-              class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
-              :class="[
-                $route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black',
-                !isAuthenticated && 'border-top',
-              ]"
-              @click="redirect('/terms-conditions')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-            >
-              <a class="nav-link text-black" aria-current="page">
-                <span class="p-1 ms-3">
-                  <img
-                    src="@/assets/images/terms_conditions.svg"
-                    alt="terms_conditions"
-                    class="me-1 mb-1"
-                  />
-                  Terms and Conditions
-                </span>
-              </a>
-            </li>
+              <li
+                class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
+                :class="[
+                  $route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black',
+                  !isAuthenticated && 'border-top',
+                ]"
+                @click="redirect('/terms-conditions')"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+              >
+                <a class="nav-link text-black" aria-current="page">
+                  <span class="p-1 ms-3">
+                    <img
+                      src="@/assets/images/terms_conditions.svg"
+                      alt="terms_conditions"
+                      class="me-1 mb-1"
+                    />
+                    Terms and Conditions
+                  </span>
+                </a>
+              </li>
+            </ClientOnly>
 
             <li
               class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"

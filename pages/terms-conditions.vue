@@ -1,10 +1,12 @@
 <template>
   <div class="container px-4">
-    <NavbarLogo />
+    <!-- <img
+      class="position-absolute top-0 end-0 d-sm-none oval_img"
+      src="@/assets/images/oval.jpg"
+      alt="oval"
+    /> -->
 
-    <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-sm-6">Terms and Conditions</h1>
+    <h1 class="mt-5 mb-4 font_size_36">Terms and Conditions</h1>
 
     <div class="word_wrap">
       <!-- <a href="#1">1. AGREEMENT TO TERMS</a> <br />
@@ -790,8 +792,6 @@
 
 <script>
 export default {
-  layout: 'introLayout',
-
   head() {
     return {
       title: 'Terms and Conditions',

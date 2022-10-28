@@ -1,7 +1,7 @@
 <template>
   <div class="remove_padding_x">
     <Navbar v-if="!startTest" />
-    <div :class="isSideNavbarVisible && 'sideNavbarOpen'">
+    <div>
       <!-- START INSTRUCTION -->
       <div v-if="!startTest" class="px-2 mt-2">
         <TestInstructions v-if="testInstruction" :bodyContent="testInstruction" />
@@ -165,7 +165,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['allPurchasedTests', 'allAttemptedTests', 'isSideNavbarVisible']),
+    ...mapState(['allPurchasedTests', 'allAttemptedTests']),
 
     remainingTime() {
       return (this.timerCount / 60).toFixed(2);
