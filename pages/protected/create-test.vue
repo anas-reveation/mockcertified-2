@@ -409,7 +409,16 @@ export default {
     questionList(newValue, _oldValue) {
       if (newValue.length <= 0) {
         this.isDisableBtn = true;
-      } else {
+      } else if (
+        this.formData.title &&
+        this.formData.description &&
+        this.formData.price &&
+        this.formData.timeLimit &&
+        this.formData.categoryId !== 'default' &&
+        this.formData.subCategoryId !== 'default' &&
+        this.errors.timeLimit.isValid &&
+        this.errors.price.isValid
+      ) {
         this.isDisableBtn = false;
       }
     },
