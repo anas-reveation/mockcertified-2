@@ -115,7 +115,6 @@
 </template>
 
 <script>
-import { App as CapacitorApp } from '@capacitor/app';
 import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 
@@ -250,14 +249,6 @@ export default {
   },
 
   async mounted() {
-    CapacitorApp.addListener('backButton', ({ canGoBack }) => {
-      if (!canGoBack) {
-        CapacitorApp.exitApp();
-      } else {
-        window.history.back();
-      }
-    });
-
     if (!this.categories.length) {
       await this.getAllCategories();
     }

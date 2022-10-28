@@ -76,6 +76,81 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
+  head() {
+    return {
+      title: `${this.categoryName}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: `${this.categoryName} - Mockcertified App`,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
+        },
+        {
+          name: 'keywords',
+          content: `${this.categoryName}, Mock Test Categories`,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: `${this.categoryName && this.categoryName.description} - Mockcertified App`,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: `Get a variety of ${
+            this.categoryName && this.categoryName
+          } practise tests. Choose the ${
+            this.categoryName && this.categoryName
+          } sub-categorized designation exam that you desire. And begin your test right now.`,
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
+
   data() {
     return {
       allSubCategory: [],
@@ -101,7 +176,6 @@ export default {
   },
 
   computed: {
-    ...mapState('buyer', ['cartItems']),
     ...mapState('testManagement', ['categoryName']),
     ...mapState(['isLoading']),
   },

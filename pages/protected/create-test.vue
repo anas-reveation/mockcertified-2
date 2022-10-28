@@ -70,12 +70,26 @@
         <input
           type="number"
           class="border border-2 border-primary rounded form-control"
-          step=".01"
+          step="any"
           @keydown="numberValidation"
           v-model="formData.price"
           required
         />
-        <label class="form-label">Price ($ USD)</label>
+        <label class="form-label">
+          Price ($ USD)
+          <img
+            v-if="!errors.price.isValid"
+            src="@/assets/images/i_button.svg"
+            alt="i-button"
+            @click="errors.price.isVisiable = !errors.price.isVisiable"
+          />
+        </label>
+        <div
+          v-if="errors.price.isVisiable"
+          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+        >
+          {{ errors.price.msg }}
+        </div>
       </div>
 
       <div class="mb-4 input-data">
@@ -312,6 +326,11 @@ export default {
           isVisiable: false,
           msg: 'Maximum 300 min.',
         },
+        price: {
+          isValid: true,
+          isVisiable: false,
+          msg: 'Upto 2 decimal allow',
+        },
       },
     };
   },
@@ -323,6 +342,18 @@ export default {
     //     this.formData.title = oldValue;
     //   }
     // },
+
+    'formData.price'(newValue, _oldValue) {
+      let isTwoDecimal = /^\d+(\.\d{1,2})?$/.test(newValue);
+      if (!isTwoDecimal) {
+        this.errors.price.isValid = false;
+      } else {
+        this.errors.price.isValid = true;
+      }
+      if (this.errors.price.isValid) {
+        this.errors.price.isVisiable = false;
+      }
+    },
 
     file(newValue, _oldValue) {
       if (!newValue) {
@@ -361,7 +392,8 @@ export default {
           newValue.timeLimit &&
           newValue.categoryId !== 'default' &&
           newValue.subCategoryId !== 'default' &&
-          this.errors.timeLimit.isValid
+          this.errors.timeLimit.isValid &&
+          this.errors.price.isValid
         ) {
           this.isDisableBtn = false;
         } else {

@@ -40,7 +40,11 @@ export default async ({ app, route, store }) => {
     const authRoute = route.path.match(/\/auth\/*/g) ? true : false;
     const adminRoute = route.path.match(/\/admin\/*/g) ? true : false;
 
-    if (store.state.platform !== 'web' && dashboardRoute) {
+    if (store.state.platform !== 'web' && dashboardRoute && !isAuthenticated) {
+      app.router.push('/auth/login');
+    }
+
+    if (store.state.platform !== 'web' && dashboardRoute && isAuthenticated) {
       app.router.push('/protected/purchased-test');
     }
 
@@ -52,7 +56,7 @@ export default async ({ app, route, store }) => {
       app.router.push('/dashboard');
     }
 
-    if (userGroup !== 'admins' && adminRoute) {
+    if ((userGroup !== 'admins' && adminRoute) || (!isAuthenticated && homeRoute)) {
       app.router.push('/dashboard');
     }
   });

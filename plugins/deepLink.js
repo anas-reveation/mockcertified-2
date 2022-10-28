@@ -10,5 +10,13 @@ export default async function ({ app }, inject) {
         app.router.push(slug);
       }
     });
+
+    CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+      if (!canGoBack) {
+        CapacitorApp.exitApp();
+      } else {
+        window.history.back();
+      }
+    });
   });
 }

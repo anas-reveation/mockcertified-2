@@ -9,7 +9,11 @@ export default async function ({ store, route, redirect, req }) {
     const authRoute = route.path.match(/\/auth\/*/g) ? true : false;
     const adminRoute = route.path.match(/\/admin\/*/g) ? true : false;
 
-    if (store.state.platform !== 'web' && dashboardRoute) {
+    if (store.state.platform !== 'web' && dashboardRoute && !isAuthenticated) {
+      redirect('/auth/login');
+    }
+
+    if (store.state.platform !== 'web' && dashboardRoute && isAuthenticated) {
       redirect('/protected/purchased-test');
     }
 
@@ -21,7 +25,7 @@ export default async function ({ store, route, redirect, req }) {
       redirect('/dashboard');
     }
 
-    if (userGroup !== 'admins' && adminRoute) {
+    if ((userGroup !== 'admins' && adminRoute) || (!isAuthenticated && homeRoute)) {
       redirect('/dashboard');
     }
   }
