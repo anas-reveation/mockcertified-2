@@ -21,6 +21,11 @@
         </button>
       </div>
     </div>
+    <div class="text-center mt-3">
+      <button class="btn btn-danger border border-dark" type="button" @click="accountDeleteLocal">
+        Delete Account
+      </button>
+    </div>
   </div>
 </template>
 
@@ -120,6 +125,7 @@ export default {
 
   methods: {
     ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard']),
+    ...mapActions('testManagement', ['accountDelete']),
 
     async getBalanceLocal() {
       const res = await this.getBalanceDetail();
@@ -133,6 +139,20 @@ export default {
       if (this.url) {
         await Browser.open({ url: this.url });
       }
+    },
+
+    async accountDeleteLocal() {
+      this.$swal
+        .fire({
+          title: 'Are you sure?',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            await this.accountDelete();
+          }
+        });
     },
   },
 };

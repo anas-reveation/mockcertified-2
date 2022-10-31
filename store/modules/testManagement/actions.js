@@ -493,6 +493,52 @@ export default {
     }
   },
 
+  async accountDelete({ commit, dispatch }) {
+    commit('SET_LOADER', true, { root: true });
+    try {
+      commit('SET_LOADER', false, { root: true });
+      const res = await dispatch('auth/logout', false, { root: true });
+      if (res) {
+        this.$router.push('/auth/login');
+        commit('SET_LOADER', false, { root: true });
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Account successfully deleted',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 3000,
+        });
+        return true;
+      }
+
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
+  },
+
   // Local function
   sortBycreatedAt(_none, payload) {
     return payload.sort(function (a, b) {

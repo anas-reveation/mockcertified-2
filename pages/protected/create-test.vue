@@ -153,6 +153,9 @@
           >
             Review Question
           </button>
+          <span v-if="this.errors.fileError.msg" class="text-danger">
+            {{ this.errors.fileError.msg }}
+          </span>
         </div>
         <div class="col-sm-6">
           <button
@@ -331,6 +334,11 @@ export default {
           isVisiable: false,
           msg: 'Upto 2 decimal allow',
         },
+        fileError: {
+          isValid: true,
+          isVisiable: false,
+          msg: '',
+        },
       },
     };
   },
@@ -470,6 +478,7 @@ export default {
       this.$refs.fileupload.value = '';
       this.questionList = [];
       this.reviewQuestions = [];
+      this.errors.fileError.msg = '';
     },
 
     downloadCsv() {
@@ -522,11 +531,11 @@ export default {
           // header of this column
           const header = FileData[0][j];
           const col = row[j];
-
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
-          } else if (header && header === 'answer' && col && col.startsWith('option_')) {
-            questionObj.answer = col.replace(/\s+/g, ' ').trim();
+          } else if (header && header === 'answer' && col) {
+            questionObj.answer = col.replace(/\s+/g, ' ').trim().toUpperCase();
+            questionObj.answer = questionObj.answer.length === 1 ? questionObj.answer : null;
           } else if (header && header === 'explanation' && col) {
             questionObj.explanation = col.replace(/\s+/g, ' ').trim();
           } else if (header && header.startsWith('option_') && col) {
@@ -537,6 +546,7 @@ export default {
             questionObj.options.push(optionObj);
           }
         }
+
         // skipping header
         if (i === 0) {
           continue;
@@ -549,11 +559,13 @@ export default {
           !questionObj.options.length
         ) {
           isFormatted = false;
+          const formateErrorMsg = 'Invalid file formatted';
+          this.errors.fileError.msg = formateErrorMsg;
           this.$swal.fire({
             toast: true,
             position: 'top-end',
             icon: 'warning',
-            title: 'Invalid file formatted',
+            title: formateErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
             timer: 3000,
@@ -565,7 +577,7 @@ export default {
         questionObj.options.forEach((obj) => {
           Object.keys(obj).forEach(function (key) {
             // do something with obj[key]
-            if (key === questionObj.answer) {
+            if (key === 'option_' + questionObj.answer) {
               questionObj.answer = obj[key];
               isSelectedAnswer = true;
             }
@@ -580,11 +592,13 @@ export default {
         });
         if (!isSelectedAnswer) {
           this.questionList = [];
+          const fileErrorMsg = "You haven't selected correct option";
+          this.errors.fileError.msg = fileErrorMsg;
           this.$swal.fire({
             toast: true,
             position: 'top-end',
             icon: 'warning',
-            title: "You haven't selected correct option",
+            title: fileErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
             timer: 3000,
