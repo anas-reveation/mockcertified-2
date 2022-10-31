@@ -311,6 +311,49 @@ export const listCategories = /* GraphQL */ `
     }
   }
 `;
+export const searchCategories = /* GraphQL */ `
+  query SearchCategories(
+    $filter: SearchableCategoryFilterInput
+    $sort: [SearchableCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCategoryAggregationInput]
+  ) {
+    searchCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        image
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getSubCategory = /* GraphQL */ `
   query GetSubCategory($id: ID!) {
     getSubCategory(id: $id) {
@@ -346,6 +389,50 @@ export const listSubCategories = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const searchSubCategories = /* GraphQL */ `
+  query SearchSubCategories(
+    $filter: SearchableSubCategoryFilterInput
+    $sort: [SearchableSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableSubCategoryAggregationInput]
+  ) {
+    searchSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        category_id
+        image
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

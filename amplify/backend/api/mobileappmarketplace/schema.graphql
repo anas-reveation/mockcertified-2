@@ -77,6 +77,7 @@ type Question
 
 type Category
   @model
+  @searchable
   @auth(
     rules: [
       { allow: public, operations: [read] }
@@ -92,6 +93,7 @@ type Category
 
 type SubCategory
   @model
+  @searchable
   @auth(
     rules: [
       { allow: public, operations: [read] }
