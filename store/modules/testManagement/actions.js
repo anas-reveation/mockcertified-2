@@ -7,9 +7,11 @@ import {
   listCategoriesDetail,
   listAllTests,
   listTestsByStatus,
+  searchSubCategories,
+  searchTestManagers,
 } from '~/ManualGraphql/queries';
 
-import { listStaticContents } from '~/graphql/queries';
+import { listStaticContents, searchCategories } from '~/graphql/queries';
 
 import {
   createAttemptedTest,
@@ -426,19 +428,39 @@ export default {
       const query = payload.toLowerCase().replace(/\s+/g, ' ').trim();
       commit('SET_LOADER', true, { root: true });
 
+      // const filter = {
+      //   title: { contains: query },
+      //   and: { status: { eq: 'APPROVED' } },
+      // };
       const filter = {
-        title: { contains: query },
-        and: { status: { eq: 'APPROVED' } },
+        title: { match: query },
       };
-
+      const subCategoryFilter = {
+        name: { match: query },
+      };
       const allTestData = await API.graphql({
-        query: listAllTests,
+        query: searchTestManagers,
         variables: { filter: filter, variables: { limit: 10000 } },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+
+      // searchSubCategories
+      const allSubCategory = await API.graphql({
+        query: searchSubCategories,
+        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const allCategory = await API.graphql({
+        query: searchCategories,
+        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        // authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
       commit('SET_LOADER', false, { root: true });
-      const testList = allTestData.data.listTestManagers.items;
-      if (testList && !testList.length) {
+      const testList = allTestData.data.searchTestManagers.items;
+      const subCategoryList = allSubCategory.data.searchSubCategories.items;
+      const categoryList = allCategory.data.searchCategories.items;
+      if (!testList.length && !categoryList.length && !subCategoryList.length) {
         this.$swal.fire({
           toast: true,
           position: 'top-end',
@@ -449,7 +471,7 @@ export default {
           timer: 3000,
         });
       }
-      return testList;
+      return { testList, subCategoryList, categoryList };
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
@@ -477,52 +499,6 @@ export default {
         return testInstruction.body;
       }
       commit('SET_LOADER', false, { root: true });
-      return false;
-    } catch (err) {
-      commit('SET_LOADER', false, { root: true });
-      this.$swal.fire({
-        toast: true,
-        position: 'top-end',
-        icon: 'error',
-        title: 'Something went wrong',
-        showConfirmButton: false,
-        timerProgressBar: true,
-        timer: 3000,
-      });
-      return false;
-    }
-  },
-
-  async accountDelete({ commit, dispatch }) {
-    commit('SET_LOADER', true, { root: true });
-    try {
-      commit('SET_LOADER', false, { root: true });
-      const res = await dispatch('auth/logout', false, { root: true });
-      if (res) {
-        this.$router.push('/auth/login');
-        commit('SET_LOADER', false, { root: true });
-        this.$swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'success',
-          title: 'Account successfully deleted',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 3000,
-        });
-        return true;
-      }
-
-      commit('SET_LOADER', false, { root: true });
-      this.$swal.fire({
-        toast: true,
-        position: 'top-end',
-        icon: 'error',
-        title: 'Something went wrong',
-        showConfirmButton: false,
-        timerProgressBar: true,
-        timer: 3000,
-      });
       return false;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });

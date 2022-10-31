@@ -266,3 +266,117 @@ export const listCategoriesDetail = /* GraphQL */ `
     }
   }
 `;
+
+export const searchSubCategories = /* GraphQL */ `
+  query SearchSubCategories(
+    $filter: SearchableSubCategoryFilterInput
+    $sort: [SearchableSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableSubCategoryAggregationInput]
+  ) {
+    searchSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        category_id
+        image
+        createdAt
+        category {
+          id
+          name
+        }
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const searchTestManagers = /* GraphQL */ `
+  query SearchTestManagers(
+    $filter: SearchableTestManagerFilterInput
+    $sort: [SearchableTestManagerSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTestManagerAggregationInput]
+  ) {
+    searchTestManagers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        created_by {
+          createdAt
+          first_name
+          last_name
+        }
+        questions {
+          items {
+            explainantion
+            id
+            options
+            question
+          }
+        }
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;

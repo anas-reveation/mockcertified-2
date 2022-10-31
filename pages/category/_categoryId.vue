@@ -176,12 +176,19 @@ export default {
     ...mapState(['isLoading']),
   },
 
-  async asyncData({ params }) {
+  async asyncData({ params, query }) {
     const categoryId = params.categoryId;
-    return { categoryId };
+    const subCategoryId = query.subCategoryId ? query.subCategoryId : null;
+    const subCategoryName = query.subCategoryName ? query.subCategoryName : null;
+    return { categoryId, subCategoryId, subCategoryName };
   },
 
   async mounted() {
+    if (this.subCategoryId) {
+      await this.getAllTests(this.subCategoryId, this.subCategoryName);
+      return;
+    }
+
     this.allSubCategory = await this.getAllSubCategories(this.categoryId);
     if (!this.allSubCategory.length) {
       this.$swal.fire({

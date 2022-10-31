@@ -21,6 +21,50 @@
           </NuxtLink>
         </div>
       </div>
+      <div v-if="allSearchedCategory.length">
+        <p class="font_size_16">Suggestions Category</p>
+        <div class="row">
+          <NuxtLink
+            :to="`/category/${category.id}`"
+            v-for="category in allSearchedCategory"
+            :key="category.id"
+            class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+          >
+            <div class="row">
+              <span class="col-2 me-2">
+                <img :src="category.image" alt="category" class="rounded-circle category_image" />
+              </span>
+              <span class="col text-start">
+                {{ category.name }}
+              </span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+      <div v-if="allSearchedSubCategory.length">
+        <p class="font_size_16">Suggestions Sub-Category</p>
+        <div class="row">
+          <NuxtLink
+            :to="`/category/${subCategory.category_id}?subCategoryId=${subCategory.id}&subCategoryName=${subCategory.name}`"
+            v-for="subCategory in allSearchedSubCategory"
+            :key="subCategory.id"
+            class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+          >
+            <div class="row">
+              <span class="col-2 me-2">
+                <img
+                  :src="subCategory.image"
+                  alt="category"
+                  class="rounded-circle category_image"
+                />
+              </span>
+              <span class="col text-start">
+                {{ subCategory.name }}
+              </span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
     </div>
 
     <div v-else>
@@ -207,6 +251,8 @@ export default {
       allCategories: [],
       searchQuery: '',
       allSearchedTest: [],
+      allSearchedCategory: [],
+      allSearchedSubCategory: [],
       settings: {
         dots: true,
         infinite: false,
@@ -298,7 +344,9 @@ export default {
         this.allSearchedTest = [];
         return;
       }
-      this.allSearchedTest = res;
+      this.allSearchedTest = res.testList;
+      this.allSearchedSubCategory = res.subCategoryList;
+      this.allSearchedCategory = res.categoryList;
     },
   },
 };
@@ -313,5 +361,10 @@ export default {
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scroll_x::-webkit-scrollbar {
   display: none;
+}
+.category_image {
+  object-fit: contain;
+  width: 35px;
+  height: 35px;
 }
 </style>
