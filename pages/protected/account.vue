@@ -21,11 +21,11 @@
         </button>
       </div>
     </div>
-    <div class="text-center mt-3">
+    <!-- <div class="text-center mt-3">
       <button class="btn btn-danger border border-dark" type="button" @click="accountDeleteLocal">
         Delete Account
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
