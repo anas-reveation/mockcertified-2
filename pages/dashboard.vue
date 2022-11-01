@@ -21,9 +21,10 @@
           </NuxtLink>
         </div>
       </div>
+      <br />
       <div v-if="allSearchedCategory.length">
         <p class="font_size_16">Suggestions Category</p>
-        <div class="row">
+        <div class="row p-1">
           <NuxtLink
             :to="`/category/${category.id}`"
             v-for="category in allSearchedCategory"
@@ -41,9 +42,10 @@
           </NuxtLink>
         </div>
       </div>
+      <br />
       <div v-if="allSearchedSubCategory.length">
         <p class="font_size_16">Suggestions Sub-Category</p>
-        <div class="row">
+        <div class="row p-1">
           <NuxtLink
             :to="`/category/${subCategory.category_id}?subCategoryId=${subCategory.id}&subCategoryName=${subCategory.name}`"
             v-for="subCategory in allSearchedSubCategory"
