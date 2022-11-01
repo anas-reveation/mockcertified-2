@@ -138,7 +138,7 @@
         <label class="form-label fixed_up">Question list (csv file only)</label>
       </div>
 
-      <button type="button" class="btn text-white mb-2 bg_clr_blue" @click="downloadCsv">
+      <button type="button" class="btn text-white mb-3 bg_clr_blue" @click="downloadCsv">
         Download template
       </button>
 
@@ -592,7 +592,7 @@ export default {
         });
         if (!isSelectedAnswer) {
           this.questionList = [];
-          const fileErrorMsg = "You haven't selected correct option";
+          const fileErrorMsg = 'You have not selected the correct option';
           this.errors.fileError.msg = fileErrorMsg;
           this.$swal.fire({
             toast: true,

@@ -16,7 +16,7 @@
             value[1].toLowerCase() === question.answer.toLowerCase() && 'bg_green',
           ]"
         >
-          {{ index2 + 1 }}. {{ value[1] }}
+          {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
         </li>
       </ul>
     </div>
