@@ -50,7 +50,11 @@ export const getUser = /* GraphQL */ `
   }
 `;
 export const listUsers = /* GraphQL */ `
-  query ListUsers($filter: ModelUserFilterInput, $limit: Int, $nextToken: String) {
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -107,7 +111,11 @@ export const getTestManager = /* GraphQL */ `
   }
 `;
 export const listTestManagers = /* GraphQL */ `
-  query ListTestManagers($filter: ModelTestManagerFilterInput, $limit: Int, $nextToken: String) {
+  query ListTestManagers(
+    $filter: ModelTestManagerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listTestManagers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -185,19 +193,6 @@ export const searchTestManagers = /* GraphQL */ `
     ) {
       items {
         id
-        created_by {
-          createdAt
-          first_name
-          last_name
-        }
-        questions {
-          items {
-            explainantion
-            id
-            options
-            question
-          }
-        }
         user_id
         category_id
         sub_category_id
@@ -263,7 +258,11 @@ export const getQuestion = /* GraphQL */ `
   }
 `;
 export const listQuestions = /* GraphQL */ `
-  query ListQuestions($filter: ModelQuestionFilterInput, $limit: Int, $nextToken: String) {
+  query ListQuestions(
+    $filter: ModelQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -295,7 +294,11 @@ export const getCategory = /* GraphQL */ `
   }
 `;
 export const listCategories = /* GraphQL */ `
-  query ListCategories($filter: ModelCategoryFilterInput, $limit: Int, $nextToken: String) {
+  query ListCategories(
+    $filter: ModelCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -371,7 +374,11 @@ export const getSubCategory = /* GraphQL */ `
   }
 `;
 export const listSubCategories = /* GraphQL */ `
-  query ListSubCategories($filter: ModelSubCategoryFilterInput, $limit: Int, $nextToken: String) {
+  query ListSubCategories(
+    $filter: ModelSubCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listSubCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -408,6 +415,7 @@ export const searchSubCategories = /* GraphQL */ `
         category_id
         image
         createdAt
+        updatedAt
       }
       nextToken
       total
@@ -572,7 +580,11 @@ export const getResult = /* GraphQL */ `
   }
 `;
 export const listResults = /* GraphQL */ `
-  query ListResults($filter: ModelResultFilterInput, $limit: Int, $nextToken: String) {
+  query ListResults(
+    $filter: ModelResultFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listResults(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -600,7 +612,11 @@ export const getPromotion = /* GraphQL */ `
   }
 `;
 export const listPromotions = /* GraphQL */ `
-  query ListPromotions($filter: ModelPromotionFilterInput, $limit: Int, $nextToken: String) {
+  query ListPromotions(
+    $filter: ModelPromotionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listPromotions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id

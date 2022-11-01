@@ -140,7 +140,8 @@ exports.handler = async (eventLambda) => {
       Source: 'support@mockcertified.com',
     };
     var sendPromise = new AWS.SES().sendEmail(params).promise();
-    console.log(await sendPromise);
+    sendPromise;
+    console.log(sendPromise);
   }
 
   // Handle the event
@@ -153,7 +154,7 @@ exports.handler = async (eventLambda) => {
       try {
         await purchaseTest(test_id, customer_id, promocode_id);
         let testdetail = await getTestDetail(test_id);
-        sendMail(testdetail.email, testdetail.title);
+        await sendMail(testdetail.email, testdetail.title);
         message = 'success';
       } catch (err) {
         console.log('ERROR: ', err);
