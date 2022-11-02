@@ -175,8 +175,11 @@ export default {
   async mounted() {
     this.SET_LOADER(true);
     CapacitorApp.addListener('backButton', ({ canGoBack }) => {
-      this.setTestRemainingTimeLocal();
-      this.$router.push('/protected/purchased-test');
+      // Only if test is started
+      if (this.startTest) {
+        this.setTestRemainingTimeLocal();
+        this.$router.push('/protected/purchased-test');
+      }
     });
 
     this.testInstruction = await this.getTestInstruction();
