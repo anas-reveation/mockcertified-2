@@ -168,7 +168,9 @@ exports.handler = async (event) => {
     // Start STRIPE
     const stripePayment = async (title, basePrice, sellerId, userId, promocodeId) => {
       const quantity = 1;
-      const calculateApplicationFeeAmount = commission_percentage * basePrice * 100 * quantity;
+      const calculateApplicationFeeAmount = Math.round(
+        commission_percentage * basePrice * quantity,
+      );
       // const domainURL = process.env.DOMAIN_ORIGIN;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -177,7 +179,7 @@ exports.handler = async (event) => {
             name: title,
             quantity,
             currency: 'USD',
-            amount: basePrice * 100,
+            amount: Math.round(basePrice * 100),
             // Keep the amount on the server to prevent customers from manipulating on client
           },
         ],
@@ -231,9 +233,8 @@ exports.handler = async (event) => {
         if (!usedPromocodes.includes(result.id)) {
           if (result.discount_percentage) {
             const testDetail = await getTestDetail(testId);
-            var discount = (testDetail.price * result.discount_percentage) / 100;
-            testDetail.price = testDetail.price - discount;
-
+            var discount = Math.round(testDetail.price * result.discount_percentage);
+            testDetail.price = Math.round(testDetail.price * 100 - discount);
             const sessionData = await stripePayment(
               testDetail.title,
               testDetail.price,
