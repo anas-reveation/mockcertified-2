@@ -60,7 +60,7 @@
                 "
                 @click="selectOption(questionItem.id, value[1])"
               >
-                {{ index2 + 1 }}. {{ value[1] }}
+                {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
               </li>
             </ul>
           </div>

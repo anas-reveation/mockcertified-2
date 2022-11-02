@@ -95,13 +95,13 @@
       >
         <li
           v-if="isAuthenticated"
-          class="border-bottom border-primary text-capitalize py-2 font_size_16"
+          class="border-bottom border-primary py-2 font_size_16"
           :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
         >
           <NuxtLink to="/protected/create-test">
             <span class="p-1 ms-3">
               <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
-              Create A New Test
+              Create a New Test
             </span>
           </NuxtLink>
         </li>

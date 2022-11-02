@@ -29,6 +29,23 @@
           Go to purchased test
         </NuxtLink>
       </div>
+
+      <div class="mt-3">
+        <p class="text-success">Congratulations for purchasing our test !!</p>
+        <p>Get our Mockcertified app in</p>
+
+        <div class="row">
+          <a href="#" class="col m-1">
+            <img src="@/assets/images/GooglePlay.svg" alt="GooglePlayStore" />
+          </a>
+          <a href="#" class="col m-1">
+            <img src="@/assets/images/AppStore.svg" alt="AppStore" />
+          </a>
+          <a href="#" class="col m-1">
+            <img src="@/assets/images/alexa2.svg" alt="alexa" />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </template>

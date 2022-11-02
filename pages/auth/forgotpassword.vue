@@ -248,7 +248,7 @@ export default {
       password: {
         isValid: true,
         isVisiable: false,
-        msg: 'Minimum password length required is 8 characters with at least 1 capital letter, 1 number and 1 special character (for security purposes)',
+        msg: 'Minimum password length required is 8 characters with at least 1 (upper & lower) case letter, 1 number and 1 special character (for security purposes)',
       },
     },
   }),
