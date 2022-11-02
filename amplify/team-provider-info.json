@@ -38,7 +38,7 @@
         },
         "paymentSuccessStripe": {
           "deploymentBucketName": "amplify-mobileappmarketplace-dev-123858-deployment",
-          "s3Key": "amplify-builds/paymentSuccessStripe-6f4c4668495074443254-build.zip",
+          "s3Key": "amplify-builds/paymentSuccessStripe-30323552635938735035-build.zip",
           "stripeSecretKey": "sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E",
           "stripePublishableKey": "pk_test_51LO8AEGrqGT9imAkrO0vB9QgNP4AVAY5DzEPidxLxoPBIZogIHpcGHCNOx2GOVtI1IlF4PsP4Sm012NYYp5A2g1S00Hw7dGqMo",
           "signingSecretWebhook": "whsec_V56fIbS7391n43g6EcGZmf8aJlvPbGFB"

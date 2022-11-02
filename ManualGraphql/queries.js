@@ -345,6 +345,7 @@ export const searchTestManagers = /* GraphQL */ `
             id
             options
             question
+            marks
           }
         }
         user_id
