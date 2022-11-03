@@ -4,6 +4,9 @@ import seller from './modules/seller';
 import admin from './modules/admin';
 import testManagement from './modules/testManagement';
 
+import { API } from 'aws-amplify';
+import { listStaticContents } from '~/graphql/queries';
+
 import { Capacitor } from '@capacitor/core';
 
 const state = () => {
@@ -17,6 +20,8 @@ const state = () => {
     isSideNavbarVisible: false,
     redirectUrl: '',
     platform: '',
+    termsConditions: null,
+    privacyPolicy: null,
   };
 };
 
@@ -70,6 +75,11 @@ const mutations = {
   setPlatform(state) {
     state.platform = Capacitor.getPlatform();
   },
+
+  setTC_and_PP(state, payload) {
+    state.termsConditions = payload.termsConditions;
+    state.privacyPolicy = payload.privacyPolicy;
+  },
 };
 
 const actions = {
@@ -77,6 +87,38 @@ const actions = {
 
   setIsNavbarVisible({ commit }, payload) {
     commit('setIsNavbarVisible', payload);
+  },
+
+  async getTC_and_PP({ commit }) {
+    try {
+      commit('SET_LOADER', true, { root: true });
+      const staticData = await API.graphql({
+        query: listStaticContents,
+      });
+      const staticDataArray = staticData.data.listStaticContents.items;
+      const termsConditions = staticDataArray.find((obj) => obj.name === 'TermsConditions');
+      const privacyPolicy = staticDataArray.find((obj) => obj.name === 'PrivacyPolicy');
+      if (termsConditions && privacyPolicy) {
+        commit('setTC_and_PP', {
+          termsConditions: termsConditions.body,
+          privacyPolicy: privacyPolicy.body,
+        });
+      }
+      commit('SET_LOADER', false, { root: true });
+      return false;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      return false;
+    }
   },
 };
 
