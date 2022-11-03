@@ -282,22 +282,26 @@ export default {
     const question_id = payload.questionId;
     const attempted_id = payload.attemptedId;
     const user_input = payload.userInput;
+
+    let result_id = payload.result_id ? payload.result_id : false;
     commit('SET_LOADER', true, { root: true });
-
+    let resultData;
     try {
-      const input = {
-        question_id,
-        attempted_id,
-        user_input,
-      };
+      if (!result_id) {
+        const input = {
+          question_id,
+          attempted_id,
+          user_input,
+        };
 
-      const resultData = await API.graphql({
-        query: createResult,
-        variables: { input },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-      });
+        resultData = await API.graphql({
+          query: createResult,
+          variables: { input },
+          authMode: 'AMAZON_COGNITO_USER_POOLS',
+        });
+        result_id = resultData.data.createResult.id;
+      }
 
-      const result_id = resultData.data.createResult.id;
       const addResultStatusData = await API.graphql({
         query: addResultStatus,
         variables: {
@@ -308,6 +312,25 @@ export default {
       const parsedData = JSON.parse(addResultStatusData.data.addResultStatus);
       if (parsedData.statusCode === '200' || parsedData.statusCode === 200) {
         commit('SET_LOADER', false, { root: true });
+        if (resultData) {
+          const resultData2 = resultData.data.createResult;
+          const resultObj = {
+            question: {
+              question: resultData2.question.question,
+              answer: resultData2.question.answer,
+              options: resultData2.question.options,
+              explainantion: resultData2.question.explainantion,
+              marks: resultData2.question.marks,
+            },
+            question_id: resultData2.question_id,
+            // this will not update because we are not fetching again or creating or get response from "addResultStatusData"
+            result_status: resultData2.result_status,
+            user_input: resultData2.user_input,
+            // result id
+            id: resultData2.id,
+          };
+          return resultObj;
+        }
         return true;
       }
 

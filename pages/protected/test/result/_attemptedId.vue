@@ -184,7 +184,7 @@
           </div>
 
           <!-- Button trigger modal -->
-          <div class="text-center mt-3">
+          <div class="text-center mt-3" v-if="attemptedQuestions !== 0">
             <button
               type="button"
               class="btn btn-secondary border border-2 border-primary"

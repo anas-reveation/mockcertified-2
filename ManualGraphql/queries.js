@@ -61,6 +61,7 @@ export const userTests = /* GraphQL */ `
           }
           result {
             items {
+              id
               question_id
               result_status
               user_input

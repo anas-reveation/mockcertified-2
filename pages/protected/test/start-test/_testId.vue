@@ -67,7 +67,19 @@
         </div>
 
         <div class="container bg-white fixed_bottom p-2 mb-1 px-sm-4 footer_height">
-          <div class="float-lg-end float-md-end text-center">
+          <div
+            class="d-flex"
+            :class="questionCounter !== 0 ? 'justify-content-between' : 'justify-content-end'"
+          >
+            <button
+              v-if="questionCounter !== 0"
+              type="button"
+              class="btn border-primary"
+              @click="previousQuestion"
+              :disabled="timerEnabled === false"
+            >
+              Previous
+            </button>
             <button
               type="button"
               class="btn border-primary"
@@ -98,6 +110,7 @@ export default {
       questionCounter: 0,
       allQuestions: [],
       allQuestionsSubmission: [],
+      givenAnswerList: [],
       purchasedId: null,
       timerCount: 0,
       timerEnabled: false,
@@ -162,6 +175,14 @@ export default {
       },
       immediate: true, // This ensures the watcher is triggered upon creation
     },
+
+    showCounter(value, _oldValue) {
+      if (value > this.totalQuestions - 2) {
+        this.nextQuestionText = 'Submit';
+      } else {
+        this.nextQuestionText = 'Next';
+      }
+    },
   },
 
   computed: {
@@ -170,6 +191,14 @@ export default {
     remainingTime() {
       return (this.timerCount / 60).toFixed(2);
     },
+  },
+
+  beforeDestroy() {
+    // Only if test is started
+    if (this.startTest) {
+      this.setTestRemainingTimeLocal();
+      this.$router.push('/protected/purchased-test');
+    }
   },
 
   async mounted() {
@@ -200,10 +229,16 @@ export default {
         return;
       }
       const results = attemptedTest[0].result.items;
+      this.givenAnswerList = results;
 
-      // converted mintues to seoconds
-      this.timerCount = Math.round(attemptedTest[0].remaining_time * 60);
+      // If remaining_time === null, set to test time_limit
+      const isRemainingTime = attemptedTest[0].remaining_time;
+      this.timerCount = isRemainingTime
+        ? Math.round(attemptedTest[0].remaining_time * 60)
+        : attemptedTest[0].test.time_limit * 60;
 
+      // remaining questions
+      let givenAnswerCounter = 0;
       this.allQuestions = attemptedTest[0].test.questions.items
         .map((ques) => {
           // Check if already given answer to this question
@@ -211,18 +246,22 @@ export default {
             return result.question_id === ques.id;
           });
 
-          if (!isAlredyGivenAnswer) {
-            const parsedData = JSON.parse(ques.options);
-            return {
-              ...ques,
-              options: Object.entries(parsedData),
-            };
+          if (isAlredyGivenAnswer) {
+            givenAnswerCounter += 1;
           }
+          // if (!isAlredyGivenAnswer) {
+          const parsedData = JSON.parse(ques.options);
+          return {
+            ...ques,
+            options: Object.entries(parsedData),
+          };
+          // }
         })
         .filter(Boolean); // Removed the undefined elements
 
       this.totalQuestions = this.allQuestions.length;
       this.questionCounter = attemptedTest[0].test.questions.items.length - this.totalQuestions;
+      this.showCounter = this.questionCounter = givenAnswerCounter;
       this.SET_LOADER(false);
       return;
     }
@@ -269,10 +308,17 @@ export default {
       this.startTest = !this.startTest;
     },
 
-    nextQuestion() {
-      if (this.questionCounter < this.totalQuestions - 1) {
-        this.questionCounter = this.questionCounter + 1;
-        return;
+    // nextQuestion() {
+    //   if (this.questionCounter < this.totalQuestions - 1) {
+    //     this.questionCounter = this.questionCounter + 1;
+    //     return;
+    //   }
+    // },
+
+    previousQuestion() {
+      if (this.questionCounter !== 0) {
+        this.questionCounter -= 1;
+        this.showCounter -= 1;
       }
     },
 
@@ -289,23 +335,32 @@ export default {
       window.scrollTo(0, 0);
 
       if (this.selectAnswer.questionId && this.selectAnswer.userInput) {
-        const obj = {
+        let obj = {
           attemptedId: this.attemptedId,
           questionId: this.selectAnswer.questionId,
           userInput: this.selectAnswer.userInput,
         };
+        const alreadyAnswered = this.givenAnswerList.find((result) => {
+          return result.question_id === this.selectAnswer.questionId;
+        });
+        if (alreadyAnswered) {
+          obj = {
+            ...obj,
+            result_id: alreadyAnswered.id,
+          };
+        }
         const res = await this.answerSubmit(obj);
         if (res) {
+          // If response is an object then only we are adding
+          if (res !== true) {
+            // adding given answer(response) in 'givenAnswerList'
+            this.givenAnswerList.push(res);
+          }
+
           this.selectAnswer.questionId = null;
           this.selectAnswer.userInput = null;
           this.questionCounter += 1;
           this.showCounter += 1;
-
-          // Start Change button text in second last question
-          if (this.showCounter > this.totalQuestions - 2) {
-            this.nextQuestionText = 'Submit';
-          }
-          // End Change button text in second last question
 
           if (this.showCounter > this.totalQuestions - 1) {
             const completedRes = await this.compeletedTest(this.attemptedId);
