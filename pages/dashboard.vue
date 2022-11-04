@@ -1,27 +1,30 @@
 <template>
   <div class="container">
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
+    <div
+      v-if="allSearchedTest.length || allSearchedCategory.length || allSearchedSubCategory.length"
+    >
+      <div v-if="allSearchedTest.length">
+        <p class="font_size_16">Suggestions</p>
 
-    <div v-if="allSearchedTest.length">
-      <p class="font_size_16">Suggestions</p>
-
-      <div class="row">
-        <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
-          <NuxtLink :to="`/category/test/${test.id}`">
-            <TestCards
-              :title="test.title"
-              :price="`$${formatPrice(test.price)}`"
-              :addToCart="true"
-              :description="`${test.time_limit} mins • ${
-                test.questions.items.length
-              } questions • ${totalMarks(test.questions.items)} marks`"
-              :createdAt="test.createdAt"
-              :authorName="test.created_by.first_name"
-            />
-          </NuxtLink>
+        <div class="row">
+          <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
+            <NuxtLink :to="`/category/test/${test.id}`">
+              <TestCards
+                :title="test.title"
+                :price="`$${formatPrice(test.price)}`"
+                :addToCart="true"
+                :description="`${test.time_limit} mins • ${
+                  test.questions.items.length
+                } questions • ${totalMarks(test.questions.items)} marks`"
+                :createdAt="test.createdAt"
+                :authorName="test.created_by.first_name"
+              />
+            </NuxtLink>
+          </div>
         </div>
+        <br />
       </div>
-      <br />
       <div v-if="allSearchedCategory.length">
         <p class="font_size_16">Suggestions Category</p>
         <div class="row p-1">
@@ -29,7 +32,7 @@
             :to="`/category/${category.id}`"
             v-for="category in allSearchedCategory"
             :key="category.id"
-            class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+            class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
           >
             <div class="row">
               <span class="col-2 me-2">
@@ -50,7 +53,7 @@
             :to="`/category/${subCategory.category_id}?subCategoryId=${subCategory.id}&subCategoryName=${subCategory.name}`"
             v-for="subCategory in allSearchedSubCategory"
             :key="subCategory.id"
-            class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+            class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
           >
             <div class="row">
               <span class="col-2 me-2">
