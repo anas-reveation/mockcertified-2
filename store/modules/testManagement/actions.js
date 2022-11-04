@@ -16,6 +16,7 @@ import { listStaticContents, searchCategories } from '~/graphql/queries';
 import {
   createAttemptedTest,
   createResult,
+  updateResult,
   updateAttemptedTest,
   addResultStatus,
 } from '~/graphql/mutations';
@@ -284,9 +285,11 @@ export default {
     const user_input = payload.userInput;
 
     let result_id = payload.result_id ? payload.result_id : false;
+
     commit('SET_LOADER', true, { root: true });
     let resultData;
     try {
+      // first time attempt question create result ELSE update the result
       if (!result_id) {
         const input = {
           question_id,
@@ -300,8 +303,20 @@ export default {
           authMode: 'AMAZON_COGNITO_USER_POOLS',
         });
         result_id = resultData.data.createResult.id;
+      } else {
+        const input = {
+          id: result_id,
+          user_input,
+        };
+
+        await API.graphql({
+          query: updateResult,
+          variables: { input },
+          authMode: 'AMAZON_COGNITO_USER_POOLS',
+        });
       }
 
+      // Add status (correct or incorrect answer)
       const addResultStatusData = await API.graphql({
         query: addResultStatus,
         variables: {
@@ -312,6 +327,7 @@ export default {
       const parsedData = JSON.parse(addResultStatusData.data.addResultStatus);
       if (parsedData.statusCode === '200' || parsedData.statusCode === 200) {
         commit('SET_LOADER', false, { root: true });
+        // only when result is creates "createResult"
         if (resultData) {
           const resultData2 = resultData.data.createResult;
           const resultObj = {

@@ -228,7 +228,7 @@ export default {
         this.$router.push('/protected/purchased-test');
         return;
       }
-      const results = attemptedTest[0].result.items;
+      const results = [...attemptedTest[0].result.items];
       this.givenAnswerList = results;
 
       // If remaining_time === null, set to test time_limit
@@ -242,7 +242,9 @@ export default {
       this.allQuestions = attemptedTest[0].test.questions.items
         .map((ques) => {
           // Check if already given answer to this question
+          let userInput = null;
           const isAlredyGivenAnswer = results.some((result) => {
+            userInput = result.user_input;
             return result.question_id === ques.id;
           });
 
@@ -254,11 +256,11 @@ export default {
           return {
             ...ques,
             options: Object.entries(parsedData),
+            userInput,
           };
           // }
         })
         .filter(Boolean); // Removed the undefined elements
-
       this.totalQuestions = this.allQuestions.length;
       this.questionCounter = attemptedTest[0].test.questions.items.length - this.totalQuestions;
       this.showCounter = this.questionCounter = givenAnswerCounter;
@@ -308,17 +310,21 @@ export default {
       this.startTest = !this.startTest;
     },
 
-    // nextQuestion() {
-    //   if (this.questionCounter < this.totalQuestions - 1) {
-    //     this.questionCounter = this.questionCounter + 1;
-    //     return;
-    //   }
-    // },
+    nextQuestionFun() {
+      // if (this.questionCounter < this.totalQuestions - 1) {
+      //   this.questionCounter = this.questionCounter + 1;
+      //   return;
+      // }
+      const quesDetail = this.allQuestions[this.questionCounter];
+      this.selectOption(quesDetail.id, quesDetail.userInput);
+    },
 
     previousQuestion() {
       if (this.questionCounter !== 0) {
         this.questionCounter -= 1;
         this.showCounter -= 1;
+        const quesDetail = this.allQuestions[this.questionCounter];
+        this.selectOption(quesDetail.id, quesDetail.userInput);
       }
     },
 
@@ -353,9 +359,15 @@ export default {
         if (res) {
           // If response is an object then only we are adding
           if (res !== true) {
-            // adding given answer(response) in 'givenAnswerList'
+            // adding given answer(response) in 'givenAnswerList' (only when user attempt that question first time)
             this.givenAnswerList.push(res);
           }
+
+          // Adding userInput in user's attempted allQquestion list
+          const indexOfQuestion = this.allQuestions.findIndex(
+            (ques) => ques.id === this.selectAnswer.questionId,
+          );
+          this.allQuestions[indexOfQuestion].userInput = this.selectAnswer.userInput;
 
           this.selectAnswer.questionId = null;
           this.selectAnswer.userInput = null;
@@ -377,6 +389,8 @@ export default {
                 timer: 3000,
               });
             }
+          } else {
+            this.nextQuestionFun();
           }
         } else {
           this.$swal.fire({
