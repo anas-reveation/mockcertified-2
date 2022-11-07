@@ -137,7 +137,7 @@ export default {
   async mounted() {
     const testId = this.testId;
     const attemptedTest = this.allAttemptedTests.filter((item) => {
-      if (item.test.id === testId) {
+      if (item.test && item.test.id === testId) {
         if (item.status === 'IN_PROGRESS') {
           this.testStatus = 'Continue';
           return item;

@@ -40,7 +40,7 @@
               v-if="$route.path.match(/\/attempted-test\/*/g)"
               class="text-primary pb-2 font_size_10"
             >
-              Reattempt
+              Re-attempt
             </span>
           </NuxtLink>
         </div>

@@ -26,7 +26,7 @@
           </span>
         </div>
       </div>
-      <FooterNavbar class="d-sm-none" />
+      <FooterNavbar class="d-md-none" />
     </div>
   </div>
 </template>
