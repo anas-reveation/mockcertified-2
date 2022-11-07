@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light" @mouseleave="dropDownNavbar = false">
+  <nav
+    class="navbar navbar-expand-sm navbar-light bg-light"
+    @mouseleave="(userDropDown = false), (settingsDropDown = false)"
+  >
     <div class="container-fluid">
       <NuxtLink to="/dashboard" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
@@ -37,7 +40,7 @@
               class="d-flex flex-column align-items-center justify-content-center me-5"
             >
               <img class="m-1 navbar_icon" src="@/assets/images/reattempt_icon.svg" alt="reload" />
-              <span class="pb-2 font_size_10"> Reattempt </span>
+              <span class="pb-2 font_size_10"> Re-attempt </span>
               <div
                 class="active_line"
                 :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
@@ -78,20 +81,33 @@
 
           <div
             class="d-flex flex-column align-items-center justify-content-center me-5 cursor_pointer"
-            @mouseover="dropDownNavbar = true"
+            @mouseover="(settingsDropDown = true), (userDropDown = false)"
           >
             <img class="m-1 navbar_icon" src="@/assets/images/settings.svg" alt="settings" />
             <span class="pb-2 font_size_10"> settings </span>
           </div>
+
+          <ClientOnly>
+            <div
+              v-if="user"
+              class="d-flex flex-column align-items-center justify-content-center me-5 mt-1 bg-primary text-white cursor_pointer circle"
+              @mouseover="(userDropDown = true), (settingsDropDown = false)"
+            >
+              <p class="text-uppercase circle_inner">
+                {{ user.first_name[0] }}{{ user.last_name[0] }}
+              </p>
+            </div>
+          </ClientOnly>
         </div>
       </div>
     </div>
     <div class="bg-primary w-100 hr_line mt-2" />
 
     <!-- Start Hover Navbar -->
-    <div class="d-flex justify-content-end" v-if="dropDownNavbar">
+    <div class="d-flex justify-content-end" v-if="settingsDropDown">
       <ul
         class="list-unstyled border border-primary bg-white position-fixed mt-2 me-2 width_navlist arrow_box"
+        :class="isAuthenticated ? 'settings_dropdown' : 'user_dropdown'"
       >
         <li
           v-if="isAuthenticated"
@@ -115,34 +131,6 @@
             <span class="p-1 ms-3">
               <img src="@/assets/images/created_tests.svg" alt="created_tests" class="me-1 mb-1" />
               Created Tests
-            </span>
-          </NuxtLink>
-        </li>
-
-        <li
-          class="border-bottom border-primary text-capitalize py-2 font_size_16"
-          :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black'"
-        >
-          <NuxtLink to="/terms-conditions">
-            <span class="p-1 ms-3">
-              <img
-                src="@/assets/images/terms_conditions.svg"
-                alt="terms_conditions"
-                class="me-1 mb-1"
-              />
-              Terms and Conditions
-            </span>
-          </NuxtLink>
-        </li>
-
-        <li
-          class="border-bottom border-primary text-capitalize py-2 font_size_16"
-          :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black'"
-        >
-          <NuxtLink to="/privacy-policy">
-            <span class="p-1 ms-3">
-              <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1 mb-1" />
-              Privacy policy
             </span>
           </NuxtLink>
         </li>
@@ -173,10 +161,7 @@
             </NuxtLink>
           </li>
 
-          <li
-            v-if="!isAuthenticated"
-            class="border-bottom border-primary text-capitalize py-2 font_size_16"
-          >
+          <li v-if="!isAuthenticated" class="text-capitalize py-2 font_size_16">
             <NuxtLink to="/auth/login">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
@@ -184,7 +169,61 @@
               </span>
             </NuxtLink>
           </li>
+        </ClientOnly>
+      </ul>
+    </div>
+    <!-- End Hover Navbar -->
 
+    <!-- Start Hover Navbar -->
+    <div class="d-flex justify-content-end" v-if="userDropDown">
+      <ul
+        class="list-unstyled border border-primary bg-white position-fixed mt-2 me-2 width_navlist arrow_box user_dropdown"
+      >
+        <ClientOnly>
+          <li class="ms-3 py-2" v-if="user">
+            <div class="row">
+              <div class="col-2 bg-primary text-white circle">
+                <p class="mt-2 text-uppercase text-center">
+                  {{ user.first_name[0] }}{{ user.last_name[0] }}
+                </p>
+              </div>
+              <div class="col-10 font_size_16">
+                <div class="text-capitalize">{{ user.first_name }} {{ user.last_name }}</div>
+                <div>{{ user.email }}</div>
+              </div>
+            </div>
+          </li>
+        </ClientOnly>
+
+        <li
+          class="border-bottom border-primary text-capitalize py-2 font_size_16"
+          :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black'"
+        >
+          <NuxtLink to="/terms-conditions">
+            <span class="p-1 ms-3">
+              <img
+                src="@/assets/images/terms_conditions.svg"
+                alt="terms_conditions"
+                class="me-1 mb-1"
+              />
+              Terms and Conditions
+            </span>
+          </NuxtLink>
+        </li>
+
+        <li
+          class="border-bottom border-primary text-capitalize py-2 font_size_16"
+          :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg-secondary fill_black'"
+        >
+          <NuxtLink to="/privacy-policy">
+            <span class="p-1 ms-3">
+              <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1 mb-1" />
+              Privacy policy
+            </span>
+          </NuxtLink>
+        </li>
+
+        <ClientOnly>
           <li
             v-if="isAuthenticated"
             class="border-bottom border-primary text-capitalize py-2 font_size_16"
@@ -327,7 +366,8 @@ export default {
   data() {
     return {
       isSideNavbarShow: false,
-      dropDownNavbar: false,
+      userDropDown: false,
+      settingsDropDown: false,
     };
   },
 
@@ -402,7 +442,19 @@ export default {
   pointer-events: none;
 }
 
-.arrow_box:after {
+.settings_dropdown:after {
+  border-bottom-color: #ffffff;
+  border-width: 19px;
+  left: 90px;
+}
+
+.settings_dropdown:before {
+  border-bottom-color: #6782e1;
+  border-width: 20px;
+  left: 89px;
+}
+
+.user_dropdown:after {
   // border-color: rgba(255, 255, 255, 0);
   border-bottom-color: #ffffff;
   border-width: 19px;
@@ -411,12 +463,23 @@ export default {
   // margin-left: -19px;
 }
 
-.arrow_box:before {
+.user_dropdown:before {
   // border-color: rgba(113, 158, 206, 0);
   border-bottom-color: #6782e1;
   border-width: 20px;
   // left: 100%;
   right: 59px;
   // margin-left: -19px;
+}
+
+.circle {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.circle_inner {
+  height: 15px;
+  // width: 50px;
 }
 </style>
