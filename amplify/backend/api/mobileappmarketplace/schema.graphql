@@ -148,7 +148,7 @@ type Result
   @model
   @auth(
     rules: [
-      { allow: private, operations: [create, read] }
+      { allow: private, operations: [create, read, update] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
       { allow: public, provider: iam, operations: [read, update] }
       { allow: public, operations: [read, update] }
@@ -221,4 +221,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-              
+      
