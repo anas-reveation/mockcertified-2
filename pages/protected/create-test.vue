@@ -211,6 +211,10 @@
                 :questionVisible="false"
                 class="mb-2"
               />
+              <div>
+                <span class="fw-bolder">Show as a Sample</span>:
+                {{ question.is_showcase ? 'Yes' : 'No' }}
+              </div>
             </div>
           </div>
         </div>
@@ -513,6 +517,7 @@ export default {
       this.questionList = [];
       this.reviewQuestions = [];
       let isFormatted = true;
+      // let isPreviewQuestion = false;
       for (let i = 0; i < FileData.length; i++) {
         const row = FileData[i];
         let questionObj = {
@@ -520,6 +525,7 @@ export default {
           options: [],
           answer: null,
           explanation: null,
+          is_showcase: false,
         };
 
         // Individual Question
@@ -538,6 +544,13 @@ export default {
             questionObj.answer = questionObj.answer.length === 1 ? questionObj.answer : null;
           } else if (header && header === 'explanation' && col) {
             questionObj.explanation = col.replace(/\s+/g, ' ').trim();
+          } else if (header && header === 'show_as_sample_question' && col) {
+            questionObj.is_showcase = col.replace(/\s+/g, ' ').trim().toUpperCase();
+            questionObj.is_showcase =
+              questionObj.is_showcase === 'Y' || questionObj.is_showcase === 'YES' ? true : false;
+            // if (!isPreviewQuestion) {
+            //   isPreviewQuestion = questionObj.is_showcase;
+            // }
           } else if (header && header.startsWith('option_') && col) {
             const alphabet = String.fromCharCode(64 + j);
             const optionKey = 'option_' + alphabet;
@@ -615,6 +628,23 @@ export default {
         this.reviewQuestions = [];
         return;
       }
+
+      // if (!isPreviewQuestion) {
+      //   this.questionList = [];
+      //   this.reviewQuestions = [];
+      //   const fileErrorMsg = 'Please choose question to preview sample question';
+      //   this.errors.fileError.msg = fileErrorMsg;
+      //   this.$swal.fire({
+      //     toast: true,
+      //     position: 'top-end',
+      //     icon: 'warning',
+      //     title: fileErrorMsg,
+      //     showConfirmButton: false,
+      //     timerProgressBar: true,
+      //     timer: 3000,
+      //   });
+      //   return;
+      // }
 
       this.reviewQuestionsFunc();
     },

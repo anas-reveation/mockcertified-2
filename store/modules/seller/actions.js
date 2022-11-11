@@ -76,6 +76,7 @@ export default {
         answer: questionDetail.answer,
         explainantion: questionDetail.explanation,
         options: questionDetail.options,
+        is_showcase: questionDetail.is_showcase,
         marks: 1,
       };
 

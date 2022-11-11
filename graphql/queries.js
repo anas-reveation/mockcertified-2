@@ -252,6 +252,7 @@ export const getQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      is_showcase
       createdAt
       updatedAt
     }
@@ -272,6 +273,7 @@ export const listQuestions = /* GraphQL */ `
         answer
         explainantion
         options
+        is_showcase
         createdAt
         updatedAt
       }
@@ -569,6 +571,7 @@ export const getResult = /* GraphQL */ `
         answer
         explainantion
         options
+        is_showcase
         createdAt
         updatedAt
       }

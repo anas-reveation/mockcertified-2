@@ -216,6 +216,7 @@ export const onCreateQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      is_showcase
       createdAt
       updatedAt
     }
@@ -247,6 +248,7 @@ export const onUpdateQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      is_showcase
       createdAt
       updatedAt
     }
@@ -278,6 +280,7 @@ export const onDeleteQuestion = /* GraphQL */ `
       answer
       explainantion
       options
+      is_showcase
       createdAt
       updatedAt
     }
@@ -636,6 +639,7 @@ export const onCreateResult = /* GraphQL */ `
         answer
         explainantion
         options
+        is_showcase
         createdAt
         updatedAt
       }
@@ -660,6 +664,7 @@ export const onUpdateResult = /* GraphQL */ `
         answer
         explainantion
         options
+        is_showcase
         createdAt
         updatedAt
       }
@@ -684,6 +689,7 @@ export const onDeleteResult = /* GraphQL */ `
         answer
         explainantion
         options
+        is_showcase
         createdAt
         updatedAt
       }

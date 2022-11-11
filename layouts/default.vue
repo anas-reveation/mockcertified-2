@@ -13,7 +13,7 @@
       <Nuxt class="margin_bottom px-4" />
     </div> -->
 
-    <div>
+    <div @click="removeClass">
       <Nuxt class="margin_bottom px-4" />
     </div>
 

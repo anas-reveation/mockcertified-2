@@ -11,6 +11,48 @@
       :credit="testDetail.credit"
     />
 
+    <button
+      v-if="sampleQuestions.length"
+      type="button"
+      class="btn btn-secondary border border-2 border-primary w-50 mb-2 width_res"
+      data-bs-toggle="modal"
+      data-bs-target="#reviewQuestion"
+    >
+      Review Sample Questions
+    </button>
+    <!-- Start Modal -->
+    <div
+      class="modal fade"
+      id="reviewQuestion"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="reviewQuestionLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
+            <span data-bs-dismiss="modal" aria-label="Close">
+              <img src="@/assets/images/circle-cross.svg" alt="circle-cross" />
+            </span>
+          </div>
+          <div v-if="sampleQuestions.length" class="modal-body">
+            <div v-for="(question, index) in sampleQuestions" :key="index">
+              <SampleQuestion
+                :question="question"
+                :index="index + 1"
+                :questionVisible="false"
+                class="mb-2"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
     <div v-if="isPurchased || isUserOwner">
       <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
       <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
@@ -161,6 +203,7 @@ export default {
       stripeUrl: null,
       promocode: '',
       newPrice: null,
+      sampleQuestions: [],
     };
   },
 
@@ -215,6 +258,8 @@ export default {
 
   async mounted() {
     this.testDetail = await this.getTestDetail(this.testId);
+    this.sampleQuestions = await this.getSampleQuestions(this.testId);
+
     if (!this.testDetail) {
       this.$router.push('/dashboard');
       return;
@@ -226,7 +271,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTestDetail', 'getUserTests']),
+    ...mapActions('testManagement', ['getTestDetail', 'getSampleQuestions', 'getUserTests']),
     ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
     ...mapMutations(['setRedirectUrl']),
 

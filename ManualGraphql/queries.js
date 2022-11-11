@@ -382,3 +382,18 @@ export const searchTestManagers = /* GraphQL */ `
     }
   }
 `;
+
+export const getSampleQuestions = /* GraphQL */ `
+  query GetTestManager($id: ID!) {
+    getTestManager(id: $id) {
+      questions(filter: { is_showcase: { eq: true } }) {
+        items {
+          question
+          options
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

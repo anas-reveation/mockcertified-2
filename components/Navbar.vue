@@ -36,6 +36,26 @@
             <ClientOnly>
               <li
                 v-if="isAuthenticated"
+                class="nav-item border-top border-primary py-1 font_size_16"
+                @click="redirect('/protected/create-test')"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+              >
+                <div class="row px-0 mx-0 ms-3">
+                  <div class="col-2 bg-primary text-white circle">
+                    <p class="mt-2 text-uppercase text-center">
+                      {{ user.first_name[0] }}{{ user.last_name[0] }}
+                    </p>
+                  </div>
+                  <div class="col-10 font_size_16">
+                    <div class="text-capitalize">{{ user.first_name }} {{ user.last_name }}</div>
+                    <div>{{ user.email }}</div>
+                  </div>
+                </div>
+              </li>
+
+              <li
+                v-if="isAuthenticated"
                 class="nav-item border-top border-bottom border-primary py-1 font_size_16"
                 :class="$route.path.match(/\/create-test\/*/g) && 'bg-secondary fill_black'"
                 @click="redirect('/protected/create-test')"
@@ -195,7 +215,7 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   computed: {
-    ...mapState('auth', ['userGroup', 'isAuthenticated']),
+    ...mapState('auth', ['user', 'userGroup', 'isAuthenticated']),
     ...mapState(['isNavbarVisible']),
   },
 
@@ -224,5 +244,11 @@ export default {
 
 .fill_black > a > span > img {
   filter: saturate(100%) brightness(0);
+}
+
+.circle {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 </style>

@@ -9,6 +9,7 @@ import {
   listTestsByStatus,
   searchSubCategories,
   searchTestManagers,
+  getSampleQuestions,
 } from '~/ManualGraphql/queries';
 
 import { listStaticContents, searchCategories } from '~/graphql/queries';
@@ -233,6 +234,40 @@ export default {
       const testData = testQueryData.data.getTestManager;
       commit('SET_LOADER', false, { root: true });
       return testData;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 3000,
+      });
+    }
+  },
+
+  async getSampleQuestions({ commit }, payload) {
+    const testId = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const questionListData = await API.graphql({
+        query: getSampleQuestions,
+        variables: { id: testId },
+      });
+      const questionList = questionListData.data.getTestManager.questions.items;
+
+      const sampleQuestions = questionList.map((ques) => {
+        const parsedData = JSON.parse(ques.options);
+        return {
+          ...ques,
+          options: Object.entries(parsedData),
+        };
+      });
+      commit('SET_LOADER', false, { root: true });
+      return sampleQuestions;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

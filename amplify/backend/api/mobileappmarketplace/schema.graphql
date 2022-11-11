@@ -73,6 +73,7 @@ type Question
   answer: String!
   explainantion: String!
   options: AWSJSON!
+  is_showcase: Boolean @default(value: "false")
 }
 
 type Category
@@ -221,4 +222,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-      
+       
