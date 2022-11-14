@@ -1,6 +1,6 @@
 <template>
   <div class="box_shadow">
-    <div class="container text-center bg-white py-3">
+    <div class="container text-center bg-white py-2">
       <div class="row">
         <ClientOnly>
           <div v-if="platform === 'web'" class="col">
@@ -118,18 +118,6 @@ a {
 
 .box_shadow {
   box-shadow: 0px 0px 8px #becbfa;
-}
-
-.cart_item {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  font-size: 13px;
-  line-height: 15px;
-
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
 }
 
 .active_line {
