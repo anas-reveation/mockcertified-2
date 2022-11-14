@@ -6,18 +6,35 @@
         <NuxtLink class="navbar-brand ms-2" to="/dashboard">
           <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
         </NuxtLink>
-        <img
-          src="@/assets/images/profile_icon.svg"
-          height="40"
-          class="opacity-75 me-2 mt-1"
-          width="40"
-          alt="user"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        />
+
+        <ClientOnly>
+          <div
+            v-if="user"
+            class="bg-primary text-white circle me-1"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <p class="mt-2 text-uppercase text-center">
+              {{ user.first_name[0] }}{{ user.last_name[0] }}
+            </p>
+          </div>
+          <img
+            v-else
+            src="@/assets/images/profile_icon.svg"
+            height="40"
+            class="opacity-75 me-2 mt-1"
+            width="40"
+            alt="user"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          />
+        </ClientOnly>
         <div
           class="collapse navbar-collapse position-relative"
           :class="isNavbarVisible && 'show'"
@@ -36,18 +53,22 @@
             <ClientOnly>
               <li
                 v-if="isAuthenticated"
-                class="nav-item border-top border-primary py-1 font_size_16"
+                class="nav-item border-top border-primary py-1 mt-2 font_size_16"
                 @click="redirect('/protected/create-test')"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
               >
-                <div class="row px-0 mx-0 ms-3">
-                  <div class="col-2 bg-primary text-white circle">
-                    <p class="mt-2 text-uppercase text-center">
-                      {{ user.first_name[0] }}{{ user.last_name[0] }}
-                    </p>
+                <div class="d-flex ms-2">
+                  <div class="">
+                    <img
+                      src="@/assets/images/profile_icon.svg"
+                      height="40"
+                      class="opacity-75 me-2 mt-1"
+                      width="40"
+                      alt="user"
+                    />
                   </div>
-                  <div class="col-10 font_size_16">
+                  <div v-if="user" class="text-start font_size_16">
                     <div class="text-capitalize">{{ user.first_name }} {{ user.last_name }}</div>
                     <div>{{ user.email }}</div>
                   </div>
@@ -94,7 +115,7 @@
                 class="nav-item border-bottom border-primary text-capitalize py-1 font_size_16"
                 :class="[
                   $route.path.match(/\/terms-conditions\/*/g) && 'bg-secondary fill_black',
-                  !isAuthenticated && 'border-top',
+                  !isAuthenticated && 'border-top  mt-2',
                 ]"
                 @click="redirect('/terms-conditions')"
                 data-bs-toggle="collapse"
@@ -205,7 +226,7 @@
           </ul>
         </div>
       </div>
-      <div class="bg-primary w-100 hr_line" />
+      <div class="bg-primary w-100 hr_line mt-1" />
     </nav>
   </div>
 </template>
