@@ -65,8 +65,15 @@ exports.handler = async (event) => {
     );
 
     const userInput = response.data.data.getResult.user_input.toLowerCase();
-    const answer = response.data.data.getResult.question.answer.toLowerCase();
-    const result_status = userInput === answer ? true : false;
+    const answerData = response.data.data.getResult.question.answer;
+
+    let isCorrect = false;
+    answerData.forEach((ans) => {
+      if (userInput.toLowerCase() === ans.toLowerCase()) {
+        isCorrect = true;
+      }
+    });
+    const result_status = isCorrect;
 
     await axios.post(
       GRAPHQL_ENDPOINT,

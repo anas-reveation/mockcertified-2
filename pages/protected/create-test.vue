@@ -540,8 +540,9 @@ export default {
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'answer' && col) {
-            questionObj.answer = col.replace(/\s+/g, ' ').trim().toUpperCase();
-            questionObj.answer = questionObj.answer.length === 1 ? questionObj.answer : null;
+            // From string to array eg:-> "a,b" -> ["a", "b"]
+            questionObj.answer = this.getAnswerArray(col);
+            questionObj.answer = questionObj.answer.length ? questionObj.answer : null;
           } else if (header && header === 'explanation' && col) {
             questionObj.explanation = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'show_as_sample_question' && col) {
@@ -585,18 +586,24 @@ export default {
           });
           break;
         }
+
         let mergedAllOptions = {};
         let isSelectedAnswer = false;
+        let stringArrayAnswer = [];
+
+        // looping through question's(one question) options
         questionObj.options.forEach((obj) => {
           Object.keys(obj).forEach(function (key) {
             // do something with obj[key]
-            if (key === 'option_' + questionObj.answer) {
-              questionObj.answer = obj[key];
-              isSelectedAnswer = true;
-            }
-            return;
-          });
 
+            // Validation of answer array (If none of the answers match the given option, then it will give a warning/ At least one answer should match the given option.)
+            questionObj.answer.forEach((ans) => {
+              if (key === 'option_' + ans) {
+                isSelectedAnswer = true;
+                stringArrayAnswer.push(obj[key]);
+              }
+            });
+          });
           // Merging options into one object
           mergedAllOptions = {
             ...mergedAllOptions,
@@ -619,6 +626,7 @@ export default {
           break;
         }
 
+        questionObj.answer = stringArrayAnswer;
         questionObj.options = JSON.stringify(mergedAllOptions);
         this.questionList.push(questionObj);
       }
@@ -647,6 +655,22 @@ export default {
       // }
 
       this.reviewQuestionsFunc();
+    },
+
+    getAnswerArray(stringOption) {
+      let answerArray = stringOption.split(',');
+      answerArray = answerArray
+        .map((ans) => {
+          const ans2 = ans.replace(/\s+/g, ' ').trim().toUpperCase();
+          if (ans2.length) {
+            return ans2;
+          }
+        })
+        .filter((notUndefined) => notUndefined !== undefined);
+      if (answerArray.length) {
+        return answerArray;
+      }
+      return false;
     },
 
     async testSubmit() {
