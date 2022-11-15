@@ -197,7 +197,7 @@ export default {
     // Only if test is started
     if (this.startTest) {
       this.setTestRemainingTimeLocal();
-      this.$router.push('/protected/purchased-test');
+      // this.$router.push('/protected/purchased-test');
     }
   },
 
