@@ -238,7 +238,9 @@ export default {
       // If user already purchased this test
       const test_id = this.testDetail.id;
       const isPurchased = this.allPurchasedTests.some(function (purchasedItem) {
-        return purchasedItem.test.id === test_id;
+        if (purchasedItem.test) {
+          return purchasedItem.test.id === test_id;
+        }
       });
       if (isPurchased) {
         this.isPurchased = true;

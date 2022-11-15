@@ -144,7 +144,11 @@ export default {
         }
       }
     });
-    const purchasedTest = this.allPurchasedTests.filter((item) => item.test.id === testId);
+    const purchasedTest = this.allPurchasedTests.filter((item) => {
+      if (item.test && item.test.id === testId) {
+        return item;
+      }
+    });
     if (attemptedTest.length) {
       this.attemptedId = attemptedTest[0].id;
       this.testDetail = attemptedTest[0].test;
