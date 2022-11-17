@@ -91,6 +91,7 @@ export const onCreateTestManager = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -105,6 +106,7 @@ export const onCreateTestManager = /* GraphQL */ `
       questions {
         nextToken
       }
+      slug
       createdAt
       updatedAt
     }
@@ -131,6 +133,7 @@ export const onUpdateTestManager = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -145,6 +148,7 @@ export const onUpdateTestManager = /* GraphQL */ `
       questions {
         nextToken
       }
+      slug
       createdAt
       updatedAt
     }
@@ -171,6 +175,7 @@ export const onDeleteTestManager = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -185,6 +190,7 @@ export const onDeleteTestManager = /* GraphQL */ `
       questions {
         nextToken
       }
+      slug
       createdAt
       updatedAt
     }
@@ -209,6 +215,7 @@ export const onCreateQuestion = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -241,6 +248,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -273,6 +281,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -292,6 +301,7 @@ export const onCreateCategory = /* GraphQL */ `
       id
       name
       image
+      slug
       sub_category {
         nextToken
       }
@@ -306,6 +316,7 @@ export const onUpdateCategory = /* GraphQL */ `
       id
       name
       image
+      slug
       sub_category {
         nextToken
       }
@@ -320,6 +331,7 @@ export const onDeleteCategory = /* GraphQL */ `
       id
       name
       image
+      slug
       sub_category {
         nextToken
       }
@@ -335,10 +347,12 @@ export const onCreateSubCategory = /* GraphQL */ `
       name
       category_id
       image
+      slug
       category {
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -354,10 +368,12 @@ export const onUpdateSubCategory = /* GraphQL */ `
       name
       category_id
       image
+      slug
       category {
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -373,10 +389,12 @@ export const onDeleteSubCategory = /* GraphQL */ `
       name
       category_id
       image
+      slug
       category {
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -414,6 +432,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -452,6 +471,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -490,6 +510,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -528,6 +549,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -570,6 +592,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -612,6 +635,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }

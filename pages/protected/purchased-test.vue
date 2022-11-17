@@ -75,7 +75,7 @@
 
       <div class="row">
         <div v-for="test in filteredTests" :key="test.id" class="col-sm-6 col-md-4 mb-3">
-          <NuxtLink v-if="test.test" :to="`/protected/test/${test.test.id}`">
+          <NuxtLink v-if="test.test" :to="`/protected/test/${test.test.slug}`">
             <TestCards
               :title="test.test.title"
               :description="`${test.test.time_limit} mins • ${

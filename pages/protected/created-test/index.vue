@@ -31,7 +31,7 @@
     </div>
     <div class="row">
       <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3">
-        <NuxtLink :to="`/protected/created-test/${test.id}`">
+        <NuxtLink :to="`/protected/created-test/${test.slug}`">
           <TestCards
             :title="test.title"
             :price="`$${formatPrice(test.price)}`"

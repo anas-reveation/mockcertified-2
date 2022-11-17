@@ -67,7 +67,7 @@
         {{ msgText }}
       </button>
 
-      <div v-else-if="platform === 'web'">
+      <div v-else-if="platform === 'web' && !isLoading">
         <div v-if="isAuthenticated">
           <div v-if="testDetail.price !== 0">
             <h3 v-if="newPrice" class="fw-bolder text-muted font_size_20">
@@ -204,18 +204,19 @@ export default {
       promocode: '',
       newPrice: null,
       sampleQuestions: [],
+      testId: null,
     };
   },
 
   async asyncData({ params }) {
-    const testId = params.testId;
-    return { testId };
+    const testSlug = params.testId;
+    return { testSlug };
   },
 
   computed: {
     ...mapState('auth', ['user', 'isAuthenticated']),
     ...mapState('buyer', ['cartItems']),
-    ...mapState(['allPurchasedTests', 'platform']),
+    ...mapState(['isLoading', 'allPurchasedTests', 'platform']),
 
     totalMarks() {
       if (this.testDetail) {
@@ -259,6 +260,7 @@ export default {
   },
 
   async mounted() {
+    this.testId = await this.getTestIdBySlug(this.testSlug);
     this.testDetail = await this.getTestDetail(this.testId);
     this.sampleQuestions = await this.getSampleQuestions(this.testId);
 
@@ -273,15 +275,20 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTestDetail', 'getSampleQuestions', 'getUserTests']),
+    ...mapActions('testManagement', [
+      'getTestDetail',
+      'getSampleQuestions',
+      'getUserTests',
+      'getTestIdBySlug',
+    ]),
     ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
     ...mapMutations(['setRedirectUrl']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
-      const testId = this.testDetail.id;
+      const testSlug = this.testSlug;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testSlug}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,
@@ -320,7 +327,7 @@ export default {
     },
 
     redirectLogin() {
-      this.setRedirectUrl(`/category/test/${this.testId}`);
+      this.setRedirectUrl(`/category/test/${this.testSlug}`);
       this.$router.push('/auth/login');
     },
 

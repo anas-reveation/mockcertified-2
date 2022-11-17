@@ -122,12 +122,13 @@ export default {
       testStatus: null,
       attemptedId: null,
       totalMarks: 0,
+      testId: null,
     };
   },
 
   async asyncData({ params }) {
-    const testId = params.testId;
-    return { testId };
+    const testSlug = params.testId;
+    return { testSlug };
   },
 
   computed: {
@@ -135,6 +136,7 @@ export default {
   },
 
   async mounted() {
+    this.testId = await this.getTestIdBySlug(this.testSlug);
     const testId = this.testId;
     const attemptedTest = this.allAttemptedTests.filter((item) => {
       if (item.test && item.test.id === testId) {
@@ -164,7 +166,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['abortedAttemptedTest']),
+    ...mapActions('testManagement', ['abortedAttemptedTest', 'getTestIdBySlug']),
 
     totalMarksCal(test) {
       if (test) {
@@ -195,9 +197,9 @@ export default {
 
     async shareTest() {
       const domainOrigin = window.location.origin;
-      const testId = this.testDetail.id;
+      const testSlug = this.testDetail.slug;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
+      const url = `${domainOrigin}/category/test/${testSlug}`;
       await Share.share({
         title,
         text: `${title} is Really awesome test`,

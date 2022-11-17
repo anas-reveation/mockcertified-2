@@ -6,7 +6,7 @@
 
     <div class="row">
       <NuxtLink
-        :to="`/category/${category.id}`"
+        :to="`/category/${category.slug}`"
         v-for="category in allCategoriesFilter"
         :key="category.id"
         class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
@@ -15,9 +15,7 @@
           <span class="col-2 me-2">
             <img :src="category.image" alt="category" class="rounded-circle category_image" />
           </span>
-          <span class="col text-start">
-            {{ category.name }}
-          </span>
+          <span class="col text-start"> {{ category.name }} </span>
         </div>
       </NuxtLink>
     </div>
@@ -135,10 +133,6 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
-
-    redirectPage(id) {
-      this.$router.push(`/category/${id}`);
-    },
   },
 };
 </script>

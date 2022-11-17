@@ -9,7 +9,7 @@
 
         <div class="row">
           <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
-            <NuxtLink :to="`/category/test/${test.id}`">
+            <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
@@ -29,7 +29,7 @@
         <p class="font_size_16">Suggestions Category</p>
         <div class="row p-1">
           <NuxtLink
-            :to="`/category/${category.id}`"
+            :to="`/category/${category.slug}`"
             v-for="category in allSearchedCategory"
             :key="category.id"
             class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
@@ -38,9 +38,7 @@
               <span class="col-2 me-2">
                 <img :src="category.image" alt="category" class="rounded-circle category_image" />
               </span>
-              <span class="col text-start">
-                {{ category.name }}
-              </span>
+              <span class="col text-start"> {{ category.name }} </span>
             </div>
           </NuxtLink>
         </div>
@@ -50,8 +48,8 @@
         <p class="font_size_16">Suggestions Sub-Category</p>
         <div class="row p-1">
           <NuxtLink
-            :to="`/category/${subCategory.category_id}?subCategoryId=${subCategory.id}&subCategoryName=${subCategory.name}`"
             v-for="subCategory in allSearchedSubCategory"
+            :to="`/category/${subCategory.category.slug}?subCategoryId=${subCategory.slug}&subCategoryName=${subCategory.name}`"
             :key="subCategory.id"
             class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
           >
@@ -63,9 +61,7 @@
                   class="rounded-circle category_image"
                 />
               </span>
-              <span class="col text-start">
-                {{ subCategory.name }}
-              </span>
+              <span class="col text-start">{{ subCategory.name }}</span>
             </div>
           </NuxtLink>
         </div>
@@ -90,7 +86,7 @@
           v-if="featuredTests.length"
         >
           <div v-for="(test, index) in featuredTests" :key="index" class="mb-3 px-2">
-            <NuxtLink :to="`/category/test/${test.id}`">
+            <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
@@ -122,7 +118,7 @@
             :key="index"
             class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
           >
-            <NuxtLink :to="`/category/${category.id}`"> {{ category.name }} </NuxtLink>
+            <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
           </div>
         </div>
       </div>
@@ -146,7 +142,7 @@
           v-if="recentlyAddedTests.length"
         >
           <div v-for="(test, index) in recentlyAddedTests" :key="index" class="px-2 pb-2">
-            <NuxtLink :to="`/category/test/${test.id}`">
+            <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"

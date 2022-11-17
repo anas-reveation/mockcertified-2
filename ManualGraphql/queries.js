@@ -7,6 +7,7 @@ export const userTests = /* GraphQL */ `
           createdAt
           test {
             title
+            slug
             time_limit
             id
             category_id
@@ -41,6 +42,7 @@ export const userTests = /* GraphQL */ `
             id
             price
             title
+            slug
             time_limit
             description
             credit
@@ -79,6 +81,7 @@ export const userTests = /* GraphQL */ `
       created_tests {
         items {
           title
+          slug
           category_id
           description
           reject_description
@@ -148,6 +151,7 @@ export const listAllTests = /* GraphQL */ `
         user_id
         category_id
         title
+        slug
         description
         credit
         price
@@ -200,6 +204,7 @@ export const listTestsByStatus = /* GraphQL */ `
         user_id
         category_id
         title
+        slug
         description
         price
         status
@@ -256,11 +261,13 @@ export const listCategoriesDetail = /* GraphQL */ `
         name
         image
         createdAt
+        slug
         sub_category {
           items {
             id
             name
             image
+            slug
           }
         }
       }
@@ -291,9 +298,11 @@ export const searchSubCategories = /* GraphQL */ `
         category_id
         image
         createdAt
+        slug
         category {
           id
           name
+          slug
         }
       }
       nextToken
@@ -349,10 +358,15 @@ export const searchTestManagers = /* GraphQL */ `
             marks
           }
         }
+        category {
+          id
+          slug
+        }
         user_id
         category_id
         sub_category_id
         title
+        slug
         description
         reject_description
         credit
@@ -394,6 +408,26 @@ export const getSampleQuestions = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const categorySlug = /* GraphQL */ `
+  query ListCategories($filter: ModelCategoryFilterInput, $limit: Int, $nextToken: String) {
+    listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+      }
+    }
+  }
+`;
+
+export const subCategorySlug = /* GraphQL */ `
+  query ListSubCategories($filter: ModelSubCategoryFilterInput, $limit: Int, $nextToken: String) {
+    listSubCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+      }
     }
   }
 `;

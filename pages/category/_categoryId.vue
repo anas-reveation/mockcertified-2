@@ -51,7 +51,7 @@
       </div> -->
       <div class="row">
         <div v-for="test in allCategoriesFilter" class="col-sm-6 col-md-4 mb-3">
-          <NuxtLink :to="`/category/test/${test.id}`">
+          <NuxtLink :to="`/category/test/${test.slug}`">
             <TestCards
               :title="test.title"
               :price="`$${formatPrice(test.price)}`"
@@ -154,6 +154,7 @@ export default {
       breadCrum: [],
       searchQuery: '',
       allCategoriesFilter: [],
+      categoryId: null,
     };
   },
 
@@ -176,15 +177,23 @@ export default {
     ...mapState(['isLoading']),
   },
 
-  async asyncData({ params, query }) {
-    const categoryId = params.categoryId;
-    const subCategoryId = query.subCategoryId ? query.subCategoryId : null;
+  async asyncData({ params, query, store }) {
+    const categorySlug = params.categoryId;
+    const subCategorySlug = query.subCategoryId ? query.subCategoryId : null;
     const subCategoryName = query.subCategoryName ? query.subCategoryName : null;
-    return { categoryId, subCategoryId, subCategoryName };
+    return { categorySlug, subCategorySlug, subCategoryName };
   },
 
   async mounted() {
-    if (this.subCategoryId) {
+    this.categoryId = await this.getCategoryIdBySlug(this.categorySlug);
+
+    if (!this.categoryId) {
+      this.$router.back();
+      return;
+    }
+
+    if (this.subCategorySlug) {
+      this.subCategoryId = await this.getSubCategoryIdBySlug(this.subCategorySlug);
       await this.getAllTests(this.subCategoryId, this.subCategoryName);
       return;
     }
@@ -211,7 +220,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['getAllSubCategories', 'getTestsBySubCategory']),
+    ...mapActions('testManagement', [
+      'getAllSubCategories',
+      'getTestsBySubCategory',
+      'getCategoryIdBySlug',
+      'getSubCategoryIdBySlug',
+    ]),
     ...mapMutations('buyer', ['addToCart']),
 
     // redirectPage(id) {

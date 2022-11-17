@@ -52,6 +52,7 @@ type TestManager
   # In minutes
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
+  slug: String
   createdAt: String!
 }
 
@@ -89,6 +90,7 @@ type Category
   id: ID!
   name: String!
   image: String
+  slug: String!
   sub_category: [SubCategory] @hasMany(indexName: "byCategory", fields: ["id"])
 }
 
@@ -106,6 +108,7 @@ type SubCategory
   name: String!
   category_id: ID! @index(name: "byCategory")
   image: String
+  slug: String!
   category: Category @hasOne(fields: ["category_id"])
 }
 
@@ -222,4 +225,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-   
+  

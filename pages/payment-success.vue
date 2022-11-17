@@ -35,10 +35,18 @@
         <p>Get our Mockcertified app in</p>
 
         <div class="row">
-          <a href="#" class="col m-1">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.mockcertified.mockcertified"
+            target="_blank"
+            class="col m-1"
+          >
             <img src="@/assets/images/GooglePlay.svg" alt="GooglePlayStore" />
           </a>
-          <a href="#" class="col m-1">
+          <a
+            href="https://apps.apple.com/in/app/MockCertified/1645773656"
+            target="_blank"
+            class="col m-1"
+          >
             <img src="@/assets/images/AppStore.svg" alt="AppStore" />
           </a>
           <a href="#" class="col m-1">
