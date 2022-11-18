@@ -250,6 +250,8 @@ export default {
 
           if (isAlredyGivenAnswer) {
             givenAnswerCounter += 1;
+          } else {
+            userInput = null;
           }
           // if (!isAlredyGivenAnswer) {
           const parsedData = JSON.parse(ques.options);
