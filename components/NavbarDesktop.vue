@@ -482,4 +482,10 @@ export default {
   height: 15px;
   // width: 50px;
 }
+
+.bg-light {
+  --bs-bg-opacity: 0;
+  background-color: rgba(255, 255, 255, var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
 </style>
