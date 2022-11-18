@@ -116,6 +116,7 @@
             >
               <TestCards
                 :title="test.test.title"
+                :dateTime="getDate(test.createdAt)"
                 :description="`${test.test.time_limit} mins • ${
                   test.test.questions.items.length
                 } questions • ${totalMarks(test.test.questions.items)} marks`"
@@ -124,6 +125,7 @@
             <NuxtLink v-else :to="`/protected/test/result/${test.id}`">
               <TestCards
                 :title="test.test.title"
+                :dateTime="getDate(test.createdAt)"
                 :description="`${test.test.time_limit} mins • ${
                   test.test.questions.items.length
                 } questions • ${totalMarks(test.test.questions.items)} marks`"
@@ -288,6 +290,11 @@ export default {
         return;
       }
       this.sortingTabName = tabName;
+    },
+
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
     },
 
     // redirectPage(test) {

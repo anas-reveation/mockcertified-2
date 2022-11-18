@@ -17,7 +17,7 @@
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
-                :createdAt="test.createdAt"
+                :dateTime="getDate(test.createdAt)"
                 :authorName="test.created_by.first_name"
               />
             </NuxtLink>
@@ -333,6 +333,11 @@ export default {
     // redirectPage(id) {
     //   this.$router.push(`/category/test/${id}`);
     // },
+
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
+    },
 
     async searchQueryFunc() {
       if (!this.searchQuery) {

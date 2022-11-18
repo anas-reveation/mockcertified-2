@@ -105,3 +105,7 @@ AMPLIFY_GOOGLE_CLIENT_SECRET
 ### Android google developer account (OAuth 2.0 Client IDs)
 
 Create OAuth client ID "Web Application" & "Andorid". Use "Web Application" ID in android code (android\app\src\main\res\values\strings.xml - <string name="server_client_id">{Web Application}</string>)
+
+### To Edit Static content eg: privacy policy, etc..
+
+If you want to fetch data from app sync then try this to remove "/" [website](https://www.browserling.com/tools/strip-slashes).
