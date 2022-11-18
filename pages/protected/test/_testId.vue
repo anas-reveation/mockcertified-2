@@ -200,12 +200,14 @@ export default {
       const testSlug = this.testDetail.slug;
       const title = this.testDetail.title;
       const url = `${domainOrigin}/category/test/${testSlug}`;
-      await Share.share({
-        title,
-        text: `${title} is Really awesome test`,
-        url,
-        dialogTitle: 'Share with buddies',
-      });
+      try {
+        await Share.share({
+          title,
+          text: `${title} is Really awesome test`,
+          url,
+          dialogTitle: 'Share with buddies',
+        });
+      } catch (_err) {}
     },
   },
 };
