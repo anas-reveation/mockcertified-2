@@ -3,7 +3,7 @@
     <div v-if="isFetched && !filteredTests.length">
       <div class="d-sm-none">
         <h1 class="fw-bold font_size_32">No Test Available</h1>
-        <p>
+        <p v-if="platform === 'web'">
           Want to buy new tests?
           <br />
           Click on the button below!
@@ -16,6 +16,7 @@
             class="boy_illustration"
           />
           <NuxtLink
+            v-if="platform === 'web'"
             to="/category"
             class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
           >
@@ -28,12 +29,13 @@
         <div class="row mt-5">
           <div class="col-6">
             <h1 class="fw-bold font_size_32">No Test Available</h1>
-            <p>
+            <p v-if="platform === 'web'">
               Want to buy new tests?
               <br />
               Click on the button below!
             </p>
             <NuxtLink
+              v-if="platform === 'web'"
               to="/category"
               class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
             >
@@ -175,7 +177,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['isLoading', 'allPurchasedTests']),
+    ...mapState(['isLoading', 'platform', 'allPurchasedTests']),
   },
 
   watch: {
