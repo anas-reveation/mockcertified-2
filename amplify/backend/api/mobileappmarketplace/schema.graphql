@@ -72,7 +72,7 @@ type Question
   test: TestManager @hasOne(fields: ["test_id"])
   question: String!
   answer: [String!]!
-  explainantion: String!
+  explainantion: String
   options: AWSJSON!
   is_showcase: Boolean @default(value: "false")
 }
@@ -225,4 +225,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-  
+ 

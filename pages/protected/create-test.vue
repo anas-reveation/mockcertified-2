@@ -226,7 +226,7 @@
 
 <script>
 import * as XLSX from 'xlsx';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { Browser } from '@capacitor/browser';
 
 export default {
@@ -472,6 +472,7 @@ export default {
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding', 'getStripeIdStatus']),
+    ...mapMutations(['SET_LOADER']),
 
     numberValidation(event) {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
@@ -569,7 +570,7 @@ export default {
         if (
           !questionObj.question ||
           !questionObj.answer ||
-          !questionObj.explanation ||
+          // !questionObj.explanation ||
           !questionObj.options.length
         ) {
           isFormatted = false;
@@ -674,6 +675,7 @@ export default {
     },
 
     async testSubmit() {
+      console.log('first');
       if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
         this.$swal.fire({
           toast: true,
@@ -704,7 +706,12 @@ export default {
         testDetail: this.formData,
         questionList: this.questionList,
       };
+
+      this.SET_LOADER(true);
       const res = await this.createTest(obj);
+      this.SET_LOADER(false);
+
+      console.log('resres', res);
       if (res) {
         this.$router.push('/dashboard');
         this.$swal.fire({

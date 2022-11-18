@@ -23,6 +23,8 @@ export default {
     let isSlugAvailable = false;
     do {
       isSlugAvailable = await dispatch('testManagement/getTestIdBySlug', testSlug, { root: true });
+      // Keep loader on in loop
+      commit('SET_LOADER', true, { root: true });
       if (isSlugAvailable) {
         testSlug = testSlug + counter.toString();
         counter++;
@@ -65,9 +67,8 @@ export default {
       }
 
       await dispatch('testManagement/getUserTests', false, { root: true });
-
       commit('SET_LOADER', false, { root: true });
-      return false;
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
@@ -104,6 +105,7 @@ export default {
       });
       return true;
     } catch (err) {
+      console.log('err', err);
       this.$swal.fire({
         toast: true,
         position: 'top-end',
