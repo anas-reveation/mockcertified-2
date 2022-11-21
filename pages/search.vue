@@ -157,15 +157,17 @@ export default {
       allSearchedCategory: [],
       allSearchedSubCategory: [],
       isFetched: false,
+      searchQuery: null,
     };
   },
 
-  async asyncData({ query }) {
-    const searchQuery = query.search_query ? query.search_query : null;
-    return { searchQuery };
-  },
+  // async asyncData({ query }) {
+  //   const searchQuery = query.search_query ? query.search_query : null;
+  //   return { searchQuery };
+  // },
 
   async mounted() {
+    this.searchQuery = this.$route.query.search_query ? this.$route.query.search_query : null;
     if (!this.searchQuery) {
       this.$router.push('/dashboard');
       return;
