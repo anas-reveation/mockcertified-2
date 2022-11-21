@@ -140,7 +140,7 @@ export default {
     try {
       const allCategoriesData = await API.graphql({
         query: listCategoriesDetail,
-        variables: { variables: { limit: 10000 } },
+        variables: { limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
@@ -207,7 +207,7 @@ export default {
 
       const allTestsData = await API.graphql({
         query: listAllTests,
-        variables: { filter: filter, variables: { limit: 10000 } },
+        variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allTests = allTestsData.data.listTestManagers.items;
@@ -521,19 +521,19 @@ export default {
       };
       const allTestData = await API.graphql({
         query: searchTestManagers,
-        variables: { filter: filter, variables: { limit: 10000 } },
+        variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 
       // searchSubCategories
       const allSubCategory = await API.graphql({
         query: searchSubCategories,
-        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        variables: { filter: subCategoryFilter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategory = await API.graphql({
         query: searchCategories,
-        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        variables: { filter: subCategoryFilter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 

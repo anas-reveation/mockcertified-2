@@ -52,7 +52,7 @@ type TestManager
   # In minutes
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
-  slug: String
+  slug: String!
   createdAt: String!
 }
 
@@ -225,4 +225,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
- 
+  
