@@ -38,6 +38,7 @@ export const userTests = /* GraphQL */ `
           test_id
           remaining_time
           createdAt
+          updatedAt
           test {
             id
             price

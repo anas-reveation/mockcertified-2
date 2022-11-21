@@ -50,7 +50,8 @@ export default {
       const allAttemptedTests = userTestsData.data.getUser.attempted_tests.items
         ? userTestsData.data.getUser.attempted_tests.items
         : [];
-      const sortedAllAttemptedTests = await dispatch('sortBycreatedAt', allAttemptedTests);
+
+      const sortedAllAttemptedTests = await dispatch('sortByupdatedAt', allAttemptedTests);
 
       // We used filter because in case if someone(admin) deletes test so Attempted test have test object that will be null
       const filterSortedAllAttemptedTests = sortedAllAttemptedTests.filter((test) => test.test);
@@ -669,7 +670,7 @@ export default {
   },
   // End - Only to get ID
 
-  // Local function
+  // Start Local function
   sortBycreatedAt(_none, payload) {
     return payload.sort(function (a, b) {
       // Turn your strings into dates, and then subtract them
@@ -677,4 +678,13 @@ export default {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
   },
+
+  sortByupdatedAt(_none, payload) {
+    return payload.sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+  },
+  // End Local function
 };
