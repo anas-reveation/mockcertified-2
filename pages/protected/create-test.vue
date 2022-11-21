@@ -226,7 +226,7 @@
 
 <script>
 import * as XLSX from 'xlsx';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { Browser } from '@capacitor/browser';
 
 export default {
@@ -472,6 +472,7 @@ export default {
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding', 'getStripeIdStatus']),
+    ...mapMutations(['SET_LOADER']),
 
     numberValidation(event) {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
@@ -540,8 +541,9 @@ export default {
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'answer' && col) {
-            questionObj.answer = col.replace(/\s+/g, ' ').trim().toUpperCase();
-            questionObj.answer = questionObj.answer.length === 1 ? questionObj.answer : null;
+            // From string to array eg:-> "a,b" -> ["a", "b"]
+            questionObj.answer = this.getAnswerArray(col);
+            questionObj.answer = questionObj.answer.length ? questionObj.answer : null;
           } else if (header && header === 'explanation' && col) {
             questionObj.explanation = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'show_as_sample_question' && col) {
@@ -568,7 +570,7 @@ export default {
         if (
           !questionObj.question ||
           !questionObj.answer ||
-          !questionObj.explanation ||
+          // !questionObj.explanation ||
           !questionObj.options.length
         ) {
           isFormatted = false;
@@ -585,18 +587,24 @@ export default {
           });
           break;
         }
+
         let mergedAllOptions = {};
         let isSelectedAnswer = false;
+        let stringArrayAnswer = [];
+
+        // looping through question's(one question) options
         questionObj.options.forEach((obj) => {
           Object.keys(obj).forEach(function (key) {
             // do something with obj[key]
-            if (key === 'option_' + questionObj.answer) {
-              questionObj.answer = obj[key];
-              isSelectedAnswer = true;
-            }
-            return;
-          });
 
+            // Validation of answer array (If none of the answers match the given option, then it will give a warning/ At least one answer should match the given option.)
+            questionObj.answer.forEach((ans) => {
+              if (key === 'option_' + ans) {
+                isSelectedAnswer = true;
+                stringArrayAnswer.push(obj[key]);
+              }
+            });
+          });
           // Merging options into one object
           mergedAllOptions = {
             ...mergedAllOptions,
@@ -619,6 +627,7 @@ export default {
           break;
         }
 
+        questionObj.answer = stringArrayAnswer;
         questionObj.options = JSON.stringify(mergedAllOptions);
         this.questionList.push(questionObj);
       }
@@ -649,7 +658,24 @@ export default {
       this.reviewQuestionsFunc();
     },
 
+    getAnswerArray(stringOption) {
+      let answerArray = stringOption.split(',');
+      answerArray = answerArray
+        .map((ans) => {
+          const ans2 = ans.replace(/\s+/g, ' ').trim().toUpperCase();
+          if (ans2.length) {
+            return ans2;
+          }
+        })
+        .filter((notUndefined) => notUndefined !== undefined);
+      if (answerArray.length) {
+        return answerArray;
+      }
+      return false;
+    },
+
     async testSubmit() {
+      console.log('first');
       if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
         this.$swal.fire({
           toast: true,
@@ -680,7 +706,12 @@ export default {
         testDetail: this.formData,
         questionList: this.questionList,
       };
+
+      this.SET_LOADER(true);
       const res = await this.createTest(obj);
+      this.SET_LOADER(false);
+
+      console.log('resres', res);
       if (res) {
         this.$router.push('/dashboard');
         this.$swal.fire({

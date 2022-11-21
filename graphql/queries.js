@@ -91,6 +91,7 @@ export const getTestManager = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -105,6 +106,7 @@ export const getTestManager = /* GraphQL */ `
       questions {
         nextToken
       }
+      slug
       createdAt
       updatedAt
     }
@@ -130,6 +132,7 @@ export const listTestManagers = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -167,6 +170,7 @@ export const listTestsByStatus = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -204,6 +208,7 @@ export const searchTestManagers = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -245,6 +250,7 @@ export const getQuestion = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -287,6 +293,7 @@ export const getCategory = /* GraphQL */ `
       id
       name
       image
+      slug
       sub_category {
         nextToken
       }
@@ -306,6 +313,7 @@ export const listCategories = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -334,6 +342,7 @@ export const searchCategories = /* GraphQL */ `
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -363,10 +372,12 @@ export const getSubCategory = /* GraphQL */ `
       name
       category_id
       image
+      slug
       category {
         id
         name
         image
+        slug
         createdAt
         updatedAt
       }
@@ -387,6 +398,7 @@ export const listSubCategories = /* GraphQL */ `
         name
         category_id
         image
+        slug
         createdAt
         updatedAt
       }
@@ -416,6 +428,7 @@ export const searchSubCategories = /* GraphQL */ `
         name
         category_id
         image
+        slug
         createdAt
         updatedAt
       }
@@ -467,6 +480,7 @@ export const getPurchasedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }
@@ -524,6 +538,7 @@ export const getAttemptedTest = /* GraphQL */ `
         status
         tags
         time_limit
+        slug
         createdAt
         updatedAt
       }

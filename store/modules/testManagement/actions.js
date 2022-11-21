@@ -10,9 +10,11 @@ import {
   searchSubCategories,
   searchTestManagers,
   getSampleQuestions,
+  categorySlug,
+  subCategorySlug,
 } from '~/ManualGraphql/queries';
 
-import { listStaticContents, searchCategories } from '~/graphql/queries';
+import { listStaticContents, searchCategories, listTestManagers } from '~/graphql/queries';
 
 import {
   createAttemptedTest,
@@ -39,7 +41,10 @@ export default {
         ? userTestsData.data.getUser.purchased_tests.items
         : [];
       const sortedAllPurchasedTests = await dispatch('sortBycreatedAt', allPurchasedTests);
-      commit('setAllPurchasedTests', sortedAllPurchasedTests, { root: true });
+
+      // We used filter because in case if someone(admin) deletes test so Attempted test have test object that will be null
+      const filterSortedAllPurchasedTests = sortedAllPurchasedTests.filter((test) => test.test);
+      commit('setAllPurchasedTests', filterSortedAllPurchasedTests, { root: true });
 
       // Get attempted tests
       const allAttemptedTests = userTestsData.data.getUser.attempted_tests.items
@@ -47,7 +52,9 @@ export default {
         : [];
       const sortedAllAttemptedTests = await dispatch('sortBycreatedAt', allAttemptedTests);
 
-      commit('setAllAttemptedTests', sortedAllAttemptedTests, { root: true });
+      // We used filter because in case if someone(admin) deletes test so Attempted test have test object that will be null
+      const filterSortedAllAttemptedTests = sortedAllAttemptedTests.filter((test) => test.test);
+      commit('setAllAttemptedTests', filterSortedAllAttemptedTests, { root: true });
 
       // Get created tests
       const allCreatedTests = userTestsData.data.getUser.created_tests.items
@@ -133,7 +140,7 @@ export default {
     try {
       const allCategoriesData = await API.graphql({
         query: listCategoriesDetail,
-        variables: { variables: { limit: 10000 } },
+        variables: { limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategories = allCategoriesData.data.listCategories.items;
@@ -200,7 +207,7 @@ export default {
 
       const allTestsData = await API.graphql({
         query: listAllTests,
-        variables: { filter: filter, variables: { limit: 10000 } },
+        variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allTests = allTestsData.data.listTestManagers.items;
@@ -514,19 +521,19 @@ export default {
       };
       const allTestData = await API.graphql({
         query: searchTestManagers,
-        variables: { filter: filter, variables: { limit: 10000 } },
+        variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 
       // searchSubCategories
       const allSubCategory = await API.graphql({
         query: searchSubCategories,
-        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        variables: { filter: subCategoryFilter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const allCategory = await API.graphql({
         query: searchCategories,
-        variables: { filter: subCategoryFilter, variables: { limit: 10000 } },
+        variables: { filter: subCategoryFilter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
 
@@ -588,6 +595,79 @@ export default {
       return false;
     }
   },
+
+  // Start - Only to get ID
+  async getCategoryIdBySlug({ commit }, payload) {
+    const slug = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const filter = {
+        slug: { eq: slug },
+      };
+      const categoryData = await API.graphql({
+        query: categorySlug,
+        variables: { filter },
+      });
+      const categoryArray = categoryData.data.listCategories.items;
+      commit('SET_LOADER', false, { root: true });
+      if (categoryArray.length && categoryArray[0].id) {
+        return categoryArray[0].id;
+      }
+      return false;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+    }
+  },
+
+  async getSubCategoryIdBySlug({ commit }, payload) {
+    const slug = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const filter = {
+        slug: { eq: slug },
+      };
+      const subCategoryData = await API.graphql({
+        query: subCategorySlug,
+        variables: { filter },
+      });
+      const subCategoryArray = subCategoryData.data.listSubCategories.items;
+      commit('SET_LOADER', false, { root: true });
+      if (subCategoryArray.length && subCategoryArray[0].id) {
+        return subCategoryArray[0].id;
+      }
+      return false;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+    }
+  },
+
+  async getTestIdBySlug({ commit }, payload) {
+    const slug = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const filter = {
+        slug: { eq: slug },
+      };
+      const testQueryData = await API.graphql({
+        query: listTestManagers,
+        variables: { filter },
+      });
+      const testsArray = testQueryData.data.listTestManagers.items;
+      commit('SET_LOADER', false, { root: true });
+      if (testsArray.length && testsArray[0].id) {
+        // Slug is available
+        return testsArray[0].id;
+      }
+      // Slug is not available
+      return false;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+    }
+  },
+  // End - Only to get ID
 
   // Local function
   sortBycreatedAt(_none, payload) {

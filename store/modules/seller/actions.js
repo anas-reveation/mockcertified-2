@@ -13,6 +13,24 @@ export default {
     const testDetail = payload.testDetail;
     const questionList = payload.questionList;
     commit('SET_LOADER', true, { root: true });
+
+    let testSlug = testDetail.title
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
+
+    let counter = 1;
+    let isSlugAvailable = false;
+    do {
+      isSlugAvailable = await dispatch('testManagement/getTestIdBySlug', testSlug, { root: true });
+      // Keep loader on in loop
+      commit('SET_LOADER', true, { root: true });
+      if (isSlugAvailable) {
+        testSlug = testSlug + counter.toString();
+        counter++;
+      }
+    } while (isSlugAvailable);
+
     try {
       const input = {
         user_id,
@@ -24,6 +42,7 @@ export default {
         category_id: testDetail.categoryId,
         sub_category_id: testDetail.subCategoryId,
         credit: testDetail.credit,
+        slug: testSlug,
       };
       const createdtest = await API.graphql({
         query: createTestManager,
@@ -48,7 +67,6 @@ export default {
       }
 
       await dispatch('testManagement/getUserTests', false, { root: true });
-
       commit('SET_LOADER', false, { root: true });
       return true;
     } catch (err) {
@@ -87,6 +105,7 @@ export default {
       });
       return true;
     } catch (err) {
+      console.log('err', err);
       this.$swal.fire({
         toast: true,
         position: 'top-end',

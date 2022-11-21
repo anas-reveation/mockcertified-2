@@ -200,7 +200,7 @@
 
     <div class="text-center text-sm-start pb-3">
       <NuxtLink
-        :to="`/protected/test/${testDetail.id}`"
+        :to="`/protected/test/${testDetail.slug}`"
         class="btn btn-secondary border border-2 border-primary"
         @click=""
       >
@@ -511,15 +511,17 @@ export default {
 
     async shareTest() {
       const domainOrigin = window.location.origin;
-      const testId = this.testDetail.id;
+      const testSlug = this.testDetail.slug;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
-      await Share.share({
-        title,
-        text: `Hurray, I got ${this.percentage}% in ${title} test`,
-        url,
-        dialogTitle: 'Share with buddies',
-      });
+      const url = `${domainOrigin}/category/test/${testSlug}`;
+      try {
+        await Share.share({
+          title,
+          text: `Hurray, I got ${this.percentage}% in ${title} test`,
+          url,
+          dialogTitle: 'Share with buddies',
+        });
+      } catch (_err) {}
     },
   },
 };

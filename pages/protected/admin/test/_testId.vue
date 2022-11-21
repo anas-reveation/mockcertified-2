@@ -149,12 +149,13 @@ export default {
     return {
       testDetail: null,
       rejectDescription: '',
+      testId: null,
     };
   },
 
   async asyncData({ params }) {
-    const testId = params.testId;
-    return { testId };
+    const testSlug = params.testId;
+    return { testSlug };
   },
 
   computed: {
@@ -170,6 +171,8 @@ export default {
   },
 
   async mounted() {
+    this.testId = await this.getTestIdBySlug(this.testSlug);
+
     if (!this.allTests.length) {
       await this.getAllTests();
     }
@@ -192,6 +195,7 @@ export default {
 
   methods: {
     ...mapActions('admin', ['getAllTests', 'approveRejectTest']),
+    ...mapActions('testManagement', ['getTestIdBySlug']),
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);

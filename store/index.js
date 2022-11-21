@@ -22,6 +22,7 @@ const state = () => {
     platform: '',
     termsConditions: null,
     privacyPolicy: null,
+    selectBySlug: null,
   };
 };
 
@@ -79,6 +80,10 @@ const mutations = {
   setTC_and_PP(state, payload) {
     state.termsConditions = payload.termsConditions;
     state.privacyPolicy = payload.privacyPolicy;
+  },
+
+  setSelectBySlug(state, slug) {
+    state.selectBySlug = slug;
   },
 };
 

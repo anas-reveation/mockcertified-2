@@ -101,12 +101,13 @@ export default {
   data() {
     return {
       testDetail: null,
+      createdTestId: null,
     };
   },
 
   async asyncData({ params }) {
-    const createdTestId = params.createdTestId;
-    return { createdTestId };
+    const testSlug = params.createdTestId;
+    return { testSlug };
   },
 
   computed: {
@@ -123,6 +124,8 @@ export default {
   },
 
   async mounted() {
+    this.createdTestId = await this.getTestIdBySlug(this.testSlug);
+
     if (!this.allCreatedTests.length) {
       await this.getUserTests();
     }
@@ -143,19 +146,21 @@ export default {
   },
 
   methods: {
-    ...mapActions('testManagement', ['getUserTests']),
+    ...mapActions('testManagement', ['getUserTests', 'getTestIdBySlug']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
-      const testId = this.testDetail.id;
+      const testSlug = this.testSlug;
       const title = this.testDetail.title;
-      const url = `${domainOrigin}/category/test/${testId}`;
-      await Share.share({
-        title,
-        text: `${title} is Really awesome test`,
-        url,
-        dialogTitle: 'Share with buddies',
-      });
+      const url = `${domainOrigin}/category/test/${testSlug}`;
+      try {
+        await Share.share({
+          title,
+          text: `${title} is Really awesome test`,
+          url,
+          dialogTitle: 'Share with buddies',
+        });
+      } catch (_err) {}
     },
   },
 };
