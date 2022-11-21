@@ -675,7 +675,6 @@ export default {
     },
 
     async testSubmit() {
-      console.log('first');
       if (this.formData.categoryId === 'default' || this.formData.subCategoryId === 'default') {
         this.$swal.fire({
           toast: true,
@@ -711,7 +710,6 @@ export default {
       const res = await this.createTest(obj);
       this.SET_LOADER(false);
 
-      console.log('resres', res);
       if (res) {
         this.$router.push('/dashboard');
         this.$swal.fire({

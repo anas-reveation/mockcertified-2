@@ -547,7 +547,7 @@ export default {
           toast: true,
           position: 'top-end',
           icon: 'warning',
-          title: 'No test found',
+          title: 'No search result found',
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 3000,

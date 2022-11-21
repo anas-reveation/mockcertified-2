@@ -1,74 +1,8 @@
 <template>
   <div class="container">
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
-    <div
-      v-if="allSearchedTest.length || allSearchedCategory.length || allSearchedSubCategory.length"
-    >
-      <div v-if="allSearchedTest.length">
-        <p class="font_size_16">Suggestions</p>
 
-        <div class="row">
-          <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
-            <NuxtLink :to="`/category/test/${test.slug}`">
-              <TestCards
-                :title="test.title"
-                :price="`$${formatPrice(test.price)}`"
-                :addToCart="true"
-                :description="`${test.time_limit} mins • ${
-                  test.questions.items.length
-                } questions • ${totalMarks(test.questions.items)} marks`"
-                :dateTime="getDate(test.createdAt)"
-                :authorName="test.created_by.first_name"
-              />
-            </NuxtLink>
-          </div>
-        </div>
-        <br />
-      </div>
-      <div v-if="allSearchedCategory.length">
-        <p class="font_size_16">Suggestions Category</p>
-        <div class="row p-1">
-          <NuxtLink
-            :to="`/category/${category.slug}`"
-            v-for="category in allSearchedCategory"
-            :key="category.id"
-            class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
-          >
-            <div class="row">
-              <span class="col-2 me-2">
-                <img :src="category.image" alt="category" class="rounded-circle category_image" />
-              </span>
-              <span class="col text-start"> {{ category.name }} </span>
-            </div>
-          </NuxtLink>
-        </div>
-      </div>
-      <br />
-      <div v-if="allSearchedSubCategory.length">
-        <p class="font_size_16">Suggestions Sub-Category</p>
-        <div class="row p-1">
-          <NuxtLink
-            v-for="subCategory in allSearchedSubCategory"
-            :to="`/category/${subCategory.category.slug}?subCategoryId=${subCategory.slug}&subCategoryName=${subCategory.name}`"
-            :key="subCategory.id"
-            class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
-          >
-            <div class="row">
-              <span class="col-2 me-2">
-                <img
-                  :src="subCategory.image"
-                  alt="category"
-                  class="rounded-circle category_image"
-                />
-              </span>
-              <span class="col text-start">{{ subCategory.name }}</span>
-            </div>
-          </NuxtLink>
-        </div>
-      </div>
-    </div>
-
-    <div v-else>
+    <div>
       <div>
         <div class="row justify-content-between">
           <div class="col">
@@ -340,19 +274,7 @@ export default {
     },
 
     async searchQueryFunc() {
-      if (!this.searchQuery) {
-        this.allSearchedTest = [];
-        return;
-      }
-      const res = await this.getTestByQuery(this.searchQuery);
-      this.searchQuery = '';
-      if (!res) {
-        this.allSearchedTest = [];
-        return;
-      }
-      this.allSearchedTest = res.testList;
-      this.allSearchedSubCategory = res.subCategoryList;
-      this.allSearchedCategory = res.categoryList;
+      this.$router.push(`/search?search_query=${this.searchQuery}`);
     },
   },
 };

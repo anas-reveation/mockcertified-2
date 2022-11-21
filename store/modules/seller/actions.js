@@ -105,7 +105,6 @@ export default {
       });
       return true;
     } catch (err) {
-      console.log('err', err);
       this.$swal.fire({
         toast: true,
         position: 'top-end',

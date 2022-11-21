@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
 
     <p class="mt-2">
       <NuxtLink to="/category">
@@ -50,7 +50,11 @@
         </div>
       </div> -->
       <div class="row">
-        <div v-for="test in allCategoriesFilter" class="col-sm-6 col-md-4 mb-3">
+        <div
+          v-for="(test, index) in allCategoriesFilter"
+          :key="index"
+          class="col-sm-6 col-md-4 mb-3"
+        >
           <NuxtLink :to="`/category/test/${test.slug}`">
             <TestCards
               :title="test.title"
@@ -159,17 +163,17 @@ export default {
   },
 
   watch: {
-    searchQuery(newValue) {
-      if (this.allTestBySubCategory.length) {
-        this.allCategoriesFilter = this.allTestBySubCategory.filter((item) =>
-          item.title.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
-        );
-      } else {
-        this.allCategoriesFilter = this.allSubCategory.filter((item) =>
-          item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
-        );
-      }
-    },
+    // searchQuery(newValue) {
+    //   if (this.allTestBySubCategory.length) {
+    //     this.allCategoriesFilter = this.allTestBySubCategory.filter((item) =>
+    //       item.title.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
+    //     );
+    //   } else {
+    //     this.allCategoriesFilter = this.allSubCategory.filter((item) =>
+    //       item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
+    //     );
+    //   }
+    // },
   },
 
   computed: {
@@ -228,10 +232,6 @@ export default {
     ]),
     ...mapMutations('buyer', ['addToCart']),
 
-    // redirectPage(id) {
-    //   this.$router.push(`/category/test/${id}`);
-    // },
-
     async goingBack(index) {
       this.allTestBySubCategory = [];
       this.allCategoriesFilter = [];
@@ -279,6 +279,10 @@ export default {
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
+    },
+
+    async searchQueryFunc() {
+      this.$router.push(`/search?search_query=${this.searchQuery}`);
     },
   },
 };

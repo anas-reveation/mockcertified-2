@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
 
     <h1 class="fw-bolder mt-3 font_size_24">Categories</h1>
 
@@ -112,11 +112,11 @@ export default {
   },
 
   watch: {
-    searchQuery(newValue) {
-      this.allCategoriesFilter = this.allCategories.filter((item) =>
-        item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
-      );
-    },
+    // searchQuery(newValue) {
+    //   this.allCategoriesFilter = this.allCategories.filter((item) =>
+    //     item.name.toLowerCase().match(newValue.toLowerCase().replace(/\s+/g, ' ').trim()),
+    //   );
+    // },
   },
 
   computed: {
@@ -133,6 +133,10 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
+
+    async searchQueryFunc() {
+      this.$router.push(`/search?search_query=${this.searchQuery}`);
+    },
   },
 };
 </script>
