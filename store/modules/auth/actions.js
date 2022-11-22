@@ -152,11 +152,16 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
+      let errMsg = err.message;
+      if (err.name === 'QuotaExceededError') {
+        window.localStorage.clear();
+        errMsg = 'Please try again later';
+      }
       this.$swal.fire({
         toast: true,
         position: 'top-end',
         icon: 'error',
-        title: err.message,
+        title: errMsg,
         showConfirmButton: false,
         timerProgressBar: true,
         timer: 3000,
