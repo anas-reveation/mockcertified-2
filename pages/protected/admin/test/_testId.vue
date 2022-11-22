@@ -271,7 +271,7 @@ export default {
             },
             Subject: {
               Charset: 'UTF-8',
-              Data: `Your Test ${name} is approved and availble to users for purchase`,
+              Data: `Your test ${name} is approved and availble to users for purchase`,
             },
           },
           Source: 'support@mockcertified.com',
@@ -296,7 +296,7 @@ export default {
             },
             Subject: {
               Charset: 'UTF-8',
-              Data: `Your Test ${name} is Rejected. Please try again. `,
+              Data: `Your test ${name} is Rejected. Please try again. `,
             },
           },
           Source: 'support@mockcertified.com',
