@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { API } from 'aws-amplify';
 import {
   onboardingStripe,
@@ -19,18 +20,15 @@ export default {
       .replace(/ /g, '-')
       .replace(/[^\w-]+/g, '');
 
-    let counter = 1;
     let isSlugAvailable = false;
     do {
       isSlugAvailable = await dispatch('testManagement/getTestIdBySlug', testSlug, { root: true });
       // Keep loader on in loop
       commit('SET_LOADER', true, { root: true });
       if (isSlugAvailable) {
-        testSlug = testSlug + counter.toString();
-        counter++;
+        testSlug = testSlug + '-' + uuidv4();
       }
     } while (isSlugAvailable);
-
     try {
       const input = {
         user_id,

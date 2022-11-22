@@ -17,7 +17,7 @@
       <Nuxt class="margin_bottom px-4" />
     </div>
 
-    <div class="fixed-bottom footer_height" @click="removeClass">
+    <div class="fixed-bottom" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
         <div class="position-absolute bottom-0 end-0 mb-2">
           <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_hover" />

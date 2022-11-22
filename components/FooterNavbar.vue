@@ -1,6 +1,6 @@
 <template>
   <div class="box_shadow">
-    <div class="container text-center bg-white py-2">
+    <div class="container text-center bg-white py-2 footer_height">
       <div class="row">
         <ClientOnly>
           <div v-if="platform === 'web'" class="col">
