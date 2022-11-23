@@ -2,7 +2,7 @@
   <div class="container px-4">
     <h1 class="mt-5 mb-4 font_size_36">Contact Us</h1>
     <p>
-      For all your questions and queries please reach us at
+      To contact us, please send an email to
       <a href="mailto:contactus@mockcertified.com" class="fw-bolder text-dark">
         contactus@mockcertified.com
       </a>
