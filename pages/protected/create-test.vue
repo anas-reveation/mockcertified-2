@@ -700,7 +700,7 @@ export default {
         return;
       }
 
-      this.formData.title = this.formData.title.toLowerCase().replace(/\s+/g, ' ').trim();
+      this.formData.title = this.formData.title.replace(/\s+/g, ' ').trim();
       const obj = {
         testDetail: this.formData,
         questionList: this.questionList,

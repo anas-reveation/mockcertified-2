@@ -1,7 +1,7 @@
 <template>
   <div class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1">
     <div class="row">
-      <p class="col-7 text-capitalize fw-bolder mb-0" v-if="title">{{ title }}</p>
+      <p class="col-7 fw-bolder mb-0" v-if="title">{{ title }}</p>
       <p class="col-5 text-capitalize fw-bolder text-end text-success" v-if="price === '$0.00'">
         Free
       </p>
