@@ -11,10 +11,9 @@
           v-for="(value, index2) in question.options"
           :key="index2"
           class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
-          :class="[
-            question.userInput && bgColor(question.userInput, value[1]),
-            checkAnswer(value[1]) && 'bg_green',
-          ]"
+          :class="
+            question.userInput ? bgColor(question.userInput, value[1]) : checkAnswer(value[1])
+          "
         >
           <!-- value[1].toLowerCase() === question.answer.toLowerCase() && 'bg_green', -->
           {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
@@ -26,7 +25,6 @@
       <div v-if="question.answer">
         <span class="fw-bolder">Answer</span>:
         {{ answerArrToLetter(question.answer, question.options) }}
-        <!-- {{ question.answer }} -->
       </div>
       <!-- Spelling mistake "explainantion" -->
       <div v-if="question.explainantion">
@@ -48,14 +46,25 @@ export default {
   },
   methods: {
     bgColor(userInputParams, valueParams) {
-      const userInput = userInputParams.toLowerCase();
+      const userInputArr = userInputParams;
       const value = valueParams.toLowerCase();
-      if (!userInput) return '';
-      if (userInput === value && this.question.resultStatus) {
-        return 'bg_green';
-      } else if (userInput === value) {
-        return 'bg_gray ';
+      if (!userInputArr.length) return '';
+
+      let bgClr = '';
+      userInputArr.forEach((answer) => {
+        const userAnswer = answer.toLowerCase();
+        if (userAnswer === value && this.question.resultStatus) {
+          bgClr = 'bg_green';
+        } else if (userAnswer === value) {
+          bgClr = 'bg_gray ';
+        }
+      });
+
+      const res = this.checkAnswer(valueParams);
+      if (res) {
+        bgClr = 'bg_green';
       }
+      return bgClr;
     },
 
     checkAnswer(value) {

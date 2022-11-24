@@ -180,6 +180,8 @@ export default {
       commit('setAllPurchasedTests', [], { root: true });
       commit('setAllAttemptedTests', [], { root: true });
       commit('setAllCreatedTests', [], { root: true });
+      commit('testManagement/setRecentlyAddedTests', [], { root: true });
+      commit('testManagement/setFeaturedTests', [], { root: true });
       commit('setUserGroup', null);
       commit('SET_LOADER', false, { root: true });
       return true;
