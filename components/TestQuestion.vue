@@ -23,7 +23,11 @@
     </div>
 
     <div>
-      <div v-if="question.answer"><span class="fw-bolder">Answer</span>: {{ question.answer }}</div>
+      <div v-if="question.answer">
+        <span class="fw-bolder">Answer</span>:
+        {{ answerArrToLetter(question.answer, question.options) }}
+        <!-- {{ question.answer }} -->
+      </div>
       <!-- Spelling mistake "explainantion" -->
       <div v-if="question.explainantion">
         <span class="fw-bolder">Explanation</span>: {{ question.explainantion }}
@@ -53,6 +57,7 @@ export default {
         return 'bg_gray ';
       }
     },
+
     checkAnswer(value) {
       let isAnswer = false;
       this.question.answer.forEach((ans) => {
@@ -61,6 +66,20 @@ export default {
         }
       });
       return isAnswer;
+    },
+
+    answerArrToLetter(answerArr, optionsArr) {
+      let lettersArr = [];
+      optionsArr.forEach((opt, index) => {
+        answerArr.forEach((ans) => {
+          if (ans === opt[1]) {
+            // we are not taking option key "opt[0]" because it's not sync (decending order) eg: "option_A" key would be last option in frontend. So we used index in option array for letter
+            const jj = String.fromCharCode(65 + index);
+            lettersArr.push(jj);
+          }
+        });
+      });
+      return lettersArr;
     },
   },
 };
