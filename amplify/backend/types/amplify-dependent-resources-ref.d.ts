@@ -86,5 +86,12 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
+    },
+    "analytics": {
+        "mobileappmarketplace": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
     }
 }

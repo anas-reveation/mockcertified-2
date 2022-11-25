@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "mobileappmarketplacee1e8cc85": {}
+        "mobileappmarketplacee1e8cc85": {},
+        "true": {}
       },
       "function": {
         "onboardingStripe": {
@@ -34,7 +35,7 @@
         },
         "checkAnswer": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/checkAnswer-39397a466c4c6c507362-build.zip"
+          "s3Key": "amplify-builds/checkAnswer-654465504a7443375658-build.zip"
         },
         "paymentSuccessStripe": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
