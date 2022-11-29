@@ -74,6 +74,9 @@ export default {
           isAnswer = true;
         }
       });
+      if (isAnswer) {
+        isAnswer = 'bg_green';
+      }
       return isAnswer;
     },
 

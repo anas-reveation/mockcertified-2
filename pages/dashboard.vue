@@ -28,6 +28,7 @@
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
+                :dateTime="getDate(test.createdAt)"
               />
             </NuxtLink>
           </div>
@@ -84,6 +85,7 @@
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
+                :dateTime="getDate(test.createdAt)"
               />
             </NuxtLink>
           </div>
@@ -188,6 +190,42 @@ export default {
       allSearchedTest: [],
       allSearchedCategory: [],
       allSearchedSubCategory: [],
+
+      categoriesScroller: {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        initialSlide: 0,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true,
+            },
+          },
+          {
+            breakpoint: 778,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2,
+            },
+          },
+          {
+            breakpoint: 575,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+            },
+          },
+        ],
+      },
+
       settings: {
         dots: true,
         infinite: false,
@@ -214,7 +252,7 @@ export default {
             },
           },
           {
-            breakpoint: 544,
+            breakpoint: 575,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -263,10 +301,6 @@ export default {
       });
       return totalMarks;
     },
-
-    // redirectPage(id) {
-    //   this.$router.push(`/category/test/${id}`);
-    // },
 
     getDate(getdatetime) {
       var dateStr = new Date(getdatetime);

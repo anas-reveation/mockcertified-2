@@ -20,7 +20,7 @@
       <div v-else class="mt-4 container">
         <div class="fixed-top bg-white pt-3">
           <div class="row px-4">
-            <div class="col-8 text-primary">
+            <div class="col text-primary">
               <img
                 class="cursor_pointer"
                 v-if="timerEnabled === false"

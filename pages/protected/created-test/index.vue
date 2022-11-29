@@ -38,6 +38,7 @@
             :description="`${test.time_limit} mins • ${
               test.questions.items.length
             } questions • ${totalMarks(test.questions.items)} marks`"
+            :dateTime="getDate(test.createdAt)"
           />
         </NuxtLink>
       </div>
@@ -191,6 +192,11 @@ export default {
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
+    },
+
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
     },
 
     // redirectPage(id) {

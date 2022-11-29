@@ -1,5 +1,5 @@
 <template>
-  <div v-if="testDetail" class="container">
+  <div v-if="testDetail && !isLoading" class="container">
     <TestDetail
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
@@ -262,13 +262,17 @@ export default {
   async mounted() {
     this.testId = await this.getTestIdBySlug(this.testSlug);
     this.testDetail = await this.getTestDetail(this.testId);
-    this.sampleQuestions = await this.getSampleQuestions(this.testId);
+    this.SET_LOADER(true);
 
-    if (!this.testDetail) {
+    if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
+      this.SET_LOADER(false);
       this.$router.push('/dashboard');
       return;
     }
 
+    this.sampleQuestions = await this.getSampleQuestions(this.testId);
+
+    this.SET_LOADER(false);
     if (this.isAuthenticated && !this.allPurchasedTests.length) {
       await this.getUserTests();
     }
@@ -282,7 +286,7 @@ export default {
       'getTestIdBySlug',
     ]),
     ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
-    ...mapMutations(['setRedirectUrl']),
+    ...mapMutations(['SET_LOADER', 'setRedirectUrl']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
