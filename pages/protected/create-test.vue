@@ -518,9 +518,9 @@ export default {
       this.questionList = [];
       this.reviewQuestions = [];
       let isFormatted = true;
-      // let isPreviewQuestion = false;
       for (let i = 0; i < FileData.length; i++) {
         const row = FileData[i];
+        let answerCounterAscii = 0;
         let questionObj = {
           question: null,
           options: [],
@@ -537,6 +537,27 @@ export default {
           }
           // header of this column
           const header = FileData[0][j];
+
+          // Start Restrict Option count upto 5
+          if (header.startsWith('option_')) {
+            const restricted = this.restrictedOption(header);
+            if (!restricted) {
+              const formateErrorMsg = 'Maximum 5 option in a question';
+              this.errors.fileError.msg = formateErrorMsg;
+              this.$swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'warning',
+                title: formateErrorMsg,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+              });
+              return;
+            }
+          }
+          // End Restrict Option count upto 5
+
           const col = row[j];
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
@@ -550,10 +571,14 @@ export default {
             questionObj.is_showcase = col.replace(/\s+/g, ' ').trim().toUpperCase();
             questionObj.is_showcase =
               questionObj.is_showcase === 'Y' || questionObj.is_showcase === 'YES' ? true : false;
-            // if (!isPreviewQuestion) {
-            //   isPreviewQuestion = questionObj.is_showcase;
-            // }
           } else if (header && header.startsWith('option_') && col) {
+            // Check if there is an empty option in between eg: option_A: "red", option_B: "", option_C: "Green"
+            const optionTrack = answerCounterAscii + 1;
+            answerCounterAscii = 64 + j;
+            if (optionTrack !== 1 && optionTrack !== answerCounterAscii) {
+              break;
+            }
+
             const alphabet = String.fromCharCode(64 + j);
             const optionKey = 'option_' + alphabet;
             let optionObj = {};
@@ -570,8 +595,9 @@ export default {
         if (
           !questionObj.question ||
           !questionObj.answer ||
-          // !questionObj.explanation ||
-          !questionObj.options.length
+          (!questionObj.options.length &&
+            questionObj.options.length < 2 &&
+            questionObj.options.length > 5)
         ) {
           isFormatted = false;
           const formateErrorMsg = 'Invalid file formatted';
@@ -656,6 +682,15 @@ export default {
       // }
 
       this.reviewQuestionsFunc();
+    },
+
+    restrictedOption(header) {
+      const oneLetter = header.split('option_').pop();
+      const asciiNum = oneLetter.charCodeAt(0);
+      if (asciiNum < 65 || asciiNum > 69) {
+        return false;
+      }
+      return true;
     },
 
     getAnswerArray(stringOption) {

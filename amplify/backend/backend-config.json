@@ -246,5 +246,11 @@
         }
       }
     }
+  },
+  "analytics": {
+    "mobileappmarketplace": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

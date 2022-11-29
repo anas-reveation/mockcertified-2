@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1">
+  <div
+    class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1 card_height"
+  >
     <div class="row">
       <p class="col-7 fw-bolder mb-0" v-if="title">{{ title }}</p>
       <p class="col-5 text-capitalize fw-bolder text-end text-success" v-if="price === '$0.00'">
@@ -72,3 +74,31 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
+@include media-breakpoint-up(sm) {
+  .card_height {
+    height: 265px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .card_height {
+    height: 265px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .card_height {
+    height: 220px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .card_height {
+    height: 180px;
+  }
+}
+</style>

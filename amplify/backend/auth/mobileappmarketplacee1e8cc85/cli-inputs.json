@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "mobileappmarketplacee1e8cc85_identitypool_e1e8cc85",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "mobilee1e8cc85",
     "userPoolName": "mobileappmarketplacee1e8cc85_userpool_e1e8cc85",
     "autoVerifiedAttributes": [

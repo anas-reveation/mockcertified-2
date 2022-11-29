@@ -5,7 +5,7 @@
   >
     <div class="container-fluid">
       <NuxtLink to="/dashboard" class="navbar-brand">
-        <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
+        <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
       <button
         class="navbar-toggler"
@@ -93,9 +93,7 @@
               class="d-flex flex-column align-items-center justify-content-center me-5 mt-1 bg-primary text-white cursor_pointer circle"
               @mouseover="(userDropDown = true), (settingsDropDown = false)"
             >
-              <p class="text-uppercase circle_inner">
-                {{ user.first_name[0] }}{{ user.last_name[0] }}
-              </p>
+              <span class="text-uppercase"> {{ user.first_name[0] }}{{ user.last_name[0] }} </span>
             </div>
           </ClientOnly>
         </div>
@@ -394,7 +392,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .hr_line {
   height: 2px;
 }
@@ -487,5 +487,15 @@ export default {
   --bs-bg-opacity: 0;
   background-color: rgba(255, 255, 255, var(--bs-bg-opacity)) !important;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.logo_with_name {
+  width: 190px;
+}
+
+@include media-breakpoint-between(md, lg) {
+  .logo_with_name {
+    width: 140px;
+  }
 }
 </style>

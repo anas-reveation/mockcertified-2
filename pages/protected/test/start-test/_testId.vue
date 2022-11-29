@@ -20,7 +20,7 @@
       <div v-else class="mt-4 container">
         <div class="fixed-top bg-white pt-3">
           <div class="row px-4">
-            <div class="col-8 text-primary">
+            <div class="col text-primary">
               <img
                 class="cursor_pointer"
                 v-if="timerEnabled === false"
@@ -56,7 +56,9 @@
                 :key="index2"
                 class="list-group-item border border-2 border-primary rounded text-dark fw-bold mb-2 p-2 font_size_16 cursor_pointer"
                 :class="
-                  selectAnswer.userInput === value[1] ? 'bg-secondary' : 'bg-white text-success'
+                  selectAnswer.userInput.includes(value[1])
+                    ? 'bg-secondary'
+                    : 'bg-white text-success'
                 "
                 @click="selectOption(questionItem.id, value[1])"
               >
@@ -83,7 +85,7 @@
             <button
               type="button"
               class="btn border-primary"
-              :class="timerEnabled && selectAnswer.userInput ? 'btn-secondary' : 'btn-gray'"
+              :class="timerEnabled && selectAnswer.userInput.length ? 'btn-secondary' : 'btn-gray'"
               @click="submitTest"
               :disabled="timerEnabled === false"
             >
@@ -118,7 +120,7 @@ export default {
       firstAttemptedId: null,
       selectAnswer: {
         questionId: null,
-        userInput: null,
+        userInput: [],
       },
       totalQuestions: null,
       nextQuestionText: 'Next',
@@ -318,7 +320,7 @@ export default {
       //   return;
       // }
       const quesDetail = this.allQuestions[this.questionCounter];
-      this.selectOption(quesDetail.id, quesDetail.userInput);
+      this.selectedAnswer(quesDetail.id, quesDetail.userInput);
     },
 
     previousQuestion() {
@@ -326,13 +328,23 @@ export default {
         this.questionCounter -= 1;
         this.showCounter -= 1;
         const quesDetail = this.allQuestions[this.questionCounter];
-        this.selectOption(quesDetail.id, quesDetail.userInput);
+        this.selectedAnswer(quesDetail.id, quesDetail.userInput);
       }
+    },
+
+    selectedAnswer(questionId, userInputArr) {
+      this.selectAnswer.questionId = questionId;
+      this.selectAnswer.userInput = userInputArr ? [...userInputArr] : [];
     },
 
     selectOption(questionId, userInput) {
       this.selectAnswer.questionId = questionId;
-      this.selectAnswer.userInput = userInput;
+      // Added into an array when user select option and remove when its already selected
+      if (!this.selectAnswer.userInput.includes(userInput)) {
+        this.selectAnswer.userInput.push(userInput);
+      } else {
+        this.selectAnswer.userInput.splice(this.selectAnswer.userInput.indexOf(userInput), 1);
+      }
     },
 
     covertTimer(seconds) {
@@ -342,7 +354,7 @@ export default {
     async submitTest() {
       window.scrollTo(0, 0);
 
-      if (this.selectAnswer.questionId && this.selectAnswer.userInput) {
+      if (this.selectAnswer.questionId && this.selectAnswer.userInput.length) {
         let obj = {
           attemptedId: this.attemptedId,
           questionId: this.selectAnswer.questionId,
@@ -372,7 +384,7 @@ export default {
           this.allQuestions[indexOfQuestion].userInput = this.selectAnswer.userInput;
 
           this.selectAnswer.questionId = null;
-          this.selectAnswer.userInput = null;
+          this.selectAnswer.userInput = [];
           this.questionCounter += 1;
           this.showCounter += 1;
 

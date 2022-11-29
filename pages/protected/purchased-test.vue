@@ -83,6 +83,7 @@
               :description="`${test.test.time_limit} mins • ${
                 test.test.questions.items.length
               } questions • ${totalMarks(test.test.questions.items)} marks`"
+              :dateTime="getDate(test.createdAt)"
             />
           </NuxtLink>
         </div>
@@ -213,9 +214,10 @@ export default {
       return totalMarks;
     },
 
-    // redirectPage(test) {
-    //   this.$router.push(`/protected/test/${test.test.id}`);
-    // },
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
+    },
   },
 };
 </script>

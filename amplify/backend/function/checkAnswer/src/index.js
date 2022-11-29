@@ -64,13 +64,21 @@ exports.handler = async (event) => {
       },
     );
 
-    const userInput = response.data.data.getResult.user_input.toLowerCase();
+    // const userInputArr = response.data.data.getResult.user_input.toLowerCase();
+    const userInputArr = response.data.data.getResult.user_input;
     const answerData = response.data.data.getResult.question.answer;
 
-    let isCorrect = false;
+    let isCorrect = true;
     answerData.forEach((ans) => {
-      if (userInput.toLowerCase() === ans.toLowerCase()) {
-        isCorrect = true;
+      if (isCorrect) {
+        userInputArr.forEach((userAnswer) => {
+          // (userInputArr -> user answers array) If user selected any wrong answer it should be consider as wrong answer
+          if (isCorrect && userAnswer.toLowerCase() === ans.toLowerCase()) {
+            isCorrect = true;
+          } else {
+            isCorrect = false;
+          }
+        });
       }
     });
     const result_status = isCorrect;

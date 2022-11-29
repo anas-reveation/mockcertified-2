@@ -162,7 +162,7 @@ type Result
   attempted_id: ID! @index(name: "byAttemptedTest")
   question_id: ID!
   question: Question @hasOne(fields: ["question_id"])
-  user_input: String!
+  user_input: [String!]!
   result_status: Boolean
 }
 
@@ -225,4 +225,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
-    
+ 

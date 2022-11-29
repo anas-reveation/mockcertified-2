@@ -128,6 +128,7 @@ export const getTestDetail = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      status
       title
       description
       credit
