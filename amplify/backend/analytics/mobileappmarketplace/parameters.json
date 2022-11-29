@@ -1,11 +1,11 @@
 {
     "appName": "mobileappmarketplace",
-    "roleName": "pinpointLambdaRole9fcfefbe",
-    "cloudformationPolicyName": "cloudformationPolicy9fcfefbe",
-    "cloudWatchPolicyName": "cloudWatchPolicy9fcfefbe",
-    "pinpointPolicyName": "pinpointPolicy9fcfefbe",
-    "authPolicyName": "pinpoint_amplify_9fcfefbe",
-    "unauthPolicyName": "pinpoint_amplify_9fcfefbe",
+    "roleName": "pinpointLambdaRole6850534e",
+    "cloudformationPolicyName": "cloudformationPolicy6850534e",
+    "cloudWatchPolicyName": "cloudWatchPolicy6850534e",
+    "pinpointPolicyName": "pinpointPolicy6850534e",
+    "authPolicyName": "pinpoint_amplify_6850534e",
+    "unauthPolicyName": "pinpoint_amplify_6850534e",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },
