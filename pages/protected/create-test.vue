@@ -520,6 +520,12 @@ export default {
       let isFormatted = true;
       for (let i = 0; i < FileData.length; i++) {
         const row = FileData[i];
+
+        // If there is empty row - continue
+        if (!row.length) {
+          continue;
+        }
+
         let answerCounterAscii = 0;
         let questionObj = {
           question: null,
@@ -559,6 +565,8 @@ export default {
           // End Restrict Option count upto 5
 
           const col = row[j];
+          const booleanToString = col === true ? 'true' : col === false ? 'false' : col;
+
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'answer' && col) {
@@ -571,7 +579,7 @@ export default {
             questionObj.is_showcase = col.replace(/\s+/g, ' ').trim().toUpperCase();
             questionObj.is_showcase =
               questionObj.is_showcase === 'Y' || questionObj.is_showcase === 'YES' ? true : false;
-          } else if (header && header.startsWith('option_') && col) {
+          } else if (header && header.startsWith('option_') && booleanToString) {
             // Check if there is an empty option in between eg: option_A: "red", option_B: "", option_C: "Green"
             const optionTrack = answerCounterAscii + 1;
             answerCounterAscii = 64 + j;

@@ -1,14 +1,14 @@
 [
-    {
-      "relation": [
-        "delegate_permission/common.handle_all_urls"
-      ],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.mockcertified.mockcertified",
-        "sha256_cert_fingerprints": [
-          "FF:59:98:DD:FA:E2:39:5B:CF:97:88:E4:55:40:37:16:29:25:5E:AC:BB:75:22:C3:BA:C8:A5:91:3B:4F:08:43"
-        ]
-      }
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mockcertified.mockcertifiedapp",
+      "sha256_cert_fingerprints": [
+        "F5:8F:F0:4C:6D:7F:55:2D:1B:1D:84:95:F6:1D:61:FC:AE:9C:54:48:64:DF:C9:47:94:82:C5:37:B0:ED:4F:FD"
+      ]
     }
-  ]
+  }
+]
