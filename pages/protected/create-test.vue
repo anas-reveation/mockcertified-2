@@ -542,7 +542,7 @@ export default {
             continue;
           }
           // header of this column
-          const header = FileData[0][j];
+          const header = this.headerCaseInsensitive(FileData[0][j]);
 
           // Start Restrict Option count upto 5
           if (header.startsWith('option_')) {
@@ -694,11 +694,17 @@ export default {
 
     restrictedOption(header) {
       const oneLetter = header.split('option_').pop();
-      const asciiNum = oneLetter.charCodeAt(0);
+      const capLetter = oneLetter.toUpperCase();
+      const asciiNum = capLetter.charCodeAt(0);
       if (asciiNum < 65 || asciiNum > 69) {
         return false;
       }
       return true;
+    },
+
+    headerCaseInsensitive(value) {
+      let headerValue = value.toString().toLowerCase();
+      return headerValue;
     },
 
     getAnswerArray(stringOption) {
