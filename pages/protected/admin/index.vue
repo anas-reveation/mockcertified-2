@@ -2,6 +2,13 @@
   <div class="container">
     <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-md-6">Admin Panel</h1>
 
+    <NuxtLink to="/protected/admin/category/add-category" class="btn btn-primary text-white">
+      Add Category
+    </NuxtLink>
+    <NuxtLink to="/protected/admin/category" class="btn btn-primary text-white">
+      Update category
+    </NuxtLink>
+
     <div class="mb-2 w-100 d-flex justify-content-center width_res">
       <div
         class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
@@ -195,10 +202,6 @@ export default {
       var dateStr = new Date(getdatetime);
       return dateStr.toLocaleDateString();
     },
-
-    // redirectPage(id) {
-    //   this.$router.push(`/protected/admin/test/${id}`);
-    // },
   },
 };
 </script>

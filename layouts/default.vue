@@ -20,7 +20,9 @@
     <div class="fixed-bottom" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
         <div class="position-absolute bottom-0 end-0 mb-2">
-          <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_hover" />
+          <a @click="openAlexa" href="#">
+            <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_hover" />
+          </a>
           <span class="border border-dark rounded-pill text-dark p-1 hide_text">
             Connect to Alexa
           </span>
@@ -32,12 +34,14 @@
 </template>
 
 <script>
+import { Browser } from '@capacitor/browser';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
     return {
       ishiddenAlexa: false,
+      alexaSkillLink: `https://alexa-skills.amazon.com/apis/custom/skills/${process.env.ALEXA_SKILL_ID}/launch`,
     };
   },
 
@@ -65,6 +69,10 @@ export default {
         // this.setIsSideNavbarVisible(false);
         this.$root.$children[1].$children[0].$refs['navbarDiv'].classList.remove('show');
       } catch (_err) {}
+    },
+
+    async openAlexa() {
+      await Browser.open({ url: this.alexaSkillLink });
     },
   },
 };

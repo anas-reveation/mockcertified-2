@@ -9,10 +9,13 @@
       </p>
       <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">{{ price }}</p>
       <p class="col-7 mb-0 fs-7 fw-light" v-if="authorName">By-{{ authorName }}</p>
-      <p class="col-7 fs-7 fw-light" v-if="dateTime">{{ dateTime }}</p>
+      <p class="col-7 fs-7 fw-light font_family_roboto" v-if="dateTime">{{ dateTime }}</p>
     </div>
 
-    <span v-if="description" class="font_family_roboto font_size_16">
+    <span
+      v-if="description"
+      class="position-relative position-absolute bottom-0 start-0 m-2 font_family_roboto font_size_16"
+    >
       {{ description }}
     </span>
     <span

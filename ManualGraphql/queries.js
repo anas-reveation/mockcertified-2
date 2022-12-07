@@ -433,3 +433,23 @@ export const subCategorySlug = /* GraphQL */ `
     }
   }
 `;
+
+export const subCategoryUpdate = /* GraphQL */ `
+  query GetSubCategory($id: ID!, $slug: String!) {
+    getSubCategory(id: $id) {
+      category {
+        name
+        sub_category(filter: { slug: { eq: $slug } }) {
+          items {
+            id
+            name
+            slug
+            category {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
