@@ -34,22 +34,14 @@
         <p class="text-success">Congratulations for purchasing our test !!</p>
         <p>Get our Mockcertified app in</p>
 
-        <div class="row">
-          <a
-            href="https://play.google.com/store/apps/details?id=com.mockcertified.mockcertified"
-            target="_blank"
-            class="col m-1"
-          >
+        <div class="row align-items-center">
+          <a :href="playstoreLink" target="_blank" class="col m-1">
             <img src="@/assets/images/GooglePlay.svg" alt="GooglePlayStore" />
           </a>
-          <a
-            href="https://apps.apple.com/in/app/MockCertified/1645773656"
-            target="_blank"
-            class="col m-1"
-          >
+          <a :href="appleAppStoreLink" target="_blank" class="col m-1">
             <img src="@/assets/images/AppStore.svg" alt="AppStore" />
           </a>
-          <a href="#" class="col m-1">
+          <a :href="alexaSkillLink" target="_blank" class="col m-1">
             <img src="@/assets/images/alexa2.svg" alt="alexa" />
           </a>
         </div>
@@ -135,6 +127,14 @@ export default {
           content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
         },
       ],
+    };
+  },
+
+  data() {
+    return {
+      playstoreLink: `https://play.google.com/store/apps/details?id=${process.env.GOOGLE_PLAYSTORE_ID}`,
+      appleAppStoreLink: `https://apps.apple.com/in/app/MockCertified/${process.env.APPLE_APP_STORE_ID}`,
+      alexaSkillLink: `https://alexa-skills.amazon.com/apis/custom/skills/${process.env.ALEXA_SKILL_ID}/launch`,
     };
   },
 
