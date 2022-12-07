@@ -6,7 +6,7 @@
       Add Category
     </NuxtLink>
     <NuxtLink to="/protected/admin/category" class="btn btn-primary text-white">
-      Update category
+      Update Category
     </NuxtLink>
 
     <div class="mb-2 w-100 d-flex justify-content-center width_res">
