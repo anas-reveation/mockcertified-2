@@ -1,5 +1,5 @@
 <template>
-  <div v-if="testDetail && !isLoading" class="container">
+  <div v-if="testDetail && !isLoading" class="container" data-aos="zoom-in">
     <TestDetail
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •

@@ -30,7 +30,7 @@
       <h1>No Test Available</h1>
     </div>
     <div class="row">
-      <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3">
+      <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3" data-aos="flip-right">
         <NuxtLink :to="`/protected/created-test/${test.slug}`">
           <TestCards
             :title="test.title"

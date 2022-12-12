@@ -8,7 +8,12 @@
         <p class="font_size_16">Suggestions</p>
 
         <div class="row">
-          <div v-for="(test, index) in allSearchedTest" :key="index" class="col-sm-6 col-md-4 mb-3">
+          <div
+            v-for="(test, index) in allSearchedTest"
+            :key="index"
+            class="col-sm-6 col-md-4 mb-3"
+            data-aos="flip-right"
+          >
             <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
@@ -33,6 +38,7 @@
             v-for="category in allSearchedCategory"
             :key="category.id"
             class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+            data-aos="zoom-in"
           >
             <div class="row">
               <span class="col-2 me-2">
@@ -52,6 +58,7 @@
             :to="`/category/${subCategory.category.slug}?subCategoryId=${subCategory.slug}&subCategoryName=${subCategory.name}`"
             :key="subCategory.id"
             class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+            data-aos="zoom-in"
           >
             <div class="row">
               <span class="col-2 me-2">

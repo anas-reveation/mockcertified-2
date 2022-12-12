@@ -1,5 +1,5 @@
 <template>
-  <div v-if="testDetail" class="container">
+  <div v-if="testDetail" class="container" data-aos="zoom-in">
     <div class="row">
       <div class="col-lg-6">
         <TestDetail

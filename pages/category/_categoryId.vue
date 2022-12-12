@@ -23,6 +23,7 @@
           :key="category.id"
           class="d-inline col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
           @click="getAllTests(category.id, category.name)"
+          data-aos="zoom-in"
         >
           <div class="row">
             <span class="col-2 d-flex align-items-center">
@@ -54,6 +55,7 @@
           v-for="(test, index) in allCategoriesFilter"
           :key="index"
           class="col-sm-6 col-md-4 mb-3"
+          data-aos="flip-right"
         >
           <NuxtLink :to="`/category/test/${test.slug}`">
             <TestCards
@@ -63,6 +65,7 @@
               :description="`${test.time_limit} mins • ${
                 test.questions.items.length
               } questions • ${totalMarks(test.questions.items)} marks`"
+              :dateTime="getDate(test.createdAt)"
             />
           </NuxtLink>
         </div>
@@ -279,6 +282,11 @@ export default {
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
+    },
+
+    getDate(getdatetime) {
+      var dateStr = new Date(getdatetime);
+      return dateStr.toLocaleDateString();
     },
 
     async searchQueryFunc() {
