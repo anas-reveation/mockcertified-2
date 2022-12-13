@@ -1,7 +1,7 @@
 <template>
-  <div v-if="testDetail" class="container" data-aos="zoom-in">
+  <div v-if="testDetail" class="container">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-6" data-aos="zoom-in">
         <TestDetail
           :title="testDetail.title"
           :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
