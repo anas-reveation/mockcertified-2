@@ -40,7 +40,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return false;
       }
@@ -54,7 +54,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -84,7 +84,7 @@ export default {
           title: 'Promocode is not valid',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return false;
       } else if (parsedData.status === 400) {
@@ -95,7 +95,7 @@ export default {
           title: 'Promocode is expired',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return false;
       } else if (parsedData.status === 409) {
@@ -106,7 +106,7 @@ export default {
           title: 'Promocode has already been used.',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return false;
       } else if (parsedData.status === 500) {
@@ -117,7 +117,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return false;
       }
@@ -129,7 +129,7 @@ export default {
         title: 'Promocode applied',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
 
       return parsedData.discount_percentage;
@@ -142,7 +142,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -168,7 +168,7 @@ export default {
         title: 'Successfully purchased',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return true;
     } catch (err) {
@@ -180,7 +180,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }

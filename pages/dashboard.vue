@@ -19,7 +19,12 @@
           v-bind="settings"
           v-if="featuredTests.length"
         >
-          <div v-for="(test, index) in featuredTests" :key="index" class="mb-3 px-2">
+          <div
+            v-for="(test, index) in featuredTests"
+            :key="index"
+            class="mb-3 px-2"
+            data-aos="flip-right"
+          >
             <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
@@ -52,6 +57,7 @@
             v-for="(category, index) in allCategories"
             :key="index"
             class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
+            data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
           </div>
@@ -76,7 +82,12 @@
           v-bind="settings"
           v-if="recentlyAddedTests.length"
         >
-          <div v-for="(test, index) in recentlyAddedTests" :key="index" class="px-2 pb-2">
+          <div
+            v-for="(test, index) in recentlyAddedTests"
+            :key="index"
+            class="px-2 pb-2"
+            data-aos="flip-right"
+          >
             <NuxtLink :to="`/category/test/${test.slug}`">
               <TestCards
                 :title="test.title"
@@ -191,44 +202,10 @@ export default {
       allSearchedCategory: [],
       allSearchedSubCategory: [],
 
-      categoriesScroller: {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        initialSlide: 0,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true,
-            },
-          },
-          {
-            breakpoint: 778,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2,
-            },
-          },
-          {
-            breakpoint: 575,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-            },
-          },
-        ],
-      },
-
       settings: {
-        dots: true,
-        infinite: false,
+        dots: false,
+        autoplay: true,
+        infinite: true,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -239,8 +216,6 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 3,
-              infinite: true,
-              dots: true,
             },
           },
           {
@@ -248,7 +223,6 @@ export default {
             settings: {
               slidesToShow: 2,
               slidesToScroll: 2,
-              initialSlide: 2,
             },
           },
           {
@@ -287,7 +261,6 @@ export default {
       'getAllFeaturedTest',
       'getRecentlyAddedTests',
       'getAllCategories',
-      'getTestByQuery',
     ]),
 
     formatPrice(price) {

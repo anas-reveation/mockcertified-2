@@ -32,6 +32,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
+    "aos": "^2.3.4",
     "apexcharts": "^3.35.5",
     "aws-amplify": "^4.3.25",
     "aws-amplify-vue": "^2.1.5",

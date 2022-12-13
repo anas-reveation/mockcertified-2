@@ -170,7 +170,7 @@ export default {
             title: 'Times Up',
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 3000,
+            timer: 5000,
           });
           this.$router.push(`/protected/test/result/${this.attemptedId}`);
         }
@@ -400,7 +400,7 @@ export default {
                 title: 'Successfully completed test',
                 showConfirmButton: false,
                 timerProgressBar: true,
-                timer: 3000,
+                timer: 5000,
               });
             }
           } else {
@@ -414,7 +414,7 @@ export default {
             title: 'Something went wrong',
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 3000,
+            timer: 5000,
           });
         }
       } else {
@@ -425,7 +425,7 @@ export default {
           title: 'please select option',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
     },

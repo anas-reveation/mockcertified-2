@@ -56,6 +56,7 @@ export default {
     { src: '~/plugins/getLocalData.js', mode: 'client' },
     { src: '~/plugins/vue-apexcharts.js', mode: 'client' },
     { src: '~/plugins/deepLink.js', mode: 'client' },
+    { src: '~/plugins/aos.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

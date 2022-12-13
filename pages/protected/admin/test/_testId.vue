@@ -1,5 +1,5 @@
 <template>
-  <div v-if="testDetail" class="container">
+  <div v-if="testDetail" class="container" data-aos="zoom-in">
     <TestDetail
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
@@ -215,7 +215,7 @@ export default {
           title: 'Please fill reject decription',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return;
       } else if (status === 'reject' && this.rejectDescription) {

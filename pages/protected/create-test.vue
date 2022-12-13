@@ -180,7 +180,7 @@
           class="btn btn-secondary border border-2 border-primary"
           :disabled="isDisable"
         >
-          Connect
+          Connects
         </button>
       </div>
     </div>
@@ -445,7 +445,7 @@ export default {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
-    } else if (this.user.stripe_seller_id == '') {
+    } else if (!this.user.stripe_seller_id || this.user.stripe_seller_id == '') {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
@@ -557,7 +557,7 @@ export default {
                 title: formateErrorMsg,
                 showConfirmButton: false,
                 timerProgressBar: true,
-                timer: 3000,
+                timer: 5000,
               });
               return;
             }
@@ -617,7 +617,7 @@ export default {
             title: formateErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 3000,
+            timer: 5000,
           });
           break;
         }
@@ -656,7 +656,7 @@ export default {
             title: fileErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 3000,
+            timer: 5000,
           });
           break;
         }
@@ -684,7 +684,7 @@ export default {
       //     title: fileErrorMsg,
       //     showConfirmButton: false,
       //     timerProgressBar: true,
-      //     timer: 3000,
+      //     timer: 5000,
       //   });
       //   return;
       // }
@@ -732,7 +732,7 @@ export default {
           title: 'Please select category and sub category',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return;
       }
@@ -744,7 +744,7 @@ export default {
           title: 'Please submit questions',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return;
       }
@@ -768,7 +768,7 @@ export default {
           title: 'Test submitted',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       } else {
         this.$swal.fire({
@@ -778,7 +778,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
     },
@@ -817,9 +817,15 @@ export default {
       });
     },
 
-    redirectToStripe() {
-      if (this.stripeUrl) {
-        this.newWindowsOpen(this.stripeUrl);
+    async redirectToStripe() {
+      let stripeUrl = this.stripeUrl;
+      this.stripeUrl = null;
+      if (stripeUrl) {
+        this.newWindowsOpen(stripeUrl);
+      } else {
+        const res = await this.stripeOnboardingLocal();
+        stripeUrl = res;
+        this.newWindowsOpen(stripeUrl);
       }
     },
 
