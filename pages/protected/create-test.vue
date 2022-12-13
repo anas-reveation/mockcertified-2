@@ -180,7 +180,7 @@
           class="btn btn-secondary border border-2 border-primary"
           :disabled="isDisable"
         >
-          Connects
+          Connect
         </button>
       </div>
     </div>
