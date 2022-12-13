@@ -261,7 +261,6 @@ export default {
       'getAllFeaturedTest',
       'getRecentlyAddedTests',
       'getAllCategories',
-      'getTestByQuery',
     ]),
 
     formatPrice(price) {

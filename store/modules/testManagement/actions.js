@@ -516,6 +516,7 @@ export default {
       // };
       const filter = {
         title: { match: query },
+        status: { eq: 'APPROVED' },
       };
       const subCategoryFilter = {
         name: { match: query },
@@ -525,7 +526,6 @@ export default {
         variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-
       // searchSubCategories
       const allSubCategory = await API.graphql({
         query: searchSubCategories,

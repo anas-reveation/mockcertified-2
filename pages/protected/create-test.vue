@@ -180,7 +180,7 @@
           class="btn btn-secondary border border-2 border-primary"
           :disabled="isDisable"
         >
-          Connect
+          Connects
         </button>
       </div>
     </div>
@@ -445,7 +445,7 @@ export default {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
-    } else if (this.user.stripe_seller_id == '') {
+    } else if (!this.user.stripe_seller_id || this.user.stripe_seller_id == '') {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
       this.stripeUrl = res;
@@ -817,9 +817,15 @@ export default {
       });
     },
 
-    redirectToStripe() {
-      if (this.stripeUrl) {
-        this.newWindowsOpen(this.stripeUrl);
+    async redirectToStripe() {
+      let stripeUrl = this.stripeUrl;
+      this.stripeUrl = null;
+      if (stripeUrl) {
+        this.newWindowsOpen(stripeUrl);
+      } else {
+        const res = await this.stripeOnboardingLocal();
+        stripeUrl = res;
+        this.newWindowsOpen(stripeUrl);
       }
     },
 

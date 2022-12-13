@@ -69,9 +69,9 @@
           </div>
 
           <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
-
-          <div class="mt-2">
-            <!-- <button
+          <ClientOnly>
+            <div class="mt-2">
+              <!-- <button
           type="button"
           class="btn btn-secondary fw-bold border border-2 border-primary p-3 mt-2 w-100 text-start"
         >
@@ -91,11 +91,12 @@
           Continue with Facebook
         </button> -->
 
-            <p v-if="platform === 'web'" class="mt-4 text-center">
-              New to Mockcertified ?
-              <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
-            </p>
-          </div>
+              <p v-if="platform === 'web'" class="mt-4 text-center">
+                New to Mockcertified ?
+                <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
+              </p>
+            </div>
+          </ClientOnly>
         </form>
       </div>
     </div>
