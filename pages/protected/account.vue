@@ -1,31 +1,56 @@
 <template>
-  <div v-if="balanceDetail" class="container">
-    <div class="d-sm-flex align-items-center justify-content-around mt-3">
-      <div class="">
-        <p class="fw-bolder font_size_32">
-          Your Account
-          <br class="d-sm-none" />
-          Balance
-        </p>
-        <p class="font_size_36">
-          <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
-        </p>
-      </div>
+  <div class="container">
+    <div v-if="balanceDetail && isFetched">
+      <div class="d-sm-flex align-items-center justify-content-around mt-3">
+        <div class="">
+          <p class="fw-bolder font_size_32">
+            Your Account
+            <br class="d-sm-none" />
+            Balance
+          </p>
+          <p class="font_size_36">
+            <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
+          </p>
+        </div>
 
-      <div class="text-center">
-        <button
-          @click="getRedirectlink"
-          class="btn border border-2 border-primary text-primary w-75 width_res"
-        >
-          View your payout
-        </button>
+        <div class="text-center">
+          <button
+            @click="getRedirectlink"
+            class="btn border border-2 border-primary text-primary w-75 width_res"
+          >
+            View your payout
+          </button>
+        </div>
       </div>
-    </div>
-    <!-- <div class="text-center mt-3">
+      <!-- <div class="text-center mt-3">
       <button class="btn btn-danger border border-dark" type="button" @click="accountDeleteLocal">
         Delete Account
       </button>
     </div> -->
+    </div>
+    <div v-else-if="isFetched">
+      <div class="d-sm-flex align-items-center justify-content-around mt-3">
+        <div class="">
+          <p class="fw-bolder font_size_32">
+            Your Account Is
+            <br class="d-sm-none" />
+            Not Connected
+          </p>
+          <p class="font_size_36">
+            <span class="fw-bolder">$</span> <span class="text-muted">0.00</span>
+          </p>
+        </div>
+
+        <div class="text-center">
+          <NuxtLink
+            to="/protected/create-test"
+            class="btn border border-2 border-primary text-primary w-75 width_res"
+          >
+            Create a Test
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -112,19 +137,25 @@ export default {
     return {
       balanceDetail: null,
       url: null,
+      isAccountActive: null,
+      isFetched: false,
     };
   },
 
   async mounted() {
-    await this.getBalanceLocal();
-    const res = await this.redirectExpressDashboard();
-    if (res) {
-      this.url = res;
+    await this.getStripeIdStatusLocal();
+    if (this.isAccountActive) {
+      await this.getBalanceLocal();
+      const res = await this.redirectExpressDashboard();
+      if (res) {
+        this.url = res;
+      }
     }
+    this.isFetched = true;
   },
 
   methods: {
-    ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard']),
+    ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard', 'getStripeIdStatus']),
     ...mapActions('testManagement', ['accountDelete']),
 
     async getBalanceLocal() {
@@ -153,6 +184,15 @@ export default {
             await this.accountDelete();
           }
         });
+    },
+
+    async getStripeIdStatusLocal() {
+      const res = await this.getStripeIdStatus();
+      if (res == 'active') {
+        this.isAccountActive = true;
+      } else if (res == 'notActive') {
+        this.isAccountActive = false;
+      }
     },
   },
 };
