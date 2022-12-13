@@ -75,7 +75,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -100,7 +100,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -130,7 +130,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -158,7 +158,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -191,7 +191,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -224,7 +224,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -251,7 +251,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -285,7 +285,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
     }
   },
@@ -316,7 +316,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -404,7 +404,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -436,7 +436,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -467,7 +467,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -499,7 +499,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -516,6 +516,7 @@ export default {
       // };
       const filter = {
         title: { match: query },
+        status: { eq: 'APPROVED' },
       };
       const subCategoryFilter = {
         name: { match: query },
@@ -525,7 +526,6 @@ export default {
         variables: { filter: filter, limit: 10000 },
         // authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-
       // searchSubCategories
       const allSubCategory = await API.graphql({
         query: searchSubCategories,
@@ -550,7 +550,7 @@ export default {
           title: 'No search result found',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
       return { testList, subCategoryList, categoryList };
@@ -563,7 +563,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }
@@ -591,7 +591,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       return false;
     }

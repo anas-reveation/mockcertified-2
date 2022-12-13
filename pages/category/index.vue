@@ -10,6 +10,7 @@
         v-for="category in allCategoriesFilter"
         :key="category.id"
         class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+        data-aos="zoom-in"
       >
         <div class="row">
           <span class="col-2 me-2">

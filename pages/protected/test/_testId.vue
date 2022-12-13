@@ -190,7 +190,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
     },
