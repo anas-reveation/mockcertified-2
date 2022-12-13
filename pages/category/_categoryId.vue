@@ -214,7 +214,7 @@ export default {
         title: 'No tests available',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 3000,
+        timer: 5000,
       });
       this.$router.back();
       return;
@@ -263,7 +263,7 @@ export default {
           title: 'No tests available',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         this.$router.back();
         this.breadCrum.pop();

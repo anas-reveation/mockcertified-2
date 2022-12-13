@@ -215,7 +215,7 @@ export default {
           title: 'Please fill reject decription',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         return;
       } else if (status === 'reject' && this.rejectDescription) {

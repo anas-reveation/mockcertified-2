@@ -292,7 +292,7 @@ export default {
           title: 'Check your email for the verification code',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         this.pageCount += 1;
       } catch (err) {
@@ -304,7 +304,7 @@ export default {
           title: 'Email is not registered',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
     },
@@ -322,7 +322,7 @@ export default {
           title: 'Password successfully changed',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
         this.$router.push('/auth/login');
       } catch (err) {
@@ -334,7 +334,7 @@ export default {
           title: 'Invalid code',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 3000,
+          timer: 5000,
         });
       }
     },
