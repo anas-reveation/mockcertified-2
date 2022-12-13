@@ -1,5 +1,5 @@
 <template>
-  <div class="container container_width">
+  <div v-show="!isLoading" class="container container_width">
     <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create new test</h1>
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
@@ -437,10 +437,15 @@ export default {
   },
 
   computed: {
+    ...mapState(['isLoading']),
     ...mapState('auth', ['user']),
   },
 
   async mounted() {
+    Browser.addListener('browserFinished', (_none) => {
+      this.$router.push('/protected/account');
+    });
+
     if (this.user.stripe_seller_id) {
       await this.getStripeIdStatusLocal();
       const res = await this.stripeOnboardingLocal();
