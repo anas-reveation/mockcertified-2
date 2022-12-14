@@ -325,7 +325,7 @@ export default {
         .then(async (result) => {
           if (result.isConfirmed && this.testDetail.price !== 0) {
             await Browser.open({ url: this.stripeUrl });
-          } else if (this.testDetail.price === 0) {
+          } else if (result.isConfirmed && this.testDetail.price === 0) {
             const res = await this.buyTestFree({ testId: this.testDetail.id });
             if (res) {
               this.$router.push('/protected/purchased-test');
