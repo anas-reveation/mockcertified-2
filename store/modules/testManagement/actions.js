@@ -515,11 +515,11 @@ export default {
       //   and: { status: { eq: 'APPROVED' } },
       // };
       const filter = {
-        title: { match: query },
+        title: { matchPhrasePrefix: query },
         status: { eq: 'APPROVED' },
       };
       const subCategoryFilter = {
-        name: { match: query },
+        name: { matchPhrasePrefix: query },
       };
       const allTestData = await API.graphql({
         query: searchTestManagers,
