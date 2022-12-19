@@ -64,23 +64,22 @@ exports.handler = async (event) => {
       },
     );
 
-    // const userInputArr = response.data.data.getResult.user_input.toLowerCase();
-    const userInputArr = response.data.data.getResult.user_input;
-    const answerData = response.data.data.getResult.question.answer;
+    const userInputArrTemp = response.data.data.getResult.user_input;
+    const answerDataTemp = response.data.data.getResult.question.answer;
+    const userInputArr = userInputArrTemp.sort();
+    const answerData = answerDataTemp.sort();
 
     let isCorrect = true;
-    answerData.forEach((ans) => {
-      if (isCorrect) {
-        userInputArr.forEach((userAnswer) => {
-          // (userInputArr -> user answers array) If user selected any wrong answer it should be consider as wrong answer
-          if (isCorrect && userAnswer.toLowerCase() === ans.toLowerCase()) {
-            isCorrect = true;
-          } else {
-            isCorrect = false;
-          }
-        });
+    for (let i = 0; i < userInputArr.length; i++) {
+      const userAnswer = userInputArr[i];
+      const ans = answerData[i];
+      if (isCorrect && userAnswer && ans && userAnswer.toLowerCase() === ans.toLowerCase()) {
+        isCorrect = true;
+      } else {
+        isCorrect = false;
       }
-    });
+    }
+
     const result_status = isCorrect;
 
     await axios.post(
