@@ -562,7 +562,7 @@ export default {
                 title: formateErrorMsg,
                 showConfirmButton: false,
                 timerProgressBar: true,
-                timer: 5000,
+                timer: 7000,
               });
               return;
             }
@@ -622,7 +622,7 @@ export default {
             title: formateErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 5000,
+            timer: 7000,
           });
           break;
         }
@@ -661,7 +661,7 @@ export default {
             title: fileErrorMsg,
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 5000,
+            timer: 7000,
           });
           break;
         }
@@ -689,7 +689,7 @@ export default {
       //     title: fileErrorMsg,
       //     showConfirmButton: false,
       //     timerProgressBar: true,
-      //     timer: 5000,
+      //     timer: 7000,
       //   });
       //   return;
       // }
@@ -737,7 +737,7 @@ export default {
           title: 'Please select category and sub category',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
         return;
       }
@@ -749,7 +749,7 @@ export default {
           title: 'Please submit questions',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
         return;
       }
@@ -773,7 +773,7 @@ export default {
           title: 'Test submitted',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       } else {
         this.$swal.fire({
@@ -783,7 +783,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       }
     },
