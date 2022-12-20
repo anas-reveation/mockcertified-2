@@ -187,7 +187,7 @@ export default {
           title: errorMsg,
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       }
     },

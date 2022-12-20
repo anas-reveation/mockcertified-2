@@ -67,7 +67,7 @@ export default {
         title: err.message,
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
     }
   },
@@ -88,7 +88,7 @@ export default {
         title: err.message,
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -109,7 +109,7 @@ export default {
         title: 'Check your email for the verification code',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return true;
     } catch (err) {
@@ -121,7 +121,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -164,7 +164,7 @@ export default {
         title: errMsg,
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -194,7 +194,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -227,7 +227,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return null;
     }

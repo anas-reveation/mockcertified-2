@@ -508,7 +508,7 @@ export default {
           title: 'Check your email for the verification code',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       } catch (err) {
         this.$swal.fire({
@@ -518,7 +518,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       }
     },
@@ -534,7 +534,7 @@ export default {
             title: 'Something went wrong',
             showConfirmButton: false,
             timerProgressBar: true,
-            timer: 5000,
+            timer: 7000,
           });
           return;
         }
@@ -549,7 +549,7 @@ export default {
           title: 'Successfully registered account',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       } catch (err) {
         this.$swal.fire({
@@ -559,7 +559,7 @@ export default {
           title: 'Something went wrong',
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
       }
     },
