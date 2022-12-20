@@ -37,7 +37,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -88,7 +88,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -115,7 +115,7 @@ export default {
           title: `${categoryDetail.name} category is already exist`,
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
         return false;
       }
@@ -166,7 +166,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -220,7 +220,7 @@ export default {
           title: `${categoryDetail.name} category is already exist`,
           showConfirmButton: false,
           timerProgressBar: true,
-          timer: 5000,
+          timer: 7000,
         });
         return false;
       }
@@ -252,7 +252,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -284,7 +284,7 @@ export default {
         title: `"${subCatName}" is already exist in "${isSlugAvailable.category.name}" category`,
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -313,7 +313,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
@@ -353,7 +353,7 @@ export default {
         title: 'Something went wrong',
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 5000,
+        timer: 7000,
       });
       return false;
     }
