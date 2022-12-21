@@ -249,7 +249,7 @@
           <div class="text-center mt-2">
             <button
               type="submit"
-              class="btn btn-secondary border border-2 border-primary fw-bold px-3 login_btn_width"
+              class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 login_btn_width"
             >
               Confirm
             </button>

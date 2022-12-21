@@ -12,6 +12,10 @@ export default {
     state.userGroup = groupName;
   },
 
+  setUnconfirmedUserEmail(state, unconfirmedUserEmail) {
+    state.unconfirmedUserEmail = unconfirmedUserEmail;
+  },
+
   setStripeSeller(state, stripeSellerId) {
     state.user = {
       ...state.user,
