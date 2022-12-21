@@ -96,7 +96,7 @@
           <div class="text-sm-start">
             <button
               type="button"
-              class="btn btn-secondary border border-2 border-primary w-50 width_res"
+              class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
               @click="buyNowLocal"
             >
               Buy Now
@@ -107,7 +107,7 @@
         <div v-else class="text-sm-start">
           <button
             type="button"
-            class="btn btn-secondary border border-2 border-primary w-50 width_res"
+            class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
             @click="redirectLogin"
           >
             Login

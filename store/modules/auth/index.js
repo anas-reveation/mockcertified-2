@@ -6,6 +6,7 @@ const state = () => ({
   user: null,
   userGroup: null,
   jwtToken: null,
+  unconfirmedUserEmail: null,
 });
 
 const getters = {};
