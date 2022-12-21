@@ -11,7 +11,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
+          class="list-group-item border border-2 border-primary rounded text-dark mb-2"
         >
           {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
         </li>

@@ -127,7 +127,7 @@ export default {
     }
   },
 
-  async login({ commit }, { email, password }) {
+  async login({ commit, dispatch }, { email, password }) {
     commit('SET_LOADER', true, { root: true });
 
     try {
@@ -152,7 +152,28 @@ export default {
       return user;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
+
+      if (err.name === 'UserNotConfirmedException') {
+        const res = await dispatch('resendConfirmationCode', email);
+        if (res) {
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'warning',
+            title: 'User is not confirmed, We have sent a verification code to your email',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 10000,
+          });
+
+          commit('setUnconfirmedUserEmail', email);
+          this.$router.push('/auth/resend-code');
+        }
+        return false;
+      }
+
       let errMsg = err.message;
+
       if (err.name === 'QuotaExceededError') {
         window.localStorage.clear();
         errMsg = 'Please try again later';

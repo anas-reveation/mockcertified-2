@@ -30,7 +30,7 @@
         />
         {{ fullName }}
         <span v-if="price" class="text-primary fw-bolder ms-2 d-none d-sm-inline">
-          {{ formatedPrice }}
+          USD {{ formatedPrice }}
         </span>
         <span
           v-else-if="priceZero"

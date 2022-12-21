@@ -10,7 +10,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark fw-bolder mb-2"
+          class="list-group-item border border-2 border-primary rounded text-dark mb-2"
           :class="
             question.userInput ? bgColor(question.userInput, value[1]) : checkAnswer(value[1])
           "

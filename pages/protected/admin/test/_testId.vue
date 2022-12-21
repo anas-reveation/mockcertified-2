@@ -271,7 +271,7 @@ export default {
             },
             Subject: {
               Charset: 'UTF-8',
-              Data: `Your test ${name} is approved and availble to users for purchase`,
+              Data: `Your test ${name} is approved and available to users for purchase`,
             },
           },
           Source: 'support@mockcertified.com',

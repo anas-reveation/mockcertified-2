@@ -56,7 +56,7 @@
           <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16"
+            class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16 category_box"
             data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
@@ -301,5 +301,9 @@ export default {
   object-fit: contain;
   width: 35px;
   height: 35px;
+}
+
+.category_box {
+  min-width: 65px !important;
 }
 </style>
