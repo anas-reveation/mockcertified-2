@@ -8,8 +8,9 @@
     "@types/aws-lambda": "^8.10.92"
   },
   "dependencies": {
-    "aws-sdk": "^2.1231.0",
+    "aws-sdk": "2.1230.0",
     "axios": "^0.27.2",
+    "logplease": "^1.2.15",
     "stripe": "^10.6.0"
   }
 }
