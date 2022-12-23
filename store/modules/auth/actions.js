@@ -144,7 +144,19 @@ export default {
         variables: { id: user.username },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-      const userData = userGraphql.data.getUser;
+      let userData = userGraphql.data.getUser;
+
+      // If user signedIn dont have user in DB (This situation comes when user didn't verified and after they tried to login)
+      // We dont need this code if we reload page because this code is present in function "load()"
+      if (user && !userData) {
+        const obj = {
+          userId: user.attributes.sub,
+          firstName: user.attributes.given_name,
+          lastName: user.attributes.family_name,
+          email: user.attributes.email,
+        };
+        userData = await dispatch('createUser', obj);
+      }
 
       commit('setUser', userData);
       commit('setJwtToken', jwtToken);
