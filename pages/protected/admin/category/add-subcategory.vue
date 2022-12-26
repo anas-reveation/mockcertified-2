@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isLoading" class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12">Category- {{ formData.name }}</h1>
+    <h1 class="mt-5 mb-4 font_size_32 col-md-12">Category- {{ formData.name }}</h1>
     <form class="wrapper mt-3" @submit.prevent="createCategory">
       <!-- Subcategory -->
       <div class="sub_width">

@@ -9,14 +9,14 @@
         :to="`/category/${category.slug}`"
         v-for="category in allCategoriesFilter"
         :key="category.id"
-        class="col-sm-4 border border-2 border-primary rounded-pill mt-3 p-2"
+        class="col-12 col-md-4 col-sm-6"
         data-aos="zoom-in"
       >
-        <div class="row">
-          <span class="col-2 me-2">
-            <img :src="category.image" alt="category" class="rounded-circle category_image" />
+        <div class="row shawdow_card m-2 p-2 category_border_radius">
+          <span class="col-2 me-2 d-flex align-items-center">
+            <img :src="category.image" alt="category" class="category_image" />
           </span>
-          <span class="col text-start"> {{ category.name }} </span>
+          <span class="col text-start font_size_16"> {{ category.name }} </span>
         </div>
       </NuxtLink>
     </div>
@@ -142,10 +142,24 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .category_image {
   object-fit: contain;
   width: 35px;
   height: 35px;
+}
+
+.shawdow_card {
+  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+}
+
+@include media-breakpoint-up(sm) {
+  .category_border_radius {
+    border-radius: 100px;
+  }
 }
 </style>

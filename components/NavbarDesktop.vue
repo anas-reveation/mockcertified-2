@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-light bg-light"
     @mouseleave="(userDropDown = false), (settingsDropDown = false)"
   >
-    <div class="container-fluid">
+    <div class="container-fluid shadow-sm">
       <NuxtLink to="/dashboard" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
@@ -84,7 +84,7 @@
             @mouseover="(settingsDropDown = true), (userDropDown = false)"
           >
             <img class="m-1 navbar_icon" src="@/assets/images/settings.svg" alt="settings" />
-            <span class="pb-2 font_size_10"> settings </span>
+            <span class="pb-2 font_size_10"> Settings </span>
           </div>
 
           <ClientOnly>
@@ -99,7 +99,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-primary w-100 hr_line mt-2" />
+    <!-- <div class="bg-primary w-100 hr_line mt-2" /> -->
 
     <!-- Start Hover Navbar -->
     <div class="d-flex justify-content-end" v-if="settingsDropDown">
@@ -186,8 +186,10 @@
                 </p>
               </div>
               <div class="col-10 font_size_16">
-                <div class="text-capitalize">{{ user.first_name }} {{ user.last_name }}</div>
-                <div>{{ user.email }}</div>
+                <div class="text-capitalize text-truncate">
+                  {{ user.first_name }} {{ user.last_name }}
+                </div>
+                <div class="text-truncate">{{ user.email }}</div>
               </div>
             </div>
           </li>
