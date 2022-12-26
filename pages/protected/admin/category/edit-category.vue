@@ -1,6 +1,6 @@
 <template>
   <div class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12">Update Category</h1>
+    <h1 class="mt-5 mb-4 font_size_32 col-md-12">Update Category</h1>
     <form class="wrapper mt-3" @submit.prevent="updateCategoryLocal">
       <div class="mb-4 input-data">
         <input

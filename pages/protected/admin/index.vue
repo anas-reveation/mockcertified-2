@@ -2,10 +2,10 @@
   <div class="container">
     <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-md-6">Admin Panel</h1>
 
-    <NuxtLink to="/protected/admin/category/add-category" class="btn btn-primary text-white">
+    <NuxtLink to="/protected/admin/category/add-category" class="btn btn-primary text-white mb-2">
       Add Category
     </NuxtLink>
-    <NuxtLink to="/protected/admin/category" class="btn btn-primary text-white">
+    <NuxtLink to="/protected/admin/category" class="btn btn-primary text-white mb-2">
       Update Category
     </NuxtLink>
 

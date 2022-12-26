@@ -2,7 +2,7 @@
   <div class="container">
     <NavbarLogo />
 
-    <div class="row">
+    <div class="row my-4">
       <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
         <div>
           <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
@@ -14,12 +14,12 @@
           src="@/assets/images/oval.jpg"
           alt="oval"
         />
-        <h1 class="my-5 fw-bold font_size_36 text-sm-center">
+        <h1 class="text-primary fw-bolder my-5 font_size_36">
           Reset
           <br class="d-sm-none" />
           Password
         </h1>
-        <p class="text-sm-center">
+        <p>
           Enter the email associated with your account and we will send a verification code to reset
           your password
         </p>

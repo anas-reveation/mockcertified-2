@@ -3,9 +3,9 @@
     <NavbarLogo />
 
     <div class="row">
-      <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
+      <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-5">
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
+          <img src="~/assets/images/Illustration.svg" class="me-4 w-100" alt="Illustration" />
         </div>
       </div>
       <div class="col-sm-6">
@@ -20,7 +20,7 @@
           class="wrapper width_res"
           @submit.prevent="registerLocal"
         >
-          <h1 class="mt-5 mb-4 text-sm-center font_size_36">Register</h1>
+          <h1 class="text-primary text-sm-center fw-bolder mt-5 mb-4 font_size_36">Register</h1>
           <div class="mb-4 input-data">
             <input
               type="text"
@@ -174,11 +174,19 @@
           <div>
             <input type="checkbox" v-model="registerForm.userAgreement" />
             I accept the
-            <a href="#" @click="newWindowsOpen" class="fw-bolder text-decoration-underline">
+            <a
+              href="#"
+              @click="newWindowsOpen"
+              class="text-black fw-bolder text-decoration-underline"
+            >
               terms & conditions
             </a>
             and
-            <a href="#" @click="newWindowsOpen('pp')" class="fw-bolder text-decoration-underline">
+            <a
+              href="#"
+              @click="newWindowsOpen('pp')"
+              class="text-black fw-bolder text-decoration-underline"
+            >
               privacy policies
             </a>
           </div>
@@ -186,8 +194,8 @@
           <div class="text-center mt-2">
             <button
               type="submit"
-              class="btn border border-2 border-primary fw-bold px-3 login_btn_width"
-              :class="isDisabled ? 'btn-gray' : 'btn-secondary'"
+              class="btn border border-2 fw-bold px-3 login_btn_width"
+              :class="isDisabled ? 'border-primary' : 'btn-primary text-white'"
               :disabled="isDisabled"
             >
               Register
@@ -218,7 +226,9 @@
 
             <p class="mt-4 text-center">
               Already have an account ?
-              <NuxtLink to="/auth/login" class="fw-bolder">Login</NuxtLink>
+              <NuxtLink to="/auth/login" class="text-primary text-decoration-none fw-bolder">
+                Login
+              </NuxtLink>
             </p>
           </div>
         </form>

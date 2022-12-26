@@ -1,42 +1,24 @@
 <template>
-  <div
-    class="bg-secondary border border-2 border-primary rounded-1 position-relative px-2 py-1 card_height"
-  >
-    <div class="row">
-      <p class="col-7 fw-bolder mb-0" v-if="title">{{ title }}</p>
-      <p class="col-5 text-capitalize fw-bolder text-end text-success" v-if="price === '$0.00'">
-        Free
+  <div class="shawdow_card rounded-1 position-relative px-2 py-1 card_height">
+    <div class="row mt-1">
+      <p class="col-7 fw-bolder mb-0 font_size_18" v-if="title">{{ title }}</p>
+      <p class="col-5 fw-bolder text-end" v-if="price === '$0.00'">
+        <span class="text-success rounded-pill px-2 py-1 bg_price_green">Free</span>
       </p>
-      <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">{{ price }}</p>
+      <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">
+        <span class="bg_price rounded-pill px-2 py-1">{{ price }}</span>
+      </p>
       <p class="col-7 mb-0 fs-7 fw-light" v-if="authorName">By-{{ authorName }}</p>
-      <p class="col-7 fs-7 fw-light font_family_roboto" v-if="dateTime">{{ dateTime }}</p>
+      <p class="col-7 fs-7 fw-light text-muted font_size_18" v-if="dateTime">
+        {{ dateTime }}
+      </p>
     </div>
 
     <span
       v-if="description"
-      class="position-relative position-absolute bottom-0 start-0 m-2 font_family_roboto font_size_16"
+      class="position-relative position-absolute bottom-0 start-0 text-primary m-2 font_size_16"
     >
       {{ description }}
-    </span>
-    <span
-      v-if="addToCart || removeItem"
-      class="position-absolute top-100 start-100 translate-middle"
-    >
-      <img
-        v-if="addToCart"
-        src="@/assets/images/add_cart_icon.svg"
-        alt="add-to-cart-icon"
-        width="30"
-        height="30"
-      />
-      <img
-        v-if="removeItem"
-        src="@/assets/images/remove_icon.svg"
-        alt="add-to-cart-icon"
-        width="30"
-        height="30"
-        @click="removeCartItemLocal(testId)"
-      />
     </span>
   </div>
 </template>
@@ -80,6 +62,24 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.shawdow_card {
+  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+}
+
+.bg_price {
+  background: rgba(255, 193, 7, 0.21);
+}
+
+.bg_price_green {
+  background: rgba(76, 175, 80, 0.3);
+}
+
+.card_height {
+  height: 205px;
+}
 
 @include media-breakpoint-up(sm) {
   .card_height {

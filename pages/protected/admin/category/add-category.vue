@@ -1,6 +1,6 @@
 <template>
   <div class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create a new category</h1>
+    <h1 class="mt-5 mb-4 font_size_32 col-md-12">Create a new category</h1>
     <form class="wrapper mt-3" @submit.prevent="createCategory">
       <div class="mb-4 input-data">
         <input
@@ -24,7 +24,7 @@
 
       <!-- Subcategory -->
       <div class="sub_width">
-        <p class="font_size_32">Subcategories</p>
+        <p class="font_size_24">Subcategories</p>
 
         <div v-for="(subcatt, index) in formData.subCat">
           <div class="mt-3">
@@ -35,7 +35,7 @@
                 v-model="subcatt.name"
                 required
               />
-              <label class="form-label">Sub cateogary name</label>
+              <label class="form-label">Subcateogary </label>
             </div>
 
             <div class="mb-4 input-data">
@@ -48,13 +48,17 @@
               <label class="form-label">Image URL</label>
             </div>
             <button
-              class="btn btn-primary"
+              class="btn btn-primary mb-2"
               type="button"
               @click="addMoreSubCategory(subcatt.name, subcatt.imageUrl)"
             >
               Add more
             </button>
-            <button class="btn btn-danger" @click="removeSubCategory(subcatt.name)" type="button">
+            <button
+              class="btn btn-danger mb-2"
+              @click="removeSubCategory(subcatt.name)"
+              type="button"
+            >
               Remove
             </button>
           </div>
@@ -64,7 +68,7 @@
       <div class="mt-2 text-center">
         <button
           type="submit"
-          class="btn border border-2 border-primary w-50 mb-2 width_res"
+          class="btn btn-primary text-white w-50 mb-2 width_res"
           :class="!isDisableBtn && 'btn-secondary'"
           :disabled="isDisableBtn"
         >

@@ -3,9 +3,9 @@
     <NavbarLogo />
 
     <div class="row">
-      <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
+      <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-5">
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
+          <img src="~/assets/images/Illustration.svg" class="me-4 w-100" alt="Illustration" />
         </div>
       </div>
       <div class="col-sm-6">
@@ -16,7 +16,7 @@
         />
 
         <form class="wrapper width_res" @submit.prevent="loginLocal">
-          <h1 class="my-5 text-sm-center font_size_36">Login</h1>
+          <h1 class="text-primary text-sm-center fw-bolder my-5 font_size_36">Login</h1>
 
           <div class="mb-4 input-data">
             <input
@@ -54,14 +54,16 @@
           </div>
 
           <div class="text-end">
-            <NuxtLink to="/auth/forgotpassword"> Forgot Password? </NuxtLink>
+            <NuxtLink to="/auth/forgotpassword" class="text-decoration-none">
+              Forgot Password?
+            </NuxtLink>
           </div>
 
           <div class="text-center mt-2">
             <button
               type="submit"
-              class="btn border border-2 border-primary fw-bold px-3 login_btn_width"
-              :class="!form.email || !form.password ? 'btn-gray' : 'btn-secondary'"
+              class="btn border border-2 fw-bold px-3 login_btn_width"
+              :class="!form.email || !form.password ? 'border-primary' : 'btn-primary text-white'"
               :disabled="!form.email || !form.password || !errors.email.isValid"
             >
               Login
@@ -93,7 +95,9 @@
 
               <p v-if="platform === 'web'" class="mt-4 text-center">
                 New to Mockcertified ?
-                <NuxtLink to="/auth/signup" class="fw-bolder">Register</NuxtLink>
+                <NuxtLink to="/auth/signup" class="text-decoration-none text-primary fw-bolder">
+                  Register
+                </NuxtLink>
               </p>
             </div>
           </ClientOnly>
@@ -109,7 +113,7 @@ import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { Capacitor } from '@capacitor/core';
 import { Auth } from 'aws-amplify';
 import { Http } from '@capacitor-community/http';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   layout: 'introLayout',

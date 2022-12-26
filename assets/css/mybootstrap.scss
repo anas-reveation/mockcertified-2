@@ -1,7 +1,11 @@
 @font-face {
   font-family: loraRegular;
-  src: url('../fonts/Lora-Regular.ttf');
+  src: url('../fonts/Poppins-Regular.ttf');
 }
+// @font-face {
+//   font-family: loraRegular;
+//   src: url('../fonts/Lora-Regular.ttf');
+// }
 // All of your custom SCSS variables go first
 $secondary: #becbfa;
 $primary: #6782e1;
@@ -31,12 +35,20 @@ $font-family-sans-serif: loraRegular;
   font-size: 20px;
 }
 
+.font_size_18 {
+  font-size: 18px;
+}
+
 .font_size_16 {
   font-size: 16px;
 }
 
 .font_size_14 {
   font-size: 14px;
+}
+
+.font_size_12 {
+  font-size: 12px;
 }
 
 .font_size_10 {

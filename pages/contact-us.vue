@@ -1,9 +1,9 @@
 <template>
   <div class="container px-4">
-    <h1 class="mt-5 mb-4 font_size_36">Contact Us</h1>
+    <h1 class="text-primary fw-bolder mt-5 mb-4 font_size_36">Contact Us</h1>
     <p>
       To contact us, please send an email to
-      <a href="mailto:contactus@mockcertified.com" class="fw-bolder text-dark">
+      <a href="mailto:contactus@mockcertified.com" class="fw-bolder text-primary">
         contactus@mockcertified.com
       </a>
     </p>
