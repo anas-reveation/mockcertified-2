@@ -131,6 +131,8 @@ export default {
     commit('SET_LOADER', true, { root: true });
 
     try {
+      window.localStorage.clear();
+
       const user = await Auth.signIn(email, password);
       const jwtToken = user.signInUserSession.accessToken.jwtToken;
 
@@ -190,6 +192,14 @@ export default {
         window.localStorage.clear();
         errMsg = 'Please try again later';
       }
+
+      if (
+        err.name === 'NotAuthorizedException' &&
+        err.message === 'Unable to login because of security reasons.'
+      ) {
+        errMsg = 'Account blocked. Go to forgot password to unblock';
+      }
+
       this.$swal.fire({
         toast: true,
         position: 'top-end',

@@ -115,7 +115,7 @@ export default {
     try {
       const allFeaturedTestData = await API.graphql({
         query: listTestsByStatus,
-        variables: { status: 'APPROVED', filter: filter, limit: 3 },
+        variables: { status: 'APPROVED', filter: filter, limit: 10000 },
       });
 
       const allFeaturedTest = allFeaturedTestData.data.listTestsByStatus.items;

@@ -1,7 +1,196 @@
 <template>
   <div>
     <NavbarDesktop class="sticky-top d-none d-md-block" />
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2 d-md-none">
+    <div class="d-md-none px-3 my-3">
+      <div class="row align-items-center justify-content-between">
+        <ClientOnly>
+          <div class="col text-capitalize text-truncate font_size_20">
+            Welcome{{ user && ',' }}
+            <span v-if="user" class="text-primary fw-bolder">{{ user.first_name }}</span>
+          </div>
+        </ClientOnly>
+        <div class="col-2">
+          <img
+            @click="openNav()"
+            src="@/assets/images/profile_icon.svg"
+            height="40"
+            class="opacity-75"
+            width="40"
+            alt="user"
+          />
+        </div>
+      </div>
+    </div>
+    <ClientOnly>
+      <div id="mySidenav" class="border border-primary sidenav">
+        <div class="position-relative">
+          <div class="position-absolute top-0 end-0">
+            <img src="@/assets/images/mobile_navbar_top_curve.svg" alt="vector" />
+          </div>
+        </div>
+        <a href="#" class="closebtn" @click="closeNav()">&times;</a>
+
+        <div class="row px-3 mt-5" :class="user && 'align-items-center'">
+          <div
+            class="col-2"
+            @click="
+              redirect('/dashboard');
+              closeNav();
+            "
+          >
+            <img src="@/assets/images/logo.svg" alt="logo" class="me-2" />
+          </div>
+          <div class="col">
+            <div class="text-black fw-bolder text-truncate">
+              {{ user ? `${user.first_name} ${user.last_name}` : 'Mockcertified' }}
+            </div>
+            <div v-if="user" class="text-primary text-truncate font_size_14">
+              {{ user.email }}
+            </div>
+          </div>
+        </div>
+
+        <div v-if="isAuthenticated" class="px-3">
+          <hr />
+        </div>
+
+        <div class="px-3 mt-2">
+          <ul class="navbar-nav">
+            <li
+              v-if="isAuthenticated"
+              class="rounded-3 py-1"
+              :class="$route.path.match(/\/create-test\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/protected/create-test');
+                closeNav();
+              "
+            >
+              <a class="text-black ms-2">
+                <span class="font_size_18">
+                  <img src="@/assets/images/add.svg" alt="add" />
+                  Create a New Test
+                </span>
+              </a>
+            </li>
+
+            <li
+              v-if="isAuthenticated"
+              class="rounded-3 py-1 mt-2"
+              :class="$route.path.match(/\/created-test\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/protected/created-test');
+                closeNav();
+              "
+            >
+              <a class="text-black ms-2">
+                <span class="font_size_18">
+                  <img src="@/assets/images/created_tests.svg" alt="created_tests" />
+                  Created Tests
+                </span>
+              </a>
+            </li>
+
+            <li
+              v-if="userGroup === 'admins'"
+              class="rounded-3 py-1 mt-2"
+              :class="$route.path.match(/\/admin\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/protected/admin');
+                closeNav();
+              "
+            >
+              <a class="text-black ms-2">
+                <span class="font_size_18">
+                  <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" />
+                  Admin Panel
+                </span>
+              </a>
+            </li>
+
+            <div v-if="isAuthenticated" class="px-3">
+              <hr />
+            </div>
+
+            <li
+              class="rounded-3 py-1 mt-2"
+              :class="$route.path.match(/\/contact-us\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/contact-us');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_18">
+                <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" />
+                Contact Us
+              </span>
+            </li>
+
+            <li
+              class="rounded-3 py-1 mt-2"
+              :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/terms-conditions');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_18">
+                <img src="@/assets/images/terms_conditions.svg" alt="terms_conditions" />
+                Terms and Conditions
+              </span>
+            </li>
+
+            <li
+              class="rounded-3 py-1 mt-2"
+              :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/privacy-policy');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_18">
+                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" />
+                Privacy policy
+              </span>
+            </li>
+
+            <li
+              v-if="!isAuthenticated"
+              class="rounded-3 py-1 mt-2"
+              @click="
+                redirect('/auth/login');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_18">
+                <img src="@/assets/images/logout.svg" alt="logout" />
+                Login
+              </span>
+            </li>
+
+            <li
+              v-if="isAuthenticated"
+              class="rounded-3 py-1 mt-2"
+              @click="
+                userLogOut();
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_18">
+                <img src="@/assets/images/logout.svg" alt="logout" />
+                Logout
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="position-absolute bottom-0 start-0 z_index_curve">
+            <img src="@/assets/images/mobile_navbar_bottom_curve.svg" alt="vector" />
+          </div>
+        </div>
+      </div>
+    </ClientOnly>
+    <!-- <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2 d-md-none">
       <div class="container-fluid px-0">
         <NuxtLink class="navbar-brand ms-2" to="/dashboard">
           <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
@@ -227,7 +416,7 @@
         </div>
       </div>
       <div class="bg-primary w-100 hr_line mt-1" />
-    </nav>
+    </nav> -->
   </div>
 </template>
 
@@ -254,6 +443,14 @@ export default {
     redirect(url) {
       this.$router.push(url);
     },
+
+    openNav() {
+      document.getElementById('mySidenav').style.width = '90%';
+    },
+
+    closeNav() {
+      document.getElementById('mySidenav').style.width = '0';
+    },
   },
 };
 </script>
@@ -263,13 +460,72 @@ export default {
   height: 2px;
 }
 
-.fill_black > a > span > img {
+/* .fill_black > a > span > img {
   filter: saturate(100%) brightness(0);
-}
+} */
 
 .circle {
   border-radius: 50%;
   height: 50px;
   width: 50px;
+}
+
+/* NAVBAR*/
+ul {
+  list-style-type: none;
+}
+
+.bg_color {
+  background-color: #e8ecfb;
+}
+
+.z_index_curve {
+  z-index: -1;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  /* padding-top: 60px; */
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  z-index: 9991;
+}
+
+.sidenav a {
+  /* padding: 8px 8px 8px 32px; */
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 </style>

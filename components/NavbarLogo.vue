@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="position-absolute top-0 end-0 p-2 d-block d-sm-none">
+    <div class="position-absolute top-0 start-0 p-2">
+      <NuxtLink to="/">
+        <img src="@/assets/images/logo_with_name.svg" alt="logo" />
+      </NuxtLink>
+    </div>
+    <!-- <div class="position-absolute top-0 end-0 p-2 d-block d-sm-none">
       <NuxtLink to="/">
         <img src="@/assets/images/logo.svg" alt="logo" />
       </NuxtLink>
@@ -9,6 +14,6 @@
       <NuxtLink to="/">
         <img src="@/assets/images/logo.svg" alt="logo" />
       </NuxtLink>
-    </div>
+    </div> -->
   </div>
 </template>

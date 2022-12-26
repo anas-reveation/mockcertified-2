@@ -25,7 +25,7 @@
             class="mb-3 px-2"
             data-aos="flip-right"
           >
-            <NuxtLink :to="`/category/test/${test.slug}`">
+            <NuxtLink :to="`/category/test/${test.slug}`" v-if="index <= 2">
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
@@ -56,7 +56,7 @@
           <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-secondary border border-2 border-primary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_16 category_box"
+            class="bg-tertiary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_14 category_box"
             data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
@@ -69,11 +69,11 @@
           <div class="col">
             <h2 class="fw-bolder font_size_24">Recently Added</h2>
           </div>
-          <div class="col-4 text-end">
-            <!-- <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
+          <!-- <div class="col-4 text-end">
+            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
               See all
-            </NuxtLink> -->
-          </div>
+            </NuxtLink>
+          </div> -->
         </div>
 
         <VueSlickCarousel
@@ -305,5 +305,9 @@ export default {
 
 .category_box {
   min-width: 65px !important;
+}
+
+.bg-tertiary {
+  background-color: #e9eeff;
 }
 </style>
