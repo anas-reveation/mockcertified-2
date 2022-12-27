@@ -11,7 +11,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark mb-2"
+          class="list-group-item rounded text-primary mb-2 bg_blue"
         >
           {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
         </li>
@@ -34,10 +34,8 @@ export default {
 </script>
 
 <style scoped>
-.bg_green {
-  background: #94e4bd;
-}
-.bg_gray {
-  background: #b3b3b3;
+.bg_blue {
+  background: #ecefff;
+  border: #ecefff;
 }
 </style>

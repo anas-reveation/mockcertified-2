@@ -11,18 +11,15 @@
       :credit="testDetail.credit"
     />
 
-    <div class="text-center">
+    <div class="text-center mt-2">
       <div v-if="testStatus" class="d-sm-flex justify-content-start">
         <NuxtLink
           :to="`/protected/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 width_res"
+          class="btn btn-primary text-white w-50 mt-3 width_res"
         >
           {{ testStatus }}
         </NuxtLink>
-        <button
-          class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 width_res"
-          @click="startTestAgain"
-        >
+        <button class="btn btn-primary text-white w-50 mt-3 width_res" @click="startTestAgain">
           Start over
         </button>
       </div>
@@ -30,7 +27,7 @@
       <NuxtLink
         v-else
         :to="`/protected/test/start-test/${testDetail.id}`"
-        class="btn btn-secondary border border-2 border-primary fw-bold w-50 width_res"
+        class="btn btn-primary text-white w-50 width_res"
       >
         Start
       </NuxtLink>

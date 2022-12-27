@@ -1,7 +1,7 @@
 <template>
   <div v-if="testDetail" class="container">
     <div class="row">
-      <div class="col-lg-6" data-aos="zoom-in">
+      <div class="col-lg-6 mt-4" data-aos="zoom-in">
         <TestDetail
           :title="testDetail.title"
           :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
@@ -96,7 +96,7 @@
               <div class="text-center mt-3">
                 <button
                   type="button"
-                  class="btn btn-secondary border border-2 border-primary"
+                  class="btn btn-primary text-white"
                   data-bs-toggle="modal"
                   data-bs-target="#reviewAnswers"
                 >
@@ -187,7 +187,7 @@
           <div class="text-center mt-3" v-if="attemptedQuestions !== 0">
             <button
               type="button"
-              class="btn btn-secondary border border-2 border-primary"
+              class="btn btn-primary text-white"
               data-bs-toggle="modal"
               data-bs-target="#reviewAnswers"
             >
@@ -201,7 +201,7 @@
     <div class="text-center text-sm-start pb-3">
       <NuxtLink
         :to="`/protected/test/${testDetail.slug}`"
-        class="btn btn-secondary border border-2 border-primary"
+        class="btn btn-primary text-white"
         @click=""
       >
         Start Again

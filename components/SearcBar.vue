@@ -5,7 +5,7 @@
         <img src="@/assets/images/search_icon_gray.svg" alt="search-icon" width="20" height="20" />
       </div>
       <input
-        class="col form-control border border-1 border-secondary rounded-3 me-2"
+        class="col form-control border border-1 border-secondary me-2 search_input_rounded"
         :class="!value && 'bg_input text_indent'"
         type="search"
         maxlength="80"
@@ -72,6 +72,12 @@ export default {
 
 .width_search_mobile {
   width: 55px;
+}
+
+@include media-breakpoint-up(sm) {
+  .search_input_rounded {
+    border-radius: 20px;
+  }
 }
 
 @include media-breakpoint-up(sm) {

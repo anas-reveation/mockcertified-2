@@ -8,7 +8,7 @@
         <div v-if="testInstruction" class="text-center">
           <button
             type="button"
-            class="btn btn-secondary border border-2 border-primary fw-bold w-50 mt-3 mb-3 width_res"
+            class="btn btn-primary text-white w-50 mt-3 mb-3 width_res"
             @click="startTestFun"
           >
             Start
