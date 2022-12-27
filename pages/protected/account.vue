@@ -1,54 +1,30 @@
 <template>
   <div class="container">
     <div v-if="balanceDetail && isFetched">
-      <div class="d-sm-flex align-items-center justify-content-around mt-3">
-        <div class="">
-          <p class="fw-bolder font_size_32">
-            Your Account
-            <br class="d-sm-none" />
-            Balance
-          </p>
-          <p class="font_size_36">
-            <span class="fw-bolder">$</span> <span class="text-muted">{{ balanceDetail }}</span>
-          </p>
+      <div class="mt-5">
+        <div>
+          <span class="text-dark rounded-3 p-2 fw-bold font_size_32 bg_grey me-2">
+            Your Account Balance ${{ balanceDetail }}
+          </span>
         </div>
 
-        <div class="text-center">
-          <button
-            @click="getRedirectlink"
-            class="btn border border-2 border-primary text-primary w-75 width_res"
-          >
-            View your payout
-          </button>
-        </div>
+        <button @click="getRedirectlink" class="btn btn-primary text-white mt-4">
+          View your payout
+        </button>
       </div>
-      <!-- <div class="text-center mt-3">
-      <button class="btn btn-danger border border-dark" type="button" @click="accountDeleteLocal">
-        Delete Account
-      </button>
-    </div> -->
     </div>
     <div v-else-if="isFetched">
-      <div class="d-sm-flex align-items-center justify-content-around mt-3">
-        <div class="">
-          <p class="fw-bolder font_size_32">
-            Your Account Is
-            <br class="d-sm-none" />
-            Not Connected
-          </p>
-          <p class="font_size_36">
-            <span class="fw-bolder">$</span> <span class="text-muted">0.00</span>
-          </p>
-        </div>
+      <div class="mt-5 text-center">
+        <img
+          src="@/assets/images/not_connected.svg"
+          alt="boy_illustration"
+          class="boy_illustration"
+        />
+        <div class="fw-bolder font_size_32">Your Account Is Not Connected $0.00</div>
 
-        <div class="text-center">
-          <NuxtLink
-            to="/protected/create-test"
-            class="btn border border-2 border-primary text-primary w-75 width_res"
-          >
-            Create a Test
-          </NuxtLink>
-        </div>
+        <NuxtLink to="/protected/create-test" class="btn btn-primary text-white mt-4">
+          Create a Test
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -202,6 +178,16 @@ export default {
 @import '~bootstrap/scss/_functions.scss';
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/mixins/_breakpoints';
+
+.bg_grey {
+  background: #f3f3f3;
+}
+
+.boy_illustration {
+  object-fit: contain;
+  height: 230px;
+  width: 230px;
+}
 
 @include media-breakpoint-up(sm) {
   .width_res {

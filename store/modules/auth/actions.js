@@ -197,7 +197,7 @@ export default {
         err.name === 'NotAuthorizedException' &&
         err.message === 'Unable to login because of security reasons.'
       ) {
-        errMsg = 'Account blocked. Go to forgot password to unblock';
+        errMsg = 'Account blocked. Click on "Forgot password" to unblock';
       }
 
       this.$swal.fire({
@@ -207,7 +207,7 @@ export default {
         title: errMsg,
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 7000,
+        timer: 10000,
       });
       return false;
     }

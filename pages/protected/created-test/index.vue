@@ -1,33 +1,43 @@
 <template>
   <div class="container">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-sm-6">Created Test</h1>
-
-    <div class="mb-2 w-100 d-flex justify-content-center width_res">
+    <div class="mb-2 d-flex justify-content-center justify-content-sm-end">
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isApprovedOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isApprovedOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isApprovedOpen')"
       >
         Approved
+        <div v-if="isApprovedOpen" class="bg-primary mt-0 blue_underline" />
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isInProgressOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isInProgressOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isInProgressOpen')"
       >
         Ongoing
+        <div v-if="isInProgressOpen" class="bg-primary mt-0 blue_underline" />
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isRejectedOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isRejectedOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isRejectedOpen')"
       >
         Rejected
+        <div v-if="isRejectedOpen" class="bg-primary mt-0 blue_underline" />
       </div>
     </div>
 
+    <h1 class="mt-2 mb-4 text-primary font_size_32 col-md-12 col-sm-6">Created Test</h1>
+
     <div v-if="!isLoading && !filteredTests.length" class="mt-4 px-3">
-      <h1>No Test Available</h1>
+      <div class="text-center">
+        <img
+          src="@/assets/images/boy_illustration.png"
+          alt="boy_illustration"
+          class="boy_illustration"
+        />
+        <h1 class="fw-bolder mt-3 font_size_32">No Test Available</h1>
+      </div>
     </div>
     <div class="row">
       <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3" data-aos="flip-right">
@@ -211,22 +221,27 @@ export default {
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/mixins/_breakpoints';
 
-.btn-active-color {
-  background-color: #11a49b !important;
-  color: white !important;
+.boy_illustration {
+  object-fit: contain;
+  height: 230px;
+  width: 230px;
 }
 
-.btn-outline-primary {
-  outline-color: #11a49b !important;
-}
-.tabs {
-  border: 1px solid rgb(143, 142, 142);
+.blue_underline {
+  height: 2px;
+  background: #6782e1;
 }
 
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 25% !important;
     margin-left: auto;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .sorting_text_size {
+    font-size: 14px;
   }
 }
 </style>

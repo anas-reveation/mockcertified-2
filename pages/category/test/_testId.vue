@@ -1,6 +1,7 @@
 <template>
   <div v-if="testDetail && !isLoading" class="container">
     <TestDetail
+      class="mt-3"
       data-aos="zoom-in"
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
@@ -15,7 +16,7 @@
     <button
       v-if="sampleQuestions.length"
       type="button"
-      class="btn btn-secondary border border-2 border-primary w-50 mb-2 width_res"
+      class="btn btn-outline-primary w-50 mt-3 mb-2 width_res"
       data-bs-toggle="modal"
       data-bs-target="#reviewQuestion"
     >
@@ -81,10 +82,11 @@
                   type="text"
                   class="border border-2 border-primary rounded form-control width_res"
                   v-model="promocode"
+                  placeholder="Code"
                   required
                 />
                 <button
-                  class="btn border-2 border-dark text-dark mt-2 bg_grey width_res"
+                  class="btn btn-primary border-2 text-white mt-2 width_res"
                   :disabled="!promocode"
                 >
                   Apply Code
@@ -357,13 +359,6 @@ export default {
 @import '~bootstrap/scss/_functions.scss';
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/mixins/_breakpoints';
-.bg_grey {
-  background-color: #f3f3f3;
-}
-
-.grey_clr {
-  color: #7f7f7f;
-}
 
 @include media-breakpoint-up(sm) {
   .width_res {

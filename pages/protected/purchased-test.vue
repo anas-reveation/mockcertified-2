@@ -1,57 +1,23 @@
 <template>
   <div class="container">
     <div v-if="isFetched && !filteredTests.length">
-      <div class="d-sm-none">
-        <h1 class="fw-bold font_size_32">No Test Available</h1>
-        <p v-if="platform === 'web'">
-          Want to buy new tests?
-          <br />
-          Click on the button below!
+      <div class="text-center mt-2">
+        <img
+          src="@/assets/images/boy_illustration.png"
+          alt="boy_illustration"
+          class="boy_illustration"
+        />
+        <h1 class="fw-bolder mt-2 font_size_32">No Test Available</h1>
+        <p v-if="platform === 'web'" class="text-muted">
+          Want to buy new tests? Click on the button below!
         </p>
-
-        <div class="text-center">
-          <img
-            src="@/assets/images/boy_illustration.png"
-            alt="boy_illustration"
-            class="boy_illustration"
-          />
-          <NuxtLink
-            v-if="platform === 'web'"
-            to="/category"
-            class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
-          >
-            Buy a test
-          </NuxtLink>
-        </div>
-      </div>
-      <!-- Desktop -->
-      <div class="d-none d-sm-block">
-        <div class="row mt-5">
-          <div class="col-6">
-            <h1 class="fw-bold font_size_32">No Test Available</h1>
-            <p v-if="platform === 'web'">
-              Want to buy new tests?
-              <br />
-              Click on the button below!
-            </p>
-            <NuxtLink
-              v-if="platform === 'web'"
-              to="/category"
-              class="btn btn-secondary border border-2 border-primary rounded mt-4 w-50"
-            >
-              Buy a test
-            </NuxtLink>
-          </div>
-          <div class="col-6">
-            <div class="text-center">
-              <img
-                src="@/assets/images/boy_illustration.png"
-                alt="boy_illustration"
-                class="boy_illustration"
-              />
-            </div>
-          </div>
-        </div>
+        <NuxtLink
+          v-if="platform === 'web'"
+          to="/category"
+          class="btn btn-primary text-white rounded"
+        >
+          Buy a test
+        </NuxtLink>
       </div>
     </div>
 
@@ -230,7 +196,7 @@ export default {
 <style scoped>
 .boy_illustration {
   object-fit: contain;
-  height: 250px;
-  width: 250px;
+  height: 230px;
+  width: 230px;
 }
 </style>
