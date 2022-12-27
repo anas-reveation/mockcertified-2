@@ -1,11 +1,12 @@
 <template>
   <div v-show="!isLoading" class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create new test</h1>
     <form
       v-if="user && user.stripe_seller_id && isAccountActive"
       class="wrapper mt-3"
       @submit.prevent="testSubmit"
     >
+      <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create new test</h1>
+
       <div class="mb-4 input-data">
         <input
           type="text"
@@ -169,15 +170,20 @@
         </div>
       </div>
     </form>
+
     <div v-else-if="!isDisable">
-      <div>
-        <label><h2>Please create your stripe express seller account</h2></label>
-      </div>
-      <div class="mb-2">
+      <div class="mt-5 text-center">
+        <img
+          src="@/assets/images/Illustration.svg"
+          alt="boy_illustration"
+          class="boy_illustration"
+        />
+        <h2 class="fw-bolder font_size_32">Please create your stripe express seller account</h2>
+
         <button
           type="button"
           @click="redirectToStripe"
-          class="btn btn-secondary border border-2 border-primary"
+          class="btn btn-primary text-white mt-4"
           :disabled="isDisable"
         >
           Connect
@@ -613,7 +619,7 @@ export default {
             questionObj.options.length > 5)
         ) {
           isFormatted = false;
-          const formateErrorMsg = 'Invalid file formatted';
+          const formateErrorMsg = 'Invalid file format';
           this.errors.fileError.msg = formateErrorMsg;
           this.$swal.fire({
             toast: true,

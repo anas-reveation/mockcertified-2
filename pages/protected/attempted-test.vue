@@ -1,86 +1,45 @@
 <template>
   <div class="container">
     <div>
-      <div class="mb-2 w-100 d-flex justify-content-center width_res">
+      <div class="mb-2 d-flex justify-content-center justify-content-sm-end">
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-          :class="sortingTabName === 'IN_PROGRESS' && 'bg-secondary text-dark'"
+          class="p-1 m-1 cursor_pointer sorting_text_size"
+          :class="sortingTabName === 'IN_PROGRESS' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('IN_PROGRESS')"
         >
           Ongoing
+          <div v-if="sortingTabName === 'IN_PROGRESS'" class="bg-primary mt-0 blue_underline" />
         </div>
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-          :class="sortingTabName === 'COMPLETED' && 'bg-secondary text-dark'"
+          class="p-1 m-1 cursor_pointer sorting_text_size"
+          :class="sortingTabName === 'COMPLETED' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('COMPLETED')"
         >
           Completed
+          <div v-if="sortingTabName === 'COMPLETED'" class="bg-primary mt-0 blue_underline" />
         </div>
         <div
-          class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-          :class="sortingTabName === 'ABORTED' && 'bg-secondary text-dark'"
+          class="p-1 m-1 cursor_pointer sorting_text_size"
+          :class="sortingTabName === 'ABORTED' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('ABORTED')"
         >
           Aborted
+          <div v-if="sortingTabName === 'ABORTED'" class="bg-primary mt-0 blue_underline" />
         </div>
       </div>
 
       <div v-if="isFetched && !filteredTests.length" class="px-3">
-        <div class="d-sm-none">
-          <h1 class="fw-bold font_size_32">No Test Available</h1>
-          <p>
-            Want to give a test?
-            <br />
-            Click on the button below!
-          </p>
-          <div class="text-center">
-            <img
-              src="@/assets/images/girl_illustration.png"
-              alt="illustration"
-              class="girl_illustration"
-            />
-
-            <br />
-
-            <NuxtLink
-              to="/protected/purchased-test"
-              class="btn btn-secondary border border-2 border-primary rounded mt-4"
-            >
-              Attempt a test
-            </NuxtLink>
-          </div>
-        </div>
-
-        <!-- Desktop -->
-        <div class="d-none d-sm-block">
-          <div class="row mt-5">
-            <div class="col-6">
-              <h1 class="fw-bold font_size_32">No Test Available</h1>
-              <p>
-                Want to give a test?
-                <br />
-                Click on the button below!
-              </p>
-
-              <NuxtLink
-                to="/protected/purchased-test"
-                class="btn btn-secondary border border-2 border-primary rounded mt-4"
-              >
-                Attempt a test
-              </NuxtLink>
-            </div>
-            <div class="col-6">
-              <div class="text-center">
-                <img
-                  src="@/assets/images/girl_illustration.png"
-                  alt="illustration"
-                  class="girl_illustration"
-                />
-
-                <br />
-              </div>
-            </div>
-          </div>
+        <div class="text-center mt-2">
+          <img
+            src="@/assets/images/girl_illustration.png"
+            alt="illustration"
+            class="girl_illustration"
+          />
+          <h1 class="fw-bolder mt-2 font_size_32">No Test Available</h1>
+          <p class="text-muted">Give a test from your purchased test</p>
+          <NuxtLink to="/protected/purchased-test" class="btn btn-primary text-white rounded">
+            Attempt A Test
+          </NuxtLink>
         </div>
       </div>
       <div v-else>
@@ -320,14 +279,25 @@ export default {
 
 .girl_illustration {
   object-fit: contain;
-  height: 200px;
-  width: 200px;
+  height: 230px;
+  width: 230px;
+}
+
+.blue_underline {
+  height: 2px;
+  background: #6782e1;
 }
 
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 25% !important;
     margin-left: auto;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .sorting_text_size {
+    font-size: 14px;
   }
 }
 </style>

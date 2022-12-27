@@ -1,6 +1,7 @@
 <template>
   <div v-if="testDetail" class="container">
     <TestDetail
+      class="mt-3"
       :title="testDetail.title"
       :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
       ${totalMarks} marks`"
@@ -12,8 +13,10 @@
       :rejectDescription="testDetail.reject_description"
     />
 
-    <div v-for="(question, index) in testQuestions" :key="index">
-      <TestQuestion :question="question" :index="index + 1" />
+    <div class="mt-3">
+      <div v-for="(question, index) in testQuestions" :key="index">
+        <TestQuestion :question="question" :index="index + 1" />
+      </div>
     </div>
   </div>
 </template>

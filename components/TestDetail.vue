@@ -1,80 +1,69 @@
 <template>
   <div>
-    <div class="row justify-content-between">
-      <h1 class="col fw-bolder pe-0 font_size_32">{{ title }}</h1>
-      <div v-if="shareFunc" class="col-2 text-end">
-        <img
-          src="@/assets/images/share_icon.svg"
-          alt="share"
-          height="30"
-          width="30"
-          @click="shareFunc"
-        />
+    <div class="shawdow_card rounded-1 position-relative p-2">
+      <div class="row mt-1">
+        <h1 class="col-7 fw-bolder font_size_24">{{ title }}</h1>
+
+        <p class="col-5 text-capitalize fw-bolder text-end" v-if="price">
+          <span class="bg_price rounded-pill px-2 py-1">{{ formatedPrice }}</span>
+        </p>
+        <p class="col-5 fw-bolder text-end" v-else-if="priceZero">
+          <span class="text-success rounded-pill px-2 py-1 bg_price_green">Free</span>
+        </p>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col">
+            <span v-if="shortDescription" class="text-primary font_size_16">
+              {{ shortDescription }}
+            </span>
+          </div>
+          <div v-if="shareFunc" class="col-2 text-end">
+            <img
+              src="@/assets/images/share_icon.svg"
+              alt="share"
+              height="30"
+              width="30"
+              class="cursor_pointer"
+              @click="shareFunc"
+            />
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <h3 class="fw-bolder font_size_20">Description</h3>
+          <p class="font_size_16">
+            {{ seeMore ? description : truncatePara(description) }}
+            <span v-if="wordLength > wordCount">
+              <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder">See more</span>
+              <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder"
+                >...See less</span
+              >
+            </span>
+          </p>
+        </div>
+
+        <div>
+          <h3 class="fw-bolder font_size_20">Created By</h3>
+          <div class="text-primary fw-bolder" v-if="fullName">{{ fullName }}</div>
+        </div>
+      </div>
+
+      <div v-if="credit">
+        <h3 class="fw-bolder font_size_20">Test Material Reference</h3>
+        <p class="font_size_16">dsaddsda</p>
+      </div>
+
+      <div v-if="rejectDescription">
+        <h3 class="fw-bolder font_size_20">Rejected</h3>
+        <p class="font_size_16">
+          {{ rejectDescription }}
+        </p>
       </div>
     </div>
-    <p class="my-2 font_family_roboto font_size_16">
-      {{ shortDescription }}
-    </p>
 
     <slot />
-
-    <div class="row justify-content-between mt-3">
-      <h3 class="fw-bolder font_size_20">Created by:</h3>
-      <div class="col-9 text-capitalize fw-bolder">
-        <img
-          src="@/assets/images/profile_icon.svg"
-          alt="user"
-          class="me-1 mb-1"
-          height="30"
-          width="30"
-        />
-        {{ fullName }}
-        <span v-if="price" class="text-primary fw-bolder ms-2 d-none d-sm-inline">
-          USD {{ formatedPrice }}
-        </span>
-        <span
-          v-else-if="priceZero"
-          class="text-primary fw-bolder text-end text-success d-none d-sm-inline"
-        >
-          Free
-        </span>
-      </div>
-
-      <span v-if="price" class="col-3 text-primary fw-bolder text-end d-sm-none">
-        {{ formatedPrice }}
-      </span>
-      <span
-        v-else-if="priceZero"
-        class="col-3 text-primary fw-bolder text-end text-success d-sm-none"
-      >
-        Free
-      </span>
-    </div>
-
-    <div class="mt-3">
-      <h3 class="fw-bolder font_size_20">Description</h3>
-      <p class="font_size_16">
-        {{ seeMore ? description : truncatePara(description) }}
-        <span v-if="wordLength > wordCount">
-          <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder">See more</span>
-          <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder">...See less</span>
-        </span>
-      </p>
-    </div>
-
-    <div v-if="credit" class="mt-3">
-      <h3 class="fw-bolder font_size_20">Test Material Reference</h3>
-      <p class="font_size_16">
-        {{ credit }}
-      </p>
-    </div>
-
-    <div v-if="rejectDescription" class="mt-3">
-      <h3 class="fw-bolder font_size_20">Rejected</h3>
-      <p class="font_size_16">
-        {{ rejectDescription }}
-      </p>
-    </div>
   </div>
 </template>
 
@@ -137,3 +126,25 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
+.shawdow_card {
+  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+}
+
+.bg_price {
+  background: rgba(255, 193, 7, 0.21);
+}
+
+.bg_price_green {
+  background: rgba(76, 175, 80, 0.3);
+}
+
+.card_width {
+  min-width: 350px;
+}
+</style>
