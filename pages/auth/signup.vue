@@ -562,15 +562,27 @@ export default {
           timer: 7000,
         });
       } catch (err) {
-        this.$swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'error',
-          title: 'Something went wrong',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 7000,
-        });
+        if ((err.errors[0].errorType = 'DynamoDB:ConditionalCheckFailedException')) {
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Successfully registered account',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 7000,
+          });
+        } else {
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 7000,
+          });
+        }
       }
     },
 
