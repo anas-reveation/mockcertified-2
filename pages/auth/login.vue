@@ -16,9 +16,9 @@
         />
 
         <form class="wrapper width_res" @submit.prevent="loginLocal">
-          <h1 class="text-primary text-sm-center fw-bolder my-5 font_size_36">Login</h1>
+          <h1 class="text-primary text-sm-center fw-bolder my-3 font_size_36">Login</h1>
 
-          <div class="mb-4 input-data">
+          <div class="mb-2 input-data">
             <input
               type="text"
               class="border border-2 border-primary rounded py-3"

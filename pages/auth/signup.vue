@@ -20,7 +20,7 @@
           class="wrapper width_res"
           @submit.prevent="registerLocal"
         >
-          <h1 class="text-primary text-sm-center fw-bolder mt-5 mb-4 font_size_36">Register</h1>
+          <h1 class="text-primary text-sm-center fw-bolder mt-3 mb-3 font_size_36">Register</h1>
           <div class="mb-4 input-data">
             <input
               type="text"
