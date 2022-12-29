@@ -550,8 +550,8 @@ export default {
         }
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
-        await this.createUserLocal();
         this.$router.push('/dashboard');
+        await this.createUserLocal();
         this.$swal.fire({
           toast: true,
           position: 'top-end',
