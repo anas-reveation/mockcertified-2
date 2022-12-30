@@ -474,9 +474,15 @@ export default {
       // Array of question that is attempted
       const options = res.question.options;
       const parsedData = JSON.parse(options);
+      const ordered = Object.keys(parsedData)
+        .sort()
+        .reduce((obj, key) => {
+          obj[key] = parsedData[key];
+          return obj;
+        }, {});
       const questionDetail = {
         ...res.question,
-        options: Object.entries(parsedData),
+        options: Object.entries(ordered),
         resultStatus: res.result_status,
         userInput: res.user_input,
       };

@@ -818,11 +818,17 @@ export default {
         // Array of question that is attempted
         const options = res.options;
         const parsedData = JSON.parse(options);
+        const ordered = Object.keys(parsedData)
+          .sort()
+          .reduce((obj, key) => {
+            obj[key] = parsedData[key];
+            return obj;
+          }, {});
         const questionDetail = {
           ...res,
           // spelling mistake
           explainantion: res.explanation,
-          options: Object.entries(parsedData),
+          options: Object.entries(ordered),
         };
         this.reviewQuestions.push(questionDetail);
       });
