@@ -204,28 +204,26 @@ export default {
     commit('SET_LOADER', true, { root: true });
     const categoryDetail = payload;
     try {
-      // let categorySlug = categoryDetail.name
-      //   .toLowerCase()
-      //   .replace(/ /g, '-')
-      //   .replace(/[^\w-]+/g, '');
-
-      let categorySlug = categoryDetail.id;
+      let categorySlug = categoryDetail.name
+        .toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/[^\w-]+/g, '');
 
       let isSlugAvailable = false;
       isSlugAvailable = await dispatch('getCategoryBySlug', categorySlug);
-      // if (isSlugAvailable) {
-      //   commit('SET_LOADER', false, { root: true });
-      //   this.$swal.fire({
-      //     toast: true,
-      //     position: 'top-end',
-      //     icon: 'error',
-      //     title: `${categoryDetail.name} category is already exist`,
-      //     showConfirmButton: false,
-      //     timerProgressBar: true,
-      //     timer: 7000,
-      //   });
-      //   return false;
-      // }
+      if (isSlugAvailable && categoryDetail.imageUrl === isSlugAvailable.image) {
+        commit('SET_LOADER', false, { root: true });
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: `${categoryDetail.name} category is already exist`,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 7000,
+        });
+        return false;
+      }
 
       const input = {
         id: categoryDetail.categoryId,
@@ -375,7 +373,7 @@ export default {
       const categoryArray = testQueryData.data.listCategories.items;
       if (categoryArray.length && categoryArray[0].id) {
         // Slug is available
-        return categoryArray[0].id;
+        return categoryArray[0];
       }
       // Slug is not available
       return false;
