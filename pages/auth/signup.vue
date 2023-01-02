@@ -20,7 +20,7 @@
           class="wrapper width_res"
           @submit.prevent="registerLocal"
         >
-          <h1 class="text-primary text-sm-center fw-bolder mt-5 mb-4 font_size_36">Register</h1>
+          <h1 class="text-primary text-sm-center fw-bolder mt-3 mb-3 font_size_36">Register</h1>
           <div class="mb-4 input-data">
             <input
               type="text"
@@ -550,8 +550,8 @@ export default {
         }
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
-        await this.createUserLocal();
         this.$router.push('/dashboard');
+        await this.createUserLocal();
         this.$swal.fire({
           toast: true,
           position: 'top-end',
@@ -562,15 +562,27 @@ export default {
           timer: 7000,
         });
       } catch (err) {
-        this.$swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'error',
-          title: 'Something went wrong',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          timer: 7000,
-        });
+        if ((err.errors[0].errorType = 'DynamoDB:ConditionalCheckFailedException')) {
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Successfully registered account',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 7000,
+          });
+        } else {
+          this.$swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Something went wrong',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            timer: 7000,
+          });
+        }
       }
     },
 

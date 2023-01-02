@@ -257,9 +257,15 @@ export default {
           }
           // if (!isAlredyGivenAnswer) {
           const parsedData = JSON.parse(ques.options);
+          const ordered = Object.keys(parsedData)
+            .sort()
+            .reduce((obj, key) => {
+              obj[key] = parsedData[key];
+              return obj;
+            }, {});
           return {
             ...ques,
-            options: Object.entries(parsedData),
+            options: Object.entries(ordered),
             userInput,
           };
           // }

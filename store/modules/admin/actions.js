@@ -211,7 +211,7 @@ export default {
 
       let isSlugAvailable = false;
       isSlugAvailable = await dispatch('getCategoryBySlug', categorySlug);
-      if (isSlugAvailable) {
+      if (isSlugAvailable && categoryDetail.imageUrl === isSlugAvailable.image) {
         commit('SET_LOADER', false, { root: true });
         this.$swal.fire({
           toast: true,
@@ -373,7 +373,7 @@ export default {
       const categoryArray = testQueryData.data.listCategories.items;
       if (categoryArray.length && categoryArray[0].id) {
         // Slug is available
-        return categoryArray[0].id;
+        return categoryArray[0];
       }
       // Slug is not available
       return false;
