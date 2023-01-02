@@ -234,6 +234,7 @@ export default {
     await this.getUserTests();
     this.filteredTests = this.allAttemptedTests;
     this.isFetched = true;
+    this.changeTabName('IN_PROGRESS');
   },
 
   methods: {

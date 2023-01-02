@@ -69,7 +69,7 @@
         <button
           type="submit"
           class="btn btn-primary text-white w-50 mb-2 width_res"
-          :class="!isDisableBtn && 'btn-secondary'"
+          :class="isDisableBtn ? 'btn-secondary' : ''"
           :disabled="isDisableBtn"
         >
           Submit
