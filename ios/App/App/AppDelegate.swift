@@ -1,3 +1,4 @@
+import Instabug
 import UIKit
 import Capacitor
 import FBSDKCoreKit
@@ -8,6 +9,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        Instabug.sdkDebugLogsLevel = .verbose
+        Instabug.start(withToken: "29dffddb67514db2fafde0075bfb3fda", invocationEvents: [.shake, .screenshot])
+
         // Override point for customization after application launch.
         FBSDKCoreKit.ApplicationDelegate.shared.application(
             application,
