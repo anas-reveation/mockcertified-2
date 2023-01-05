@@ -85,6 +85,17 @@ More information about the usage of this directory in [the documentation](https:
 
 ---
 
+## 'NOTE: npx cap sync'
+
+While npx cap sync for IOS it would remove "pod 'Instabug'" from Podfile. If by mistake you have done that please refer code below:
+
+```
+pod 'Instabug'
+pod install
+
+Since CocoaPods might not always download the latest version of the SDK when using pod install, we recommend that you also run pod update Instabug after the installation has completed or whenever you would like to update Instabug.
+```
+
 ## 'For Deep Link'
 
 To setup deep links [the documentation](https://devdactic.com/setup-deep-links-capacitor/).
