@@ -35,11 +35,11 @@
         },
         "checkAnswer": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/checkAnswer-56335277646241456438-build.zip"
+          "s3Key": "amplify-builds/checkAnswer-726b77317033612f4364-build.zip"
         },
         "paymentSuccessStripe": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/paymentSuccessStripe-4b705576344c67306668-build.zip",
+          "s3Key": "amplify-builds/paymentSuccessStripe-615773492f4743697a74-build.zip",
           "stripeSecretKey": "sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E",
           "stripePublishableKey": "pk_test_51LO8AEGrqGT9imAkrO0vB9QgNP4AVAY5DzEPidxLxoPBIZogIHpcGHCNOx2GOVtI1IlF4PsP4Sm012NYYp5A2g1S00Hw7dGqMo",
           "signingSecretWebhook": "whsec_sYaXslaUKwxdtC22RYAIzgNsiWleHntn"
