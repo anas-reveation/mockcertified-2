@@ -233,8 +233,8 @@ exports.handler = async (event) => {
         if (!usedPromocodes.includes(result.id)) {
           if (result.discount_percentage) {
             const testDetail = await getTestDetail(testId);
-            var discount = Math.round(testDetail.price * result.discount_percentage);
-            testDetail.price = Math.round(testDetail.price * 100 - discount);
+            var discount = Math.round(testDetail.price * result.discount_percentage) / 100;
+            testDetail.price = Math.round(testDetail.price - discount);
             const sessionData = await stripePayment(
               testDetail.title,
               testDetail.price,
