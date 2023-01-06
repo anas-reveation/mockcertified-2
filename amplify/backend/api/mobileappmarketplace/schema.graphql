@@ -225,4 +225,3 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
- 
