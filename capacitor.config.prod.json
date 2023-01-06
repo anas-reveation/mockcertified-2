@@ -11,6 +11,10 @@
     "contentInset": "always"
   },
   "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 4000,
+      "launchAutoHide": true
+    },
     "GoogleAuth": {
       "scopes": ["profile", "email", "openid"],
       "serverClientId": "584395129581-4jensnf5hileelk0hifr198e2g5sdcjk.apps.googleusercontent.com",
