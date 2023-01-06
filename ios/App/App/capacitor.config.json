@@ -11,6 +11,10 @@
 		"contentInset": "always"
 	},
 	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 4000,
+			"launchAutoHide": true
+		},
 		"GoogleAuth": {
 			"scopes": [
 				"profile",
