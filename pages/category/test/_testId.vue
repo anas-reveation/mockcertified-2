@@ -29,7 +29,7 @@
         data-bs-toggle="modal"
         data-bs-target="#reviewQuestion"
       >
-        Review Sample Questions
+        <span class="font_size_16">Review Sample Questions</span>
       </button>
 
       <!-- Start Modal -->
@@ -66,8 +66,8 @@
       <!-- End Modal -->
 
       <div v-if="isPurchased || isUserOwner">
-        <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
-        <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
+        <span v-if="isPurchased" class="text-primary font_size_16">• Already Purchased</span>
+        <span v-if="isUserOwner" class="text-primary font_size_16">• You're the creator</span>
       </div>
 
       <div v-else class="text-center">
@@ -99,7 +99,7 @@
                     class="btn btn-primary border-2 text-white mt-2 width_res"
                     :disabled="!promocode"
                   >
-                    Apply Code
+                    <span class="font_size_16">Apply Code</span>
                   </button>
                 </div>
               </form>
@@ -111,7 +111,7 @@
                 class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
                 @click="buyNowLocal"
               >
-                Buy Now
+                <span class="font_size_16">Buy Now</span>
               </button>
             </div>
           </div>
@@ -122,7 +122,7 @@
               class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
               @click="redirectLogin"
             >
-              Login
+              <span class="font_size_16">Login</span>
             </button>
           </div>
         </div>

@@ -4,7 +4,7 @@
     <div class="d-lg-none px-3 my-3 container">
       <div class="row align-items-center justify-content-between">
         <ClientOnly>
-          <div class="col text-capitalize text-truncate font_size_20">
+          <div class="col text-capitalize text-truncate font_size_16">
             Welcome{{ user && ',' }}
             <span v-if="user" class="text-primary fw-bolder">{{ user.first_name }}</span>
           </div>
@@ -13,10 +13,8 @@
           <img
             @click="openNav()"
             src="@/assets/images/profile_icon.svg"
-            height="40"
-            class="opacity-75"
-            width="40"
-            alt="user"
+            alt="profile icon"
+            class="opacity-75 profile_icon"
           />
         </div>
       </div>
@@ -41,7 +39,7 @@
             <img src="@/assets/images/logo.svg" alt="logo" class="me-2" />
           </div>
           <div class="col" :class="!user && 'd-flex align-items-center'">
-            <div class="text-black fw-bolder text-truncate">
+            <div class="text-black fw-bolder text-truncate font_size_16">
               {{ user ? `${user.first_name} ${user.last_name}` : 'Mockcertified' }}
             </div>
             <div v-if="user" class="text-primary text-truncate font_size_14">
@@ -66,7 +64,7 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_16">
+                <span class="font_size_14">
                   <img src="@/assets/images/add.svg" alt="add" class="me-1" />
                   Create a New Test
                 </span>
@@ -83,7 +81,7 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_16">
+                <span class="font_size_14">
                   <img src="@/assets/images/created_tests.svg" alt="created_tests" class="me-1" />
                   Created Tests
                 </span>
@@ -100,7 +98,7 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_16">
+                <span class="font_size_14">
                   <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1" />
                   Admin Panel
                 </span>
@@ -119,7 +117,7 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_16">
+              <span class="text-black ms-2 font_size_14">
                 <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" class="me-1" />
                 Contact Us
               </span>
@@ -133,7 +131,7 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_16">
+              <span class="text-black ms-2 font_size_14">
                 <img
                   src="@/assets/images/terms_conditions.svg"
                   alt="terms_conditions"
@@ -151,7 +149,7 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_16">
+              <span class="text-black ms-2 font_size_14">
                 <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1" />
                 Privacy policy
               </span>
@@ -165,7 +163,7 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_16">
+              <span class="text-black ms-2 font_size_14">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
                 Login
               </span>
@@ -179,7 +177,7 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_16">
+              <span class="text-black ms-2 font_size_14">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
                 Logout
               </span>
@@ -459,7 +457,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .hr_line {
   height: 2px;
 }
@@ -530,6 +530,13 @@ ul {
   }
   .sidenav a {
     font-size: 18px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .profile_icon {
+    width: 28px;
+    height: 28px;
   }
 }
 </style>
