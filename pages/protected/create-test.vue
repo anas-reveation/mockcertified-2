@@ -1,193 +1,229 @@
 <template>
-  <div v-show="!isLoading" class="container container_width">
-    <form
-      v-if="user && user.stripe_seller_id && isAccountActive"
-      class="wrapper mt-3"
-      @submit.prevent="testSubmit"
-    >
-      <h1 class="mt-5 mb-4 font_size_36 col-md-12">Create new test</h1>
+  <div class="container">
+    <div v-if="isLoaderHidden" class="wrapper mt-3">
+      <AnimatedPlaceholder class="mt-5 mb-4" width="200px" />
+      <div class="row" v-for="i in 3">
+        <div class="col-12 col-md-6 mb-4">
+          <AnimatedPlaceholder width="100%" />
+        </div>
 
-      <div class="mb-4 input-data">
-        <input
-          type="text"
-          title="It should contain only text"
-          class="border border-2 border-primary rounded form-control"
-          v-model="formData.title"
-          required
-        />
-        <label class="form-label">Title</label>
-      </div>
-
-      <div class="mb-4 input-data">
-        <input
-          type="text"
-          class="border border-2 border-primary rounded form-control"
-          v-model="formData.description"
-          required
-        />
-        <label class="form-label">Description</label>
-      </div>
-
-      <div class="mb-4 input-data">
-        <select
-          class="form-select border border-2 border-primary rounded text-capitalize"
-          aria-label="Default select example"
-          v-model="formData.categoryId"
-        >
-          <option selected value="default" disabled>Select Category</option>
-          <option
-            v-for="(category, index) in allCategories"
-            v-if="category"
-            :key="index"
-            :value="category.id"
-            class="text-capitalize"
-          >
-            {{ category.name }}
-          </option>
-        </select>
-        <label class="form-label fixed_up">Category</label>
-      </div>
-
-      <div class="mb-4 input-data">
-        <select
-          class="form-select border border-2 border-primary rounded text-capitalize"
-          aria-label="Default select example"
-          v-model="formData.subCategoryId"
-        >
-          <option selected value="default" disabled>Select Sub Category</option>
-          <option
-            v-for="(subCategory, index) in allSubCategories"
-            :key="index"
-            :value="subCategory.id"
-            class="text-capitalize"
-          >
-            {{ subCategory.name }}
-          </option>
-        </select>
-        <label class="form-label fixed_up">Sub Category</label>
-      </div>
-
-      <div class="mb-4 input-data">
-        <input
-          type="number"
-          class="border border-2 border-primary rounded form-control"
-          step="any"
-          @keydown="numberValidation"
-          v-model="formData.price"
-          required
-        />
-        <label class="form-label">
-          Price ($ USD)
-          <img
-            v-if="!errors.price.isValid"
-            src="@/assets/images/i_button.svg"
-            alt="i-button"
-            @click="errors.price.isVisiable = !errors.price.isVisiable"
-          />
-        </label>
-        <div
-          v-if="errors.price.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-        >
-          {{ errors.price.msg }}
+        <div class="col-12 col-md-6 mb-4">
+          <AnimatedPlaceholder width="100%" />
         </div>
       </div>
+    </div>
 
-      <div class="mb-4 input-data">
-        <input
-          type="number"
-          class="border border-2 border-primary rounded form-control"
-          min="1"
-          @keydown="numberValidation"
-          v-model="formData.timeLimit"
-          required
-        />
-        <label class="form-label">
-          Time Limit (in min)
-          <img
-            v-if="!errors.timeLimit.isValid"
-            src="@/assets/images/i_button.svg"
-            alt="i-button"
-            @click="errors.timeLimit.isVisiable = !errors.timeLimit.isVisiable"
-          />
-        </label>
-        <div
-          v-if="errors.timeLimit.isVisiable"
-          class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-        >
-          {{ errors.timeLimit.msg }}
+    <div v-show="!isLoading">
+      <form
+        v-if="user && user.stripe_seller_id && isAccountActive"
+        class="wrapper mt-3"
+        @submit.prevent="testSubmit"
+      >
+        <h1 class="fw-bolder mt-5 mb-4 font_size_24">Create new test</h1>
+
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="text"
+              title="It should contain only text"
+              class="border border-2 border-grey rounded form-control"
+              v-model="formData.title"
+              required
+            />
+            <label class="form-label fixed_up">Title</label>
+          </div>
+
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-grey rounded form-control"
+              v-model="formData.description"
+              required
+            />
+            <label class="form-label fixed_up">Description</label>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-4 input-data">
-        <input
-          type="text"
-          class="border border-2 border-primary rounded form-control"
-          v-model="formData.credit"
-        />
-        <label class="form-label">Test Material Reference (optional)</label>
-      </div>
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4">
+            <label class="ms-2 font_size_16">Category</label>
+            <select
+              class="form-select text-capitalize border border-white"
+              aria-label="Default select example"
+              v-model="formData.categoryId"
+            >
+              <option selected value="default" disabled>Select Category</option>
+              <option
+                v-for="(category, index) in allCategories"
+                v-if="category"
+                :key="index"
+                :value="category.id"
+                class="text-capitalize"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+            <hr class="m-0" />
+          </div>
 
-      <div class="mb-4 input-data border border-2 border-primary rounded">
-        <input
-          class="container"
-          type="file"
-          ref="fileupload"
-          @change="uploadFile"
-          @click="resetFileRef"
-        />
-        <label class="form-label fixed_up">Question list (csv file only)</label>
-      </div>
+          <div class="col-12 col-md-6 mb-4">
+            <label class="ms-2 font_size_16">Sub Category</label>
 
-      <button type="button" class="btn text-white mb-3 bg_clr_blue" @click="downloadCsv">
-        Download template
-      </button>
+            <select
+              class="form-select text-capitalize border border-white"
+              aria-label="Default select example"
+              v-model="formData.subCategoryId"
+            >
+              <option selected value="default" disabled>Select Sub Category</option>
+              <option
+                v-for="(subCategory, index) in allSubCategories"
+                :key="index"
+                :value="subCategory.id"
+                class="text-capitalize"
+              >
+                {{ subCategory.name }}
+              </option>
+            </select>
+            <hr class="m-0" />
+          </div>
+        </div>
 
-      <div class="text-center row">
-        <div class="col-sm-6">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="number"
+              class="border border-2 border-grey rounded form-control"
+              step="any"
+              @keydown="numberValidation"
+              v-model="formData.price"
+              required
+            />
+            <label class="form-label fixed_up">
+              Price ($USD)
+              <img
+                v-if="!errors.price.isValid"
+                src="@/assets/images/i_button.svg"
+                alt="i-button"
+                @click="errors.price.isVisiable = !errors.price.isVisiable"
+              />
+            </label>
+            <div
+              v-if="errors.price.isVisiable"
+              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+            >
+              {{ errors.price.msg }}
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="number"
+              class="border border-2 border-grey rounded form-control"
+              min="1"
+              @keydown="numberValidation"
+              v-model="formData.timeLimit"
+              required
+            />
+            <label class="form-label fixed_up">
+              Time Limit (in min)
+              <img
+                v-if="!errors.timeLimit.isValid"
+                src="@/assets/images/i_button.svg"
+                alt="i-button"
+                @click="errors.timeLimit.isVisiable = !errors.timeLimit.isVisiable"
+              />
+            </label>
+            <div
+              v-if="errors.timeLimit.isVisiable"
+              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+            >
+              {{ errors.timeLimit.msg }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-grey rounded form-control"
+              v-model="formData.credit"
+            />
+            <label class="form-label fixed_up">Test Material Reference (optional)</label>
+          </div>
+
+          <div class="col-12 col-md-6 mb-4">
+            <label class="font_size_14">Question list (csv file only)</label>
+            <br />
+            <input
+              class="font_size_14"
+              type="file"
+              ref="fileupload"
+              @change="uploadFile"
+              @click="resetFileRef"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end flex-column flex-sm-row">
+          <div class="ms-sm-4" v-if="questionList.length">
+            <button
+              v-if="questionList.length"
+              type="button"
+              class="btn border-2 border-primary text-primary mb-2"
+              data-bs-toggle="modal"
+              data-bs-target="#reviewQuestion"
+            >
+              <span class="font_size_16"> Review Question </span>
+            </button>
+            <span v-if="this.errors.fileError.msg" class="text-danger">
+              {{ this.errors.fileError.msg }}
+            </span>
+          </div>
+
+          <div class="ms-sm-4">
+            <button
+              type="button"
+              class="btn border-2 border-primary text-primary mb-3"
+              @click="downloadCsv"
+            >
+              <span class="font_size_16">Download template</span>
+            </button>
+          </div>
+
+          <div class="ms-sm-4">
+            <button
+              type="submit"
+              class="btn btn-primary text-white mb-2 submit_btn"
+              :disabled="isDisableBtn || questionList.length <= 0"
+            >
+              <!-- :class="!isDisableBtn && 'btn-secondary'" -->
+              <span class="font_size_16"> Submit </span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div v-else-if="!isDisable">
+        <div class="mt-5 text-center">
+          <img
+            src="@/assets/images/Illustration.svg"
+            alt="illustration_img"
+            class="illustration_img"
+          />
+          <h2 class="fw-bolder mt-2 font_size_32 create_test_font_size">
+            Please create your stripe express seller account
+          </h2>
+
           <button
-            v-if="questionList.length"
             type="button"
-            class="btn btn-secondary border border-2 border-primary w-50 mb-2 width_res"
-            data-bs-toggle="modal"
-            data-bs-target="#reviewQuestion"
+            @click="redirectToStripe"
+            class="btn btn-primary text-white mt-4"
+            :disabled="isDisable"
           >
-            Review Question
-          </button>
-          <span v-if="this.errors.fileError.msg" class="text-danger">
-            {{ this.errors.fileError.msg }}
-          </span>
-        </div>
-        <div class="col-sm-6">
-          <button
-            type="submit"
-            class="btn border border-2 border-primary w-50 mb-2 width_res"
-            :class="!isDisableBtn && 'btn-secondary'"
-            :disabled="isDisableBtn || questionList.length <= 0"
-          >
-            Submit
+            <span class="font_size_16"> Connect </span>
           </button>
         </div>
-      </div>
-    </form>
-
-    <div v-else-if="!isDisable">
-      <div class="mt-5 text-center">
-        <img
-          src="@/assets/images/Illustration.svg"
-          alt="boy_illustration"
-          class="boy_illustration"
-        />
-        <h2 class="fw-bolder font_size_32">Please create your stripe express seller account</h2>
-
-        <button
-          type="button"
-          @click="redirectToStripe"
-          class="btn btn-primary text-white mt-4"
-          :disabled="isDisable"
-        >
-          Connect
-        </button>
       </div>
     </div>
 
@@ -443,11 +479,12 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'isLoaderHidden']),
     ...mapState('auth', ['user']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     Browser.addListener('browserFinished', (_none) => {
       this.$router.push('/protected/account');
     });
@@ -477,13 +514,14 @@ export default {
     this.allCategories.push(category);
     // End Moving "other" category at end
 
+    this.setIsLoaderHidden(false);
     this.isDisable = false;
   },
 
   methods: {
     ...mapActions('testManagement', ['getAllCategories']),
     ...mapActions('seller', ['createTest', 'stripeOnboarding', 'getStripeIdStatus']),
-    ...mapMutations(['SET_LOADER']),
+    ...mapMutations(['SET_LOADER', 'setIsLoaderHidden']),
 
     numberValidation(event) {
       ['e', 'E', '+', '-'].includes(event.key) && event.preventDefault();
@@ -856,22 +894,18 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint';
 
-.bg_clr_blue {
-  background: #1877cf;
+@include media-breakpoint-down(lg) {
+  .illustration_img {
+    width: 200px;
+  }
 }
 
-.underline_hr {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid #000;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
+@include media-breakpoint-down(sm) {
+  .create_test_font_size {
+    font-size: 20px;
+  }
 }
 
-.underline_hr span {
-  background: #fff;
-  padding: 0 10px;
-}
 .form-select {
   font-size: 15px;
   font-weight: 200;
@@ -879,31 +913,29 @@ export default {
 }
 
 .wrapper .input-data {
-  // height: 40px;
-  width: 100%;
   position: relative;
 }
 
 .wrapper .input-data input {
   height: 100%;
-  width: 100%;
+  // width: 100%;
   border: none;
   font-size: 17px;
-  outline-color: #6782e1;
+  outline-color: #cccccc;
 }
 
 .input-data input:focus ~ label,
 .input-data input:valid ~ label {
   transform: translateY(-20px);
   font-size: 15px;
-  color: #000;
+  color: #2f2f2fcc;
 }
 
 .wrapper .input-data label {
   position: absolute;
-  top: 3px;
-  left: 0.8rem;
-  color: #000;
+  top: 10px;
+  left: 1.5rem;
+  color: #2f2f2fcc;
   pointer-events: none;
   transition: all 0.3s ease;
   background-color: white;
@@ -917,7 +949,7 @@ export default {
 .fixed_up {
   transform: translateY(-20px);
   font-size: 15px;
-  color: #000;
+  color: #2f2f2fcc;
 }
 
 .password_format_position {
@@ -931,15 +963,7 @@ export default {
   }
 }
 
-@include media-breakpoint-up(sm) {
-  .width_res {
-    width: 250px !important;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .container_width {
-    width: 50%;
-  }
+.submit_btn {
+  width: 100px;
 }
 </style>

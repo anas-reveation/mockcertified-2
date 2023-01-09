@@ -571,16 +571,16 @@ export default {
 
   async getTestInstruction({ commit }) {
     try {
-      commit('SET_LOADER', true, { root: true });
+      // commit('SET_LOADER', true, { root: true });
       const staticData = await API.graphql({
         query: listStaticContents,
       });
       const staticDataArray = staticData.data.listStaticContents.items;
       const testInstruction = staticDataArray.find((obj) => obj.name === 'TestInstruction');
+      // commit('SET_LOADER', false, { root: true });
       if (testInstruction) {
         return testInstruction.body;
       }
-      commit('SET_LOADER', false, { root: true });
       return false;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });

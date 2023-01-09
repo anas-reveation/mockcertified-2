@@ -1,12 +1,29 @@
 <template>
   <div class="container px-4">
-    <NavbarLogo />
+    <NavbarLogo class="mt-4" />
 
     <div class="row">
-      <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-5">
+      <div
+        class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-3 position-relative"
+      >
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4 w-100" alt="Illustration" />
+          <img
+            src="~/assets/images/Illustration.svg"
+            class="mb-lg-5 auth_illustration"
+            alt="Illustration"
+          />
         </div>
+
+        <!-- Start Tagline -->
+        <div class="d-none d-lg-block position-absolute tagline"></div>
+        <div
+          class="d-none d-lg-block position-absolute text-primary fw-bolder text-center font_size_18 tagline_text"
+        >
+          Empowering you with the knowledge
+          <br />
+          & confidence to succeed
+        </div>
+        <!-- End Tagline -->
       </div>
       <div class="col-sm-6">
         <img
@@ -20,12 +37,14 @@
           class="wrapper width_res"
           @submit.prevent="registerLocal"
         >
-          <h1 class="text-primary text-sm-center fw-bolder mt-3 mb-3 font_size_36">Register</h1>
-          <div class="mb-4 input-data">
+          <h1 class="text-primary text-sm-center fw-bolder d-none d-sm-block my-3 font_size_36">
+            Register
+          </h1>
+          <div class="my-3 input-data">
             <input
               type="text"
               id="firstName"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               pattern="[a-zA-Z]*"
               v-model="registerForm.first_name"
               required
@@ -47,11 +66,11 @@
             </div>
           </div>
 
-          <div class="mb-4 input-data">
+          <div class="mb-3 input-data">
             <input
               type="text"
               id="lastName"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               pattern="[a-zA-Z]*"
               title="It should contain only text"
               v-model="registerForm.last_name"
@@ -74,10 +93,10 @@
             </div>
           </div>
 
-          <div class="mb-4 input-data">
+          <div class="mb-3 input-data">
             <input
               type="text"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               v-model="registerForm.email"
               required
             />
@@ -98,10 +117,10 @@
             </div>
           </div>
 
-          <div class="mb-4 input-data position-relative">
+          <div class="mb-3 input-data position-relative">
             <input
               :type="isPasswordVisible ? 'text' : 'password'"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               v-model="registerForm.password"
               @input="checkPasswordMatch"
               required
@@ -137,10 +156,10 @@
             </div>
           </div>
 
-          <div class="mb-4 input-data">
+          <div class="mb-3 input-data">
             <input
               :type="isPasswordVisible ? 'text' : 'password'"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               :class="!passwordMatched && registerForm.confirmPassword.length && ' border-danger'"
               v-model="registerForm.confirmPassword"
               @input="checkPasswordMatch"
@@ -171,7 +190,7 @@
             </div>
           </div>
 
-          <div>
+          <div class="font_size_16 auth_font_size">
             <input type="checkbox" v-model="registerForm.userAgreement" />
             I accept the
             <a
@@ -191,13 +210,13 @@
             </a>
           </div>
 
-          <div class="text-center mt-2">
+          <div class="text-center mt-4">
             <button
               type="submit"
-              class="btn border border-2 fw-bold px-3 login_btn_width"
-              :class="isDisabled ? 'border-primary' : 'btn-primary text-white'"
+              class="btn btn-primary text-white fw-bold px-3 login_btn_width auth_font_size"
               :disabled="isDisabled"
             >
+              <!-- :class="isDisabled ? 'border-grey' : 'btn-primary text-white'" -->
               Register
             </button>
           </div>
@@ -224,7 +243,7 @@
           Facebook
         </button> -->
 
-            <p class="mt-4 text-center">
+            <p class="mt-4 text-center auth_font_size">
               Already have an account ?
               <NuxtLink to="/auth/login" class="text-primary text-decoration-none fw-bolder">
                 Login
@@ -246,7 +265,7 @@
             Enter Verification Code :
           </label>
 
-          <div class="mb-4 input-data">
+          <div class="mb-3 input-data">
             <input
               type="text"
               class="border border-2 border-primary rounded py-3"
@@ -457,6 +476,10 @@ export default {
       //   this.errors.email.isValid = true;
       //   return;
       // }
+
+      // trimmed whitespace
+      this.registerForm.email = newValue.trim();
+
       this.errors.email.isValid =
         /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
           newValue,
@@ -548,10 +571,11 @@ export default {
           });
           return;
         }
+        // Till now User is present only in cognito is not in DB. In login function (action file) we are making user object in DB
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
         this.$router.push('/dashboard');
-        await this.createUserLocal();
+        // await this.createUserLocal();
         this.$swal.fire({
           toast: true,
           position: 'top-end',
@@ -562,27 +586,15 @@ export default {
           timer: 7000,
         });
       } catch (err) {
-        if ((err.errors[0].errorType = 'DynamoDB:ConditionalCheckFailedException')) {
-          this.$swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            title: 'Successfully registered account',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 7000,
-          });
-        } else {
-          this.$swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'Something went wrong',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer: 7000,
-          });
-        }
+        this.$swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 7000,
+        });
       }
     },
 
@@ -590,19 +602,20 @@ export default {
       await this.resendConfirmationCode(this.confirmForm.email);
     },
 
-    async createUserLocal() {
-      const newUser = {
-        id: this.userId,
-        first_name: this.registerForm.first_name,
-        last_name: this.registerForm.last_name,
-        email: this.registerForm.email,
-      };
-      await API.graphql({
-        query: createUser,
-        variables: { input: newUser },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-      });
-    },
+    // async createUserLocal() {
+    //   const newUser = {
+    //     id: this.userId,
+    //     first_name: this.registerForm.first_name,
+    //     last_name: this.registerForm.last_name,
+    //     email: this.registerForm.email,
+    //   };
+    //   console.log('newUser', newUser);
+    //   await API.graphql({
+    //     query: createUser,
+    //     variables: { input: newUser },
+    //     authMode: 'AMAZON_COGNITO_USER_POOLS',
+    //   });
+    // },
 
     async newWindowsOpen(params) {
       const domain = process.env.DOMAIN;
@@ -620,9 +633,47 @@ export default {
 @import '~/assets/css/auth.scss';
 @import '~/assets/css/bootstrapBreakpoint';
 
+.tagline_text {
+  top: 400px;
+}
+
+.tagline {
+  width: 170px;
+  height: 470px;
+  top: 175px;
+  // left: calc(50% - 170px / 2 + 31px);
+
+  background: linear-gradient(270deg, #e7eafc -0.85%, rgba(255, 255, 255, 0) 34.86%);
+  border-radius: 0px 100px 100px 0px;
+  transform: rotate(90deg);
+}
+
 .password_format_position {
   left: 4.5rem;
   bottom: 2.5rem;
+}
+
+input[type='checkbox'] {
+  accent-color: #f5f5f5;
+}
+
+@include media-breakpoint-down(sm) {
+  .auth_font_size {
+    font-size: 12px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .auth_illustration {
+    width: 200px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .auth_illustration {
+    width: 250px;
+    // margin-bottom: 4rem;
+  }
 }
 
 @include media-breakpoint-up(sm) {

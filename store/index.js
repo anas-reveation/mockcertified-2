@@ -12,6 +12,7 @@ import { Capacitor } from '@capacitor/core';
 const state = () => {
   return {
     isLoading: false,
+    isLoaderHidden: false,
     selectedTest: null,
     allPurchasedTests: [],
     allAttemptedTests: [],
@@ -39,6 +40,10 @@ const getters = {};
 const mutations = {
   SET_LOADER(state, isLoading) {
     state.isLoading = isLoading;
+  },
+
+  setIsLoaderHidden(state, isLoaderHidden) {
+    state.isLoaderHidden = isLoaderHidden;
   },
 
   setAllPurchasedTests(state, allPurchasedTests) {

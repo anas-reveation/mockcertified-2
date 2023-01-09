@@ -16,10 +16,7 @@
       </p>
 
       <div class="d-sm-flex justify-content-around">
-        <NuxtLink
-          class="btn btn-secondary border-2 border-primary w-75 width_res mt-3"
-          to="/category"
-        >
+        <NuxtLink class="btn btn-primary text-white w-75 width_res mt-3" to="/category">
           Buy more tests
         </NuxtLink>
         <NuxtLink

@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <div class="mt-5" v-if="!isFetched">
+      <AnimatedPlaceholder class="rounded-3 p-2 me-2" width="300px" />
+      <br />
+      <AnimatedPlaceholder class="btn mt-4" width="200px" />
+    </div>
+
     <div v-if="balanceDetail && isFetched">
       <div class="mt-5">
         <div>
@@ -20,10 +26,12 @@
           alt="boy_illustration"
           class="boy_illustration"
         />
-        <div class="fw-bolder font_size_32">Your Account Is Not Connected $0.00</div>
+        <div class="fw-bolder font_size_32 account_font_size">
+          Your Account Is Not Connected $0.00
+        </div>
 
         <NuxtLink to="/protected/create-test" class="btn btn-primary text-white mt-4">
-          Create a Test
+          <span class="font_size_16"> Create a Test </span>
         </NuxtLink>
       </div>
     </div>
@@ -31,7 +39,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { Browser } from '@capacitor/browser';
 
 export default {
@@ -118,7 +126,12 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState(['isLoaderHidden']),
+  },
+
   async mounted() {
+    this.setIsLoaderHidden(true);
     await this.getStripeIdStatusLocal();
     if (this.isAccountActive) {
       await this.getBalanceLocal();
@@ -128,11 +141,13 @@ export default {
       }
     }
     this.isFetched = true;
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard', 'getStripeIdStatus']),
     ...mapActions('testManagement', ['accountDelete']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     async getBalanceLocal() {
       const res = await this.getBalanceDetail();
@@ -187,6 +202,18 @@ export default {
   object-fit: contain;
   height: 230px;
   width: 230px;
+}
+
+@include media-breakpoint-down(sm) {
+  .account_font_size {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .boy_illustration {
+    width: 200px;
+  }
 }
 
 @include media-breakpoint-up(sm) {

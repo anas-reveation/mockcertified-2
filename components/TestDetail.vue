@@ -33,7 +33,7 @@
 
         <div class="mt-2">
           <h3 class="fw-bolder font_size_20">Description</h3>
-          <p class="font_size_16">
+          <p class="font_size_16 my-0">
             {{ seeMore ? description : truncatePara(description) }}
             <span v-if="wordLength > wordCount">
               <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder">See more</span>
@@ -45,17 +45,17 @@
         </div>
 
         <div>
-          <h3 class="fw-bolder font_size_20">Created By</h3>
+          <h3 class="fw-bolder mt-2 font_size_20">Created By</h3>
           <div class="text-primary fw-bolder" v-if="fullName">{{ fullName }}</div>
         </div>
       </div>
 
-      <div v-if="credit">
+      <div v-if="credit" class="mt-2">
         <h3 class="fw-bolder font_size_20">Test Material Reference</h3>
-        <p class="font_size_16">dsaddsda</p>
+        <p class="font_size_16">{{ credit }}</p>
       </div>
 
-      <div v-if="rejectDescription">
+      <div v-if="rejectDescription" class="mt-2">
         <h3 class="fw-bolder font_size_20">Rejected</h3>
         <p class="font_size_16">
           {{ rejectDescription }}
@@ -129,12 +129,6 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
-
-.shawdow_card {
-  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-}
 
 .bg_price {
   background: rgba(255, 193, 7, 0.21);

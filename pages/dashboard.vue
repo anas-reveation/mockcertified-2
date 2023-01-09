@@ -1,12 +1,15 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
     <div>
       <div>
         <div class="row justify-content-between">
           <div class="col">
-            <h2 class="fw-bolder font_size_24">Featured</h2>
+            <h2 v-if="isLoaderHidden || !featuredTests.length">
+              <AnimatedPlaceholder width="200px" height="10px" />
+            </h2>
+            <h2 class="text-primary fw-bolder font_size_24" v-else>Featured</h2>
           </div>
           <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
@@ -17,12 +20,25 @@
           :arrows="false"
           :dots="false"
           v-bind="settings"
-          v-if="featuredTests.length"
+          v-if="isLoaderHidden"
+          class="mt-3"
+        >
+          <div v-for="i in 3" :key="i" class="pe-2 pb-2" data-aos="flip-right">
+            <TestCardsSkeleton />
+          </div>
+        </VueSlickCarousel>
+
+        <VueSlickCarousel
+          :arrows="false"
+          :dots="false"
+          v-bind="settings"
+          v-if="featuredTests.length && !isLoading"
+          class="mt-3"
         >
           <div
             v-for="(test, index) in featuredTests"
             :key="index"
-            class="mb-3 px-2"
+            class="mb-3 px-2 py-2"
             data-aos="flip-right"
           >
             <NuxtLink :to="`/category/test/${test.slug}`" v-if="index <= 2">
@@ -43,20 +59,34 @@
       <div class="mt-3">
         <div class="row justify-content-between">
           <div class="col">
-            <h2 class="fw-bolder font_size_24">Categories</h2>
+            <h2 v-if="isLoaderHidden || !allCategories.length">
+              <AnimatedPlaceholder width="200px" height="10px" />
+            </h2>
+            <h2 class="text-primary fw-bolder font_size_24" v-else>Categories</h2>
           </div>
-          <div class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
+          <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
+            <NuxtLink to="/category" class="text-primary text-decoration-underline font_size_16">
               See all
             </NuxtLink>
           </div>
         </div>
 
-        <div class="scroll_x">
+        <div v-if="isLoaderHidden" class="mt-3 scroll_x">
+          <div
+            v-for="i in 5"
+            :key="i"
+            class="rounded-pill d-inline-block text-center m-1 p-2 category_box"
+            data-aos="zoom-in"
+          >
+            <AnimatedPlaceholder width="200px" borderRadius="50px" />
+          </div>
+        </div>
+
+        <div class="mt-3 scroll_x" v-if="!isLoading">
           <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-tertiary rounded-pill fw-bolder d-inline-block text-center text-capitalize m-1 p-2 font_size_14 category_box"
+            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 font_size_14 category_box"
             data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
@@ -64,10 +94,13 @@
         </div>
       </div>
 
-      <div class="mt-3 pb-3">
+      <div class="mt-4">
         <div class="row justify-content-between">
           <div class="col">
-            <h2 class="fw-bolder font_size_24">Recently Added</h2>
+            <h2 v-if="isLoaderHidden || !recentlyAddedTests.length">
+              <AnimatedPlaceholder width="200px" height="10px" />
+            </h2>
+            <h2 class="text-primary fw-bolder font_size_24" v-else>Recently Added</h2>
           </div>
           <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
@@ -80,12 +113,25 @@
           :arrows="false"
           :dots="false"
           v-bind="settings"
-          v-if="recentlyAddedTests.length"
+          v-if="isLoaderHidden"
+          class="mt-3 px-2 py-3"
+        >
+          <div v-for="i in 3" :key="i" class="px-2 pb-2" data-aos="flip-right">
+            <TestCardsSkeleton />
+          </div>
+        </VueSlickCarousel>
+
+        <VueSlickCarousel
+          :arrows="false"
+          :dots="false"
+          v-bind="settings"
+          v-if="recentlyAddedTests.length && !isLoading"
+          class="mt-3 px-2 py-3 bg_light_blue"
         >
           <div
             v-for="(test, index) in recentlyAddedTests"
             :key="index"
-            class="px-2 pb-2"
+            class="px-2 py-2"
             data-aos="flip-right"
           >
             <NuxtLink :to="`/category/test/${test.slug}`">
@@ -110,7 +156,7 @@
 import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
   components: { VueSlickCarousel },
@@ -238,10 +284,12 @@ export default {
   },
 
   computed: {
+    ...mapState(['isLoading', 'isLoaderHidden']),
     ...mapState('testManagement', ['featuredTests', 'categories', 'recentlyAddedTests']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     if (!this.categories.length) {
       await this.getAllCategories();
     }
@@ -253,6 +301,7 @@ export default {
     if (!this.recentlyAddedTests.length) {
       await this.getRecentlyAddedTests();
     }
+    this.setIsLoaderHidden(false);
     this.allCategories = this.categories;
   },
 
@@ -262,6 +311,7 @@ export default {
       'getRecentlyAddedTests',
       'getAllCategories',
     ]),
+    ...mapMutations(['setIsLoaderHidden']),
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
@@ -308,6 +358,10 @@ export default {
 }
 
 .bg-tertiary {
-  background-color: #e9eeff;
+  background: #e9eeff;
+}
+
+.bg_light_blue {
+  background: rgba(233, 238, 255, 0.3);
 }
 </style>

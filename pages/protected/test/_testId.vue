@@ -1,43 +1,52 @@
 <template>
-  <div v-if="testDetail" class="container">
-    <TestDetail
-      :title="testDetail.title"
-      :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
-      ${totalMarks} marks`"
-      :description="testDetail.description"
-      :price="testDetail.price"
-      :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
-      :shareFunc="shareTest"
-      :credit="testDetail.credit"
-    />
-
-    <div class="text-center mt-2">
-      <div v-if="testStatus" class="d-sm-flex justify-content-start">
-        <NuxtLink
-          :to="`/protected/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
-          class="btn btn-primary text-white w-50 mt-3 width_res"
-        >
-          {{ testStatus }}
-        </NuxtLink>
-        <button class="btn btn-primary text-white w-50 mt-3 width_res" @click="startTestAgain">
-          Start over
-        </button>
+  <div class="container">
+    <div v-if="isLoaderHidden">
+      <div v-for="i in 3" :key="i">
+        <AnimatedPlaceholder width="100px" height="10px" class="mt-4" />
+        <br />
+        <AnimatedPlaceholder width="50%" height="30px" class="mt-4" />
       </div>
+    </div>
+    <div v-if="!isLoaderHidden && testDetail">
+      <TestDetail
+        :title="testDetail.title"
+        :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
+      ${totalMarks} marks`"
+        :description="testDetail.description"
+        :price="testDetail.price"
+        :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+        :shareFunc="shareTest"
+        :credit="testDetail.credit"
+      />
 
-      <NuxtLink
-        v-else
-        :to="`/protected/test/start-test/${testDetail.id}`"
-        class="btn btn-primary text-white w-50 width_res"
-      >
-        Start
-      </NuxtLink>
+      <div class="text-center mt-3">
+        <div v-if="testStatus" class="d-sm-flex justify-content-start">
+          <NuxtLink
+            :to="`/protected/test/start-test/${testDetail.id}?attempted_id=${attemptedId}`"
+            class="btn btn-primary text-white w-50 mt-3 width_res"
+          >
+            {{ testStatus }}
+          </NuxtLink>
+          <button class="btn btn-primary text-white w-50 mt-3 width_res" @click="startTestAgain">
+            Start over
+          </button>
+        </div>
+
+        <NuxtLink
+          v-else
+          :to="`/protected/test/start-test/${testDetail.id}`"
+          class="btn btn-primary text-white w-50 width_res"
+        >
+          Start
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { Share } from '@capacitor/share';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   middleware: ['authenticated'],
@@ -129,10 +138,11 @@ export default {
   },
 
   computed: {
-    ...mapState(['allPurchasedTests', 'allAttemptedTests']),
+    ...mapState(['isLoaderHidden', 'allPurchasedTests', 'allAttemptedTests']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     this.testId = await this.getTestIdBySlug(this.testSlug);
     const testId = this.testId;
     const attemptedTest = this.allAttemptedTests.filter((item) => {
@@ -152,18 +162,24 @@ export default {
       this.attemptedId = attemptedTest[0].id;
       this.testDetail = attemptedTest[0].test;
       this.totalMarksCal(attemptedTest[0].test);
+      this.setIsLoaderHidden(false);
       return;
     } else if (purchasedTest.length) {
       this.testDetail = purchasedTest[0].test;
       this.totalMarksCal(purchasedTest[0].test);
+      this.setIsLoaderHidden(false);
       return;
     } else {
+      this.setIsLoaderHidden(false);
       this.$router.back();
     }
+
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions('testManagement', ['abortedAttemptedTest', 'getTestIdBySlug']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     totalMarksCal(test) {
       if (test) {
@@ -176,7 +192,9 @@ export default {
     },
 
     async startTestAgain() {
+      this.setIsLoaderHidden(true);
       const res = await this.abortedAttemptedTest(this.attemptedId);
+      this.setIsLoaderHidden(false);
       if (res) {
         this.$router.push(`/protected/test/start-test/${this.testId}`);
       } else {

@@ -1,12 +1,29 @@
 <template>
   <div class="container px-4">
-    <NavbarLogo />
+    <NavbarLogo class="mt-4" />
 
     <div class="row">
-      <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-5">
+      <div
+        class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-3 position-relative"
+      >
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4 w-100" alt="Illustration" />
+          <img
+            src="~/assets/images/Illustration.svg"
+            class="auth_illustration"
+            alt="Illustration"
+          />
         </div>
+
+        <!-- Start Tagline -->
+        <div class="d-none d-lg-block position-absolute tagline"></div>
+        <div
+          class="d-none d-lg-block position-absolute text-primary fw-bolder text-center font_size_18 tagline_text"
+        >
+          Empowering you with the knowledge
+          <br />
+          & confidence to succeed
+        </div>
+        <!-- End Tagline -->
       </div>
       <div class="col-sm-6">
         <img
@@ -16,12 +33,14 @@
         />
 
         <form class="wrapper width_res" @submit.prevent="loginLocal">
-          <h1 class="text-primary text-sm-center fw-bolder my-3 font_size_36">Login</h1>
+          <h1 class="text-primary text-sm-center fw-bolder d-none d-sm-block my-3 font_size_36">
+            Login
+          </h1>
 
-          <div class="mb-2 input-data">
+          <div class="my-3 input-data">
             <input
               type="text"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               :class="!errors.email.isValid && 'border-danger'"
               v-model="form.email"
               required
@@ -32,7 +51,7 @@
           <div class="mb-2 input-data">
             <input
               :type="isPasswordVisible ? 'text' : 'password'"
-              class="border border-2 border-primary rounded py-3"
+              class="border border-2 border-grey rounded py-3"
               v-model="form.password"
               required
             />
@@ -54,7 +73,10 @@
           </div>
 
           <div class="text-end">
-            <NuxtLink to="/auth/forgotpassword" class="text-decoration-none">
+            <NuxtLink
+              to="/auth/forgotpassword"
+              class="text-decoration-none font_size_14 auth_font_size"
+            >
               Forgot Password?
             </NuxtLink>
           </div>
@@ -62,10 +84,10 @@
           <div class="text-center mt-2">
             <button
               type="submit"
-              class="btn border border-2 fw-bold px-3 login_btn_width"
-              :class="!form.email || !form.password ? 'border-primary' : 'btn-primary text-white'"
+              class="btn btn-primary text-white rounded fw-bold px-3 auth_font_size login_btn_width"
               :disabled="!form.email || !form.password || !errors.email.isValid"
             >
+              <!-- :class="!form.email || !form.password ? 'border-primary' : 'btn-primary text-white'" -->
               Login
             </button>
           </div>
@@ -93,7 +115,7 @@
           Continue with Facebook
         </button> -->
 
-              <p v-if="platform === 'web'" class="mt-4 text-center">
+              <p v-if="platform === 'web'" class="mt-4 text-center auth_font_size">
                 New to Mockcertified ?
                 <NuxtLink to="/auth/signup" class="text-decoration-none text-primary fw-bolder">
                   Register
@@ -213,6 +235,9 @@ export default {
 
   watch: {
     'form.email'(newValue, _oldValue) {
+      // trimmed whitespace
+      this.form.email = newValue.trim();
+
       this.errors.email.isValid =
         /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
           newValue,
@@ -318,6 +343,27 @@ export default {
 @import '~/assets/css/auth.scss';
 @import '~/assets/css/bootstrapBreakpoint';
 
+.tagline_text {
+  top: 400px;
+}
+
+.tagline {
+  width: 170px;
+  height: 470px;
+  top: 175px;
+  // left: calc(50% - 170px / 2 + 31px);
+
+  background: linear-gradient(270deg, #e7eafc -0.85%, rgba(255, 255, 255, 0) 34.86%);
+  border-radius: 0px 100px 100px 0px;
+  transform: rotate(90deg);
+}
+
+@include media-breakpoint-down(sm) {
+  .auth_font_size {
+    font-size: 12px;
+  }
+}
+
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 75%;
@@ -325,6 +371,12 @@ export default {
 
   .login_btn_width {
     width: 100%;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .auth_illustration {
+    width: 200px;
   }
 }
 </style>

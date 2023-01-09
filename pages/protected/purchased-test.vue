@@ -7,8 +7,8 @@
           alt="boy_illustration"
           class="boy_illustration"
         />
-        <h1 class="fw-bolder mt-2 font_size_32">No Test Available</h1>
-        <p v-if="platform === 'web'" class="text-muted">
+        <h1 class="fw-bolder mt-2 font_size_32 purchased_test_font_size_h1">No Test Available</h1>
+        <p v-if="platform === 'web'" class="text-muted purchased_test_font_size">
           Want to buy new tests? Click on the button below!
         </p>
         <NuxtLink
@@ -16,13 +16,13 @@
           to="/category"
           class="btn btn-primary text-white rounded"
         >
-          Buy a test
+          <span class="font_size_16">Buy a test</span>
         </NuxtLink>
       </div>
     </div>
 
     <div v-else>
-      <div class="text-sm-start text-end mb-3">
+      <div class="text-sm-start text-end my-3">
         <span>Sort by :</span>
         <select class="border border-primary rounded" v-model="sortBy">
           <option value="date">Date</option>
@@ -41,7 +41,13 @@
         </span>
       </div>
 
-      <div class="row">
+      <div v-if="isLoaderHidden" class="row">
+        <div v-for="i in 3" :key="i" class="col-sm-6 col-md-4 mb-3" data-aos="flip-right">
+          <TestCardsSkeleton />
+        </div>
+      </div>
+
+      <div v-if="filteredTests.length && !isLoading" class="row">
         <div
           v-for="test in filteredTests"
           :key="test.id"
@@ -63,7 +69,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -149,7 +155,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['isLoading', 'platform', 'allPurchasedTests']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'platform', 'allPurchasedTests']),
   },
 
   watch: {
@@ -169,13 +175,16 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     await this.getUserTests();
     this.filteredTests = this.allPurchasedTests;
     this.isFetched = true;
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions('testManagement', ['getUserTests']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     totalMarks(questionsArr) {
       let totalMarks = 0;
@@ -193,10 +202,28 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint';
+
 .boy_illustration {
   object-fit: contain;
   height: 230px;
   width: 230px;
+}
+
+@include media-breakpoint-down(lg) {
+  .boy_illustration {
+    width: 200px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .purchased_test_font_size_h1 {
+    font-size: 24px;
+  }
+
+  .purchased_test_font_size {
+    font-size: 14px;
+  }
 }
 </style>

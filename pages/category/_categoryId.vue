@@ -1,22 +1,28 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
-    <p class="mt-2">
+    <AnimatedPlaceholder v-if="isLoaderHidden" width="200px" height="10px" />
+
+    <div v-if="isLoaderHidden" class="row mt-4">
+      <div v-for="i in 6" :key="i" class="col-12 col-md-4 col-sm-6" data-aos="zoom-in">
+        <AnimatedPlaceholder width="200px" borderRadius="50px" class="m-2" />
+      </div>
+    </div>
+
+    <p v-if="!isLoaderHidden" class="mt-2 font_size_24">
       <NuxtLink to="/category">
-        <span>Categories</span>
+        <span class="fw-bolder mt-3">Categories</span>
       </NuxtLink>
-      <span
-        v-for="(item, index) in breadCrum"
-        :key="index"
-        :class="index === breadCrum.length - 1 && 'fw-bolder'"
-        @click="goingBack(index)"
-      >
-        > <a href="#" class="text-primary">{{ item.name }}</a>
+      <span v-for="(item, index) in breadCrum" :key="index" @click="goingBack(index)">
+        >
+        <a href="#" :class="index === breadCrum.length - 1 && 'text-primary'">
+          {{ item.name }}
+        </a>
       </span>
     </p>
     <div v-if="!allTestBySubCategory.length">
-      <div class="row">
+      <div v-if="!isLoaderHidden" class="row mt-4">
         <a
           href="#"
           v-for="category in allCategoriesFilter"
@@ -25,8 +31,10 @@
           @click="getAllTests(category.id, category.name)"
           data-aos="zoom-in"
         >
-          <div class="row shawdow_card m-2 p-2 category_border_radius">
-            <span class="col-2 d-flex align-items-center">
+          <div
+            class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+          >
+            <span class="col-2">
               <img :src="category.image" alt="category" class="category_image" />
             </span>
             <span class="col text-start font_size_16"> {{ category.name }}</span>
@@ -36,7 +44,7 @@
     </div>
 
     <div v-else>
-      <div class="row">
+      <div class="row mt-4">
         <div
           v-for="(test, index) in allCategoriesFilter"
           :key="index"
@@ -148,6 +156,7 @@ export default {
       searchQuery: '',
       allCategoriesFilter: [],
       categoryId: null,
+      isHovering: false,
     };
   },
 
@@ -167,7 +176,7 @@ export default {
 
   computed: {
     ...mapState('testManagement', ['categoryName']),
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'isLoaderHidden']),
   },
 
   async asyncData({ params, query, store }) {
@@ -178,9 +187,12 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
+
     this.categoryId = await this.getCategoryIdBySlug(this.categorySlug);
 
     if (!this.categoryId) {
+      this.setIsLoaderHidden(false);
       this.$router.back();
       return;
     }
@@ -188,6 +200,7 @@ export default {
     if (this.subCategorySlug) {
       this.subCategoryId = await this.getSubCategoryIdBySlug(this.subCategorySlug);
       await this.getAllTests(this.subCategoryId, this.subCategoryName);
+      this.setIsLoaderHidden(false);
       return;
     }
 
@@ -203,6 +216,7 @@ export default {
         timer: 7000,
       });
       this.$router.back();
+      this.setIsLoaderHidden(false);
       return;
     }
     this.allCategoriesFilter = this.allSubCategory;
@@ -210,6 +224,7 @@ export default {
       name: this.categoryName,
     };
     this.breadCrum.push(obj);
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
@@ -220,6 +235,7 @@ export default {
       'getSubCategoryIdBySlug',
     ]),
     ...mapMutations('buyer', ['addToCart']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     async goingBack(index) {
       this.allTestBySubCategory = [];
@@ -240,6 +256,8 @@ export default {
         name,
       };
       this.breadCrum.push(obj);
+
+      this.setIsLoaderHidden(true);
       this.allTestBySubCategory = await this.getTestsBySubCategory(subCategoryId);
       if (!this.allTestBySubCategory.length) {
         this.$swal.fire({
@@ -253,9 +271,11 @@ export default {
         });
         this.$router.back();
         this.breadCrum.pop();
+        this.setIsLoaderHidden(false);
         return;
       }
       this.allCategoriesFilter = this.allTestBySubCategory;
+      this.setIsLoaderHidden(false);
     },
 
     totalMarks(questionsArr) {
@@ -291,10 +311,8 @@ export default {
   height: 35px;
 }
 
-.shawdow_card {
-  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+.hover_effect:hover {
+  border: 1px solid #6782e1;
 }
 
 @include media-breakpoint-up(sm) {

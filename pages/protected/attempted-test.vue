@@ -35,10 +35,10 @@
             alt="illustration"
             class="girl_illustration"
           />
-          <h1 class="fw-bolder mt-2 font_size_32">No Test Available</h1>
-          <p class="text-muted">Give a test from your purchased test</p>
+          <h1 class="fw-bolder mt-2 font_size_32 attempted_test_font_size_h1">No Test Available</h1>
+          <p class="text-muted attempted_test_font_size">Give a test from your purchased test</p>
           <NuxtLink to="/protected/purchased-test" class="btn btn-primary text-white rounded">
-            Attempt A Test
+            <span class="font_size_16"> Attempt A Test </span>
           </NuxtLink>
         </div>
       </div>
@@ -67,7 +67,13 @@
           </span>
         </div>
 
-        <div class="row">
+        <div v-if="isLoaderHidden" class="row">
+          <div v-for="i in 3" :key="i" class="col-sm-6 col-md-4 mb-3" data-aos="flip-right">
+            <TestCardsSkeleton />
+          </div>
+        </div>
+
+        <div v-if="filteredTests.length && !isLoading" class="row">
           <div
             v-for="test in filteredTests"
             :key="test.id"
@@ -102,7 +108,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -193,7 +199,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['isLoading', 'allAttemptedTests']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'allAttemptedTests']),
   },
 
   watch: {
@@ -231,13 +237,16 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     await this.getUserTests();
     this.filteredTests = this.allAttemptedTests;
     this.isFetched = true;
     this.changeTabName('IN_PROGRESS');
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
+    ...mapMutations(['setIsLoaderHidden']),
     ...mapActions('testManagement', ['getUserTests']),
 
     totalMarks(questionsArr) {
@@ -274,9 +283,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~bootstrap/scss/_functions.scss';
-@import '~bootstrap/scss/_variables.scss';
-@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~/assets/css/bootstrapBreakpoint';
 
 .girl_illustration {
   object-fit: contain;
@@ -287,6 +294,22 @@ export default {
 .blue_underline {
   height: 2px;
   background: #6782e1;
+}
+
+@include media-breakpoint-down(lg) {
+  .girl_illustration {
+    width: 200px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .attempted_test_font_size {
+    font-size: 14px;
+  }
+
+  .attempted_test_font_size_h1 {
+    font-size: 24px;
+  }
 }
 
 @include media-breakpoint-up(sm) {

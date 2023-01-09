@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
     <div
       v-if="allSearchedTest.length || allSearchedCategory.length || allSearchedSubCategory.length"
     >
@@ -235,12 +235,6 @@ export default {
   object-fit: contain;
   width: 35px;
   height: 35px;
-}
-
-.shawdow_card {
-  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
 }
 
 @include media-breakpoint-up(sm) {
