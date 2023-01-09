@@ -27,10 +27,10 @@
       </button>
 
       <button
-        class="col-3 d-lg-none btn btn-primary width_search_mobile"
+        class="col-3 d-lg-none btn btn-primary width_search_mobile input_height"
         :type="searchQueryFunc ? 'submit' : 'button'"
       >
-        <img src="@/assets/images/search_icon_white.svg" alt="search-icon" />
+        <img src="@/assets/images/search_icon_white.svg" alt="search-icon" class="mb-2" />
       </button>
     </form>
   </div>
@@ -82,6 +82,16 @@ export default {
   width: 55px;
 }
 
+@include media-breakpoint-down(lg) {
+  .input_height {
+    height: 37px;
+  }
+
+  .search_placeholder {
+    font-size: 12px;
+  }
+}
+
 @include media-breakpoint-up(lg) {
   .search_input_rounded {
     border-radius: 20px;
@@ -90,9 +100,7 @@ export default {
   .input_height {
     height: 40px;
   }
-}
 
-@include media-breakpoint-up(lg) {
   .authenticated_search_input_size {
     width: 530px !important;
   }

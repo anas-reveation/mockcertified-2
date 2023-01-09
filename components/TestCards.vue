@@ -3,22 +3,26 @@
     class="shawdow_card position-relative bg-white px-2 py-1 test_card_border_radius card_height"
   >
     <div class="row mt-1">
-      <p class="col-7 fw-bolder mb-0 font_size_24" v-if="title">{{ title }}</p>
+      <p class="col-7 fw-bolder mb-0 font_size_24 test_card_title mb-2" v-if="title">{{ title }}</p>
       <p class="col-5 fw-bolder text-end" v-if="price === '$0.00'">
         <span class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14">Free</span>
       </p>
       <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">
-        <span class="bg_price rounded-pill px-2 py-1 font_size_14">{{ price }}</span>
+        <span class="bg_price rounded-pill px-2 py-1 font_size_14 test_card_price">{{
+          price
+        }}</span>
       </p>
-      <p class="col-7 mb-0 fs-7 fw-light" v-if="authorName">By-{{ authorName }}</p>
-      <p class="col-7 fs-7 fw-light text-muted font_size_14" v-if="dateTime">
+      <p class="col-7 mb-0 fs-7 fw-light font_size_14 test_card_desc" v-if="authorName">
+        By-{{ authorName }}
+      </p>
+      <p class="col-7 fs-7 fw-light text-muted font_size_14 test_card_desc" v-if="dateTime">
         {{ dateTime }}
       </p>
     </div>
 
     <span
       v-if="description"
-      class="position-relative position-absolute bottom-0 start-0 text-primary m-2 font_size_14"
+      class="position-relative position-absolute bottom-0 start-0 text-primary m-2 font_size_14 test_card_desc"
     >
       {{ description }}
     </span>
@@ -78,20 +82,20 @@ export default {
 }
 
 .card_height {
-  height: 205px;
+  height: 180px;
 }
 
 @include media-breakpoint-up(sm) {
   .card_height {
-    height: 265px;
+    height: 200px;
   }
 }
 
-@include media-breakpoint-up(md) {
-  .card_height {
-    height: 265px;
-  }
-}
+// @include media-breakpoint-up(md) {
+//   .card_height {
+//     height: 265px;
+//   }
+// }
 
 @include media-breakpoint-up(lg) {
   .card_height {
@@ -102,6 +106,20 @@ export default {
 @include media-breakpoint-up(xl) {
   .card_height {
     height: 180px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .test_card_title {
+    font-size: 18px;
+  }
+
+  .test_card_price {
+    font-size: 12px;
+  }
+
+  .test_card_desc {
+    font-size: 12px;
   }
 }
 </style>
