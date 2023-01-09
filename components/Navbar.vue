@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavbarDesktop class="sticky-top d-none d-md-block" />
-    <div class="d-md-none px-3 my-3">
+    <NavbarDesktop class="sticky-top d-none d-lg-block" />
+    <div class="d-lg-none px-3 my-3 container">
       <div class="row align-items-center justify-content-between">
         <ClientOnly>
           <div class="col text-capitalize text-truncate font_size_20">
@@ -9,7 +9,7 @@
             <span v-if="user" class="text-primary fw-bolder">{{ user.first_name }}</span>
           </div>
         </ClientOnly>
-        <div class="col-2">
+        <div class="col-2 text-end">
           <img
             @click="openNav()"
             src="@/assets/images/profile_icon.svg"
@@ -40,7 +40,7 @@
           >
             <img src="@/assets/images/logo.svg" alt="logo" class="me-2" />
           </div>
-          <div class="col">
+          <div class="col" :class="!user && 'd-flex align-items-center'">
             <div class="text-black fw-bolder text-truncate">
               {{ user ? `${user.first_name} ${user.last_name}` : 'Mockcertified' }}
             </div>
@@ -66,8 +66,8 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_18">
-                  <img src="@/assets/images/add.svg" alt="add" />
+                <span class="font_size_16">
+                  <img src="@/assets/images/add.svg" alt="add" class="me-1" />
                   Create a New Test
                 </span>
               </a>
@@ -83,8 +83,8 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_18">
-                  <img src="@/assets/images/created_tests.svg" alt="created_tests" />
+                <span class="font_size_16">
+                  <img src="@/assets/images/created_tests.svg" alt="created_tests" class="me-1" />
                   Created Tests
                 </span>
               </a>
@@ -100,8 +100,8 @@
               "
             >
               <a class="text-black ms-2">
-                <span class="font_size_18">
-                  <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" />
+                <span class="font_size_16">
+                  <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1" />
                   Admin Panel
                 </span>
               </a>
@@ -119,8 +119,8 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_18">
-                <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" />
+              <span class="text-black ms-2 font_size_16">
+                <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" class="me-1" />
                 Contact Us
               </span>
             </li>
@@ -133,8 +133,12 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_18">
-                <img src="@/assets/images/terms_conditions.svg" alt="terms_conditions" />
+              <span class="text-black ms-2 font_size_16">
+                <img
+                  src="@/assets/images/terms_conditions.svg"
+                  alt="terms_conditions"
+                  class="me-1"
+                />
                 Terms and Conditions
               </span>
             </li>
@@ -147,8 +151,8 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_18">
-                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" />
+              <span class="text-black ms-2 font_size_16">
+                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1" />
                 Privacy policy
               </span>
             </li>
@@ -161,8 +165,8 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_18">
-                <img src="@/assets/images/logout.svg" alt="logout" />
+              <span class="text-black ms-2 font_size_16">
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
                 Login
               </span>
             </li>
@@ -175,8 +179,8 @@
                 closeNav();
               "
             >
-              <span class="text-black ms-2 font_size_18">
-                <img src="@/assets/images/logout.svg" alt="logout" />
+              <span class="text-black ms-2 font_size_16">
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
                 Logout
               </span>
             </li>

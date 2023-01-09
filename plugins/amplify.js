@@ -14,10 +14,10 @@ const newConfig = {
 };
 
 Amplify.configure(newConfig);
-const amazonPinpointAnalytics = process.env.AMAZON_PINPOINT_ANALYTICS;
-if (amazonPinpointAnalytics === true || amazonPinpointAnalytics === 'true') {
-  Analytics.record({ name: 'VisitApp' });
-}
+// const amazonPinpointAnalytics = process.env.AMAZON_PINPOINT_ANALYTICS;
+// if (amazonPinpointAnalytics === true || amazonPinpointAnalytics === 'true') {
+//   Analytics.record({ name: 'VisitApp' });
+// }
 
 // import Vue from 'vue';
 // import Amplify, * as AmplifyModules from 'aws-amplify';

@@ -1,19 +1,35 @@
 <template>
-  <div>
-    <div class="position-absolute top-0 start-0 p-2">
+  <div class="container">
+    <div class="text-center text-sm-start p-2">
       <NuxtLink to="/">
-        <img src="@/assets/images/logo_with_name.svg" alt="logo" />
+        <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
     </div>
-    <!-- <div class="position-absolute top-0 end-0 p-2 d-block d-sm-none">
-      <NuxtLink to="/">
-        <img src="@/assets/images/logo.svg" alt="logo" />
-      </NuxtLink>
-    </div>
-    <div class="position-absolute top-0 start-0 p-2 d-none d-sm-block">
-      <NuxtLink to="/">
-        <img src="@/assets/images/logo.svg" alt="logo" />
-      </NuxtLink>
-    </div> -->
   </div>
 </template>
+
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+.mobile_logo {
+  width: 200px;
+}
+
+@include media-breakpoint-down(md) {
+  .logo_with_name {
+    object-fit: contain;
+    width: 150px;
+  }
+}
+
+@include media-breakpoint-between(md, lg) {
+  .logo_with_name {
+    width: 140px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .logo_with_name {
+    width: 190px;
+  }
+}
+</style>

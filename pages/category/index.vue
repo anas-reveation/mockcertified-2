@@ -1,10 +1,18 @@
 <template>
   <div class="container">
-    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" />
+    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
-    <h1 class="fw-bolder mt-3 font_size_24">Categories</h1>
+    <AnimatedPlaceholder v-if="isLoaderHidden" width="200px" height="10px" />
 
-    <div class="row">
+    <div v-if="isLoaderHidden" class="row mt-4">
+      <div v-for="i in 6" :key="i" class="col-12 col-md-4 col-sm-6" data-aos="zoom-in">
+        <AnimatedPlaceholder width="200px" borderRadius="50px" class="m-2" />
+      </div>
+    </div>
+
+    <h1 v-if="allCategoriesFilter.length" class="fw-bolder mt-3 font_size_24">Categories</h1>
+
+    <div v-if="allCategoriesFilter.length" class="row mt-4">
       <NuxtLink
         :to="`/category/${category.slug}`"
         v-for="category in allCategoriesFilter"
@@ -12,8 +20,10 @@
         class="col-12 col-md-4 col-sm-6"
         data-aos="zoom-in"
       >
-        <div class="row shawdow_card m-2 p-2 category_border_radius">
-          <span class="col-2 me-2 d-flex align-items-center">
+        <div
+          class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+        >
+          <span class="col-2 me-2">
             <img :src="category.image" alt="category" class="category_image" />
           </span>
           <span class="col text-start font_size_16"> {{ category.name }} </span>
@@ -24,7 +34,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -109,6 +119,7 @@ export default {
       allCategories: [],
       searchQuery: '',
       allCategoriesFilter: [],
+      isHovering: false,
     };
   },
 
@@ -121,18 +132,22 @@ export default {
   },
 
   computed: {
+    ...mapState(['isLoaderHidden']),
     ...mapState('testManagement', ['categories']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     if (!this.categories.length) {
       await this.getAllCategories();
     }
     this.allCategories = this.categories;
     this.allCategoriesFilter = this.allCategories;
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
+    ...mapMutations(['setIsLoaderHidden']),
     ...mapActions('testManagement', ['getAllCategories']),
 
     async searchQueryFunc() {
@@ -151,10 +166,8 @@ export default {
   height: 35px;
 }
 
-.shawdow_card {
-  -webkit-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  -moz-box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
-  box-shadow: 0px 0px 40px 8px rgba(103, 130, 225, 0.18);
+.hover_effect:hover {
+  border: 1px solid #6782e1;
 }
 
 @include media-breakpoint-up(sm) {

@@ -36,9 +36,7 @@
             required
           />
           <div class="text-center mt-3">
-            <button type="submit" class="btn btn-secondary border border-2 border-primary w-100">
-              Send
-            </button>
+            <button type="submit" class="btn btn-primary text-white w-100">Send</button>
           </div>
         </form>
 
@@ -130,12 +128,7 @@
           <div class="text-center mt-2">
             <button
               type="submit"
-              class="btn border border-2 border-primary fw-bold px-3 w-100"
-              :class="
-                !code || !password || !confirmPassword || !errors.password.isValid
-                  ? 'btn-gray'
-                  : 'btn-secondary'
-              "
+              class="btn btn-primary text-white fw-bold px-3 w-100"
               :disabled="
                 !code ||
                 !password ||
@@ -144,6 +137,11 @@
                 !errors.password.isValid
               "
             >
+              <!-- :class="
+                !code || !password || !confirmPassword || !errors.password.isValid
+                  ? 'btn-gray'
+                  : 'btn-secondary'
+              " -->
               Reset Password
             </button>
           </div>

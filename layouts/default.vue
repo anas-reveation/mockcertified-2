@@ -2,7 +2,7 @@
   <div>
     <div
       class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute z_index"
-      v-if="isLoading"
+      v-if="isLoading && !isLoaderHidden"
     >
       <div class="spinner-border" role="status"></div>
     </div>
@@ -28,7 +28,7 @@
           </span>
         </div>
       </div>
-      <FooterNavbar class="d-md-none" />
+      <FooterNavbar class="d-lg-none" />
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading', 'isSideNavbarVisible']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'isSideNavbarVisible']),
   },
 
   watch: {
