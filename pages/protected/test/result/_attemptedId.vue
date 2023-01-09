@@ -12,6 +12,7 @@
           :shareFunc="shareTest"
           :credit="testDetail.credit"
         >
+          <!-- MOBILE RESUlt SECTION -->
           <template>
             <div class="container border border-2 border-primary rounded mt-4 p-3 d-lg-none">
               <span class="fw-bolder">
@@ -96,7 +97,7 @@
               <div class="text-center mt-3">
                 <button
                   type="button"
-                  class="btn btn-primary text-white"
+                  class="btn border border-2 border-primary text-black"
                   data-bs-toggle="modal"
                   data-bs-target="#reviewAnswers"
                 >
@@ -187,7 +188,7 @@
           <div class="text-center mt-3" v-if="attemptedQuestions !== 0">
             <button
               type="button"
-              class="btn btn-primary text-white"
+              class="btn border border-2 border-primary text-black"
               data-bs-toggle="modal"
               data-bs-target="#reviewAnswers"
             >
@@ -198,7 +199,7 @@
       </div>
     </div>
 
-    <div class="text-center text-sm-start pb-3">
+    <div class="text-center text-sm-start mt-2 pb-3">
       <NuxtLink
         :to="`/protected/test/${testDetail.slug}`"
         class="btn btn-primary text-white"
@@ -553,10 +554,16 @@ export default {
   right: 38%;
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-down(lg) {
   .donut_image {
-    top: 33%;
-    right: 43%;
+    top: 35%;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .donut_image {
+    top: 34%;
+    right: 42%;
   }
 }
 

@@ -9,33 +9,43 @@
       Update Category
     </NuxtLink>
 
-    <div class="mb-2 w-100 d-flex justify-content-center width_res">
+    <div class="mb-2 d-flex justify-content-center justify-content-sm-end">
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isInProgressOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isInProgressOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isInProgressOpen')"
       >
         Pending
+        <div v-if="isInProgressOpen" class="bg-primary mt-0 blue_underline" />
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isApprovedOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isApprovedOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isApprovedOpen')"
       >
         Approved
+        <div v-if="isApprovedOpen" class="bg-primary mt-0 blue_underline" />
       </div>
       <div
-        class="text-primary border border-2 border-primary rounded flex-fill text-center fw-bold p-1 m-1 cursor_pointer"
-        :class="isRejectedOpen && 'bg-secondary text-dark'"
+        class="p-1 m-1 cursor_pointer sorting_text_size"
+        :class="isRejectedOpen ? 'text-primary' : 'text-dark'"
         @click="changeTabName('isRejectedOpen')"
       >
         Rejected
+        <div v-if="isRejectedOpen" class="bg-primary mt-0 blue_underline" />
       </div>
     </div>
 
-    <div v-if="!isLoading && !filteredTests.length" class="mt-4 px-3">
+    <div v-if="isLoaderHidden" class="row">
+      <div v-for="i in 3" :key="i" class="col-sm-6 col-md-4 mb-3" data-aos="flip-right">
+        <TestCardsSkeleton />
+      </div>
+    </div>
+
+    <div v-if="!isLoaderHidden && !filteredTests.length" class="mt-4 px-3">
       <h2>No Test Available</h2>
     </div>
+
     <div class="row">
       <div
         v-for="test in filteredTests"
@@ -58,7 +68,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -148,7 +158,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'isLoaderHidden']),
     ...mapState('admin', ['allTests']),
 
     approvedTests() {
@@ -165,11 +175,14 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     await this.getAllTests();
     this.changeTabName('isInProgressOpen');
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
+    ...mapMutations(['setIsLoaderHidden']),
     ...mapActions('admin', ['getAllTests']),
 
     changeTabName(tabName) {
@@ -212,27 +225,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~bootstrap/scss/_functions.scss';
-@import '~bootstrap/scss/_variables.scss';
-@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~/assets/css/bootstrapBreakpoint';
 
-.btn-active-color {
-  background-color: #11a49b !important;
-  color: white !important;
-}
-
-.btn-outline-primary {
-  outline-color: #11a49b !important;
-}
-
-.tabs {
-  border: 1px solid rgb(143, 142, 142);
+.blue_underline {
+  height: 2px;
+  background: #6782e1;
 }
 
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 25% !important;
     margin-left: auto;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .sorting_text_size {
+    font-size: 14px;
   }
 }
 </style>

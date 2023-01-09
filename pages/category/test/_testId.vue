@@ -1,119 +1,130 @@
 <template>
-  <div v-if="testDetail && !isLoading" class="container">
-    <TestDetail
-      class="mt-3"
-      data-aos="zoom-in"
-      :title="testDetail.title"
-      :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
-      ${totalMarks} marks`"
-      :description="testDetail.description"
-      :price="newPrice ? newPrice : testDetail.price"
-      :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
-      :shareFunc="shareTest"
-      :credit="testDetail.credit"
-    />
+  <div class="container">
+    <div v-if="isLoaderHidden">
+      <div v-for="i in 3" :key="i">
+        <AnimatedPlaceholder width="100px" height="10px" class="mt-4" />
+        <br />
+        <AnimatedPlaceholder width="50%" height="30px" class="mt-4" />
+      </div>
+    </div>
 
-    <button
-      v-if="sampleQuestions.length"
-      type="button"
-      class="btn btn-outline-primary w-50 mt-3 mb-2 width_res"
-      data-bs-toggle="modal"
-      data-bs-target="#reviewQuestion"
-    >
-      Review Sample Questions
-    </button>
-    <!-- Start Modal -->
-    <div
-      class="modal fade"
-      id="reviewQuestion"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="reviewQuestionLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
-            <span data-bs-dismiss="modal" aria-label="Close">
-              <img src="@/assets/images/circle-cross.svg" alt="circle-cross" />
-            </span>
-          </div>
-          <div v-if="sampleQuestions.length" class="modal-body">
-            <div v-for="(question, index) in sampleQuestions" :key="index">
-              <SampleQuestion
-                :question="question"
-                :index="index + 1"
-                :questionVisible="false"
-                class="mb-2"
-              />
+    <div v-if="testDetail && !isLoaderHidden">
+      <TestDetail
+        class="mt-3"
+        data-aos="zoom-in"
+        :title="testDetail.title"
+        :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
+      ${totalMarks} marks`"
+        :description="testDetail.description"
+        :price="newPrice ? newPrice : testDetail.price"
+        :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+        :shareFunc="shareTest"
+        :credit="testDetail.credit"
+      />
+
+      <button
+        v-if="sampleQuestions.length"
+        type="button"
+        class="btn btn-outline-primary w-50 mt-3 mb-2 width_res"
+        data-bs-toggle="modal"
+        data-bs-target="#reviewQuestion"
+      >
+        Review Sample Questions
+      </button>
+
+      <!-- Start Modal -->
+      <div
+        class="modal fade"
+        id="reviewQuestion"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="reviewQuestionLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bolder" id="reviewQuestionLabel">Questions</h5>
+              <span data-bs-dismiss="modal" aria-label="Close">
+                <img src="@/assets/images/circle-cross.svg" alt="circle-cross" />
+              </span>
+            </div>
+            <div v-if="sampleQuestions.length" class="modal-body">
+              <div v-for="(question, index) in sampleQuestions" :key="index">
+                <SampleQuestion
+                  :question="question"
+                  :index="index + 1"
+                  :questionVisible="false"
+                  class="mb-2"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End Modal -->
+      <!-- End Modal -->
 
-    <div v-if="isPurchased || isUserOwner">
-      <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
-      <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
-    </div>
+      <div v-if="isPurchased || isUserOwner">
+        <span v-if="isPurchased" class="text-primary">• Already Purchased</span>
+        <span v-if="isUserOwner" class="text-primary">• You're the creator</span>
+      </div>
 
-    <div v-else class="text-center">
-      <button
-        v-if="msgText"
-        type="button"
-        class="btn btn-secondary border border-2 border-primary w-50"
-      >
-        {{ msgText }}
-      </button>
+      <div v-else class="text-center">
+        <button
+          v-if="msgText"
+          type="button"
+          class="btn btn-secondary border border-2 border-primary w-50"
+        >
+          {{ msgText }}
+        </button>
 
-      <div v-else-if="platform === 'web' && !isLoading">
-        <div v-if="isAuthenticated">
-          <div v-if="testDetail.price !== 0">
-            <h3 v-if="newPrice" class="fw-bolder text-muted font_size_20">
-              New price -
-              <span class="text-success fw-bolder"> ${{ newPrice }} </span>
-            </h3>
-            <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
-              <div class="mb-4 input-data text-sm-start">
-                <input
-                  type="text"
-                  class="border border-2 border-primary rounded form-control width_res"
-                  v-model="promocode"
-                  placeholder="Code"
-                  required
-                />
-                <button
-                  class="btn btn-primary border-2 text-white mt-2 width_res"
-                  :disabled="!promocode"
-                >
-                  Apply Code
-                </button>
-              </div>
-            </form>
+        <div v-else-if="platform === 'web' && !isLoading">
+          <div v-if="isAuthenticated">
+            <div v-if="testDetail.price !== 0">
+              <h3 v-if="newPrice" class="fw-bolder text-muted font_size_20">
+                New price:
+                <span class="text-success fw-bolder"> ${{ newPrice }} </span>
+              </h3>
+              <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
+                <div class="mb-4 input-data text-sm-start">
+                  <input
+                    type="text"
+                    class="border border-2 border-primary rounded form-control width_res"
+                    v-model="promocode"
+                    placeholder="Code"
+                    required
+                  />
+                  <button
+                    class="btn btn-primary border-2 text-white mt-2 width_res"
+                    :disabled="!promocode"
+                  >
+                    Apply Code
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="text-sm-start">
+              <button
+                type="button"
+                class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
+                @click="buyNowLocal"
+              >
+                Buy Now
+              </button>
+            </div>
           </div>
 
-          <div class="text-sm-start">
+          <div v-else class="text-sm-start">
             <button
               type="button"
               class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
-              @click="buyNowLocal"
+              @click="redirectLogin"
             >
-              Buy Now
+              Login
             </button>
           </div>
-        </div>
-
-        <div v-else class="text-sm-start">
-          <button
-            type="button"
-            class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
-            @click="redirectLogin"
-          >
-            Login
-          </button>
         </div>
       </div>
     </div>
@@ -219,7 +230,7 @@ export default {
   computed: {
     ...mapState('auth', ['user', 'isAuthenticated']),
     ...mapState('buyer', ['cartItems']),
-    ...mapState(['isLoading', 'allPurchasedTests', 'platform']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'allPurchasedTests', 'platform']),
 
     totalMarks() {
       if (this.testDetail) {
@@ -263,12 +274,14 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     this.testId = await this.getTestIdBySlug(this.testSlug);
     this.testDetail = await this.getTestDetail(this.testId);
     this.SET_LOADER(true);
 
     if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
       this.SET_LOADER(false);
+      this.setIsLoaderHidden(false);
       this.$router.push('/dashboard');
       return;
     }
@@ -276,8 +289,11 @@ export default {
     this.sampleQuestions = await this.getSampleQuestions(this.testId);
 
     this.SET_LOADER(false);
+    this.setIsLoaderHidden(false);
     if (this.isAuthenticated && !this.allPurchasedTests.length) {
+      this.setIsLoaderHidden(true);
       await this.getUserTests();
+      this.setIsLoaderHidden(false);
     }
   },
 
@@ -289,7 +305,7 @@ export default {
       'getTestIdBySlug',
     ]),
     ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
-    ...mapMutations(['SET_LOADER', 'setRedirectUrl']),
+    ...mapMutations(['SET_LOADER', 'setIsLoaderHidden', 'setRedirectUrl']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;

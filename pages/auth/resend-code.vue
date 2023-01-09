@@ -1,6 +1,6 @@
 <template>
   <div class="container px-4">
-    <NavbarLogo />
+    <NavbarLogo class="mt-4" />
     <form v-if="isFetched" class="wrapper width_res" @submit.prevent="confirmLocal">
       <h1 class="mt-5 mb-4 font_size_36">
         Verification
@@ -25,17 +25,14 @@
       </div>
 
       <div class="mt-2">
-        <button
-          type="submit"
-          class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 login_btn_width"
-        >
+        <button type="submit" class="btn btn-primary text-white fw-bold px-3 login_btn_width">
           Confirm
         </button>
       </div>
       <div class="mt-2">
         <button
           type="button"
-          class="btn btn-secondary border border-2 border-primary fw-bold px-3 login_btn_width"
+          class="btn border border-2 border-primary text-primary fw-bold px-3 login_btn_width"
           @click="resendCode"
         >
           Resend the code
@@ -49,6 +46,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
+  layout: 'introLayout',
   data: () => ({
     confirmForm: {
       email: '',
@@ -62,11 +60,11 @@ export default {
   },
 
   mounted() {
-    this.confirmForm.email = this.unconfirmedUserEmail;
-    if (!this.confirmForm.email) {
-      this.$router.push('/auth/login');
-      return;
-    }
+    // this.confirmForm.email = this.unconfirmedUserEmail;
+    // if (!this.confirmForm.email) {
+    //   this.$router.push('/auth/login');
+    //   return;
+    // }
     this.isFetched = true;
   },
 

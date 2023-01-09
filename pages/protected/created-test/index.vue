@@ -29,7 +29,13 @@
 
     <h1 class="mt-2 mb-4 text-primary font_size_32 col-md-12 col-sm-6">Created Test</h1>
 
-    <div v-if="!isLoading && !filteredTests.length" class="mt-4 px-3">
+    <div v-if="isLoaderHidden" class="row">
+      <div v-for="i in 3" :key="i" class="col-sm-6 col-md-4 mb-3" data-aos="flip-right">
+        <TestCardsSkeleton />
+      </div>
+    </div>
+
+    <div v-if="!isLoaderHidden && !filteredTests.length" class="mt-4 px-3">
       <div class="text-center">
         <img
           src="@/assets/images/boy_illustration.png"
@@ -39,7 +45,7 @@
         <h1 class="fw-bolder mt-3 font_size_32">No Test Available</h1>
       </div>
     </div>
-    <div class="row">
+    <div v-if="filteredTests.length && !isLoading" class="row">
       <div v-for="test in filteredTests" :key="test.id" class="col-sm-4 mb-3" data-aos="flip-right">
         <NuxtLink :to="`/protected/created-test/${test.slug}`">
           <TestCards
@@ -57,7 +63,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
@@ -148,7 +154,7 @@ export default {
 
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState(['isLoading', 'allCreatedTests']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests']),
 
     approvedTests() {
       return this.allCreatedTests.filter((test) => test.status === 'APPROVED');
@@ -164,14 +170,18 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     if (!this.allCreatedTests.length) {
       await this.getUserTests();
     }
     this.changeTabName('isApprovedOpen');
+
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions('testManagement', ['getUserTests']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     changeTabName(tabName) {
       if (tabName === 'isApprovedOpen') {

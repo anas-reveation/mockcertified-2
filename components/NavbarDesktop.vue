@@ -1,96 +1,121 @@
 <template>
   <nav
-    class="navbar navbar-expand-sm navbar-light bg-light"
+    class="navbar navbar-expand-sm navbar-light bg-light shadow-sm mb-1"
     @mouseleave="(userDropDown = false), (settingsDropDown = false)"
   >
-    <div class="container-fluid shadow-sm">
+    <div class="container px-4">
       <NuxtLink to="/dashboard" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <ClientOnly>
             <NuxtLink
               v-if="platform === 'web'"
               to="/dashboard"
-              class="d-flex flex-column align-items-center justify-content-center me-5"
+              class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
-              <img class="m-1 navbar_icon" src="@/assets/images/home.svg" alt="home" />
-              <span class="pb-2 font_size_10"> Home </span>
+              <img
+                class="m-1 navbar_icon"
+                :class="$route.path.match(/\/dashboard\/*/g) && 'active_color'"
+                src="@/assets/images/home.svg"
+                alt="home"
+              />
+              <span
+                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                :class="$route.path.match(/\/dashboard\/*/g) && 'text-primary'"
+              >
+                Home
+              </span>
 
-              <div
+              <!-- <div
                 class="active_line"
                 :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
-              />
+              /> -->
             </NuxtLink>
 
             <NuxtLink
               :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
-              class="d-flex flex-column align-items-center justify-content-center me-5"
+              class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
-              <img class="m-1 navbar_icon" src="@/assets/images/reattempt_icon.svg" alt="reload" />
-              <span class="pb-2 font_size_10"> Re-attempt </span>
-              <div
+              <img
+                class="m-1 navbar_icon"
+                :class="$route.path.match(/\/attempted-test\/*/g) && 'active_color'"
+                src="@/assets/images/reattempt_icon.svg"
+                alt="reload"
+              />
+              <span
+                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                :class="$route.path.match(/\/attempted-test\/*/g) && 'text-primary'"
+              >
+                Re-attempt
+              </span>
+
+              <!-- <div
                 class="active_line"
                 :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
-              />
+              /> -->
             </NuxtLink>
 
             <NuxtLink
               :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
-              class="d-flex flex-column align-items-center justify-content-center me-5"
+              class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
               <img
                 class="m-1 navbar_icon"
+                :class="$route.path.match(/\/purchased-test\/*/g) && 'active_color'"
                 src="@/assets/images/purchase_icon.svg"
                 alt="purchase_icon"
               />
-              <span class="pb-2 font_size_10"> Purchased </span>
+              <span
+                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                :class="$route.path.match(/\/purchased-test\/*/g) && 'text-primary'"
+              >
+                Purchased
+              </span>
 
-              <div
+              <!-- <div
                 class="active_line"
                 :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
-              />
+              /> -->
             </NuxtLink>
 
             <NuxtLink
-              v-if="user && user.stripe_seller_id"
-              to="/protected/account"
-              class="d-flex flex-column align-items-center justify-content-center me-5"
+              :to="isAuthenticated ? '/protected/account' : '/auth/login'"
+              class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
-              <img class="m-1 navbar_icon" src="@/assets/images/wallet.svg" alt="stripe_logo" />
-              <span class="pb-2 font_size_10"> Balance </span>
+              <img
+                class="m-1 navbar_icon"
+                :class="$route.path.match(/\/account\/*/g) && 'active_color'"
+                src="@/assets/images/wallet.svg"
+                alt="stripe_logo"
+              />
+              <span
+                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                :class="$route.path.match(/\/account\/*/g) && 'text-primary'"
+              >
+                Balance
+              </span>
 
-              <div
+              <!-- <div
                 class="active_line"
                 :class="$route.path.match(/\/account\/*/g) && 'bg-primary'"
-              />
+              /> -->
             </NuxtLink>
           </ClientOnly>
 
           <div
-            class="d-flex flex-column align-items-center justify-content-center me-5 cursor_pointer"
+            class="d-flex flex-column align-items-center justify-content-center ms-5 cursor_pointer"
             @mouseover="(settingsDropDown = true), (userDropDown = false)"
           >
             <img class="m-1 navbar_icon" src="@/assets/images/settings.svg" alt="settings" />
-            <span class="pb-2 font_size_10"> Settings </span>
+            <span class="fw-bolder pb-2 navbar_font_color font_size_12"> Settings </span>
           </div>
 
           <ClientOnly>
             <div
               v-if="user"
-              class="d-flex flex-column align-items-center justify-content-center me-5 mt-1 bg-primary text-white cursor_pointer circle"
+              class="d-flex flex-column align-items-center justify-content-center ms-5 mt-1 bg-primary text-white cursor_pointer circle"
               @mouseover="(userDropDown = true), (settingsDropDown = false)"
             >
               <span class="text-uppercase"> {{ user.first_name[0] }}{{ user.last_name[0] }} </span>
@@ -185,7 +210,7 @@
           <li class="ms-3 py-2" v-if="user">
             <div class="row">
               <div class="col-2 bg-primary text-white circle">
-                <p class="mt-2 text-uppercase text-center">
+                <p class="mt-2 text-uppercase d-flex justify-content-center">
                   {{ user.first_name[0] }}{{ user.last_name[0] }}
                 </p>
               </div>
@@ -284,6 +309,14 @@ export default {
 
 .hr_line {
   height: 2px;
+}
+
+.active_color {
+  filter: invert(61%) sepia(98%) saturate(2965%) hue-rotate(203deg) brightness(91%) contrast(92%);
+}
+
+.navbar_font_color {
+  color: hsla(0, 0%, 6%, 0.5);
 }
 
 .active_line {

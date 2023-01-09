@@ -8,14 +8,19 @@
               to="/dashboard"
               class="d-flex flex-column align-items-center justify-content-center"
             >
-              <div
+              <!-- <div
                 class="active_line mb-1"
                 :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
+              /> -->
+              <img
+                class="m-1"
+                :class="$route.path.match(/\/dashboard\/*/g) && 'active_color'"
+                src="@/assets/images/home.svg"
+                alt="home"
               />
-              <img class="m-1" src="@/assets/images/home.svg" alt="home" />
               <span
                 v-if="$route.path.match(/\/dashboard\/*/g)"
-                class="text-primary pb-2 font_size_10"
+                class="text-primary fw-bolder pb-2 font_size_10"
               >
                 Home
               </span>
@@ -27,18 +32,19 @@
             :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center"
           >
-            <div
+            <!-- <div
               class="active_line mb-1"
               :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
-            />
+            /> -->
             <img
               class="m-1 reattempt_icon_size"
+              :class="$route.path.match(/\/attempted-test\/*/g) && 'active_color'"
               src="@/assets/images/reattempt_icon.svg"
               alt="reload"
             />
             <span
               v-if="$route.path.match(/\/attempted-test\/*/g)"
-              class="text-primary pb-2 font_size_10"
+              class="text-primary fw-bolder pb-2 font_size_10"
             >
               Re-attempt
             </span>
@@ -49,14 +55,19 @@
             :to="isAuthenticated ? '/protected/purchased-test' : '/auth/login'"
             class="d-flex flex-column align-items-center justify-content-center"
           >
-            <div
+            <!-- <div
               class="active_line mb-1"
               :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
+            /> -->
+            <img
+              class="m-1"
+              :class="$route.path.match(/\/purchased-test\/*/g) && 'active_color'"
+              src="@/assets/images/purchase_icon.svg"
+              alt="purchase_icon"
             />
-            <img class="m-1" src="@/assets/images/purchase_icon.svg" alt="purchase_icon" />
             <span
               v-if="$route.path.match(/\/purchased-test\/*/g)"
-              class="text-primary pb-2 font_size_10"
+              class="text-primary fw-bolder pb-2 font_size_10"
             >
               Purchased
             </span>
@@ -68,17 +79,22 @@
               to="/protected/account"
               class="d-flex flex-column align-items-center justify-content-center"
             >
-              <div
+              <!-- <div
                 class="active_line mb-1"
                 :class="$route.path.match(/\/account\/*/g) && 'bg-primary'"
-              />
+              /> -->
               <div class="position-relative">
-                <img class="m-1" src="@/assets/images/wallet.svg" alt="stripe_logo" />
+                <img
+                  class="m-1"
+                  :class="$route.path.match(/\/account\/*/g) && 'active_color'"
+                  src="@/assets/images/wallet.svg"
+                  alt="stripe_logo"
+                />
               </div>
 
               <span
                 v-if="$route.path.match(/\/account\/*/g)"
-                class="text-primary pb-2 font_size_10"
+                class="text-primary fw-bolder pb-2 font_size_10"
               >
                 Balance
               </span>
@@ -118,6 +134,10 @@ a {
 
 .box_shadow {
   box-shadow: 0px 0px 8px #becbfa;
+}
+
+.active_color {
+  filter: invert(61%) sepia(98%) saturate(2965%) hue-rotate(203deg) brightness(91%) contrast(92%);
 }
 
 .active_line {

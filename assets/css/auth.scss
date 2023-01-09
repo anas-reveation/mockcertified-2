@@ -25,8 +25,10 @@
   height: 100%;
   width: 100%;
   border: none;
+  font-family: 'Nunito';
   font-size: 17px;
-  outline-color: #6782e1;
+  // outline-color: #6782e1;
+  outline-color: #cccccc;
   text-indent: 10px;
 }
 
@@ -34,6 +36,7 @@
 .input-data input:valid ~ label {
   transform: translateY(-20px);
   font-size: 15px;
+  font-family: 'Nunito';
   color: #000;
 }
 
