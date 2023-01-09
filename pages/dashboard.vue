@@ -9,7 +9,7 @@
             <h2 v-if="isLoaderHidden || !featuredTests.length">
               <AnimatedPlaceholder width="200px" height="10px" />
             </h2>
-            <h2 class="text-primary fw-bolder font_size_24" v-else>Featured</h2>
+            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Featured</h2>
           </div>
           <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
@@ -62,10 +62,13 @@
             <h2 v-if="isLoaderHidden || !allCategories.length">
               <AnimatedPlaceholder width="200px" height="10px" />
             </h2>
-            <h2 class="text-primary fw-bolder font_size_24" v-else>Categories</h2>
+            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
           </div>
           <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
-            <NuxtLink to="/category" class="text-primary text-decoration-underline font_size_16">
+            <NuxtLink
+              to="/category"
+              class="text-primary text-decoration-underline font_size_16 dashboard_title"
+            >
               See all
             </NuxtLink>
           </div>
@@ -86,7 +89,7 @@
           <div
             v-for="(category, index) in allCategories"
             :key="index"
-            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 font_size_14 category_box"
+            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
             data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
@@ -100,7 +103,9 @@
             <h2 v-if="isLoaderHidden || !recentlyAddedTests.length">
               <AnimatedPlaceholder width="200px" height="10px" />
             </h2>
-            <h2 class="text-primary fw-bolder font_size_24" v-else>Recently Added</h2>
+            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>
+              Recently Added
+            </h2>
           </div>
           <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
@@ -337,7 +342,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .scroll_x {
   overflow-x: auto;
   white-space: nowrap;
@@ -363,5 +370,15 @@ export default {
 
 .bg_light_blue {
   background: rgba(233, 238, 255, 0.3);
+}
+
+@include media-breakpoint-down(lg) {
+  .dashboard_title {
+    font-size: 16px;
+  }
+
+  .dashboard_category_title {
+    font-size: 12px;
+  }
 }
 </style>

@@ -1,6 +1,13 @@
 <template>
   <div class="container">
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
+
+    <div v-if="isLoaderHidden" class="row">
+      <div v-for="i in 3" :key="i" class="col-sm-6 col-md-4 mb-3" data-aos="flip-right">
+        <TestCardsSkeleton />
+      </div>
+    </div>
+
     <div
       v-if="allSearchedTest.length || allSearchedCategory.length || allSearchedSubCategory.length"
     >
@@ -33,7 +40,7 @@
 
       <div v-if="allSearchedCategory.length">
         <p class="font_size_16">Suggestions Category</p>
-        <div class="row p-1">
+        <div v-if="allSearchedCategory.length" class="row mt-4">
           <NuxtLink
             :to="`/category/${category.slug}`"
             v-for="category in allSearchedCategory"
@@ -41,11 +48,13 @@
             class="col-12 col-md-4 col-sm-6"
             data-aos="zoom-in"
           >
-            <div class="row shawdow_card m-2 p-2 category_border_radius">
-              <span class="col-2 me-2 d-flex align-items-center">
+            <div
+              class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+            >
+              <span class="col-2 me-2">
                 <img :src="category.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start"> {{ category.name }} </span>
+              <span class="col text-start font_size_16"> {{ category.name }} </span>
             </div>
           </NuxtLink>
         </div>
@@ -55,7 +64,7 @@
 
       <div v-if="allSearchedSubCategory.length">
         <p class="font_size_16">Suggestions Sub-Category</p>
-        <div class="row p-1">
+        <div v-if="allSearchedSubCategory.length" class="row mt-4">
           <NuxtLink
             v-for="subCategory in allSearchedSubCategory"
             :to="`/category/${subCategory.category.slug}?subCategoryId=${subCategory.slug}&subCategoryName=${subCategory.name}`"
@@ -63,11 +72,13 @@
             class="col-12 col-md-4 col-sm-6"
             data-aos="zoom-in"
           >
-            <div class="row shawdow_card m-2 p-2 category_border_radius">
-              <span class="col-2 me-2 d-flex align-items-center">
+            <div
+              class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+            >
+              <span class="col-2 me-2">
                 <img :src="subCategory.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start">{{ subCategory.name }}</span>
+              <span class="col text-start font_size_16"> {{ subCategory.name }} </span>
             </div>
           </NuxtLink>
         </div>
@@ -81,7 +92,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   // head() {
   //   return {
@@ -167,22 +178,30 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState(['isLoaderHidden']),
+  },
+
   // async asyncData({ query }) {
   //   const searchQuery = query.search_query ? query.search_query : null;
   //   return { searchQuery };
   // },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     this.searchQuery = this.$route.query.search_query ? this.$route.query.search_query : null;
     if (!this.searchQuery) {
+      this.setIsLoaderHidden(false);
       this.$router.push('/dashboard');
       return;
     }
     await this.searchQueryFunc();
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions('testManagement', ['getTestByQuery']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
@@ -237,9 +256,23 @@ export default {
   height: 35px;
 }
 
+.hover_effect:hover {
+  border: 1px solid #6782e1;
+}
+
 @include media-breakpoint-up(sm) {
   .category_border_radius {
     border-radius: 100px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .dashboard_title {
+    font-size: 16px;
+  }
+
+  .dashboard_category_title {
+    font-size: 12px;
   }
 }
 </style>

@@ -21,7 +21,7 @@
       <div v-if="!ishiddenAlexa" class="position-relative">
         <div class="position-absolute bottom-0 end-0 mb-2">
           <a @click="openAlexa" href="#">
-            <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_hover" />
+            <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_icon alexa_hover" />
           </a>
           <span class="border border-dark rounded-pill text-dark p-1 hide_text">
             Connect to Alexa
@@ -102,6 +102,13 @@ export default {
 @include media-breakpoint-down(sm) {
   .footer_height {
     height: 80px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .alexa_icon {
+    width: 50px;
+    height: 50px;
   }
 }
 
