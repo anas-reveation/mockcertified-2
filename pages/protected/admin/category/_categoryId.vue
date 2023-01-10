@@ -1,4 +1,5 @@
 <template>
+  <!-- NOTHING -->
   <div class="container">
     <p class="mt-2">
       <NuxtLink to="/protected/admin/category">

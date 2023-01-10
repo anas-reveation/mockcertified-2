@@ -1,7 +1,9 @@
 <template>
   <div class="text-left">
-    <h3 v-if="questionVisible" class="fw-bolder font_size_24">Question {{ index }}</h3>
-    <p :class="!questionVisible && 'fw-bolder'">
+    <h3 v-if="questionVisible" class="fw-bolder font_size_24 test_question_title">
+      Question {{ index }}
+    </h3>
+    <p class="test_question" :class="!questionVisible && 'fw-bolder'">
       <span v-if="!questionVisible" class="fw-bolder">{{ index }}. </span>
       {{ question.question }}
     </p>
@@ -10,7 +12,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark mb-2"
+          class="list-group-item border border-2 border-primary rounded text-dark mb-2 test_option"
           :class="
             question.userInput ? bgColor(question.userInput, value[1]) : checkAnswer(value[1])
           "
@@ -22,12 +24,12 @@
     </div>
 
     <div>
-      <div v-if="question.answer">
+      <div v-if="question.answer" class="test_question">
         <span class="fw-bolder">Answer</span>:
         {{ answerArrToLetter(question.answer, question.options) }}
       </div>
       <!-- Spelling mistake "explainantion" -->
-      <div v-if="question.explainantion">
+      <div v-if="question.explainantion" class="test_question">
         <span class="fw-bolder">Explanation</span>: {{ question.explainantion }}
       </div>
     </div>
@@ -97,11 +99,27 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
 .bg_green {
   background: #94e4bd;
 }
 .bg_gray {
   background: #b3b3b3;
+}
+
+@include media-breakpoint-down(lg) {
+  .test_question_title {
+    font-size: 18px;
+  }
+
+  .test_question {
+    font-size: 16px;
+  }
+
+  .test_option {
+    font-size: 14px;
+  }
 }
 </style>
