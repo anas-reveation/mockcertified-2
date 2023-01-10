@@ -10,22 +10,22 @@
       :credit="testDetail.credit"
     />
 
-    <div class="pb-2" v-for="(question, index) in testQuestions" :key="index">
+    <div class="mt-3 pb-2" v-for="(question, index) in testQuestions" :key="index">
       <TestQuestion :question="question" :index="index + 1" />
     </div>
 
-    <div class="pb-3" v-if="testDetail.reject_description">
+    <div class="pb-3 reject_title" v-if="testDetail.reject_description">
       <span class="fw-bolder"> Reject Description</span>:- {{ testDetail.reject_description }}
     </div>
 
     <div v-if="testDetail.status === 'IN_PROGRESS'">
       <div class="text-center">
         <button
-          class="btn btn-secondary border border-2 border-primary mb-1 w-50 width_res"
+          class="btn btn-primary text-white mb-1 w-50 width_res"
           type="button"
           @click="approveRejectTestLocal('approve')"
         >
-          Approve
+          <span class="font_size_16">Approve</span>
         </button>
 
         <div class="d-sm-flex justify-content-center">
@@ -54,7 +54,7 @@
           :disabled="!rejectDescription"
           @click="approveRejectTestLocal('reject')"
         >
-          Reject
+          <span class="font_size_16">Reject</span>
         </button>
       </div>
     </div>
@@ -395,6 +395,12 @@ export default {
 @include media-breakpoint-up(sm) {
   .width_res {
     width: 220px !important;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .reject_title {
+    font-size: 18px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container container_width">
-    <h1 class="mt-5 mb-4 font_size_32 col-md-12">Create a new category</h1>
+    <h1 class="mt-5 mb-4 font_size_24 admin_category_title">Create a new category</h1>
     <form class="wrapper mt-3" @submit.prevent="createCategory">
       <div class="mb-4 input-data">
         <input
@@ -23,8 +23,8 @@
       </div>
 
       <!-- Subcategory -->
-      <div class="sub_width">
-        <p class="font_size_24">Subcategories</p>
+      <div>
+        <p class="font_size_24 admin_category_title">Subcategories</p>
 
         <div v-for="(subcatt, index) in formData.subCat">
           <div class="mt-3">
@@ -48,14 +48,14 @@
               <label class="form-label">Image URL</label>
             </div>
             <button
-              class="btn btn-primary mb-2"
+              class="btn btn-outline-primary mb-2"
               type="button"
               @click="addMoreSubCategory(subcatt.name, subcatt.imageUrl)"
             >
               Add more
             </button>
             <button
-              class="btn btn-danger mb-2"
+              class="btn btn-outline-danger mb-2"
               @click="removeSubCategory(subcatt.name)"
               type="button"
             >
@@ -65,13 +65,13 @@
         </div>
       </div>
 
-      <div class="mt-2 text-center">
+      <div class="mt-2 text-start">
         <button
           type="submit"
           class="btn btn-primary text-white w-50 mb-2 width_res"
-          :class="isDisableBtn ? 'btn-secondary' : ''"
           :disabled="isDisableBtn"
         >
+          <!-- :class="isDisableBtn ? 'btn-secondary' : ''" -->
           Submit
         </button>
       </div>
@@ -283,57 +283,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/assets/css/bootstrapBreakpoint';
-
-.wrapper .input-data {
-  // height: 40px;
-  width: 100%;
-  position: relative;
-}
-
-.wrapper .input-data input {
-  height: 100%;
-  width: 100%;
-  border: none;
-  font-size: 17px;
-  outline-color: #6782e1;
-}
-
-.input-data input:focus ~ label,
-.input-data input:valid ~ label {
-  transform: translateY(-20px);
-  font-size: 15px;
-  color: #000;
-}
-
-.wrapper .input-data label {
-  position: absolute;
-  top: 3px;
-  left: 0.8rem;
-  color: #000;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  background-color: white;
-}
-
-.input-data input:focus ~ .underline:before,
-.input-data input:valid ~ .underline:before {
-  transform: scaleX(1);
-}
-
-.wrapper .input-data label {
-  img {
-    pointer-events: auto;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .container_width {
-    width: 50%;
-  }
-}
-
-.sub_width {
-  width: 50%;
-}
+@import '~/assets/css/admin_categories';
 </style>
