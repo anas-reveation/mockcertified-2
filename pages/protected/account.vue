@@ -9,13 +9,15 @@
     <div v-if="balanceDetail && isFetched">
       <div class="mt-5">
         <div>
-          <span class="text-dark rounded-3 p-2 fw-bold font_size_32 bg_grey me-2">
+          <span
+            class="text-dark rounded-3 fw-bold p-2 me-2 d-inline-block font_size_24 account_font_size bg_grey"
+          >
             Your Account Balance ${{ balanceDetail }}
           </span>
         </div>
 
         <button @click="getRedirectlink" class="btn btn-primary text-white mt-4">
-          View your payout
+          <span class="font_size_16"> View your payout </span>
         </button>
       </div>
     </div>
@@ -26,7 +28,7 @@
           alt="boy_illustration"
           class="boy_illustration"
         />
-        <div class="fw-bolder font_size_32 account_font_size">
+        <div class="fw-bolder font_size_24 account_font_size">
           Your Account Is Not Connected $0.00
         </div>
 
