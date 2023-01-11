@@ -127,7 +127,7 @@
     <!-- <div class="bg-primary w-100 hr_line mt-2" /> -->
 
     <!-- Start Hover Navbar -->
-    <div class="d-flex justify-content-end" v-if="settingsDropDown">
+    <div class="container d-flex justify-content-end" v-if="settingsDropDown">
       <ul
         class="list-unstyled bg-white position-fixed mt-2 me-2 p-2 settings_user_dropdown_border arrow_box"
         :class="isAuthenticated ? 'settings_dropdown' : 'user_dropdown'"
@@ -202,7 +202,7 @@
     <!-- End Hover Navbar -->
 
     <!-- Start Hover Navbar -->
-    <div class="d-flex justify-content-end" v-if="userDropDown">
+    <div class="container d-flex justify-content-end" v-if="userDropDown">
       <ul
         class="list-unstyled bg-white position-fixed mt-2 me-2 p-2 settings_user_dropdown_border arrow_box user_dropdown"
       >
@@ -389,6 +389,11 @@ export default {
   // border-bottom-color: #6782e1;
   border-width: 20px;
   right: 59px;
+}
+
+.user_dropdown,
+.settings_dropdown {
+  top: 80px;
 }
 
 .circle {
