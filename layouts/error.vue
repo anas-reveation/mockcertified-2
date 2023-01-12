@@ -11,8 +11,18 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   props: ['error'],
   layout: 'error', // you can set a custom layout for the error page
+
+  mounted() {
+    this.SET_LOADER(false);
+  },
+
+  methods: {
+    ...mapMutations(['SET_LOADER']),
+  },
 };
 </script>

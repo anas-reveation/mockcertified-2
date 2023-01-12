@@ -91,7 +91,7 @@
             <li
               v-if="userGroup === 'admins'"
               class="rounded-3 py-1 mt-2"
-              :class="$route.path.match(/\/admin\/*/g) && 'bg_color fill_black'"
+              :class="adminRoute && 'bg_color fill_black'"
               @click="
                 redirect('/protected/admin');
                 closeNav();
@@ -101,6 +101,23 @@
                 <span class="font_size_14">
                   <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1" />
                   Admin Panel
+                </span>
+              </a>
+            </li>
+
+            <li
+              v-if="userGroup === 'admins'"
+              class="rounded-3 py-1 mt-2"
+              :class="feebackRoute && 'bg_color fill_black'"
+              @click="
+                redirect('/protected/admin/feedback');
+                closeNav();
+              "
+            >
+              <a class="text-black ms-2">
+                <span class="font_size_14">
+                  <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1" />
+                  Feedback
                 </span>
               </a>
             </li>
@@ -426,9 +443,28 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
+  data() {
+    return {
+      adminRoute: false,
+      feebackRoute: false,
+    };
+  },
+
   computed: {
     ...mapState('auth', ['user', 'userGroup', 'isAuthenticated']),
     ...mapState(['isNavbarVisible']),
+  },
+
+  watch: {
+    $route: {
+      handler: function (newValue) {
+        const adminRoute = 'protected-admin' === newValue.name.substring(0, 15);
+        this.adminRoute = adminRoute && newValue.name.search('feedback') === -1;
+        this.feebackRoute = adminRoute && newValue.name.search('feedback') === 16;
+      },
+      deep: true,
+      immediate: true,
+    },
   },
 
   methods: {

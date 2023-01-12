@@ -1,61 +1,79 @@
 <template>
-  <div v-if="testDetail" class="container" data-aos="zoom-in">
-    <TestDetail
-      :title="testDetail.title"
-      :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
+  <div class="container">
+    <div v-if="isLoaderHidden">
+      <AnimatedPlaceholder width="150px" height="16px" class="mt-3" />
+      <br />
+      <AnimatedPlaceholder width="200px" height="16px" class="mt-3" />
+      <br />
+      <AnimatedPlaceholder width="150px" height="16px" class="mt-3" />
+      <br />
+      <AnimatedPlaceholder width="200px" height="16px" class="mt-3" />
+      <br />
+      <AnimatedPlaceholder width="150px" height="16px" class="mt-3" />
+      <br />
+      <AnimatedPlaceholder width="300px" height="16px" class="mt-3" />
+      <br />
+      <TestCardsSkeleton class="mt-3" />
+    </div>
+
+    <div v-else-if="!isLoaderHidden && testDetail" data-aos="zoom-in">
+      <TestDetail
+        :title="testDetail.title"
+        :shortDescription="`${testDetail.time_limit} min • ${testDetail.questions.items.length} questions •
       ${totalMarks} marks`"
-      :description="testDetail.description"
-      :price="testDetail.price"
-      :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
-      :credit="testDetail.credit"
-    />
+        :description="testDetail.description"
+        :price="testDetail.price"
+        :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
+        :credit="testDetail.credit"
+      />
 
-    <div class="mt-3 pb-2" v-for="(question, index) in testQuestions" :key="index">
-      <TestQuestion :question="question" :index="index + 1" />
-    </div>
+      <div class="mt-3 pb-2" v-for="(question, index) in testQuestions" :key="index">
+        <TestQuestion :question="question" :index="index + 1" />
+      </div>
 
-    <div class="pb-3 reject_title" v-if="testDetail.reject_description">
-      <span class="fw-bolder"> Reject Description</span>:- {{ testDetail.reject_description }}
-    </div>
+      <div class="pb-3 reject_title" v-if="testDetail.reject_description">
+        <span class="fw-bolder"> Reject Description</span>:- {{ testDetail.reject_description }}
+      </div>
 
-    <div v-if="testDetail.status === 'IN_PROGRESS'">
-      <div class="text-center">
-        <button
-          class="btn btn-primary text-white mb-1 w-50 width_res"
-          type="button"
-          @click="approveRejectTestLocal('approve')"
-        >
-          <span class="font_size_16">Approve</span>
-        </button>
+      <div v-if="testDetail.status === 'IN_PROGRESS'">
+        <div class="text-center">
+          <button
+            class="btn btn-primary text-white mb-1 w-50 width_res"
+            type="button"
+            @click="approveRejectTestLocal('approve')"
+          >
+            <span class="font_size_16">Approve</span>
+          </button>
 
-        <div class="d-sm-flex justify-content-center">
-          <form class="wrapper my-3">
-            <div class="mb-2 input-data">
-              <input
-                type="text"
-                class="border border-dark rounded form-control"
-                :class="!rejectDescription.length && 'reject_clr'"
-                v-model="rejectDescription"
-                required
-              />
-              <label
-                class="form-label label_clr"
-                :class="!rejectDescription.length && 'reject_clr'"
-              >
-                Reason of Rejection
-              </label>
-            </div>
-          </form>
+          <div class="d-sm-flex justify-content-center">
+            <form class="wrapper my-3">
+              <div class="mb-2 input-data">
+                <input
+                  type="text"
+                  class="border border-dark rounded form-control"
+                  :class="!rejectDescription.length && 'reject_clr'"
+                  v-model="rejectDescription"
+                  required
+                />
+                <label
+                  class="form-label label_clr"
+                  :class="!rejectDescription.length && 'reject_clr'"
+                >
+                  Reason of Rejection
+                </label>
+              </div>
+            </form>
+          </div>
+
+          <button
+            class="btn border border-2 border-danger text-danger w-50 mb-2 width_res"
+            type="button"
+            :disabled="!rejectDescription"
+            @click="approveRejectTestLocal('reject')"
+          >
+            <span class="font_size_16">Reject</span>
+          </button>
         </div>
-
-        <button
-          class="btn border border-2 border-danger text-danger w-50 mb-2 width_res"
-          type="button"
-          :disabled="!rejectDescription"
-          @click="approveRejectTestLocal('reject')"
-        >
-          <span class="font_size_16">Reject</span>
-        </button>
       </div>
     </div>
   </div>
@@ -69,7 +87,7 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_SECRET_KEY,
 });
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   middleware: ['authenticated'],
@@ -159,6 +177,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['isLoaderHidden']),
     ...mapState('admin', ['allTests']),
 
     totalMarks() {
@@ -171,6 +190,7 @@ export default {
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     this.testId = await this.getTestIdBySlug(this.testSlug);
 
     if (!this.allTests.length) {
@@ -180,6 +200,7 @@ export default {
     this.testDetail = this.allTests.find((test) => test.id === this.testId);
 
     if (!this.testDetail) {
+      this.setIsLoaderHidden(false);
       this.$router.push('/dashboard');
       return;
     }
@@ -197,9 +218,11 @@ export default {
         options: Object.entries(ordered),
       };
     });
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
+    ...mapMutations(['setIsLoaderHidden']),
     ...mapActions('admin', ['getAllTests', 'approveRejectTest']),
     ...mapActions('testManagement', ['getTestIdBySlug']),
 
