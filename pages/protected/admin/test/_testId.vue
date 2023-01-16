@@ -82,7 +82,7 @@
 <script>
 var AWS = require('aws-sdk');
 AWS.config.update({
-  region: 'us-east-1',
+  region: process.env.REGION,
   accessKeyId: process.env.AWS_ACCESS_ID,
   secretAccessKey: process.env.AWS_SECRET_KEY,
 });
@@ -168,6 +168,7 @@ export default {
       testDetail: null,
       rejectDescription: '',
       testId: null,
+      SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
     };
   },
 
@@ -303,7 +304,7 @@ export default {
               Data: `Your test ${name} is approved and available to users for purchase`,
             },
           },
-          Source: 'support@mockcertified.com',
+          Source: this.SUPPORT_EMAIL,
         };
       } else {
         var params = {
@@ -328,7 +329,7 @@ export default {
               Data: `Your test ${name} is Rejected. Please try again. `,
             },
           },
-          Source: 'support@mockcertified.com',
+          Source: this.SUPPORT_EMAIL,
         };
       }
 

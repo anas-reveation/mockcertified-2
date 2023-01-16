@@ -410,6 +410,7 @@ export default {
       // Since we are fetching purchased test so we have to give "authMode" in query
       const feedbackQueryData = await API.graphql({
         query: listFeedbacksAdmin,
+        variables: { limit: 10000 },
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const feedbackArray = feedbackQueryData.data.listFeedbacks.items;

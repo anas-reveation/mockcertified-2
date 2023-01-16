@@ -341,6 +341,13 @@
 </template>
 
 <script>
+var AWS = require('aws-sdk');
+AWS.config.update({
+  region: process.env.REGION,
+  accessKeyId: process.env.AWS_ACCESS_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+});
+
 import { Share } from '@capacitor/share';
 import { mapState, mapActions, mapMutations } from 'vuex';
 
@@ -364,6 +371,9 @@ export default {
       isEditFeedback: false,
       isFeedbackExits: false,
       limit: 300,
+
+      SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
+      ADMIN_EMAIL: process.env.ADMIN_EMAIL,
 
       // chart
       series: [0, 0, 0],
@@ -672,6 +682,7 @@ export default {
         };
         const res = await this.giveFeedback(obj);
         if (res) {
+          await this.sendEmail();
           this.isEditFeedback = true;
           this.isFeedbackExits = true;
         }
@@ -682,6 +693,7 @@ export default {
         };
         const res2 = await this.editFeedback(obj2);
         if (res2) {
+          await this.sendEmail();
           this.isEditFeedback = true;
           this.isFeedbackExits = true;
         }
@@ -695,6 +707,43 @@ export default {
 
     check() {
       this.feedbackDesc = this.feedbackDesc.substr(0, this.limit);
+    },
+
+    sendEmail() {
+      var params = {
+        Destination: {
+          ToAddresses: [this.ADMIN_EMAIL],
+        },
+        Message: {
+          /* required */
+          Body: {
+            /* required */
+            Html: {
+              Charset: 'UTF-8',
+              Data: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2"> <div style="margin:50px auto;width:70%;padding:20px 20px"> <div style="border-bottom:1px solid #eee"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> <p style="font-size:1.1em">Hi,</p> <p>The Feedback: ${this.feedbackDesc}</p><p style="font-size:0.9em;">Regards,<br />MockCertified Team</p> <hr style="border:none;border-top:1px solid #eee" /> <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> </div> </div>`,
+            },
+            Text: {
+              Charset: 'UTF-8',
+              Data: 'TEXT_FORMAT_BODY',
+            },
+          },
+          Subject: {
+            Charset: 'UTF-8',
+            Data: `You have received feedback from: ${this.user.first_name} ${this.user.last_name}`,
+          },
+        },
+        Source: this.SUPPORT_EMAIL,
+      };
+
+      // Create the promise and SES service object
+      var sendPromise = new AWS.SES().sendEmail(params).promise();
+
+      // Handle promise's fulfilled/rejected states
+      sendPromise
+        .then(function (data) {})
+        .catch(function (err) {
+          console.error(err, err.stack);
+        });
     },
 
     async shareTest() {
