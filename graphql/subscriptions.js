@@ -107,6 +107,9 @@ export const onCreateTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -149,6 +152,9 @@ export const onUpdateTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -191,6 +197,9 @@ export const onDeleteTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -515,6 +524,117 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         updatedAt
       }
       promocode_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateFeedback = /* GraphQL */ `
+  subscription OnCreateFeedback {
+    onCreateFeedback {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFeedback = /* GraphQL */ `
+  subscription OnUpdateFeedback {
+    onUpdateFeedback {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFeedback = /* GraphQL */ `
+  subscription OnDeleteFeedback {
+    onDeleteFeedback {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
       createdAt
       updatedAt
     }

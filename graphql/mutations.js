@@ -141,6 +141,9 @@ export const createTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -186,6 +189,9 @@ export const updateTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -231,6 +237,9 @@ export const deleteTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -591,6 +600,126 @@ export const deletePurchasedTest = /* GraphQL */ `
         updatedAt
       }
       promocode_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFeedback = /* GraphQL */ `
+  mutation CreateFeedback(
+    $input: CreateFeedbackInput!
+    $condition: ModelFeedbackConditionInput
+  ) {
+    createFeedback(input: $input, condition: $condition) {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFeedback = /* GraphQL */ `
+  mutation UpdateFeedback(
+    $input: UpdateFeedbackInput!
+    $condition: ModelFeedbackConditionInput
+  ) {
+    updateFeedback(input: $input, condition: $condition) {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFeedback = /* GraphQL */ `
+  mutation DeleteFeedback(
+    $input: DeleteFeedbackInput!
+    $condition: ModelFeedbackConditionInput
+  ) {
+    deleteFeedback(input: $input, condition: $condition) {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
       createdAt
       updatedAt
     }

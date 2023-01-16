@@ -107,6 +107,9 @@ export const getTestManager = /* GraphQL */ `
         nextToken
       }
       slug
+      feedback {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -502,6 +505,62 @@ export const listPurchasedTests = /* GraphQL */ `
         user_id
         test_id
         promocode_id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFeedback = /* GraphQL */ `
+  query GetFeedback($id: ID!) {
+    getFeedback(id: $id) {
+      id
+      test_id
+      test {
+        id
+        user_id
+        category_id
+        sub_category_id
+        title
+        description
+        reject_description
+        credit
+        price
+        status
+        tags
+        time_limit
+        slug
+        createdAt
+        updatedAt
+      }
+      purchased_id
+      purchased_test {
+        id
+        user_id
+        test_id
+        promocode_id
+        createdAt
+        updatedAt
+      }
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFeedbacks = /* GraphQL */ `
+  query ListFeedbacks(
+    $filter: ModelFeedbackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFeedbacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        test_id
+        purchased_id
+        description
         createdAt
         updatedAt
       }
