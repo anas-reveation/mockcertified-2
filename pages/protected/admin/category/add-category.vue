@@ -85,80 +85,79 @@ import { mapState, mapActions } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
-  //   head() {
-  //     return {
-  //       title: 'Create A New Test',
-  //       meta: [
-  //         {
-  //           hid: 'description',
-  //           name: 'description',
-  //           content:
-  //             'Create a new mock test by filling the details title, description, category, sub-category, price, time limits, reference, upload questions list in the form.',
-  //         },
-  //         {
-  //           hid: 'og:title',
-  //           property: 'og:title',
-  //           content: 'Create A New Test - Mockcertified App',
-  //         },
-  //         {
-  //           hid: 'og:description',
-  //           property: 'og:description',
-  //           content:
-  //             'Create a new mock test by filling the details title, description, category, sub-category, price, time limits, reference, upload questions list in the form.',
-  //         },
-  //         {
-  //           name: 'keywords',
-  //           content: 'Create A New Test, Mockcertified App',
-  //         },
+  head() {
+    return {
+      title: 'Create New Mock Test Categories',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Create a new mock test category by entering Name, Subcategory Name, Category Image URL and Subcategory Image URL.',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Create New Mock Test Categories - Mockcertified App',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+        },
+        {
+          name: 'keywords',
+          content: 'Create a new Mock test category, Mockcertified App',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}${this.$router.currentRoute.path}`,
+        },
 
-  //         {
-  //           hid: 'og:type',
-  //           property: 'og:type',
-  //           content: 'website',
-  //         },
-  //         {
-  //           hid: 'og:image',
-  //           property: 'og:image',
-  //           content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
-  //         },
-  //         {
-  //           hid: 'og:url',
-  //           property: 'og:url',
-  //           content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-  //         },
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Create New Mock Test Categories - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content:
+            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+        },
 
-  //         // Twitter Meta Tags
-  //         { name: 'twitter:card', content: 'summary_large_image' },
-  //         {
-  //           hid: 'twitter:title',
-  //           name: 'twitter:title',
-  //           content: 'Create A New Test - Mockcertified App',
-  //         },
-  //         {
-  //           hid: 'twitter:description',
-  //           name: 'twitter:description',
-  //           content:
-  //             'Create a new mock test by filling the details title, description, category, sub-category, price, time limits, reference, upload questions list in the form.',
-  //         },
-
-  //         {
-  //           hid: 'twitter:domain',
-  //           property: 'twitter:domain',
-  //           content: process.env.DOMAIN,
-  //         },
-  //         {
-  //           hid: 'twitter:url',
-  //           property: 'twitter:url',
-  //           content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-  //         },
-  //         {
-  //           hid: 'twitter:image',
-  //           name: 'twitter:image',
-  //           content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
-  //         },
-  //       ],
-  //     };
-  //   },
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}${this.$router.currentRoute.path}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
 
   data() {
     return {

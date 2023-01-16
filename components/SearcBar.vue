@@ -20,10 +20,10 @@
 
       <!-- We did not use the btn-primary button, which is not aligned centre when the height is specified.  -->
       <button
-        class="col-3 d-none d-lg-block text-white border border-primary bg-primary pt-1 font_size_14 input_height border_radius_500"
+        class="col-3 d-none d-lg-block text-white border border-primary bg-primary font_size_14 input_height border_radius_500"
         :type="searchQueryFunc ? 'submit' : 'button'"
       >
-        Search
+        <span> Search </span>
       </button>
 
       <button
@@ -82,6 +82,10 @@ export default {
   width: 55px;
 }
 
+.input_height {
+  height: 40px;
+}
+
 @include media-breakpoint-down(lg) {
   .input_height {
     height: 37px;
@@ -95,10 +99,6 @@ export default {
 @include media-breakpoint-up(lg) {
   .search_input_rounded {
     border-radius: 20px;
-  }
-
-  .input_height {
-    height: 40px;
   }
 
   .authenticated_search_input_size {

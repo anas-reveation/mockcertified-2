@@ -178,12 +178,25 @@
           <li
             v-if="userGroup === 'admins'"
             class="text-capitalize py-2 font_size_16"
-            :class="$route.path.match(/\/admin\/*/g) && 'bg_blue_color fill_black'"
+            :class="adminRoute && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/protected/admin">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1 mb-1" />
                 Admin
+              </span>
+            </NuxtLink>
+          </li>
+
+          <li
+            v-if="userGroup === 'admins'"
+            class="text-capitalize py-2 font_size_16"
+            :class="feebackRoute && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/protected/admin/feedback">
+              <span class="p-1 ms-3">
+                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1 mb-1" />
+                Feedback
               </span>
             </NuxtLink>
           </li>
@@ -278,12 +291,26 @@ export default {
       isSideNavbarShow: false,
       userDropDown: false,
       settingsDropDown: false,
+      adminRoute: false,
+      feebackRoute: false,
     };
   },
 
   computed: {
     ...mapState(['isSideNavbarVisible', 'platform']),
     ...mapState('auth', ['user', 'isAuthenticated', 'userGroup']),
+  },
+
+  watch: {
+    $route: {
+      handler: function (newValue) {
+        const adminRoute = 'protected-admin' === newValue.name.substring(0, 15);
+        this.adminRoute = adminRoute && newValue.name.search('feedback') === -1;
+        this.feebackRoute = adminRoute && newValue.name.search('feedback') === 16;
+      },
+      deep: true,
+      immediate: true,
+    },
   },
 
   methods: {

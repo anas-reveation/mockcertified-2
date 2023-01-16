@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { listAllTests, subCategoryUpdate } from '~/ManualGraphql/queries';
+import { listAllTests, subCategoryUpdate, listFeedbacksAdmin } from '~/ManualGraphql/queries';
 import { listCategories, getSubCategory } from '~/graphql/queries';
 import {
   updateTestManager,
@@ -400,6 +400,41 @@ export default {
       return false;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
+      return false;
+    }
+  },
+
+  async getAllFeedbacks({ commit, dispatch }) {
+    commit('SET_LOADER', true, { root: true });
+    try {
+      // Since we are fetching purchased test so we have to give "authMode" in query
+      const feedbackQueryData = await API.graphql({
+        query: listFeedbacksAdmin,
+        variables: { limit: 10000 },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const feedbackArray = feedbackQueryData.data.listFeedbacks.items;
+      commit('SET_LOADER', false, { root: true });
+
+      let sortedFeedbackArray = feedbackArray;
+      // If feedbackArray has a length, we sort by updated timestamp
+      if (feedbackArray.length) {
+        sortedFeedbackArray = await dispatch('testManagement/sortByupdatedAt', feedbackArray, {
+          root: true,
+        });
+      }
+      return sortedFeedbackArray;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
       return false;
     }
   },

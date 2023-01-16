@@ -168,7 +168,7 @@ export default {
 
   head() {
     return {
-      title: 'Create Your Mock Test',
+      title: 'Online Mock Test | Test Series',
       meta: [
         {
           hid: 'description',
@@ -179,7 +179,7 @@ export default {
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Create Your Mock Test - Mockcertified App',
+          content: 'Online Mock Test | Test Series - Mockcertified App',
         },
         {
           hid: 'og:description',
@@ -213,7 +213,7 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: 'Create Your Mock Test - Mockcertified App',
+          content: 'Online Mock Test | Test Series - Mockcertified App',
         },
         {
           hid: 'twitter:description',

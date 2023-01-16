@@ -53,6 +53,7 @@ type TestManager
   time_limit: Int!
   questions: [Question] @hasMany(indexName: "byTest", fields: ["id"])
   slug: String!
+  feedback: [Feedback] @hasMany(indexName: "byTestFeedback", fields: ["id"])
   createdAt: String!
 }
 
@@ -127,6 +128,23 @@ type PurchasedTest
   purchased_by: User @hasOne(fields: ["user_id"])
   test: TestManager @hasOne(fields: ["test_id"])
   promocode_id: String @default(value: "")
+}
+
+type Feedback
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [create, read, update] }
+      { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  test_id: ID! @index(name: "byTestFeedback")
+  test: TestManager @hasOne(fields: ["test_id"])
+  purchased_id: ID! @index(name: "byPurchasedFeedback")
+  purchased_test: PurchasedTest @hasOne(fields: ["purchased_id"])
+  description: String!
 }
 
 type AttemptedTest

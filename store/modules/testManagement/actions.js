@@ -14,7 +14,12 @@ import {
   subCategorySlug,
 } from '~/ManualGraphql/queries';
 
-import { listStaticContents, searchCategories, listTestManagers } from '~/graphql/queries';
+import {
+  listStaticContents,
+  searchCategories,
+  listTestManagers,
+  getFeedback,
+} from '~/graphql/queries';
 
 import {
   createAttemptedTest,
@@ -669,6 +674,34 @@ export default {
     }
   },
   // End - Only to get ID
+
+  async getFeedbackPurchasedTest({ commit }, payload) {
+    const purchased_id = payload;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      // Feedback ID and Purchased will be same (because purchased and feedback id will be unique)
+      const feedbackQueryData = await API.graphql({
+        query: getFeedback,
+        variables: { id: purchased_id },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const feedback = feedbackQueryData.data.getFeedback;
+      return feedback;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
 
   // Start Local function
   sortBycreatedAt(_none, payload) {

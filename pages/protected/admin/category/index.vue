@@ -44,81 +44,80 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   middleware: ['authenticated'],
 
-  // head() {
-  //   return {
-  //     title: 'Mock Test Categories',
-  //     meta: [
-  //       {
-  //         hid: 'description',
-  //         name: 'description',
-  //         content:
-  //           'Get all the categories at the Mock Certified application platform. Search and choose the category and their sub-category as per your interest, and select your preferred mock test.',
-  //       },
-  //       {
-  //         hid: 'og:title',
-  //         property: 'og:title',
-  //         content: 'Mock Test Categories - Mockcertified App',
-  //       },
-  //       {
-  //         hid: 'og:description',
-  //         property: 'og:description',
-  //         content:
-  //           'Get all the categories at the Mock Certified application platform. Search and choose the category and their sub-category as per your interest, and select your preferred mock test.',
-  //       },
-  //       {
-  //         name: 'keywords',
-  //         content:
-  //           'Mock Test Categories, Mockcertified App, AWS, Google, NDEB, NBDE, FSMB, Salesforce, Nursing, Cisco, Microsoft, EC Council, PMI, UiPath',
-  //       },
+  head() {
+    return {
+      title: 'Mock Test Categories For Admin',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'All mock test categories created by admin. You can update categories and add new subcategories to their list.',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Mock Test Categories For Admin - Mockcertified App',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'All mock test categories created by admin. You can update categories and add new subcategories to their list.',
+        },
+        {
+          name: 'keywords',
+          content:
+            'Mock Test Categories, Microsoft, UiPath, Cisco, Nursing, PMI, AWS, Google, NBDE, NDEB, Salesforce, FSMB, EC Council, Six Sigma Certification, Adex',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}${this.$router.currentRoute.path}`,
+        },
 
-  //       {
-  //         hid: 'og:type',
-  //         property: 'og:type',
-  //         content: 'website',
-  //       },
-  //       {
-  //         hid: 'og:image',
-  //         property: 'og:image',
-  //         content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
-  //       },
-  //       {
-  //         hid: 'og:url',
-  //         property: 'og:url',
-  //         content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-  //       },
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Mock Test Categories For Admin - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content:
+            'All mock test categories created by admin. You can update categories and add new subcategories to their list.',
+        },
 
-  //       // Twitter Meta Tags
-  //       { name: 'twitter:card', content: 'summary_large_image' },
-  //       {
-  //         hid: 'twitter:title',
-  //         name: 'twitter:title',
-  //         content: 'Mock Test Categories - Mockcertified App',
-  //       },
-  //       {
-  //         hid: 'twitter:description',
-  //         name: 'twitter:description',
-  //         content:
-  //           'Get all the categories at the Mock Certified application platform. Search and choose the category and their sub-category as per your interest, and select your preferred mock test.',
-  //       },
-
-  //       {
-  //         hid: 'twitter:domain',
-  //         property: 'twitter:domain',
-  //         content: process.env.DOMAIN,
-  //       },
-  //       {
-  //         hid: 'twitter:url',
-  //         property: 'twitter:url',
-  //         content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-  //       },
-  //       {
-  //         hid: 'twitter:image',
-  //         name: 'twitter:image',
-  //         content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
-  //       },
-  //     ],
-  //   };
-  // },
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}${this.$router.currentRoute.path}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
 
   data() {
     return {

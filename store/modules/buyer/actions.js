@@ -1,7 +1,11 @@
 import { API } from 'aws-amplify';
 import { checkPromoCode } from '~/graphql/queries';
-import { createPurchasedTest } from '~/graphql/mutations';
-import { checkoutStripeUrl } from '~/graphql/mutations';
+import {
+  createPurchasedTest,
+  checkoutStripeUrl,
+  createFeedback,
+  updateFeedback,
+} from '~/graphql/mutations';
 
 export default {
   async buyNow({ commit, rootState }, payload) {
@@ -186,37 +190,98 @@ export default {
     }
   },
 
-  // async checkout({ commit, rootState, dispatch }, payload) {
-  //   const jwtToken = rootState.auth.jwtToken;
-  //   const cartItems = payload;
-  //   commit('SET_LOADER', true, { root: true });
+  async giveFeedback({ commit }, payload) {
+    const purchasedTestId = payload.purchasedTestId;
+    const testId = payload.testId;
+    const description = payload.description;
 
-  //   try {
-  //     let urlArr = [];
-  //     const success_redirect_url = window.location.origin + '/payment-success';
-  //     const cancel_redirect_url = window.location.origin + '/payment-cancel';
-  //     cartItems.forEach(async (test) => {
-  //       const checkoutStripeUrlData = await API.graphql({
-  //         query: checkoutStripeUrl,
-  //         variables: {
-  //           test_id: test.id,
-  //           token: jwtToken,
-  //           success_redirect_url,
-  //           cancel_redirect_url,
-  //         },
-  //       });
-  //       const parsedData = JSON.parse(checkoutStripeUrlData.data.checkoutStripeUrl);
-  //       urlArr.push(parsedData.body.url);
-  //       newWindowsOpen(parsedData.body.url);
-  //     });
-  //     commit('buyer/clearCart', false, { root: true });
-  //     await dispatch('testManagement/getUserTests', false, { root: true });
-  //     commit('SET_LOADER', false, { root: true });
-  //     return true;
-  //   } catch (err) {
-  //     commit('SET_LOADER', false, { root: true });
-  //     console.error('ERR', err);
-  //     return false;
-  //   }
-  // },
+    // Feedback ID and Purchased will be same (because purchased and feedback id will be unique)
+    const input = {
+      id: purchasedTestId,
+      purchased_id: purchasedTestId,
+      test_id: testId,
+      description,
+    };
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      await API.graphql({
+        query: createFeedback,
+        variables: {
+          input,
+        },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Feedback submitted',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return true;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
+
+  async editFeedback({ commit }, payload) {
+    const purchasedTestId = payload.purchasedTestId;
+    const description = payload.description;
+
+    // Feedback ID and Purchased will be same (because purchased and feedback id will be unique)
+    const input = {
+      id: purchasedTestId,
+      description,
+    };
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      await API.graphql({
+        query: updateFeedback,
+        variables: {
+          input,
+        },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Feedback submitted',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return true;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
 };

@@ -453,3 +453,28 @@ export const subCategoryUpdate = /* GraphQL */ `
     }
   }
 `;
+
+export const listFeedbacksAdmin = /* GraphQL */ `
+  query ListFeedbacks($filter: ModelFeedbackFilterInput, $limit: Int, $nextToken: String) {
+    listFeedbacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        test_id
+        test {
+          slug
+        }
+        purchased_id
+        purchased_test {
+          purchased_by {
+            first_name
+            last_name
+          }
+        }
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
