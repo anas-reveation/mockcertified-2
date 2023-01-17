@@ -6,7 +6,7 @@ android {
         applicationId "com.mockcertified.mockcertifiedapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 32
-        versionCode 3
+        versionCode 5
         versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
