@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-sm navbar-light bg-light shadow-sm mb-1"
+    class="navbar navbar-expand-sm navbar-light bg-light mb-1 navbar_shadow"
     @mouseleave="(userDropDown = false), (settingsDropDown = false)"
   >
     <div class="container px-4">
@@ -135,7 +135,7 @@
         <ClientOnly>
           <li
             v-if="isAuthenticated"
-            class="py-2 font_size_16"
+            class="py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/create-test\/*/g) && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/protected/create-test">
@@ -148,7 +148,7 @@
 
           <li
             v-if="isAuthenticated"
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/created-test\/*/g) && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/protected/created-test">
@@ -164,7 +164,7 @@
           </li>
 
           <li
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/contact-us\/*/g) && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/contact-us">
@@ -177,7 +177,7 @@
 
           <li
             v-if="userGroup === 'admins'"
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="adminRoute && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/protected/admin">
@@ -190,18 +190,18 @@
 
           <li
             v-if="userGroup === 'admins'"
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="feebackRoute && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/protected/admin/feedback">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1 mb-1" />
+                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1" />
                 Feedback
               </span>
             </NuxtLink>
           </li>
 
-          <li v-if="!isAuthenticated" class="text-capitalize py-2 font_size_16">
+          <li v-if="!isAuthenticated" class="text-capitalize py-2 font_size_16 hover_clr mx-2">
             <NuxtLink to="/auth/login">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
@@ -241,7 +241,7 @@
           </div>
 
           <li
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/terms-conditions">
@@ -257,7 +257,7 @@
           </li>
 
           <li
-            class="text-capitalize py-2 font_size_16"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg_blue_color fill_black'"
           >
             <NuxtLink to="/privacy-policy">
@@ -268,7 +268,7 @@
             </NuxtLink>
           </li>
 
-          <li v-if="isAuthenticated" class="text-capitalize py-2 font_size_16">
+          <li v-if="isAuthenticated" class="text-capitalize py-2 font_size_16 hover_clr mx-2">
             <a href="#" @click="userLogOut()">
               <span class="p-1 ms-3">
                 <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
@@ -334,6 +334,20 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
+.navbar_shadow {
+  box-shadow: 0px 8px 15px rgba(165, 165, 165, 0.1);
+}
+
+.hover_clr:hover {
+  background: #e8ecfb;
+  border-radius: 6px;
+}
+
+.bg_blue_color {
+  background-color: #e8ecfb;
+  border-radius: 6px;
+}
+
 .hr_line {
   height: 2px;
 }
@@ -349,10 +363,6 @@ export default {
 .active_line {
   width: 40px;
   height: 4px;
-}
-
-.bg_blue_color {
-  background-color: #e8ecfb;
 }
 
 .fill_black > a > span > img {

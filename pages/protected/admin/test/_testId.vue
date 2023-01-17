@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div v-if="isLoaderHidden">
       <AnimatedPlaceholder width="150px" height="16px" class="mt-3" />
       <br />
@@ -27,7 +27,7 @@
         :credit="testDetail.credit"
       />
 
-      <div class="mt-3 pb-2" v-for="(question, index) in testQuestions" :key="index">
+      <div class="mt-4 pb-2" v-for="(question, index) in testQuestions" :key="index">
         <TestQuestion :question="question" :index="index + 1" />
       </div>
 
