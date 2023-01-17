@@ -11,7 +11,7 @@
 
       <div v-if="!isLoaderHidden">
         <!-- START INSTRUCTION -->
-        <div v-if="!startTest">
+        <div v-if="!startTest" class="mt-3">
           <TestInstructions v-if="testInstruction" :bodyContent="testInstruction" />
           <div v-if="testInstruction" class="text-center">
             <button

@@ -3,10 +3,6 @@
 	"appName": "Mockcertified",
 	"webDir": "dist",
 	"bundledWebRuntime": false,
-	"server": {
-		"url": "https://www.mockcertified.com",
-		"cleartext": true
-	},
 	"ios": {
 		"contentInset": "always"
 	},

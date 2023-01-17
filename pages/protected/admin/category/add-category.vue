@@ -104,7 +104,7 @@ export default {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+            'Create a new mock test category by entering Name, Subcategory Name, Category Image URL and Subcategory Image URL.',
         },
         {
           name: 'keywords',
@@ -137,7 +137,7 @@ export default {
           hid: 'twitter:description',
           name: 'twitter:description',
           content:
-            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+            'Create a new mock test category by entering Name, Subcategory Name, Category Image URL and Subcategory Image URL.',
         },
 
         {

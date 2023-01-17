@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div v-if="isLoaderHidden">
       <div v-for="i in 3" :key="i">
         <AnimatedPlaceholder width="100px" height="10px" class="mt-4" />

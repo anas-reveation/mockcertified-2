@@ -91,6 +91,10 @@ export default {
     height: 37px;
   }
 
+  .search_icon_position {
+    top: 3px;
+  }
+
   .search_placeholder {
     font-size: 12px;
   }

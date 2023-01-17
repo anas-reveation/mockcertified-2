@@ -18,7 +18,7 @@
     </div>
 
     <div v-else-if="!isLoaderHidden && testDetail">
-      <div class="row">
+      <div class="row mb-4">
         <div class="col-lg-6 mt-4" data-aos="zoom-in">
           <TestDetail
             :title="testDetail.title"
@@ -38,7 +38,7 @@
                   <br />
                 </span>
                 <span class="text-muted font_family_roboto font_size_14">
-                  attempted on {{ attemptedTimeStamp }}
+                  Attempted on {{ attemptedTimeStamp }}
                 </span>
                 <div class="row mt-2">
                   <div class="col px-0">
@@ -117,7 +117,7 @@
                 <div class="text-center mt-3">
                   <button
                     type="button"
-                    class="btn border border-2 border-primary text-black"
+                    class="btn btn-outline-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#reviewAnswers"
                   >
@@ -127,6 +127,16 @@
               </div>
             </template>
           </TestDetail>
+
+          <div class="text-center text-sm-start mt-2 start_btn_position">
+            <NuxtLink
+              :to="`/protected/test/${testDetail.slug}`"
+              class="btn btn-primary text-white"
+              @click=""
+            >
+              Start Again
+            </NuxtLink>
+          </div>
         </div>
 
         <!-- Desktop result section -->
@@ -137,7 +147,7 @@
               <br />
             </span>
             <span class="text-muted font_family_roboto font_size_14">
-              attempted on {{ attemptedTimeStamp }}
+              Attempted on {{ attemptedTimeStamp }}
             </span>
             <div class="row mt-2">
               <div class="col px-0">
@@ -212,7 +222,7 @@
             <div class="text-center mt-3" v-if="attemptedQuestions !== 0">
               <button
                 type="button"
-                class="btn border border-2 border-primary text-black"
+                class="btn btn-outline-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#reviewAnswers"
               >
@@ -223,16 +233,6 @@
         </div>
       </div>
 
-      <div class="text-center text-sm-start mt-2 pb-3">
-        <NuxtLink
-          :to="`/protected/test/${testDetail.slug}`"
-          class="btn btn-primary text-white"
-          @click=""
-        >
-          Start Again
-        </NuxtLink>
-      </div>
-
       <hr />
 
       <div class="mt-3 pb-3">
@@ -241,7 +241,7 @@
         <form v-if="!isEditFeedback" @submit.prevent="feedbackSubmit" class="feedback_width">
           <textarea
             v-model.trim="feedbackDesc"
-            class="w-100 textarea_border font_size_14"
+            class="w-100 p-1 textarea_box font_size_14"
             rows="4"
             type="text"
             @input="check"
@@ -266,14 +266,14 @@
           <div class="row">
             <div class="col-1">
               <div
-                class="d-flex flex-column align-items-center justify-content-center bg-primary text-white cursor_pointer circle"
+                class="d-flex flex-column align-items-center justify-content-center bg-primary text-white ms-lg-3 cursor_pointer circle"
               >
                 <span class="text-uppercase">
                   {{ user.first_name[0] }}{{ user.last_name[0] }}
                 </span>
               </div>
             </div>
-            <div class="col mt-2 ms-2 ms-lg-0 text-start">
+            <div class="col mt-2 ms-2 ms-lg-0">
               <div class="row">
                 <div class="col">
                   <div class="fw-bolder font_size_20 feedback_user_font">
@@ -567,7 +567,7 @@ export default {
     instruction: function () {
       return this.feedbackDesc === ''
         ? 'Limit: ' + this.limit + ' characters'
-        : 'remaining ' + this.remaining + ' characters';
+        : 'Remaining ' + this.remaining + ' characters';
     },
     remaining: function () {
       return this.limit - this.feedbackDesc.length;
@@ -720,7 +720,44 @@ export default {
             /* required */
             Html: {
               Charset: 'UTF-8',
-              Data: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2"> <div style="margin:50px auto;width:70%;padding:20px 20px"> <div style="border-bottom:1px solid #eee"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> <p style="font-size:1.1em">Hi,</p> <p>The Feedback: ${this.feedbackDesc}</p><p style="font-size:0.9em;">Regards,<br />MockCertified Team</p> <hr style="border:none;border-top:1px solid #eee" /> <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300"> <img src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"></img> </div> </div> </div>`,
+              Data: `<div
+                      style="
+                        font-family: Helvetica, Arial, sans-serif;
+                        min-width: 1000px;
+                        overflow: auto;
+                        line-height: 2;
+                      "
+                    >
+                      <div style="margin: 50px auto; width: 70%; padding: 20px 20px">
+                        <div style="border-bottom: 1px solid #eee">
+                          <img
+                            src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"
+                          />
+                        </div>
+                        <p style="font-size: 1.1em">Hi,</p>
+                        <p>The Feedback: ${this.feedbackDesc}</p>
+                        <p>Test Name: ${this.testDetail.title}</p>
+                        <p>Seller Name: ${this.testDetail.created_by.first_name} ${this.testDetail.created_by.last_name}; ID: ${this.testDetail.created_by.id}</p>
+                        <p>Buyer Name: ${this.user.first_name} ${this.user.last_name}; ID: ${this.user.id}</p>
+                        <p>Test Link: <a href="https://${process.env.DOMAIN}/protected/admin/test/${this.testDetail.slug}">Link</a></p>
+                        <p style="font-size: 0.9em">Regards,<br />MockCertified Team</p>
+                        <hr style="border: none; border-top: 1px solid #eee" />
+                        <div
+                          style="
+                            float: right;
+                            padding: 8px 0;
+                            color: #aaa;
+                            font-size: 0.8em;
+                            line-height: 1;
+                            font-weight: 300;
+                          "
+                        >
+                          <img
+                            src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"
+                          />
+                        </div>
+                      </div>
+                    </div>`,
             },
             Text: {
               Charset: 'UTF-8',
@@ -784,8 +821,9 @@ export default {
   right: 38%;
 }
 
-.textarea_border {
-  border: 2px solid #878787;
+.textarea_box {
+  border: 1.5px solid #878787;
+  border-radius: 4px;
 }
 
 .circle {
@@ -839,6 +877,11 @@ export default {
 
   .feedback_width {
     width: 50%;
+  }
+
+  .start_btn_position {
+    position: absolute;
+    bottom: 0;
   }
 }
 

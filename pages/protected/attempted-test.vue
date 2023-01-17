@@ -3,7 +3,7 @@
     <div>
       <div class="mb-2 d-flex justify-content-center justify-content-sm-end">
         <div
-          class="p-1 m-1 cursor_pointer sorting_text_size"
+          class="p-1 ps-lg-3 m-1 cursor_pointer font_size_16"
           :class="sortingTabName === 'IN_PROGRESS' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('IN_PROGRESS')"
         >
@@ -11,7 +11,7 @@
           <div v-if="sortingTabName === 'IN_PROGRESS'" class="bg-primary mt-0 blue_underline" />
         </div>
         <div
-          class="p-1 m-1 cursor_pointer sorting_text_size"
+          class="p-1 ps-lg-3 m-1 cursor_pointer font_size_16"
           :class="sortingTabName === 'COMPLETED' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('COMPLETED')"
         >
@@ -19,7 +19,7 @@
           <div v-if="sortingTabName === 'COMPLETED'" class="bg-primary mt-0 blue_underline" />
         </div>
         <div
-          class="p-1 m-1 cursor_pointer sorting_text_size"
+          class="p-1 ps-lg-3 m-1 cursor_pointer font_size_16"
           :class="sortingTabName === 'ABORTED' ? 'text-primary' : 'text-dark'"
           @click="changeTabName('ABORTED')"
         >
@@ -316,12 +316,6 @@ export default {
   .width_res {
     width: 25% !important;
     margin-left: auto;
-  }
-}
-
-@include media-breakpoint-down(sm) {
-  .sorting_text_size {
-    font-size: 14px;
   }
 }
 </style>
