@@ -368,8 +368,10 @@ export default {
   background: #e9eeff;
 }
 
-.bg_light_blue {
-  background: rgba(233, 238, 255, 0.3);
+@include media-breakpoint-up(sm) {
+  .bg_light_blue {
+    background: rgba(233, 238, 255, 0.3);
+  }
 }
 
 @include media-breakpoint-down(lg) {

@@ -365,9 +365,9 @@ export default {
   height: 4px;
 }
 
-.fill_black > a > span > img {
-  filter: saturate(100%) brightness(0);
-}
+// .fill_black > a > span > img {
+//   filter: saturate(100%) brightness(0);
+// }
 
 .side_navbar {
   position: fixed;

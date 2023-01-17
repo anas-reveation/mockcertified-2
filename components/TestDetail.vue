@@ -4,29 +4,24 @@
       <div class="row mt-1">
         <div class="col-7">
           <h1 class="fw-bolder font_size_24 test_detail_title">{{ title }}</h1>
+          <span v-if="shortDescription" class="text-primary font_size_14 test_detail_desc">
+            {{ shortDescription }}
+          </span>
         </div>
         <div class="col-5 text-capitalize fw-bolder text-end" v-if="price">
           <span class="bg_price rounded-pill px-2 py-1 font_size_14 test_detail_desc">
             {{ formatedPrice }}
           </span>
         </div>
-        <p class="col-5 fw-bolder text-end" v-else-if="priceZero">
-          <span
-            class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14 test_detail_desc"
-          >
-            Free
-          </span>
-        </p>
-      </div>
-
-      <div>
-        <div class="row">
-          <div class="col">
-            <span v-if="shortDescription" class="text-primary font_size_14 test_detail_desc">
-              {{ shortDescription }}
+        <div class="col-5 fw-bolder text-end">
+          <p v-if="priceZero">
+            <span
+              class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14 test_detail_desc"
+            >
+              Free
             </span>
-          </div>
-          <div v-if="shareFunc" class="col-2 text-end">
+          </p>
+          <div v-if="shareFunc">
             <img
               src="@/assets/images/share_icon.svg"
               alt="share"
@@ -37,27 +32,27 @@
             />
           </div>
         </div>
+      </div>
 
-        <div class="mt-3">
-          <h3 class="fw-bolder font_size_18 test_detail_title">Description</h3>
-          <div class="my-0 font_size_14 test_detail_desc">
-            {{ seeMore ? description : truncatePara(description) }}
-            <span v-if="wordLength > wordCount">
-              <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder font_size_14"
-                >See more</span
-              >
-              <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder font_size_14">
-                ...See less
-              </span>
+      <div class="mt-2">
+        <h3 class="fw-bolder font_size_18 test_detail_title">Description</h3>
+        <div class="my-0 font_size_14 test_detail_desc">
+          {{ seeMore ? description : truncatePara(description) }}
+          <span v-if="wordLength > wordCount">
+            <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder font_size_14"
+              >See more</span
+            >
+            <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder font_size_14">
+              ...See less
             </span>
-          </div>
+          </span>
         </div>
+      </div>
 
-        <div class="mt-3">
-          <h3 class="fw-bolder mt-2 font_size_18 test_detail_title">Created By</h3>
-          <div class="text-primary fw-bolder font_size_16 test_detail_desc" v-if="fullName">
-            {{ fullName }}
-          </div>
+      <div class="mt-3">
+        <h3 class="fw-bolder mt-2 font_size_18 test_detail_title">Created By</h3>
+        <div class="text-primary fw-bolder font_size_16 test_detail_desc" v-if="fullName">
+          {{ fullName }}
         </div>
       </div>
 
