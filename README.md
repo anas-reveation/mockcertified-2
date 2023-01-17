@@ -120,3 +120,8 @@ Create OAuth client ID "Web Application" & "Andorid". Use "Web Application" ID i
 ### To Edit Static content eg: privacy policy, etc..
 
 If you want to fetch data from app sync then try this to remove "/" [website](https://www.browserling.com/tools/strip-slashes).
+
+## AppSync API Key Renewal - 16/01/2022 Last Renewed
+
+Regarding Appsync API key , Appsync API key is to be renewed every year from the AWS console(last updated : 16/01/2022)
+Possible error if the API key is expired are 401 or 400.

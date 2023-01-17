@@ -32,12 +32,12 @@
           data-aos="zoom-in"
         >
           <div
-            class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+            class="row align-items-center m-2 p-2 shawdow_category category_border_radius hover_effect"
           >
             <span class="col-2">
               <img :src="category.image" alt="category" class="category_image" />
             </span>
-            <span class="col text-start font_size_16"> {{ category.name }}</span>
+            <span class="col text-start text-truncate font_size_16"> {{ category.name }}</span>
           </div>
         </a>
       </div>
@@ -304,6 +304,10 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.shawdow_category {
+  box-shadow: 2px 2px 10px rgba(103, 130, 225, 0.1);
+}
 
 .category_image {
   object-fit: contain;

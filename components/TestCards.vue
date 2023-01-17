@@ -1,9 +1,11 @@
 <template>
   <div
-    class="shawdow_card position-relative bg-white px-2 py-1 test_card_border_radius card_height"
+    class="shawdow_card position-relative bg-white px-3 py-1 test_card_border_radius card_height"
   >
     <div class="row mt-1">
-      <p class="col-7 fw-bolder mb-0 font_size_24 test_card_title mb-2" v-if="title">{{ title }}</p>
+      <p class="col-7 fw-bolder mb-0 mb-2 text-truncate font_size_24 test_card_title" v-if="title">
+        {{ title }}
+      </p>
       <p class="col-5 fw-bolder text-end" v-if="price === '$0.00'">
         <span class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14">Free</span>
       </p>
@@ -22,7 +24,7 @@
 
     <span
       v-if="description"
-      class="position-relative position-absolute bottom-0 start-0 text-primary m-2 font_size_14 test_card_desc"
+      class="position-relative position-absolute bottom-0 start-0 text-primary ps-2 m-2 font_size_14 test_card_desc"
     >
       {{ description }}
     </span>

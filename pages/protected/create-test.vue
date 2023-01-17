@@ -622,7 +622,11 @@ export default {
             // From string to array eg:-> "a,b" -> ["a", "b"]
             questionObj.answer = this.getAnswerArray(col);
             questionObj.answer = questionObj.answer.length ? questionObj.answer : null;
-          } else if (header && header === 'explanation' && col) {
+          } else if (
+            header &&
+            (header === 'explanation' || header === 'explanation(optional)') &&
+            col
+          ) {
             questionObj.explanation = col.replace(/\s+/g, ' ').trim();
           } else if (header && header === 'show_as_sample_question' && col) {
             questionObj.is_showcase = col.replace(/\s+/g, ' ').trim().toUpperCase();
@@ -696,7 +700,8 @@ export default {
         });
         if (!isSelectedAnswer) {
           this.questionList = [];
-          const fileErrorMsg = 'You have not selected the correct option';
+          const fileErrorMsg =
+            'An error has occurred with the uploaded file. Kindly review the file and ensure that all non-optional columns contain valid data.';
           this.errors.fileError.msg = fileErrorMsg;
           this.$swal.fire({
             toast: true,

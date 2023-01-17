@@ -1,5 +1,5 @@
 <template>
-  <div v-if="testDetail" class="container">
+  <div v-if="testDetail" class="container mt-3">
     <TestDetail
       class="mt-3"
       :title="testDetail.title"

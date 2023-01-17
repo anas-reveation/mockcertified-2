@@ -25,7 +25,7 @@
       <button
         v-if="sampleQuestions.length"
         type="button"
-        class="btn btn-outline-primary w-50 mt-3 mb-2 width_res"
+        class="btn btn-outline-primary mt-3 mb-2 width_res"
         data-bs-toggle="modal"
         data-bs-target="#reviewQuestion"
       >
