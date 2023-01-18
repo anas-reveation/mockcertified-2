@@ -65,7 +65,7 @@
             >
               <a class="text-black ms-2">
                 <span class="font_size_14">
-                  <img src="@/assets/images/add.svg" alt="add" class="me-1" />
+                  <img src="@/assets/images/add.svg" alt="add" class="me-1 nav_icon" />
                   Create a New Test
                 </span>
               </a>
@@ -73,7 +73,7 @@
 
             <li
               v-if="isAuthenticated"
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               :class="$route.path.match(/\/created-test\/*/g) && 'bg_color fill_black'"
               @click="
                 redirect('/protected/created-test');
@@ -82,7 +82,11 @@
             >
               <a class="text-black ms-2">
                 <span class="font_size_14">
-                  <img src="@/assets/images/created_tests.svg" alt="created_tests" class="me-1" />
+                  <img
+                    src="@/assets/images/created_tests.svg"
+                    alt="created_tests"
+                    class="me-1 nav_icon"
+                  />
                   Created Tests
                 </span>
               </a>
@@ -90,7 +94,7 @@
 
             <li
               v-if="userGroup === 'admins'"
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               :class="adminRoute && 'bg_color fill_black'"
               @click="
                 redirect('/protected/admin');
@@ -99,7 +103,11 @@
             >
               <a class="text-black ms-2">
                 <span class="font_size_14">
-                  <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1" />
+                  <img
+                    src="@/assets/images/admin_pannel.svg"
+                    alt="admin_pannel"
+                    class="me-1 nav_icon"
+                  />
                   Admin Panel
                 </span>
               </a>
@@ -107,7 +115,7 @@
 
             <li
               v-if="userGroup === 'admins'"
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               :class="feebackRoute && 'bg_color fill_black'"
               @click="
                 redirect('/protected/admin/feedback');
@@ -116,7 +124,11 @@
             >
               <a class="text-black ms-2">
                 <span class="font_size_14">
-                  <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1" />
+                  <img
+                    src="@/assets/images/feedback_icon.svg"
+                    alt="feedback"
+                    class="me-1 nav_icon"
+                  />
                   Feedback
                 </span>
               </a>
@@ -127,7 +139,7 @@
             </div>
 
             <li
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               :class="$route.path.match(/\/contact-us\/*/g) && 'bg_color fill_black'"
               @click="
                 redirect('/contact-us');
@@ -135,13 +147,31 @@
               "
             >
               <span class="text-black ms-2 font_size_14">
-                <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" class="me-1" />
+                <img
+                  src="@/assets/images/contact-us-icon.svg"
+                  alt="contact-us"
+                  class="me-1 nav_icon"
+                />
                 Contact Us
               </span>
             </li>
 
             <li
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
+              :class="$route.path.match(/\/faq\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/faq');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_14">
+                <img src="@/assets/images/FAQ.svg" alt="faq" class="me-1 nav_icon" />
+                FAQ
+              </span>
+            </li>
+
+            <li
+              class="rounded-3 py-1"
               :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg_color fill_black'"
               @click="
                 redirect('/terms-conditions');
@@ -152,14 +182,14 @@
                 <img
                   src="@/assets/images/terms_conditions.svg"
                   alt="terms_conditions"
-                  class="me-1"
+                  class="me-1 nav_icon"
                 />
                 Terms and Conditions
               </span>
             </li>
 
             <li
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               :class="$route.path.match(/\/privacy-policy\/*/g) && 'bg_color fill_black'"
               @click="
                 redirect('/privacy-policy');
@@ -167,35 +197,39 @@
               "
             >
               <span class="text-black ms-2 font_size_14">
-                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1" />
+                <img
+                  src="@/assets/images/privacy_icon.svg"
+                  alt="privacy_icon"
+                  class="me-1 nav_icon"
+                />
                 Privacy policy
               </span>
             </li>
 
             <li
               v-if="!isAuthenticated"
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               @click="
                 redirect('/auth/login');
                 closeNav();
               "
             >
               <span class="text-black ms-2 font_size_14">
-                <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 nav_icon" />
                 Login
               </span>
             </li>
 
             <li
               v-if="isAuthenticated"
-              class="rounded-3 py-1 mt-2"
+              class="rounded-3 py-1"
               @click="
                 userLogOut();
                 closeNav();
               "
             >
               <span class="text-black ms-2 font_size_14">
-                <img src="@/assets/images/logout.svg" alt="logout" class="me-1" />
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 nav_icon" />
                 Logout
               </span>
             </li>
@@ -495,6 +529,11 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.nav_icon {
+  height: 15px;
+  width: 15px;
+}
 
 .hr_line {
   height: 2px;

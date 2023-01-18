@@ -3,9 +3,13 @@
     class="shawdow_card position-relative bg-white px-3 py-1 test_card_border_radius card_height"
   >
     <div class="row mt-1">
-      <p class="col-7 fw-bolder mb-0 mb-2 text-truncate font_size_24 test_card_title" v-if="title">
+      <h3
+        :title="title"
+        class="col-7 fw-bolder mb-0 mb-2 text-truncate font_size_24 test_card_title"
+        v-if="title"
+      >
         {{ title }}
-      </p>
+      </h3>
       <p class="col-5 fw-bolder text-end" v-if="price === '$0.00'">
         <span class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14">Free</span>
       </p>
