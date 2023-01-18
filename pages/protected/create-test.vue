@@ -165,6 +165,18 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4"></div>
+          <div class="col-12 col-md-6 mb-4">
+            <div v-if="this.errors.fileError.msg" class="font_size_12">
+              <span class="text-danger">{{ this.errors.fileError.msg }}</span>
+              <span class="text-primary cursor_pointer" @click="downloadHelpDoc">
+                Help Document
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div class="d-flex justify-content-end flex-column flex-sm-row">
           <div class="ms-sm-4" v-if="questionList.length">
             <button
@@ -176,9 +188,6 @@
             >
               <span class="font_size_16"> Review Question </span>
             </button>
-            <span v-if="this.errors.fileError.msg" class="text-danger">
-              {{ this.errors.fileError.msg }}
-            </span>
           </div>
 
           <div class="ms-sm-4">
@@ -378,7 +387,7 @@ export default {
         price: {
           isValid: true,
           isVisiable: false,
-          msg: 'Upto 2 decimal allow',
+          msg: '',
         },
         fileError: {
           isValid: true,
@@ -401,6 +410,10 @@ export default {
       let isTwoDecimal = /^\d+(\.\d{1,2})?$/.test(newValue);
       if (!isTwoDecimal) {
         this.errors.price.isValid = false;
+        this.errors.price.msg = 'Upto 2 decimal allow';
+      } else if (newValue > 0 && newValue < 4.99) {
+        this.errors.price.isValid = false;
+        this.errors.price.msg = 'Minimum Price Allowed is 4.99 USD';
       } else {
         this.errors.price.isValid = true;
       }
@@ -535,6 +548,11 @@ export default {
       this.errors.fileError.msg = '';
     },
 
+    downloadHelpDoc() {
+      let url = process.env.TEST_FORMAT;
+      this.newWindowsOpen(url);
+    },
+
     downloadCsv() {
       let url = process.env.QUESTION_TEMPLATE_CSV;
       this.newWindowsOpen(url);
@@ -614,7 +632,10 @@ export default {
           // End Restrict Option count upto 5
 
           const col = row[j];
-          const booleanToString = col === true ? 'true' : col === false ? 'false' : col;
+          let booleanToString = col === true ? 'true' : col === false ? 'false' : col;
+          if (booleanToString === 0) {
+            booleanToString = '0';
+          }
 
           if (header && header === 'question' && col) {
             questionObj.question = col.replace(/\s+/g, ' ').trim();
@@ -701,7 +722,7 @@ export default {
         if (!isSelectedAnswer) {
           this.questionList = [];
           const fileErrorMsg =
-            'An error has occurred with the uploaded file. Kindly review the file and ensure that all non-optional columns contain valid data.';
+            'Kindly review the file and ensure that all non-optional columns contain valid data.';
           this.errors.fileError.msg = fileErrorMsg;
           this.$swal.fire({
             toast: true,
