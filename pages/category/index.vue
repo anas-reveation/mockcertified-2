@@ -26,7 +26,9 @@
           <span class="col-2 me-2">
             <img :src="category.image" alt="category" class="category_image" />
           </span>
-          <span class="col text-start text-truncate font_size_16"> {{ category.name }} </span>
+          <span class="col text-start text-truncate font_size_16" :title="category.name">
+            {{ category.name }}
+          </span>
         </div>
       </NuxtLink>
     </div>

@@ -64,14 +64,14 @@
             </h2>
             <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
           </div>
-          <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
+          <!-- <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
             <NuxtLink
               to="/category"
               class="text-primary text-decoration-underline font_size_16 dashboard_title"
             >
               See all
             </NuxtLink>
-          </div>
+          </div> -->
         </div>
 
         <div v-if="isLoaderHidden" class="mt-3 scroll_x">
@@ -93,6 +93,13 @@
             data-aos="zoom-in"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
+          </div>
+          <div
+            v-if="isFetched"
+            class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
+            data-aos="zoom-in"
+          >
+            <NuxtLink :to="`/category`" class="text-primary"> View More </NuxtLink>
           </div>
         </div>
       </div>
@@ -136,7 +143,7 @@
           <div
             v-for="(test, index) in recentlyAddedTests"
             :key="index"
-            class="px-2 py-2"
+            class="px-sm-2 py-sm-2"
             data-aos="flip-right"
           >
             <NuxtLink :to="`/category/test/${test.slug}`">
@@ -252,6 +259,7 @@ export default {
       allSearchedTest: [],
       allSearchedCategory: [],
       allSearchedSubCategory: [],
+      isFetched: false,
 
       settings: {
         dots: false,
@@ -307,7 +315,8 @@ export default {
       await this.getRecentlyAddedTests();
     }
     this.setIsLoaderHidden(false);
-    this.allCategories = this.categories;
+    this.allCategories = this.categories.slice(0, 12);
+    this.isFetched = true;
   },
 
   methods: {

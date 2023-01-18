@@ -140,7 +140,7 @@
           >
             <NuxtLink to="/protected/create-test">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1" />
+                <img src="@/assets/images/add.svg" alt="add" class="me-1 mb-1 nav_icon" />
                 Create a New Test
               </span>
             </NuxtLink>
@@ -156,7 +156,7 @@
                 <img
                   src="@/assets/images/created_tests.svg"
                   alt="created_tests"
-                  class="me-1 mb-1"
+                  class="me-1 mb-1 nav_icon"
                 />
                 Created Tests
               </span>
@@ -169,7 +169,11 @@
           >
             <NuxtLink to="/contact-us">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/contact-us-icon.svg" alt="contact-us" class="me-1 mb-1" />
+                <img
+                  src="@/assets/images/contact-us-icon.svg"
+                  alt="contact-us"
+                  class="me-1 mb-1 nav_icon"
+                />
                 Contact Us
               </span>
             </NuxtLink>
@@ -182,7 +186,11 @@
           >
             <NuxtLink to="/protected/admin">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/admin_pannel.svg" alt="admin_pannel" class="me-1 mb-1" />
+                <img
+                  src="@/assets/images/admin_pannel.svg"
+                  alt="admin_pannel"
+                  class="me-1 mb-1 nav_icon"
+                />
                 Admin
               </span>
             </NuxtLink>
@@ -195,7 +203,7 @@
           >
             <NuxtLink to="/protected/admin/feedback">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1" />
+                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1 nav_icon" />
                 Feedback
               </span>
             </NuxtLink>
@@ -204,7 +212,7 @@
           <li v-if="!isAuthenticated" class="text-capitalize py-2 font_size_16 hover_clr mx-2">
             <NuxtLink to="/auth/login">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1 nav_icon" />
                 Login
               </span>
             </NuxtLink>
@@ -249,7 +257,7 @@
                 <img
                   src="@/assets/images/terms_conditions.svg"
                   alt="terms_conditions"
-                  class="me-1 mb-1"
+                  class="me-1 mb-1 nav_icon"
                 />
                 Terms and Conditions
               </span>
@@ -262,8 +270,24 @@
           >
             <NuxtLink to="/privacy-policy">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/privacy_icon.svg" alt="privacy_icon" class="me-1 mb-1" />
+                <img
+                  src="@/assets/images/privacy_icon.svg"
+                  alt="privacy_icon"
+                  class="me-1 mb-1 nav_icon"
+                />
                 Privacy policy
+              </span>
+            </NuxtLink>
+          </li>
+
+          <li
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="$route.path.match(/\/faq\/*/g) && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/faq">
+              <span class="p-1 ms-3">
+                <img src="@/assets/images/FAQ.svg" alt="faq" class="me-1 mb-1 nav_icon" />
+                FAQ
               </span>
             </NuxtLink>
           </li>
@@ -271,7 +295,7 @@
           <li v-if="isAuthenticated" class="text-capitalize py-2 font_size_16 hover_clr mx-2">
             <a href="#" @click="userLogOut()">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1" />
+                <img src="@/assets/images/logout.svg" alt="logout" class="me-1 mb-1 nav_icon" />
                 Logout
               </span>
             </a>
@@ -333,6 +357,11 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.nav_icon {
+  height: 18px;
+  width: 18px;
+}
 
 .navbar_shadow {
   box-shadow: 0px 8px 15px rgba(165, 165, 165, 0.1);

@@ -37,7 +37,9 @@
             <span class="col-2">
               <img :src="category.image" alt="category" class="category_image" />
             </span>
-            <span class="col text-start text-truncate font_size_16"> {{ category.name }}</span>
+            <span class="col text-start text-truncate font_size_16" :title="category.name">
+              {{ category.name }}
+            </span>
           </div>
         </a>
       </div>
@@ -210,7 +212,7 @@ export default {
         toast: true,
         position: 'top-end',
         icon: 'warning',
-        title: 'No tests available',
+        title: 'No test available',
         showConfirmButton: false,
         timerProgressBar: true,
         timer: 7000,
@@ -264,7 +266,7 @@ export default {
           toast: true,
           position: 'top-end',
           icon: 'warning',
-          title: 'No tests available',
+          title: `No test available for ${name}`,
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 7000,

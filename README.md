@@ -125,3 +125,7 @@ If you want to fetch data from app sync then try this to remove "/" [website](ht
 
 Regarding Appsync API key , Appsync API key is to be renewed every year from the AWS console(last updated : 16/01/2022)
 Possible error if the API key is expired are 401 or 400.
+
+## Project Architecture flow chart
+
+![Project_Architecture](https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/public+image/MockCertified-Architecture.jpg)

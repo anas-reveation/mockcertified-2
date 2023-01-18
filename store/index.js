@@ -21,9 +21,10 @@ const state = () => {
     isSideNavbarVisible: false,
     redirectUrl: '',
     platform: '',
+    selectBySlug: null,
     termsConditions: null,
     privacyPolicy: null,
-    selectBySlug: null,
+    FAQ: null,
   };
 };
 
@@ -85,6 +86,7 @@ const mutations = {
   setTC_and_PP(state, payload) {
     state.termsConditions = payload.termsConditions;
     state.privacyPolicy = payload.privacyPolicy;
+    state.FAQ = payload.FAQ;
   },
 
   setSelectBySlug(state, slug) {
@@ -108,10 +110,12 @@ const actions = {
       const staticDataArray = staticData.data.listStaticContents.items;
       const termsConditions = staticDataArray.find((obj) => obj.name === 'TermsConditions');
       const privacyPolicy = staticDataArray.find((obj) => obj.name === 'PrivacyPolicy');
-      if (termsConditions && privacyPolicy) {
+      const FAQ = staticDataArray.find((obj) => obj.name === 'FAQ');
+      if (termsConditions && privacyPolicy && FAQ) {
         commit('setTC_and_PP', {
           termsConditions: termsConditions.body,
           privacyPolicy: privacyPolicy.body,
+          FAQ: FAQ.body,
         });
       }
       commit('SET_LOADER', false, { root: true });
