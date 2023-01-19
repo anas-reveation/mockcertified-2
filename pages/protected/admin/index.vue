@@ -60,6 +60,7 @@
           <TestCards
             :title="test.title"
             :price="`$${formatPrice(test.price)}`"
+            :category="test.category.name"
             :description="`${test.time_limit} mins • ${
               test.questions.items.length
             } questions • ${totalMarks(test.questions.items)} marks`"

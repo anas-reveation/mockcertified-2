@@ -25,7 +25,7 @@
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
-                :addToCart="true"
+                :category="test.category.name"
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
@@ -54,7 +54,9 @@
               <span class="col-2 me-2">
                 <img :src="category.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start font_size_16"> {{ category.name }} </span>
+              <span class="col text-start font_size_16" :title="category.name">
+                {{ category.name }}
+              </span>
             </div>
           </NuxtLink>
         </div>
@@ -78,7 +80,9 @@
               <span class="col-2 me-2">
                 <img :src="subCategory.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start font_size_16"> {{ subCategory.name }} </span>
+              <span class="col text-start font_size_16" :title="subCategory.name">
+                {{ subCategory.name }}
+              </span>
             </div>
           </NuxtLink>
         </div>
