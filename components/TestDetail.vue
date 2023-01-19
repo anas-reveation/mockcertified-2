@@ -8,20 +8,19 @@
             {{ shortDescription }}
           </span>
         </div>
-        <div class="col-5 text-capitalize fw-bolder text-end" v-if="price">
-          <span class="bg_price rounded-pill px-2 py-1 font_size_14 test_detail_desc">
+        <div class="col-5 text-capitalize fw-bolder text-end">
+          <span v-if="price" class="bg_price rounded-pill px-2 py-1 font_size_14 test_detail_desc">
             {{ formatedPrice }}
           </span>
-        </div>
-        <div class="col-5 fw-bolder text-end">
-          <p v-if="priceZero">
-            <span
-              class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14 test_detail_desc"
-            >
-              Free
-            </span>
-          </p>
-          <div v-if="shareFunc">
+
+          <span
+            v-if="priceZero"
+            class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14 test_detail_desc"
+          >
+            Free
+          </span>
+
+          <div v-if="shareFunc" class="mt-2">
             <img
               src="@/assets/images/share_icon.svg"
               alt="share"

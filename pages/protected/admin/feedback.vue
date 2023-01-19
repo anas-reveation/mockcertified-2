@@ -20,6 +20,10 @@
       Feedback
     </h1>
 
+    <div v-if="!isLoaderHidden && !allFeedbacks.length" class="mt-4 px-3">
+      <h2>No Feedback Available</h2>
+    </div>
+
     <hr v-if="allFeedbacks.length" />
 
     <div v-for="(feedback, index) in allFeedbacks" :key="index" class="mb-4">

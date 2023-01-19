@@ -45,7 +45,6 @@
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
-                :addToCart="true"
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
@@ -150,7 +149,7 @@
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
-                :addToCart="true"
+                :category="test.category.name"
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"

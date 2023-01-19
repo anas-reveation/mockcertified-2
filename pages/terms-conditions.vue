@@ -1,19 +1,24 @@
 <template>
-  <div class="container px-4">
-    <!-- <img
-      class="position-absolute top-0 end-0 d-sm-none oval_img"
-      src="@/assets/images/oval.jpg"
-      alt="oval"
-    /> -->
+  <div class="container mt-5 px-4">
+    <div v-if="isLoaderHidden">
+      <AnimatedPlaceholder width="150px" height="16px" />
+      <br />
+      <AnimatedPlaceholder width="250px" height="16px" />
+      <br />
+      <AnimatedPlaceholder width="250px" height="16px" />
+      <br />
+      <TestCardsSkeleton />
+    </div>
 
-    <h1 class="mt-5 mb-4 font_size_36">Terms and Conditions</h1>
-
-    <div class="TC_and_PP_class" v-html="termsConditions"></div>
+    <div v-else>
+      <h1 v-if="termsConditions" class="mb-4 font_size_36">Terms and Conditions</h1>
+      <div class="TC_and_PP_class" v-html="termsConditions"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   head() {
@@ -93,17 +98,21 @@ export default {
   },
 
   computed: {
-    ...mapState(['termsConditions']),
+    ...mapState(['isLoaderHidden', 'termsConditions']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     if (!this.termsConditions) {
       await this.getTC_and_PP();
     }
+
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions(['getTC_and_PP']),
+    ...mapMutations(['setIsLoaderHidden']),
   },
 };
 </script>
