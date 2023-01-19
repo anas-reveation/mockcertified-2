@@ -1,19 +1,24 @@
 <template>
-  <div class="container px-4">
-    <!-- <img
-      class="position-absolute top-0 end-0 oval_img"
-      src="@/assets/images/oval.jpg"
-      alt="oval"
-    /> -->
+  <div class="container mt-5 px-4">
+    <div v-if="isLoaderHidden">
+      <AnimatedPlaceholder width="150px" height="16px" />
+      <br />
+      <AnimatedPlaceholder width="250px" height="16px" />
+      <br />
+      <AnimatedPlaceholder width="250px" height="16px" />
+      <br />
+      <TestCardsSkeleton />
+    </div>
 
-    <h1 class="mt-5 mb-4 font_size_36">Privacy Policy</h1>
-
-    <div class="TC_and_PP_class" v-html="privacyPolicy"></div>
+    <div v-else>
+      <h1 v-if="privacyPolicy" class="mb-4 font_size_36">Privacy Policy</h1>
+      <div class="TC_and_PP_class" v-html="privacyPolicy"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { Browser } from '@capacitor/browser';
 
 export default {
@@ -93,17 +98,20 @@ export default {
   },
 
   computed: {
-    ...mapState(['privacyPolicy']),
+    ...mapState(['isLoaderHidden', 'privacyPolicy']),
   },
 
   async mounted() {
+    this.setIsLoaderHidden(true);
     if (!this.privacyPolicy) {
       await this.getTC_and_PP();
     }
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
     ...mapActions(['getTC_and_PP']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     async newWindowsOpen(url) {
       await Browser.open({ url: url });

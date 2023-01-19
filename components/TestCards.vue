@@ -10,14 +10,25 @@
       >
         {{ title }}
       </h3>
-      <p class="col-5 fw-bolder text-end" v-if="price === '$0.00'">
-        <span class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14">Free</span>
-      </p>
-      <p class="col-5 text-capitalize fw-bolder text-end" v-else-if="price">
-        <span class="bg_price rounded-pill px-2 py-1 font_size_14 test_card_price">{{
-          price
-        }}</span>
-      </p>
+      <div class="col-5 fw-bolder text-end">
+        <span
+          v-if="price === '$0.00'"
+          class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14"
+        >
+          Free
+        </span>
+        <span
+          v-else-if="price"
+          class="bg_price rounded-pill px-2 py-1 font_size_14 test_card_price"
+        >
+          {{ price }}
+        </span>
+      </div>
+
+      <span v-if="category" :title="category" class="text-primary text-truncate mb-1 font_size_14">
+        Category: {{ category }}
+      </span>
+
       <p class="col-7 mb-0 fs-7 fw-light font_size_14 test_card_desc" v-if="authorName">
         By-{{ authorName }}
       </p>
@@ -44,9 +55,9 @@ export default {
     description: String,
     price: Number | String,
     testId: String,
-    addToCart: {
-      type: Boolean,
-      default: false,
+    category: {
+      type: String,
+      default: null,
     },
     dateTime: {
       type: String,

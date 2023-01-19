@@ -286,7 +286,7 @@
           >
             <NuxtLink to="/faq">
               <span class="p-1 ms-3">
-                <img src="@/assets/images/FAQ.svg" alt="faq" class="me-1 mb-1 nav_icon" />
+                <img src="@/assets/images/FAQ.svg" alt="faq" class="me-1 nav_icon" />
                 FAQ
               </span>
             </NuxtLink>

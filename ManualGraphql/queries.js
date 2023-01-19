@@ -14,6 +14,11 @@ export const userTests = /* GraphQL */ `
             price
             description
             credit
+            category {
+              id
+              slug
+              name
+            }
             questions {
               items {
                 id
@@ -47,6 +52,11 @@ export const userTests = /* GraphQL */ `
             time_limit
             description
             credit
+            category {
+              id
+              slug
+              name
+            }
             questions {
               items {
                 id
@@ -92,6 +102,11 @@ export const userTests = /* GraphQL */ `
           time_limit
           status
           createdAt
+          category {
+            id
+            slug
+            name
+          }
           questions {
             items {
               answer
@@ -162,6 +177,11 @@ export const listAllTests = /* GraphQL */ `
         reject_description
         createdAt
         updatedAt
+        category {
+          id
+          slug
+          name
+        }
         questions {
           items {
             answer
@@ -214,6 +234,10 @@ export const listTestsByStatus = /* GraphQL */ `
         reject_description
         createdAt
         updatedAt
+        category {
+          id
+          name
+        }
         questions {
           items {
             answer
@@ -363,6 +387,7 @@ export const searchTestManagers = /* GraphQL */ `
         category {
           id
           slug
+          name
         }
         user_id
         category_id
