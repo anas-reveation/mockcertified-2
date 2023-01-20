@@ -14,24 +14,29 @@
               <span class="col-2 me-2">
                 <img :src="category.image" alt="category" class="rounded-circle category_image" />
               </span>
-              <span class="col text-start"> {{ category.name }} </span>
+              <span :title="category.name" class="col text-start text-truncate">
+                {{ category.name }}
+              </span>
             </div>
           </NuxtLink>
 
-          <div class="my-1">
-            <span
-              @click="redirectEditCategoryPage(category.id, category.name, category.image)"
-              class="rounded-3 bg-warning p-1 my-1 me-2 cursor_pointer font_size_16"
-            >
-              Update
-            </span>
-
-            <span
-              @click="redirectAddSubCategoryPage(category.id, category.name, category.image)"
-              class="rounded-3 bg-warning p-1 cursor_pointer font_size_16"
-            >
-              Add Subcategory
-            </span>
+          <div class="d-flex flex-column flex-lg-row mt-1">
+            <div class="my-1">
+              <span
+                class="d-inline-block rounded-3 bg-warning p-1 me-2 cursor_pointer font_size_16"
+                @click="redirectEditCategoryPage(category.id, category.name, category.image)"
+              >
+                Update
+              </span>
+            </div>
+            <div class="my-1">
+              <span
+                class="d-inline-block rounded-3 bg-warning p-1 cursor_pointer font_size_16"
+                @click="redirectAddSubCategoryPage(category.id, category.name, category.image)"
+              >
+                Add Subcategory
+              </span>
+            </div>
           </div>
         </div>
       </div>

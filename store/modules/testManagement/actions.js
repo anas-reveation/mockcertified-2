@@ -515,10 +515,6 @@ export default {
       const query = payload.toLowerCase().replace(/\s+/g, ' ').trim();
       commit('SET_LOADER', true, { root: true });
 
-      // const filter = {
-      //   title: { contains: query },
-      //   and: { status: { eq: 'APPROVED' } },
-      // };
       const filter = {
         title: { matchPhrasePrefix: query },
         status: { eq: 'APPROVED' },
@@ -613,7 +609,7 @@ export default {
       };
       const categoryData = await API.graphql({
         query: categorySlug,
-        variables: { filter },
+        variables: { filter, limit: 10000 },
       });
       const categoryArray = categoryData.data.listCategories.items;
       commit('SET_LOADER', false, { root: true });
@@ -636,7 +632,7 @@ export default {
       };
       const subCategoryData = await API.graphql({
         query: subCategorySlug,
-        variables: { filter },
+        variables: { filter, limit: 10000 },
       });
       const subCategoryArray = subCategoryData.data.listSubCategories.items;
       commit('SET_LOADER', false, { root: true });
@@ -659,7 +655,7 @@ export default {
       };
       const testQueryData = await API.graphql({
         query: listTestManagers,
-        variables: { filter },
+        variables: { filter, limit: 10000 },
       });
       const testsArray = testQueryData.data.listTestManagers.items;
       commit('SET_LOADER', false, { root: true });
