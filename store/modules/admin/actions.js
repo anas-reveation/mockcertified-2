@@ -368,7 +368,7 @@ export default {
       };
       const testQueryData = await API.graphql({
         query: listCategories,
-        variables: { filter },
+        variables: { filter, limit: 10000 },
       });
       const categoryArray = testQueryData.data.listCategories.items;
       if (categoryArray.length && categoryArray[0].id) {

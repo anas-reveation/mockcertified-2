@@ -26,15 +26,19 @@
               <span class="col-2 d-flex align-items-center">
                 <img :src="category.image" alt="category" class="rounded-circle category_image" />
               </span>
-              <span class="col text-start"> {{ category.name }}</span>
+              <span :title="category.name" class="col text-start text-truncate">
+                {{ category.name }}
+              </span>
             </div>
 
-            <span
-              @click="redirectPage(category.id, category.name, category.image)"
-              class="rounded-3 bg-warning p-1 font_size_16 my-1 cursor_pointer"
-            >
-              Update
-            </span>
+            <div class="mt-2 mb-1">
+              <span
+                class="rounded-3 bg-warning p-1 font_size_16 cursor_pointer"
+                @click="redirectPage(category.id, category.name, category.image)"
+              >
+                Update
+              </span>
+            </div>
           </div>
         </div>
       </div>
