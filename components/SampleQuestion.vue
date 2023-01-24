@@ -4,7 +4,7 @@
     <h3 v-if="questionVisible" class="fw-bolder font_size_24 test_question_title">
       Question {{ index }}
     </h3>
-    <p class="test_question" :class="!questionVisible && 'fw-bolder'">
+    <p class="text-break test_question" :class="!questionVisible && 'fw-bolder'">
       <span v-if="!questionVisible" class="fw-bolder">{{ index }}. </span>
       {{ question.question }}
     </p>
@@ -13,7 +13,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item rounded text-primary mb-2 bg_blue test_option"
+          class="list-group-item rounded text-break text-primary mb-2 bg_blue test_option"
         >
           {{ String.fromCharCode(65 + index2) }}. {{ value[1] }}
         </li>

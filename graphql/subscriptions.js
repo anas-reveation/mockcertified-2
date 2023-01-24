@@ -913,3 +913,39 @@ export const onDeleteStaticContent = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSearchFeedback = /* GraphQL */ `
+  subscription OnCreateSearchFeedback {
+    onCreateSearchFeedback {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSearchFeedback = /* GraphQL */ `
+  subscription OnUpdateSearchFeedback {
+    onUpdateSearchFeedback {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSearchFeedback = /* GraphQL */ `
+  subscription OnDeleteSearchFeedback {
+    onDeleteSearchFeedback {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
