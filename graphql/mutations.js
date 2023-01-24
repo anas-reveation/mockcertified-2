@@ -1034,3 +1034,48 @@ export const deleteStaticContent = /* GraphQL */ `
     }
   }
 `;
+export const createSearchFeedback = /* GraphQL */ `
+  mutation CreateSearchFeedback(
+    $input: CreateSearchFeedbackInput!
+    $condition: ModelSearchFeedbackConditionInput
+  ) {
+    createSearchFeedback(input: $input, condition: $condition) {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSearchFeedback = /* GraphQL */ `
+  mutation UpdateSearchFeedback(
+    $input: UpdateSearchFeedbackInput!
+    $condition: ModelSearchFeedbackConditionInput
+  ) {
+    updateSearchFeedback(input: $input, condition: $condition) {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSearchFeedback = /* GraphQL */ `
+  mutation DeleteSearchFeedback(
+    $input: DeleteSearchFeedbackInput!
+    $condition: ModelSearchFeedbackConditionInput
+  ) {
+    deleteSearchFeedback(input: $input, condition: $condition) {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
