@@ -3,7 +3,7 @@
     <h3 v-if="questionVisible" class="fw-bolder font_size_24 test_question_title">
       Question {{ index }}
     </h3>
-    <p class="test_question" :class="!questionVisible && 'fw-bolder'">
+    <p class="text-break test_question" :class="!questionVisible && 'fw-bolder'">
       <span v-if="!questionVisible" class="fw-bolder">{{ index }}. </span>
       {{ question.question }}
     </p>
@@ -12,7 +12,7 @@
         <li
           v-for="(value, index2) in question.options"
           :key="index2"
-          class="list-group-item border border-2 border-primary rounded text-dark mb-2 test_option"
+          class="list-group-item border border-2 border-primary rounded text-break text-dark mb-2 test_option"
           :class="
             question.userInput ? bgColor(question.userInput, value[1]) : checkAnswer(value[1])
           "
@@ -29,7 +29,7 @@
         {{ answerArrToLetter(question.answer, question.options) }}
       </div>
       <!-- Spelling mistake "explainantion" -->
-      <div v-if="question.explainantion" class="test_question">
+      <div v-if="question.explainantion" class="text-break test_question">
         <span class="fw-bolder">Explanation</span>: {{ question.explainantion }}
       </div>
     </div>

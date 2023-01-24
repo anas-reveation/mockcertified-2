@@ -736,3 +736,34 @@ export const listStaticContents = /* GraphQL */ `
     }
   }
 `;
+export const getSearchFeedback = /* GraphQL */ `
+  query GetSearchFeedback($id: ID!) {
+    getSearchFeedback(id: $id) {
+      id
+      user_email
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSearchFeedbacks = /* GraphQL */ `
+  query ListSearchFeedbacks(
+    $filter: ModelSearchFeedbackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSearchFeedbacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_email
+        description
+        status
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

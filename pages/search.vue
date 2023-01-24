@@ -90,7 +90,48 @@
     </div>
 
     <div v-else-if="isFetched">
-      <h2 class="text-center mt-4">No search results found</h2>
+      <h2 class="fw-bolder text-center mt-4 font_size_24 search_title">No search results found</h2>
+      <div class="mt-4">
+        <form @submit.prevent="searchFeedbackLocal" class="feedback_width">
+          <div class="mt-3">
+            <label for="email">Email</label>
+            <br />
+            <input
+              type="email"
+              class="p-1 font_size_14 input_field email_width"
+              v-model="userEmail"
+              required
+            />
+          </div>
+
+          <div class="mt-3">
+            <label for="searchQueryDesc">Description</label>
+            <br />
+            <textarea
+              v-model.trim="feedbackDesc"
+              class="w-100 p-1 input_field font_size_14"
+              rows="4"
+              type="text"
+              placeholder="Write your query"
+              @input="check"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <div class="col text-start">
+              <p class="font_size_14" :class="remaining === 0 && 'text-danger'">
+                {{ instruction }}
+              </p>
+            </div>
+            <div class="col text-end">
+              <button type="submit" class="btn btn-primary text-white" :disabled="remaining === 0">
+                <span class="font_size_16"> submit </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -172,6 +213,7 @@ export default {
   //     ],
   //   };
   // },
+
   data() {
     return {
       allSearchedTest: [],
@@ -179,17 +221,27 @@ export default {
       allSearchedSubCategory: [],
       isFetched: false,
       searchQuery: null,
+
+      userEmail: '',
+      feedbackDesc: '',
+      limit: 300,
     };
   },
 
   computed: {
     ...mapState(['isLoaderHidden']),
-  },
+    ...mapState('auth', ['user']),
 
-  // async asyncData({ query }) {
-  //   const searchQuery = query.search_query ? query.search_query : null;
-  //   return { searchQuery };
-  // },
+    instruction: function () {
+      return this.feedbackDesc === ''
+        ? 'Limit: ' + this.limit + ' characters'
+        : 'Remaining ' + this.remaining + ' characters';
+    },
+
+    remaining: function () {
+      return this.limit - this.feedbackDesc.length;
+    },
+  },
 
   async mounted() {
     this.setIsLoaderHidden(true);
@@ -200,12 +252,20 @@ export default {
       return;
     }
     await this.searchQueryFunc();
+
+    if (this.user) {
+      this.userEmail = this.user.email;
+    }
     this.setIsLoaderHidden(false);
   },
 
   methods: {
-    ...mapActions('testManagement', ['getTestByQuery']),
+    ...mapActions('testManagement', ['getTestByQuery', 'searchFeedback']),
     ...mapMutations(['setIsLoaderHidden']),
+
+    check() {
+      this.feedbackDesc = this.feedbackDesc.substr(0, this.limit);
+    },
 
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
@@ -237,6 +297,17 @@ export default {
       this.allSearchedCategory = res.categoryList;
       this.isFetched = true;
     },
+
+    async searchFeedbackLocal() {
+      const res = await this.searchFeedback({
+        email: this.userEmail,
+        description: this.feedbackDesc,
+      });
+
+      if (res) {
+        this.$router.push('/dashboard');
+      }
+    },
   },
 };
 </script>
@@ -264,6 +335,21 @@ export default {
   border: 1px solid #6782e1;
 }
 
+.feedback_area {
+  background: #f5f5f5;
+  border-radius: 4px;
+  word-wrap: break-word;
+}
+
+.email_width {
+  width: 300px;
+}
+
+.input_field {
+  border: 1.5px solid #878787;
+  border-radius: 4px;
+}
+
 @include media-breakpoint-up(sm) {
   .category_border_radius {
     border-radius: 100px;
@@ -271,12 +357,12 @@ export default {
 }
 
 @include media-breakpoint-down(lg) {
-  .dashboard_title {
+  .search_title {
     font-size: 16px;
   }
 
-  .dashboard_category_title {
-    font-size: 12px;
+  .email_width {
+    width: 100%;
   }
 }
 </style>

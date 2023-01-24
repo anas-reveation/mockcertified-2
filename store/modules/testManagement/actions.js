@@ -27,6 +27,7 @@ import {
   updateResult,
   updateAttemptedTest,
   addResultStatus,
+  createSearchFeedback,
 } from '~/graphql/mutations';
 
 export default {
@@ -684,6 +685,47 @@ export default {
       });
       const feedback = feedbackQueryData.data.getFeedback;
       return feedback;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
+
+  async searchFeedback({ commit }, payload) {
+    const input = {
+      user_email: payload.email,
+      description: payload.description,
+    };
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      await API.graphql({
+        query: createSearchFeedback,
+        variables: {
+          input,
+        },
+      });
+
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Feedback submitted',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
