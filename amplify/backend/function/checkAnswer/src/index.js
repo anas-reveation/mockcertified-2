@@ -69,14 +69,13 @@ exports.handler = async (event) => {
     const userInputArr = userInputArrTemp.sort();
     const answerData = answerDataTemp.sort();
 
-    let isCorrect = true;
+    let isCorrect = false;
+
     for (let i = 0; i < userInputArr.length; i++) {
       const userAnswer = userInputArr[i];
-      const ans = answerData[i];
-      if (isCorrect && userAnswer && ans && userAnswer.toLowerCase() === ans.toLowerCase()) {
-        isCorrect = true;
-      } else {
-        isCorrect = false;
+      isCorrect = answerData.includes(userAnswer);
+      if (!isCorrect) {
+        break;
       }
     }
 
