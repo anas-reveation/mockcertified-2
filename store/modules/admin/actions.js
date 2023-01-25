@@ -1,12 +1,13 @@
 import { API } from 'aws-amplify';
 import { listAllTests, subCategoryUpdate, listFeedbacksAdmin } from '~/ManualGraphql/queries';
-import { listCategories, getSubCategory } from '~/graphql/queries';
+import { listCategories, getSubCategory, listSearchFeedbacks } from '~/graphql/queries';
 import {
   updateTestManager,
   createCategory,
   createSubCategory,
   updateSubCategory,
   updateCategory,
+  updateSearchFeedback,
 } from '~/graphql/mutations';
 
 export default {
@@ -424,6 +425,88 @@ export default {
         });
       }
       return sortedFeedbackArray;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
+
+  async getAllSearchFeedbacks({ commit, dispatch }) {
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const searchFeedbackQueryData = await API.graphql({
+        query: listSearchFeedbacks,
+        variables: { limit: 10000 },
+      });
+      const searchFeedbackArray = searchFeedbackQueryData.data.listSearchFeedbacks.items;
+      commit('SET_LOADER', false, { root: true });
+
+      let sortedSearchFeedbackArray = searchFeedbackArray;
+      // If searchFeedbackArray has a length, we sort by created timestamp
+      if (searchFeedbackArray.length) {
+        sortedSearchFeedbackArray = await dispatch(
+          'testManagement/sortBycreatedAt',
+          searchFeedbackArray,
+          {
+            root: true,
+          },
+        );
+      }
+      return sortedSearchFeedbackArray;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
+
+  async approveRejectSearchFeedback({ commit }, payload) {
+    const searchFeedbackID = payload.searchFeedbackID;
+    const statusName = payload.status;
+
+    commit('SET_LOADER', true, { root: true });
+
+    let status;
+    if (statusName === 'approve') {
+      status = 'APPROVED';
+    } else if (statusName === 'reject') {
+      status = 'REJECTED';
+    } else {
+      commit('SET_LOADER', false, { root: true });
+      return false;
+    }
+
+    try {
+      let input = {
+        id: searchFeedbackID,
+        status,
+      };
+
+      await API.graphql({
+        query: updateSearchFeedback,
+        variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
+      commit('SET_LOADER', false, { root: true });
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({
