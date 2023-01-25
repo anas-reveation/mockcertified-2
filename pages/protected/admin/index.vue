@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="mt-5 mb-4 font_size_36 col-md-12 col-md-6">Admin Panel</h1>
+    <h1 class="mt-5 mb-4 font_size_32 search_title_size">Admin Panel</h1>
 
     <NuxtLink
       to="/protected/admin/category/add-category"
@@ -8,8 +8,13 @@
     >
       <span class="font_size_16"> Add Category </span>
     </NuxtLink>
+
     <NuxtLink to="/protected/admin/category" class="btn btn-primary text-white mb-2">
       <span class="font_size_16"> Update Category </span>
+    </NuxtLink>
+
+    <NuxtLink to="/protected/admin/search-feedback" class="btn btn-primary text-white mb-2">
+      <span class="font_size_16"> Search Feedback </span>
     </NuxtLink>
 
     <div class="mb-2 d-flex justify-content-center justify-content-sm-end">
@@ -46,7 +51,7 @@
     </div>
 
     <div v-if="!isLoaderHidden && !filteredTests.length" class="mt-4 px-3">
-      <h2>No Test Available</h2>
+      <h2 class="font_size_32 search_title_size">No Test Available</h2>
     </div>
 
     <div class="row">
@@ -240,6 +245,12 @@ export default {
   .width_res {
     width: 25% !important;
     margin-left: auto;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .search_title_size {
+    font-size: 24px;
   }
 }
 </style>
