@@ -135,11 +135,11 @@ export default {
   },
 
   mounted() {
-    // this.confirmForm.email = this.unconfirmedUserEmail;
-    // if (!this.confirmForm.email) {
-    //   this.$router.push('/auth/login');
-    //   return;
-    // }
+    this.confirmForm.email = this.unconfirmedUserEmail;
+    if (!this.confirmForm.email) {
+      this.$router.push('/auth/login');
+      return;
+    }
     this.isFetched = true;
   },
 
