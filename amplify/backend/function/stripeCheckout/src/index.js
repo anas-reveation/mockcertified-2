@@ -179,7 +179,7 @@ exports.handler = async (event) => {
             name: title,
             quantity,
             currency: 'USD',
-            amount: Math.round(basePrice * 100),
+            amount: basePrice * 100,
             // Keep the amount on the server to prevent customers from manipulating on client
           },
         ],
@@ -233,8 +233,8 @@ exports.handler = async (event) => {
         if (!usedPromocodes.includes(result.id)) {
           if (result.discount_percentage) {
             const testDetail = await getTestDetail(testId);
-            var discount = Math.round(testDetail.price * result.discount_percentage) / 100;
-            testDetail.price = Math.round(testDetail.price - discount);
+            var discount = (testDetail.price * result.discount_percentage) / 100;
+            testDetail.price = (testDetail.price - discount).toFixed(2);
             const sessionData = await stripePayment(
               testDetail.title,
               testDetail.price,
