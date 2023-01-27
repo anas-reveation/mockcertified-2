@@ -87,7 +87,7 @@
                 <span class="text-success fw-bolder"> ${{ newPrice }} </span>
               </h3>
               <form class="wrapper my-3" @submit.prevent="checkPromoCodeLocal">
-                <div class="mb-4 input-data text-sm-start">
+                <div class="mb-3 input-data text-start">
                   <input
                     type="text"
                     class="border border-2 border-primary rounded form-control width_res"
@@ -96,7 +96,7 @@
                     required
                   />
                   <button
-                    class="btn btn-primary border-2 text-white mt-2 width_res"
+                    class="btn btn-primary border-2 text-white mt-2 w-100 width_res"
                     :disabled="!promocode"
                   >
                     <span class="font_size_16">Apply Code</span>
@@ -105,10 +105,10 @@
               </form>
             </div>
 
-            <div class="text-sm-start">
+            <div class="text-start">
               <button
                 type="button"
-                class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
+                class="btn btn-primary border border-2 border-secondary text-white w-100 width_res"
                 @click="buyNowLocal"
               >
                 <span class="font_size_16">Buy Now</span>
@@ -116,10 +116,10 @@
             </div>
           </div>
 
-          <div v-else class="text-sm-start">
+          <div v-else class="text-start">
             <button
               type="button"
-              class="btn btn-primary border border-2 border-secondary text-white w-50 width_res"
+              class="btn btn-primary text-white w-50 width_res"
               @click="redirectLogin"
             >
               <span class="font_size_16">Login</span>

@@ -3,12 +3,16 @@
     <NavbarLogo />
 
     <div class="row my-4">
-      <div class="col-sm-6 d-none d-sm-flex flex-column align-items-center justify-content-center">
+      <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
         <div>
-          <img src="~/assets/images/Illustration.svg" class="me-4" alt="Illustration" />
+          <img
+            src="~/assets/images/Illustration.svg"
+            class="me-4 auth_illustration"
+            alt="Illustration"
+          />
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <img
           class="position-absolute top-0 end-0 oval_img"
           src="@/assets/images/oval.jpg"
@@ -348,9 +352,23 @@ export default {
   left: 4.5rem;
   bottom: 2.5rem;
 }
-@include media-breakpoint-up(sm) {
+
+@include media-breakpoint-up(md) {
   .width_res {
     width: 75%;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .auth_illustration {
+    width: 200px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .auth_illustration {
+    width: 250px;
+    // margin-bottom: 4rem;
   }
 }
 </style>
