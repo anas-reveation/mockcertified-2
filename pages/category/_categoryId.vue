@@ -37,7 +37,10 @@
             <span class="col-2">
               <img :src="category.image" alt="category" class="category_image" />
             </span>
-            <span class="col text-start text-truncate font_size_16" :title="category.name">
+            <span
+              class="col text-start text-truncate ms-2 ms-lg-0 font_size_16"
+              :title="category.name"
+            >
               {{ category.name }}
             </span>
           </div>
