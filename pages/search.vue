@@ -49,12 +49,15 @@
             data-aos="zoom-in"
           >
             <div
-              class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+              class="row align-items-center m-2 p-2 shawdow_category category_border_radius hover_effect"
             >
               <span class="col-2 me-2">
                 <img :src="category.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start font_size_16" :title="category.name">
+              <span
+                class="col text-start text-truncate ms-2 ms-lg-0 font_size_16"
+                :title="category.name"
+              >
                 {{ category.name }}
               </span>
             </div>
@@ -75,12 +78,15 @@
             data-aos="zoom-in"
           >
             <div
-              class="row align-items-center m-2 p-2 shawdow_card category_border_radius hover_effect"
+              class="row align-items-center m-2 p-2 shawdow_category category_border_radius hover_effect"
             >
               <span class="col-2 me-2">
                 <img :src="subCategory.image" alt="category" class="category_image" />
               </span>
-              <span class="col text-start font_size_16" :title="subCategory.name">
+              <span
+                class="col text-start text-truncate ms-2 ms-lg-0 font_size_16"
+                :title="subCategory.name"
+              >
                 {{ subCategory.name }}
               </span>
             </div>
@@ -318,6 +324,10 @@ export default {
 .scroll_x {
   overflow-x: auto;
   white-space: nowrap;
+}
+
+.shawdow_category {
+  box-shadow: 2px 2px 10px rgba(103, 130, 225, 0.1);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

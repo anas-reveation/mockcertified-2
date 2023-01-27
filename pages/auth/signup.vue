@@ -4,7 +4,7 @@
 
     <div class="row">
       <div
-        class="col-sm-6 d-flex flex-column align-items-center justify-content-center mt-3 position-relative"
+        class="col-md-6 d-flex flex-column align-items-center justify-content-center mt-3 position-relative"
       >
         <div>
           <img
@@ -25,7 +25,7 @@
         </div>
         <!-- End Tagline -->
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <img
           class="position-absolute top-0 end-0 oval_img"
           src="@/assets/images/oval.jpg"
@@ -677,12 +677,14 @@ input[type='checkbox'] {
 }
 
 @include media-breakpoint-up(sm) {
-  .width_res {
-    width: 75%;
-  }
-
   .login_btn_width {
     width: 100%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .width_res {
+    width: 75%;
   }
 }
 </style>

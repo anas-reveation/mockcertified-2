@@ -266,7 +266,7 @@
           <div class="row">
             <div class="col-1">
               <div
-                class="d-flex flex-column align-items-center justify-content-center bg-primary text-white ms-lg-3 cursor_pointer circle"
+                class="d-flex flex-column align-items-center justify-content-center bg-primary text-white ms-lg-3 circle"
               >
                 <span class="text-uppercase">
                   {{ user.first_name[0] }}{{ user.last_name[0] }}

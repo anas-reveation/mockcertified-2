@@ -28,6 +28,7 @@
           </span>
         </div>
       </div>
+      <FooterDesktop class="d-none d-lg-block" />
       <FooterNavbar class="d-lg-none" />
     </div>
   </div>
