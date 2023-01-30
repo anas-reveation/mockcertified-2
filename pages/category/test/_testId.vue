@@ -96,7 +96,7 @@
                     required
                   />
                   <button
-                    class="btn btn-primary border-2 text-white mt-2 w-100 width_res"
+                    class="btn btn-primary border-2 text-white mt-2 width_res"
                     :disabled="!promocode"
                   >
                     <span class="font_size_16">Apply Code</span>
@@ -108,7 +108,7 @@
             <div class="text-start">
               <button
                 type="button"
-                class="btn btn-primary border border-2 border-secondary text-white w-100 width_res"
+                class="btn btn-primary border border-2 border-secondary text-white width_res"
                 @click="buyNowLocal"
               >
                 <span class="font_size_16">Buy Now</span>
@@ -119,7 +119,7 @@
           <div v-else class="text-start">
             <button
               type="button"
-              class="btn btn-primary text-white w-50 width_res"
+              class="btn btn-primary text-white width_res"
               @click="redirectLogin"
             >
               <span class="font_size_16">Login</span>
@@ -372,9 +372,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~bootstrap/scss/_functions.scss';
-@import '~bootstrap/scss/_variables.scss';
-@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
+.width_res {
+  width: 100%;
+}
 
 @include media-breakpoint-up(sm) {
   .width_res {
