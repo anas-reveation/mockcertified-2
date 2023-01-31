@@ -3,33 +3,27 @@
     <NavbarLogo />
 
     <img class="position-absolute top-0 end-0 oval_img" src="@/assets/images/oval.jpg" alt="oval" />
-    <h1 class="my-5 text-sm-center font_size_36">Payment Status</h1>
+    <h1 class="my-5 text-center font_size_32">Payment Status</h1>
     <div class="text-center">
       <img src="@/assets/images/done_icon.svg" alt="done-icon" />
 
-      <p class="mt-3 font_size_32">
-        Your
-        <br class="d-sm-none" />
-        payment
-        <br class="d-sm-none" />
-        was successful
-      </p>
+      <p class="mt-3 font_size_24">Your payment was successful</p>
 
-      <div class="d-sm-flex justify-content-around">
-        <NuxtLink class="btn btn-primary text-white w-75 width_res mt-3" to="/category">
-          Buy more tests
+      <div class="d-lg-flex justify-content-around">
+        <NuxtLink class="btn btn-primary text-white width_res mt-3" to="/category">
+          <span class="font_size_18"> Buy more tests </span>
         </NuxtLink>
         <NuxtLink
-          class="btn btn-white border-2 border-primary text-primary w-75 width_res mt-3"
+          class="btn btn-white border-2 border-primary text-primary width_res mt-3"
           to="/protected/purchased-test"
         >
-          Go to purchased test
+          <span class="font_size_18"> Go to purchased test </span>
         </NuxtLink>
       </div>
 
       <div class="mt-3">
-        <p class="text-success">Congratulations for purchasing our test !!</p>
-        <p>Get our Mockcertified app in</p>
+        <p class="text-success font_size_18">Congratulations for purchasing our test !!</p>
+        <p class="font_size_18">Get our Mockcertified app in</p>
 
         <div class="row align-items-center">
           <a :href="playstoreLink" target="_blank" class="col m-1">
@@ -153,9 +147,7 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/auth.scss';
-@import '~bootstrap/scss/_functions.scss';
-@import '~bootstrap/scss/_variables.scss';
-@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~/assets/css/bootstrapBreakpoint.scss';
 
 @include media-breakpoint-up(sm) {
   .width_res {
