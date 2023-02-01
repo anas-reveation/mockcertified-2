@@ -30,16 +30,16 @@
       <div class="fw-bolder font_size_20 feedback_username">{{ feedback.userFullName }}</div>
       <div class="text-muted mt-1 font_size_14">{{ feedback.updatedAt }}</div>
 
-      <div class="mt-2 container">
-        <div class="row p-2 feedback_card">
-          <div class="col font_size_14">
+      <div class="mt-2">
+        <div class="p-2 feedback_card">
+          <div class="font_size_14">
             {{ feedback.description }}
           </div>
-          <div class="col-12 col-md-2 align-self-end text-end mt-2">
-            <div>
+          <div class="">
+            <div class="text-end">
               <NuxtLink
                 :to="`/protected/admin/test/${feedback.testSlug}`"
-                class="btn btn-primary text-white"
+                class="btn btn-primary text-white mt-1"
               >
                 <span class="font_size_14">Go To Test</span>
               </NuxtLink>
@@ -55,6 +55,14 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
+  middleware: ['authenticated'],
+
+  head() {
+    return {
+      title: 'Test Feedback',
+    };
+  },
+
   data() {
     return {
       allFeedbacks: [],
