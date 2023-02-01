@@ -35,7 +35,7 @@
                 v-model="subcatt.name"
                 required
               />
-              <label class="form-label">Subcateogary </label>
+              <label class="form-label">Subcategory </label>
             </div>
 
             <div class="mb-4 input-data">
