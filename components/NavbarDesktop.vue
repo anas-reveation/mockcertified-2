@@ -180,6 +180,22 @@
           </li>
 
           <li
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="$route.path.match(/\/blog\/*/g) && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/blog">
+              <span class="p-1 ms-3">
+                <img
+                  src="@/assets/images/created_tests.svg"
+                  alt="blog"
+                  class="me-1 mb-1 nav_icon"
+                />
+                Blogs
+              </span>
+            </NuxtLink>
+          </li>
+
+          <li
             v-if="userGroup === 'admins'"
             class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="adminRoute && 'bg_blue_color fill_black'"

@@ -158,6 +158,20 @@
 
             <li
               class="rounded-3 py-1"
+              :class="$route.path.match(/\/blog\/*/g) && 'bg_color fill_black'"
+              @click="
+                redirect('/blog');
+                closeNav();
+              "
+            >
+              <span class="text-black ms-2 font_size_14">
+                <img src="@/assets/images/created_tests.svg" alt="blog" class="me-1 nav_icon" />
+                Blogs
+              </span>
+            </li>
+
+            <li
+              class="rounded-3 py-1"
               :class="$route.path.match(/\/faq\/*/g) && 'bg_color fill_black'"
               @click="
                 redirect('/faq');
