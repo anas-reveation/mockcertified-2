@@ -25,7 +25,6 @@
           <div class="col-12 col-md-6 mb-4 input-data">
             <input
               type="text"
-              title="It should contain only text"
               class="border border-2 border-grey rounded form-control"
               v-model="formData.title"
               required
@@ -414,6 +413,9 @@ export default {
       } else if (newValue > 0 && newValue < 4.99) {
         this.errors.price.isValid = false;
         this.errors.price.msg = 'Minimum Price Allowed is 4.99 USD';
+      } else if (newValue > 100) {
+        this.errors.price.isValid = false;
+        this.errors.price.msg = 'Maximum Price Allowed is 100 USD';
       } else {
         this.errors.price.isValid = true;
       }

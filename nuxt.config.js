@@ -57,13 +57,16 @@ export default {
     { src: '~/plugins/vue-apexcharts.js', mode: 'client' },
     { src: '~/plugins/deepLink.js', mode: 'client' },
     { src: '~/plugins/aos.js', mode: 'client' },
+    { src: '~/plugins/sanity-image-builder.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }]],
+  buildModules: [
+    ['@nuxtjs/sanity/module', '@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
