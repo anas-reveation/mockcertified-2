@@ -2,6 +2,72 @@
   <div class="container">
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
+    <div class="mt-4 mb-5">
+      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 home_banner">
+        <div class="position-relative">
+          <div class="d-flex flex-column justify-content-between p-4">
+            <div class="text-break">
+              <div class="fw-bolder font_size_50 banner_title">Think you're ready?</div>
+              <div class="font_size_25 banner_subtitle">
+                Prove it with
+                <span class="text-primary"> mockcertified.com </span>
+              </div>
+            </div>
+
+            <div>
+              <div class="d-none d-md-block position-absolute element1_position">
+                <img src="@/assets/images/element1.svg" alt="ellipse" />
+              </div>
+
+              <div class="position-absolute bannerEllipse_position">
+                <img src="@/assets/images/bannerEllipse.png" alt="ellipse" class="bannerEllipse" />
+              </div>
+              <div class="position-absolute bannerImage1_position">
+                <img src="@/assets/images/bannerImage1.png" alt="banner" class="bannerImage1" />
+              </div>
+
+              <div class="d-none d-xl-block position-absolute element2_position">
+                <img src="@/assets/images/element2.svg" alt="ellipse" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="">
+          <div class="d-flex flex-column flex-lg-row justify-content-around p-4">
+            <div class="mb-3 mb-lg-0">
+              <div class="d-flex flex-column">
+                <div class="fw-bolder me-2 font_size_50 banner_title">
+                  Discover <span class="text-primary">Mockcertifed Platform</span>
+                </div>
+                <div class="mt-4">
+                  <div class="btn home_banner_btn pe-none">Grow more with Mockcertified</div>
+                </div>
+              </div>
+            </div>
+            <div class="position-relative">
+              <img
+                src="@/assets/images/thumbnailVideo.png"
+                alt="video"
+                class="video_thumbnail cursor_pointer"
+                data-bs-toggle="modal"
+                data-bs-target="#reviewAnswers"
+                @click="isVideoOn = true"
+              />
+              <!-- <img
+                src="@/assets/images/playbtn.svg"
+                alt="play button"
+                type="button"
+                class="position-absolute playbtn_position"
+                data-bs-toggle="modal"
+                data-bs-target="#reviewAnswers"
+              /> -->
+            </div>
+          </div>
+        </div>
+      </VueSlickCarousel>
+    </div>
+
     <div>
       <div>
         <div class="row justify-content-between">
@@ -160,12 +226,58 @@
         </VueSlickCarousel>
       </div>
     </div>
+
+    <!-- Start Modal -->
+    <div
+      class="modal fade"
+      id="reviewAnswers"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="reviewAnswersLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content video_modal">
+          <div class="modal-header video_modal">
+            <h5 class="modal-title text-white font_size_30 modal_title" id="reviewAnswersLabel">
+              What is Mockcertified?
+            </h5>
+            <span
+              class="cursor_pointer"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              @click="isVideoOn = false"
+            >
+              <img src="@/assets/images/closeBtn.svg" alt="circle-cross" />
+            </span>
+          </div>
+          <div class="modal-body">
+            <div>
+              <iframe
+                v-if="isVideoOn"
+                id="videoId"
+                class="w-100"
+                style="height: 300px"
+                :src="YOUTUBE_EMBED_LINK_BANNER"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
   </div>
 </template>
 
 <script>
 import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
@@ -259,6 +371,17 @@ export default {
       allSearchedCategory: [],
       allSearchedSubCategory: [],
       isFetched: false,
+      YOUTUBE_EMBED_LINK_BANNER: process.env.YOUTUBE_EMBED_LINK_BANNER,
+      isVideoOn: false,
+
+      homeBannerCarousel: {
+        arrows: false,
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        initialSlide: 0,
+      },
 
       settings: {
         dots: false,
@@ -353,6 +476,65 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
+.element1_position {
+  top: -40px;
+  right: 30%;
+  transform: rotate(40deg);
+}
+
+.element2_position {
+  bottom: -100%;
+  right: 25%;
+}
+
+.home_banner {
+  background: #f6f8ff;
+  border-radius: 10px;
+}
+
+.home_banner1 {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.bannerImage1_position {
+  right: 20px;
+  top: 22px;
+}
+
+.bannerImage1 {
+  height: 300px;
+}
+
+.bannerEllipse_position {
+  right: 0;
+  top: 30%;
+}
+
+.bannerEllipse {
+  width: 400px;
+}
+
+.home_banner_btn {
+  background: #ffffff;
+  box-shadow: 2px 2px 10px rgba(73, 73, 73, 0.1);
+  border-radius: 8px;
+}
+
+// .playbtn_position {
+//   right: 165px;
+//   bottom: 39%;
+// }
+
+.video_modal {
+  background: #252525;
+}
+
+.video_modal_bg {
+  background: rgba(43, 43, 43, 0.8);
+}
+
 .scroll_x {
   overflow-x: auto;
   white-space: nowrap;
@@ -362,6 +544,7 @@ export default {
 .scroll_x::-webkit-scrollbar {
   display: none;
 }
+
 .category_image {
   object-fit: contain;
   width: 35px;
@@ -383,12 +566,78 @@ export default {
 }
 
 @include media-breakpoint-down(lg) {
+  .banner_title {
+    font-size: 25px;
+  }
+
+  .banner_subtitle {
+    font-size: 18px;
+  }
+
+  .video_thumbnail {
+    width: 100%;
+  }
+
+  // .playbtn_position {
+  //   right: 42%;
+  // }
+
+  .bannerImage1 {
+    width: 100%;
+    // height: 100%;
+  }
+
+  .bannerImage1_position {
+    right: 0;
+    top: 100%;
+  }
+
+  .bannerEllipse {
+    width: 100%;
+  }
+
+  .bannerEllipse_position {
+    right: 0;
+    // top: 266px;
+    top: 100%;
+  }
+
   .dashboard_title {
     font-size: 16px;
   }
 
   .dashboard_category_title {
     font-size: 12px;
+  }
+
+  .home_banner_btn {
+    font-size: 14px;
+  }
+
+  .modal_title {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .banner_title {
+    font-size: 18px;
+  }
+
+  .banner_subtitle {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  // .playbtn_position {
+  //   right: 39%;
+  //   bottom: 120px;
+  //   width: 50px;
+  // }
+
+  .bannerImage1 {
+    height: 200px;
   }
 }
 </style>
