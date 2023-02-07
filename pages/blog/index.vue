@@ -34,7 +34,13 @@
 
               <div class="d-flex justify-content-between align-items-center">
                 <div class="text-truncate">
-                  <img :src="$urlFor(post.author.image)" alt="user" class="author_image" />
+                  <img
+                    v-if="post.author.image"
+                    :src="$urlFor(post.author.image)"
+                    alt="user"
+                    class="author_image"
+                  />
+                  <img v-else src="@/assets/images/user.svg" alt="user" class="author_image" />
                   <span class="fw-bolder font_size_14"> {{ post.author.name }} </span>
                 </div>
                 <div class="text-end font_size_12">{{ getDate(post.publishedAt) }}</div>

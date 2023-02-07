@@ -18,7 +18,13 @@
         <div class="col-12 col-lg-3 mt-3 mt-lg-0">
           <div class="row justify-content-between align-items-center">
             <div class="col text-truncate">
-              <img :src="$urlFor(blogDetail.author.image)" alt="user" class="author_image" />
+              <img
+                v-if="blogDetail.author.image"
+                :src="$urlFor(blogDetail.author.image)"
+                alt="user"
+                class="author_image"
+              />
+              <img v-else src="@/assets/images/user.svg" alt="user" class="author_image" />
               <span class="fw-bolder font_size_14"> {{ blogDetail.author.name }} </span>
             </div>
             <div class="col text-end font_size_12">{{ getDate(blogDetail.publishedAt) }}</div>
@@ -54,11 +60,9 @@ export default {
   },
 
   async mounted() {
-    console.log('blogSlug', this.blogSlug);
     const query = groq`*[_type == "post" && slug.current == "${this.blogSlug}"][0] { title, slug, shortDescription, body, publishedAt, author->{name, image} }`;
     this.blogDetail = await this.$sanity.fetch(query);
     this.isFetched = true;
-    console.log('blogDetail', this.blogDetail);
   },
 
   methods: {
