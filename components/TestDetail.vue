@@ -34,16 +34,54 @@
       </div>
 
       <div class="mt-2">
-        <h3 class="fw-bolder font_size_18 test_detail_title">Description</h3>
-        <div class="my-0 text-break font_size_14 test_detail_desc">
-          {{ seeMore ? description : truncatePara(description) }}
-          <span v-if="wordLength > wordCount">
-            <span @click="seeMore = !seeMore" v-if="!seeMore" class="fw-bolder font_size_14"
-              >See more</span
+        <h3 class="fw-bolder font_size_18 test_detail_title">
+          Description
+          <img
+            v-if="isDescEdit"
+            src="@/assets/images/edit.svg"
+            alt="edit"
+            @click="isEditTestDesc = !isEditTestDesc"
+            class="ms-2 mb-1 cursor_pointer edit_icon"
+          />
+        </h3>
+
+        <form v-if="isEditTestDesc" @submit.prevent="editTestDesc">
+          <client-only>
+            <tiptap-editor
+              :value="editTestDescContent"
+              class="font_size_14"
+              v-on:input="inputShow"
+            />
+          </client-only>
+
+          <div class="text-end mt-2">
+            <button
+              type="submit"
+              class="bg-primary border border-primary rounded p-2 text-white font_size_14"
             >
-            <span @click="seeMore = !seeMore" v-else-if="seeMore" class="fw-bolder font_size_14">
-              ...See less
-            </span>
+              submit
+            </button>
+          </div>
+        </form>
+
+        <div v-else class="my-0 text-break font_size_14 test_detail_desc">
+          <div
+            class="position-relative"
+            :class="!seeMore && 'test_desc_height overflow-hidden'"
+            v-html="editTestDescContent"
+          ></div>
+        </div>
+
+        <div>
+          <span
+            v-if="seeMore"
+            @click="seeMore = !seeMore"
+            class="text-primary font_size_14 cursor_pointer"
+          >
+            see less..
+          </span>
+          <span v-else @click="seeMore = !seeMore" class="text-primary font_size_14 cursor_pointer">
+            see more..
           </span>
         </div>
       </div>
@@ -92,15 +130,30 @@ export default {
       type: String,
       default: '',
     },
+    isInColumn: {
+      type: Boolean,
+      default: false,
+    },
+
+    isDescEdit: {
+      type: Boolean,
+      default: false,
+    },
+    descEditFun: {
+      type: Function,
+      default: () => {},
+    },
   },
 
   data() {
     return {
       formatedPrice: 0,
       seeMore: false,
-      wordCount: 55,
-      wordLength: 0,
+      // wordCount: 55,
+      // wordLength: 0,
       priceZero: false,
+      isEditTestDesc: false,
+      editTestDescContent: '',
     };
   },
 
@@ -111,8 +164,8 @@ export default {
       // this.price = '$0.00';
       this.priceZero = true;
     }
-
-    this.wordLength = this.description.trim().split(' ').length;
+    this.editTestDescContent = this.description;
+    // this.wordLength = this.description.trim().split(' ').length;
 
     if (this.price && typeof this.price === 'number') {
       this.formatedPrice = `$${this.formatPrice(this.price)}`;
@@ -126,10 +179,27 @@ export default {
       return parseFloat(price).toFixed(2);
     },
 
+    checkWordCount(str) {
+      const array = str.trim().split(' ');
+      return array.length > this.wordCount;
+    },
+
     truncatePara(str) {
       const array = str.trim().split(' ');
       const ellipsis = array.length > this.wordCount ? '...' : '';
       return array.slice(0, this.wordCount).join(' ') + ellipsis;
+    },
+
+    async editTestDesc() {
+      if (this.editTestDescContent && this.editTestDescContent !== '<p></p>') {
+        await this.descEditFun(this.editTestDescContent);
+        this.isEditTestDesc = false;
+      }
+      // this.wordLength = this.editTestDescContent.trim().split(' ').length;
+    },
+
+    async inputShow(ff) {
+      this.editTestDescContent = ff;
     },
   },
 };
@@ -137,6 +207,11 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.edit_icon {
+  width: 15px;
+  height: 15px;
+}
 
 .test_card_border_radius {
   border-radius: 10px;
@@ -152,6 +227,32 @@ export default {
 
 .card_width {
   min-width: 350px;
+}
+
+.test_desc_height {
+  height: 100px;
+}
+
+// Blur
+.test_desc_height:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+  width: 100%;
+  height: 4em;
+}
+
+.textarea_box {
+  border: 1.5px solid #878787;
+  border-radius: 4px;
+}
+
+.submit_btn {
+  height: 20px;
 }
 
 @include media-breakpoint-down(lg) {

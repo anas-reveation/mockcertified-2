@@ -3,10 +3,10 @@
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
     <div class="mt-4 mb-5">
-      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 home_banner">
-        <div class="position-relative">
-          <div class="d-flex flex-column justify-content-between p-4">
-            <div class="text-break">
+      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3">
+        <div class="home_banner">
+          <div class="d-flex flex-column flex-lg-row justify-content-between">
+            <div class="text-break p-4">
               <div class="fw-bolder font_size_50 banner_title">Think you're ready?</div>
               <div class="font_size_25 banner_subtitle">
                 Prove it with
@@ -15,25 +15,12 @@
             </div>
 
             <div>
-              <div class="d-none d-md-block position-absolute element1_position">
-                <img src="@/assets/images/element1.svg" alt="ellipse" />
-              </div>
-
-              <div class="position-absolute bannerEllipse_position">
-                <img src="@/assets/images/bannerEllipse.png" alt="ellipse" class="bannerEllipse" />
-              </div>
-              <div class="position-absolute bannerImage1_position">
-                <img src="@/assets/images/bannerImage1.png" alt="banner" class="bannerImage1" />
-              </div>
-
-              <div class="d-none d-xl-block position-absolute element2_position">
-                <img src="@/assets/images/element2.svg" alt="ellipse" />
-              </div>
+              <img src="@/assets/images/bannerImage1.svg" alt="banner" class="bannerImage1" />
             </div>
           </div>
         </div>
 
-        <div class="">
+        <div class="home_banner">
           <div class="d-flex flex-column flex-lg-row justify-content-around p-4">
             <div class="mb-3 mb-lg-0">
               <div class="d-flex flex-column">
@@ -54,14 +41,32 @@
                 data-bs-target="#reviewAnswers"
                 @click="isVideoOn = true"
               />
-              <!-- <img
-                src="@/assets/images/playbtn.svg"
-                alt="play button"
-                type="button"
-                class="position-absolute playbtn_position"
-                data-bs-toggle="modal"
-                data-bs-target="#reviewAnswers"
-              /> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="home_banner">
+          <div class="d-flex flex-column flex-lg-row justify-content-around">
+            <div class="mb-3 mb-lg-0 p-4">
+              <div class="d-flex flex-column">
+                <div class="fw-bolder me-2 font_size_45 banner_title">
+                  Whether you're a <span class="text-primary">student or a professional!</span>
+                </div>
+                <div class="mt-4">
+                  <div class="btn home_banner_btn pe-none">
+                    we're here to help you achieve your certification goals
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <img
+                  src="@/assets/images/bannerImage3.svg"
+                  alt="bannerImage3"
+                  class="bannerImage3"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -507,6 +512,10 @@ export default {
   height: 300px;
 }
 
+.bannerImage3 {
+  height: 300px;
+}
+
 .bannerEllipse_position {
   right: 0;
   top: 30%;
@@ -617,6 +626,11 @@ export default {
   .modal_title {
     font-size: 20px;
   }
+
+  .bannerImage3 {
+    width: 100%;
+    object-fit: contain;
+  }
 }
 
 @include media-breakpoint-down(md) {
@@ -637,6 +651,10 @@ export default {
   // }
 
   .bannerImage1 {
+    height: 200px;
+  }
+
+  .bannerImage3 {
     height: 200px;
   }
 }

@@ -11,6 +11,8 @@
       :shareFunc="shareTest"
       :credit="testDetail.credit"
       :rejectDescription="testDetail.reject_description"
+      :isDescEdit="true"
+      :descEditFun="descEditFun"
     />
 
     <div class="mt-3">
@@ -156,6 +158,7 @@ export default {
 
   methods: {
     ...mapActions('testManagement', ['getUserTests', 'getTestIdBySlug']),
+    ...mapActions('seller', ['editTestDescription']),
 
     async shareTest() {
       const domainOrigin = window.location.origin;
@@ -170,6 +173,14 @@ export default {
           dialogTitle: 'Share with buddies',
         });
       } catch (_err) {}
+    },
+
+    async descEditFun(descContent) {
+      const obj = {
+        testId: this.testDetail.id,
+        testDescription: descContent,
+      };
+      await this.editTestDescription(obj);
     },
   },
 };

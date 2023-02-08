@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div v-if="testDetail && !isLoaderHidden">
+    <div v-if="testDetail && !isLoaderHidden" class="test_detail_width">
       <TestDetail
         class="mt-3"
         data-aos="zoom-in"
@@ -20,6 +20,8 @@
         :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
         :shareFunc="shareTest"
         :credit="testDetail.credit"
+        :isDescEdit="this.user && this.user.id === this.testDetail.user_id"
+        :descEditFun="descEditFun"
       />
 
       <button
@@ -305,6 +307,7 @@ export default {
       'getTestIdBySlug',
     ]),
     ...mapActions('buyer', ['buyNow', 'checkPromoCode', 'buyTestFree']),
+    ...mapActions('seller', ['editTestDescription']),
     ...mapMutations(['SET_LOADER', 'setIsLoaderHidden', 'setRedirectUrl']),
 
     async shareTest() {
@@ -367,6 +370,17 @@ export default {
       this.newPrice = null;
       return;
     },
+
+    async descEditFun(descContent) {
+      const obj = {
+        testId: this.testId,
+        testDescription: descContent,
+      };
+      const res = await this.editTestDescription(obj);
+      if (res) {
+        this.testDetail.description = descContent;
+      }
+    },
   },
 };
 </script>
@@ -380,7 +394,13 @@ export default {
 
 @include media-breakpoint-up(sm) {
   .width_res {
-    width: 400px !important;
+    width: 450px !important;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .test_detail_width {
+    width: 450px;
   }
 }
 </style>
