@@ -6,7 +6,12 @@ import {
   redirectPayoutDashboard,
   getStripeIdStatus,
 } from '~/graphql/queries';
-import { createTestManager, createQuestion, updateUser } from '~/graphql/mutations';
+import {
+  createTestManager,
+  updateTestManager,
+  createQuestion,
+  updateUser,
+} from '~/graphql/mutations';
 
 export default {
   async createTest({ commit, rootState, dispatch }, payload) {
@@ -238,6 +243,49 @@ export default {
       return parsedData.body.status;
 
       // return balanceDetail;
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+      return false;
+    }
+  },
+
+  async editTestDescription({ commit, rootState }, payload) {
+    // const seller_id = rootState.auth.user.stripe_seller_id;
+    commit('SET_LOADER', true, { root: true });
+    try {
+      const input = {
+        id: payload.testId,
+        description: payload.testDescription,
+      };
+      await API.graphql({
+        query: updateTestManager,
+        variables: { input },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+
+      commit('updateTestDescription', input, { root: true });
+      commit('SET_LOADER', false, { root: true });
+
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Description updated',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+
+      return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
       this.$swal.fire({

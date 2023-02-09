@@ -92,6 +92,19 @@ const mutations = {
   setSelectBySlug(state, slug) {
     state.selectBySlug = slug;
   },
+
+  updateTestDescription(state, testDetail) {
+    const { id, description } = testDetail;
+    state.allCreatedTests = state.allCreatedTests.map((test) => {
+      if (test.id === id) {
+        return {
+          ...test,
+          description,
+        };
+      }
+      return test;
+    });
+  },
 };
 
 const actions = {

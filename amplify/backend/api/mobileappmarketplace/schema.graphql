@@ -32,6 +32,7 @@ type TestManager
       { allow: public, operations: [read] }
       { allow: private, operations: [create, read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
+      { allow: owner, ownerField: "user_id", operations: [create, read, update] }
     ]
   ) {
   id: ID!
