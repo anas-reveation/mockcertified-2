@@ -380,6 +380,7 @@ export default {
       isVideoOn: false,
 
       homeBannerCarousel: {
+        autoplay: true,
         arrows: false,
         dots: true,
         infinite: true,
