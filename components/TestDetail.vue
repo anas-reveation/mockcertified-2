@@ -66,7 +66,7 @@
 
         <div v-else class="my-0 text-break font_size_14 test_detail_desc">
           <div
-            class="position-relative"
+            class="position-relative test_desc_mini_height"
             :class="!seeMore && 'test_desc_height overflow-hidden'"
             v-html="editTestDescContent"
           ></div>
@@ -227,6 +227,10 @@ export default {
 
 .card_width {
   min-width: 350px;
+}
+
+.test_desc_mini_height {
+  min-height: 100px;
 }
 
 .test_desc_height {
