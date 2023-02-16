@@ -5,12 +5,12 @@
     <div class="row mt-1">
       <h3
         :title="title"
-        class="col-7 fw-bolder mb-0 mb-2 text-truncate font_size_24 test_card_title"
+        class="col-8 fw-bolder mb-0 mb-2 text-truncate font_size_22 test_card_title"
         v-if="title"
       >
         {{ title }}
       </h3>
-      <div class="col-5 fw-bolder text-end">
+      <div class="col-4 fw-bolder text-end">
         <span
           v-if="price === '$0.00'"
           class="text-success rounded-pill px-2 py-1 bg_price_green font_size_14"
