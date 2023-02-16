@@ -2,13 +2,13 @@
   <div>
     <div class="shawdow_card position-relative p-2 px-3 test_card_border_radius">
       <div class="row mt-1">
-        <div class="col-7">
+        <div class="col-8">
           <h1 class="fw-bolder text-break font_size_24 test_detail_title">{{ title }}</h1>
           <span v-if="shortDescription" class="text-primary font_size_14 test_detail_desc">
             {{ shortDescription }}
           </span>
         </div>
-        <div class="col-5 text-capitalize fw-bolder text-end">
+        <div class="col-4 text-capitalize fw-bolder text-end">
           <span v-if="price" class="bg_price rounded-pill px-2 py-1 font_size_14 test_detail_desc">
             {{ formatedPrice }}
           </span>
