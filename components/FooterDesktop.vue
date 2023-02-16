@@ -19,6 +19,7 @@
               <img src="@/assets/images/instagram_icon.svg" alt="instagram_icon" class="ms-2" />
             </a>
           </span>
+          <NuxtLink to="/faq" class="text-primary ms-2 font_size_12">FAQ</NuxtLink>
         </div>
       </div>
       <div class="col-6 text-end">

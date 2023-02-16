@@ -116,6 +116,7 @@
               <TestCards
                 :title="test.title"
                 :price="`$${formatPrice(test.price)}`"
+                :category="test.category.name"
                 :description="`${test.time_limit} mins • ${
                   test.questions.items.length
                 } questions • ${totalMarks(test.questions.items)} marks`"
@@ -443,7 +444,7 @@ export default {
       await this.getRecentlyAddedTests();
     }
     this.setIsLoaderHidden(false);
-    this.allCategories = this.categories.slice(0, 12);
+    this.allCategories = this.categories.slice(0, 13);
     this.isFetched = true;
   },
 
