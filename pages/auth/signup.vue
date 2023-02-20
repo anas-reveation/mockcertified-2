@@ -300,9 +300,15 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { API } from 'aws-amplify';
-import { createUser } from '~/graphql/mutations';
 import { Browser } from '@capacitor/browser';
+
+var AWS = require('aws-sdk');
+AWS.config.update({
+  region: process.env.REGION,
+  accessKeyId: process.env.AWS_ACCESS_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+});
+
 const steps = {
   register: 'REGISTER',
   confirm: 'CONFIRM',
@@ -407,6 +413,9 @@ export default {
     isDisabled: true,
     isPasswordVisible: false,
     passwordDetail: false,
+
+    SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
 
     errors: {
       firstName: {
@@ -527,6 +536,7 @@ export default {
 
     async registerLocal() {
       try {
+        this.sendEmail();
         const userData = await this.register(this.registerForm);
         if (!userData) {
           return;
@@ -602,21 +612,6 @@ export default {
       await this.resendConfirmationCode(this.confirmForm.email);
     },
 
-    // async createUserLocal() {
-    //   const newUser = {
-    //     id: this.userId,
-    //     first_name: this.registerForm.first_name,
-    //     last_name: this.registerForm.last_name,
-    //     email: this.registerForm.email,
-    //   };
-    //   console.log('newUser', newUser);
-    //   await API.graphql({
-    //     query: createUser,
-    //     variables: { input: newUser },
-    //     authMode: 'AMAZON_COGNITO_USER_POOLS',
-    //   });
-    // },
-
     async newWindowsOpen(params) {
       const domain = process.env.DOMAIN;
       if (params === 'pp') {
@@ -624,6 +619,79 @@ export default {
       } else {
         await Browser.open({ url: `https://${domain}/terms-conditions` });
       }
+    },
+
+    sendEmail() {
+      var params = {
+        Destination: {
+          ToAddresses: [this.ADMIN_EMAIL],
+        },
+        Message: {
+          /* required */
+          Body: {
+            /* required */
+            Html: {
+              Charset: 'UTF-8',
+              Data: `<div
+      style="
+        font-family: Helvetica, Arial, sans-serif;
+        min-width: 1000px;
+        overflow: auto;
+        line-height: 2;
+      "
+    >
+      <div style="margin: 50px auto; width: 70%; padding: 20px 20px">
+        <div style="border-bottom: 1px solid #eee">
+          <img
+            src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"
+          />
+        </div>
+        <p style="font-size: 1.1em">New User</p>
+        <p>First Name: ${this.registerForm.first_name}</p>
+        <p>Last Name: ${this.registerForm.last_name}</p>
+        <p>Email: ${this.registerForm.email}</p>
+
+        <p style="font-size: 0.9em">Regards,<br />MockCertified Team</p>
+        <hr style="border: none; border-top: 1px solid #eee" />
+        <div
+          style="
+            float: right;
+            padding: 8px 0;
+            color: #aaa;
+            font-size: 0.8em;
+            line-height: 1;
+            font-weight: 300;
+          "
+        >
+          <img
+            src="https://amplify-mobileappmarketplace-dev-123858-deployment.s3.amazonaws.com/logo_with_name.svg"
+          />
+        </div>
+      </div>
+    </div>`,
+            },
+            Text: {
+              Charset: 'UTF-8',
+              Data: 'TEXT_FORMAT_BODY',
+            },
+          },
+          Subject: {
+            Charset: 'UTF-8',
+            Data: `New user is created: ${this.registerForm.first_name} ${this.registerForm.last_name}`,
+          },
+        },
+        Source: this.SUPPORT_EMAIL,
+      };
+
+      // Create the promise and SES service object
+      var sendPromise = new AWS.SES().sendEmail(params).promise();
+
+      // Handle promise's fulfilled/rejected states
+      sendPromise
+        .then(function (data) {})
+        .catch(function (err) {
+          console.error(err, err.stack);
+        });
     },
   },
 };
