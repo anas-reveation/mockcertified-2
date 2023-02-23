@@ -66,13 +66,17 @@
 
         <div v-else class="my-0 text-break font_size_14 test_detail_desc">
           <div
-            class="position-relative test_desc_mini_height"
-            :class="!seeMore && 'test_desc_height overflow-hidden'"
+            class="position-relative"
+            :class="[
+              !seeMore && 'test_desc_height overflow-hidden',
+              seeMoreBtn && !seeMore && 'blur_bottom',
+            ]"
             v-html="editTestDescContent"
+            ref="container"
           ></div>
         </div>
 
-        <div>
+        <div v-if="seeMoreBtn">
           <span
             v-if="seeMore"
             @click="seeMore = !seeMore"
@@ -149,15 +153,21 @@ export default {
     return {
       formatedPrice: 0,
       seeMore: false,
+      seeMoreBtn: true,
       // wordCount: 55,
       // wordLength: 0,
       priceZero: false,
       isEditTestDesc: false,
       editTestDescContent: '',
+      containerHeight: 0,
     };
   },
 
-  computed: {},
+  watch: {
+    containerRef: function () {
+      this.containerHeight = this.$refs[this.containerRef].scrollHeight;
+    },
+  },
 
   mounted() {
     if (this.price === 0) {
@@ -172,6 +182,15 @@ export default {
     } else if (this.price) {
       this.formatedPrice = this.price;
     }
+
+    this.$nextTick(() => {
+      const container = this.$refs.container;
+      this.containerHeight = container.scrollHeight;
+      console.log(this.containerHeight);
+      if (this.containerHeight < 100) {
+        this.seeMoreBtn = false;
+      }
+    });
   },
 
   methods: {
@@ -194,6 +213,12 @@ export default {
       if (this.editTestDescContent && this.editTestDescContent !== '<p></p>') {
         await this.descEditFun(this.editTestDescContent);
         this.isEditTestDesc = false;
+      }
+      console.log('this.containerHeight', this.containerHeight);
+      if (this.containerHeight < 100) {
+        this.seeMoreBtn = false;
+      } else {
+        this.seeMoreBtn = true;
       }
       // this.wordLength = this.editTestDescContent.trim().split(' ').length;
     },
@@ -229,16 +254,12 @@ export default {
   min-width: 350px;
 }
 
-.test_desc_mini_height {
-  min-height: 100px;
-}
-
 .test_desc_height {
-  height: 100px;
+  max-height: 100px;
 }
 
 // Blur
-.test_desc_height:after {
+.blur_bottom:after {
   content: '';
   position: absolute;
   z-index: 1;
