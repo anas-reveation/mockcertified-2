@@ -19,16 +19,18 @@
 
     <div class="fixed-bottom" @click="removeClass">
       <div v-if="!ishiddenAlexa" class="position-relative">
-        <div class="position-absolute bottom-0 end-0 mb-2">
+        <div class="position-absolute hover-alex bottom-0 end-0 mb-5">
           <a @click="openAlexa" href="#">
             <img src="@/assets/images/alexa.svg" alt="alexa-icon" class="alexa_icon alexa_hover" />
           </a>
-          <span class="border border-dark rounded-pill text-dark p-1 hide_text">
-            Connect to Alexa
-          </span>
+          <a @click="openAlexa" class="d-none d-md-block" href="#">
+            <span class="border border-dark bg-light rounded-pill text-dark hide_text">
+              Connect to Alexa
+            </span>
+          </a>
         </div>
       </div>
-      <FooterDesktop class="d-none d-lg-block" />
+      <FooterDesktop class="d-none d-lg-block pt-0" />
       <FooterNavbar class="d-lg-none" />
     </div>
   </div>
@@ -111,15 +113,33 @@ export default {
     width: 50px;
     height: 50px;
   }
+  .margin_bottom {
+    margin-bottom: 80px !important;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .fixed-bottom {
+    position: static !important;
+  }
+  .hover-alex {
+    position: fixed !important;
+  }
 }
 
 .margin_bottom {
-  margin-bottom: 80px;
+  margin-bottom: 28px;
 }
 /* Proceed to checkout button is related that is in "cart" page */
 
 .hide_text {
   display: none;
+}
+.hover-alex:hover .hide_text {
+  display: block;
+  position: absolute;
+  margin-left: -9.4em;
+  margin-top: -3em;
+  padding: 8px 7px 5px 9px;
 }
 
 .alexa_hover:hover + .hide_text {
