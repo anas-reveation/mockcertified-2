@@ -2,14 +2,17 @@
   <div class="container">
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
-    <div class="mt-4 mb-5">
+    <div class="mt-4 mb-4">
       <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3">
         <div class="home_banner">
           <div class="d-flex flex-column flex-lg-row justify-content-between">
             <div class="text-break p-4">
-              <div class="fw-bolder font_size_50 banner_title">Think you're ready?</div>
-              <div class="font_size_25 banner_subtitle">
-                Prove it with
+              <div class="fw-bolder me-2 font_size_50 banner_title">
+                Find out amazing <span class="text-primary">Categories for Mock Exam!</span>
+              </div>
+
+              <div class="font_size_25 mt-4 banner_subtitle">
+                Check here
                 <span class="text-primary"> mockcertified.com </span>
               </div>
             </div>
@@ -74,7 +77,52 @@
     </div>
 
     <div>
-      <div>
+      <div class="mt-5 zoom-m">
+        <div class="row justify-content-between">
+          <div class="col">
+            <h2 v-if="isLoaderHidden || !allCategories.length">
+              <AnimatedPlaceholder width="200px" height="10px" />
+            </h2>
+            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
+          </div>
+          <!-- <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
+            <NuxtLink
+              to="/category"
+              class="text-primary text-decoration-underline font_size_16 dashboard_title"
+            >
+              See all
+            </NuxtLink>
+          </div> -->
+        </div>
+
+        <div v-if="isLoaderHidden" class="mt-3 scroll_x">
+          <div
+            v-for="i in 5"
+            :key="i"
+            class="rounded-pill d-inline-block text-center m-1 p-2 category_box"
+            data-aos="zoom-in"
+          >
+            <AnimatedPlaceholder width="200px" borderRadius="50px" />
+          </div>
+        </div>
+
+        <div class="mt-3 scroll_x" v-if="!isLoading">
+          <div
+            v-for="(category, index) in allCategories"
+            :key="index"
+            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 m-22 p-2 category_box font_size_14 dashboard_category_title"
+          >
+            <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
+          </div>
+          <div
+            v-if="isFetched"
+            class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
+          >
+            <NuxtLink :to="`/category`" class="text-primary"> View More </NuxtLink>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5">
         <div class="row justify-content-between">
           <div class="col">
             <h2 v-if="isLoaderHidden || !featuredTests.length">
@@ -126,55 +174,6 @@
           </div>
         </VueSlickCarousel>
       </div>
-
-      <div class="mt-3">
-        <div class="row justify-content-between">
-          <div class="col">
-            <h2 v-if="isLoaderHidden || !allCategories.length">
-              <AnimatedPlaceholder width="200px" height="10px" />
-            </h2>
-            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
-          </div>
-          <!-- <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
-            <NuxtLink
-              to="/category"
-              class="text-primary text-decoration-underline font_size_16 dashboard_title"
-            >
-              See all
-            </NuxtLink>
-          </div> -->
-        </div>
-
-        <div v-if="isLoaderHidden" class="mt-3 scroll_x">
-          <div
-            v-for="i in 5"
-            :key="i"
-            class="rounded-pill d-inline-block text-center m-1 p-2 category_box"
-            data-aos="zoom-in"
-          >
-            <AnimatedPlaceholder width="200px" borderRadius="50px" />
-          </div>
-        </div>
-
-        <div class="mt-3 scroll_x" v-if="!isLoading">
-          <div
-            v-for="(category, index) in allCategories"
-            :key="index"
-            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
-            data-aos="zoom-in"
-          >
-            <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
-          </div>
-          <div
-            v-if="isFetched"
-            class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
-            data-aos="zoom-in"
-          >
-            <NuxtLink :to="`/category`" class="text-primary"> View More </NuxtLink>
-          </div>
-        </div>
-      </div>
-
       <div class="mt-4">
         <div class="row justify-content-between">
           <div class="col">
@@ -658,6 +657,17 @@ export default {
 
   .bannerImage3 {
     height: 200px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .category_box {
+    min-width: 61px !important;
+  }
+  .m-22 {
+    margin: 0.13rem !important;
+  }
+  .zoom-m {
+    margin-top: 1.8rem !important;
   }
 }
 </style>

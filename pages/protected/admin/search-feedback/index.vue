@@ -86,7 +86,76 @@ export default {
 
   head() {
     return {
-      title: 'Search Feedback',
+      title: 'Search Our Feedback',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Check out the Feedback section on Mockcertified for more information and how it can help you ace your certification exams. Plus, read feedback from our users.',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Search Our Feedback - Mockcertified App',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'Check out the Feedback section on Mockcertified for more information and how it can help you ace your certification exams. Plus, read feedback from our users.',
+        },
+        {
+          name: 'keywords',
+          content:
+            'Search feedback, feedback search, mock feedback, mock exam feedback, mock test feedback',
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Search Our Feedback - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content:
+            'Check out the Feedback section on Mockcertified for more information and how it can help you ace your certification exams. Plus, read feedback from our users.',
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
     };
   },
 
