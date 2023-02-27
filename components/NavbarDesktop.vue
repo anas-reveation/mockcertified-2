@@ -33,6 +33,29 @@
                 :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
               /> -->
             </NuxtLink>
+            <NuxtLink
+              :to="isAuthenticated ? '/protected/create-test' : '/auth/login'"
+              class="d-flex flex-column align-items-center justify-content-center ms-5"
+            >
+              <img
+                class="m-1 navbar_icon"
+                :class="$route.path.match(/\/create-test\/*/g) && 'active_color'"
+                src="@/assets/images/add.svg"
+                alt="stripe_logo"
+              />
+
+              <span
+                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                :class="$route.path.match(/\/create-test\/*/g) && 'text-primary'"
+              >
+                New Test
+              </span>
+
+              <!-- <div
+                class="active_line"
+                :class="$route.path.match(/\/account\/*/g) && 'bg-primary'"
+              /> -->
+            </NuxtLink>
 
             <NuxtLink
               :to="isAuthenticated ? '/protected/attempted-test' : '/auth/login'"
@@ -81,20 +104,16 @@
             </NuxtLink>
 
             <NuxtLink
-              :to="isAuthenticated ? '/protected/account' : '/auth/login'"
+              v-if="!isAuthenticated"
+              to="/auth/login"
               class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
-              <img
-                class="m-1 navbar_icon"
-                :class="$route.path.match(/\/account\/*/g) && 'active_color'"
-                src="@/assets/images/wallet.svg"
-                alt="stripe_logo"
-              />
+              <img class="m-1 navbar_icon" src="@/assets/images/login1.svg" alt="stripe_logo" />
               <span
                 class="fw-bolder pb-2 navbar_font_color font_size_12"
                 :class="$route.path.match(/\/account\/*/g) && 'text-primary'"
               >
-                Balance
+                Login
               </span>
 
               <!-- <div
@@ -103,14 +122,6 @@
               /> -->
             </NuxtLink>
           </ClientOnly>
-
-          <div
-            class="d-flex flex-column align-items-center justify-content-center ms-5 cursor_pointer"
-            @mouseover="(settingsDropDown = true), (userDropDown = false)"
-          >
-            <img class="m-1 navbar_icon" src="@/assets/images/settings.svg" alt="settings" />
-            <span class="fw-bolder pb-2 navbar_font_color font_size_12"> Settings </span>
-          </div>
 
           <ClientOnly>
             <div
@@ -146,24 +157,7 @@
             </NuxtLink>
           </li>
 
-          <li
-            v-if="isAuthenticated"
-            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
-            :class="$route.path.match(/\/created-test\/*/g) && 'bg_blue_color fill_black'"
-          >
-            <NuxtLink to="/protected/created-test">
-              <span class="p-1 ms-3">
-                <img
-                  src="@/assets/images/created_tests.svg"
-                  alt="created_tests"
-                  class="me-1 mb-1 nav_icon"
-                />
-                Created Tests
-              </span>
-            </NuxtLink>
-          </li>
-
-          <li
+          <!-- <li
             class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/contact-us\/*/g) && 'bg_blue_color fill_black'"
           >
@@ -193,37 +187,7 @@
                 Blogs
               </span>
             </NuxtLink>
-          </li>
-
-          <li
-            v-if="userGroup === 'admins'"
-            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
-            :class="adminRoute && 'bg_blue_color fill_black'"
-          >
-            <NuxtLink to="/protected/admin">
-              <span class="p-1 ms-3">
-                <img
-                  src="@/assets/images/admin_pannel.svg"
-                  alt="admin_pannel"
-                  class="me-1 mb-1 nav_icon"
-                />
-                Admin
-              </span>
-            </NuxtLink>
-          </li>
-
-          <li
-            v-if="userGroup === 'admins'"
-            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
-            :class="feebackRoute && 'bg_blue_color fill_black'"
-          >
-            <NuxtLink to="/protected/admin/feedback">
-              <span class="p-1 ms-3">
-                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1 nav_icon" />
-                Feedback
-              </span>
-            </NuxtLink>
-          </li>
+          </li> -->
 
           <li v-if="!isAuthenticated" class="text-capitalize py-2 font_size_16 hover_clr mx-2">
             <NuxtLink to="/auth/login">
@@ -264,7 +228,7 @@
             <hr class="m-0 w-75" />
           </div>
 
-          <li
+          <!-- <li
             class="text-capitalize py-2 font_size_16 hover_clr mx-2"
             :class="$route.path.match(/\/terms-conditions\/*/g) && 'bg_blue_color fill_black'"
           >
@@ -304,6 +268,66 @@
               <span class="p-1 ms-3">
                 <img src="@/assets/images/FAQ.svg" alt="faq" class="me-1 nav_icon" />
                 FAQ
+              </span>
+            </NuxtLink>
+          </li> -->
+          <li
+            v-if="isAuthenticated"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="$route.path.match(/\/created-test\/*/g) && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/protected/created-test">
+              <span class="p-1 ms-3">
+                <img
+                  src="@/assets/images/created_tests.svg"
+                  alt="created_tests"
+                  class="me-1 mb-1 nav_icon"
+                />
+                Created Tests
+              </span>
+            </NuxtLink>
+          </li>
+          <li
+            v-if="isAuthenticated"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="$route.path.match(/\/account\/*/g) && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/protected/account">
+              <span class="p-1 ms-3">
+                <img
+                  src="@/assets/images/wallet.svg"
+                  alt="created_tests"
+                  class="me-1 mb-1 nav_icon active_color"
+                />
+                Balance
+              </span>
+            </NuxtLink>
+          </li>
+          <li
+            v-if="userGroup === 'admins'"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="adminRoute && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/protected/admin">
+              <span class="p-1 ms-3">
+                <img
+                  src="@/assets/images/admin_pannel.svg"
+                  alt="admin_pannel"
+                  class="me-1 mb-1 nav_icon"
+                />
+                Admin
+              </span>
+            </NuxtLink>
+          </li>
+          <li
+            v-if="userGroup === 'admins'"
+            class="text-capitalize py-2 font_size_16 hover_clr mx-2"
+            :class="feebackRoute && 'bg_blue_color fill_black'"
+          >
+            <NuxtLink to="/protected/admin/feedback">
+              <span class="p-1 ms-3">
+                <img src="@/assets/images/feedback_icon.svg" alt="feedback" class="me-1 nav_icon" />
+                Feedback
               </span>
             </NuxtLink>
           </li>

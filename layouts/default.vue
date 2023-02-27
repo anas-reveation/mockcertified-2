@@ -30,9 +30,9 @@
           </a>
         </div>
       </div>
-      <FooterDesktop class="d-none d-lg-block pt-0" />
       <FooterNavbar class="d-lg-none" />
     </div>
+    <FooterDesktop class="d-none d-lg-block pt-0 bg-footer" />
   </div>
 </template>
 
@@ -95,6 +95,9 @@ export default {
 .z_index2 {
   z-index: 999;
 }
+.bg-footer {
+  background-color: #232738;
+}
 
 // .sideNavbarOpen {
 //   margin-right: 250px;
@@ -118,9 +121,6 @@ export default {
   }
 }
 @include media-breakpoint-up(lg) {
-  .fixed-bottom {
-    position: static !important;
-  }
   .hover-alex {
     position: fixed !important;
   }
