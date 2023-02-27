@@ -3,7 +3,7 @@
     <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
     <div class="mt-4 mb-4">
-      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3">
+      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 zoom-125">
         <div class="home_banner">
           <div class="d-flex flex-column flex-lg-row justify-content-between">
             <div class="text-break p-4">
@@ -27,7 +27,7 @@
           <div class="d-flex flex-column flex-lg-row justify-content-around p-4">
             <div class="mb-3 mb-lg-0">
               <div class="d-flex flex-column">
-                <div class="fw-bolder me-2 font_size_50 banner_title">
+                <div class="fw-bolder me-2 font_size_50 font_size_40 banner_title">
                   Discover <span class="text-primary">Mockcertifed Platform</span>
                 </div>
                 <div class="mt-4">
@@ -39,7 +39,7 @@
               <img
                 src="@/assets/images/thumbnailVideo.png"
                 alt="video"
-                class="video_thumbnail cursor_pointer"
+                class="video_thumbnail cursor_pointer video-size"
                 data-bs-toggle="modal"
                 data-bs-target="#reviewAnswers"
                 @click="isVideoOn = true"
@@ -107,13 +107,14 @@
         </div>
 
         <div class="mt-3 scroll_x" v-if="!isLoading">
-          <div
+          <NuxtLink
+            :to="`/category/${category.slug}`"
             v-for="(category, index) in allCategories"
             :key="index"
             class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 m-22 p-2 category_box font_size_14 dashboard_category_title"
           >
             <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
-          </div>
+          </NuxtLink>
           <div
             v-if="isFetched"
             class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
@@ -659,7 +660,7 @@ export default {
     height: 200px;
   }
 }
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1100px) and (max-width: 1399px) {
   .category_box {
     min-width: 61px !important;
   }
@@ -668,6 +669,27 @@ export default {
   }
   .zoom-m {
     margin-top: 1.8rem !important;
+  }
+  .font_size_50 {
+    font-size: 36px;
+  }
+  .font_size_40 {
+    font-size: 40px;
+  }
+  .font_size_45 {
+    font-size: 36px;
+  }
+  .bannerImage1 {
+    height: 230px;
+  }
+  .bannerImage3 {
+    height: 237px;
+  }
+  .zoom-125 {
+    height: 253px;
+  }
+  .video-size {
+    width: 314px;
   }
 }
 </style>
