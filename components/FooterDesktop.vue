@@ -75,12 +75,34 @@
           </div>
         </div>
         <div class="col-12 text-center">
-          <div class="fw-bold font_size_14 text-white">
-            © Copyright {{ new Date().getFullYear() }} Mockcertified | Designed by
-            <a href="https://www.reveation.io" target="_blank" class="text-primary"
-              >Reveation Labs</a
-            >
-            ❤️
+          <div class="row align-items-center">
+            <div class="col-md-8 text-xl-end text-md-start">
+              <div class="fw-bold font_size_14 text-white">
+                © Copyright {{ new Date().getFullYear() }} Mockcertified | Designed by
+                <a href="https://www.reveation.io" target="_blank" class="text-primary"
+                  >Reveation Labs</a
+                >
+                ❤️
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row justify-content-end">
+                <div class="col-md-5 col-xl-4">
+                  <a :href="playstoreLink" target="_blank" class="">
+                    <img
+                      src="@/assets/images/GooglePlay.svg"
+                      alt="GooglePlayStore"
+                      class="icon-s"
+                    />
+                  </a>
+                </div>
+                <div class="col-xl-4 col-md-5">
+                  <a :href="appleAppStoreLink" target="_blank" class="">
+                    <img src="@/assets/images/AppStore.svg" alt="AppStore" class="icon-s" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -95,6 +117,8 @@ export default {
     FACEBOOK_LINK: process.env.FACEBOOK_LINK,
     TWITTER_LINK: process.env.TWITTER_LINK,
     INSTAGRAM_LINK: process.env.INSTAGRAM_LINK,
+    playstoreLink: `https://play.google.com/store/apps/details?id=${process.env.GOOGLE_PLAYSTORE_ID}`,
+    appleAppStoreLink: `https://apps.apple.com/in/app/MockCertified/${process.env.APPLE_APP_STORE_ID}`,
   }),
 };
 </script>
@@ -105,5 +129,8 @@ export default {
 }
 .footer-logo {
   width: 180px;
+}
+.icon-s {
+  width: 108px;
 }
 </style>

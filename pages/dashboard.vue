@@ -7,9 +7,9 @@
         <div class="home_banner">
           <div class="d-flex flex-column flex-lg-row justify-content-between">
             <div class="text-break p-4">
-              <div class="fw-bolder me-2 font_size_50 banner_title">
+              <h1 class="fw-bolder me-2 font_size_50 banner_title">
                 Find out amazing <span class="text-primary">Categories for Mock Exam!</span>
-              </div>
+              </h1>
 
               <div class="font_size_25 mt-4 banner_subtitle">
                 Check here

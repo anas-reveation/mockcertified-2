@@ -32,7 +32,7 @@
       </div>
       <FooterNavbar class="d-lg-none" />
     </div>
-    <FooterDesktop class="d-none d-lg-block pt-0 bg-footer" />
+    <FooterDesktop class="d-none d-lg-block pt-0 bg-footer foot_h" />
   </div>
 </template>
 
@@ -41,6 +41,14 @@ import { Browser } from '@capacitor/browser';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'default_h',
+      },
+    };
+  },
+
   data() {
     return {
       ishiddenAlexa: false,
@@ -84,6 +92,19 @@ export default {
 <style lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
+// .default_h {
+//   position: relative;
+//   min-height: 100vh;
+//   padding-bottom: 376px;
+// }
+// @media (max-width: 992px) {
+//   .default_h {
+//     position: static;
+//     min-height: 0;
+//     padding-bottom: 0;
+//   }
+// }
+
 .spinner-bg {
   background: #656565 !important;
 }
@@ -121,6 +142,12 @@ export default {
   }
 }
 @include media-breakpoint-up(lg) {
+  .default_h {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 376px;
+  }
+
   .hover-alex {
     position: fixed !important;
   }
@@ -128,6 +155,12 @@ export default {
 
 .margin_bottom {
   margin-bottom: 28px;
+}
+
+.foot_h {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 /* Proceed to checkout button is related that is in "cart" page */
 

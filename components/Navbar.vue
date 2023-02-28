@@ -65,7 +65,7 @@
             >
               <a class="text-black ms-2">
                 <span class="font_size_14">
-                  <img src="@/assets/images/add.svg" alt="add" class="me-1 nav_icon" />
+                  <img src="@/assets/images/add.svg" alt="add" class="me-1 nav_icon icon_color" />
                   Create a New Test
                 </span>
               </a>
@@ -543,6 +543,10 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.icon_color {
+  filter: invert(61%) sepia(98%) saturate(2965%) hue-rotate(203deg) brightness(91%) contrast(92%);
+}
 
 .nav_icon {
   height: 15px;
