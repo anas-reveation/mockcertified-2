@@ -284,7 +284,7 @@ export default {
     if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
       this.SET_LOADER(false);
       this.setIsLoaderHidden(false);
-      this.$router.push('/dashboard');
+      this.$router.push('/');
       return;
     }
 

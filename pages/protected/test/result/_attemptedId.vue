@@ -586,7 +586,7 @@ export default {
     if (!attemptedTest.length) {
       this.SET_LOADER(false);
       this.setIsLoaderHidden(false);
-      this.$router.push('/dashboard');
+      this.$router.push('/');
       return;
     }
 
@@ -599,7 +599,7 @@ export default {
     if (!this.purchasedTestId) {
       this.SET_LOADER(false);
       this.setIsLoaderHidden(false);
-      this.$router.push('/dashboard');
+      this.$router.push('/');
       return;
     }
     const feedbackDetail = await this.getFeedbackPurchasedTest(this.purchasedTestId);
