@@ -4,7 +4,7 @@
     @mouseleave="(userDropDown = false), (settingsDropDown = false)"
   >
     <div class="container px-4">
-      <NuxtLink to="/dashboard" class="navbar-brand">
+      <NuxtLink to="/" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -12,26 +12,21 @@
           <ClientOnly>
             <NuxtLink
               v-if="platform === 'web'"
-              to="/dashboard"
+              to="/"
               class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
               <img
                 class="m-1 navbar_icon"
-                :class="$route.path.match(/\/dashboard\/*/g) && 'active_color'"
+                :class="$route.path === '/' && 'active_color'"
                 src="@/assets/images/home.svg"
                 alt="home"
               />
               <span
                 class="fw-bolder pb-2 navbar_font_color font_size_12"
-                :class="$route.path.match(/\/dashboard\/*/g) && 'text-primary'"
+                :class="$route.path === '/' && 'text-primary'"
               >
                 Home
               </span>
-
-              <!-- <div
-                class="active_line"
-                :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
-              /> -->
             </NuxtLink>
             <NuxtLink
               :to="isAuthenticated ? '/protected/create-test' : '/auth/login'"

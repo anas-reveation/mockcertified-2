@@ -137,7 +137,7 @@ export default {
 
     this.testDetail = this.allCreatedTests.find((test) => test.id === this.createdTestId);
     if (!this.testDetail) {
-      this.$router.push('/dashboard');
+      this.$router.push('/');
       return;
     }
 

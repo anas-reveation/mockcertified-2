@@ -584,7 +584,7 @@ export default {
         // Till now User is present only in cognito is not in DB. In login function (action file) we are making user object in DB
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
-        this.$router.push('/dashboard');
+        this.$router.push('/');
         // await this.createUserLocal();
         this.$swal.fire({
           toast: true,

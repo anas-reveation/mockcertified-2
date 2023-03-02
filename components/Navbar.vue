@@ -32,7 +32,7 @@
           <div
             class="col-2"
             @click="
-              redirect('/dashboard');
+              redirect('/');
               closeNav();
             "
           >
@@ -259,7 +259,7 @@
     </ClientOnly>
     <!-- <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white mb-2 d-md-none">
       <div class="container-fluid px-0">
-        <NuxtLink class="navbar-brand ms-2" to="/dashboard">
+        <NuxtLink class="navbar-brand ms-2" to="/">
           <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo" />
         </NuxtLink>
 

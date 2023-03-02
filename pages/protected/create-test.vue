@@ -837,7 +837,7 @@ export default {
       this.SET_LOADER(false);
 
       if (res) {
-        this.$router.push('/dashboard');
+        this.$router.push('/');
         this.$swal.fire({
           toast: true,
           position: 'top-end',
