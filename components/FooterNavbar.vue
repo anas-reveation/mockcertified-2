@@ -4,24 +4,14 @@
       <div class="row">
         <ClientOnly>
           <div v-if="platform === 'web'" class="col">
-            <NuxtLink
-              to="/dashboard"
-              class="d-flex flex-column align-items-center justify-content-center"
-            >
-              <!-- <div
-                class="active_line mb-1"
-                :class="$route.path.match(/\/dashboard\/*/g) && 'bg-primary'"
-              /> -->
+            <NuxtLink to="/" class="d-flex flex-column align-items-center justify-content-center">
               <img
                 class="m-1"
-                :class="$route.path.match(/\/dashboard\/*/g) && 'active_color'"
+                :class="$route.path === '/' && 'active_color'"
                 src="@/assets/images/home.svg"
                 alt="home"
               />
-              <span
-                v-if="$route.path.match(/\/dashboard\/*/g)"
-                class="text-primary fw-bolder pb-2 font_size_10"
-              >
+              <span v-if="$route.path === '/'" class="text-primary fw-bolder pb-2 font_size_10">
                 Home
               </span>
             </NuxtLink>

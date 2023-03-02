@@ -3,7 +3,7 @@
     <div class="p-2 container">
       <div class="row mt-5 mb-4">
         <div class="col-6">
-          <NuxtLink to="/dashboard" class="navbar-brand">
+          <NuxtLink to="/" class="navbar-brand">
             <img src="@/assets/images/logo_with_name.svg" alt="logo" class="footer-logo" />
           </NuxtLink>
         </div>

@@ -35,29 +35,48 @@ export default async ({ app, route, store }) => {
     const userGroup = store.state.auth.userGroup;
 
     const homeRoute = route.path === '/' ? true : false;
-    const dashboardRoute = route.path.match(/\/dashboard\/*/g) ? true : false;
     const protectedRoute = route.path.match(/\/protected\/*/g) ? true : false;
     const authRoute = route.path.match(/\/auth\/*/g) ? true : false;
     const adminRoute = route.path.match(/\/admin\/*/g) ? true : false;
 
-    if (store.state.platform !== 'web' && dashboardRoute && !isAuthenticated) {
+    if (store.state.platform !== 'web' && homeRoute && !isAuthenticated) {
       app.router.push('/auth/login');
     }
 
-    if (store.state.platform !== 'web' && dashboardRoute && isAuthenticated) {
+    if (store.state.platform !== 'web' && homeRoute && isAuthenticated) {
       app.router.push('/protected/purchased-test');
     }
 
-    if (!isAuthenticated && protectedRoute) {
+    if (isAuthenticated && authRoute) {
       app.router.push('/');
     }
 
-    if (isAuthenticated && (homeRoute || authRoute)) {
-      app.router.push('/dashboard');
+    if (!isAuthenticated && (protectedRoute || adminRoute)) {
+      app.router.push('/');
     }
 
-    if ((userGroup !== 'admins' && adminRoute) || (!isAuthenticated && homeRoute)) {
-      app.router.push('/dashboard');
+    if (isAuthenticated && adminRoute && userGroup !== 'admins') {
+      app.router.push('/');
     }
+
+    // if (store.state.platform !== 'web' && homeRoute && !isAuthenticated) {
+    //   app.router.push('/auth/login');
+    // }
+
+    // if (store.state.platform !== 'web' && homeRoute && isAuthenticated) {
+    //   app.router.push('/protected/purchased-test');
+    // }
+
+    // if (!isAuthenticated && protectedRoute) {
+    //   app.router.push('/');
+    // }
+
+    // if (isAuthenticated && (homeRoute || authRoute)) {
+    //   app.router.push('/');
+    // }
+
+    // if ((userGroup !== 'admins' && adminRoute) || (!isAuthenticated && homeRoute)) {
+    //   app.router.push('/');
+    // }
   });
 };

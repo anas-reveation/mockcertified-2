@@ -264,7 +264,7 @@ export default {
       if (res && this.redirectUrl) {
         this.$router.push(this.redirectUrl);
       } else if (res) {
-        this.$router.push('/dashboard');
+        this.$router.push('/');
       }
     },
 
