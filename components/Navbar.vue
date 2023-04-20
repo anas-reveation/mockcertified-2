@@ -160,7 +160,7 @@
               class="rounded-3 py-1"
               :class="$route.path.match(/\/blog\/*/g) && 'bg_color fill_black'"
               @click="
-                redirect('/blog');
+                openBlog();
                 closeNav();
               "
             >
@@ -489,6 +489,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import { Browser } from '@capacitor/browser';
 
 export default {
   data() {
@@ -532,6 +533,10 @@ export default {
 
     openNav() {
       document.getElementById('mySidenav').style.width = '90%';
+    },
+
+    async openBlog() {
+      await Browser.open({ url: 'https://blog.mockcertified.com' });
     },
 
     closeNav() {

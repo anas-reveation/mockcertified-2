@@ -68,9 +68,9 @@
               class="text-capitalize py-2 font_size_16 hover_clr list-unstyled"
               :class="$route.path.match(/\/blog\/*/g) && 'bg_blue_color fill_black'"
             >
-              <NuxtLink to="/blog">
+              <a href="https://blog.mockcertified.com">
                 <span class="p-1 text-white"> Blogs </span>
-              </NuxtLink>
+              </a>
             </li>
           </div>
         </div>
