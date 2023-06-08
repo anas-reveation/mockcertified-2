@@ -56,6 +56,8 @@ export default {
       status = 'APPROVED';
     } else if (statusName === 'reject') {
       status = 'REJECTED';
+    } else if (statusName === 'pending') {
+      status = 'PENDING_APPROVAL';
     } else {
       return false;
     }

@@ -171,7 +171,7 @@ export default {
     ...mapState('admin', ['allTests']),
 
     approvedTests() {
-      return this.allTests.filter((test) => test.status === 'APPROVED');
+      return this.allTests.filter((test) => test.status === 'APPROVED' || 'PENDING_APPROVAL');
     },
 
     inProgressTests() {

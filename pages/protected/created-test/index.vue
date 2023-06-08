@@ -51,6 +51,7 @@
           <TestCards
             :title="test.title"
             :price="`$${formatPrice(test.price)}`"
+            :status="test.status"
             :category="test.category.name"
             :description="`${test.time_limit} mins • ${
               test.questions.items.length
@@ -158,7 +159,9 @@ export default {
     ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests']),
 
     approvedTests() {
-      return this.allCreatedTests.filter((test) => test.status === 'APPROVED');
+      return this.allCreatedTests.filter(
+        (test) => test.status === 'APPROVED' || 'PENDING_APPROVAL',
+      );
     },
 
     inProgressTests() {
