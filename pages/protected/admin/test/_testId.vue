@@ -40,7 +40,7 @@
           <button
             class="btn btn-primary text-white mb-1 w-50 width_res"
             type="button"
-            @click="approveRejectTestLocal('approve')"
+            @click="approveRejectTestLocal('pending')"
           >
             <span class="font_size_16">Approve</span>
           </button>
