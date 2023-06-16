@@ -1,6 +1,7 @@
 import { API } from 'aws-amplify';
 
 import {
+  getUserPendingApprovalTests,
   userTests,
   getTestDetail,
   getCategoryDetail,
@@ -31,6 +32,26 @@ import {
 } from '~/graphql/mutations';
 
 export default {
+  async isUserPendingApprovalTests({ commit, dispatch, rootState }) {
+    const user_id = rootState.auth.user.id;
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const userTestsData = await API.graphql({
+        query: getUserPendingApprovalTests,
+        variables: { id: user_id },
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+      });
+      const allPendingApprovalTests = userTestsData?.data?.getUser?.created_tests?.items;
+      if (allPendingApprovalTests.length) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  },
+
   async getUserTests({ commit, dispatch, rootState }) {
     const user_id = rootState.auth.user.id;
     commit('SET_LOADER', true, { root: true });

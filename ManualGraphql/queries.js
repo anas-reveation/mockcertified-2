@@ -1,3 +1,16 @@
+export const getUserPendingApprovalTests = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      created_tests(filter: { status: { eq: PENDING_APPROVAL } }) {
+        items {
+          id
+          slug
+        }
+      }
+    }
+  }
+`;
+
 export const userTests = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {

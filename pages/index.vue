@@ -281,6 +281,7 @@
 </template>
 
 <script>
+import { Storage } from '@capacitor/storage';
 import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
@@ -426,7 +427,8 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading', 'isLoaderHidden']),
+    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests']),
+    ...mapState('auth', ['user']),
     ...mapState('testManagement', ['featuredTests', 'categories', 'recentlyAddedTests']),
   },
 
@@ -446,6 +448,27 @@ export default {
     this.setIsLoaderHidden(false);
     this.allCategories = this.categories.slice(0, 13);
     this.isFetched = true;
+
+    const { value } = await Storage.get({ key: 'isClickedPopupPublish' });
+    const isClickedPopupPublish = JSON.parse(value);
+
+    if (this.user && !isClickedPopupPublish && this.isUserPendingApprovalTests()) {
+      this.$swal
+        .fire({
+          text: 'Your tests are not published. Click to redirect.',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            await Storage.set({
+              key: 'isClickedPopupPublish',
+              value: JSON.stringify(true),
+            });
+            this.$router.push('/protected/created-test');
+          }
+        });
+    }
   },
 
   methods: {
@@ -453,6 +476,7 @@ export default {
       'getAllFeaturedTest',
       'getRecentlyAddedTests',
       'getAllCategories',
+      'isUserPendingApprovalTests',
     ]),
     ...mapMutations(['setIsLoaderHidden']),
 
