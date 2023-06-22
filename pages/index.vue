@@ -452,7 +452,7 @@ export default {
     const { value } = await Storage.get({ key: 'isClickedPopupPublish' });
     const isClickedPopupPublish = JSON.parse(value);
 
-    if (this.user && !isClickedPopupPublish && this.isUserPendingApprovalTests()) {
+    if (this.user && !isClickedPopupPublish && (await this.isUserPendingApprovalTests())) {
       this.$swal
         .fire({
           text: 'Your tests are not published. Click to redirect.',

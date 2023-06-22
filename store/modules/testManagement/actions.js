@@ -33,10 +33,8 @@ import {
 
 export default {
   async isUserPendingApprovalTests({ commit, dispatch, rootState }) {
-    const user_id = rootState.auth.user.id;
-    commit('SET_LOADER', true, { root: true });
-
     try {
+      const user_id = rootState.auth.user.id;
       const userTestsData = await API.graphql({
         query: getUserPendingApprovalTests,
         variables: { id: user_id },
