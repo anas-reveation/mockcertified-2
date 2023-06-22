@@ -461,13 +461,13 @@ export default {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-            await Storage.set({
-              key: 'isClickedPopupPublish',
-              value: JSON.stringify(true),
-            });
             this.$router.push('/protected/created-test');
           }
         });
+      await Storage.set({
+        key: 'isClickedPopupPublish',
+        value: JSON.stringify(true),
+      });
     }
   },
 
