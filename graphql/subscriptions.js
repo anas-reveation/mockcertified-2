@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
-    onCreateUser(filter: $filter) {
+  subscription OnCreateUser {
+    onCreateUser {
       id
       first_name
       last_name
@@ -25,8 +25,8 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
-    onUpdateUser(filter: $filter) {
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       first_name
       last_name
@@ -48,8 +48,8 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
-    onDeleteUser(filter: $filter) {
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       first_name
       last_name
@@ -71,11 +71,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateTestManager = /* GraphQL */ `
-  subscription OnCreateTestManager(
-    $filter: ModelSubscriptionTestManagerFilterInput
-    $user_id: String
-  ) {
-    onCreateTestManager(filter: $filter, user_id: $user_id) {
+  subscription OnCreateTestManager($user_id: String) {
+    onCreateTestManager(user_id: $user_id) {
       id
       user_id
       created_by {
@@ -119,11 +116,8 @@ export const onCreateTestManager = /* GraphQL */ `
   }
 `;
 export const onUpdateTestManager = /* GraphQL */ `
-  subscription OnUpdateTestManager(
-    $filter: ModelSubscriptionTestManagerFilterInput
-    $user_id: String
-  ) {
-    onUpdateTestManager(filter: $filter, user_id: $user_id) {
+  subscription OnUpdateTestManager($user_id: String) {
+    onUpdateTestManager(user_id: $user_id) {
       id
       user_id
       created_by {
@@ -167,11 +161,8 @@ export const onUpdateTestManager = /* GraphQL */ `
   }
 `;
 export const onDeleteTestManager = /* GraphQL */ `
-  subscription OnDeleteTestManager(
-    $filter: ModelSubscriptionTestManagerFilterInput
-    $user_id: String
-  ) {
-    onDeleteTestManager(filter: $filter, user_id: $user_id) {
+  subscription OnDeleteTestManager($user_id: String) {
+    onDeleteTestManager(user_id: $user_id) {
       id
       user_id
       created_by {
@@ -215,8 +206,8 @@ export const onDeleteTestManager = /* GraphQL */ `
   }
 `;
 export const onCreateQuestion = /* GraphQL */ `
-  subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
-    onCreateQuestion(filter: $filter) {
+  subscription OnCreateQuestion {
+    onCreateQuestion {
       id
       marks
       test_id
@@ -248,8 +239,8 @@ export const onCreateQuestion = /* GraphQL */ `
   }
 `;
 export const onUpdateQuestion = /* GraphQL */ `
-  subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
-    onUpdateQuestion(filter: $filter) {
+  subscription OnUpdateQuestion {
+    onUpdateQuestion {
       id
       marks
       test_id
@@ -281,8 +272,8 @@ export const onUpdateQuestion = /* GraphQL */ `
   }
 `;
 export const onDeleteQuestion = /* GraphQL */ `
-  subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
-    onDeleteQuestion(filter: $filter) {
+  subscription OnDeleteQuestion {
+    onDeleteQuestion {
       id
       marks
       test_id
@@ -314,8 +305,8 @@ export const onDeleteQuestion = /* GraphQL */ `
   }
 `;
 export const onCreateCategory = /* GraphQL */ `
-  subscription OnCreateCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onCreateCategory(filter: $filter) {
+  subscription OnCreateCategory {
+    onCreateCategory {
       id
       name
       image
@@ -329,8 +320,8 @@ export const onCreateCategory = /* GraphQL */ `
   }
 `;
 export const onUpdateCategory = /* GraphQL */ `
-  subscription OnUpdateCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onUpdateCategory(filter: $filter) {
+  subscription OnUpdateCategory {
+    onUpdateCategory {
       id
       name
       image
@@ -344,8 +335,8 @@ export const onUpdateCategory = /* GraphQL */ `
   }
 `;
 export const onDeleteCategory = /* GraphQL */ `
-  subscription OnDeleteCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onDeleteCategory(filter: $filter) {
+  subscription OnDeleteCategory {
+    onDeleteCategory {
       id
       name
       image
@@ -359,10 +350,8 @@ export const onDeleteCategory = /* GraphQL */ `
   }
 `;
 export const onCreateSubCategory = /* GraphQL */ `
-  subscription OnCreateSubCategory(
-    $filter: ModelSubscriptionSubCategoryFilterInput
-  ) {
-    onCreateSubCategory(filter: $filter) {
+  subscription OnCreateSubCategory {
+    onCreateSubCategory {
       id
       name
       category_id
@@ -382,10 +371,8 @@ export const onCreateSubCategory = /* GraphQL */ `
   }
 `;
 export const onUpdateSubCategory = /* GraphQL */ `
-  subscription OnUpdateSubCategory(
-    $filter: ModelSubscriptionSubCategoryFilterInput
-  ) {
-    onUpdateSubCategory(filter: $filter) {
+  subscription OnUpdateSubCategory {
+    onUpdateSubCategory {
       id
       name
       category_id
@@ -405,10 +392,8 @@ export const onUpdateSubCategory = /* GraphQL */ `
   }
 `;
 export const onDeleteSubCategory = /* GraphQL */ `
-  subscription OnDeleteSubCategory(
-    $filter: ModelSubscriptionSubCategoryFilterInput
-  ) {
-    onDeleteSubCategory(filter: $filter) {
+  subscription OnDeleteSubCategory {
+    onDeleteSubCategory {
       id
       name
       category_id
@@ -428,10 +413,8 @@ export const onDeleteSubCategory = /* GraphQL */ `
   }
 `;
 export const onCreatePurchasedTest = /* GraphQL */ `
-  subscription OnCreatePurchasedTest(
-    $filter: ModelSubscriptionPurchasedTestFilterInput
-  ) {
-    onCreatePurchasedTest(filter: $filter) {
+  subscription OnCreatePurchasedTest {
+    onCreatePurchasedTest {
       id
       user_id
       test_id
@@ -469,10 +452,8 @@ export const onCreatePurchasedTest = /* GraphQL */ `
   }
 `;
 export const onUpdatePurchasedTest = /* GraphQL */ `
-  subscription OnUpdatePurchasedTest(
-    $filter: ModelSubscriptionPurchasedTestFilterInput
-  ) {
-    onUpdatePurchasedTest(filter: $filter) {
+  subscription OnUpdatePurchasedTest {
+    onUpdatePurchasedTest {
       id
       user_id
       test_id
@@ -510,10 +491,8 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
   }
 `;
 export const onDeletePurchasedTest = /* GraphQL */ `
-  subscription OnDeletePurchasedTest(
-    $filter: ModelSubscriptionPurchasedTestFilterInput
-  ) {
-    onDeletePurchasedTest(filter: $filter) {
+  subscription OnDeletePurchasedTest {
+    onDeletePurchasedTest {
       id
       user_id
       test_id
@@ -551,8 +530,8 @@ export const onDeletePurchasedTest = /* GraphQL */ `
   }
 `;
 export const onCreateFeedback = /* GraphQL */ `
-  subscription OnCreateFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
-    onCreateFeedback(filter: $filter) {
+  subscription OnCreateFeedback {
+    onCreateFeedback {
       id
       test_id
       test {
@@ -588,8 +567,8 @@ export const onCreateFeedback = /* GraphQL */ `
   }
 `;
 export const onUpdateFeedback = /* GraphQL */ `
-  subscription OnUpdateFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
-    onUpdateFeedback(filter: $filter) {
+  subscription OnUpdateFeedback {
+    onUpdateFeedback {
       id
       test_id
       test {
@@ -625,8 +604,8 @@ export const onUpdateFeedback = /* GraphQL */ `
   }
 `;
 export const onDeleteFeedback = /* GraphQL */ `
-  subscription OnDeleteFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
-    onDeleteFeedback(filter: $filter) {
+  subscription OnDeleteFeedback {
+    onDeleteFeedback {
       id
       test_id
       test {
@@ -662,10 +641,8 @@ export const onDeleteFeedback = /* GraphQL */ `
   }
 `;
 export const onCreateAttemptedTest = /* GraphQL */ `
-  subscription OnCreateAttemptedTest(
-    $filter: ModelSubscriptionAttemptedTestFilterInput
-  ) {
-    onCreateAttemptedTest(filter: $filter) {
+  subscription OnCreateAttemptedTest {
+    onCreateAttemptedTest {
       id
       user_id
       attempted_by {
@@ -707,10 +684,8 @@ export const onCreateAttemptedTest = /* GraphQL */ `
   }
 `;
 export const onUpdateAttemptedTest = /* GraphQL */ `
-  subscription OnUpdateAttemptedTest(
-    $filter: ModelSubscriptionAttemptedTestFilterInput
-  ) {
-    onUpdateAttemptedTest(filter: $filter) {
+  subscription OnUpdateAttemptedTest {
+    onUpdateAttemptedTest {
       id
       user_id
       attempted_by {
@@ -752,10 +727,8 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
   }
 `;
 export const onDeleteAttemptedTest = /* GraphQL */ `
-  subscription OnDeleteAttemptedTest(
-    $filter: ModelSubscriptionAttemptedTestFilterInput
-  ) {
-    onDeleteAttemptedTest(filter: $filter) {
+  subscription OnDeleteAttemptedTest {
+    onDeleteAttemptedTest {
       id
       user_id
       attempted_by {
@@ -797,8 +770,8 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
   }
 `;
 export const onCreateResult = /* GraphQL */ `
-  subscription OnCreateResult($filter: ModelSubscriptionResultFilterInput) {
-    onCreateResult(filter: $filter) {
+  subscription OnCreateResult {
+    onCreateResult {
       id
       attempted_id
       question_id
@@ -822,8 +795,8 @@ export const onCreateResult = /* GraphQL */ `
   }
 `;
 export const onUpdateResult = /* GraphQL */ `
-  subscription OnUpdateResult($filter: ModelSubscriptionResultFilterInput) {
-    onUpdateResult(filter: $filter) {
+  subscription OnUpdateResult {
+    onUpdateResult {
       id
       attempted_id
       question_id
@@ -847,8 +820,8 @@ export const onUpdateResult = /* GraphQL */ `
   }
 `;
 export const onDeleteResult = /* GraphQL */ `
-  subscription OnDeleteResult($filter: ModelSubscriptionResultFilterInput) {
-    onDeleteResult(filter: $filter) {
+  subscription OnDeleteResult {
+    onDeleteResult {
       id
       attempted_id
       question_id
@@ -872,10 +845,8 @@ export const onDeleteResult = /* GraphQL */ `
   }
 `;
 export const onCreatePromotion = /* GraphQL */ `
-  subscription OnCreatePromotion(
-    $filter: ModelSubscriptionPromotionFilterInput
-  ) {
-    onCreatePromotion(filter: $filter) {
+  subscription OnCreatePromotion {
+    onCreatePromotion {
       id
       promotion_code
       discount_percentage
@@ -886,10 +857,8 @@ export const onCreatePromotion = /* GraphQL */ `
   }
 `;
 export const onUpdatePromotion = /* GraphQL */ `
-  subscription OnUpdatePromotion(
-    $filter: ModelSubscriptionPromotionFilterInput
-  ) {
-    onUpdatePromotion(filter: $filter) {
+  subscription OnUpdatePromotion {
+    onUpdatePromotion {
       id
       promotion_code
       discount_percentage
@@ -900,10 +869,8 @@ export const onUpdatePromotion = /* GraphQL */ `
   }
 `;
 export const onDeletePromotion = /* GraphQL */ `
-  subscription OnDeletePromotion(
-    $filter: ModelSubscriptionPromotionFilterInput
-  ) {
-    onDeletePromotion(filter: $filter) {
+  subscription OnDeletePromotion {
+    onDeletePromotion {
       id
       promotion_code
       discount_percentage
@@ -914,10 +881,8 @@ export const onDeletePromotion = /* GraphQL */ `
   }
 `;
 export const onCreateStaticContent = /* GraphQL */ `
-  subscription OnCreateStaticContent(
-    $filter: ModelSubscriptionStaticContentFilterInput
-  ) {
-    onCreateStaticContent(filter: $filter) {
+  subscription OnCreateStaticContent {
+    onCreateStaticContent {
       id
       name
       body
@@ -927,10 +892,8 @@ export const onCreateStaticContent = /* GraphQL */ `
   }
 `;
 export const onUpdateStaticContent = /* GraphQL */ `
-  subscription OnUpdateStaticContent(
-    $filter: ModelSubscriptionStaticContentFilterInput
-  ) {
-    onUpdateStaticContent(filter: $filter) {
+  subscription OnUpdateStaticContent {
+    onUpdateStaticContent {
       id
       name
       body
@@ -940,10 +903,8 @@ export const onUpdateStaticContent = /* GraphQL */ `
   }
 `;
 export const onDeleteStaticContent = /* GraphQL */ `
-  subscription OnDeleteStaticContent(
-    $filter: ModelSubscriptionStaticContentFilterInput
-  ) {
-    onDeleteStaticContent(filter: $filter) {
+  subscription OnDeleteStaticContent {
+    onDeleteStaticContent {
       id
       name
       body
@@ -953,10 +914,8 @@ export const onDeleteStaticContent = /* GraphQL */ `
   }
 `;
 export const onCreateSearchFeedback = /* GraphQL */ `
-  subscription OnCreateSearchFeedback(
-    $filter: ModelSubscriptionSearchFeedbackFilterInput
-  ) {
-    onCreateSearchFeedback(filter: $filter) {
+  subscription OnCreateSearchFeedback {
+    onCreateSearchFeedback {
       id
       user_email
       description
@@ -967,10 +926,8 @@ export const onCreateSearchFeedback = /* GraphQL */ `
   }
 `;
 export const onUpdateSearchFeedback = /* GraphQL */ `
-  subscription OnUpdateSearchFeedback(
-    $filter: ModelSubscriptionSearchFeedbackFilterInput
-  ) {
-    onUpdateSearchFeedback(filter: $filter) {
+  subscription OnUpdateSearchFeedback {
+    onUpdateSearchFeedback {
       id
       user_email
       description
@@ -981,10 +938,8 @@ export const onUpdateSearchFeedback = /* GraphQL */ `
   }
 `;
 export const onDeleteSearchFeedback = /* GraphQL */ `
-  subscription OnDeleteSearchFeedback(
-    $filter: ModelSubscriptionSearchFeedbackFilterInput
-  ) {
-    onDeleteSearchFeedback(filter: $filter) {
+  subscription OnDeleteSearchFeedback {
+    onDeleteSearchFeedback {
       id
       user_email
       description
