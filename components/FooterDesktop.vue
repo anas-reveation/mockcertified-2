@@ -76,8 +76,8 @@
         </div>
         <div class="col-12 text-center">
           <div class="row align-items-center">
-            <div class="col-md-8 text-md-start text-xl-end pe-xl-5">
-              <div class="fw-bold font_size_14 text-white">
+            <div class="col-md-8 text-md-start text-xl-end">
+              <div class="fw-bold font_size_14 text-white me-xl-5">
                 © Copyright {{ new Date().getFullYear() }} Mockcertified
                 <!-- | Designed by
                 <a href="https://www.reveation.io" target="_blank" class="text-primary"
