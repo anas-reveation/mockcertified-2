@@ -1,237 +1,18 @@
 {
-  "auth": {
-    "mobileappmarketplacee1e8cc85": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE"
-        ],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
-    }
-  },
-  "storage": {
-    "user": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    },
-    "testTable": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "function": {
-    "onboardingStripe": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
-    },
-    "stripeCheckout": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "checkAnswer": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "paymentSuccessStripe": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "getBalance": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "redirectPayoutDashboard": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "getStripeIdStatus": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "checkPromoCode": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "mobileappmarketplace",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    }
-  },
+  "analytics": {},
   "api": {
     "mobileappmarketplace": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "mobileappmarketplacee1e8cc85",
           "attributes": [
             "UserPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
         }
       ],
       "output": {
         "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "apiKeyExpirationDate": "2022-06-29T10:41:00.828Z",
-              "description": "test"
-            }
-          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
@@ -242,10 +23,487 @@
             {
               "authenticationType": "AWS_IAM"
             }
-          ]
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2022-06-29T10:41:00.828Z",
+              "apiKeyExpirationDays": 7,
+              "description": "test"
+            },
+            "authenticationType": "API_KEY"
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
     }
   },
-  "analytics": {}
+  "auth": {
+    "mobileappmarketplacee1e8cc85": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [
+          "FACEBOOK",
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "checkAnswer": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "checkPromoCode": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getBalance": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getStripeIdStatus": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "onboardingStripe": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "paymentSuccessStripe": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "redirectPayoutDashboard": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "stripeCheckout": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mobileappmarketplacee1e8cc85"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "mobileappmarketplace"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_checkAnswer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_checkAnswer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_checkPromoCode_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkPromoCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_checkPromoCode_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkPromoCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBalance_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBalance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBalance_domainOrigin": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBalance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBalance_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBalance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBalance_stripePublishableKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBalance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getBalance_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getBalance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getStripeIdStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getStripeIdStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_getStripeIdStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getStripeIdStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_getStripeIdStatus_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getStripeIdStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_domainOrigin": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_stripePublishableKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardingStripe_stripeWebhookSecret": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardingStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_paymentSuccessStripe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "paymentSuccessStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_paymentSuccessStripe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "paymentSuccessStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_paymentSuccessStripe_signingSecretWebhook": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "paymentSuccessStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_paymentSuccessStripe_stripePublishableKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "paymentSuccessStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_paymentSuccessStripe_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "paymentSuccessStripe"
+        }
+      ]
+    },
+    "AMPLIFY_function_redirectPayoutDashboard_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "redirectPayoutDashboard"
+        }
+      ]
+    },
+    "AMPLIFY_function_redirectPayoutDashboard_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "redirectPayoutDashboard"
+        }
+      ]
+    },
+    "AMPLIFY_function_redirectPayoutDashboard_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "redirectPayoutDashboard"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_commissionPercentage": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_domainOrigin": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_stripePublishableKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeCheckout_stripeSecretKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeCheckout"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "testTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "user": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
 }

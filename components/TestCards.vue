@@ -35,6 +35,13 @@
       <p class="col-7 fs-7 fw-light text-muted font_size_14 test_card_desc" v-if="dateTime">
         {{ dateTime }}
       </p>
+
+      <a
+        class="col-7 fs-7 fw-light text-muted font_size_14 test_card_desc"
+        v-if="status == 'PENDING_APPROVAL'"
+      >
+        Publish
+      </a>
     </div>
 
     <span
@@ -64,6 +71,10 @@ export default {
       default: null,
     },
     authorName: {
+      type: String,
+      default: null,
+    },
+    status: {
       type: String,
       default: null,
     },

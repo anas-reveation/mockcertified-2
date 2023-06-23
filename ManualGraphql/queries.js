@@ -1,3 +1,16 @@
+export const getUserPendingApprovalTests = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      created_tests(filter: { status: { eq: PENDING_APPROVAL } }) {
+        items {
+          id
+          slug
+        }
+      }
+    }
+  }
+`;
+
 export const userTests = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -19,7 +32,7 @@ export const userTests = /* GraphQL */ `
               slug
               name
             }
-            questions {
+            questions(limit: 10000) {
               items {
                 id
                 marks
@@ -57,7 +70,7 @@ export const userTests = /* GraphQL */ `
               slug
               name
             }
-            questions {
+            questions(limit: 10000) {
               items {
                 id
                 marks
@@ -107,7 +120,7 @@ export const userTests = /* GraphQL */ `
             slug
             name
           }
-          questions {
+          questions(limit: 10000) {
             items {
               answer
               explainantion
@@ -151,7 +164,7 @@ export const getTestDetail = /* GraphQL */ `
       time_limit
       createdAt
       updatedAt
-      questions {
+      questions(limit: 10000) {
         items {
           marks
         }
@@ -182,7 +195,7 @@ export const listAllTests = /* GraphQL */ `
           slug
           name
         }
-        questions {
+        questions(limit: 10000) {
           items {
             answer
             explainantion
@@ -238,7 +251,7 @@ export const listTestsByStatus = /* GraphQL */ `
           id
           name
         }
-        questions {
+        questions(limit: 10000) {
           items {
             answer
             explainantion
@@ -375,7 +388,7 @@ export const searchTestManagers = /* GraphQL */ `
           first_name
           last_name
         }
-        questions {
+        questions(limit: 10000) {
           items {
             explainantion
             id
@@ -427,7 +440,7 @@ export const searchTestManagers = /* GraphQL */ `
 export const getSampleQuestions = /* GraphQL */ `
   query GetTestManager($id: ID!) {
     getTestManager(id: $id) {
-      questions(filter: { is_showcase: { eq: true } }) {
+      questions(limit: 10000, filter: { is_showcase: { eq: true } }) {
         items {
           question
           options

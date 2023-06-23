@@ -14,11 +14,7 @@
     </div>
 
     <div v-show="!isLoading">
-      <form
-        v-if="user && user.stripe_seller_id && isAccountActive"
-        class="wrapper mt-3"
-        @submit.prevent="testSubmit"
-      >
+      <form v-if="user" class="wrapper mt-3" @submit.prevent="testSubmit">
         <h1 class="fw-bolder mt-5 mb-4 font_size_24">Create new test</h1>
 
         <div class="row">
@@ -211,28 +207,6 @@
           </div>
         </div>
       </form>
-
-      <div v-else-if="!isDisable">
-        <div class="mt-5 text-center">
-          <img
-            src="@/assets/images/Illustration.svg"
-            alt="illustration_img"
-            class="illustration_img"
-          />
-          <h2 class="fw-bolder mt-2 font_size_32 create_test_font_size">
-            Please create your stripe express seller account
-          </h2>
-
-          <button
-            type="button"
-            @click="redirectToStripe"
-            class="btn btn-primary text-white mt-4"
-            :disabled="isDisable"
-          >
-            <span class="font_size_16"> Connect </span>
-          </button>
-        </div>
-      </div>
     </div>
 
     <!-- Start Modal -->

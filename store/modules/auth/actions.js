@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
+import { Storage } from '@capacitor/storage';
 
 import { getUser } from '~/graphql/queries';
 import { createUser } from '~/graphql/mutations';
@@ -227,6 +228,10 @@ export default {
       commit('testManagement/setFeaturedTests', [], { root: true });
       commit('setUserGroup', null);
       commit('SET_LOADER', false, { root: true });
+      await Storage.set({
+        key: 'isClickedPopupPublish',
+        value: JSON.stringify(false),
+      });
       return true;
     } catch (err) {
       commit('SET_LOADER', false, { root: true });
