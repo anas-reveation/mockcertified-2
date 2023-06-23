@@ -71,8 +71,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateTestManager = /* GraphQL */ `
-  subscription OnCreateTestManager {
-    onCreateTestManager {
+  subscription OnCreateTestManager($user_id: String) {
+    onCreateTestManager(user_id: $user_id) {
       id
       user_id
       created_by {
@@ -116,8 +116,8 @@ export const onCreateTestManager = /* GraphQL */ `
   }
 `;
 export const onUpdateTestManager = /* GraphQL */ `
-  subscription OnUpdateTestManager {
-    onUpdateTestManager {
+  subscription OnUpdateTestManager($user_id: String) {
+    onUpdateTestManager(user_id: $user_id) {
       id
       user_id
       created_by {
@@ -161,8 +161,8 @@ export const onUpdateTestManager = /* GraphQL */ `
   }
 `;
 export const onDeleteTestManager = /* GraphQL */ `
-  subscription OnDeleteTestManager {
-    onDeleteTestManager {
+  subscription OnDeleteTestManager($user_id: String) {
+    onDeleteTestManager(user_id: $user_id) {
       id
       user_id
       created_by {

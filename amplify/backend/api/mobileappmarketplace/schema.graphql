@@ -153,6 +153,7 @@ type AttemptedTest
   @auth(
     rules: [
       { allow: private, operations: [create, read, update] }
+      { allow: public, operations: [read] }
       { allow: groups, groups: ["admins"], operations: [create, read, update, delete] }
     ]
   ) {
@@ -236,6 +237,7 @@ enum AttemptStatus {
 enum TestManagerStatus {
   APPROVED
   IN_PROGRESS
+  PENDING_APPROVAL
   REJECTED
 }
 
@@ -243,6 +245,7 @@ enum SearchFeedbackStatus {
   APPROVED
   IN_PROGRESS
   REJECTED
+  PENDING_APPROVAL
 }
 
 type Query {
@@ -265,3 +268,4 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
+  

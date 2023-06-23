@@ -20,6 +20,11 @@
         <TestQuestion :question="question" :index="index + 1" />
       </div>
     </div>
+    <div v-if="user && testDetail.status == 'PENDING_APPROVAL'" class="col text-end">
+      <button @click="publishFunction('approve')" type="submit" class="btn btn-primary text-white">
+        <span class="font_size_16"> Publish </span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -27,6 +32,7 @@
 import { Share } from '@capacitor/share';
 import { mapState, mapActions } from 'vuex';
 import TestQuestion from '~/components/TestQuestion.vue';
+import { Browser } from '@capacitor/browser';
 
 export default {
   components: { TestQuestion },
@@ -107,6 +113,8 @@ export default {
     return {
       testDetail: null,
       createdTestId: null,
+      isAccountActive: false,
+      stripeUrl: null,
     };
   },
 
@@ -154,12 +162,48 @@ export default {
         options: Object.entries(ordered),
       };
     });
+
+    if (this.user.stripe_seller_id) {
+      await this.getStripeIdStatusLocal();
+      const res = await this.stripeOnboardingLocal();
+      this.stripeUrl = res;
+    } else if (!this.user.stripe_seller_id || this.user.stripe_seller_id == '') {
+      await this.getStripeIdStatusLocal();
+      const res = await this.stripeOnboardingLocal();
+      this.stripeUrl = res;
+      this.isAccountActive = null;
+    }
   },
 
   methods: {
     ...mapActions('testManagement', ['getUserTests', 'getTestIdBySlug']),
-    ...mapActions('seller', ['editTestDescription']),
+    ...mapActions('seller', ['editTestDescription', 'stripeOnboarding', 'getStripeIdStatus']),
+    ...mapActions('admin', ['approveRejectTest']),
 
+    async publishFunction(status) {
+      if (this.user.stripe_seller_id && this.isAccountActive) {
+        console.log(this.user.stripe_seller_id);
+
+        let params = {
+          testId: this.testDetail.id,
+          status,
+        };
+        const res = await this.approveRejectTest(params);
+        if (res) {
+          this.$router.push('/');
+        }
+      } else {
+        let stripeUrl = this.stripeUrl;
+        this.stripeUrl = null;
+        if (stripeUrl) {
+          this.newWindowsOpen(stripeUrl);
+        } else {
+          const res = await this.stripeOnboardingLocal();
+          stripeUrl = res;
+          this.newWindowsOpen(stripeUrl);
+        }
+      }
+    },
     async shareTest() {
       const domainOrigin = window.location.origin;
       const testSlug = this.testSlug;
@@ -175,12 +219,34 @@ export default {
       } catch (_err) {}
     },
 
+    async getStripeIdStatusLocal() {
+      const res = await this.getStripeIdStatus();
+      if (res == 'active') {
+        this.isAccountActive = true;
+      } else if (res == 'notActive') {
+        this.isAccountActive = false;
+      }
+    },
+    async stripeOnboardingLocal() {
+      if (!this.isAccountActive && this.user.stripe_seller_id) {
+        const res = await this.stripeOnboarding();
+        return res;
+      } else if (!this.isAccountActive && !this.user.stripe_seller_id) {
+        const res = await this.stripeOnboarding();
+        return res;
+      }
+    },
+
     async descEditFun(descContent) {
       const obj = {
         testId: this.testDetail.id,
         testDescription: descContent,
       };
       await this.editTestDescription(obj);
+    },
+
+    async newWindowsOpen(url) {
+      await Browser.open({ url: url });
     },
   },
 };
