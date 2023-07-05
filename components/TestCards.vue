@@ -40,7 +40,7 @@
         class="col-7 fs-7 fw-light text-muted font_size_14 test_card_desc"
         v-if="status == 'PENDING_APPROVAL'"
       >
-        Publish
+        <span class="p-1 badge bg-warning"> Not Published </span>
       </a>
     </div>
 

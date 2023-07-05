@@ -68,7 +68,7 @@
               class="text-capitalize py-2 font_size_16 hover_clr list-unstyled"
               :class="$route.path.match(/\/blog\/*/g) && 'bg_blue_color fill_black'"
             >
-              <a href="https://blog.mockcertified.com">
+              <a @click="openBlog" class="cursor_pointer">
                 <span class="p-1 text-white"> Blogs </span>
               </a>
             </li>
@@ -112,15 +112,23 @@
 </template>
 
 <script>
+import { Browser } from '@capacitor/browser';
 export default {
   data: () => ({
     LINKEDIN_LINK: process.env.LINKEDIN_LINK,
     FACEBOOK_LINK: process.env.FACEBOOK_LINK,
     TWITTER_LINK: process.env.TWITTER_LINK,
     INSTAGRAM_LINK: process.env.INSTAGRAM_LINK,
+    BLOG_URL: process.env.BLOG_URL,
     playstoreLink: `https://play.google.com/store/apps/details?id=${process.env.GOOGLE_PLAYSTORE_ID}`,
     appleAppStoreLink: `https://apps.apple.com/in/app/MockCertified/${process.env.APPLE_APP_STORE_ID}`,
   }),
+
+  methods: {
+    async openBlog() {
+      await Browser.open({ url: this.BLOG_URL });
+    },
+  },
 };
 </script>
 
