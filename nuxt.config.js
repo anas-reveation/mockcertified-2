@@ -58,7 +58,7 @@ export default {
     { src: '~/plugins/deepLink.js', mode: 'client' },
     { src: '~/plugins/aos.js', mode: 'client' },
     { src: '~/plugins/sanity-image-builder.js', mode: 'client' },
-    { src: '~/middleware/redirectBlog.js', mode: 'client' },
+    { src: '~/plugins/redirectBlog.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
