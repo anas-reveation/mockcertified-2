@@ -496,6 +496,7 @@ export default {
     return {
       adminRoute: false,
       feebackRoute: false,
+      BLOG_URL: process.env.BLOG_URL,
     };
   },
 
@@ -507,7 +508,7 @@ export default {
   watch: {
     $route: {
       handler: function (newValue) {
-        const adminRoute = 'protected-admin' === newValue.name.substring(0, 15);
+        const adminRoute = 'protected-admin' === newValue?.name?.substring(0, 15);
         this.adminRoute = adminRoute && newValue.name.search('feedback') === -1;
         this.feebackRoute = adminRoute && newValue.name.search('feedback') === 16;
       },
@@ -536,7 +537,7 @@ export default {
     },
 
     async openBlog() {
-      await Browser.open({ url: 'https://blog.mockcertified.com' });
+      await Browser.open({ url: this.BLOG_URL });
     },
 
     closeNav() {
