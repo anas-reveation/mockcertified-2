@@ -363,7 +363,7 @@ export default {
   watch: {
     $route: {
       handler: function (newValue) {
-        const adminRoute = 'protected-admin' === newValue.name.substring(0, 15);
+        const adminRoute = 'protected-admin' === newValue?.name?.substring(0, 15);
         this.adminRoute = adminRoute && newValue.name.search('feedback') === -1;
         this.feebackRoute = adminRoute && newValue.name.search('feedback') === 16;
       },
