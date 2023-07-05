@@ -58,7 +58,7 @@ export default {
     { src: '~/plugins/deepLink.js', mode: 'client' },
     { src: '~/plugins/aos.js', mode: 'client' },
     { src: '~/plugins/sanity-image-builder.js', mode: 'client' },
-    { src: '~/plugins/redirectBlog.js', mode: 'client' },
+    // { src: '~/plugins/redirectBlog.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -92,9 +92,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  router: {
-    middleware: 'redirectBlog',
-  },
+  // router: {
+  //   middleware: 'redirectBlog',
+  // },
 
   generate: {
     fallback: true,
