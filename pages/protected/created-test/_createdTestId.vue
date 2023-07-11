@@ -182,8 +182,6 @@ export default {
 
     async publishFunction(status) {
       if (this.user.stripe_seller_id && this.isAccountActive) {
-        console.log(this.user.stripe_seller_id);
-
         let params = {
           testId: this.testDetail.id,
           status,

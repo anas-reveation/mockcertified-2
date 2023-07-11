@@ -71,4 +71,36 @@
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11202411924"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'AW-11202411924');
+  </script>
+
+  <script>
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('button').innerText.includes('Login')) {
+        gtag('event', 'conversion', {
+          send_to: 'AW-11202411924/wPSbCM3EvbcYEJT73N0p',
+        });
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (
+        e.target.matches(
+          'a[href="mailto:contactus@mockcertified.com"] , [href="mailto:contactus@mockcertified.com"] *',
+        )
+      ) {
+        gtag('event', 'conversion', {
+          send_to: 'AW-11202411924/zVjqCNDEvbcYEJT73N0p',
+        });
+      }
+    });
+  </script>
 </html>

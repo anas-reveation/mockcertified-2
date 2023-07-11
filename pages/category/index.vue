@@ -147,7 +147,17 @@ export default {
       await this.getAllCategories();
     }
     this.allCategories = this.categories;
-    this.allCategoriesFilter = this.allCategories;
+    this.allCategoriesFilter = [...this.allCategories].sort((a, b) => {
+      const nameA = a.name.toLowerCase(); // Convert names to lowercase for case-insensitive sorting
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1; // nameA comes before nameB
+      }
+      if (nameA > nameB) {
+        return 1; // nameA comes after nameB
+      }
+      return 0; // names are equal
+    });
     this.setIsLoaderHidden(false);
   },
 

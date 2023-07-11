@@ -186,7 +186,6 @@ export default {
     this.$nextTick(() => {
       const container = this.$refs.container;
       this.containerHeight = container.scrollHeight;
-      console.log(this.containerHeight);
       if (this.containerHeight < 100) {
         this.seeMoreBtn = false;
       }
@@ -214,7 +213,6 @@ export default {
         await this.descEditFun(this.editTestDescContent);
         this.isEditTestDesc = false;
       }
-      console.log('this.containerHeight', this.containerHeight);
       if (this.containerHeight < 100) {
         this.seeMoreBtn = false;
       } else {
