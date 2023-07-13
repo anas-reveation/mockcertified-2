@@ -25,7 +25,7 @@ export default {
 .scroller p {
   display: inline-block;
   margin: 0;
-  animation: marquee 20s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 @keyframes marquee {
