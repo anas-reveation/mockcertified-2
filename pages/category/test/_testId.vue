@@ -368,12 +368,15 @@ export default {
       if (res) {
         this.newPrice = this.testDetail.price - (this.testDetail.price / 100) * res;
         this.newPrice = parseFloat(this.newPrice).toFixed(2);
-        if (this.newPrice < 1) {
+        if (this.newPrice <= 0) {
           this.newPrice = '0.00';
           return;
         }
+        console.log('this.promocode 1', this.promocode);
         return;
       }
+      console.log('this.promocode 2', this.promocode);
+      this.promocode = '';
       this.newPrice = null;
       return;
     },
