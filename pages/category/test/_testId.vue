@@ -344,9 +344,12 @@ export default {
           confirmButtonText: 'Yes',
         })
         .then(async (result) => {
-          if (result.isConfirmed && this.testDetail.price !== 0) {
+          if (result.isConfirmed && this.testDetail.price !== 0 && this.newPrice !== '0.00') {
             await Browser.open({ url: this.stripeUrl });
-          } else if (result.isConfirmed && this.testDetail.price === 0) {
+          } else if (
+            result.isConfirmed &&
+            (this.testDetail.price === 0 || this.newPrice === '0.00')
+          ) {
             const res = await this.buyTestFree({ testId: this.testDetail.id });
             if (res) {
               this.$router.push('/protected/purchased-test');
@@ -365,8 +368,15 @@ export default {
       if (res) {
         this.newPrice = this.testDetail.price - (this.testDetail.price / 100) * res;
         this.newPrice = parseFloat(this.newPrice).toFixed(2);
+        if (this.newPrice <= 0) {
+          this.newPrice = '0.00';
+          return;
+        }
+        console.log('this.promocode 1', this.promocode);
         return;
       }
+      console.log('this.promocode 2', this.promocode);
+      this.promocode = '';
       this.newPrice = null;
       return;
     },

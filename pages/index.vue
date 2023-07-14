@@ -1,91 +1,93 @@
 <template>
-  <div class="container">
-    <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
+  <div>
+    <HomeScrollerBanner v-if="homeScrollerBannerContent && platform === 'web'" />
+    <div class="container">
+      <SearcBar v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
 
-    <div class="mt-4 mb-4">
-      <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 zoom-125">
-        <div class="home_banner">
-          <div class="d-flex flex-column flex-lg-row justify-content-between">
-            <div class="text-break p-4">
-              <h1 class="fw-bolder me-2 font_size_50 banner_title">
-                Find out amazing <span class="text-primary">Categories for Mock Exam!</span>
-              </h1>
+      <div class="mt-4 mb-4">
+        <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 zoom-125">
+          <div class="home_banner">
+            <div class="d-flex flex-column flex-lg-row justify-content-between">
+              <div class="text-break p-4">
+                <h1 class="fw-bolder me-2 font_size_50 banner_title">
+                  Find out amazing <span class="text-primary">Categories for Mock Exam!</span>
+                </h1>
 
-              <div class="font_size_25 mt-4 banner_subtitle">
-                Check here
-                <span class="text-primary"> mockcertified.com </span>
-              </div>
-            </div>
-
-            <div>
-              <img src="@/assets/images/bannerImage1.svg" alt="banner" class="bannerImage1" />
-            </div>
-          </div>
-        </div>
-
-        <div class="home_banner">
-          <div class="d-flex flex-column flex-lg-row justify-content-around p-4">
-            <div class="mb-3 mb-lg-0">
-              <div class="d-flex flex-column">
-                <div class="fw-bolder me-2 font_size_50 font_size_40 banner_title">
-                  Discover <span class="text-primary">Mockcertifed Platform</span>
-                </div>
-                <div class="mt-4">
-                  <div class="btn home_banner_btn pe-none">Grow more with Mockcertified</div>
+                <div class="font_size_25 mt-4 banner_subtitle">
+                  Check here
+                  <span class="text-primary"> mockcertified.com </span>
                 </div>
               </div>
-            </div>
-            <div class="position-relative">
-              <img
-                src="@/assets/images/thumbnailVideo.png"
-                alt="video"
-                class="video_thumbnail cursor_pointer video-size"
-                data-bs-toggle="modal"
-                data-bs-target="#reviewAnswers"
-                @click="isVideoOn = true"
-              />
+
+              <div>
+                <img src="@/assets/images/bannerImage1.svg" alt="banner" class="bannerImage1" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="home_banner">
-          <div class="d-flex flex-column flex-lg-row justify-content-around">
-            <div class="mb-3 mb-lg-0 p-4">
-              <div class="d-flex flex-column">
-                <div class="fw-bolder me-2 font_size_45 banner_title">
-                  Whether you're a <span class="text-primary">student or a professional!</span>
-                </div>
-                <div class="mt-4">
-                  <div class="btn home_banner_btn pe-none">
-                    we're here to help you achieve your certification goals
+          <div class="home_banner">
+            <div class="d-flex flex-column flex-lg-row justify-content-around p-4">
+              <div class="mb-3 mb-lg-0">
+                <div class="d-flex flex-column">
+                  <div class="fw-bolder me-2 font_size_50 font_size_40 banner_title">
+                    Discover <span class="text-primary">Mockcertifed Platform</span>
+                  </div>
+                  <div class="mt-4">
+                    <div class="btn home_banner_btn pe-none">Grow more with Mockcertified</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <div>
+              <div class="position-relative">
                 <img
-                  src="@/assets/images/bannerImage3.svg"
-                  alt="bannerImage3"
-                  class="bannerImage3"
+                  src="@/assets/images/thumbnailVideo.png"
+                  alt="video"
+                  class="video_thumbnail cursor_pointer video-size"
+                  data-bs-toggle="modal"
+                  data-bs-target="#reviewAnswers"
+                  @click="isVideoOn = true"
                 />
               </div>
             </div>
           </div>
-        </div>
-      </VueSlickCarousel>
-    </div>
 
-    <div>
-      <div class="mt-5 zoom-m">
-        <div class="row justify-content-between">
-          <div class="col">
-            <h2 v-if="isLoaderHidden || !allCategories.length">
-              <AnimatedPlaceholder width="200px" height="10px" />
-            </h2>
-            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
+          <div class="home_banner">
+            <div class="d-flex flex-column flex-lg-row justify-content-around">
+              <div class="mb-3 mb-lg-0 p-4">
+                <div class="d-flex flex-column">
+                  <div class="fw-bolder me-2 font_size_45 banner_title">
+                    Whether you're a <span class="text-primary">student or a professional!</span>
+                  </div>
+                  <div class="mt-4">
+                    <div class="btn home_banner_btn pe-none">
+                      we're here to help you achieve your certification goals
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <img
+                    src="@/assets/images/bannerImage3.svg"
+                    alt="bannerImage3"
+                    class="bannerImage3"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
+        </VueSlickCarousel>
+      </div>
+
+      <div>
+        <div class="mt-5 zoom-m">
+          <div class="row justify-content-between">
+            <div class="col">
+              <h2 v-if="isLoaderHidden || !allCategories.length">
+                <AnimatedPlaceholder width="200px" height="10px" />
+              </h2>
+              <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Categories</h2>
+            </div>
+            <!-- <div v-if="!isLoaderHidden || !allCategories.length" class="col-4 text-end">
             <NuxtLink
               to="/category"
               class="text-primary text-decoration-underline font_size_16 dashboard_title"
@@ -93,190 +95,192 @@
               See all
             </NuxtLink>
           </div> -->
-        </div>
+          </div>
 
-        <div v-if="isLoaderHidden" class="mt-3 scroll_x">
-          <div
-            v-for="i in 5"
-            :key="i"
-            class="rounded-pill d-inline-block text-center m-1 p-2 category_box"
-            data-aos="zoom-in"
-          >
-            <AnimatedPlaceholder width="200px" borderRadius="50px" />
+          <div v-if="isLoaderHidden" class="mt-3 scroll_x">
+            <div
+              v-for="i in 5"
+              :key="i"
+              class="rounded-pill d-inline-block text-center m-1 p-2 category_box"
+              data-aos="zoom-in"
+            >
+              <AnimatedPlaceholder width="200px" borderRadius="50px" />
+            </div>
           </div>
-        </div>
 
-        <div class="mt-3 scroll_x" v-if="!isLoading">
-          <NuxtLink
-            :to="`/category/${category.slug}`"
-            v-for="(category, index) in allCategories"
-            :key="index"
-            class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 m-22 p-2 category_box font_size_14 dashboard_category_title"
-          >
-            <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
-          </NuxtLink>
-          <div
-            v-if="isFetched"
-            class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
-          >
-            <NuxtLink :to="`/category`" class="text-primary"> View More </NuxtLink>
+          <div class="mt-3 scroll_x" v-if="!isLoading">
+            <NuxtLink
+              :to="`/category/${category.slug}`"
+              v-for="(category, index) in allCategories"
+              :key="index"
+              class="bg-tertiary rounded-pill d-inline-block text-center text-capitalize m-1 m-22 p-2 category_box font_size_14 dashboard_category_title"
+            >
+              <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
+            </NuxtLink>
+            <div
+              v-if="isFetched"
+              class="border border-primary rounded-pill d-inline-block text-center text-capitalize m-1 p-2 category_box font_size_14 dashboard_category_title"
+            >
+              <NuxtLink :to="`/category`" class="text-primary"> View More </NuxtLink>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-5">
-        <div class="row justify-content-between">
-          <div class="col">
-            <h2 v-if="isLoaderHidden || !featuredTests.length">
-              <AnimatedPlaceholder width="200px" height="10px" />
-            </h2>
-            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Featured</h2>
-          </div>
-          <!-- <div class="col-4 text-end">
+        <div class="mt-5">
+          <div class="row justify-content-between">
+            <div class="col">
+              <h2 v-if="isLoaderHidden || !featuredTests.length">
+                <AnimatedPlaceholder width="200px" height="10px" />
+              </h2>
+              <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>Featured</h2>
+            </div>
+            <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">See all</NuxtLink>
           </div> -->
-        </div>
-
-        <VueSlickCarousel
-          :arrows="false"
-          :dots="false"
-          v-bind="settings"
-          v-if="isLoaderHidden"
-          class="mt-3"
-        >
-          <div v-for="i in 3" :key="i" class="pe-2 pb-2" data-aos="flip-right">
-            <TestCardsSkeleton />
           </div>
-        </VueSlickCarousel>
 
-        <VueSlickCarousel
-          :arrows="false"
-          :dots="false"
-          v-bind="settings"
-          v-if="featuredTests.length && !isLoading"
-          class="mt-3"
-        >
-          <div
-            v-for="(test, index) in featuredTests"
-            :key="index"
-            class="mb-3 px-2 py-2"
-            data-aos="flip-right"
+          <VueSlickCarousel
+            :arrows="false"
+            :dots="false"
+            v-bind="settings"
+            v-if="isLoaderHidden"
+            class="mt-3"
           >
-            <NuxtLink :to="`/category/test/${test.slug}`" v-if="index <= 2">
-              <TestCards
-                :title="test.title"
-                :price="`$${formatPrice(test.price)}`"
-                :category="test.category.name"
-                :description="`${test.time_limit} mins • ${
-                  test.questions.items.length
-                } questions • ${totalMarks(test.questions.items)} marks`"
-                :dateTime="getDate(test.createdAt)"
-              />
-            </NuxtLink>
-          </div>
-        </VueSlickCarousel>
-      </div>
-      <div class="mt-4">
-        <div class="row justify-content-between">
-          <div class="col">
-            <h2 v-if="isLoaderHidden || !recentlyAddedTests.length">
-              <AnimatedPlaceholder width="200px" height="10px" />
-            </h2>
-            <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>
-              Recently Added
-            </h2>
-          </div>
-          <!-- <div class="col-4 text-end">
+            <div v-for="i in 3" :key="i" class="pe-2 pb-2" data-aos="flip-right">
+              <TestCardsSkeleton />
+            </div>
+          </VueSlickCarousel>
+
+          <VueSlickCarousel
+            :arrows="false"
+            :dots="false"
+            v-bind="settings"
+            v-if="featuredTests.length && !isLoading"
+            class="mt-3"
+          >
+            <div
+              v-for="(test, index) in featuredTests"
+              :key="index"
+              class="mb-3 px-2 py-2"
+              data-aos="flip-right"
+            >
+              <NuxtLink :to="`/category/test/${test.slug}`" v-if="index <= 2">
+                <TestCards
+                  :title="test.title"
+                  :price="`$${formatPrice(test.price)}`"
+                  :category="test.category.name"
+                  :description="`${test.time_limit} mins • ${
+                    test.questions.items.length
+                  } questions • ${totalMarks(test.questions.items)} marks`"
+                  :dateTime="getDate(test.createdAt)"
+                />
+              </NuxtLink>
+            </div>
+          </VueSlickCarousel>
+        </div>
+        <div class="mt-4">
+          <div class="row justify-content-between">
+            <div class="col">
+              <h2 v-if="isLoaderHidden || !recentlyAddedTests.length">
+                <AnimatedPlaceholder width="200px" height="10px" />
+              </h2>
+              <h2 class="text-primary fw-bolder font_size_24 dashboard_title" v-else>
+                Recently Added
+              </h2>
+            </div>
+            <!-- <div class="col-4 text-end">
             <NuxtLink to="/category" class="text-primary fw-bolder font_size_16">
               See all
             </NuxtLink>
           </div> -->
-        </div>
-
-        <VueSlickCarousel
-          :arrows="false"
-          :dots="false"
-          v-bind="settings"
-          v-if="isLoaderHidden"
-          class="mt-3 px-2 py-3"
-        >
-          <div v-for="i in 3" :key="i" class="px-2 pb-2" data-aos="flip-right">
-            <TestCardsSkeleton />
           </div>
-        </VueSlickCarousel>
 
-        <VueSlickCarousel
-          :arrows="false"
-          :dots="false"
-          v-bind="settings"
-          v-if="recentlyAddedTests.length && !isLoading"
-          class="mt-3 px-2 py-3 bg_light_blue"
-        >
-          <div
-            v-for="(test, index) in recentlyAddedTests"
-            :key="index"
-            class="px-sm-2 py-sm-2"
-            data-aos="flip-right"
+          <VueSlickCarousel
+            :arrows="false"
+            :dots="false"
+            v-bind="settings"
+            v-if="isLoaderHidden"
+            class="mt-3 px-2 py-3"
           >
-            <NuxtLink :to="`/category/test/${test.slug}`">
-              <TestCards
-                :title="test.title"
-                :price="`$${formatPrice(test.price)}`"
-                :category="test.category.name"
-                :description="`${test.time_limit} mins • ${
-                  test.questions.items.length
-                } questions • ${totalMarks(test.questions.items)} marks`"
-                :dateTime="getDate(test.createdAt)"
-              />
-            </NuxtLink>
-          </div>
-        </VueSlickCarousel>
-      </div>
-    </div>
+            <div v-for="i in 3" :key="i" class="px-2 pb-2" data-aos="flip-right">
+              <TestCardsSkeleton />
+            </div>
+          </VueSlickCarousel>
 
-    <!-- Start Modal -->
-    <div
-      class="modal fade"
-      id="reviewAnswers"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="reviewAnswersLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content video_modal">
-          <div class="modal-header video_modal">
-            <h5 class="modal-title text-white font_size_30 modal_title" id="reviewAnswersLabel">
-              What is Mockcertified?
-            </h5>
-            <span
-              class="cursor_pointer"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              @click="isVideoOn = false"
+          <VueSlickCarousel
+            :arrows="false"
+            :dots="false"
+            v-bind="settings"
+            v-if="recentlyAddedTests.length && !isLoading"
+            class="mt-3 px-2 py-3 bg_light_blue"
+          >
+            <div
+              v-for="(test, index) in recentlyAddedTests"
+              :key="index"
+              class="px-sm-2 py-sm-2"
+              data-aos="flip-right"
             >
-              <img src="@/assets/images/closeBtn.svg" alt="circle-cross" />
-            </span>
-          </div>
-          <div class="modal-body">
-            <div>
-              <iframe
-                v-if="isVideoOn"
-                id="videoId"
-                class="w-100"
-                style="height: 300px"
-                :src="YOUTUBE_EMBED_LINK_BANNER"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
+              <NuxtLink :to="`/category/test/${test.slug}`">
+                <TestCards
+                  :title="test.title"
+                  :price="`$${formatPrice(test.price)}`"
+                  :category="test.category.name"
+                  :description="`${test.time_limit} mins • ${
+                    test.questions.items.length
+                  } questions • ${totalMarks(test.questions.items)} marks`"
+                  :dateTime="getDate(test.createdAt)"
+                  :authorName="test.created_by.first_name"
+                />
+              </NuxtLink>
+            </div>
+          </VueSlickCarousel>
+        </div>
+      </div>
+
+      <!-- Start Modal -->
+      <div
+        class="modal fade"
+        id="reviewAnswers"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="reviewAnswersLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content video_modal">
+            <div class="modal-header video_modal">
+              <h5 class="modal-title text-white font_size_30 modal_title" id="reviewAnswersLabel">
+                What is Mockcertified?
+              </h5>
+              <span
+                class="cursor_pointer"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                @click="isVideoOn = false"
+              >
+                <img src="@/assets/images/closeBtn.svg" alt="circle-cross" />
+              </span>
+            </div>
+            <div class="modal-body">
+              <div>
+                <iframe
+                  v-if="isVideoOn"
+                  id="videoId"
+                  class="w-100"
+                  style="height: 300px"
+                  :src="YOUTUBE_EMBED_LINK_BANNER"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- End Modal -->
     </div>
-    <!-- End Modal -->
   </div>
 </template>
 
@@ -427,13 +431,23 @@ export default {
   },
 
   computed: {
-    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests']),
+    ...mapState([
+      'isLoading',
+      'isLoaderHidden',
+      'allCreatedTests',
+      'homeScrollerBannerContent',
+      'platform',
+    ]),
     ...mapState('auth', ['user']),
     ...mapState('testManagement', ['featuredTests', 'categories', 'recentlyAddedTests']),
   },
 
   async mounted() {
     this.setIsLoaderHidden(true);
+    if (!this.homeScrollerBannerContent) {
+      await this.getTC_and_PP();
+    }
+
     if (!this.categories.length) {
       await this.getAllCategories();
     }
@@ -472,6 +486,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['getTC_and_PP']),
     ...mapActions('testManagement', [
       'getAllFeaturedTest',
       'getRecentlyAddedTests',
@@ -536,10 +551,12 @@ export default {
 
 .bannerImage1 {
   height: 300px;
+  width: 100%;
 }
 
 .bannerImage3 {
   height: 300px;
+  width: 100%;
 }
 
 .bannerEllipse_position {
@@ -592,6 +609,11 @@ export default {
 
 .bg-tertiary {
   background: #e9eeff;
+}
+
+.video-size {
+  width: 100%;
+  height: 100%;
 }
 
 @include media-breakpoint-up(sm) {

@@ -36,7 +36,7 @@
               closeNav();
             "
           >
-            <img src="@/assets/images/logo.svg" alt="logo" class="me-2" />
+            <img src="@/assets/images/logo.svg" alt="logo" class="me-2 logo_size" />
           </div>
           <div class="col" :class="!user && 'd-flex align-items-center'">
             <div class="text-black fw-bolder text-truncate font_size_16">
@@ -552,6 +552,11 @@ export default {
 
 .icon_color {
   filter: invert(61%) sepia(98%) saturate(2965%) hue-rotate(203deg) brightness(91%) contrast(92%);
+}
+
+.logo_size {
+  width: 40px;
+  height: 40px;
 }
 
 .nav_icon {

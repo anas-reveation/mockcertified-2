@@ -15,6 +15,7 @@ const axios = require('axios');
 const jwt_decode = require('jwt-decode');
 const GRAPHQLAPI_KEY_OUTPUT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT;
 const GRAPHQL_ENDPOINT = process.env.API_MOBILEAPPMARKETPLACE_GRAPHQLAPIENDPOINTOUTPUT;
+const FREETESTCODE = process.env.FREE_TEST_CODE;
 
 exports.handler = async (event) => {
   const gotPromoCode = event.arguments.promocode;
@@ -70,6 +71,15 @@ exports.handler = async (event) => {
   let body;
 
   try {
+    if (FREETESTCODE === gotPromoCode) {
+      statusCode = 200;
+      body = {
+        message: 'success',
+        discount_percentage: 100,
+        status: 200,
+      };
+      return JSON.stringify(body);
+    }
     const response = await axios.post(
       GRAPHQL_ENDPOINT,
       {

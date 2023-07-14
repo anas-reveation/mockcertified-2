@@ -29,7 +29,7 @@
         Category: {{ category }}
       </span>
 
-      <p class="col-7 mb-0 fs-7 fw-light font_size_14 test_card_desc" v-if="authorName">
+      <p class="col-7 mb-0 fs-7 fw-light font_size_14 mb-1 test_card_desc" v-if="authorName">
         By-{{ authorName }}
       </p>
       <p class="col-7 fs-7 fw-light text-muted font_size_14 test_card_desc" v-if="dateTime">

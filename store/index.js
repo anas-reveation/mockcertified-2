@@ -25,6 +25,7 @@ const state = () => {
     termsConditions: null,
     privacyPolicy: null,
     FAQ: null,
+    homeScrollerBannerContent: null,
   };
 };
 
@@ -87,6 +88,7 @@ const mutations = {
     state.termsConditions = payload.termsConditions;
     state.privacyPolicy = payload.privacyPolicy;
     state.FAQ = payload.FAQ;
+    state.homeScrollerBannerContent = payload.homeScrollerBannerContent;
   },
 
   setSelectBySlug(state, slug) {
@@ -124,11 +126,15 @@ const actions = {
       const termsConditions = staticDataArray.find((obj) => obj.name === 'TermsConditions');
       const privacyPolicy = staticDataArray.find((obj) => obj.name === 'PrivacyPolicy');
       const FAQ = staticDataArray.find((obj) => obj.name === 'FAQ');
+      const homeScrollerBannerContent = staticDataArray.find(
+        (obj) => obj.name === 'HomeScrollerBanner',
+      );
       if (termsConditions && privacyPolicy && FAQ) {
         commit('setTC_and_PP', {
           termsConditions: termsConditions.body,
           privacyPolicy: privacyPolicy.body,
           FAQ: FAQ.body,
+          homeScrollerBannerContent: homeScrollerBannerContent.body,
         });
       }
       commit('SET_LOADER', false, { root: true });

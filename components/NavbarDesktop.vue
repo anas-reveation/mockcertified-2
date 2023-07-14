@@ -515,6 +515,7 @@ export default {
 
 .logo_with_name {
   width: 190px;
+  height: 100%;
 }
 
 @include media-breakpoint-between(md, lg) {
