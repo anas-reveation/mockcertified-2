@@ -4,6 +4,52 @@
 
 ```bash
 # install dependencies
+$ npm install -g @aws-amplify/cli
+
+# Close terminal or vs code and reopen
+$ amplify pull --appId {amplify app id} --envName {env name}
+
+# If it doesn't work then install (only if it's not working)
+$ npm i aws-amplify
+
+# It will ask you to login and some information and we have to answer it. Eg: below
+'''
+amplify pull --appId d22h3uk4vvon62 --envName dev
+Opening link: https://us-east-1.admin.amplifyapp.com/admin/d22h3uk4vvon62/dev/verify/?loginVersion=1
+⠼ Confirm login in the browser or manually paste in your CLI login key:
+Successfully received Amplify Studio tokens.
+Amplify AppID found: d22h3uk4vvon62. Amplify App name is: MobileappMarketplace
+Backend environment dev found in Amplify Console app: MobileappMarketplace
+? Choose your default editor: Visual Studio Code
+√ Choose the type of app that you're building · javascript
+Please tell us about your project
+? What javascript framework are you using vue
+? Source Directory Path:  .
+? Distribution Directory Path: dist
+? Build Command:  npm.cmd run-script build
+? Start Command: npm.cmd run-script serve
+? Do you plan on modifying this backend? Yes
+- Fetching updates to backend environment: dev from the cloud.- Building resource auth/mobileappmarketplacee1/ Building resource api/mobileappmarketplace⚠️ Your instance type for OpenSearch is t2.small.elasticsearch, yyou may experience performance issues or data loss. Consider reconfiguring with the instructions here https://docs.amplify.aws/cli/graphql/search-and-result-aggregations/#set-up-opensearch-for-production-environments   
+- Building resource api/mobileappmarketplace⚠️ WARNING: owners may reassign ownership for the following modell(s) and role(s): TestManager: [user_id]. If this is not intentional, you may want to apply field-level authorization rules to these fields. To read more: https://docs.amplify.aws/cli/graphql/authorization-rules/#per-user--owner-based-data-access.
+/ Building resource api/mobileappmarketplace✅ GraphQL schema compiled successfully.
+
+Edit your schema at D:\MC\mock-certified-mobileapp\amplify\backend\api\mobileappmarketplace\schema.graphql or place .graphql files in a directory at D:\MC\mock-certified-mobileapp\amplify\backend\api\mobileappmarketplace\schema
+✔ Successfully pulled backend environment dev from the cloud.
+✅ 
+
+✅ Successfully pulled backend environment dev from the cloud.
+Run 'amplify pull' to sync future upstream changes.
+
+```
+
+```
+NOTE : Before amplify push, pull the latest amplify (check amplify env).
+Branch : develop branch is in "dev"(production) env amplify backend others are in "staged" (non-production).
+```
+
+
+```bash
+# install dependencies
 $ npm install
 
 # serve with hot reload at localhost:3000

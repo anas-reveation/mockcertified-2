@@ -6,7 +6,7 @@
           <div v-if="platform === 'web'" class="col">
             <NuxtLink to="/" class="d-flex flex-column align-items-center justify-content-center">
               <img
-                class="m-1"
+                class="m-1 icon_size"
                 :class="$route.path === '/' && 'active_color'"
                 src="@/assets/images/home.svg"
                 alt="home"
@@ -27,7 +27,7 @@
               :class="$route.path.match(/\/attempted-test\/*/g) && 'bg-primary'"
             /> -->
             <img
-              class="m-1 reattempt_icon_size"
+              class="m-1 reattempt_icon_size icon_size"
               :class="$route.path.match(/\/attempted-test\/*/g) && 'active_color'"
               src="@/assets/images/reattempt_icon.svg"
               alt="reload"
@@ -50,7 +50,7 @@
               :class="$route.path.match(/\/purchased-test\/*/g) && 'bg-primary'"
             /> -->
             <img
-              class="m-1"
+              class="m-1 icon_size"
               :class="$route.path.match(/\/purchased-test\/*/g) && 'active_color'"
               src="@/assets/images/purchase_icon.svg"
               alt="purchase_icon"
@@ -75,7 +75,7 @@
               /> -->
               <div class="position-relative">
                 <img
-                  class="m-1"
+                  class="m-1 icon_size"
                   :class="$route.path.match(/\/account\/*/g) && 'active_color'"
                   src="@/assets/images/wallet.svg"
                   alt="stripe_logo"
@@ -133,6 +133,11 @@ a {
 .active_line {
   width: 40px;
   height: 4px;
+}
+
+.icon_size {
+  width: 26px;
+  height: 26px;
 }
 
 .reattempt_icon_size {

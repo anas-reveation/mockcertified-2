@@ -551,10 +551,12 @@ export default {
 
 .bannerImage1 {
   height: 300px;
+  width: 100%;
 }
 
 .bannerImage3 {
   height: 300px;
+  width: 100%;
 }
 
 .bannerEllipse_position {
@@ -607,6 +609,11 @@ export default {
 
 .bg-tertiary {
   background: #e9eeff;
+}
+
+.video-size {
+  width: 100%;
+  height: 100%;
 }
 
 @include media-breakpoint-up(sm) {
