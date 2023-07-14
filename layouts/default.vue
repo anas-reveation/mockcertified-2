@@ -126,6 +126,11 @@ export default {
 
 /* Proceed to checkout button is related that is in "cart" page */
 
+.alexa_icon {
+  width: 100%;
+  height: 100%;
+}
+
 @include media-breakpoint-down(sm) {
   .footer_height {
     height: 80px;

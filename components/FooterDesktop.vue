@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="p-2 container">
-      <div class="row mt-5 mb-4">
+      <div class="row mt-4 mb-4">
         <div class="col-6">
           <NuxtLink to="/" class="navbar-brand">
             <img src="@/assets/images/logo_with_name.svg" alt="logo" class="footer-logo" />
@@ -12,16 +12,32 @@
           <div class="fw-bolder font_size_14 text-white">
             <span class="ms-1">
               <a :href="LINKEDIN_LINK" target="_blank">
-                <img src="@/assets/images/linkedin_icon.svg" alt="linkedin_icon" class="ms-2" />
+                <img
+                  src="@/assets/images/linkedin_icon.svg"
+                  alt="linkedin_icon"
+                  class="ms-2 social_icon"
+                />
               </a>
               <a :href="FACEBOOK_LINK" target="_blank">
-                <img src="@/assets/images/facebook_icon.svg" alt="facebook_icon" class="ms-2" />
+                <img
+                  src="@/assets/images/facebook_icon.svg"
+                  alt="facebook_icon"
+                  class="ms-2 social_icon"
+                />
               </a>
               <a :href="TWITTER_LINK" target="_blank">
-                <img src="@/assets/images/twitter_icon.svg" alt="twitter_icon" class="ms-2" />
+                <img
+                  src="@/assets/images/twitter_icon.svg"
+                  alt="twitter_icon"
+                  class="ms-2 social_icon"
+                />
               </a>
               <a :href="INSTAGRAM_LINK" target="_blank">
-                <img src="@/assets/images/instagram_icon.svg" alt="instagram_icon" class="ms-2" />
+                <img
+                  src="@/assets/images/instagram_icon.svg"
+                  alt="instagram_icon"
+                  class="ms-2 social_icon"
+                />
               </a>
             </span>
           </div>
@@ -68,9 +84,9 @@
               class="text-capitalize py-2 font_size_16 hover_clr list-unstyled"
               :class="$route.path.match(/\/blog\/*/g) && 'bg_blue_color fill_black'"
             >
-              <a @click="openBlog" class="cursor_pointer">
+              <span @click="openBlog" class="cursor_pointer">
                 <span class="p-1 text-white"> Blogs </span>
-              </a>
+              </span>
             </li>
           </div>
         </div>
@@ -138,8 +154,15 @@ export default {
 }
 .footer-logo {
   width: 180px;
+  height: 100%;
 }
 .icon-s {
   width: 108px;
+  height: 100%;
+}
+
+.social_icon {
+  width: 25px;
+  height: 25px;
 }
 </style>

@@ -31,6 +31,9 @@
     "apimobileappmarketplaceGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apimobileappmarketplaceGraphQLAPIKeyOutput"
+    },
+    "freeTestCode": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -97,6 +100,9 @@
             },
             "API_MOBILEAPPMARKETPLACE_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apimobileappmarketplaceGraphQLAPIKeyOutput"
+            },
+            "FREE_TEST_CODE": {
+              "Ref": "freeTestCode"
             }
           }
         },
