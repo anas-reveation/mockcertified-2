@@ -90,10 +90,10 @@ img {
 }
 
 .arrow_image {
-  width: 150px !important;
-  height: 150px !important;
+  width: 75px;
+  height: 75px;
   top: 20%;
-  left: 40%;
+  left: 39%;
   transform: rotate(30deg);
   z-index: 1 !important;
 }
@@ -120,6 +120,11 @@ img {
   a,
   .contact_number {
     font-size: 16px;
+  }
+  .arrow_image {
+    width: 150px;
+    height: 150px ;
+    left: 40%;
   }
 }
 </style>

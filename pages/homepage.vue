@@ -10,7 +10,7 @@
     <HomeTopSellingTests />
     <HomeFreshPerspectives />
     <HomeLookingFor />
-    <HomeOurClients />
+    <!-- <HomeOurClients /> -->
     <HomeContactUs />
   </div>
 </template>

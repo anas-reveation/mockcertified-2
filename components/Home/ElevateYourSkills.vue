@@ -122,6 +122,7 @@ a {
 .cards img {
   object-fit: cover;
   height: 200px;
+  object-position: bottom;
 }
 
 .cards p {
