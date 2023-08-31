@@ -19,7 +19,7 @@
       "function": {
         "onboardingStripe": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/onboardingStripe-4c306136366d6f2b4435-build.zip",
+          "s3Key": "amplify-builds/onboardingStripe-5633713236634a343561-build.zip",
           "stripePublishableKey": "pk_test_51LO8AEGrqGT9imAkrO0vB9QgNP4AVAY5DzEPidxLxoPBIZogIHpcGHCNOx2GOVtI1IlF4PsP4Sm012NYYp5A2g1S00Hw7dGqMo",
           "stripeSecretKey": "sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E",
           "stripeWebhookSecret": "whsec_1234",
@@ -58,12 +58,12 @@
         },
         "getStripeIdStatus": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/getStripeIdStatus-5537766a3578766c4437-build.zip",
+          "s3Key": "amplify-builds/getStripeIdStatus-554b31626c39644e6933-build.zip",
           "stripeSecretKey": "sk_test_51LO8AEGrqGT9imAkAXWFCNjuhOiON3TuXe5JaTK7RhYT6p1mosPSK4PsPhm5TN6DfHCWbBaYayGaFJ44M1EIwGHJ002BKvTA4E"
         },
         "checkPromoCode": {
           "deploymentBucketName": "amplify-mobileappmarketplace-staged-102218-deployment",
-          "s3Key": "amplify-builds/checkPromoCode-562f544432556266546f-build.zip",
+          "s3Key": "amplify-builds/checkPromoCode-3450374b69742b6f6e66-build.zip",
           "freeTestCode": "FREEMOCK2023"
         }
       },
@@ -143,6 +143,13 @@
           "s3Key": "amplify-builds/checkPromoCode-562f544432556266546f-build.zip",
           "freeTestCode": "FREEMOCK2023"
         }
+      },
+      "api": {
+        "mobileappmarketplace": {}
+      },
+      "storage": {
+        "user": {},
+        "testTable": {}
       }
     }
   }
