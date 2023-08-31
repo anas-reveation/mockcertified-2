@@ -12,15 +12,37 @@
       <!-- CARDS -->
 
       <div class="row">
-        <div v-for="(data, i) in perspectiveData" :key="i" class="col-4 cards">
-          <img class="w-100" :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()" :alt="data?.images[0]?.alt" />
-          <!-- <SanityImage
-              :asset-id="data.images[0].image.asset._ref"
-              auto="format"
-            /> -->
+        <div v-for="(data, i) in perspectiveData" :key="i" class="col-4 d-none d-md-block cards">
+          <img
+            class="w-100 h-100"
+            :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+            :alt="data?.images[0]?.alt"
+          />
           <div class="cards_caption_text">
-            <p class="font_family_aileron card_title">{{data?.title}}</p>
-            <p class="font_family_montserrat">{{data?.subtitle}}</p>
+            <p class="font_family_aileron card_title">{{ data?.title }}</p>
+            <p class="font_family_montserrat">{{ data?.subtitle }}</p>
+          </div>
+        </div>
+
+        <!--Cards Mobile UI -->
+
+        <div
+          v-for="(data, index) in perspectiveData"
+          :key="data?.title"
+           :class="['my-2', 'd-block', 'd-md-none', 'mobile_card', `bg-${index + 1}`]"
+        >
+          <div data-aos="zoom-in-up" class="row align-items-center mobile">
+            <div class="col-5 col-sm-4">
+              <img
+                class="w-100 h-100"
+                :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+                :alt="data?.images[0]?.alt"
+              />
+            </div>
+            <div class="col-7 col-sm-8 px-2 px-sm-4 cards_caption_text">
+              <p class="font_family_aileron card_title">{{ data?.title }}</p>
+              <p class="font_family_montserrat pt-2">{{ data?.subtitle }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +71,18 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
+.mobile_card {
+  &.bg-1 .mobile {
+    background:linear-gradient(to right, rgb(221 228 226), rgb(126 126 126 / 38%));
+  }
+  &.bg-2 .mobile {
+    background: linear-gradient(to right, #edeaeb, #c3bec7);
+  }
+
+  &.bg-3 .mobile {
+    background: linear-gradient(to right, #cad6d673, #cad6d6);
+  }
+}
 .background {
   background: linear-gradient(to top left, #deecdd, #728adc, #f3f1f6, #f3f1f6);
   background-repeat: no-repeat;
@@ -58,51 +92,56 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .head p {
-  font-size: 20px !important;
+  font-size: 20px;
 }
 
-.text_color {
+.head .text_color {
   color: #555657 !important;
 }
-.cards {
-  height: 33rem !important;
-  position: relative;
-}
 
-.cards img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+.cards_caption_text{
+  font-weight: 600;
 }
-.cards_caption_text {
-  background-color: #f2f2f2ab;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  height: 9rem;
-}
-
 .cards_caption_text .card_title {
-  font-size: 16px;
+  font-size: 11px !important;
   font-weight: 500;
 }
 .cards_caption_text p {
-  font-size: 8px !important;
+  font-size: 9px !important;
 }
 
 @include media-breakpoint-up(sm) {
+  .head p {
+    font-size: 25px !important;
+  }
+  .cards_caption_text .card_title {
+    font-size: 17px !important;
+  }
   .cards_caption_text p {
-    font-size: 12px !important;
+    font-size: 15px !important;
   }
 }
 @include media-breakpoint-up(md) {
-  .head h1 {
-    font-size: 55px !important;
+  .cards {
+    height: 20rem !important;
+    position: relative;
+  }
+
+  .head p {
+    font-size: 35px !important;
+  }
+  .cards_caption_text {
+    background-color: #f2f2f2ab;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 9rem;
   }
   .cards_caption_text p {
     font-size: 15px !important;
@@ -112,11 +151,14 @@ export default {
   .head p {
     font-size: 55px !important;
   }
+  .cards_caption_text{
+    padding: 20px;
+  }
   .cards_caption_text p {
     font-size: 15px !important;
   }
   .cards {
-    height: 30rem !important;
+    height: 25rem !important;
   }
   .cards_caption_text {
     height: 7rem;

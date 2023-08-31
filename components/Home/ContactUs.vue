@@ -1,7 +1,7 @@
 <template>
   <div class="background overflow-hidden font_family_dmsans">
     <div class="row position-relative">
-      <div class="col-6 px-5 py-5">
+      <div class="col-12 col-sm-6 px-5 py-5">
         <div class="head position-relative">
           <h1 class="text-start">
             <span class="fw-bold span_blue_color">Need a helping hand?</span>
@@ -29,11 +29,11 @@
         </div>
       </div>
 
-      <div class="position-absolute arrow_image">
+      <div class="position-absolute d-none d-sm-block arrow_image">
         <img class="w-100" src="~/assets/images/arrow.png" alt="" />
       </div>
 
-      <div class="col-6 z_index_1">
+      <div class="col-6 z_index_1 d-none d-sm-block">
         <img class="w-100 h-100" src="~/assets/images/contact-us-image.jpg" alt="" />
       </div>
     </div>
@@ -47,7 +47,7 @@ p {
 }
 a {
   text-decoration: none;
-  font-size: 10px;
+  font-size: 14px;
 }
 .fw-bold {
   font-weight: bold !important;
@@ -59,11 +59,7 @@ a {
   color: black;
 }
 .head h1 {
-  font-size: 18px;
-}
-
-.head p {
-  font-size: 10px;
+  font-size: 26px;
 }
 
 .social_icons {
@@ -73,12 +69,12 @@ a {
 }
 
 .contact_title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .contact_number {
-  font-size: 10px;
+  font-size: 14px;
 }
 .social i {
   font-size: 25px;

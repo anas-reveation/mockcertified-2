@@ -94,7 +94,8 @@ a {
   text-decoration: none !important;
 }
 .background_image {
-  background: url('~/assets/images/elevate.webp');
+  position: relative;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgb(0 0 0 / 61%)), url('~/assets/images/elevate.webp');
   background-size: cover;
   background-position: center;
   overflow: hidden;
