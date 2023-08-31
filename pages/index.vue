@@ -372,6 +372,7 @@ export default {
 
   data() {
     return {
+      // hasRunBefore: false,
       purchasedTestOpen: false,
       attemptedOpen: false,
       noTest: false,
@@ -443,6 +444,10 @@ export default {
   },
 
   async mounted() {
+
+    if (!this.user) {
+      this.$router.push('/homepage');
+    }
     this.setIsLoaderHidden(true);
     if (!this.homeScrollerBannerContent) {
       await this.getTC_and_PP();

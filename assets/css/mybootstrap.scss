@@ -7,6 +7,23 @@
   font-family: 'Nunito';
   src: url('../fonts/nunito.regular.ttf');
 }
+@font-face {
+  font-family: 'Aileron';
+  src: url('~/assets/fonts/Aileron-Black.otf');
+}
+@font-face {
+  font-family: 'DMSans';
+  src: url('~/assets/fonts/DMSans-VariableFont_opsz,wght.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('~/assets/fonts/Montserrat-VariableFont_wght.ttf');
+}
+@font-face {
+  font-family: 'Neue Machina';
+  src: url('~/assets/fonts/NeueMachina-Regular.otf');
+}
+
 // @font-face {
 //   font-family: loraRegular;
 //   src: url('../fonts/Lora-Regular.ttf');
@@ -20,12 +37,31 @@ $font-size-root: 20px;
 $font-weight-bold: 500;
 $font-family-sans-serif: Poppins;
 
+:root {
+  --dark-blue: #3824CD;
+  --light-blue: #5271FF;
+  --light-black: #555657;
+}
+
 .font_family_roboto {
   font-family: 'Roboto';
 }
 
 .font_family_nunito {
   font-family: 'Nunito';
+}
+
+.font_family_aileron {
+  font-family: 'Aileron', sans-serif;
+}
+.font_family_dmsans {
+  font-family: 'DMSans', sans-serif;
+}
+.font_family_montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+.font_family_Neuemachina {
+  font-family: 'Neue Machina', sans-serif;
 }
 
 .font_size_50 {
@@ -92,6 +128,26 @@ $font-family-sans-serif: Poppins;
   -webkit-box-shadow: 2px 2px 20px rgba(103, 130, 225, 0.18);
   -moz-box-shadow: 2px 2px 20px rgba(103, 130, 225, 0.18);
   box-shadow: 2px 2px 20px rgba(103, 130, 225, 0.18);
+}
+
+.blue_button {
+  background-color: var(--light-blue);
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 2rem;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Aileron', sans-serif;
+}
+
+.span_blue_color {
+  color: var(--light-blue) !important;
+}
+
+.z_index_1 {
+  z-index: 1;
 }
 
 // body {
