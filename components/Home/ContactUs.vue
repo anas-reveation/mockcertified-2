@@ -7,13 +7,15 @@
             <span class="fw-bold span_blue_color">Need a helping hand?</span>
           </h1>
           <p>we are one click away!</p>
-          <button class="text-dark my-4 blue_button">Contact us</button>
+          <button class="text-dark my-4 blue_button">
+            <NuxtLink to="/auth/login">Contact us</NuxtLink>
+          </button>
         </div>
         <div class="contacts">
-          <div class="phone">
+          <!-- <div class="phone">
             <p class="contact_title">Phone</p>
             <p class="contact_number">+01 123456789</p>
-          </div>
+          </div> -->
           <div class="email my-4">
             <p class="contact_title">Email</p>
             <a href="mockcertified@gmail.com">mockcertified@gmail.com</a>
@@ -21,9 +23,15 @@
           <div class="social">
             <p class="contact_title mb-3">Social</p>
             <div class="social_icons mt-3">
-              <div><i class="fa-brands fa-facebook-f"></i></div>
-              <div><i class="fa-brands fa-twitter"></i></div>
-              <div><i class="fa-brands fa-instagram"></i></div>
+              <div>
+                <a :href="FACEBOOK_LINK"><i class="fa-brands fa-facebook-f"></i></a>
+              </div>
+              <div>
+                <a :href="TWITTER_LINK"><i class="fa-brands fa-twitter"></i></a>
+              </div>
+              <div>
+                <a :href="INSTAGRAM_LINK"><i class="fa-brands fa-instagram"></i></a>
+              </div>
             </div>
           </div>
         </div>
@@ -39,6 +47,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    // LINKEDIN_LINK: process.env.LINKEDIN_LINK,
+    FACEBOOK_LINK: process.env.FACEBOOK_LINK,
+    TWITTER_LINK: process.env.TWITTER_LINK,
+    INSTAGRAM_LINK: process.env.INSTAGRAM_LINK,
+  }),
+};
+</script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
@@ -119,7 +138,7 @@ img {
   }
   .arrow_image {
     width: 150px;
-    height: 150px ;
+    height: 150px;
     left: 40%;
   }
 }

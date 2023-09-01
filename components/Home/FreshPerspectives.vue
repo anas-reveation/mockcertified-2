@@ -13,15 +13,17 @@
 
       <div class="row">
         <div v-for="(data, i) in perspectiveData" :key="i" class="col-4 d-none d-md-block cards">
-          <img
-            class="w-100 h-100"
-            :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
-            :alt="data?.images[0]?.alt"
-          />
-          <div class="cards_caption_text">
-            <p class="font_family_aileron card_title">{{ data?.title }}</p>
-            <p class="font_family_montserrat">{{ data?.subtitle }}</p>
-          </div>
+          <a :href="data.link" target="_blank">
+            <img
+              class="w-100 h-100"
+              :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+              :alt="data?.images[0]?.alt"
+            />
+            <div class="cards_caption_text">
+              <p class="font_family_aileron card_title">{{ data?.title }}</p>
+              <p class="font_family_montserrat">{{ data?.subtitle }}</p>
+            </div>
+          </a>
         </div>
 
         <!--Cards Mobile UI -->
@@ -29,21 +31,23 @@
         <div
           v-for="(data, index) in perspectiveData"
           :key="data?.title"
-           :class="['my-2', 'd-block', 'd-md-none', 'mobile_card', `bg-${index + 1}`]"
+          :class="['my-2', 'd-block', 'd-md-none', 'mobile_card', `bg-${index + 1}`]"
         >
-          <div data-aos="zoom-in-up" class="row align-items-center mobile">
-            <div class="col-5 col-sm-4">
-              <img
-                class="w-100 h-100"
-                :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
-                :alt="data?.images[0]?.alt"
-              />
+          <a :href="data.link" target="_blank">
+            <div data-aos="zoom-in-up" class="row align-items-center mobile">
+              <div class="col-2 col-sm-2">
+                <img
+                  class="w-100 h-100"
+                  :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+                  :alt="data?.images[0]?.alt"
+                />
+              </div>
+              <div class="col-9 col-sm-8 px-2 px-sm-4 cards_caption_text">
+                <p class="font_family_aileron card_title">{{ data?.title }}</p>
+                <p class="font_family_montserrat pt-2">{{ data?.subtitle }}</p>
+              </div>
             </div>
-            <div class="col-7 col-sm-8 px-2 px-sm-4 cards_caption_text">
-              <p class="font_family_aileron card_title">{{ data?.title }}</p>
-              <p class="font_family_montserrat pt-2">{{ data?.subtitle }}</p>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -61,8 +65,9 @@ export default {
   },
 
   async mounted() {
-    const query = groq`*[_type == "perspective"] | order( _updatedAt asc) {_createdAt, images, title, subtitle }`;
+    const query = groq`*[_type == "perspective"] | order( _updatedAt asc) {_createdAt, images, title, subtitle, link }`;
     this.perspectiveData = await this.$sanity.fetch(query);
+    console.log(this.perspectiveData);
     this.isFetched = true;
   },
 };
@@ -73,7 +78,7 @@ export default {
 
 .mobile_card {
   &.bg-1 .mobile {
-    background:linear-gradient(to right, rgb(221 228 226), rgb(126 126 126 / 38%));
+    background: linear-gradient(to right, rgb(221 228 226), rgb(126 126 126 / 38%));
   }
   &.bg-2 .mobile {
     background: linear-gradient(to right, #edeaeb, #c3bec7);
@@ -103,7 +108,7 @@ export default {
   color: #555657 !important;
 }
 
-.cards_caption_text{
+.cards_caption_text {
   font-weight: 600;
 }
 .cards_caption_text .card_title {
@@ -151,7 +156,7 @@ export default {
   .head p {
     font-size: 55px !important;
   }
-  .cards_caption_text{
+  .cards_caption_text {
     padding: 20px;
   }
   .cards_caption_text p {
