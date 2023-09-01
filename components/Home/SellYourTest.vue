@@ -17,7 +17,7 @@
       <div class="row my-5">
         <div class="col-9 col-sm-6 col-lg-4 col-xxl-3 mx-auto mx-lg-0">
           <button class="blue_button fw-bold">
-            <nuxt-link class="text-light" to="/auth/signup">REGISTER NOW TO GET STARTED</nuxt-link>
+            <NuxtLink class="text-light" to="/auth/signup">REGISTER NOW TO GET STARTED</NuxtLink>
           </button>
         </div>
       </div>

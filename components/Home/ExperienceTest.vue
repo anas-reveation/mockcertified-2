@@ -25,7 +25,7 @@
           </div>
 
           <div>
-            <button class="blue_button">See More</button>
+            <NuxtLink class="blue_button" to="/auth/login">See More</NuxtLink>
           </div>
         </div>
       </div>

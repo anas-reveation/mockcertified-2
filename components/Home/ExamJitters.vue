@@ -39,7 +39,7 @@
           </div>
 
           <div class="my-5">
-            <button class="explore_btn">Explore Now</button>
+            <NuxtLink class="explore_btn" to="/auth/login">Explore Now</NuxtLink>
           </div>
         </div>
       </div>
@@ -76,10 +76,6 @@ svg {
   width: 150%;
 }
 
-a {
-  text-decoration: none;
-  color: #5271ff !important;
-}
 p {
   font-size: 18px;
   line-height: 1.2;
