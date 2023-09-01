@@ -67,7 +67,6 @@ export default {
   async mounted() {
     const query = groq`*[_type == "perspective"] | order( _updatedAt asc) {_createdAt, images, title, subtitle, link }`;
     this.perspectiveData = await this.$sanity.fetch(query);
-    console.log(this.perspectiveData);
     this.isFetched = true;
   },
 };
