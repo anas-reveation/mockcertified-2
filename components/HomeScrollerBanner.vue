@@ -1,6 +1,6 @@
 <template>
   <div class="alert alert-primary" role="alert">
-    <div class="scroller">
+    <div class="scroller text-center font_size_12">
       <p v-html="homeScrollerBannerContent"></p>
     </div>
   </div>
@@ -17,7 +17,7 @@ export default {
 
 <style scoped lang="scss">
 .scroller {
-  white-space: nowrap;
+  // white-space: nowrap;
   overflow: hidden;
   width: 100%;
 }
@@ -25,15 +25,15 @@ export default {
 .scroller p {
   display: inline-block;
   margin: 0;
-  animation: marquee 30s linear infinite;
+  // animation: marquee 30s linear infinite;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
+// @keyframes marquee {
+//   0% {
+//     transform: translateX(100%);
+//   }
+//   100% {
+//     transform: translateX(-100%);
+//   }
+// }
 </style>

@@ -143,6 +143,13 @@
           "s3Key": "amplify-builds/checkPromoCode-562f544432556266546f-build.zip",
           "freeTestCode": "FREEMOCK2023"
         }
+      },
+      "api": {
+        "mobileappmarketplace": {}
+      },
+      "storage": {
+        "user": {},
+        "testTable": {}
       }
     }
   }

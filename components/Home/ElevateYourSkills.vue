@@ -17,8 +17,8 @@
           class="col-12 col-lg-4 text-center text-lg-end my-5 my-lg-0 auth_btn"
         >
           <div>
-            <nuxt-link to="/auth/signup" class="mx-2 blue_button button">Sign Up!</nuxt-link>
-            <nuxt-link to="/auth/login" class="blue_button button">Login</nuxt-link>
+            <NuxtLink to="/auth/signup" class="mx-2 blue_button button">Sign Up!</NuxtLink>
+            <NuxtLink to="/auth/login" class="blue_button button">Login</NuxtLink>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@
           class="col-12 col-lg-6 d-flex justify-content-end align-items-end text-end mt-5 mt-lg-0"
         >
           <div>
-            <button class="blue_button explore_more">Explore More</button>
+            <NuxtLink to="/auth/login" class="blue_button explore_more">Explore More</NuxtLink>
             <p class="font_family_aileron bottom_text">
               Only at <span class="span_blue_color">Mockcertified</span>.
             </p>
