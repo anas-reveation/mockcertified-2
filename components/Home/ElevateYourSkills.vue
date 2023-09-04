@@ -35,16 +35,18 @@
               :key="i"
               class="col-8 col-md-4 mt-3 mx-auto cards"
             >
-              <div>
-                <img
-                  class="w-100"
-                  :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
-                  :alt="data?.images[0]?.alt"
-                />
-                <p class="font_family_aileron px-3 text-center py-3 fw-bold text-dark">
-                  {{ data?.title }}
-                </p>
-              </div>
+              <NuxtLink to="/category">
+                <div>
+                  <img
+                    class="w-100"
+                    :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+                    :alt="data?.images[0]?.alt"
+                  />
+                  <p class="font_family_aileron px-3 text-center py-3 fw-bold text-dark">
+                    {{ data?.title }}
+                  </p>
+                </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -93,9 +95,13 @@ export default {
 a {
   text-decoration: none !important;
 }
+a:hover {
+  color: black;
+}
 .background_image {
   position: relative;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(0 0 0 / 61%)), url('~/assets/images/elevate.webp');
+  background: linear-gradient(rgba(255, 255, 255, 0), rgb(0 0 0 / 61%)),
+    url('~/assets/images/elevate.webp');
   background-size: cover;
   background-position: center;
   overflow: hidden;

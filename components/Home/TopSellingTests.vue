@@ -15,35 +15,43 @@
         <div class="row">
           <div class="col-12 col-md-4">
             <div class="count"><p>01</p></div>
-            <div>
-              <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
-            </div>
-            <div class="caption my-3 font_family_montserrat"><p>PROJECT MANAGEMENT</p></div>
-            <div class="sub_caption font_family_montserrat">
-              <p>Score a 75 on this and you know you are project management ready!</p>
-            </div>
+            <NuxtLink to="/category">
+              <div>
+                <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
+              </div>
+              <div class="caption my-3 font_family_montserrat"><p>PROJECT MANAGEMENT</p></div>
+              <div class="sub_caption font_family_montserrat">
+                <p>Score a 75 on this and you know you are project management ready!</p>
+              </div>
+            </NuxtLink>
           </div>
 
           <div class="col-12 col-md-4">
             <div class="count"><p>02</p></div>
-            <div>
-              <img class="w-100" src="~/assets/images/cloud.webp" alt="" />
-            </div>
-            <div class="caption my-3 font_family_montserrat"><p>MICROSOFT AZURE ARCHITECT</p></div>
-            <div class="sub_caption font_family_montserrat">
-              <p>With Updated 2023 exam format.</p>
-            </div>
+            <NuxtLink to="/category">
+              <div>
+                <img class="w-100" src="~/assets/images/cloud.webp" alt="" />
+              </div>
+              <div class="caption my-3 font_family_montserrat">
+                <p>MICROSOFT AZURE ARCHITECT</p>
+              </div>
+              <div class="sub_caption font_family_montserrat">
+                <p>With Updated 2023 exam format.</p>
+              </div>
+            </NuxtLink>
           </div>
 
           <div class="col-12 col-md-4">
             <div class="count"><p>03</p></div>
-            <div>
-              <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
-            </div>
-            <div class="caption my-3 font_family_montserrat"><p>PROJECT MANAGEMENT</p></div>
-            <div class="sub_caption font_family_montserrat">
-              <p>Take this effective cloud architect exam to know if you're a fit or not!</p>
-            </div>
+            <NuxtLink to="/category">
+              <div>
+                <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
+              </div>
+              <div class="caption my-3 font_family_montserrat"><p>GOOGLE CLOUD ARCHITECT</p></div>
+              <div class="sub_caption font_family_montserrat">
+                <p>Take this effective cloud architect exam to know if you're a fit or not!</p>
+              </div>
+            </NuxtLink>
           </div>
         </div>
       </div>

@@ -6,16 +6,26 @@
       </div>
 
       <div class="row gx-1 gx-lg-3 gx-xl-5">
-        <div class="col-12 col-md-4 my-4 my-lg-0 cards_container" v-for="(data, i) in lookingForData" :key="i">
-          <div data-aos="flip-left" class="cards">
-            <div>
-              <img class="w-100" :src="$urlFor(data?.image?.asset?._ref).url()" :alt="data?.image?.alt" />
+        <div
+          class="col-12 col-md-4 my-4 my-lg-0 cards_container"
+          v-for="(data, i) in lookingForData"
+          :key="i"
+        >
+          <NuxtLink to="/category">
+            <div data-aos="flip-left" class="cards">
+              <div>
+                <img
+                  class="w-100"
+                  :src="$urlFor(data?.image?.asset?._ref).url()"
+                  :alt="data?.image?.alt"
+                />
+              </div>
+              <div class="card_text_container">
+                <p class="card_title font_family_Neuemachina fw-bold">{{ data.title }}</p>
+                <p class="card_subtitle">{{ data.subtitle }}</p>
+              </div>
             </div>
-            <div class="card_text_container">
-              <p class="card_title font_family_Neuemachina fw-bold">{{ data.title }}</p>
-              <p class="card_subtitle">{{ data.subtitle }}</p>
-            </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -71,7 +81,7 @@ export default {
   text-align: center;
 }
 
-.cards_container:nth-child(2) .card_text_container{
+.cards_container:nth-child(2) .card_text_container {
   background: white !important;
 }
 
