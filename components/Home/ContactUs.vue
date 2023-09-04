@@ -18,7 +18,7 @@
           </div> -->
           <div class="email my-4">
             <p class="contact_title">Email</p>
-            <a href="mockcertified@gmail.com">mockcertified@gmail.com</a>
+            <a :href="`mailto:${ADMIN_EMAIL}`">{{ADMIN_EMAIL}}</a>
           </div>
           <div class="social">
             <p class="contact_title mb-3">Social</p>
@@ -55,6 +55,7 @@ export default {
     FACEBOOK_LINK: process.env.FACEBOOK_LINK,
     TWITTER_LINK: process.env.TWITTER_LINK,
     INSTAGRAM_LINK: process.env.INSTAGRAM_LINK,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
   }),
 };
 </script>
