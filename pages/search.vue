@@ -254,7 +254,7 @@ export default {
     this.searchQuery = this.$route.query.search_query ? this.$route.query.search_query : null;
     if (!this.searchQuery) {
       this.setIsLoaderHidden(false);
-      this.$router.push('/');
+      this.$router.push('/homepage');
       return;
     }
     await this.searchQueryFunc();
@@ -311,7 +311,7 @@ export default {
       });
 
       if (res) {
-        this.$router.push('/');
+        this.$router.push('/homepage');
       }
     },
   },

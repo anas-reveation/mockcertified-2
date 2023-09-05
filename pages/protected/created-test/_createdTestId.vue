@@ -145,7 +145,7 @@ export default {
 
     this.testDetail = this.allCreatedTests.find((test) => test.id === this.createdTestId);
     if (!this.testDetail) {
-      this.$router.push('/');
+      this.$router.push('/homepage');
       return;
     }
 
@@ -188,7 +188,7 @@ export default {
         };
         const res = await this.approveRejectTest(params);
         if (res) {
-          this.$router.push('/');
+          this.$router.push('/homepage');
         }
       } else {
         let stripeUrl = this.stripeUrl;

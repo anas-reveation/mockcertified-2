@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="text-center text-sm-start p-2">
-      <NuxtLink to="/">
+      <NuxtLink to="/homepage">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
     </div>

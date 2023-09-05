@@ -4,7 +4,7 @@
       <div class="row">
         <ClientOnly>
           <div v-if="platform === 'web'" class="col">
-            <NuxtLink to="/" class="d-flex flex-column align-items-center justify-content-center">
+            <NuxtLink to="/homepage" class="d-flex flex-column align-items-center justify-content-center">
               <img
                 class="m-1 icon_size"
                 :class="$route.path === '/' && 'active_color'"
@@ -109,7 +109,7 @@ export default {
     async userLogOut() {
       const res = await this.logout();
       if (res) {
-        this.$router.push('/auth/login');
+        this.$router.push('/');
       }
     },
   },

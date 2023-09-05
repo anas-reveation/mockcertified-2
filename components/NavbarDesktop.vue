@@ -4,7 +4,7 @@
     @mouseleave="(userDropDown = false), (settingsDropDown = false)"
   >
     <div class="container px-4">
-      <NuxtLink to="/" class="navbar-brand">
+      <NuxtLink to="/homepage" class="navbar-brand">
         <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
       </NuxtLink>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -12,7 +12,7 @@
           <ClientOnly>
             <NuxtLink
               v-if="platform === 'web'"
-              to="/"
+              to="/homepage"
               class="d-flex flex-column align-items-center justify-content-center ms-5"
             >
               <img
@@ -379,7 +379,7 @@ export default {
     async userLogOut() {
       const res = await this.logout();
       if (res) {
-        this.$router.push('/auth/login');
+        this.$router.push('/');
       }
     },
 
