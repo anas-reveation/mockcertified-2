@@ -202,7 +202,7 @@ export default {
 
     if (!this.testDetail) {
       this.setIsLoaderHidden(false);
-      this.$router.push('/');
+      this.$router.push('/homepage');
       return;
     }
 

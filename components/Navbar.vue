@@ -524,7 +524,7 @@ export default {
     async userLogOut() {
       const res = await this.logout();
       if (res) {
-        this.$router.push('/auth/login');
+        this.$router.push('/');
       }
     },
 
