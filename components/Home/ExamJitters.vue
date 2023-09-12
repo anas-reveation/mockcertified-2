@@ -16,7 +16,7 @@
               </mask>
               <image
                 class="img_width"
-                xlink:href="~/assets/images/jitters-bg.jpg"
+                xlink:href="~/assets/images/jitters-bg.webp"
                 mask="url(#imageMask)"
               />
             </svg>

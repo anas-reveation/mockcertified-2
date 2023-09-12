@@ -11,6 +11,7 @@
 
       <!-- CARDS -->
 
+      
       <div class="row">
         <div v-for="(data, i) in perspectiveData" :key="i" class="col-4 d-none d-md-block cards">
           <a :href="data.link" target="_blank">

@@ -17,7 +17,7 @@
             <div class="count"><p>01</p></div>
             <NuxtLink to="/category">
               <div>
-                <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
+                <img class="w-100" src="~/assets/images/project-management.webp" alt="pm" />
               </div>
               <div class="caption my-3 font_family_montserrat"><p>PROJECT MANAGEMENT</p></div>
               <div class="sub_caption font_family_montserrat">
@@ -30,7 +30,7 @@
             <div class="count"><p>02</p></div>
             <NuxtLink to="/category">
               <div>
-                <img class="w-100" src="~/assets/images/cloud.webp" alt="" />
+                <img class="w-100" src="~/assets/images/cloud.webp" alt="pm" />
               </div>
               <div class="caption my-3 font_family_montserrat">
                 <p>MICROSOFT AZURE ARCHITECT</p>
@@ -45,7 +45,12 @@
             <div class="count"><p>03</p></div>
             <NuxtLink to="/category">
               <div>
-                <img class="w-100" src="~/assets/images/project-management.webp" alt="" />
+                <img
+                  class="w-100"
+                  src="~/assets/images/project-management.webp"
+                  alt="pm"
+                  
+                />
               </div>
               <div class="caption my-3 font_family_montserrat"><p>GOOGLE CLOUD ARCHITECT</p></div>
               <div class="sub_caption font_family_montserrat">

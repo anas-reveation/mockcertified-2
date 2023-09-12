@@ -18,7 +18,7 @@
           </div> -->
           <div class="email my-4">
             <p class="contact_title">Email</p>
-            <a :href="`mailto:${ADMIN_EMAIL}`">{{ADMIN_EMAIL}}</a>
+            <a :href="`mailto:${ADMIN_EMAIL}`">{{ ADMIN_EMAIL }}</a>
           </div>
           <div class="social">
             <p class="contact_title mb-3">Social</p>
@@ -38,11 +38,15 @@
       </div>
 
       <div class="position-absolute d-none d-sm-block arrow_image">
-        <img class="w-100" src="~/assets/images/arrow.png" alt="" />
+        <img class="w-100" src="~/assets/images/arrow.webp" alt="arrow" />
       </div>
 
       <div class="col-6 z_index_1 d-none d-sm-block">
-        <img class="w-100 h-100" src="~/assets/images/contact-us-image.jpg" alt="" />
+        <img
+          class="w-100 h-100"
+          src="~/assets/images/contact-us-image.webp"
+          alt="contact-us"
+        />
       </div>
     </div>
   </div>
@@ -51,7 +55,6 @@
 <script>
 export default {
   data: () => ({
-    // LINKEDIN_LINK: process.env.LINKEDIN_LINK,
     FACEBOOK_LINK: process.env.FACEBOOK_LINK,
     TWITTER_LINK: process.env.TWITTER_LINK,
     INSTAGRAM_LINK: process.env.INSTAGRAM_LINK,

@@ -132,7 +132,6 @@
             <NuxtLink
               :to="`/protected/test/${testDetail.slug}`"
               class="btn btn-primary text-white"
-              @click=""
             >
               Start Again
             </NuxtLink>

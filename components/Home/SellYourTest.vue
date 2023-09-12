@@ -35,7 +35,7 @@
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
 .background_image {
-  background: url('~/assets/images/sell.png');
+  background: url('~/assets/images/sell.webp');
   background-size: cover;
   background-position: center;
   width: 100%;
