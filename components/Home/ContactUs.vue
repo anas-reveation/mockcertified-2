@@ -24,13 +24,13 @@
             <p class="contact_title mb-3">Social</p>
             <div class="social_icons mt-3">
               <div>
-                <a :href="FACEBOOK_LINK"><i class="fa-brands fa-facebook-f"></i></a>
+                <a :href="FACEBOOK_LINK" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
               </div>
               <div>
-                <a :href="TWITTER_LINK"><i class="fa-brands fa-twitter"></i></a>
+                <a :href="TWITTER_LINK" target="_blank"><i class="fa-brands fa-twitter"></i></a>
               </div>
               <div>
-                <a :href="INSTAGRAM_LINK"><i class="fa-brands fa-instagram"></i></a>
+                <a :href="INSTAGRAM_LINK" target="_blank"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>

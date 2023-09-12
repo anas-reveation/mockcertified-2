@@ -131,7 +131,7 @@
 
 <script>
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+// import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { Capacitor } from '@capacitor/core';
 import { Auth } from 'aws-amplify';
 import { Http } from '@capacitor-community/http';
@@ -252,7 +252,7 @@ export default {
   async mounted() {
     if (Capacitor.getPlatform() === 'web') {
       //   GoogleAuth.initialize();
-      await FacebookLogin.initialize({ appId: '743811610173678' });
+      // await FacebookLogin.initialize({ appId: '743811610173678' });
     }
   },
 
@@ -295,47 +295,47 @@ export default {
       }
     },
 
-    async facebookAuth() {
-      // Auth.federatedSignIn({ provider: 'Facebook' });
-      const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
-      const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
-      console.log('result', result);
-      const expiresIn = 3600;
-      const providerName = 'facebook';
-      if (result.accessToken && result.accessToken.userId) {
-        const token = result.accessToken.token;
-        const userId = result.accessToken.userId;
+    // async facebookAuth() {
+    //   // Auth.federatedSignIn({ provider: 'Facebook' });
+    //   const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+    //   const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    //   console.log('result', result);
+    //   const expiresIn = 3600;
+    //   const providerName = 'facebook';
+    //   if (result.accessToken && result.accessToken.userId) {
+    //     const token = result.accessToken.token;
+    //     const userId = result.accessToken.userId;
 
-        const options = {
-          url: `https://graph.facebook.com/${userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token}`,
-          headers: {},
-          data: {},
-        };
+    //     const options = {
+    //       url: `https://graph.facebook.com/${userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token}`,
+    //       headers: {},
+    //       data: {},
+    //     };
 
-        const response = await Http.post(options);
-        console.log('response', response);
+    //     const response = await Http.post(options);
+    //     console.log('response', response);
 
-        const prasedData = JSON.parse(response.data);
-        let user = {
-          email: prasedData.email,
-          name: prasedData.name,
-        };
-        console.log('useruser', user);
-        try {
-          const aa = await Auth.federatedSignIn(
-            providerName,
-            {
-              token,
-              expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
-            },
-            user,
-          );
-          console.log('AAA', aa);
-        } catch (err) {
-          console.log('ERROR2', err);
-        }
-      }
-    },
+    //     const prasedData = JSON.parse(response.data);
+    //     let user = {
+    //       email: prasedData.email,
+    //       name: prasedData.name,
+    //     };
+    //     console.log('useruser', user);
+    //     try {
+    //       const aa = await Auth.federatedSignIn(
+    //         providerName,
+    //         {
+    //           token,
+    //           expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
+    //         },
+    //         user,
+    //       );
+    //       console.log('AAA', aa);
+    //     } catch (err) {
+    //       console.log('ERROR2', err);
+    //     }
+    //   }
+    // },
   },
 };
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <NavbarLogo class="mt-4" />
+    <NavbarAuth />
     <div class="background_color">
       <div class="container">
         <div class="row align-items-center justify-content-between min_height">
           <div class="col-md-6">
-            <div class="row align-items-center">
+            <div class="row align-items-center py-5">
               <div class="col-8">
-                <p class="span_blue_color text-center fw-bold font_family_aileron login_text">
+                <p class="span_blue_color text-center fw-bold font_family_aileron long_text">
                   Sign in, <br />
                   because <span class="text-dark">growth</span> <br />
                   starts here.
@@ -18,11 +18,11 @@
               </div>
             </div>
 
-            <div class="d-md-none">
+            <div class="d-md-none mt-5">
               <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
             </div>
           </div>
-          <div class="col-md-5 text-center">
+          <div class="col-md-6 col-lg-4 text-center bg_light">
             <form class="wrapper width_res" @submit.prevent="loginLocal">
               <div class="my-3 input-data">
                 <input
@@ -109,10 +109,9 @@
               </ClientOnly> -->
             </form>
           </div>
-        </div>
-
-        <div>
-          <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
+          <div class="d-none d-md-block">
+            <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
+          </div>
         </div>
       </div>
     </div>
@@ -121,10 +120,10 @@
 
 <script>
 // import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+// import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { Capacitor } from '@capacitor/core';
 import { Auth } from 'aws-amplify';
-import { Http } from '@capacitor-community/http';
+// import { Http } from '@capacitor-community/http';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -242,7 +241,7 @@ export default {
   async mounted() {
     if (Capacitor.getPlatform() === 'web') {
       //   GoogleAuth.initialize();
-      await FacebookLogin.initialize({ appId: '743811610173678' });
+      // await FacebookLogin.initialize({ appId: '743811610173678' });
     }
   },
 
@@ -259,73 +258,73 @@ export default {
       }
     },
 
-    async googleAuth() {
-      // Auth.federatedSignIn({ provider: 'Google' });
-      let googleUser = await GoogleAuth.signIn();
-      console.log('googleUser', googleUser);
-      const token = googleUser.authentication.idToken;
-      let user = {
-        email: googleUser.email,
-        name: googleUser.name,
-      };
-      const expiresIn = 3600;
-      const providerName = 'google';
+    // async googleAuth() {
+    //   // Auth.federatedSignIn({ provider: 'Google' });
+    //   let googleUser = await GoogleAuth.signIn();
+    //   console.log('googleUser', googleUser);
+    //   const token = googleUser.authentication.idToken;
+    //   let user = {
+    //     email: googleUser.email,
+    //     name: googleUser.name,
+    //   };
+    //   const expiresIn = 3600;
+    //   const providerName = 'google';
 
-      try {
-        await Auth.federatedSignIn(
-          providerName,
-          {
-            token,
-            expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
-          },
-          user,
-        );
-      } catch (err) {
-        console.log('ERROR', err);
-      }
-    },
+    //   try {
+    //     await Auth.federatedSignIn(
+    //       providerName,
+    //       {
+    //         token,
+    //         expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
+    //       },
+    //       user,
+    //     );
+    //   } catch (err) {
+    //     console.log('ERROR', err);
+    //   }
+    // },
 
-    async facebookAuth() {
-      // Auth.federatedSignIn({ provider: 'Facebook' });
-      const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
-      const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
-      console.log('result', result);
-      const expiresIn = 3600;
-      const providerName = 'facebook';
-      if (result.accessToken && result.accessToken.userId) {
-        const token = result.accessToken.token;
-        const userId = result.accessToken.userId;
+    // async facebookAuth() {
+    //   // Auth.federatedSignIn({ provider: 'Facebook' });
+    //   const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+    //   const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    //   console.log('result', result);
+    //   const expiresIn = 3600;
+    //   const providerName = 'facebook';
+    //   if (result.accessToken && result.accessToken.userId) {
+    //     const token = result.accessToken.token;
+    //     const userId = result.accessToken.userId;
 
-        const options = {
-          url: `https://graph.facebook.com/${userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token}`,
-          headers: {},
-          data: {},
-        };
+    //     const options = {
+    //       url: `https://graph.facebook.com/${userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token}`,
+    //       headers: {},
+    //       data: {},
+    //     };
 
-        const response = await Http.post(options);
-        console.log('response', response);
+    //     const response = await Http.post(options);
+    //     console.log('response', response);
 
-        const prasedData = JSON.parse(response.data);
-        let user = {
-          email: prasedData.email,
-          name: prasedData.name,
-        };
-        console.log('useruser', user);
-        try {
-          const aa = await Auth.federatedSignIn(
-            providerName,
-            {
-              token,
-              expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
-            },
-            user,
-          );
-          console.log('AAA', aa);
-        } catch (err) {
-          console.log('ERROR2', err);
-        }
-      }
-    },
+    //     const prasedData = JSON.parse(response.data);
+    //     let user = {
+    //       email: prasedData.email,
+    //       name: prasedData.name,
+    //     };
+    //     console.log('useruser', user);
+    //     try {
+    //       const aa = await Auth.federatedSignIn(
+    //         providerName,
+    //         {
+    //           token,
+    //           expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
+    //         },
+    //         user,
+    //       );
+    //       console.log('AAA', aa);
+    //     } catch (err) {
+    //       console.log('ERROR2', err);
+    //     }
+    //   }
+    // },
   },
 };
 </script>
@@ -333,15 +332,16 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 .background_color {
-  background: linear-gradient(to right, #dee2fb, white);
+  background: linear-gradient(to right, #dee2fb, #fafafa);
 }
-.login_text {
-  font-size: 40px;
+.long_text {
+  font-size: 25px;
 }
 
 input {
   background: #e2e3e8;
   width: 100%;
+  color: #7b7777;
 }
 
 .eye {
@@ -353,17 +353,17 @@ input {
   cursor: pointer;
 }
 
-.min_height{
-  min-height: 100vh;
+.min_height {
+  min-height: 90vh;
 }
 
-.mockcertified_text{
-  font-size: 45px ;
-
+.mockcertified_text {
+  font-size: 30px;
+  background-color: linear-gradient(to right, #1abe36, #fafafa);
 }
 
-.btn{
-  background: #5271FF;
+.btn {
+  background: #5271ff;
 }
 
 @include media-breakpoint-up(sm) {
@@ -377,11 +377,33 @@ input {
     width: 55px;
     height: 55px;
   }
+  .long_text {
+    font-size: 26px;
+  }
+  .mockcertified_text {
+    font-size: 40px;
+  }
 }
 @include media-breakpoint-up(lg) {
   .social_icon_container {
     width: 65px;
     height: 65px;
+  }
+  .long_text {
+    font-size: 36px;
+  }
+  .mockcertified_text {
+    font-size: 40px;
+  }
+}
+@include media-breakpoint-up(xl) {
+  .long_text {
+    font-size: 43px;
+  }
+}
+@include media-breakpoint-up(xxl) {
+  .long_text {
+    font-size: 50px;
   }
 }
 </style>
