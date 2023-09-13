@@ -3,27 +3,31 @@
     <NavbarAuth />
     <div class="background_color">
       <div class="container">
-        <div class="row align-items-center justify-content-between min_height">
-          <div class="col-md-6">
-            <div class="row align-items-center py-5">
+        <div class="row align-items-center justify-content-between position-relative min_height">
+          <div class="col-md-7 mt-5 mt-md-0">
+            <div class="row align-items-center position-relative">
               <div class="col-8">
                 <p class="span_blue_color text-center fw-bold font_family_aileron long_text">
-                  Sign in, <br />
+                  Sign up, <br />
                   because <span class="text-dark">growth</span> <br />
                   starts here.
                 </p>
               </div>
-              <div class="col-4">
-                <img class="w-100 object-fit-cover" src="~/assets/images/arrow.webp" alt="login" />
+              <div class="col-4 img_container">
+                <img class="w-100" src="~/assets/images/rocket.webp" alt="signup" />
               </div>
             </div>
 
             <div class="d-md-none mt-5">
               <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
             </div>
+            <div class="d-none d-md-block position-absolute bottom-0">
+              <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
+            </div>
           </div>
 
-          <div class="col-md-6 col-lg-4">
+          <div class="col-md-5 col-lg-4">
+            <h1 class="text-center span_blue_color py-3 fw-bold font_family_aileron">Sign Up</h1>
             <form
               v-if="step === steps.register"
               class="wrapper width_res"
@@ -165,7 +169,7 @@
               <div class="text-center mt-4">
                 <button
                   type="submit"
-                  class="btn btn-primary text-white fw-bold px-3 login_btn_width auth_font_size"
+                  class="btn text-white rounded-pill fw-bold px-3 login_btn_width auth_font_size"
                   :disabled="isDisabled"
                 >
                   <!-- :class="isDisabled ? 'border-grey' : 'btn-primary text-white'" -->
@@ -195,12 +199,12 @@
           Facebook
         </button> -->
 
-                <p class="mt-4 text-center auth_font_size">
+                <!-- <p class="mt-4 text-center auth_font_size">
                   Already have an account ?
                   <NuxtLink to="/auth/login" class="text-primary text-decoration-none fw-bolder">
                     Login
                   </NuxtLink>
-                </p>
+                </p> -->
               </div>
             </form>
 
@@ -246,10 +250,6 @@
               </div>
             </form>
           </div>
-
-          <div class="d-none d-md-block">
-            <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
-          </div>
         </div>
       </div>
     </div>
@@ -273,7 +273,7 @@ const steps = {
 };
 
 export default {
-  layout: 'homePageLayout',
+  layout: 'authLayout',
   middleware: ['authenticated'],
 
   head() {
@@ -316,36 +316,6 @@ export default {
           hid: 'og:url',
           property: 'og:url',
           content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-        },
-
-        // Twitter Meta Tags
-        { name: 'twitter:card', content: 'summary_large_image' },
-        {
-          hid: 'twitter:title',
-          name: 'twitter:title',
-          content: 'Signup - Mockcertified App',
-        },
-        {
-          hid: 'twitter:description',
-          name: 'twitter:description',
-          content:
-            'Create an account on our Mockcertified App and browse different categories of mock exams to suit your preferences, and begin your test.',
-        },
-
-        {
-          hid: 'twitter:domain',
-          property: 'twitter:domain',
-          content: process.env.DOMAIN,
-        },
-        {
-          hid: 'twitter:url',
-          property: 'twitter:url',
-          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
-        },
-        {
-          hid: 'twitter:image',
-          name: 'twitter:image',
-          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
         },
       ],
     };
@@ -683,6 +653,9 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
+.img_container {
+  transform: scale(2.5);
+}
 .min_height {
   min-height: 100vh;
 }
@@ -709,7 +682,7 @@ input[type='checkbox'] {
   .long_text {
     font-size: 26px;
   }
-    .mockcertified_text {
+  .mockcertified_text {
     font-size: 40px;
   }
 }
@@ -721,7 +694,7 @@ input[type='checkbox'] {
   .long_text {
     font-size: 36px;
   }
-    .mockcertified_text {
+  .mockcertified_text {
     font-size: 40px;
   }
 }

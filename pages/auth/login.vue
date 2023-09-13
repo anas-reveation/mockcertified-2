@@ -262,7 +262,6 @@ export default {
     async loginLocal() {
       const res = await this.login(this.form);
       if (res && this.redirectUrl) {
-        console.log(this.redirectUrl)
         this.$router.push(this.redirectUrl);
       } else if (res) {
         this.$router.push('/homepage');

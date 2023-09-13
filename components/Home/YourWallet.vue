@@ -68,7 +68,6 @@ export default {
   async mounted() {
     const query = groq`*[_type == "wallet"] | order( _updatedAt asc){ inputTitle, images }`;
     this.walletData = await this.$sanity.fetch(query);
-    console.log(this.walletData)
     this.walletInputText = this.walletData[0]?.inputTitle;
     this.isFetched = true;
   },

@@ -1,50 +1,43 @@
 <template>
-  <div class="container d-flex align-items-center justify-content-between py-3">
-    <div>
-      <NuxtLink to="/homepage">
-        <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
-      </NuxtLink>
-    </div>
-    <div class="d-flex align-items-center justify-content-center gap">
+  <nav>
+    <div class="container d-flex align-items-center justify-content-between py-3">
       <div>
-        <button
-          class="rounded-pill py-0 py-md-2 px-2 px-md-4"
-          :class="{ 'active-button': isLoginActive }"
-        >
-          <NuxtLink to="/login">Login</NuxtLink>
-        </button>
+        <NuxtLink to="/homepage">
+          <img src="@/assets/images/logo_with_name.svg" alt="logo" class="logo_with_name" />
+        </NuxtLink>
       </div>
-      <div>
-        <button
-          class="rounded-pill py-0 py-md-2 px-2 px-md-4 text-nowrap"
-          :class="{ 'active-button': isSignupActive }"
-        >
-          <NuxtLink to="/signup">Sign Up</NuxtLink>
-        </button>
+      <div class="d-flex align-items-center justify-content-center gap">
+        <div>
+          <button
+            class="rounded-pill py-0 py-sm-2 px-2 px-sm-4"
+            :class="$route.path === '/login' && 'active-button'"
+          >
+            <NuxtLink to="/login">Login</NuxtLink>
+          </button>
+        </div>
+        <div>
+          <button
+            class="rounded-pill py-0 py-sm-2 px-2 px-sm-4 text-nowrap"
+            :class="$route.path === '/signup' && 'active-button'"
+          >
+            <NuxtLink to="/signup">Sign Up</NuxtLink>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
-export default {
-  computed: {
-    isLoginActive() {
-      return this.$route.path === '/login';
-    },
-    isSignupActive() {
-      return this.$route.path === '/signup';
-    },
-  },
-};
+
 </script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
-.mobile_logo {
-  width: 200px;
-}
 
+nav{
+  background: linear-gradient(to right, #dee2fb, #fafafa);
+}
 .gap {
   gap: 10px;
 }
@@ -80,12 +73,12 @@ button a {
   }
 }
 
-@include media-breakpoint-up(md) {
-  button a {
-    font-size: 16px;
-  }
+@include media-breakpoint-up(sm) {
   .gap {
     gap: 20px;
+  }
+  button a {
+    font-size: 16px;
   }
 }
 @include media-breakpoint-up(lg) {
