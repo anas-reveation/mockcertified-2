@@ -25,7 +25,7 @@
               <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
             </div>
           </div>
-          <div class="col-12 col-md-5 col-lg-4 text-center min-vh-100">
+          <div class="col-12 col-md-5 col-lg-4 text-center">
             <h1 class="text-center span_blue_color py-3 fw-bold font_family_aileron">Login</h1>
             <form class="wrapper width_res" @submit.prevent="loginLocal">
               <div class="my-3 input-data">
