@@ -14,7 +14,7 @@
                 </p>
               </div>
               <div class="col-4 img_container">
-                <img class="w-100" src="~/assets/images/rocket.webp" alt="signup" />
+                <img class="w-100 h-100" src="~/assets/images/rocket.webp" alt="signup" />
               </div>
             </div>
 
@@ -316,6 +316,36 @@ export default {
           hid: 'og:url',
           property: 'og:url',
           content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Signup - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content:
+            'Create an account on our Mockcertified App and browse different categories of mock exams to suit your preferences, and begin your test.',
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
         },
       ],
     };
@@ -655,9 +685,6 @@ input[type='checkbox'] {
 
 .img_container {
   transform: scale(2.5);
-}
-.min_height {
-  min-height: 100vh;
 }
 
 .mockcertified_text {

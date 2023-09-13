@@ -160,6 +160,35 @@ export default {
           property: 'og:url',
           content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
         },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'Login - Mockcertified App',
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: 'Sign in to your Mockcertified account to use a wide categories of mock test.',
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
       ],
     };
   },
@@ -218,6 +247,74 @@ export default {
         this.$router.push('/homepage');
       }
     },
+
+    // async googleAuth() {
+    //   // Auth.federatedSignIn({ provider: 'Google' });
+    //   let googleUser = await GoogleAuth.signIn();
+    //   console.log('googleUser', googleUser);
+    //   const token = googleUser.authentication.idToken;
+    //   let user = {
+    //     email: googleUser.email,
+    //     name: googleUser.name,
+    //   };
+    //   const expiresIn = 3600;
+    //   const providerName = 'google';
+
+    //   try {
+    //     await Auth.federatedSignIn(
+    //       providerName,
+    //       {
+    //         token,
+    //         expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
+    //       },
+    //       user,
+    //     );
+    //   } catch (err) {
+    //     console.log('ERROR', err);
+    //   }
+    // },
+
+    // async facebookAuth() {
+    //   // Auth.federatedSignIn({ provider: 'Facebook' });
+    //   const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+    //   const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    //   console.log('result', result);
+    //   const expiresIn = 3600;
+    //   const providerName = 'facebook';
+    //   if (result.accessToken && result.accessToken.userId) {
+    //     const token = result.accessToken.token;
+    //     const userId = result.accessToken.userId;
+
+    //     const options = {
+    //       url: `https://graph.facebook.com/${userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token}`,
+    //       headers: {},
+    //       data: {},
+    //     };
+
+    //     const response = await Http.post(options);
+    //     console.log('response', response);
+
+    //     const prasedData = JSON.parse(response.data);
+    //     let user = {
+    //       email: prasedData.email,
+    //       name: prasedData.name,
+    //     };
+    //     console.log('useruser', user);
+    //     try {
+    //       const aa = await Auth.federatedSignIn(
+    //         providerName,
+    //         {
+    //           token,
+    //           expires_at: expiresIn * 1000 + new Date().getTime(), // the expiration timestamp
+    //         },
+    //         user,
+    //       );
+    //       console.log('AAA', aa);
+    //     } catch (err) {
+    //       console.log('ERROR2', err);
+    //     }
+    //   }
+    // },
   },
 };
 </script>
@@ -244,10 +341,6 @@ input {
   width: 35px;
   height: 35px;
   cursor: pointer;
-}
-
-.min_height {
-  min-height: 90vh;
 }
 
 .mockcertified_text {
