@@ -323,6 +323,7 @@ export default {
 @import '~/assets/css/bootstrapBreakpoint.scss';
 .background_color {
   background: linear-gradient(to right, #dee2fb, #fafafa);
+  min-height: 100vh;
 }
 .long_text {
   font-size: 25px;
