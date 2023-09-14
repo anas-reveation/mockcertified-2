@@ -3,9 +3,9 @@
     <NavbarAuth />
     <div class="background_color">
       <div class="container">
-        <div class="row align-items-center justify-content-between position-relative min_height">
+        <div class="row align-items-center justify-content-between min-vh-100">
           <div class="col-md-7 mt-5 mt-md-0">
-            <div class="row align-items-center position-relative">
+            <div class="row align-items-center">
               <div class="col-8">
                 <p class="span_blue_color text-center fw-bold font_family_aileron long_text">
                   Sign up, <br />
@@ -17,17 +17,9 @@
                 <img class="w-100 h-100" src="~/assets/images/rocket.webp" alt="signup" />
               </div>
             </div>
-
-            <div class="d-md-none mt-5">
-              <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
-            </div>
-            <div class="d-none d-md-block position-absolute bottom-0">
-              <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
-            </div>
           </div>
 
-          <div class="col-md-5 col-lg-4">
-            <h1 class="text-center span_blue_color py-3 fw-bold font_family_aileron">Sign Up</h1>
+          <div class="col-md-5 col-lg-4 py-5 mt-5 py-md-2 mt-md-0">
             <form
               v-if="step === steps.register"
               class="wrapper width_res"
@@ -686,11 +678,6 @@ input[type='checkbox'] {
 .img_container {
   transform: scale(2.5);
 }
-
-.mockcertified_text {
-  font-size: 30px;
-  background-color: linear-gradient(to right, #1abe36, #fafafa);
-}
 .btn {
   background: #5271ff;
 }
@@ -709,9 +696,6 @@ input[type='checkbox'] {
   .long_text {
     font-size: 26px;
   }
-  .mockcertified_text {
-    font-size: 40px;
-  }
 }
 @include media-breakpoint-up(lg) {
   .social_icon_container {
@@ -720,9 +704,6 @@ input[type='checkbox'] {
   }
   .long_text {
     font-size: 36px;
-  }
-  .mockcertified_text {
-    font-size: 40px;
   }
 }
 @include media-breakpoint-up(xl) {

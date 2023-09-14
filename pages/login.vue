@@ -3,9 +3,9 @@
     <NavbarAuth />
     <div class="background_color">
       <div class="container">
-        <div class="row align-items-center justify-content-between position-relative min_height">
+        <div class="row align-items-center justify-content-between pt-0 pt-md-5">
           <div class="col-md-7 mt-5 mt-md-0">
-            <div class="row align-items-center position-relative">
+            <div class="row align-items-center">
               <div class="col-8">
                 <p class="span_blue_color text-center fw-bold font_family_aileron long_text">
                   Log in, <br />
@@ -17,16 +17,8 @@
                 <img class="w-100 h-100" src="~/assets/images/rocket.webp" alt="rocket" />
               </div>
             </div>
-
-            <div class="d-md-none mt-5">
-              <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
-            </div>
-            <div class="d-none d-md-block position-absolute bottom-0">
-              <p class="mockcertified_text font_family_aileron span_blue_color">Mockcertifed</p>
-            </div>
           </div>
-          <div class="col-12 col-md-5 col-lg-4 text-center">
-            <h1 class="text-center span_blue_color py-3 fw-bold font_family_aileron">Login</h1>
+          <div class="col-12 col-md-5 col-lg-4 text-center pt-5 mt-5 pt-md-0 mt-md-0">
             <form class="wrapper width_res" @submit.prevent="loginLocal">
               <div class="my-3 input-data">
                 <input
@@ -87,10 +79,10 @@
                   <p class="font_family_nunito">OR</p>
                   <p class="font_family_nunito">continue with</p>
                 </div>
-                <div class="social_icons">
+                <div class="social_icons pb-5">
                   <div class="d-flex align-items-center justify-content-around">
                     <div class="social_icon_container">
-                      <img class="w-100 h-100" src="~/assets/images/google_icon.svg" alt="google" />
+                      <img class="w-100 h-100" src="~/assets/images/google_login_icon.png" alt="google" />
                     </div>
                     <div class="social_icon_container">
                       <img class="w-100 h-100" src="~/assets/images/apple_icon.svg" alt="apple" />
@@ -343,14 +335,6 @@ input {
   height: 35px;
   cursor: pointer;
 }
-
-.mockcertified_text {
-  font-size: 30px;
-  // background-color: linear-gradient(to right, #1abe36, #fafafa);
-  // background: radial-gradient(circle at center, rgb(223 252 252), transparent);
-  // padding: 3rem 3rem 3rem 0;
-}
-
 .btn {
   background: #5271ff;
 }
@@ -372,9 +356,6 @@ input {
   .long_text {
     font-size: 26px;
   }
-  .mockcertified_text {
-    font-size: 40px;
-  }
 }
 @include media-breakpoint-up(lg) {
   .social_icon_container {
@@ -383,9 +364,6 @@ input {
   }
   .long_text {
     font-size: 36px;
-  }
-  .mockcertified_text {
-    font-size: 40px;
   }
 }
 @include media-breakpoint-up(xl) {

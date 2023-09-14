@@ -6,6 +6,38 @@
 
       <div class="mt-4 mb-4">
         <VueSlickCarousel v-bind="homeBannerCarousel" class="mt-3 zoom-125">
+          <div class="home_banner py-4">
+            <div class="d-flex flex-column flex-lg-row justify-content-between">
+              <div class="text-break p-4">
+                <h1 class="fw-bolder me-2 font_size_45 banner_title">
+                  We are on <span class="text-primary">PlayStore</span> &
+                  <span class="text-primary">AppStore</span> <br />
+                  Download the App now
+                </h1>
+
+                <div class="font_size_25 mt-4 banner_subtitle">
+                  Check here
+                  <span class="text-primary"> mockcertified.com </span>
+                </div>
+              </div>
+
+              <div
+                class="d-flex align-items-center flex-row flex-lg-column mx-3 mx-lg-3 mb-3 mb-md-0 justify-content-center gap_20"
+              >
+                <a :href="playstoreLink" target="_blank" class="">
+                  <img
+                    src="@/assets/images/GooglePlay.svg"
+                    alt="GooglePlayStore"
+                    class="icon-s w-100"
+                  />
+                </a>
+                <a :href="appleAppStoreLink" target="_blank" class="">
+                  <img src="@/assets/images/AppStore.svg" alt="AppStore" class="icon-s w-100" />
+                </a>
+              </div>
+            </div>
+          </div>
+
           <div class="home_banner">
             <div class="d-flex flex-column flex-lg-row justify-content-between">
               <div class="text-break p-4">
@@ -384,6 +416,8 @@ export default {
       allSearchedSubCategory: [],
       isFetched: false,
       YOUTUBE_EMBED_LINK_BANNER: process.env.YOUTUBE_EMBED_LINK_BANNER,
+      playstoreLink: `https://play.google.com/store/apps/details?id=${process.env.GOOGLE_PLAYSTORE_ID}`,
+      appleAppStoreLink: `https://apps.apple.com/in/app/MockCertified/${process.env.APPLE_APP_STORE_ID}`,
       isVideoOn: false,
 
       homeBannerCarousel: {
@@ -444,7 +478,6 @@ export default {
   },
 
   async mounted() {
-
     if (!this.user) {
       this.$router.push('/');
     }
@@ -526,33 +559,36 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
-
-.element1_position {
-  top: -40px;
-  right: 30%;
-  transform: rotate(40deg);
+.gap_20 {
+  gap: 20px;
 }
 
-.element2_position {
-  bottom: -100%;
-  right: 25%;
-}
+// .element1_position {
+//   top: -40px;
+//   right: 30%;
+//   transform: rotate(40deg);
+// }
+
+// .element2_position {
+//   bottom: -100%;
+//   right: 25%;
+// }
 
 .home_banner {
   background: #f6f8ff;
   border-radius: 10px;
 }
 
-.home_banner1 {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
+// .home_banner1 {
+//   width: 100%;
+//   height: 350px;
+//   object-fit: cover;
+// }
 
-.bannerImage1_position {
-  right: 20px;
-  top: 22px;
-}
+// .bannerImage1_position {
+//   right: 20px;
+//   top: 22px;
+// }
 
 .bannerImage1 {
   height: 300px;
@@ -564,14 +600,14 @@ export default {
   width: 100%;
 }
 
-.bannerEllipse_position {
-  right: 0;
-  top: 30%;
-}
+// .bannerEllipse_position {
+//   right: 0;
+//   top: 30%;
+// }
 
-.bannerEllipse {
-  width: 400px;
-}
+// .bannerEllipse {
+//   width: 400px;
+// }
 
 .home_banner_btn {
   background: #ffffff;
@@ -588,9 +624,9 @@ export default {
   background: #252525;
 }
 
-.video_modal_bg {
-  background: rgba(43, 43, 43, 0.8);
-}
+// .video_modal_bg {
+//   background: rgba(43, 43, 43, 0.8);
+// }
 
 .scroll_x {
   overflow-x: auto;
@@ -602,11 +638,11 @@ export default {
   display: none;
 }
 
-.category_image {
-  object-fit: contain;
-  width: 35px;
-  height: 35px;
-}
+// .category_image {
+//   object-fit: contain;
+//   width: 35px;
+//   height: 35px;
+// }
 
 .category_box {
   min-width: 65px !important;
@@ -649,20 +685,20 @@ export default {
     // height: 100%;
   }
 
-  .bannerImage1_position {
-    right: 0;
-    top: 100%;
-  }
+  // .bannerImage1_position {
+  //   right: 0;
+  //   top: 100%;
+  // }
 
-  .bannerEllipse {
-    width: 100%;
-  }
+  // .bannerEllipse {
+  //   width: 100%;
+  // }
 
-  .bannerEllipse_position {
-    right: 0;
-    // top: 266px;
-    top: 100%;
-  }
+  // .bannerEllipse_position {
+  //   right: 0;
+  //   top: 266px;
+  //   top: 100%;
+  // }
 
   .dashboard_title {
     font-size: 16px;

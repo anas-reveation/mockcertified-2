@@ -304,6 +304,7 @@ export default {
         options: Object.entries(parsedData),
       };
     });
+    this.allQuestions = await this.shuffleQuestion(this.allQuestions);
     this.totalQuestions = this.allQuestions.length;
     this.setIsLoaderHidden(false);
   },
@@ -331,6 +332,15 @@ export default {
         }
       }
       this.startTest = !this.startTest;
+    },
+
+    async shuffleQuestion(array) {
+      const shuffledArray = array.slice();
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      }
+      return shuffledArray;
     },
 
     nextQuestionFun() {
