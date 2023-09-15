@@ -1,230 +1,178 @@
 <template>
-  <div class="container px-4">
-    <NavbarLogo class="mt-4" />
-
-    <div class="row">
-      <div
-        class="col-md-6 d-flex flex-column align-items-center justify-content-center mt-3 position-relative"
-      >
-        <div>
-          <img
-            src="~/assets/images/Illustration.svg"
-            class="mb-lg-5 auth_illustration"
-            alt="Illustration"
-          />
-        </div>
-
-        <!-- Start Tagline -->
-        <div class="d-none d-lg-block position-absolute tagline"></div>
-        <div
-          class="d-none d-lg-block position-absolute text-primary fw-bolder text-center font_size_18 tagline_text"
-        >
-          Empowering you with the knowledge
-          <br />
-          & confidence to succeed
-        </div>
-        <!-- End Tagline -->
-      </div>
-      <div class="col-md-6">
-        <img
-          class="position-absolute top-0 end-0 oval_img"
-          src="@/assets/images/oval.jpg"
-          alt="oval"
-        />
-
-        <form
-          v-if="step === steps.register"
-          class="wrapper width_res"
-          @submit.prevent="registerLocal"
-        >
-          <h1 class="text-primary text-sm-center fw-bolder d-none d-sm-block my-3 font_size_36">
-            Register
-          </h1>
-          <div class="my-3 input-data">
-            <input
-              type="text"
-              id="firstName"
-              class="border border-2 border-grey rounded py-3"
-              pattern="[a-zA-Z]*"
-              v-model="registerForm.first_name"
-              required
-            />
-            <label>
-              First Name
-              <img
-                v-if="!errors.firstName.isValid"
-                src="@/assets/images/i_button.svg"
-                alt="i-button"
-                @click="errors.firstName.isVisiable = !errors.firstName.isVisiable"
-              />
-            </label>
-            <div
-              v-if="errors.firstName.isVisiable"
-              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-            >
-              {{ errors.firstName.msg }}
+  <div>
+    <NavbarAuth />
+    <div class="background_color">
+      <div class="container">
+        <div class="row align-items-center justify-content-between min-vh-100">
+          <div class="col-md-7 mt-5 mt-md-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <p class="span_blue_color text-center fw-bold font_family_aileron long_text">
+                  Sign up, <br />
+                  because <span class="text-dark">growth</span> <br />
+                  starts here.
+                </p>
+              </div>
+              <div class="col-4 img_container">
+                <img class="w-100 h-100" src="~/assets/images/rocket.webp" alt="signup" />
+              </div>
             </div>
           </div>
 
-          <div class="mb-3 input-data">
-            <input
-              type="text"
-              id="lastName"
-              class="border border-2 border-grey rounded py-3"
-              pattern="[a-zA-Z]*"
-              title="It should contain only text"
-              v-model="registerForm.last_name"
-              required
-            />
-            <label>
-              Last Name
-              <img
-                v-if="!errors.lastName.isValid"
-                src="@/assets/images/i_button.svg"
-                alt="i-button"
-                @click="errors.lastName.isVisiable = !errors.lastName.isVisiable"
-              />
-            </label>
-            <div
-              v-if="errors.lastName.isVisiable"
-              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+          <div class="col-md-5 col-lg-4 py-5 mt-5 py-md-2 mt-md-0">
+            <form
+              v-if="step === steps.register"
+              class="wrapper width_res"
+              @submit.prevent="registerLocal"
             >
-              {{ errors.lastName.msg }}
-            </div>
-          </div>
+              <div class="my-3 input-data">
+                <input
+                  type="text"
+                  id="firstName"
+                  class="border border-2 border-grey rounded py-2 px-3 input"
+                  pattern="[a-zA-Z]*"
+                  v-model="registerForm.first_name"
+                  required
+                  placeholder="First Name"
+                />
+                <div
+                  v-if="errors.firstName.isVisiable"
+                  class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+                >
+                  {{ errors.firstName.msg }}
+                </div>
+              </div>
 
-          <div class="mb-3 input-data">
-            <input
-              type="text"
-              class="border border-2 border-grey rounded py-3"
-              v-model="registerForm.email"
-              required
-            />
-            <label>
-              Email
-              <img
-                v-if="!errors.email.isValid"
-                src="@/assets/images/i_button.svg"
-                alt="i-button"
-                @click="errors.email.isVisiable = !errors.email.isVisiable"
-              />
-            </label>
-            <div
-              v-if="errors.email.isVisiable"
-              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-            >
-              {{ errors.email.msg }}
-            </div>
-          </div>
+              <div class="mb-3 input-data">
+                <input
+                  type="text"
+                  id="lastName"
+                  class="border border-2 border-grey rounded py-2 px-3 input"
+                  pattern="[a-zA-Z]*"
+                  title="It should contain only text"
+                  v-model="registerForm.last_name"
+                  required
+                  placeholder="Last Name"
+                />
+                <div
+                  v-if="errors.lastName.isVisiable"
+                  class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+                >
+                  {{ errors.lastName.msg }}
+                </div>
+              </div>
 
-          <div class="mb-3 input-data position-relative">
-            <input
-              :type="isPasswordVisible ? 'text' : 'password'"
-              class="border border-2 border-grey rounded py-3"
-              v-model="registerForm.password"
-              @input="checkPasswordMatch"
-              required
-            />
-            <label>
-              Password
-              <img
-                v-if="!errors.password.isValid"
-                src="@/assets/images/i_button.svg"
-                alt="i-button"
-                @click="errors.password.isVisiable = !errors.password.isVisiable"
-              />
-            </label>
-            <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
-              <img
-                v-if="isPasswordVisible"
-                class="position-absolute bottom-50 end-0 p-2"
-                src="@/assets/images/password_visible.svg"
-                alt="eye"
-              />
-              <img
-                v-else
-                class="position-absolute bottom-50 end-0 p-2"
-                src="@/assets/images/password_not_visible.svg"
-                alt="eye"
-              />
-            </div>
-            <div
-              v-if="errors.password.isVisiable"
-              class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
-            >
-              {{ errors.password.msg }}
-            </div>
-          </div>
+              <div class="mb-3 input-data">
+                <input
+                  type="text"
+                  class="border border-2 border-grey rounded py-2 px-3 input"
+                  v-model="registerForm.email"
+                  required
+                  placeholder="Email"
+                />
 
-          <div class="mb-3 input-data">
-            <input
-              :type="isPasswordVisible ? 'text' : 'password'"
-              class="border border-2 border-grey rounded py-3"
-              :class="!passwordMatched && registerForm.confirmPassword.length && ' border-danger'"
-              v-model="registerForm.confirmPassword"
-              @input="checkPasswordMatch"
-              required
-            />
-            <label>
-              Confirm Password
-              <img
-                v-if="!errors.password.isValid"
-                src="@/assets/images/i_button.svg"
-                alt="i-button"
-                @click="errors.password.isVisiable = !errors.password.isVisiable"
-              />
-            </label>
-            <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
-              <img
-                v-if="isPasswordVisible"
-                class="position-absolute bottom-50 end-0 p-2"
-                src="@/assets/images/password_visible.svg"
-                alt="eye"
-              />
-              <img
-                v-else
-                class="position-absolute bottom-50 end-0 p-2"
-                src="@/assets/images/password_not_visible.svg"
-                alt="eye"
-              />
-            </div>
-          </div>
+                <div
+                  v-if="errors.email.isVisiable"
+                  class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+                >
+                  {{ errors.email.msg }}
+                </div>
+              </div>
 
-          <div class="font_size_16 auth_font_size">
-            <input type="checkbox" v-model="registerForm.userAgreement" />
-            I accept the
-            <a
-              href="#"
-              @click="newWindowsOpen"
-              class="text-black fw-bolder text-decoration-underline"
-            >
-              terms & conditions
-            </a>
-            and
-            <a
-              href="#"
-              @click="newWindowsOpen('pp')"
-              class="text-black fw-bolder text-decoration-underline"
-            >
-              privacy policies
-            </a>
-          </div>
+              <div class="mb-3 input-data position-relative">
+                <input
+                  :type="isPasswordVisible ? 'text' : 'password'"
+                  class="border border-2 border-grey rounded py-2 px-3 input"
+                  v-model="registerForm.password"
+                  @input="checkPasswordMatch"
+                  required
+                  placeholder="Password"
+                />
+                <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+                  <img
+                    v-if="isPasswordVisible"
+                    class="position-absolute bottom-50 end-0 p-2 eye"
+                    src="@/assets/images/password_visible.svg"
+                    alt="eye"
+                  />
+                  <img
+                    v-else
+                    class="position-absolute bottom-50 end-0 p-2 eye"
+                    src="@/assets/images/password_not_visible.svg"
+                    alt="eye"
+                  />
+                </div>
+                <div
+                  v-if="errors.password.isVisiable"
+                  class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
+                >
+                  {{ errors.password.msg }}
+                </div>
+              </div>
 
-          <div class="text-center mt-4">
-            <button
-              type="submit"
-              class="btn btn-primary text-white fw-bold px-3 login_btn_width auth_font_size"
-              :disabled="isDisabled"
-            >
-              <!-- :class="isDisabled ? 'border-grey' : 'btn-primary text-white'" -->
-              Register
-            </button>
-          </div>
+              <div class="mb-3 input-data">
+                <input
+                  :type="isPasswordVisible ? 'text' : 'password'"
+                  class="border border-2 border-grey rounded py-2 px-3 input"
+                  :class="
+                    !passwordMatched && registerForm.confirmPassword.length && ' border-danger'
+                  "
+                  v-model="registerForm.confirmPassword"
+                  @input="checkPasswordMatch"
+                  required
+                  placeholder="Confirm Password"
+                />
+                <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
+                  <img
+                    v-if="isPasswordVisible"
+                    class="position-absolute bottom-50 end-0 eye"
+                    src="@/assets/images/password_visible.svg"
+                    alt="eye"
+                  />
+                  <img
+                    v-else
+                    class="position-absolute bottom-50 end-0 eye"
+                    src="@/assets/images/password_not_visible.svg"
+                    alt="eye"
+                  />
+                </div>
+              </div>
 
-          <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+              <div class="font_size_16 auth_font_size">
+                <input type="checkbox" v-model="registerForm.userAgreement" />
+                I accept the
+                <a
+                  href="#"
+                  @click="newWindowsOpen"
+                  class="text-black fw-bolder text-decoration-underline"
+                >
+                  terms & conditions
+                </a>
+                and
+                <a
+                  href="#"
+                  @click="newWindowsOpen('pp')"
+                  class="text-black fw-bolder text-decoration-underline"
+                >
+                  privacy policies
+                </a>
+              </div>
 
-          <div class="mt-2 row">
-            <!-- <button
+              <div class="text-center mt-4">
+                <button
+                  type="submit"
+                  class="btn text-white rounded-pill fw-bold px-3 login_btn_width auth_font_size"
+                  :disabled="isDisabled"
+                >
+                  <!-- :class="isDisabled ? 'border-grey' : 'btn-primary text-white'" -->
+                  Register
+                </button>
+              </div>
+
+              <!-- <div class="mt-4 underline_hr"><span>or continue with</span></div> -->
+
+              <div class="mt-2 row">
+                <!-- <button
           type="button"
           class="col btn btn-secondary fw-bold border border-2 border-primary p-2 mx-3 text-start"
         >
@@ -243,56 +191,58 @@
           Facebook
         </button> -->
 
-            <p class="mt-4 text-center auth_font_size">
-              Already have an account ?
-              <NuxtLink to="/auth/login" class="text-primary text-decoration-none fw-bolder">
-                Login
-              </NuxtLink>
-            </p>
+                <!-- <p class="mt-4 text-center auth_font_size">
+                  Already have an account ?
+                  <NuxtLink to="/auth/login" class="text-primary text-decoration-none fw-bolder">
+                    Login
+                  </NuxtLink>
+                </p> -->
+              </div>
+            </form>
+
+            <form v-else class="wrapper width_res" @submit.prevent="confirmLocal">
+              <h1 class="mt-5 mb-4 text-sm-center font_size_36">
+                Verification
+                <br />
+                Code
+              </h1>
+
+              <p>Please enter the verification code sent to your email</p>
+
+              <label for="verficationCode" class="fw-bolder mb-2 font_size_24">
+                Enter Verification Code :
+              </label>
+
+              <div class="mb-3 input-data">
+                <input
+                  type="text"
+                  class="border border-2 border-primary rounded py-2 px-3 input"
+                  v-model="confirmForm.code"
+                  required
+                  placeholder="Enter Code"
+                />
+              </div>
+
+              <div class="text-center mt-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 login_btn_width"
+                >
+                  Confirm
+                </button>
+              </div>
+              <div class="text-center mt-2">
+                <button
+                  type="button"
+                  class="btn border border-2 border-primary text-primary fw-bold px-3 login_btn_width"
+                  @click="resendCode"
+                >
+                  Resend the code
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-
-        <form v-else class="wrapper width_res" @submit.prevent="confirmLocal">
-          <h1 class="mt-5 mb-4 text-sm-center font_size_36">
-            Verification
-            <br />
-            Code
-          </h1>
-
-          <p>Please enter the verification code sent to your email</p>
-
-          <label for="verficationCode" class="fw-bolder mb-2 font_size_24">
-            Enter Verification Code :
-          </label>
-
-          <div class="mb-3 input-data">
-            <input
-              type="text"
-              class="border border-2 border-primary rounded py-3"
-              v-model="confirmForm.code"
-              required
-            />
-            <label>Code</label>
-          </div>
-
-          <div class="text-center mt-2">
-            <button
-              type="submit"
-              class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 login_btn_width"
-            >
-              Confirm
-            </button>
-          </div>
-          <div class="text-center mt-2">
-            <button
-              type="button"
-              class="btn border border-2 border-primary text-primary fw-bold px-3 login_btn_width"
-              @click="resendCode"
-            >
-              Resend the code
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -315,7 +265,7 @@ const steps = {
 };
 
 export default {
-  layout: 'introLayout',
+  layout: 'authLayout',
   middleware: ['authenticated'],
 
   head() {
@@ -698,61 +648,72 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/assets/css/auth.scss';
-@import '~/assets/css/bootstrapBreakpoint';
-
-.tagline_text {
-  top: 400px;
+@import '~/assets/css/bootstrapBreakpoint.scss';
+.background_color {
+  background: linear-gradient(to right, #dee2fb, #fafafa);
+}
+.long_text {
+  font-size: 25px;
 }
 
-.tagline {
-  width: 170px;
-  height: 470px;
-  top: 175px;
-  // left: calc(50% - 170px / 2 + 31px);
-
-  background: linear-gradient(270deg, #e7eafc -0.85%, rgba(255, 255, 255, 0) 34.86%);
-  border-radius: 0px 100px 100px 0px;
-  transform: rotate(90deg);
-}
-
-.password_format_position {
-  left: 4.5rem;
-  bottom: 2.5rem;
+form .input {
+  background: #e2e3e8;
+  width: 100%;
+  color: #7b7777;
 }
 
 input[type='checkbox'] {
   accent-color: #f5f5f5;
 }
 
-@include media-breakpoint-down(sm) {
-  .auth_font_size {
-    font-size: 12px;
-  }
+.eye {
+  padding: 15px !important;
+}
+.social_icon_container {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
 }
 
-@include media-breakpoint-down(lg) {
-  .auth_illustration {
-    width: 200px;
-  }
+.img_container {
+  transform: scale(2.5);
 }
-
-@include media-breakpoint-up(lg) {
-  .auth_illustration {
-    width: 250px;
-    // margin-bottom: 4rem;
-  }
+.btn {
+  background: #5271ff;
 }
 
 @include media-breakpoint-up(sm) {
-  .login_btn_width {
-    width: 100%;
+  .social_icon_container {
+    width: 45px;
+    height: 45px;
   }
 }
-
 @include media-breakpoint-up(md) {
-  .width_res {
-    width: 75%;
+  .social_icon_container {
+    width: 55px;
+    height: 55px;
+  }
+  .long_text {
+    font-size: 26px;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .social_icon_container {
+    width: 65px;
+    height: 65px;
+  }
+  .long_text {
+    font-size: 36px;
+  }
+}
+@include media-breakpoint-up(xl) {
+  .long_text {
+    font-size: 43px;
+  }
+}
+@include media-breakpoint-up(xxl) {
+  .long_text {
+    font-size: 50px;
   }
 }
 </style>

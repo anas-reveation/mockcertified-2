@@ -10,17 +10,17 @@
         <div>
           <button
             class="rounded-pill py-0 py-sm-2 px-2 px-sm-4"
-            :class="$route.path === '/login' && 'active-button'"
+            :class="$route.path === '/auth/login' && 'active-button'"
           >
-            <NuxtLink to="/login">Login</NuxtLink>
+            <NuxtLink to="/auth/login">Login</NuxtLink>
           </button>
         </div>
         <div>
           <button
             class="rounded-pill py-0 py-sm-2 px-2 px-sm-4 text-nowrap"
-            :class="$route.path === '/signup' && 'active-button'"
+            :class="$route.path === '/auth/signup' && 'active-button'"
           >
-            <NuxtLink to="/signup">Sign Up</NuxtLink>
+            <NuxtLink to="/auth/signup">Sign Up</NuxtLink>
           </button>
         </div>
       </div>
