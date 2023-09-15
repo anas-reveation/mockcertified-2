@@ -28,7 +28,8 @@
           <p class="font_family_dmsans text-center text-lg-start card_head_title">
             We got what you're looking for.
           </p>
-          <div class="row gx-3 gy-2">
+          <div v-if="!isFetched">Loading</div>
+          <div v-else class="row gx-3 gy-2">
             <div
               data-aos="fade-up"
               v-for="(data, i) in elevateData"

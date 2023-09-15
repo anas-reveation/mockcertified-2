@@ -17,7 +17,7 @@
             <img
             class="w-100"
             :src="$urlFor(imageData?.image?.asset?._ref).url()"
-            :alt="imageData?.image?.alt"
+            :alt="imageData?.alt"
           />
           </div>
         </div>

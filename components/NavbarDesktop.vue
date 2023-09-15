@@ -17,17 +17,55 @@
             >
               <img
                 class="m-1 navbar_icon"
-                :class="$route.path === '/' && 'active_color'"
+                :class="$route.path === '/homepage' && 'active_color'"
                 src="@/assets/images/home.svg"
                 alt="home"
               />
               <span
-                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap"
                 :class="$route.path === '/' && 'text-primary'"
               >
                 Home
               </span>
             </NuxtLink>
+
+            <!-- Category Dropdown -->
+
+            <div
+              class="position-relative"
+              @mouseover="isHovering = true"
+              @mouseleave="isHovering = false"
+            >
+              <span>
+                <NuxtLink
+                  to="/category"
+                  class="d-flex flex-column align-items-center justify-content-center ms-5"
+                >
+                  <img
+                    class="m-1 navbar_icon"
+                    :class="$route.path === '/category' && 'active_color'"
+                    src="@/assets/images/categories.png"
+                    alt="category"
+                  />
+                  <span
+                    class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap text-now"
+                    :class="$route.path === '/category' && 'text-primary'"
+                  >
+                    Category
+                  </span>
+                </NuxtLink>
+              </span>
+
+              <ul
+                class="position-absolute border border-rounded list-group my-2 px-4 py-2 category_dropdown"
+                v-if="isHovering "
+              >
+                <li class="text-nowrap py-1" v-for="category in allCategoriesFilter" :key="category.id">
+                  <NuxtLink class="text-capitalize" :to="`/category/${category.slug}`">{{ category.name }}</NuxtLink>
+                </li>
+              </ul>
+            </div>
+
             <NuxtLink
               :to="isAuthenticated ? '/protected/create-test' : '/auth/login'"
               class="d-flex flex-column align-items-center justify-content-center ms-5"
@@ -40,7 +78,7 @@
               />
 
               <span
-                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap text-now"
                 :class="$route.path.match(/\/create-test\/*/g) && 'text-primary'"
               >
                 New Test
@@ -63,7 +101,7 @@
                 alt="reload"
               />
               <span
-                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap text-now"
                 :class="$route.path.match(/\/attempted-test\/*/g) && 'text-primary'"
               >
                 Re-attempt
@@ -86,7 +124,7 @@
                 alt="purchase_icon"
               />
               <span
-                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap text-now"
                 :class="$route.path.match(/\/purchased-test\/*/g) && 'text-primary'"
               >
                 Purchased
@@ -105,7 +143,7 @@
             >
               <img class="m-1 navbar_icon" src="@/assets/images/login1.svg" alt="stripe_logo" />
               <span
-                class="fw-bolder pb-2 navbar_font_color font_size_12"
+                class="fw-bolder pb-2 navbar_font_color font_size_12 text-nowrap text-now"
                 :class="$route.path.match(/\/account\/*/g) && 'text-primary'"
               >
                 Login
@@ -352,12 +390,17 @@ export default {
       settingsDropDown: false,
       adminRoute: false,
       feebackRoute: false,
+      allCategories: [],
+      allSubCategory: [],
+      isHovering: false,
     };
   },
 
   computed: {
+    ...mapState(['isLoaderHidden']),
     ...mapState(['isSideNavbarVisible', 'platform']),
     ...mapState('auth', ['user', 'isAuthenticated', 'userGroup']),
+    ...mapState('testManagement', ['categories']),
   },
 
   watch: {
@@ -372,9 +415,31 @@ export default {
     },
   },
 
+  async mounted() {
+    this.setIsLoaderHidden(true);
+    if (!this.categories.length) {
+      await this.getAllCategories();
+    }
+    this.allCategories = this.categories;
+    this.allCategoriesFilter = [...this.allCategories].sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0; // names are equal
+    });
+    this.setIsLoaderHidden(false);
+  },
+
   methods: {
     ...mapActions('auth', ['logout']),
     ...mapMutations(['setIsSideNavbarVisible']),
+    ...mapMutations(['setIsLoaderHidden']),
+    ...mapActions('testManagement', ['getAllCategories']),
 
     async userLogOut() {
       const res = await this.logout();
@@ -517,7 +582,18 @@ export default {
   width: 190px;
   height: 100%;
 }
-
+.category_dropdown {
+  background: white;
+  z-index: 2;
+  list-style: none;
+  top: 60px;
+  left: 0;
+}
+.category_dropdown li:hover a {
+  color: #6782e1;
+  transition: all 0.3s ease;
+  padding-left: 5px;
+}
 @include media-breakpoint-between(md, lg) {
   .logo_with_name {
     width: 140px;

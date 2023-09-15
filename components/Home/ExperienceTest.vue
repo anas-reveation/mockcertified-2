@@ -41,7 +41,7 @@
 }
 .background_image {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('~/assets/images/experience-test.png');
+    url('~/assets/images/experience-test.webp');
   background-size: cover;
   background-position: right;
   overflow: hidden;

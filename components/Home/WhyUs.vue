@@ -10,8 +10,8 @@
       <div class="text-center mt-5 py-5 whyus_circle">
         <div class="position-relative">
           <div class="mx-auto circle_image">
-            <img class="img1" src="~/assets/images/circle.svg" alt="" />
-            <img class="img2" src="~/assets/images/pen.webp" alt="" />
+            <img class="img1" src="~/assets/images/circle.svg" alt="circle" />
+            <img class="img2" src="~/assets/images/pen.webp" alt="pen" />
           </div>
 
           <div class="title_container">
@@ -23,8 +23,8 @@
         </div>
         <div class="position-relative">
           <div class="circle_image mx-auto">
-            <img class="img1" src="~/assets/images/circle2.svg" alt="" />
-            <img class="img2" src="~/assets/images/money.svg" alt="" />
+            <img class="img1" src="~/assets/images/circle2.svg" alt="circle" />
+            <img class="img2" src="~/assets/images/money.svg" alt="money" />
           </div>
 
           <div class="title_container">
@@ -35,8 +35,8 @@
 
         <div class="position-relative">
           <div class="circle_image mx-auto">
-            <img class="img1" src="~/assets/images/circle3.svg" alt="" />
-            <img class="img2" src="~/assets/images/globe.svg" alt="" />
+            <img class="img1" src="~/assets/images/circle3.svg" alt="circle" />
+            <img class="img2" src="~/assets/images/globe.svg" alt="globe" />
           </div>
 
           <div class="title_container">
