@@ -22,6 +22,7 @@
         :credit="testDetail.credit"
         :isDescEdit="this.user && this.user.id === this.testDetail.user_id"
         :descEditFun="descEditFun"
+        :userId="`${testDetail.user_id}`"
       />
 
       <button

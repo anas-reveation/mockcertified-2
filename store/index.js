@@ -3,6 +3,7 @@ import buyer from './modules/buyer';
 import seller from './modules/seller';
 import admin from './modules/admin';
 import testManagement from './modules/testManagement';
+import userTest from './modules/userTest';
 
 import { API } from 'aws-amplify';
 import { listStaticContents } from '~/graphql/queries';
@@ -35,6 +36,7 @@ const modules = {
   seller,
   admin,
   testManagement,
+  userTest,
 };
 
 const getters = {};

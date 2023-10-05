@@ -92,12 +92,14 @@
 
       <div class="mt-3">
         <h3 class="fw-bolder mt-2 font_size_18 test_detail_title">Created By</h3>
-        <div
-          class="text-primary fw-bolder text-break font_size_16 test_detail_desc"
-          v-if="fullName"
-        >
-          {{ fullName }}
-        </div>
+        <NuxtLink :to="{ name: 'user-test', params: { userId: userId, fullName: fullName } }">
+          <div
+            class="text-primary fw-bolder text-break font_size_16 test_detail_desc"
+            v-if="fullName"
+          >
+            {{ fullName }}
+          </div>
+        </NuxtLink>
       </div>
 
       <div v-if="credit" class="mt-3">
@@ -126,6 +128,7 @@ export default {
     price: Number | String,
     fullName: String,
     shareFunc: Function,
+    userId: String,
     credit: {
       type: String,
       default: '',

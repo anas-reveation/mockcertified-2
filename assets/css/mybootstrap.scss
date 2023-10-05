@@ -44,8 +44,8 @@ $font-weight-bold: 500;
 $font-family-sans-serif: Poppins;
 
 :root {
-  --dark-blue: #3824CD;
-  --light-blue: #5271FF;
+  --dark-blue: #3824cd;
+  --light-blue: #5271ff;
   --light-black: #555657;
 }
 
@@ -68,6 +68,10 @@ $font-family-sans-serif: Poppins;
 }
 .font_family_Neuemachina {
   font-family: 'Neue Machina', sans-serif;
+}
+
+.font_size_64 {
+  font-size: 64px;
 }
 
 .font_size_50 {
