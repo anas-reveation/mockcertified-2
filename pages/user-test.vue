@@ -1,8 +1,8 @@
 <template>
   <div class="bg_gradient py-4">
     <div class="container">
-      <h1 class="my-3 font_family_aileron font_size_64 text-white">More Tests</h1>
-      <h4 class="font_family_montserrat font_size_16 text-uppercase fw-bolder text-white">
+      <h1 class="my-3 font_family_aileron font_size_64 text-primary">More Tests</h1>
+      <h4 class="font_family_montserrat font_size_16 text-uppercase fw-bolder text-black">
         By
         <span class="text-primary">{{ $route.params.fullName }} </span>
       </h4>
@@ -151,14 +151,7 @@ export default {
 
 <style scoped lang="scss">
 .bg_gradient {
-  background: linear-gradient(
-    to right top,
-    rgba(236, 236, 236, 0.38),
-    rgba(229, 229, 229, 0.39),
-    #eee5ff,
-    #c5a6ff,
-    #682aff
-  );
+  background-color: #edf1f4;
 }
 .search_container {
   border: 2px solid black;
