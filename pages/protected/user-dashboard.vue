@@ -34,7 +34,7 @@
                 >
                   <img src="~assets/images/our_test.svg" alt="BellSimple" class="category_icon" />
 
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Our Test</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Your Tests</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -45,7 +45,7 @@
                   ref="testTab"
                 >
                   <img src="~assets/images/balance.svg" alt="BellSimple" class="category_icon" />
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Balance</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Balance</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -59,7 +59,7 @@
                     alt="BellSimple"
                     class="category_icon"
                   />
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Certificate</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Certificates</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -69,7 +69,7 @@
                   href="#test"
                 >
                   <img src="~assets/images/support.svg" alt="BellSimple" class="category_icon" />
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Support</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Support</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -79,7 +79,7 @@
                   href="#test"
                 >
                   <img src="~assets/images/alexa_1.svg" alt="BellSimple" class="category_icon" />
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Alexa</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Alexa</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -89,7 +89,7 @@
                   href="#test"
                 >
                   <img src="~assets/images/setting.svg" alt="BellSimple" class="category_icon" />
-                  <p class="mb-0 ms-5 fw-bold font_familly_nunito">Setting</p>
+                  <p class="mb-0 ms-4 fw-bold font_familly_nunito">Settings</p>
                 </a>
               </li>
             </ul>
@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="col-9">
-          <h4 class="underline fw-bolder my-4 font_family_nunito">Overwiew</h4>
+          <h4 class="underline fw-bolder my-4 font_family_nunito">Overview</h4>
           <div class="row">
             <div class="col-8">
               <div class="rounded bg-white shadow-box p-4">
