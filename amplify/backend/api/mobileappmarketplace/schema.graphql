@@ -45,6 +45,7 @@ type TestManager
   description: String!
   reject_description: String
   credit: String
+  blog_link: String
   price: Float!
   status: TestManagerStatus
     @default(value: "IN_PROGRESS")
@@ -268,4 +269,3 @@ type Mutation {
     promocode: String
   ): String @function(name: "stripeCheckout-${env}")
 }
- 
