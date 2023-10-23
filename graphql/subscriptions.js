@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
       id
       first_name
       last_name
@@ -12,21 +12,25 @@ export const onCreateUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
       id
       first_name
       last_name
@@ -35,21 +39,25 @@ export const onUpdateUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
       id
       first_name
       last_name
@@ -58,21 +66,28 @@ export const onDeleteUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateTestManager = /* GraphQL */ `
-  subscription OnCreateTestManager($user_id: String) {
-    onCreateTestManager(user_id: $user_id) {
+  subscription OnCreateTestManager(
+    $filter: ModelSubscriptionTestManagerFilterInput
+    $user_id: String
+  ) {
+    onCreateTestManager(filter: $filter, user_id: $user_id) {
       id
       user_id
       created_by {
@@ -84,6 +99,7 @@ export const onCreateTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -94,30 +110,38 @@ export const onCreateTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateTestManager = /* GraphQL */ `
-  subscription OnUpdateTestManager($user_id: String) {
-    onUpdateTestManager(user_id: $user_id) {
+  subscription OnUpdateTestManager(
+    $filter: ModelSubscriptionTestManagerFilterInput
+    $user_id: String
+  ) {
+    onUpdateTestManager(filter: $filter, user_id: $user_id) {
       id
       user_id
       created_by {
@@ -129,6 +153,7 @@ export const onUpdateTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -139,30 +164,38 @@ export const onUpdateTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteTestManager = /* GraphQL */ `
-  subscription OnDeleteTestManager($user_id: String) {
-    onDeleteTestManager(user_id: $user_id) {
+  subscription OnDeleteTestManager(
+    $filter: ModelSubscriptionTestManagerFilterInput
+    $user_id: String
+  ) {
+    onDeleteTestManager(filter: $filter, user_id: $user_id) {
       id
       user_id
       created_by {
@@ -174,6 +207,7 @@ export const onDeleteTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -184,30 +218,35 @@ export const onDeleteTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateQuestion = /* GraphQL */ `
-  subscription OnCreateQuestion {
-    onCreateQuestion {
+  subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+    onCreateQuestion(filter: $filter) {
       id
       marks
       test_id
@@ -220,6 +259,7 @@ export const onCreateQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -227,6 +267,7 @@ export const onCreateQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -235,12 +276,13 @@ export const onCreateQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateQuestion = /* GraphQL */ `
-  subscription OnUpdateQuestion {
-    onUpdateQuestion {
+  subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+    onUpdateQuestion(filter: $filter) {
       id
       marks
       test_id
@@ -253,6 +295,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -260,6 +303,7 @@ export const onUpdateQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -268,12 +312,13 @@ export const onUpdateQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteQuestion = /* GraphQL */ `
-  subscription OnDeleteQuestion {
-    onDeleteQuestion {
+  subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+    onDeleteQuestion(filter: $filter) {
       id
       marks
       test_id
@@ -286,6 +331,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -293,6 +339,7 @@ export const onDeleteQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -301,57 +348,66 @@ export const onDeleteQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateCategory = /* GraphQL */ `
-  subscription OnCreateCategory {
-    onCreateCategory {
+  subscription OnCreateCategory($filter: ModelSubscriptionCategoryFilterInput) {
+    onCreateCategory(filter: $filter) {
       id
       name
       image
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateCategory = /* GraphQL */ `
-  subscription OnUpdateCategory {
-    onUpdateCategory {
+  subscription OnUpdateCategory($filter: ModelSubscriptionCategoryFilterInput) {
+    onUpdateCategory(filter: $filter) {
       id
       name
       image
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteCategory = /* GraphQL */ `
-  subscription OnDeleteCategory {
-    onDeleteCategory {
+  subscription OnDeleteCategory($filter: ModelSubscriptionCategoryFilterInput) {
+    onDeleteCategory(filter: $filter) {
       id
       name
       image
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateSubCategory = /* GraphQL */ `
-  subscription OnCreateSubCategory {
-    onCreateSubCategory {
+  subscription OnCreateSubCategory(
+    $filter: ModelSubscriptionSubCategoryFilterInput
+  ) {
+    onCreateSubCategory(filter: $filter) {
       id
       name
       category_id
@@ -364,15 +420,19 @@ export const onCreateSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateSubCategory = /* GraphQL */ `
-  subscription OnUpdateSubCategory {
-    onUpdateSubCategory {
+  subscription OnUpdateSubCategory(
+    $filter: ModelSubscriptionSubCategoryFilterInput
+  ) {
+    onUpdateSubCategory(filter: $filter) {
       id
       name
       category_id
@@ -385,15 +445,19 @@ export const onUpdateSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteSubCategory = /* GraphQL */ `
-  subscription OnDeleteSubCategory {
-    onDeleteSubCategory {
+  subscription OnDeleteSubCategory(
+    $filter: ModelSubscriptionSubCategoryFilterInput
+  ) {
+    onDeleteSubCategory(filter: $filter) {
       id
       name
       category_id
@@ -406,15 +470,19 @@ export const onDeleteSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreatePurchasedTest = /* GraphQL */ `
-  subscription OnCreatePurchasedTest {
-    onCreatePurchasedTest {
+  subscription OnCreatePurchasedTest(
+    $filter: ModelSubscriptionPurchasedTestFilterInput
+  ) {
+    onCreatePurchasedTest(filter: $filter) {
       id
       user_id
       test_id
@@ -427,6 +495,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -437,6 +506,7 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -444,16 +514,20 @@ export const onCreatePurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdatePurchasedTest = /* GraphQL */ `
-  subscription OnUpdatePurchasedTest {
-    onUpdatePurchasedTest {
+  subscription OnUpdatePurchasedTest(
+    $filter: ModelSubscriptionPurchasedTestFilterInput
+  ) {
+    onUpdatePurchasedTest(filter: $filter) {
       id
       user_id
       test_id
@@ -466,6 +540,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -476,6 +551,7 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -483,16 +559,20 @@ export const onUpdatePurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeletePurchasedTest = /* GraphQL */ `
-  subscription OnDeletePurchasedTest {
-    onDeletePurchasedTest {
+  subscription OnDeletePurchasedTest(
+    $filter: ModelSubscriptionPurchasedTestFilterInput
+  ) {
+    onDeletePurchasedTest(filter: $filter) {
       id
       user_id
       test_id
@@ -505,6 +585,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -515,6 +596,7 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -522,16 +604,18 @@ export const onDeletePurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateFeedback = /* GraphQL */ `
-  subscription OnCreateFeedback {
-    onCreateFeedback {
+  subscription OnCreateFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
+    onCreateFeedback(filter: $filter) {
       id
       test_id
       test {
@@ -543,6 +627,7 @@ export const onCreateFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -550,6 +635,7 @@ export const onCreateFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -559,16 +645,18 @@ export const onCreateFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateFeedback = /* GraphQL */ `
-  subscription OnUpdateFeedback {
-    onUpdateFeedback {
+  subscription OnUpdateFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
+    onUpdateFeedback(filter: $filter) {
       id
       test_id
       test {
@@ -580,6 +668,7 @@ export const onUpdateFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -587,6 +676,7 @@ export const onUpdateFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -596,16 +686,18 @@ export const onUpdateFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteFeedback = /* GraphQL */ `
-  subscription OnDeleteFeedback {
-    onDeleteFeedback {
+  subscription OnDeleteFeedback($filter: ModelSubscriptionFeedbackFilterInput) {
+    onDeleteFeedback(filter: $filter) {
       id
       test_id
       test {
@@ -617,6 +709,7 @@ export const onDeleteFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -624,6 +717,7 @@ export const onDeleteFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -633,16 +727,20 @@ export const onDeleteFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateAttemptedTest = /* GraphQL */ `
-  subscription OnCreateAttemptedTest {
-    onCreateAttemptedTest {
+  subscription OnCreateAttemptedTest(
+    $filter: ModelSubscriptionAttemptedTestFilterInput
+  ) {
+    onCreateAttemptedTest(filter: $filter) {
       id
       user_id
       attempted_by {
@@ -654,6 +752,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -665,6 +764,7 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -672,20 +772,25 @@ export const onCreateAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateAttemptedTest = /* GraphQL */ `
-  subscription OnUpdateAttemptedTest {
-    onUpdateAttemptedTest {
+  subscription OnUpdateAttemptedTest(
+    $filter: ModelSubscriptionAttemptedTestFilterInput
+  ) {
+    onUpdateAttemptedTest(filter: $filter) {
       id
       user_id
       attempted_by {
@@ -697,6 +802,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -708,6 +814,7 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -715,20 +822,25 @@ export const onUpdateAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteAttemptedTest = /* GraphQL */ `
-  subscription OnDeleteAttemptedTest {
-    onDeleteAttemptedTest {
+  subscription OnDeleteAttemptedTest(
+    $filter: ModelSubscriptionAttemptedTestFilterInput
+  ) {
+    onDeleteAttemptedTest(filter: $filter) {
       id
       user_id
       attempted_by {
@@ -740,6 +852,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -751,6 +864,7 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -758,20 +872,23 @@ export const onDeleteAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateResult = /* GraphQL */ `
-  subscription OnCreateResult {
-    onCreateResult {
+  subscription OnCreateResult($filter: ModelSubscriptionResultFilterInput) {
+    onCreateResult(filter: $filter) {
       id
       attempted_id
       question_id
@@ -786,17 +903,19 @@ export const onCreateResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateResult = /* GraphQL */ `
-  subscription OnUpdateResult {
-    onUpdateResult {
+  subscription OnUpdateResult($filter: ModelSubscriptionResultFilterInput) {
+    onUpdateResult(filter: $filter) {
       id
       attempted_id
       question_id
@@ -811,17 +930,19 @@ export const onUpdateResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteResult = /* GraphQL */ `
-  subscription OnDeleteResult {
-    onDeleteResult {
+  subscription OnDeleteResult($filter: ModelSubscriptionResultFilterInput) {
+    onDeleteResult(filter: $filter) {
       id
       attempted_id
       question_id
@@ -836,116 +957,145 @@ export const onDeleteResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreatePromotion = /* GraphQL */ `
-  subscription OnCreatePromotion {
-    onCreatePromotion {
+  subscription OnCreatePromotion(
+    $filter: ModelSubscriptionPromotionFilterInput
+  ) {
+    onCreatePromotion(filter: $filter) {
       id
       promotion_code
       discount_percentage
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdatePromotion = /* GraphQL */ `
-  subscription OnUpdatePromotion {
-    onUpdatePromotion {
+  subscription OnUpdatePromotion(
+    $filter: ModelSubscriptionPromotionFilterInput
+  ) {
+    onUpdatePromotion(filter: $filter) {
       id
       promotion_code
       discount_percentage
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeletePromotion = /* GraphQL */ `
-  subscription OnDeletePromotion {
-    onDeletePromotion {
+  subscription OnDeletePromotion(
+    $filter: ModelSubscriptionPromotionFilterInput
+  ) {
+    onDeletePromotion(filter: $filter) {
       id
       promotion_code
       discount_percentage
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateStaticContent = /* GraphQL */ `
-  subscription OnCreateStaticContent {
-    onCreateStaticContent {
+  subscription OnCreateStaticContent(
+    $filter: ModelSubscriptionStaticContentFilterInput
+  ) {
+    onCreateStaticContent(filter: $filter) {
       id
       name
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateStaticContent = /* GraphQL */ `
-  subscription OnUpdateStaticContent {
-    onUpdateStaticContent {
+  subscription OnUpdateStaticContent(
+    $filter: ModelSubscriptionStaticContentFilterInput
+  ) {
+    onUpdateStaticContent(filter: $filter) {
       id
       name
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteStaticContent = /* GraphQL */ `
-  subscription OnDeleteStaticContent {
-    onDeleteStaticContent {
+  subscription OnDeleteStaticContent(
+    $filter: ModelSubscriptionStaticContentFilterInput
+  ) {
+    onDeleteStaticContent(filter: $filter) {
       id
       name
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onCreateSearchFeedback = /* GraphQL */ `
-  subscription OnCreateSearchFeedback {
-    onCreateSearchFeedback {
+  subscription OnCreateSearchFeedback(
+    $filter: ModelSubscriptionSearchFeedbackFilterInput
+  ) {
+    onCreateSearchFeedback(filter: $filter) {
       id
       user_email
       description
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onUpdateSearchFeedback = /* GraphQL */ `
-  subscription OnUpdateSearchFeedback {
-    onUpdateSearchFeedback {
+  subscription OnUpdateSearchFeedback(
+    $filter: ModelSubscriptionSearchFeedbackFilterInput
+  ) {
+    onUpdateSearchFeedback(filter: $filter) {
       id
       user_email
       description
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const onDeleteSearchFeedback = /* GraphQL */ `
-  subscription OnDeleteSearchFeedback {
-    onDeleteSearchFeedback {
+  subscription OnDeleteSearchFeedback(
+    $filter: ModelSubscriptionSearchFeedbackFilterInput
+  ) {
+    onDeleteSearchFeedback(filter: $filter) {
       id
       user_email
       description
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;

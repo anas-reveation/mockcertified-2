@@ -37,15 +37,19 @@ export const createUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -63,15 +67,19 @@ export const updateUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -89,15 +97,19 @@ export const deleteUser = /* GraphQL */ `
       stripe_seller_id
       created_tests {
         nextToken
+        __typename
       }
       purchased_tests {
         nextToken
+        __typename
       }
       attempted_tests {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -118,6 +130,7 @@ export const createTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -128,24 +141,29 @@ export const createTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -166,6 +184,7 @@ export const updateTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -176,24 +195,29 @@ export const updateTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -214,6 +238,7 @@ export const deleteTestManager = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       category_id
       sub_category_id
@@ -224,24 +249,29 @@ export const deleteTestManager = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       title
       description
       reject_description
       credit
+      blog_link
       price
       status
       tags
       time_limit
       questions {
         nextToken
+        __typename
       }
       slug
       feedback {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -263,6 +293,7 @@ export const createQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -270,6 +301,7 @@ export const createQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -278,6 +310,7 @@ export const createQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -299,6 +332,7 @@ export const updateQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -306,6 +340,7 @@ export const updateQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -314,6 +349,7 @@ export const updateQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -335,6 +371,7 @@ export const deleteQuestion = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -342,6 +379,7 @@ export const deleteQuestion = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       question
       answer
@@ -350,6 +388,7 @@ export const deleteQuestion = /* GraphQL */ `
       is_showcase
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -365,9 +404,11 @@ export const createCategory = /* GraphQL */ `
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -383,9 +424,11 @@ export const updateCategory = /* GraphQL */ `
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -401,9 +444,11 @@ export const deleteCategory = /* GraphQL */ `
       slug
       sub_category {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -425,9 +470,11 @@ export const createSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -449,9 +496,11 @@ export const updateSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -473,9 +522,11 @@ export const deleteSubCategory = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -497,6 +548,7 @@ export const createPurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -507,6 +559,7 @@ export const createPurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -514,10 +567,12 @@ export const createPurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -539,6 +594,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -549,6 +605,7 @@ export const updatePurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -556,10 +613,12 @@ export const updatePurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -581,6 +640,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test {
         id
@@ -591,6 +651,7 @@ export const deletePurchasedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -598,10 +659,12 @@ export const deletePurchasedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       promocode_id
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -622,6 +685,7 @@ export const createFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -629,6 +693,7 @@ export const createFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -638,10 +703,12 @@ export const createFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -662,6 +729,7 @@ export const updateFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -669,6 +737,7 @@ export const updateFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -678,10 +747,12 @@ export const updateFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -702,6 +773,7 @@ export const deleteFeedback = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -709,6 +781,7 @@ export const deleteFeedback = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       purchased_id
       purchased_test {
@@ -718,10 +791,12 @@ export const deleteFeedback = /* GraphQL */ `
         promocode_id
         createdAt
         updatedAt
+        __typename
       }
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -742,6 +817,7 @@ export const createAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -753,6 +829,7 @@ export const createAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -760,14 +837,17 @@ export const createAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -788,6 +868,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -799,6 +880,7 @@ export const updateAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -806,14 +888,17 @@ export const updateAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -834,6 +919,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         stripe_seller_id
         createdAt
         updatedAt
+        __typename
       }
       test_id
       test {
@@ -845,6 +931,7 @@ export const deleteAttemptedTest = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags
@@ -852,14 +939,17 @@ export const deleteAttemptedTest = /* GraphQL */ `
         slug
         createdAt
         updatedAt
+        __typename
       }
       status
       remaining_time
       result {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -883,11 +973,13 @@ export const createResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -911,11 +1003,13 @@ export const updateResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -939,11 +1033,13 @@ export const deleteResult = /* GraphQL */ `
         is_showcase
         createdAt
         updatedAt
+        __typename
       }
       user_input
       result_status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -959,6 +1055,7 @@ export const createPromotion = /* GraphQL */ `
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -974,6 +1071,7 @@ export const updatePromotion = /* GraphQL */ `
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -989,6 +1087,7 @@ export const deletePromotion = /* GraphQL */ `
       expiry_date
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1003,6 +1102,7 @@ export const createStaticContent = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1017,6 +1117,7 @@ export const updateStaticContent = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1031,6 +1132,7 @@ export const deleteStaticContent = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1046,6 +1148,7 @@ export const createSearchFeedback = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1061,6 +1164,7 @@ export const updateSearchFeedback = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1076,6 +1180,7 @@ export const deleteSearchFeedback = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;

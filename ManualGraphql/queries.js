@@ -27,6 +27,7 @@ export const userTests = /* GraphQL */ `
             price
             description
             credit
+            blog_link
             category {
               id
               slug
@@ -65,6 +66,7 @@ export const userTests = /* GraphQL */ `
             time_limit
             description
             credit
+            blog_link
             category {
               id
               slug
@@ -110,6 +112,7 @@ export const userTests = /* GraphQL */ `
           description
           reject_description
           credit
+          blog_link
           id
           price
           time_limit
@@ -160,6 +163,7 @@ export const getTestDetail = /* GraphQL */ `
       title
       description
       credit
+      blog_link
       price
       time_limit
       createdAt
@@ -184,6 +188,7 @@ export const listAllTests = /* GraphQL */ `
         slug
         description
         credit
+        blog_link
         price
         status
         time_limit
@@ -410,6 +415,7 @@ export const searchTestManagers = /* GraphQL */ `
         description
         reject_description
         credit
+        blog_link
         price
         status
         tags

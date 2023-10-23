@@ -20,6 +20,7 @@
         :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
         :shareFunc="shareTest"
         :credit="testDetail.credit"
+        :blogLink="testDetail.blog_link"
         :isDescEdit="this.user && this.user.id === this.testDetail.user_id"
         :descEditFun="descEditFun"
         :userId="`${testDetail.user_id}`"
