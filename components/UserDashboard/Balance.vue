@@ -1,52 +1,38 @@
 <template>
   <div>
-    <P class="text-end font_style_20 font_family_nunito fw-bolder"
-      >Current Balance : $ {{ balanceDetail }}</P
-    >
-    <div class="d-flex flex-column">
-      <div class="mb-4" v-if="userTestData?.purchased_tests?.items?.length">
-        <NuxtLink to="/protected/purchased-test">
-          <div
-            @mouseover="isHovered1 = true"
-            @mouseout="isHovered1 = false"
-            :class="{ 'bg-primary': isHovered1, 'text-white': isHovered1 }"
-            class="d-flex shadow-box justify-content-between px-4 py-5 align-items-center rounded_border"
+    <div class="mt-5" v-if="!isFetched">
+      <AnimatedPlaceholder class="rounded-3 p-2 me-2" width="300px" />
+      <br />
+      <AnimatedPlaceholder class="btn mt-4" width="200px" />
+    </div>
+    <div v-if="balanceDetail && isFetched">
+      <div class="mt-5">
+        <div>
+          <span
+            class="text-dark rounded-3 fw-bold p-2 me-2 d-inline-block font_size_24 account_font_size bg_grey"
           >
-            <h2 class="fw-bolder font_family_aieron">
-              {{ userTestData?.purchased_tests?.items?.length }}
-            </h2>
-            <p class="font_family_nunito">Tests Bought</p>
-          </div>
-        </NuxtLink>
+            Your Account Balance ${{ balanceDetail }}
+          </span>
+        </div>
+
+        <button @click="getRedirectlink1" class="btn btn-primary text-white mt-4">
+          <span class="font_size_16"> View your payout </span>
+        </button>
       </div>
-      <div class="mb-4" v-if="userTestData?.created_tests?.items?.length">
-        <NuxtLink to="/protected/create-test">
-          <div
-            @mouseover="isHovered2 = true"
-            @mouseout="isHovered2 = false"
-            :class="{ 'bg-primary': isHovered2, 'text-white': isHovered2 }"
-            class="d-flex shadow-box justify-content-between px-4 py-5 align-items-center rounded_border"
-          >
-            <h2 class="fw-bolder font_family_aieron">
-              {{ userTestData?.created_tests?.items?.length }}
-            </h2>
-            <p class="font_family_nunito">Tests Created</p>
-          </div>
-        </NuxtLink>
-      </div>
-      <div class="mb-4" v-if="userTestData?.attempted_tests?.items?.length">
-        <NuxtLink to="/protected/attempted-test">
-          <div
-            @mouseover="isHovered3 = true"
-            @mouseout="isHovered3 = false"
-            :class="{ 'bg-primary': isHovered3, 'text-white': isHovered3 }"
-            class="d-flex shadow-box justify-content-between px-4 py-5 align-items-center rounded_border"
-          >
-            <h2 class="fw-bolder font_family_aieron">
-              {{ userTestData?.attempted_tests?.items?.length }}
-            </h2>
-            <p class="font_family_nunito">Tests Attempted</p>
-          </div>
+    </div>
+    <div v-else-if="isFetched">
+      <div class="mt-5 text-center">
+        <img
+          src="@/assets/images/not_connected.svg"
+          alt="boy_illustration"
+          class="boy_illustration"
+        />
+        <div class="fw-bolder font_size_24 account_font_size">
+          Your Account Is Not Connected $0.00
+        </div>
+
+        <NuxtLink to="/protected/create-test" class="btn btn-primary text-white mt-4">
+          <span class="font_size_16"> Create a Test </span>
         </NuxtLink>
       </div>
     </div>
@@ -55,44 +41,60 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import { Browser } from '@capacitor/browser';
 
 export default {
   middleware: ['authenticated'],
 
   data() {
     return {
-      isHovered1: false,
-      isHovered2: false,
-      isHovered3: false,
-      userTestData: {},
-      hoveredCard: null,
       balanceDetail: null,
+      isFetched: false,
+      url: null,
     };
   },
 
   computed: {
-    ...mapState('dashboard', ['testCollection']),
+    ...mapState(['isLoaderHidden']),
   },
 
   async mounted() {
-    if (this.$route.params.userId && !this.testCollection.length) {
-      await this.getTestData(`${this.$route.params.userId}`);
-    }
-    await this.getBalanceLocal1();
+    this.setIsLoaderHidden(true);
 
-    this.userTestData = this.testCollection;
+    await this.getStripeIdStatusLocal1();
+    if (this.isAccountActive) {
+      await this.getBalanceLocal1();
+      const res = await this.redirectExpressDashboard();
+      if (res) {
+        this.url = res;
+      }
+    }
     this.isFetched = true;
+    this.setIsLoaderHidden(false);
   },
 
   methods: {
-    ...mapActions('dashboard', ['getTestData']),
-    ...mapActions('seller', ['getBalanceDetail']),
+    ...mapActions('seller', ['getBalanceDetail', 'redirectExpressDashboard', 'getStripeIdStatus']),
+    ...mapMutations(['setIsLoaderHidden']),
 
     async getBalanceLocal1() {
       const res = await this.getBalanceDetail();
       if (res) {
         this.balanceDetail = parseFloat(res.amount) / 100;
         this.balanceDetail = parseFloat(this.balanceDetail).toFixed(2);
+      }
+    },
+    async getRedirectlink1() {
+      if (this.url) {
+        await Browser.open({ url: this.url });
+      }
+    },
+    async getStripeIdStatusLocal1() {
+      const res = await this.getStripeIdStatus();
+      if (res == 'active') {
+        this.isAccountActive = true;
+      } else if (res == 'notActive') {
+        this.isAccountActive = false;
       }
     },
   },

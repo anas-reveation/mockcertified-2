@@ -110,7 +110,9 @@
       </div>
       <div v-if="blogLink" class="mt-3">
         <h3 class="fw-bolder font_size_20 test_detail_title">Blog Link</h3>
-        <p class="text-break font_size_16 test_detail_desc">{{ blogLink }}</p>
+        <a :href="blogLink" target="_blank">
+          <p class="text-break font_size_16 test_detail_desc">{{ blogLink }}</p>
+        </a>
       </div>
 
       <div v-if="rejectDescription" class="mt-3">
