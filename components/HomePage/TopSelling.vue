@@ -89,7 +89,7 @@
 export default {
   data() {
     return {
-      screenWidth: typeof window !== 'undefined' ? window.innerWidth : 992,
+      screenWidth: 992,
     };
   },
   created() {
