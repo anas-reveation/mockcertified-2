@@ -1,17 +1,17 @@
 <template>
   <div>
-    <HomeElevateYourSkills />
-    <HomeSellYourTest />
-    <HomeExperienceTest />
-    <HomeExamJitters />
-    <HomeWhyUs />
-    <HomeNotConvinced />
-    <HomeYourWallet />
-    <HomeTopSellingTests />
-    <HomeFreshPerspectives />
-    <HomeLookingFor />
-    <!-- <HomeOurClients /> -->
-    <HomeContactUs />
+    <NavbarNew />
+    <HomePageBanner />
+    <HomePageExamJitters />
+    <HomePageLookingFor />
+    <HomePageExprienceTest />
+    <HomePageTopSelling />
+    <HomePageYourWallet />
+    <HomePageWhyUs />
+    <HomePageOurBlogs />
+    <HomePageHelpHand />
+    <HomePageStudentReview />
+    <FooterNew />
   </div>
 </template>
 
