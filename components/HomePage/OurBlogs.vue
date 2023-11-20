@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       isServer: true, // Default to true, assuming server-side rendering
-      screenWidth: 0,
+      screenWidth: 1200,
       lgMdLoopCount: 3,
       smLoopCount: 2,
     };
