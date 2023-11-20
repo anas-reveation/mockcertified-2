@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5">
+  <div v-if="isLoaded" class="my-5">
     <h2 class="text-black font-size-44 fw-bolder text-center font_family_poppins_bold my-5">
       Our Blogs
     </h2>
@@ -31,13 +31,18 @@
       </p>
     </div>
   </div>
+  <div v-else>
+    <!-- Optionally, you can show a loading spinner or message while the data is loading -->
+    Loading...
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      screenWidth: process.client ? window.innerWidth : 0,
+      screenWidth: process.client ? window.innerWidth : 1200, // Set a default value
+      isLoaded: false, // Add a loading state
     };
   },
   computed: {
@@ -48,6 +53,8 @@ export default {
   mounted() {
     if (process.client) {
       window.addEventListener('resize', this.handleResize);
+      this.handleResize(); // Call the method to set the initial screenWidth
+      this.isLoaded = true; // Set loading state to true once the initial data is available
     }
   },
   beforeDestroy() {
