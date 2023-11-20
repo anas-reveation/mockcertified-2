@@ -1,11 +1,11 @@
 <template>
-  <div v-if="!window" class="my-5">
+  <div class="my-5">
     <h2 class="text-black font-size-44 fw-bolder text-center font_family_poppins_bold my-5">
       Our Blogs
     </h2>
-    <div v-if="window" class="container">
+    <div class="container">
       <div class="row g-4">
-        <div v-for="i in screenWidth > 991 ? 3 : 2" class="col-12 col-md-6 col-lg-4">
+        <div v-for="i in loopCount" class="col-12 col-md-6 col-lg-4">
           <div class="card h-100">
             <img src="@/assets/images/blogs_card.svg" alt="card_1" class="w-100" />
             <div class="d-flex flex-column justify-content-between h-100 p-3">
@@ -32,31 +32,32 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
-      screenWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
+      screenWidth: process.client ? window.innerWidth : 0,
     };
   },
-  created() {
-    // Check if window is defined before adding the event listener
-    if (typeof window !== 'undefined') {
+  computed: {
+    loopCount() {
+      return this.screenWidth > 991 ? 3 : 2;
+    },
+  },
+  mounted() {
+    if (process.client) {
       window.addEventListener('resize', this.handleResize);
     }
   },
-  destroyed() {
-    // Check if window is defined before removing the event listener
-    if (typeof window !== 'undefined') {
+  beforeDestroy() {
+    if (process.client) {
       window.removeEventListener('resize', this.handleResize);
     }
   },
   methods: {
     handleResize() {
-      // Check if window is defined before accessing its properties
-      if (typeof window !== 'undefined') {
-        this.screenWidth = window.innerWidth;
-      }
+      this.screenWidth = window.innerWidth;
     },
   },
 };
