@@ -1,11 +1,5 @@
 <template>
   <div>
-    <div v-if="" class="row mt-4">
-      <div v-for="i in 6" :key="i" class="col-12 col-md-4 col-sm-6" data-aos="zoom-in">
-        <AnimatedPlaceholder width="200px" borderRadius="50px" class="m-2" />
-      </div>
-    </div>
-
     <div class="my-5">
       <h2 class="text-black font-size-44 fw-bolder text-center font_family_poppins_bold my-5">
         Our Blogs
