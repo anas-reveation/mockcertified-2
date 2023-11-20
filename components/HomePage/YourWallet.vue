@@ -25,22 +25,16 @@
             </p>
           </div>
         </div>
-        <div
-          v-if="screenWidth > 991"
-          class="col-2 d-flex align-items-center justify-content-center"
-        >
+        <div class="col-2 d-none d-lg-flex align-items-center justify-content-center">
           <img src="~assets/images/ellipse.svg" alt="wallet_button" />
         </div>
-        <div v-if="screenWidth > 991" class="col-5">
+        <div class="col-5 d-none d-lg-block">
           <p class="font-size-18 fw-bold m-0">
             MockCertified offers tests at very budget-friendly prices.
           </p>
         </div>
       </div>
-      <div
-        v-if="screenWidth <= 991"
-        class="row align-items-center justify-content-center text-center"
-      >
+      <div class="row align-items-center justify-content-center text-center d-flex d-lg-none">
         <div v-for="i in 3" class="col-12 py-3">
           <p class="font-size-16 font-size-lg-18 fw-bold m-0">
             MockCertified offers tests at very budget-friendly prices.
@@ -50,36 +44,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      screenWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
-    };
-  },
-  created() {
-    // Check if window is defined before adding the event listener
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.handleResize);
-    }
-  },
-  destroyed() {
-    // Check if window is defined before removing the event listener
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.handleResize);
-    }
-  },
-  methods: {
-    handleResize() {
-      // Check if window is defined before accessing its properties
-      if (typeof window !== 'undefined') {
-        this.screenWidth = window.innerWidth;
-      }
-    },
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';

@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div v-if="screenWidth > 991" class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 d-none d-lg-block">
           <div class="card_top">
             <div class="card-content_3">
               <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
@@ -84,36 +84,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      screenWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
-    };
-  },
-  created() {
-    // Check if window is defined before adding the event listener
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.handleResize);
-    }
-  },
-  destroyed() {
-    // Check if window is defined before removing the event listener
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.handleResize);
-    }
-  },
-  methods: {
-    handleResize() {
-      // Check if window is defined before accessing its properties
-      if (typeof window !== 'undefined') {
-        this.screenWidth = window.innerWidth;
-      }
-    },
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
