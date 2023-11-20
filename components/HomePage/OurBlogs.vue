@@ -1,9 +1,9 @@
 <template>
-  <div class="my-5">
+  <div v-if="!window" class="my-5">
     <h2 class="text-black font-size-44 fw-bolder text-center font_family_poppins_bold my-5">
       Our Blogs
     </h2>
-    <div class="container">
+    <div v-if="window" class="container">
       <div class="row g-4">
         <div v-for="i in screenWidth > 991 ? 3 : 2" class="col-12 col-md-6 col-lg-4">
           <div class="card h-100">
