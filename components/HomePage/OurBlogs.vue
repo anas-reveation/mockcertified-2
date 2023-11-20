@@ -36,7 +36,7 @@
 export default {
   data() {
     return {
-      screenWidth: 992,
+      screenWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
     };
   },
   created() {
