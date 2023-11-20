@@ -1,11 +1,15 @@
 <template>
-  <div v-if="isLoaded" class="my-5">
+  <div v-if="!window" class="my-5">
     <h2 class="text-black font-size-44 fw-bolder text-center font_family_poppins_bold my-5">
       Our Blogs
     </h2>
     <div class="container">
       <div class="row g-4">
-        <div v-for="i in loopCount" class="col-12 col-md-6 col-lg-4">
+        <div
+          v-for="(item, index) in computedLoopCount"
+          :key="index"
+          class="col-12 col-md-6 col-lg-4"
+        >
           <div class="card h-100">
             <img src="@/assets/images/blogs_card.svg" alt="card_1" class="w-100" />
             <div class="d-flex flex-column justify-content-between h-100 p-3">
@@ -31,41 +35,41 @@
       </p>
     </div>
   </div>
-  <div v-else>
-    <!-- Optionally, you can show a loading spinner or message while the data is loading -->
-    Loading...
-  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      screenWidth: process.client ? window.innerWidth : 1200, // Set a default value
-      isLoaded: false, // Add a loading state
+      isServer: true, // Default to true, assuming server-side rendering
+      screenWidth: 0,
+      lgMdLoopCount: 3,
+      smLoopCount: 2,
     };
   },
   computed: {
-    loopCount() {
-      return this.screenWidth > 991 ? 3 : 2;
+    computedLoopCount() {
+      return this.screenWidth >= 992 ? this.lgMdLoopCount : this.smLoopCount;
     },
   },
   mounted() {
-    if (process.client) {
+    // Check if window is defined (not in server-side rendering)
+    if (typeof window !== 'undefined') {
+      this.isServer = false;
+      this.screenWidth = window.innerWidth;
       window.addEventListener('resize', this.handleResize);
-      this.handleResize(); // Call the method to set the initial screenWidth
-      this.isLoaded = true; // Set loading state to true once the initial data is available
-    }
-  },
-  beforeDestroy() {
-    if (process.client) {
-      window.removeEventListener('resize', this.handleResize);
     }
   },
   methods: {
     handleResize() {
       this.screenWidth = window.innerWidth;
     },
+  },
+  beforeDestroy() {
+    // Remove the event listener when the component is destroyed
+    if (!this.isServer) {
+      window.removeEventListener('resize', this.handleResize);
+    }
   },
 };
 </script>
