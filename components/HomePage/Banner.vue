@@ -1,11 +1,11 @@
 <template>
   <div class="bg_div">
-    <div class="container pt-0 pt-sm-3 pt-md-5">
-      <div class="row justify-content-center align-items-center pt-2 pt-md-5">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
         <div
           class="d-flex flex-column justify-content-center align-items-center col-12 col-md-10 col-xl-8"
         >
-          <div class="text-center text-white my-2 my-lg-5">
+          <div class="text-center text-white my-3 py-3 my-md-4 py-md-4 py-lg-5">
             <h2
               class="font-size-24 font-size-md-30 font-size-lg-50 fw-bold font_family_poppins_bold"
             >
@@ -20,7 +20,7 @@
               adipiscing elit, sed do niam, quis nostrud exercitaeiusmod te
             </p>
           </div>
-          <div class="d-flex pt-0 pt-sm-3 mt-0 mt-md-3 mt-xl-5">
+          <div class="d-flex">
             <button class="banner_btn me-2 me-md-3">JOIN FOR FREE</button>
             <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
           </div>
@@ -40,20 +40,21 @@
   background-image: url('~@/assets/images/main_bg.svg'); /* Path to your image */
   background-size: cover;
   width: 100%;
-  height: 290px;
+  height: 330px;
 }
 .banner_btn {
   background-color: transparent;
   color: white;
   border: 3px solid white;
   border-radius: 2px; /* Adjust the border radius as needed */
-  padding: 5px 12px;
+  padding: 5px 0;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 400;
+  width: 120px;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -63,19 +64,20 @@
 }
 @include media-breakpoint-up(sm) {
   .bg_div {
-    height: 350px;
+    height: 370px;
   }
 }
 
 @include media-breakpoint-up(md) {
   .bg_div {
-    height: 450px;
+    height: 480px;
     border-radius: 3px;
     padding: 5px 12px;
   }
   .banner_btn {
     border-radius: 5px; /* Adjust the border radius as needed */
-    padding: 10px 30px;
+    padding: 10px 0px;
+    width: 135px;
   }
 }
 
@@ -85,12 +87,13 @@
   }
   .banner_btn {
     font-size: 16px;
+    width: 180px;
   }
 }
 
 @include media-breakpoint-up(xl) {
   .bg_div {
-    height: 735px;
+    height: 750px;
   }
 }
 </style>

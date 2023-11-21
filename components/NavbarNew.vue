@@ -5,8 +5,8 @@
         <div class="col-7 col-lg-5 col-xl-7">
           <div class="row align-items-center">
             <div class="col-9 col-lg-5 col-xl-3">
-              <NuxtLink to="/homepage" class="navbar-brand">
-                <img src="@/assets/images/logo_with_name.svg" alt="logo" class="w-100" />
+              <NuxtLink to="/" class="navbar-brand">
+                <img src="@/assets/images/mc_icon.svg" alt="logo" class="w-100" />
               </NuxtLink>
             </div>
             <div class="col-lg-7 col-xl-9 d-none d-lg-block">
@@ -29,7 +29,7 @@
         </div>
         <div class="col-lg-7 col-xl-5">
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
+            <ul class="navbar-nav mb-2 mb-lg-0 active_link">
               <li class="d-block d-lg-none">
                 <SearchInput
                   v-model="searchQuery"
@@ -38,12 +38,23 @@
                 />
               </li>
               <li class="nav-item">
-                <a class="nav-link active font-size-16 fw-light" aria-current="page" href="#"
-                  >Categories</a
-                >
+                <NuxtLink to="/category">
+                  <a
+                    class="nav-link font-size-16"
+                    :class="{ active: $route.path === '/category' }"
+                    aria-current="page"
+                    >Categories</a
+                  >
+                </NuxtLink>
               </li>
               <li class="nav-item">
-                <a class="nav-link font-size-16 fw-light me-3" href="#">Mock Tests</a>
+                <NuxtLink to="/mocktest">
+                  <a
+                    class="nav-link font-size-16 me-3"
+                    :class="{ active: $route.path === '/mocktest' }"
+                    >Mock Tests</a
+                  >
+                </NuxtLink>
               </li>
               <div class="d-flex">
                 <button class="login_btn me-3">Login</button>
@@ -94,6 +105,17 @@ export default {
 .login_btn:hover {
   background-color: var(--primary);
   color: white;
+}
+
+.active_link .nav-item .nav-link {
+  color: black;
+}
+.active_link .nav-item .nav-link.active {
+  font-weight: 600;
+}
+
+.active_link .nav-item .nav-link:hover {
+  color: grey;
 }
 
 @include media-breakpoint-up(xl) {

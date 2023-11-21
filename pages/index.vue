@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavbarNew />
     <HomePageBanner />
     <HomePageExamJitters />
     <HomePageLookingFor />
@@ -11,7 +10,6 @@
     <HomePageOurBlogs />
     <HomePageHelpHand />
     <HomePageStudentReview />
-    <FooterNew />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5 pt-5">
+  <div class="my-5 pt-5 bg-lightGreen">
     <h2
       class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
     >
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <p class="fw-bolder font-size-16 text-primary text-decoration-underline text-end my-4">
+      <p class="fw-bolder font-size-16 text-primary text-decoration-underline text-end py-4">
         View More
       </p>
     </div>
@@ -33,6 +33,10 @@
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.bg-lightGreen {
+  background-color: rgba(240, 247, 255, 1);
+}
 .card {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black">
+  <div class="bg_footer">
     <div class="container py-5">
       <div class="row text-white">
         <div class="col-12 col-lg-4">
@@ -76,6 +76,10 @@
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
+
+.bg_footer {
+  background-color: #052142;
+}
 
 .contact_icon {
   width: 20px;

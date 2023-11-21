@@ -3,8 +3,8 @@
     <div
       class="vw-100 vh-100 d-flex justify-content-center align-items-center position-absolute z_index"
       v-if="isLoading && !isLoaderHidden"
-    >
-    </div>
+    ></div>
+    <NavbarNew />
 
     <div>
       <Nuxt class="overflow-hidden" />
@@ -24,6 +24,7 @@
         </div>
       </div>
     </div>
+    <FooterNew />
   </div>
 </template>
 
@@ -66,7 +67,7 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
-a{
+a {
   text-decoration: none !important;
 }
 .z_index {
