@@ -38,10 +38,10 @@
                 />
               </li>
               <li class="nav-item">
-                <NuxtLink to="/category">
+                <NuxtLink to="/categories">
                   <a
                     class="nav-link font-size-16"
-                    :class="{ active: $route.path === '/category' }"
+                    :class="{ active: $route.path === '/categories' }"
                     aria-current="page"
                     >Categories</a
                   >
