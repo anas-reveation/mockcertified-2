@@ -92,13 +92,13 @@ export default {
   color: var(--primary);
   border: 3px solid var(--primary);
   border-radius: 8px; /* Adjust the border radius as needed */
-  padding: 5px 15px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
+  width: 100px;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -120,9 +120,9 @@ export default {
 
 @include media-breakpoint-up(xl) {
   .login_btn {
-    padding: 5px 25px;
     font-size: 16px;
     font-weight: 500;
+    width: 100px;
   }
 }
 </style>
