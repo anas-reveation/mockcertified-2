@@ -31,9 +31,9 @@
         <div class="col-12 col-lg-5">
           <div
             v-for="i in 3"
-            class="card_wallet_2 mb-4 d-flex align-items-center justify-content-center card_height"
+            class="card_wallet_2 mb-4 p-3 d-flex align-items-center justify-content-center card_height"
           >
-            <p class="font-size-16 fw-bold m-0 text-primary">
+            <p class="font-size-14 font-size-md-16 fw-bold m-0 text-primary">
               MockCertified offers tests at very budget-friendly prices.
             </p>
           </div>

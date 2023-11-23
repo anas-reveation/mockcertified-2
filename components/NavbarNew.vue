@@ -1,9 +1,22 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container">
-      <div class="row align-items-center justify-content-center justify-content-md-between w-100">
-        <div class="col-7 col-lg-5 col-xl-7">
-          <div class="row align-items-center">
+    <div class="container justify-content-evenly justify-content-lg-between">
+      <div class="row align-items-center justify-content-between w-100 nav_btn">
+        <div class="col-3 d-flex d-lg-none justify-content-start">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"> </span>
+          </button>
+        </div>
+        <div class="col-6 col-lg-5 col-xl-7">
+          <div class="row align-items-center justify-content-center">
             <div class="col-9 col-lg-5 col-xl-3">
               <NuxtLink to="/" class="navbar-brand">
                 <img src="@/assets/images/mc_icon.svg" alt="logo" class="w-100" />
@@ -14,20 +27,85 @@
             </div>
           </div>
         </div>
-        <div class="col-4 d-flex d-lg-none justify-content-end">
+        <div class="col-3 d-flex d-lg-none justify-content-end">
           <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
+            data-bs-target="#navbarSupportedContent1"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="">
+              <img
+                src="~assets/images/magnifine_glass.svg"
+                alt="magnifine_glass"
+                class="icon_h_w"
+              />
+            </span>
           </button>
         </div>
-        <div class="col-lg-7 col-xl-5">
+        <div class="col-lg-7 col-xl-5 d-block d-lg-none">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 active_link">
+              <li class="nav-item">
+                <NuxtLink to="/category">
+                  <a
+                    class="nav-link font-size-16"
+                    :class="{ active: $route.path === '/category' }"
+                    aria-current="page"
+                    >Categories</a
+                  >
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/mocktest">
+                  <a
+                    class="nav-link font-size-16 me-3"
+                    :class="{ active: $route.path === '/mocktest' }"
+                    >Mock Tests</a
+                  >
+                </NuxtLink>
+              </li>
+              <div class="d-flex">
+                <button class="login_btn me-3">Login</button>
+                <button class="login_btn">Sign up</button>
+              </div>
+            </ul>
+            <form class="d-flex"></form>
+          </div>
+          <div
+            class="collapse navbar-collapse justify-content-end navbar_content"
+            id="navbarSupportedContent1"
+          >
+            <ul class="navbar-nav mb-2 mb-lg-0 active_link">
+              <li class="d-block d-lg-none">
+                <SearchInput
+                  v-model="searchQuery"
+                  :searchQueryFunc="searchQueryFunc"
+                  class="mt-3"
+                />
+              </li>
+
+              <!-- <li class="nav-item">
+                <NuxtLink to="/mocktest">
+                  <a
+                    class="nav-link font-size-16 me-3"
+                    :class="{ active: $route.path === '/mocktest' }"
+                    >Mock Tests</a
+                  >
+                </NuxtLink>
+              </li> -->
+              <div class="d-flex">
+                <button class="login_btn me-3">Login</button>
+                <button class="login_btn">Sign up</button>
+              </div>
+            </ul>
+            <form class="d-flex"></form>
+          </div>
+        </div>
+        <div class="col-lg-7 col-xl-5 d-none d-lg-block">
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 active_link">
               <li class="d-block d-lg-none">
@@ -117,12 +195,79 @@ export default {
 .active_link .nav-item .nav-link:hover {
   color: grey;
 }
+.nav_btn .navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.icon_h_w {
+  height: 25px;
+}
+.navbar_content {
+  position: absolute;
+  top: 100%; /* Position it below the navbar */
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Set a high z-index value to ensure it overlaps other elements */
+}
+
+.navbar-collapse {
+  position: absolute;
+  top: 100%; /* Position it below the navbar */
+  left: 0;
+  z-index: 1000; /* Set a higher z-index to make it appear above other elements */
+  width: 100%;
+  padding: 5% 10%;
+  background-color: white; /* Set the background color as needed */
+  border: 1px solid #ddd; /* Add borders or styling as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for a better appearance */
+}
+
+.navbar-toggler {
+  z-index: 1001; /* Set a higher z-index to make it appear above the content */
+}
+
+/* Optionally, you can add transitions for a smoother effect */
+
+/* Hide the collapsed content by default */
+.navbar-collapse:not(.show) {
+  display: none;
+}
+
+/* Show the collapsed content when the toggler is clicked */
+.navbar-collapse.show {
+  display: block;
+}
+
+// .navbar_content {
+//   display: flex !important;
+// }
 
 @include media-breakpoint-up(xl) {
   .login_btn {
     font-size: 16px;
     font-weight: 500;
     width: 100px;
+  }
+
+  // .navbar_content {
+  //   display: none !important;
+  // }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar-collapse {
+    position: unset;
+    top: none; /* Position it below the navbar */
+    left: none;
+    z-index: none; /* Set a higher z-index to make it appear above other elements */
+    width: none;
+    padding: 0 0;
+    background-color: none; /* Set the background color as needed */
+    border: none; /* Add borders or styling as needed */
+    box-shadow: none; /* Add box shadow for a better appearance */
   }
 }
 </style>
