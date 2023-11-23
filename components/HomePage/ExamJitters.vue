@@ -6,7 +6,7 @@
           <img src="@/assets/images/lady_laptop.svg" alt="lady_laptop" class="w-100" />
         </div>
         <div
-          class="col-12 col-md-7 col-xl-6 me-auto me-md-3 me-lg-5 d-flex flex-column align-items-center align-items-md-start"
+          class="col-12 col-md-7 col-xl-6 me-auto px-4 me-md-3 me-lg-5 d-flex flex-column align-items-center align-items-md-start"
         >
           <h2
             class="text-black fw-bolder font-size-24 font-size-md-28 font-size-lg-44 text-center text-md-start font_family_poppins_bold"
