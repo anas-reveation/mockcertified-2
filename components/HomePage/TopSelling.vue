@@ -5,7 +5,7 @@
         <h2
           class="font-size-44 fw-bolder font-size-24 font-size-md-28 font-size-lg-44 font_family_poppins_bold"
         >
-          Our Top - Selling Tests
+          Our Top Selling Tests
         </h2>
         <p
           class="fw-light font-size-10 font-size-md-12 font-size-lg-14 font_family_poppins_light text-center my-3 w_100"
