@@ -5,27 +5,27 @@
       <span class="text-primary">Everything</span>
       you need to know
     </h4>
-    <div class="row align-items-center justify-content-center mt-5">
+    <div class="row justify-content-center mt-5">
       <div class="col-12 col-lg-5">
         <img src="~/assets/images/you_know_img.svg" alt="you_know_img" class="w-100" />
       </div>
       <div class="col-12 col-lg-7">
-        <div v-for="i in 5" class="btn-group w-100 my-3">
+        <div v-for="i in 5" :key="i" class="btn-group w-100 mb-4 d-flex flex-column">
           <button
             type="button"
-            class="btn btn-secondary dropdown-toggle d-flex align-items-center justify-content-between coustum_border"
-            data-bs-toggle="dropdown"
+            class="btn btn-secondary d-flex align-items-center justify-content-between coustum_border py-3"
             data-bs-display="static"
-            aria-expanded="false"
             style="text-align: left"
+            @click="toggleDropdown(i)"
           >
             <span class="font-size-10 font-size-md-14 font-size-lg-20"
-              >Right-aligned but left aligned when large screen</span
+              >Right-aligned but left-aligned when a large screen</span
             >
             <span class="arrow"></span>
           </button>
           <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start font-size-10 font-size-md-14 font-size-lg-20"
+            v-if="openDropdownIndex === i"
+            class="font-size-10 font-size-md-14 font-size-lg-20 text-start dropdown_menu py-2"
           >
             <li><button class="dropdown-item" type="button">Action</button></li>
             <li><button class="dropdown-item" type="button">Another action</button></li>
@@ -37,12 +37,27 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      openDropdownIndex: null,
+    };
+  },
+  methods: {
+    toggleDropdown(index) {
+      if (this.openDropdownIndex === index) {
+        this.openDropdownIndex = null;
+      } else {
+        this.openDropdownIndex = index;
+      }
+    },
+  },
+};
+</script>
+
 <style>
-.dropdown-toggle::after {
-  border: none;
-  content: none;
-}
-.dropdown-toggle .arrow {
+.arrow {
   content: '';
   border-top: 0.3em solid;
   border-right: 0.3em solid transparent;
@@ -53,5 +68,9 @@
   background-color: transparent;
   border: none;
   border-bottom: 1px solid black;
+}
+.dropdown_menu {
+  list-style-type: none;
+  border: 1px solid black;
 }
 </style>
