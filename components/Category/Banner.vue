@@ -13,5 +13,6 @@
   background-image: url('~@/assets/images/banner_cat.svg'); /* Path to your image */
   background-size: cover;
   width: 100%;
+  border-radius: 0 0 20px 20px;
 }
 </style>
