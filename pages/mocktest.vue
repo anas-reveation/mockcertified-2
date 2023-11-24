@@ -1,6 +1,8 @@
 <template>
   <div>
     <MockTestPageBanner />
+    <MockTestPageLowerBanner />
+    <MockTestPageYouStarted />
   </div>
 </template>
 
