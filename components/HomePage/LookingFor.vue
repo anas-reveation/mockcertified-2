@@ -6,18 +6,18 @@
       We got what you're<span class="text-primary"> looking for</span>
     </h2>
     <div class="container">
-      <div class="row g-5">
+      <div class="row g-3">
         <div v-for="i in 4" class="col-12 col-md-6 col-xl-3">
           <div class="card">
             <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
             <div class="p-3">
               <p class="fw-bolder font_family_poppins_bold font-size-18">Blockchain</p>
-              <p class="font-size-14">
+              <p class="font-size-14 font_family_poppins_light">
                 Lorem ipsum dolor sit amet, consectetur uadipelioeiusmod tempor incididunt ut labo
                 ipsum dolor sit amet, consecteturempor uq
               </p>
               <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-              <p class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5">
+              <p class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0">
                 Explore
               </p>
             </div>
