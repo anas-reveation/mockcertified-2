@@ -25,11 +25,13 @@
           </button>
           <ul
             v-if="openDropdownIndex === i"
-            class="font-size-10 font-size-md-14 font-size-lg-20 text-start dropdown_menu py-2"
+            class="font-size-10 font-size-md-14 font-size-lg-20 text-start dropdown_menu py-2 px-2"
           >
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
+            <p class="font-size-12 font-size-lg-14">
+              Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo ostrud exercitation
+              consequat.ipsum dolamet, secteturempor uq Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            </p>
           </ul>
         </div>
       </div>
