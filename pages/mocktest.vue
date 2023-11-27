@@ -3,6 +3,8 @@
     <MockTestPageBanner />
     <MockTestPageLowerBanner />
     <MockTestPageYouStarted />
+    <MockTestPageFeatureTest />
+    <MockTestPageLatestTest />
   </div>
 </template>
 
