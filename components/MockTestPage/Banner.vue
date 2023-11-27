@@ -1,7 +1,7 @@
 <template>
   <div class="bg_div">
-    <div class="container">
-      <h2 class="font-size-38 font_family_poppins_bold text-white py-5">Mock Tests</h2>
+    <div class="container py-5">
+      <h2 class="font-size-38 font_family_poppins_bold text-white my-4">Mock Tests</h2>
     </div>
   </div>
 </template>
