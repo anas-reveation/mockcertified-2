@@ -11,6 +11,7 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            @click="toggleNavbar"
           >
             <span class="navbar-toggler-icon"> </span>
           </button>
@@ -46,10 +47,10 @@
             </span>
           </button>
         </div>
-        <div class="col-lg-7 col-xl-5 d-block d-lg-none">
-          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0 active_link">
-              <li class="nav-item">
+        <div class="col-lg-7 col-xl-5 d-flex d-lg-none">
+          <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100">
+              <li v-for="i in 10" class="nav-item my-2">
                 <NuxtLink to="/category">
                   <a
                     class="nav-link font-size-16"
@@ -68,12 +69,16 @@
                   >
                 </NuxtLink>
               </li>
-              <div class="d-flex">
-                <button class="login_btn me-3">Login</button>
-                <button class="login_btn">Sign up</button>
-              </div>
             </ul>
-            <form class="d-flex"></form>
+          </div>
+          <div
+            v-if="isNavbarOpen"
+            class="d-block d-lg-none bottom-0 left-0 position-fixed navbar_collapse_div"
+          >
+            <div class="d-flex flex-column">
+              <button class="login_btn coustum_btn py-3 mb-3">Login</button>
+              <button class="login_btn coustum_btn py-3">Sign up</button>
+            </div>
           </div>
           <div
             class="collapse navbar-collapse justify-content-end navbar_content"
@@ -87,16 +92,6 @@
                   class="mt-3"
                 />
               </li>
-
-              <!-- <li class="nav-item">
-                <NuxtLink to="/mocktest">
-                  <a
-                    class="nav-link font-size-16 me-3"
-                    :class="{ active: $route.path === '/mocktest' }"
-                    >Mock Tests</a
-                  >
-                </NuxtLink>
-              </li> -->
               <div class="d-flex">
                 <button class="login_btn me-3">Login</button>
                 <button class="login_btn">Sign up</button>
@@ -152,11 +147,18 @@ export default {
   data() {
     return {
       searchQuery: '',
+      isNavbarOpen: false, // Add a state to track the navbar state
     };
   },
   methods: {
     async searchQueryFunc() {
       this.$router.push(`/search?search_query=${this.searchQuery}`);
+    },
+    toggleNavbar() {
+      this.isNavbarOpen = !this.isNavbarOpen;
+
+      // Toggle body overflow based on the navbar state
+      document.body.style.overflow = this.isNavbarOpen ? 'hidden' : 'auto';
     },
   },
 };
@@ -214,15 +216,17 @@ export default {
 }
 
 .navbar-collapse {
-  position: absolute;
-  top: 100%; /* Position it below the navbar */
+  position: fixed;
   left: 0;
   z-index: 1000; /* Set a higher z-index to make it appear above other elements */
   width: 100%;
-  padding: 5% 10%;
+  padding: 5% 2%;
   background-color: white; /* Set the background color as needed */
   border: 1px solid #ddd; /* Add borders or styling as needed */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for a better appearance */
+  height: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 .navbar-toggler {
@@ -238,7 +242,17 @@ export default {
 
 /* Show the collapsed content when the toggler is clicked */
 .navbar-collapse.show {
-  display: block;
+  display: flex;
+}
+.navbar_collapse_div {
+  height: 35%;
+  background-color: white;
+  width: 100%;
+  padding: 10%;
+  left: 0;
+}
+.coustum_btn {
+  width: 100%;
 }
 
 // .navbar_content {
@@ -268,6 +282,7 @@ export default {
     background-color: none; /* Set the background color as needed */
     border: none; /* Add borders or styling as needed */
     box-shadow: none; /* Add box shadow for a better appearance */
+    height: auto;
   }
 }
 </style>
