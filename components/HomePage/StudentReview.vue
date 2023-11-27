@@ -49,7 +49,7 @@
                         class="d-flex align-items-center justify-content-center justify-content-lg-start pt-3"
                       >
                         <img src="~assets/images/comma.svg" alt="comma" />
-                        <div class="d-flex flex-column align-items-center ms-3">
+                        <div class="d-flex flex-column ms-3">
                           <h6 class="font-size-24 fw-bolder mb-0 font_family_poppins_bold">
                             John Smith
                           </h6>

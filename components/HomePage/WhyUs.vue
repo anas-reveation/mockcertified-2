@@ -1,7 +1,9 @@
 <template>
   <div class="bg-lightGreen">
     <div class="container py-5">
-      <h2 class="font-size-44 fw-bolder text-black text-center font_family_poppins_bold">
+      <h2
+        class="font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-black text-center font_family_poppins_bold"
+      >
         Why US?
       </h2>
       <div class="row py-5 g-4">

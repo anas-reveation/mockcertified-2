@@ -22,7 +22,7 @@
             <div class="card-content">
               <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start">
-                <p class="fw-bolder text-start font_family_poppins_bold">Blockchain</p>
+                <p class="fw-bolder text-start font_family_poppins_bold font-size-18">Blockchain</p>
                 <p class="font-size-14 text-start font_family_poppins_light">
                   Lorem ipsum dolor sit amet, consectetur uadipelioeiusmod tempor incididunt ut labo
                   ipsum dolor sit amet, consecteturempor uq
@@ -43,7 +43,7 @@
             <div class="card-content_2">
               <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start bg-white">
-                <p class="fw-bolder text-start font_family_poppins_bold">Blockchain</p>
+                <p class="fw-bolder text-start font_family_poppins_bold font-size-18">Blockchain</p>
                 <p class="font-size-14 text-start font_family_poppins_light">
                   Lorem ipsum dolor sit amet, consectetur uadipelioeiusmod tempor incididunt ut labo
                   ipsum dolor sit amet, consecteturempor uq
@@ -64,7 +64,7 @@
             <div class="card-content_3">
               <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start">
-                <p class="fw-bolder text-start font_family_poppins_bold">Blockchain</p>
+                <p class="fw-bolder text-start font_family_poppins_bold font-size-18">Blockchain</p>
                 <p class="font-size-14 text-start font_family_poppins_light">
                   Lorem ipsum dolor sit amet, consectetur uadipelioeiusmod tempor incididunt ut labo
                   ipsum dolor sit amet, consecteturempor uq
