@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5">
+  <div class="container mb-5">
     <h2
       class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
     >
@@ -20,7 +20,7 @@
                 :key="cardIndex"
                 class="col-12"
               >
-                <div class="row justify-content-between p-4 boredr_bottom">
+                <div class="row justify-content-between p-4 border_bottom">
                   <div class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <img src="@/assets/images/latest_card.svg" alt="card_1" class="w-100 h-100" />
                   </div>
@@ -144,7 +144,7 @@ export default {
   text-indent: 0;
 }
 
-.boredr_bottom {
-  border-bottom: 1px solid #c4c4c4;
+.border_bottom {
+  border-bottom: 2px solid #c4c4c4;
 }
 </style>

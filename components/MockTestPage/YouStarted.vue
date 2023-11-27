@@ -1,10 +1,19 @@
 <template>
-  <div class="mb-5">
+  <div class="container mb-5">
     <h2
       class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
     >
       Mock Test Programs To<span class="text-primary"> Get You Started</span>
     </h2>
+    <div class="row mb-4 border_bottom">
+      <div
+        class="col-5 p-0 d-flex align-items-center font-size-14 font-size-lg-16 font_family_poppins_bold"
+      >
+        <p>Most Popular</p>
+        <p class="mx-3">New</p>
+        <p>Trending</p>
+      </div>
+    </div>
     <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div
@@ -126,5 +135,8 @@ export default {
 
 .carousel-indicators .active {
   background-color: #343a40; /* Dark grey color for active indicator */
+}
+.border_bottom {
+  border-bottom: 2px solid #c4c4c4;
 }
 </style>
