@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center my-5 py-lg-5 py-0">
+  <div class="container text-center my-4 py-lg-5 py-0">
     <p class="font-size-14 font-size-md-16 font-size-lg-20 fw-bolder">Frequently asked questions</p>
     <h4 class="font-size-24 font-size-md-28 font-size-lg-44 fw-bolder font_family_poppins_bold">
       <span class="text-primary">Everything</span>
@@ -9,7 +9,7 @@
       <div class="col-12 col-lg-5">
         <img src="~/assets/images/you_know_img.svg" alt="you_know_img" class="w-100" />
       </div>
-      <div class="col-12 col-lg-7">
+      <div class="col-12 col-lg-7 mt-4 mt-lg-0">
         <div v-for="i in 5" :key="i" class="btn-group w-100 mb-4 d-flex flex-column">
           <button
             type="button"
