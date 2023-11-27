@@ -5,6 +5,8 @@
     <MockTestPageYouStarted />
     <MockTestPageFeatureTest />
     <MockTestPageLatestTest />
+    <HomePageHelpHand />
+    <CategoryYouKnow />
   </div>
 </template>
 

@@ -145,6 +145,6 @@ export default {
 }
 
 .boredr_bottom {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #c4c4c4;
 }
 </style>
