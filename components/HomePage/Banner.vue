@@ -20,7 +20,7 @@
               adipiscing elit, sed do niam, quis nostrud exercitaeiusmod te
             </p>
           </div>
-          <div class="d-flex">
+          <div class="d-flex mt-2">
             <button class="banner_btn me-2 me-md-3">JOIN FOR FREE</button>
             <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
           </div>
