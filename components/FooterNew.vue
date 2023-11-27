@@ -1,6 +1,6 @@
 <template>
   <div class="bg_footer">
-    <div class="container py-5">
+    <div class="container py-5 px-4">
       <div class="row text-white">
         <div class="col-12 col-lg-4">
           <div class="row mb-5 mb-lg-0">

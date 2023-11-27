@@ -22,7 +22,7 @@
             apart from other platforms. With MockCertified, individuals can take the next step in
             their careers with confidence and ease.
           </p>
-          <button class="learn_more mt-3 mt-md-5">Learn More</button>
+          <button class="login_btn mt-3 mt-md-5">Learn More</button>
         </div>
       </div>
     </div>
@@ -37,18 +37,19 @@
   width: 100%;
   background-size: 100% 100%;
 }
-.learn_more {
+.login_btn {
   background-color: transparent;
   color: var(--primary);
   border: 3px solid var(--primary);
-  border-radius: 5px; /* Adjust the border radius as needed */
-  padding: 10px 20px; /* Adjust the padding as needed */
+  border-radius: 8px; /* Adjust the border radius as needed */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
+  width: 100px;
+  padding: 10px 0;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -68,6 +69,14 @@
     border-radius: 5px;
     padding: 7px 16px;
     font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .login_btn {
+    font-size: 16px;
+    font-weight: 500;
+    width: 120px;
   }
 }
 </style>

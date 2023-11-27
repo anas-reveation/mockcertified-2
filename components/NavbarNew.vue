@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container justify-content-evenly justify-content-lg-between">
+    <div class="container justify-content-around px-0">
       <div class="row align-items-center justify-content-between w-100 nav_btn">
         <div class="col-3 d-flex d-lg-none justify-content-start">
           <button
