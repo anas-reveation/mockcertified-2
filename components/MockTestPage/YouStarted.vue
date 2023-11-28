@@ -5,9 +5,9 @@
     >
       Mock Test Programs To<span class="text-primary"> Get You Started</span>
     </h2>
-    <div class="row mb-4 border_bottom">
+    <div class="row mb-4 border_bottom mx-3">
       <div
-        class="col-5 p-0 d-flex align-items-center font-size-14 font-size-lg-16 font_family_poppins_bold"
+        class="col-12 col-md-8 col-lg-5 p-0 d-flex align-items-center font-size-14 font-size-lg-16 font_family_poppins_bold"
       >
         <p>Most Popular</p>
         <p class="mx-3">New</p>
