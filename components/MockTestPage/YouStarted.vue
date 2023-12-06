@@ -42,7 +42,7 @@
                       {{ card.description }}
                     </p>
                     <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <NuxtLink :to="`/mocktest/${card.title}`">
+                    <NuxtLink :to="`/${card.title}`">
                       <p
                         class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
                       >
