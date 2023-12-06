@@ -20,7 +20,7 @@
                 :key="cardIndex"
                 class="col-12"
               >
-                <div class="row justify-content-between p-4 border_bottom">
+                <div class="row justify-content-between py-4 px-0 p-lg-4 border_bottom">
                   <div class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <img src="@/assets/images/latest_card.svg" alt="card_1" class="w-100 h-100" />
                   </div>
