@@ -102,6 +102,17 @@
           </div>
         </div>
       </div>
+      <div class="d-block d-xl-none">
+        <div class="card">
+          <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
+          <div class="d-flex flex-column p-3">
+            <p class="fw-bolder font_family_poppins_bold font-size-18">Lorum dolor sit amet</p>
+            <div class="show_price py-2 px-3">
+              <p class="fw-bolder font-size-22 mb-0">$ 80.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <MockTestPageLatestTest class="mt-5" />
     <IndividualTestNextStep />
@@ -144,14 +155,14 @@ export default {
   color: var(--primary);
   border: 3px solid var(--primary);
   border-radius: 8px; /* Adjust the border radius as needed */
-  padding: 10px 15px;
+  padding: 5px 10px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  width: 150px;
+  width: 100px;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -187,6 +198,11 @@ export default {
 @include media-breakpoint-up(md) {
   .border_left {
     border-left: 1px solid black;
+  }
+  .login_btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 150px;
   }
 }
 
