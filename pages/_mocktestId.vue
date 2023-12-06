@@ -117,7 +117,6 @@ e
     </div>
     <MockTestPageLatestTest class="mt-5" />
     <IndividualTestNextStep />
-    <IndividualTestNavigateLinks />
   </div>
 </template>
 

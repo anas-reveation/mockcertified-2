@@ -1,8 +1,8 @@
 <template>
   <div class="bg_lightgreen">
     <div class="container py-0 py-md-5">
-      <div class="row justify-content-center justify-content-md-between py-5">
-        <div class="col-12 col-md-6 col-xl-6">
+      <div class="row justify-content-center justify-content-lg-between py-5">
+        <div class="col-12 col-lg-6">
           <div
             class="text-black d-flex flex-column align-items-center align-items-md-start text-center text-md-start"
           >
@@ -15,10 +15,29 @@
             <p class="font-size-20 fw-light my-3">
               Lorem ipsum dolor sit amet consectetur adipiscing
             </p>
-            <button class="login_btn my-4">Register</button>
+            <div class="row my-5">
+              <div class="col-12 col-md-6">
+                <h6 class="font-size-20 font-size-md-22 font_family_poppins_bold">
+                  Returning Users:
+                </h6>
+                <p class="font-size-16 font-size-md-18 font_weight_600">
+                  <span class="text-primary text-decoration-underline">Log in</span>
+                  to continue an application.
+                </p>
+              </div>
+              <div class="col-12 col-md-6 mt-4 mt-md-0">
+                <h6 class="font-size-20 font-size-md-22 font_family_poppins_bold">
+                  First-Time Users:
+                </h6>
+                <p class="font-size-16 font-size-md-18 font_weight_600">
+                  <span class="text-primary text-decoration-underline">Create an account </span>
+                  to start a new application
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-9 col-md-5 mt-4 mt-md-0">
+        <div class="col-9 col-lg-5 mt-4 mt-md-0">
           <img src="~assets/images/next_step.svg" alt="next_step" class="w-100" />
         </div>
       </div>
