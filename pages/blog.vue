@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BlogsPageBannner />
+    <BlogsPageBanner />
     <BlogsPageFeatureBlogs />
   </div>
 </template>
