@@ -2,6 +2,8 @@
   <div>
     <BlogsPageBanner />
     <BlogsPageFeatureBlogs />
+    <IndividualTestNextStep />
+    <BlogsPagePopular />
   </div>
 </template>
 
