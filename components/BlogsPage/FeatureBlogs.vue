@@ -64,10 +64,12 @@
                     <h4 class="fw-bolder font_family_poppins_bold font-size-24 mb-3">
                       “Poly Amazing Race” sân chơi đầy thú vị mới dành cho sinh...
                     </h4>
-                    <div class="d-flex align-items-center my-3">
-                      <p class="font-size-16 mb-0">Read More</p>
-                      <img src="~assets/images/blog_arrow.svg" alt="arrow" class="ms-2" />
-                    </div>
+                    <NuxtLink :to="{ name: 'blogslug', params: { blogslug: "AWS" } }">
+                      <div class="d-flex align-items-center my-3">
+                        <p class="font-size-16 mb-0">Read More</p>
+                        <img src="~assets/images/blog_arrow.svg" alt="arrow" class="ms-2" />
+                      </div>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
