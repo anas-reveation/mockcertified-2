@@ -39,7 +39,7 @@
         </div>
         <div class="col-12 col-lg-6">
           <div class="row gy-4">
-            <div v-for="i in 2" class="col-12 col-md-6 col-lg-12 blog_ card_s">
+            <div v-for="i in 2" class="col-12 col-md-6 col-lg-12 blog_card_s p-3">
               <div class="row">
                 <div class="col-12 col-lg-5">
                   <img
@@ -79,8 +79,11 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
 .bg_green {
   background-color: rgba(244, 244, 244, 1);
+}
+.blog_card_s {
+  box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
 }
 </style>
