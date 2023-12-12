@@ -49,4 +49,8 @@ export default {
   background-size: cover;
   width: 100%;
 }
+
+.card {
+  box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
+}
 </style>
