@@ -123,7 +123,7 @@ e
 <script>
 export default {
   layout: 'homePageLayout',
-  name: 'slug',
+  name: 'mockslug',
 };
 </script>
 
