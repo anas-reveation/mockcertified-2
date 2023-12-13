@@ -12,8 +12,8 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?
       </h2>
       <div class="row justify-content-between align-items-center my-4">
-        <div class="col-3">
-          <div class="row align-items-center">
+        <div class="col-10 col-md-5 col-lg-4 col-xl-3">
+          <div class="row align-items-center mb-3">
             <div class="col-3">
               <img src="~assets/images/blog_icon.svg" alt="blog_icon" class="w-100" />
             </div>
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-3 col-lg-2">
           <div class="d-flex">
             <img src="~assets/images/attach.svg" alt="attach" class="w-100 me-1" />
             <img src="~assets/images/linkedin.svg" alt="attach" class="w-100 me-1" />
@@ -49,7 +49,9 @@
         ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
       </h6>
-      <h5 class="font-size-30 fw_600 my-4">Lorem ipsum dolor sit amet, consectetur</h5>
+      <h5 class="font-size-16 font-size-md-24 font-size-lg-30 fw_600 my-4">
+        Lorem ipsum dolor sit amet, consectetur
+      </h5>
       <h6 class="font-size-16 lh-base">
         Collaboratively deploy intuitive partnerships whereas customized e-markets. Energistically
         maintain performance based strategic theme areas whereas just in time methodologies.
@@ -95,6 +97,7 @@
         </div>
       </div>
     </div>
+    <BlogsPagePopular />
   </div>
 </template>
 
