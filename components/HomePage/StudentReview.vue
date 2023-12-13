@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5">
+  <div class="my-5 pb-5">
     <h2
       class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
     >

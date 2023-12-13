@@ -53,7 +53,7 @@
             class="collapse navbar-collapse navbar_collapse_cus justify-content-start"
             id="navbarSupportedContent"
           >
-            <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100">
+            <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100 ms-4">
               <li v-for="i in 10" class="nav-item my-2">
                 <NuxtLink to="/category">
                   <a
@@ -168,8 +168,8 @@ export default {
 .login_btn {
   background-color: transparent;
   color: var(--primary);
-  border: 3px solid var(--primary);
-  border-radius: 8px; /* Adjust the border radius as needed */
+  border: 2px solid var(--primary);
+  border-radius: 6px; /* Adjust the border radius as needed */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -190,10 +190,11 @@ export default {
 }
 .active_link .nav-item .nav-link.active {
   font-weight: 600;
+  color: var(--primary);
 }
 
 .active_link .nav-item .nav-link:hover {
-  color: grey;
+  color: var(--primary);
 }
 .nav_btn .navbar-toggler {
   border: none;

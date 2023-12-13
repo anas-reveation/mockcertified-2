@@ -14,7 +14,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-12 col-lg-5">
+        <div class="col-12 custom_col_5">
           <div v-for="i in 3" class="card_wallet mb-4 p-3 card_height">
             <p class="font-size-16 fw-bolder font_family_poppins_bold with_underline">
               Lorem ipsum dolor sit amet
@@ -25,10 +25,10 @@
             </p>
           </div>
         </div>
-        <div class="col-2 d-none d-lg-flex align-items-center justify-content-center pb-4">
+        <div class="custom_col_2 d-none d-lg-flex align-items-center justify-content-center pb-4">
           <img src="~assets/images/wallet_element.svg" alt="wallet_button" />
         </div>
-        <div class="col-12 col-lg-5">
+        <div class="col-12 custom_col_5">
           <div
             v-for="i in 3"
             class="card_wallet_2 mb-4 p-3 d-flex align-items-center justify-content-center card_height"
@@ -82,6 +82,12 @@
 @include media-breakpoint-up(xl) {
   .card_height {
     height: 130px;
+  }
+  .custom_col_5 {
+    width: 47%;
+  }
+  .custom_col_2 {
+    width: 6%;
   }
 }
 </style>

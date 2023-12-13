@@ -4,7 +4,7 @@
       <h2
         class="font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-black text-center font_family_poppins_bold"
       >
-        Why US?
+        Why Us?
       </h2>
       <div class="row py-5 g-4">
         <div v-for="i in 4" class="col-12 col-md-6 col-lg-3 pt-5">
@@ -39,23 +39,23 @@
   background-color: rgba(240, 247, 255, 1);
 }
 .bg_circle {
-  background-color: rgba(8, 110, 229, 1);
-  width: 160px;
-  height: 80px;
-  border-radius: 0 0 80px 80px;
+  background-color: var(--primary);
+  width: 120px;
+  height: 60px;
+  border-radius: 0 0 60px 60px;
 }
 .upper_circle {
   background-color: white;
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 70px;
   position: absolute;
-  margin: -80px 0 0 0;
-  border: 2px solid blue;
+  margin: -60px 0 0 0;
+  border: 2px solid var(--primary);
 }
 .element_h_w {
-  width: 50px;
-  height: 50px2;
+  width: 32px;
+  height: 32px;
 }
 .rounded_border {
   border-radius: 1rem;

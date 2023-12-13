@@ -44,8 +44,8 @@
 .banner_btn {
   background-color: transparent;
   color: white;
-  border: 3px solid white;
-  border-radius: 2px; /* Adjust the border radius as needed */
+  border: 1px solid white;
+  border-radius: 3px; /* Adjust the border radius as needed */
   padding: 5px 0;
   cursor: pointer;
   text-align: center;
@@ -53,7 +53,7 @@
   display: inline-block;
   font-size: 10px;
   font-weight: 400;
-  width: 85px;
+  width: 95px;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -70,14 +70,15 @@
 @include media-breakpoint-up(md) {
   .bg_div {
     height: 400px;
-    border-radius: 3px;
+    border-radius: 6px;
     padding: 5px 12px;
   }
   .banner_btn {
-    border-radius: 5px; /* Adjust the border radius as needed */
+    border-radius: 6px; /* Adjust the border radius as needed */
     padding: 10px 0px;
     width: 135px;
     font-size: 12px;
+    border: 2px solid white;
   }
 }
 

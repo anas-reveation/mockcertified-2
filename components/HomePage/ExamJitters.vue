@@ -40,8 +40,8 @@
 .login_btn {
   background-color: transparent;
   color: var(--primary);
-  border: 3px solid var(--primary);
-  border-radius: 8px; /* Adjust the border radius as needed */
+  border: 1px solid var(--primary);
+  border-radius: 3px; /* Adjust the border radius as needed */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -65,10 +65,12 @@
   .order {
     order: 0;
   }
-  .banner-btn {
-    border-radius: 5px;
+  .login_btn {
+    border-radius: 6px;
     padding: 7px 16px;
     font-size: 14px;
+    width: 120px;
+    border: 2px solid var(--primary);
   }
 }
 
@@ -76,7 +78,7 @@
   .login_btn {
     font-size: 16px;
     font-weight: 500;
-    width: 120px;
+    width: 130px;
   }
 }
 </style>

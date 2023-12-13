@@ -2,11 +2,11 @@
   <div class="d-lg-flex">
     <form class="row position-relative mb-3 w-100" @submit.prevent="searchQueryFunc">
       <div v-if="!value" class="position-absolute search_icon_position">
-        <img src="@/assets/images/search_icon_gray.svg" alt="search-icon" width="20" height="20" />
+        <img src="@/assets/images/search_icon_gray.svg" alt="search-icon" width="18" height="18" />
       </div>
 
       <input
-        class="col form-control border border-1 border-secondary me-2 search_placeholder search_input_rounded input_height"
+        class="col form-control border border-1 border-secondary me-2 search_placeholder search_input_rounded input_height py-3"
         :class="[
           !value && 'text_indent',
           isAuthenticated ? 'authenticated_search_input_size' : 'unauthenticated_search_input_size',
@@ -61,12 +61,12 @@ export default {
 }
 
 .input_height {
-  height: 37px;
+  height: 16px;
 }
 
 @include media-breakpoint-down(lg) {
   .input_height {
-    height: 35px;
+    height: 18px;
   }
 
   .search_icon_position {
