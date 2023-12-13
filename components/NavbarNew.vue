@@ -1,143 +1,187 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container justify-content-around px-0">
-      <div class="row align-items-center justify-content-between w-100 nav_btn">
-        <div class="col-3 d-flex d-lg-none justify-content-start">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            @click="toggleNavbar"
-          >
-            <span class="navbar-toggler-icon"> </span>
-          </button>
-        </div>
-        <div class="col-6 col-lg-5 col-xl-7">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-9 col-lg-5 col-xl-3">
-              <NuxtLink to="/" class="navbar-brand">
-                <img src="@/assets/images/mc_icon.svg" alt="logo" class="w-100" />
-              </NuxtLink>
-            </div>
-            <div class="col-lg-7 col-xl-9 d-none d-lg-block">
-              <SearchInput v-model="searchQuery" :searchQueryFunc="searchQueryFunc" class="mt-3" />
-            </div>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container justify-content-around px-0">
+        <div class="row align-items-center justify-content-between w-100 nav_btn">
+          <div class="col-3 d-flex d-lg-none justify-content-start">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              @click="toggleNavbar"
+            >
+              <span class="navbar-toggler-icon"> </span>
+            </button>
           </div>
-        </div>
-        <div class="col-3 d-flex d-lg-none justify-content-end">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            @click="toggleNavbar"
-          >
-            <span class="">
-              <img
-                src="~assets/images/magnifine_glass.svg"
-                alt="magnifine_glass"
-                class="icon_h_w"
-              />
-            </span>
-          </button>
-        </div>
-        <div class="col-lg-7 col-xl-5 d-flex d-lg-none">
-          <div
-            class="collapse navbar-collapse navbar_collapse_cus justify-content-start"
-            id="navbarSupportedContent"
-          >
-            <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100">
-              <li v-for="i in 10" class="nav-item my-2">
-                <NuxtLink to="/category">
-                  <a
-                    class="nav-link font-size-16"
-                    :class="{ active: $route.path === '/category' }"
-                    aria-current="page"
-                    >Categories</a
-                  >
+          <div class="col-6 col-lg-5 col-xl-7">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-9 col-lg-5 col-xl-3">
+                <NuxtLink to="/" class="navbar-brand">
+                  <img src="@/assets/images/mc_icon.svg" alt="logo" class="w-100" />
                 </NuxtLink>
-              </li>
-              <li class="nav-item">
-                <NuxtLink to="/mocktest">
-                  <a
-                    class="nav-link font-size-16 me-3"
-                    :class="{ active: $route.path === '/mocktest' }"
-                    >Mock Tests</a
-                  >
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
-          <div
-            v-if="isNavbarOpen"
-            class="d-block d-lg-none bottom-0 left-0 position-fixed navbar_collapse_div"
-          >
-            <div class="d-flex flex-column">
-              <button class="login_btn coustum_btn py-3 mb-3">Login</button>
-              <button class="login_btn coustum_btn py-3">Sign up</button>
-            </div>
-          </div>
-          <div
-            class="collapse navbar-collapse navbar_collapse_cus_1 justify-content-start"
-            id="navbarSupportedContent1"
-          >
-            <ul class="navbar-nav mb-2 mb-lg-0 active_link navbar_nav_cus">
-              <li class="d-block d-lg-none">
-                <SearchInput
-                  v-model="searchQuery"
-                  :searchQueryFunc="searchQueryFunc"
-                  class="mt-3"
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-7 col-xl-5 d-none d-lg-block">
-          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0 active_link">
-              <li class="d-block d-lg-none">
-                <SearchInput
-                  v-model="searchQuery"
-                  :searchQueryFunc="searchQueryFunc"
-                  class="mt-3"
-                />
-              </li>
-              <li class="nav-item">
-                <NuxtLink to="/category">
-                  <a
-                    class="nav-link font-size-16"
-                    :class="{ active: $route.path === '/category' }"
-                    aria-current="page"
-                    >Categories</a
-                  >
-                </NuxtLink>
-              </li>
-              <li class="nav-item">
-                <NuxtLink to="/mocktest">
-                  <a
-                    class="nav-link font-size-16 me-3"
-                    :class="{ active: $route.path === '/mocktest' }"
-                    >Mock Tests</a
-                  >
-                </NuxtLink>
-              </li>
-              <div class="d-flex">
-                <button class="login_btn me-3">Login</button>
-                <button class="login_btn">Sign up</button>
               </div>
-            </ul>
+              <div class="col-lg-7 col-xl-9 d-none d-lg-block">
+                <SearchInput
+                  v-model="searchQuery"
+                  :searchQueryFunc="searchQueryFunc"
+                  class="mt-3"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-3 d-flex d-lg-none justify-content-end">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent1"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              @click="toggleNavbar"
+            >
+              <span class="">
+                <img
+                  src="~assets/images/magnifine_glass.svg"
+                  alt="magnifine_glass"
+                  class="icon_h_w"
+                />
+              </span>
+            </button>
+          </div>
+          <div class="col-lg-7 col-xl-5 d-flex d-lg-none">
+            <div
+              class="collapse navbar-collapse navbar_collapse_cus justify-content-start"
+              id="navbarSupportedContent"
+            >
+              <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100 ms-3">
+                <li v-for="i in 10" class="nav-item my-2">
+                  <NuxtLink to="/category">
+                    <a
+                      class="nav-link font-size-16"
+                      :class="{ active: $route.path === '/category' }"
+                      aria-current="page"
+                      >Categories</a
+                    >
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/mocktest">
+                    <a
+                      class="nav-link font-size-16 me-3"
+                      :class="{ active: $route.path === '/mocktest' }"
+                      >Mock Tests</a
+                    >
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+            <div
+              v-if="isNavbarOpen"
+              class="d-block d-lg-none bottom-0 left-0 position-fixed navbar_collapse_div"
+            >
+              <div class="d-flex flex-column">
+                <button
+                  class="login_btn coustum_btn py-3 mb-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Login
+                </button>
+                <button class="login_btn coustum_btn py-3">Sign up</button>
+              </div>
+            </div>
+            <div
+              class="collapse navbar-collapse navbar_collapse_cus_1 justify-content-start"
+              id="navbarSupportedContent1"
+            >
+              <ul class="navbar-nav mb-2 mb-lg-0 active_link navbar_nav_cus">
+                <li class="d-block d-lg-none">
+                  <SearchInput
+                    v-model="searchQuery"
+                    :searchQueryFunc="searchQueryFunc"
+                    class="mt-3"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xl-5 d-none d-lg-block">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+              <ul class="navbar-nav mb-2 mb-lg-0 active_link">
+                <li class="d-block d-lg-none">
+                  <SearchInput
+                    v-model="searchQuery"
+                    :searchQueryFunc="searchQueryFunc"
+                    class="mt-3"
+                  />
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/category">
+                    <a
+                      class="nav-link font-size-16"
+                      :class="{ active: $route.path === '/category' }"
+                      aria-current="page"
+                      >Categories</a
+                    >
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/mocktest">
+                    <a
+                      class="nav-link font-size-16 me-3"
+                      :class="{ active: $route.path === '/mocktest' }"
+                      >Mock Tests</a
+                    >
+                  </NuxtLink>
+                </li>
+                <div class="d-flex">
+                  <button
+                    class="login_btn me-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Login
+                  </button>
+                  <button class="login_btn">Sign up</button>
+                </div>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+    </nav>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="container my-4">
+            <div class="d-flex align-items-center justify-content-center">
+              <h5 class="modal-title font-size-24 text-center" id="exampleModalLabel">
+                Welcome back
+              </h5>
+              <button
+                type="button"
+                class="btn-close position-absolute me-5 right_0"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+          <login />
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -268,6 +312,9 @@ export default {
 }
 .navbar_nav_cus {
   padding-left: revert;
+}
+.right_0 {
+  right: 0;
 }
 
 // .navbar_content {
