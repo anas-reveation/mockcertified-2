@@ -92,7 +92,13 @@
                 >
                   Login
                 </button>
-                <button class="login_btn coustum_btn py-3">Sign up</button>
+                <button
+                  class="login_btn coustum_btn py-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_1"
+                >
+                  Sign up
+                </button>
               </div>
             </div>
             <div
@@ -147,7 +153,9 @@
                   >
                     Login
                   </button>
-                  <button class="login_btn">Sign up</button>
+                  <button class="login_btn" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
+                    Sign up
+                  </button>
                 </div>
               </ul>
             </div>
@@ -155,32 +163,8 @@
         </div>
       </div>
     </nav>
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="container my-4">
-            <div class="d-flex align-items-center justify-content-center">
-              <h5 class="modal-title font-size-24 text-center" id="exampleModalLabel">
-                Welcome back
-              </h5>
-              <button
-                type="button"
-                class="btn-close position-absolute me-5 right_0"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-          </div>
-          <login />
-        </div>
-      </div>
-    </div>
+    <LoginCover />
+    <SignUpCover />
   </div>
 </template>
 
