@@ -20,7 +20,7 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card_top">
             <div class="card-content">
-              <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
+              <img src="@/assets/images/pm_test.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start">
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   PROJECT MANAGEMENT
@@ -43,7 +43,7 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card_top">
             <div class="card-content_2">
-              <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
+              <img src="@/assets/images/google_test.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start bg-white">
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   Google Cloud Architect
@@ -66,7 +66,7 @@
         <div class="col-12 col-md-6 col-lg-4 d-none d-lg-block">
           <div class="card_top">
             <div class="card-content_3">
-              <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
+              <img src="@/assets/images/azure_test.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start">
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   Microsoft Azure
