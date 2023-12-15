@@ -8,13 +8,22 @@
       </div>
     </div>
     <div class="container">
-      <div class="row g-4">
-        <div v-for="i in 15" class="col-12 col-md-6 col-lg-4">
-          <div class="card h-100 d-flex flex-row p-3">
-            <img src="~assets/images/category_img.svg" alt="category_img" class="card_img" />
+      <div v-if="isLoaderHidden" class="row mt-4">
+        <div v-for="i in 6" :key="i" class="col-12 col-md-4 col-sm-6" data-aos="zoom-in">
+          <AnimatedPlaceholder width="200px" borderRadius="50px" class="m-2" />
+        </div>
+      </div>
+      <div v-if="allCategoriesFilter.length" class="row g-4">
+        <div
+          v-for="category in allCategoriesFilter"
+          :key="category.id"
+          class="col-12 col-md-6 col-lg-4"
+        >
+          <div class="card h-100 d-flex flex-row p-3 align-items-center">
+            <img :src="category.image" alt="category_img" class="card_img" />
             <div class="ms-3">
-              <p class="fw-bolder font-size-18 mb-2">Adex</p>
-              <p class="fw-light font-size-14">lorem ipsum dolor</p>
+              <p class="fw-bolder font-size-18 mb-0">{{ category.name }}</p>
+              <!-- <p class="fw-light font-size-14">lorem ipsum dolor</p> -->
             </div>
           </div>
         </div>
@@ -23,7 +32,50 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapState, mapActions, mapMutations } from 'vuex';
+
+export default {
+  data() {
+    return {
+      allCategories: [],
+      searchQuery: '',
+      allCategoriesFilter: [],
+      isHovering: false,
+    };
+  },
+
+  computed: {
+    ...mapState(['isLoaderHidden']),
+    ...mapState('testManagement', ['categories']),
+  },
+
+  async mounted() {
+    this.setIsLoaderHidden(true);
+    if (!this.categories.length) {
+      await this.getAllCategories();
+    }
+    this.allCategories = this.categories;
+    this.allCategoriesFilter = [...this.allCategories].sort((a, b) => {
+      const nameA = a.name.toLowerCase(); // Convert names to lowercase for case-insensitive sorting
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) {
+        return -1; // nameA comes before nameB
+      }
+      if (nameA > nameB) {
+        return 1; // nameA comes after nameB
+      }
+      return 0; // names are equal
+    });
+    this.setIsLoaderHidden(false);
+  },
+
+  methods: {
+    ...mapMutations(['setIsLoaderHidden']),
+    ...mapActions('testManagement', ['getAllCategories']),
+  },
+};
+</script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';

@@ -13,12 +13,12 @@
               <span class="text-primary">Trusted Certification Exams</span>
             </h2>
             <p class="font-size-12 font-size-lg-14 fw-light my-3 font_family_poppins_light">
-              Certification exams hold significant importance as they provide a standardized and
-              objective way to verify an individual's knowledge and skills in a particular domain,
-              enabling employers, clients, and industries to trust in the competence and expertise
-              of certified professionals. They help enhance job prospects, career advancement, and
-              professional credibility while promoting excellence and maintaining industry
-              standards.
+              Certification exams are a big deal for IT folks and PMP managers. These are like a
+              stamp of approval, showing everyone – bosses, clients, you name it – that we know our
+              stuff. Getting certified isn't just about scoring a better job or moving up the career
+              ladder; it's about proving we've got the skills and knowledge to excel in our fields.
+              These exams exist to make sure we stay on top of our game and meet the high standards
+              of the industry.
             </p>
           </div>
         </div>
