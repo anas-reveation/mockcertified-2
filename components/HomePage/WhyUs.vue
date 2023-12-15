@@ -7,7 +7,7 @@
         Why Us?
       </h2>
       <div class="row py-5 g-4">
-        <div v-for="i in 4" class="col-12 col-md-6 col-lg-3 pt-5">
+        <div v-for="(item, index) in whyUsData" :key="index" class="col-12 col-md-6 col-lg-3 pt-5">
           <div
             class="d-flex flex-column justify-content-center align-items-center bg-white px-3 rounded_border"
           >
@@ -23,9 +23,9 @@
             </div>
             <div class="text-center py-4">
               <p class="text-primary font-size-16 fw-bolder font_family_poppins_bold">
-                Lorem Ipsum
+                {{ item.title }}
               </p>
-              <p class="font-size-14">Lorem ipsum dolor sit amet, consectetur ipsum dolor sit</p>
+              <p class="font-size-14">{{ item.description }}</p>
             </div>
           </div>
         </div>
@@ -34,7 +34,34 @@
   </div>
 </template>
 
-<style scoped>
+<script>
+export default {
+  data() {
+    return {
+      whyUsData: [
+        {
+          title: 'Test Diversity',
+          description: 'Affordable tests for IT, AWS, PMP, and diverse certifications.',
+        },
+        {
+          title: 'Quality Assurance',
+          description: 'Tests are aligned with industry standards for accurate preparation.',
+        },
+        {
+          title: 'Budget-Friendly Pricing',
+          description: 'Budget-friendly prep, making certification accessible to all.',
+        },
+        {
+          title: 'Earn Passively',
+          description: 'Profit from your knowledge by selling your tests.',
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped lang="scss">
 .bg-lightGreen {
   background-color: rgba(240, 247, 255, 1);
 }

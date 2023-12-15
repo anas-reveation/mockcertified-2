@@ -14,10 +14,10 @@
             <p
               class="font-size-10 font-size-md-12 font-size-lg-16 fw-light text-justify font_family_poppins_light my-3 my-md-4 my-lg-5"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris eiusmod te Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit, sed do niam, quis nostrud exercitaeiusmod te
+              Step into a realm of skill enhancement with Mockcertified's realistic mock tests. From
+              a diverse range of IT certifications to Project Management Professional and beyond.
+              Elevate your expertise through simulated challenges tailored to different domains,
+              paving the way for success in your professional journey.
             </p>
           </div>
           <div class="d-flex mt-2">

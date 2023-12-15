@@ -9,12 +9,12 @@
             <h2
               class="font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-white font_family_poppins_bold"
             >
-              Experience Tests Like <br />Never Before!
+              Experience Tests Like <br />Never Before
             </h2>
             <p class="font-size-12 font-size-lg-14 fw-light my-2 my-xl-4 font_family_poppins_light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco
+              Explore a new way of testing with Alexa-integrated mock tests. Connect easily, manage
+              your time better, and enjoy tests without straining your eyes in front of the screen
+              for hours.
             </p>
             <button class="banner_btn me-3 mt-3">JOIN FOR FREE</button>
           </div>

@@ -17,10 +17,10 @@
             class="font-size-10 font-size-md-12 font-size-lg-14 fw-light text-center text-md-start font_family_poppins_light"
           >
             Mockcertifed allows individuals to become certified, improve their abilities, and make
-            money while managing their time and being efficient. Our dedication to delivering an
-            easy-to-use interface, personalized test preparation, and unique adaptability sets us
-            apart from other platforms. With MockCertified, individuals can take the next step in
-            their careers with confidence and ease.
+            money while managing their time and paving the way to professional growth. Our
+            dedication to delivering an easy-to-use interface, personalized test preparation, and
+            unique adaptability sets us apart from other platforms. With Mockcertified, individuals
+            can take the next step in their careers with confidence and ease.
           </p>
           <button class="login_btn mt-3 mt-md-5">Learn More</button>
         </div>
