@@ -13,14 +13,14 @@
             <button class="banner_btn mt-3">Connect with us</button>
           </div>
           <div class="row text-white justify-content-center align-items-center mt-4">
-            <div class="col-12 col-xl-8 d-flex flex-column flex-lg-row justify-content-between">
+            <div class="col-12 col-xl-8 d-flex flex-column flex-lg-row justify-content-around">
               <div class="d-flex align-items-center justify-content-center">
                 <img src="~assets/images/mail_icon.svg" alt="mail_icon" class="icon" />
-                <p class="mb-0 ms-2 font-size-16">johnsmith05@gmail.com</p>
+                <p class="mb-0 ms-2 font-size-16">mockcertified@gmail.com</p>
               </div>
               <div class="d-flex align-items-center justify-content-center mt-3 mt-lg-0">
                 <img src="~assets/images/phone_icon.svg" alt="mail_icon" class="icon" />
-                <p class="mb-0 ms-2 font-size-16">+91-9830925261</p>
+                <p class="mb-0 ms-2 font-size-16">+1 (408) 324-6275</p>
               </div>
             </div>
           </div>
