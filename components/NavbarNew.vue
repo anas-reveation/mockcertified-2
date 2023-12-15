@@ -88,7 +88,7 @@
                 <button
                   class="login_btn coustum_btn py-3 mb-3"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  data-bs-target="#exampleModal_0"
                 >
                   Login
                 </button>
@@ -149,7 +149,7 @@
                   <button
                     class="login_btn me-3"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#exampleModal_0"
                   >
                     Login
                   </button>
@@ -165,6 +165,7 @@
     </nav>
     <LoginCover />
     <SignUpCover />
+    <ForgetPasswordCover />
   </div>
 </template>
 

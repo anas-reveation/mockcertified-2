@@ -44,12 +44,13 @@
               </div>
 
               <div class="text-start">
-                <NuxtLink
-                  to="/auth/forgotpassword"
-                  class="text-decoration-none text-primary font-size-10 auth_font_size font_family_nunito"
+                <p
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_2"
+                  class="text-decoration-none text-primary font-size-10 auth_font_size font_family_nunito cursor_pointer"
                 >
                   Forgot Password?
-                </NuxtLink>
+                </p>
               </div>
 
               <div class="text-center mt-3">
@@ -248,7 +249,7 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 .background_color {
-  min-height: 100vh;
+  min-height: 75vh;
 }
 
 input {

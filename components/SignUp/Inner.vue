@@ -135,7 +135,7 @@
               <div class="text-center mt-4">
                 <button
                   type="submit"
-                  class="btn text-white fw-bold px-3 w-100 auth_font_size"
+                  class="btn text-white fw-bold px-3 w-100 font-size-14"
                   :disabled="isDisabled"
                 >
                   <!-- :class="isDisabled ? 'border-grey' : 'btn-primary text-white'" -->
@@ -204,7 +204,7 @@
                     <span
                       class="text-primary cursor_pointer"
                       data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
+                      data-bs-target="#exampleModal_0"
                       >Login</span
                     >
                   </p>
@@ -219,16 +219,18 @@
                 Code
               </h1> -->
 
-              <p class="font-size-18">Please enter the verification code sent to your email</p>
+              <p class="font-size-12 fw-light text-center">
+                Please enter the verification code sent to your email
+              </p>
 
-              <label for="verficationCode" class="fw-bolder mb-2 font-size-20">
-                Enter Verification Code :
-              </label>
+              <p for="verficationCode" class="fw-bolder mb-2 font-size-20 text-center">
+                Enter Verification Code
+              </p>
 
               <div class="mb-3 input-data">
                 <input
                   type="text"
-                  class="border border-2 border-primary rounded py-2 px-3 input"
+                  class="border border-2 border-primary rounded py-2 px-3 input font-size-14"
                   v-model="confirmForm.code"
                   required
                   placeholder="Enter Code"
@@ -238,7 +240,7 @@
               <div class="text-center mt-2">
                 <button
                   type="submit"
-                  class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 w-100"
+                  class="btn btn-primary border border-2 border-secondary text-white fw-bold px-3 w-100 font-size-14"
                 >
                   Confirm
                 </button>
@@ -246,15 +248,15 @@
               <div class="text-center mt-2">
                 <button
                   type="button"
-                  class="btn border border-2 border-primary text-white fw-bold px-3 w-100"
+                  class="btn border border-2 border-primary text-white fw-bold px-3 w-100 font-size-14"
                   @click="resendCode"
                 >
                   Resend the code
                 </button>
               </div>
               <div class="text-center mt-2">
-                <p type="button" class="fw-bold px-3 font-size-14 text-primary" @click="goToSignUp">
-                  Go Back to Sign Up
+                <p type="button" class="fw-bold px-3 font-size-12 text-primary" @click="goToSignUp">
+                  Edit your details
                 </p>
               </div>
             </form>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal fade"
-    id="exampleModal_0"
+    id="exampleModal_2"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -13,7 +13,7 @@
             <div class="col-2"></div>
             <div class="col-8 d-flex align-items-center justify-content-center">
               <h5 class="modal-title font-size-24 text-center" id="exampleModalLabel">
-                Welcome back
+                Forget Password
               </h5>
             </div>
             <div class="col-2">
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <LoginInner />
+        <ForgetPasswordInner />
       </div>
     </div>
   </div>
