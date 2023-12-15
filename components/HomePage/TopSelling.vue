@@ -23,7 +23,7 @@
               <img src="@/assets/images/pm_test.svg" alt="card_1" class="w-100" />
               <div class="p-3 d-flex flex-column justify-content-start">
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
-                  PROJECT MANAGEMENT
+                  Project Management
                 </p>
                 <p class="font-size-14 text-start font_family_poppins_light">
                   Score a solid 75 on our Mock Tests, and you're all set for PMP success! Ace PMP
