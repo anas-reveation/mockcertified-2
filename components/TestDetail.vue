@@ -3,7 +3,9 @@
     <div class="shawdow_card position-relative p-2 px-3 test_card_border_radius">
       <div class="row mt-1">
         <div class="col-8">
-          <h1 class="fw-bolder text-break font_size_24 test_detail_title">{{ title }}</h1>
+          <h1 class="fw-bolder text-break font_size_24 test_detail_title">
+            {{ title }}
+          </h1>
           <span v-if="shortDescription" class="text-primary font_size_14 test_detail_desc">
             {{ shortDescription }}
           </span>
@@ -92,17 +94,25 @@
 
       <div class="mt-3">
         <h3 class="fw-bolder mt-2 font_size_18 test_detail_title">Created By</h3>
-        <div
-          class="text-primary fw-bolder text-break font_size_16 test_detail_desc"
-          v-if="fullName"
-        >
-          {{ fullName }}
-        </div>
+        <NuxtLink :to="{ name: 'user-test', params: { userId: userId, fullName: fullName } }">
+          <div
+            class="text-primary fw-bolder text-break font_size_16 test_detail_desc"
+            v-if="fullName"
+          >
+            {{ fullName }}
+          </div>
+        </NuxtLink>
       </div>
 
       <div v-if="credit" class="mt-3">
         <h3 class="fw-bolder font_size_20 test_detail_title">Test Material Reference</h3>
         <p class="text-break font_size_16 test_detail_desc">{{ credit }}</p>
+      </div>
+      <div v-if="blogLink" class="mt-3">
+        <h3 class="fw-bolder font_size_20 test_detail_title">Blog Link</h3>
+        <a :href="blogLink" target="_blank">
+          <p class="text-break font_size_16 test_detail_desc">{{ blogLink }}</p>
+        </a>
       </div>
 
       <div v-if="rejectDescription" class="mt-3">
@@ -126,7 +136,12 @@ export default {
     price: Number | String,
     fullName: String,
     shareFunc: Function,
+    userId: String,
     credit: {
+      type: String,
+      default: '',
+    },
+    blogLink: {
       type: String,
       default: '',
     },

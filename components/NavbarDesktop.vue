@@ -58,10 +58,16 @@
 
               <ul
                 class="position-absolute border border-rounded list-group my-2 px-4 py-2 category_dropdown"
-                v-if="isHovering "
+                v-if="isHovering"
               >
-                <li class="text-nowrap py-1" v-for="category in allCategoriesFilter" :key="category.id">
-                  <NuxtLink class="text-capitalize" :to="`/category/${category.slug}`">{{ category.name }}</NuxtLink>
+                <li
+                  class="text-nowrap py-1"
+                  v-for="category in allCategoriesFilter"
+                  :key="category.id"
+                >
+                  <NuxtLink class="text-capitalize" :to="`/category/${category.slug}`">{{
+                    category.name
+                  }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -242,19 +248,26 @@
       >
         <ClientOnly>
           <li class="ms-3 py-2" v-if="user">
-            <div class="row">
-              <div class="col-2 bg-primary text-white circle">
-                <p class="mt-2 text-uppercase d-flex justify-content-center">
-                  {{ user.first_name[0] }}{{ user.last_name[0] }}
-                </p>
-              </div>
-              <div class="col-10 font_size_16">
-                <div class="text-capitalize text-truncate">
-                  {{ user.first_name }} {{ user.last_name }}
+            <NuxtLink
+              :to="{
+                name: `protected-user-dashboard`,
+                params: { userId: user.id, firstName: user.first_name, lastName: user.last_name },
+              }"
+            >
+              <div class="row">
+                <div class="col-2 bg-primary text-white circle">
+                  <p class="mt-2 text-uppercase d-flex justify-content-center">
+                    {{ user.first_name[0] }}{{ user.last_name[0] }}
+                  </p>
                 </div>
-                <div class="text-truncate">{{ user.email }}</div>
+                <div class="col-10 font_size_16">
+                  <div class="text-capitalize text-truncate">
+                    {{ user.first_name }} {{ user.last_name }}
+                  </div>
+                  <div class="text-truncate">{{ user.email }}</div>
+                </div>
               </div>
-            </div>
+            </NuxtLink>
           </li>
 
           <div class="d-flex justify-content-center mb-2">
