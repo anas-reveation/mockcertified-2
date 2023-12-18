@@ -4,7 +4,7 @@ e
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ mocktestId }}
+          {{ $route.params.mockslug }}
         </h2>
       </div>
     </div>
@@ -117,18 +117,13 @@ e
     </div>
     <MockTestPageLatestTest class="mt-5" />
     <IndividualTestNextStep />
-    <IndividualTestNavigateLinks />
   </div>
 </template>
 
 <script>
 export default {
   layout: 'homePageLayout',
-
-  async asyncData({ params }) {
-    const mocktestId = params.mocktestId;
-    return { mocktestId };
-  },
+  name: 'mockslug',
 };
 </script>
 
