@@ -10,28 +10,26 @@
         <img src="~/assets/images/you_know_img.svg" alt="you_know_img" class="w-100" />
       </div>
       <div class="col-12 col-lg-7 mt-4 mt-lg-0">
-        <div v-for="i in 5" :key="i" class="btn-group w-100 mb-4 d-flex flex-column">
+        <div
+          v-for="(item, index) in faqData"
+          :key="index"
+          class="btn-group w-100 mb-4 d-flex flex-column"
+        >
           <button
             type="button"
             class="btn btn-secondary d-flex align-items-center justify-content-between coustum_border py-3"
             data-bs-display="static"
             style="text-align: left"
-            @click="toggleDropdown(i)"
+            @click="toggleDropdown(index)"
           >
-            <span class="font-size-10 font-size-md-14 font-size-lg-20"
-              >Right-aligned but left-aligned when a large screen</span
-            >
+            <span class="font-size-10 font-size-md-14 font-size-lg-20">{{ item.question }}</span>
             <span class="arrow"></span>
           </button>
           <ul
-            v-if="openDropdownIndex === i"
+            v-if="openDropdownIndex === index"
             class="font-size-10 font-size-md-14 font-size-lg-20 text-start dropdown_menu py-2 px-2"
           >
-            <p class="font-size-12 font-size-lg-14">
-              Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo ostrud exercitation
-              consequat.ipsum dolamet, secteturempor uq Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            </p>
+            <p class="font-size-12 font-size-lg-14">{{ item.answer }}</p>
           </ul>
         </div>
       </div>
@@ -44,6 +42,33 @@ export default {
   data() {
     return {
       openDropdownIndex: null,
+      faqData: [
+        {
+          question: 'What types of IT professional mock tests do you offer?',
+          answer:
+            "We offer skill assessment tests covering a diverse range of IT certifications, encompassing AWS, Azure, ITIL, and a variety of others, including PMP. Our platform is designed to cater to diverse IT professionals' needs.",
+        },
+        {
+          question: 'Are the questions on your platform updated regularly?',
+          answer:
+            'We regularly update our question banks to align with the latest exam syllabus and industry standards. This ensures that you are practicing with the most current and relevant content.',
+        },
+        {
+          question: 'Can I access the mock tests from any device?',
+          answer:
+            'Absolutely! Our platform is responsive, enabling access to mock tests from any device. However, for phone usage, registration and account creation are required. Study conveniently anytime, anywhere.',
+        },
+        {
+          question: 'Is there a time limit for completing the mock tests?',
+          answer:
+            'Yes, just like the actual certification exams, our mock tests have time limits. This feature helps you practice time management and enhances your ability to answer questions within the allotted exam duration.',
+        },
+        {
+          question: 'Can I retake the mock tests?',
+          answer:
+            'Absolutely! You can retake the mock tests as many times as you need to reinforce your knowledge and improve your performance. This flexibility is crucial for effective exam preparation.',
+        },
+      ],
     };
   },
   methods: {
