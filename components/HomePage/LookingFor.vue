@@ -10,7 +10,11 @@
         <div v-for="(item, index) in data" :key="index" class="col-12 col-md-6 col-xl-3">
           <div class="looking_card d-flex flex-column h-100">
             <div>
-              <img :src="item.image" :alt="`card_${index + 1}`" class="w-100 card_height" />
+              <img
+                :src="require(`@/assets/images/${item.image}`)"
+                :alt="`card_${index + 1}`"
+                class="w-100 card_height"
+              />
             </div>
             <div class="p-3 flex-grow-1 d-flex flex-column justify-content-between">
               <div class="h-100 flex-grow-1 d-flex flex-column justify-content-between">
@@ -46,25 +50,25 @@ export default {
           title: 'AWS',
           description:
             'From AWS basics to advanced topics, our mock tests ensure you are confident in readiness for any AWS certification test.',
-          image: '/_nuxt/assets/images/aws_cat.svg', // Replace with your actual image path
+          image: 'aws_cat.svg', // Replace with your actual image path
         },
         {
           title: 'Google',
           description:
             'Prepare for certifications or enhance cloud skills with our realistic tests to ace those Google Cloud certification tests.',
-          image: '/_nuxt/assets/images/google_cat.svg', // Replace with your actual image path
+          image: 'google_cat.svg', // Replace with your actual image path
         },
         {
           title: 'Microsoft',
           description:
             'Master Microsoft Azure certifications with our realistic and comprehensive mock tests. Excel confidently!',
-          image: '/_nuxt/assets/images/microsoft_cat.svg', // Replace with your actual image path
+          image: 'microsoft_cat.svg', // Replace with your actual image path
         },
         {
           title: 'Project Management',
           description:
             'Get PMP-ready with our focused Mock Tests. Master the exam through realistic simulations and comprehensive assessments.',
-          image: '/_nuxt/assets/images/pm_cat.svg', // Replace with your actual image path
+          image: 'pm_cat.svg', // Replace with your actual image path
         },
       ],
     };
