@@ -6,35 +6,60 @@
           Go Easy On <sapn class="text-primary">Your Wallet</sapn>
         </h3>
         <p class="font-size-12 font-size-md-14 fw-light font_family_poppins_light pt-3">
-          ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt iLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm
+          Take it easy on your wallet! No need to break the bank – our tests are not only
+          budget-friendly but also super realistic. Get top-notch preparation without the hefty
+          price tag. Your success journey just got a lot more affordable!
         </p>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-12 col-lg-5">
-          <div v-for="i in 3" class="card_wallet mb-4 p-3 card_height">
+        <div class="col-12 custom_col_5">
+          <div class="card_wallet mb-4 p-3 card_height">
             <p class="font-size-16 fw-bolder font_family_poppins_bold with_underline">
-              Lorem ipsum dolor sit amet
+              Reasonable Pricing
             </p>
-            <p class="font-size-14">
-              Vestibulum sed elit efficitur, mattis urna et, egestas augue. Fusce augue leo, elit
-              efficitur, mattis urna et, e Vestibulum sed elit
+            <p class="font-size-14 mt-3">
+              Our mock tests come with a reasonable price tag, ensuring that quality preparation
+              doesn't have to be expensive.
+            </p>
+          </div>
+          <div class="card_wallet mb-4 p-3 card_height">
+            <p class="font-size-16 fw-bolder font_family_poppins_bold with_underline">
+              Reliable Assessments
+            </p>
+            <p class="font-size-14 mt-3">
+              Trust in the reliability of our mock tests as we've carefully crafted each assessment
+              to align with certification standards.
+            </p>
+          </div>
+          <div class="card_wallet mb-4 p-3 card_height">
+            <p class="font-size-16 fw-bolder font_family_poppins_bold with_underline">
+              Realistic Exam Simulations
+            </p>
+            <p class="font-size-14 mt-3">
+              Our mock tests are designed to be highly realistic, offering a practical experience
+              that prepares you effectively for the actual exam.
             </p>
           </div>
         </div>
-        <div class="col-2 d-none d-lg-flex align-items-center justify-content-center pb-4">
-          <img src="~assets/images/wallet_element.svg" alt="wallet_button" class="h-100" />
+        <div class="custom_col_2 d-none d-xl-flex align-items-center justify-content-center pb-4">
+          <img src="~assets/images/wallet_element.svg" alt="wallet_button" />
         </div>
-        <div class="col-12 col-lg-5">
-          <div
-            v-for="i in 3"
-            class="card_wallet_2 text-center mb-4 d-flex align-items-center justify-content-center card_height"
-          >
-            <p class="font-size-16 fw-bold m-0 text-primary">
+        <div class="col-12 custom_col_5">
+          <div class="card_wallet_2 mb-4 p-3 d-flex align-items-center card_height">
+            <p class="font-size-14 font-size-md-16 fw-bold m-0 text-primary ps-4">
               MockCertified offers tests at very budget-friendly prices.
+            </p>
+          </div>
+          <div class="card_wallet_2 mb-4 p-3 d-flex align-items-center card_height">
+            <p class="font-size-14 font-size-md-16 fw-bold m-0 text-primary ps-4">
+              Project Management Tests at only $9.99 !
+            </p>
+          </div>
+          <div class="card_wallet_2 mb-4 p-3 d-flex align-items-center card_height">
+            <p class="font-size-14 font-size-md-16 fw-bold m-0 text-primary ps-4">
+              With the uptimelined 2023 format.
             </p>
           </div>
         </div>
@@ -53,6 +78,7 @@
   background-color: rgba(248, 248, 255, 1);
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
   /* Add other card styling properties here */
 }
 .card_wallet_2 {
@@ -60,14 +86,12 @@
   border: 1px solid var(--primary);
   border-radius: 10px;
 }
-
-.with_underline::after {
-  content: '';
-  display: block;
+.with_underline {
+  display: inline; /* Set display to inline to only cover the text */
   border-bottom: 4px solid var(--primary); /* Change the color and style as needed */
-  width: 48%; /* Adjust the width of the underline as needed */
-  margin-top: 5px; /* Change the color and style as needed */
+  padding-bottom: 2px;
 }
+
 .card_height {
   height: 160px;
 }
@@ -80,7 +104,13 @@
 
 @include media-breakpoint-up(xl) {
   .card_height {
-    height: 145px;
+    height: 130px;
+  }
+  .custom_col_5 {
+    width: 47%;
+  }
+  .custom_col_2 {
+    width: 6%;
   }
 }
 </style>

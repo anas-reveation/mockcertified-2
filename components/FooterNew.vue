@@ -1,73 +1,36 @@
 <template>
   <div class="bg_footer">
     <div class="container py-5">
-      <div class="row text-white">
-        <div class="col-12 col-lg-4">
-          <div class="row mb-5 mb-lg-0">
-            <div class="col-12 col-md-6 col-lg-12">
-              <div class="">
-                <img src="~assets/images/icon_footer.svg" alt="icon_footer" />
-                <h6 class="font-size-18 pt-4 fw-bolder">
-                  T-8,9 Third floor,shubh complex, Some address –380004
-                </h6>
-              </div>
+      <div class="row justify-content-between my-4">
+        <div
+          class="col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center align-items-md-start mb-5 mb-md-0"
+        >
+          <div class="text-white font-size-16">
+            <img src="~assets/images/icon_footer.svg" alt="icon_img" class="h_w_icon" />
+            <div class="d-flex align-items-center my-3">
+              <img src="~assets/images/mail_footer.svg" alt="icon_img" class="h_w_contact" />
+              <p class="mb-0 ps-3">mockcertified@gmail.com</p>
             </div>
-            <div class="col-12 col-md-6 col-lg-12">
-              <div class="mt-5 mt-md-0 pt-0 mt-lg-5 pt-lg-5">
-                <div class="d-flex align-items-center py-2">
-                  <img src="~assets/images/whatsapp.svg" alt="icon_footer" class="contact_icon" />
-                  <p class="font-size-16 fw-light m-0 ps-2">India, +91 9898025261</p>
-                </div>
-                <div class="d-flex align-items-center py-2">
-                  <img src="~assets/images/whatsapp.svg" alt="icon_footer" class="contact_icon" />
-                  <p class="font-size-16 fw-light m-0 ps-2">India, +91 9898025261</p>
-                </div>
-                <div class="d-flex align-items-center py-2">
-                  <img src="~assets/images/whatsapp.svg" alt="icon_footer" class="contact_icon" />
-                  <p class="font-size-16 fw-light m-0 ps-2">India, +91 9898025261</p>
-                </div>
-              </div>
+            <div class="d-flex align-items-center">
+              <img src="~assets/images/phone_footer.svg" alt="icon_img" class="h_w_contact" />
+              <p class="mb-0 ps-3">USA, +1 (408) 324-6275</p>
             </div>
+          </div>
+          <div
+            class="text-decoration-underline text-white fw-bolder d-flex my-3 my-md-4 my-lg-5 py-4"
+          >
+            <p>Categories</p>
+            <p class="mx-3">Mock Tests</p>
+            <p>Blogs</p>
+          </div>
+          <div class="d-flex">
+            <img src="~assets/images/insta_footer.svg" alt="icon_img" class="h_w_social" />
+            <img src="~assets/images/insta_footer.svg" alt="icon_img" class="mx-3 h_w_social" />
+            <img src="~assets/images/fb_footer.svg" alt="icon_img" class="h_w_social" />
           </div>
         </div>
-        <div class="col-12 col-lg-8 py-3">
-          <div class="row g-4 navbar_new font-size-16">
-            <div class="col-6 col-md-3">
-              <ul>
-                <p>About Us</p>
-                <li>lorem</li>
-                <li>lorem</li>
-                <li>lorem</li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-3">
-              <ul>
-                <p>Categories</p>
-
-                <li>lorem</li>
-                <li>lorem</li>
-                <li>lorem</li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-3">
-              <ul>
-                <p>Learnings</p>
-
-                <li>lorem</li>
-                <li>lorem</li>
-                <li>lorem</li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-3">
-              <ul>
-                <p>Option Four</p>
-
-                <li>lorem</li>
-                <li>lorem</li>
-                <li>lorem</li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-12 col-md-6 px-5 px-md-0 px-lg-5">
+          <img src="~assets/images/big_footer.svg" alt="big_img" class="w-100" />
         </div>
       </div>
     </div>
@@ -78,7 +41,7 @@
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
 .bg_footer {
-  background-color: #052142;
+  background-color: rgba(5, 33, 66, 1);
 }
 
 .contact_icon {
@@ -95,6 +58,20 @@
   text-decoration: none;
   list-style-type: none;
   font-size: 14px;
+}
+.line_height {
+  line-height: 1.5rem;
+}
+.h_w_contact {
+  height: 17px;
+  width: 22px;
+}
+.h_w_icon {
+  width: 250px;
+}
+.h_w_social {
+  height: 50px;
+  width: 50px;
 }
 
 @include media-breakpoint-up(lg) {

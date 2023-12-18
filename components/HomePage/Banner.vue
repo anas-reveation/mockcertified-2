@@ -5,22 +5,22 @@
         <div
           class="d-flex flex-column justify-content-center align-items-center col-12 col-md-10 col-xl-8"
         >
-          <div class="text-center text-white my-3 py-3 my-md-4 py-md-4 py-lg-5">
+          <div class="text-center text-white mt-3 pt-3 mt-md-4 pt-md-4 pt-lg-5">
             <h2
-              class="font-size-24 font-size-md-30 font-size-lg-50 fw-bold font_family_poppins_bold"
+              class="font-size-24 font-size-md-30 font-size-lg-50 fw-bold font_family_poppins_bold mb-0"
             >
               Elevate Your Skills
             </h2>
             <p
-              class="font-size-10 font-size-md-12 font-size-lg-16 fw-light text-justify font_family_poppins_light mt-3"
+              class="font-size-10 font-size-md-12 font-size-lg-16 fw-light text-justify font_family_poppins_light my-3 my-md-4 my-lg-5"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris eiusmod te Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit, sed do niam, quis nostrud exercitaeiusmod te
+              Step into a realm of skill enhancement with Mockcertified's realistic mock tests. From
+              a diverse range of IT certifications to Project Management Professional and beyond.
+              Elevate your expertise through simulated challenges tailored to different domains,
+              paving the way for success in your professional journey.
             </p>
           </div>
-          <div class="d-flex">
+          <div class="d-flex mt-2">
             <button class="banner_btn me-2 me-md-3">JOIN FOR FREE</button>
             <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
           </div>
@@ -37,24 +37,23 @@
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
 .bg_div {
-  background-image: url('~@/assets/images/main_bg.svg'); /* Path to your image */
+  background-image: url('~@/assets/images/banner_landing1.svg'); /* Path to your image */
   background-size: cover;
-  width: 100%;
-  height: 330px;
+  height: 270px;
 }
 .banner_btn {
   background-color: transparent;
   color: white;
-  border: 3px solid white;
-  border-radius: 2px; /* Adjust the border radius as needed */
+  border: 1px solid white;
+  border-radius: 3px; /* Adjust the border radius as needed */
   padding: 5px 0;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
-  width: 120px;
+  width: 95px;
 }
 
 /* Optionally, you can add hover styles to make the button interactive */
@@ -64,26 +63,28 @@
 }
 @include media-breakpoint-up(sm) {
   .bg_div {
-    height: 370px;
+    height: 280px;
   }
 }
 
 @include media-breakpoint-up(md) {
   .bg_div {
-    height: 480px;
-    border-radius: 3px;
+    height: 400px;
+    border-radius: 6px;
     padding: 5px 12px;
   }
   .banner_btn {
-    border-radius: 5px; /* Adjust the border radius as needed */
+    border-radius: 6px; /* Adjust the border radius as needed */
     padding: 10px 0px;
     width: 135px;
+    font-size: 12px;
+    border: 2px solid white;
   }
 }
 
 @include media-breakpoint-up(lg) {
   .bg_div {
-    height: 620px;
+    height: 570px;
   }
   .banner_btn {
     font-size: 16px;
@@ -93,7 +94,7 @@
 
 @include media-breakpoint-up(xl) {
   .bg_div {
-    height: 750px;
+    height: 600px;
   }
 }
 </style>
