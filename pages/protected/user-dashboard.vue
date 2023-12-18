@@ -42,7 +42,7 @@
                   <a
                     class="d-flex align-items-center my-3 nav-link"
                     data-bs-toggle="tab"
-                    href="#test"
+                    href="#balance"
                     ref="testTab"
                   >
                     <img src="~assets/images/balance.svg" alt="BellSimple" class="category_icon" />
@@ -67,7 +67,7 @@
                   <a
                     class="d-flex align-items-center my-3 nav-link"
                     data-bs-toggle="tab"
-                    href="#test"
+                    href="#support"
                   >
                     <img src="~assets/images/support.svg" alt="BellSimple" class="category_icon" />
                     <p class="mb-0 ms-4 fw-bold font_familly_nunito">Support</p>
@@ -109,7 +109,13 @@
                 <div class="rounded bg-white shadow-box p-4">
                   <div class="tab-content">
                     <div class="tab-pane container fade" id="test">
+                      <UserDashboardTest />
+                    </div>
+                    <div class="tab-pane container fade" id="balance">
                       <UserDashboardBalance />
+                    </div>
+                    <div class="tab-pane container fade" id="support">
+                      <UserDashboardSupport />
                     </div>
                     <div class="tab-pane container fade" id="certificate">
                       <UserDashboardCertificates />

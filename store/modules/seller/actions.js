@@ -45,6 +45,7 @@ export default {
         category_id: testDetail.categoryId,
         sub_category_id: testDetail.subCategoryId,
         credit: testDetail.credit,
+        blog_link: testDetail.blogLink,
         slug: testSlug,
       };
       const createdtest = await API.graphql({

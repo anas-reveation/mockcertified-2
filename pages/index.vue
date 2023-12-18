@@ -1,17 +1,15 @@
 <template>
   <div>
-    <HomeElevateYourSkills />
-    <HomeSellYourTest />
-    <HomeExperienceTest />
-    <HomeExamJitters />
-    <HomeWhyUs />
-    <HomeNotConvinced />
-    <HomeYourWallet />
-    <HomeTopSellingTests />
-    <HomeFreshPerspectives />
-    <HomeLookingFor />
-    <!-- <HomeOurClients /> -->
-    <HomeContactUs />
+    <HomePageBanner />
+    <HomePageExamJitters />
+    <HomePageLookingFor />
+    <HomePageExprienceTest />
+    <HomePageTopSelling />
+    <HomePageYourWallet />
+    <HomePageWhyUs />
+    <HomePageOurBlogs />
+    <HomePageHelpHand />
+    <HomePageStudentReview />
   </div>
 </template>
 
@@ -21,30 +19,26 @@ export default {
 
   head() {
     return {
-      title: 'Online Mock Test | Test Series',
+      title: 'MockCertified: Realistic Certification Mock Tests',
       meta: [
         {
           hid: 'description',
           name: 'description',
           content:
-            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+            'Confidently prep for IT and PMP certifications with MockCertifieds realistic mock tests. Ace your certification journey with us!',
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Online Mock Test | Test Series - Mockcertified App',
+          content: 'MockCertified: Realistic Certification Mock Tests',
         },
         {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+            'Confidently prep for IT and PMP certifications with MockCertifieds realistic mock tests. Ace your certification journey with us!',
         },
-        {
-          name: 'keywords',
-          content:
-            'Mockcertified, Mock Test, mock exam, practice mock test, practice mock, Create Mock Test, Mockcertified App',
-        },
+
         {
           hid: 'og:type',
           property: 'og:type',
@@ -66,13 +60,13 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: 'Online Mock Test | Test Series - Mockcertified App',
+          content: 'MockCertified: Realistic Certification Mock Tests',
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
           content:
-            'This application serves as a platform to link information seekers with subject matter experts. They can create mock exams and market them to potential customers.',
+            'Confidently prep for IT and PMP certifications with MockCertifieds realistic mock tests. Ace your certification journey with us!',
         },
 
         {
