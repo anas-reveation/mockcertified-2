@@ -147,6 +147,16 @@
             <label class="form-label fixed_up">Test Material Reference (optional)</label>
           </div>
 
+          <div class="col-12 col-md-6 mb-4 input-data">
+            <input
+              type="text"
+              class="border border-2 border-grey rounded form-control"
+              v-model="formData.blogLink"
+            />
+            <label class="form-label fixed_up">Blog Link (optional)</label>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-12 col-md-6 mb-4">
             <label class="font_size_14">Question list (csv file only)</label>
             <br />
@@ -340,6 +350,7 @@ export default {
         subCategoryId: 'default',
         price: null,
         credit: '',
+        blogLink: '',
         timeLimit: null,
       },
       allCategories: [],
