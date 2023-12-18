@@ -60,10 +60,10 @@
             >
               <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100 ms-3">
                 <li v-for="i in 10" class="nav-item my-2">
-                  <NuxtLink to="/category">
+                  <NuxtLink to="/categories">
                     <a
                       class="nav-link font-size-16"
-                      :class="{ active: $route.path === '/category' }"
+                      :class="{ active: $route.path === '/categories' }"
                       aria-current="page"
                       >Categories</a
                     >
@@ -127,10 +127,10 @@
                   />
                 </li>
                 <li class="nav-item">
-                  <NuxtLink to="/category">
+                  <NuxtLink to="/categories">
                     <a
                       class="nav-link font-size-16"
-                      :class="{ active: $route.path === '/category' }"
+                      :class="{ active: $route.path === '/categories' }"
                       aria-current="page"
                       >Categories</a
                     >
@@ -219,10 +219,12 @@ export default {
 }
 .active_link .nav-item .nav-link.active {
   font-weight: 600;
+  color: var(--primary);
 }
 
 .active_link .nav-item .nav-link:hover {
   color: grey;
+  color: var(--primary);
 }
 .nav_btn .navbar-toggler {
   border: none;

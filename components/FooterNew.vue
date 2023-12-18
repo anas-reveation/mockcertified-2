@@ -19,14 +19,22 @@
           <div
             class="text-decoration-underline text-white fw-bolder d-flex my-3 my-md-4 my-lg-5 py-4"
           >
-            <p>Categories</p>
-            <p class="mx-3">Mock Tests</p>
-            <p>Blogs</p>
+            <NuxtLink to="/categories">
+              <p class="text-white">Categories</p>
+            </NuxtLink>
+            <NuxtLink to="mocktest">
+              <p class="mx-3 text-white">Mock Tests</p>
+            </NuxtLink>
+            <NuxtLink to="/blog">
+              <p class="text-white">Blogs</p>
+            </NuxtLink>
           </div>
           <div class="d-flex">
-            <img src="~assets/images/insta_footer.svg" alt="icon_img" class="h_w_social" />
-            <img src="~assets/images/insta_footer.svg" alt="icon_img" class="mx-3 h_w_social" />
             <img src="~assets/images/fb_footer.svg" alt="icon_img" class="h_w_social" />
+            <img src="~assets/images/x_footer.svg" alt="icon_img" class="mx-3 h_w_social" />
+            <img src="~assets/images/insta_footer.svg" alt="icon_img" class="h_w_social" />
+            <img src="~assets/images/yt_footer.svg" alt="icon_img" class="mx-3 h_w_social" />
+            <img src="~assets/images/in_footer.svg" alt="icon_img" class="h_w_social" />
           </div>
         </div>
         <div class="col-12 col-md-6 px-5 px-md-0 px-lg-5">
