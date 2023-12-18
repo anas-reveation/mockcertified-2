@@ -42,11 +42,13 @@
                       {{ card.description }}
                     </p>
                     <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <p
-                      class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
-                    >
-                      Explore
-                    </p>
+                    <NuxtLink :to="{ name: 'mockslug', params: { mockslug: card.title } }">
+                      <p
+                        class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
+                      >
+                        Explore
+                      </p>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
@@ -98,7 +100,7 @@ export default {
     // Fetch data from the API and update the 'cards' array
     // Replace the following line with your actual API call
     this.cards = Array.from({ length: 16 }, (_, index) => ({
-      title: `Card ${index + 1}`,
+      title: `Card_${index + 1}`,
       description: `Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo
                     ipsum dolamet, secteturempor uq `,
       image: `~assets/images/you_started_card.svg`,
