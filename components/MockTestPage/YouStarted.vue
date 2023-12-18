@@ -1,0 +1,144 @@
+<template>
+  <div class="container mb-5">
+    <h2
+      class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
+    >
+      Mock Test Programs To<span class="text-primary"> Get You Started</span>
+    </h2>
+    <!-- <div class="row mb-4 border_bottom mx-3">
+      <div
+        class="col-12 col-md-8 col-lg-5 p-0 d-flex align-items-center font-size-14 font-size-lg-16 font_family_poppins_bold"
+      >
+        <p>Most Popular</p>
+        <p class="mx-3">New</p>
+        <p>Trending</p>
+      </div>
+    </div> -->
+    <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div
+          v-for="(slide, index) in totalSlides"
+          :key="index"
+          class="carousel-item"
+          :class="{ active: index === 0 }"
+        >
+          <div class="container">
+            <div class="row g-3">
+              <div
+                v-for="(card, cardIndex) in getCardsForSlide(index)"
+                :key="cardIndex"
+                class="col-12 col-md-6 col-xl-3"
+              >
+                <div class="card">
+                  <!-- Card content goes here using the 'card' object -->
+                  <img
+                    src="~assets/images/you_started_card.svg"
+                    :alt="'card_' + cardIndex"
+                    class="w-100"
+                  />
+                  <div class="p-3">
+                    <p class="fw-bolder font_family_poppins_bold font-size-18">{{ card.title }}</p>
+                    <p class="font-size-14 mb-2 font_family_poppins_light">
+                      {{ card.description }}
+                    </p>
+                    <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
+                    <NuxtLink :to="{ name: 'mockslug', params: { mockslug: card.title } }">
+                      <p
+                        class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
+                      >
+                        Explore
+                      </p>
+                    </NuxtLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-indicators">
+        <button
+          v-for="i in totalSlides"
+          type="button"
+          :data-bs-target="`#${carouselId}`"
+          :data-bs-slide-to="i - 1"
+          :class="{ active: i === 2 }"
+          :aria-label="'Slide ' + i - 1"
+          :aria-current="{ true: i == 2 }"
+        >
+          <div class="carousel-indicator-disc"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      cards: [], // To store the API response
+      carouselId: 'carouselExampleControls', // ID for the carousel
+    };
+  },
+  computed: {
+    totalSlides() {
+      // Calculate the total number of slides based on the number of cards
+      return Math.ceil(this.cards.length / 4);
+    },
+  },
+  methods: {
+    getCardsForSlide(slideIndex) {
+      // Calculate the start and end index for cards in the current slide
+      const startIndex = slideIndex * 4;
+      const endIndex = startIndex + 4;
+      // Return the subset of cards for the current slide
+      return this.cards.slice(startIndex, endIndex);
+    },
+  },
+  mounted() {
+    // Fetch data from the API and update the 'cards' array
+    // Replace the following line with your actual API call
+    this.cards = Array.from({ length: 16 }, (_, index) => ({
+      title: `Card_${index + 1}`,
+      description: `Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo
+                    ipsum dolamet, secteturempor uq `,
+      image: `~assets/images/you_started_card.svg`,
+    }));
+
+    // Add an event listener to update screenWidth on window resize
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import '~/assets/css/bootstrapBreakpoint.scss';
+
+.card {
+  box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
+}
+.card_star {
+  width: 100px;
+}
+.carousel-indicators {
+  padding-top: 20px;
+  position: relative;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #6c757d; /* Light grey color for inactive indicators */
+  background-color: transparent;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.carousel-indicators .active {
+  background-color: #343a40; /* Dark grey color for active indicator */
+}
+.border_bottom {
+  border-bottom: 2px solid #c4c4c4;
+}
+</style>

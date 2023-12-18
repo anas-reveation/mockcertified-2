@@ -17,10 +17,10 @@
             class="font-size-10 font-size-md-12 font-size-lg-14 fw-light text-center text-md-start font_family_poppins_light"
           >
             Mockcertifed allows individuals to become certified, improve their abilities, and make
-            money while managing their time and being efficient. Our dedication to delivering an
-            easy-to-use interface, personalized test preparation, and unique adaptability sets us
-            apart from other platforms. With MockCertified, individuals can take the next step in
-            their careers with confidence and ease.
+            money while managing their time and paving the way to professional growth. Our
+            dedication to delivering an easy-to-use interface, personalized test preparation, and
+            unique adaptability sets us apart from other platforms. With Mockcertified, individuals
+            can take the next step in their careers with confidence and ease.
           </p>
           <button class="login_btn mt-3 mt-md-5">Learn More</button>
         </div>
@@ -40,8 +40,8 @@
 .login_btn {
   background-color: transparent;
   color: var(--primary);
-  border: 3px solid var(--primary);
-  border-radius: 8px; /* Adjust the border radius as needed */
+  border: 1px solid var(--primary);
+  border-radius: 3px; /* Adjust the border radius as needed */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -65,10 +65,12 @@
   .order {
     order: 0;
   }
-  .banner-btn {
-    border-radius: 5px;
+  .login_btn {
+    border-radius: 6px;
     padding: 7px 16px;
     font-size: 14px;
+    width: 120px;
+    border: 2px solid var(--primary);
   }
 }
 
@@ -76,7 +78,7 @@
   .login_btn {
     font-size: 16px;
     font-weight: 500;
-    width: 120px;
+    width: 130px;
   }
 }
 </style>
