@@ -172,7 +172,7 @@ export default {
         this.$router.push(this.redirectUrl);
       } else if (res) {
         this.$router.push('/homepage');
-        window.location.reload();
+        // window.location.reload();
       }
     },
 
