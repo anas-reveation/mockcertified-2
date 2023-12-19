@@ -425,6 +425,29 @@ export default {
       }
     },
 
+    changeBodyStyle() {
+      // Get the body element
+      const body = document.body;
+
+      // Change the style property (e.g., overflow) as needed
+      body.style.overflow = 'visible';
+      const modal = document.querySelector('.modal-backdrop');
+      if (modal) {
+        // Check if the modal has the 'show' class
+        if (modal.classList.contains('show')) {
+          // Remove the 'show' class
+          modal.classList.remove('show');
+
+          // Add the 'hide' class
+          modal.classList.add('hide');
+          modal.remove();
+
+          // Alternatively, you can use Bootstrap's modal method to hide the modal
+          // $(modal).modal('hide');
+        }
+      }
+    },
+
     async registerLocal() {
       try {
         this.sendEmail();
@@ -475,6 +498,7 @@ export default {
         // Till now User is present only in cognito is not in DB. In login function (action file) we are making user object in DB
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);
+        this.changeBodyStyle();
         this.$router.push('/homepage');
         // await this.createUserLocal();
         this.$swal.fire({

@@ -169,10 +169,37 @@ export default {
     async loginLocal() {
       const res = await this.login(this.form);
       if (res && this.redirectUrl) {
+        this.changeBodyStyle();
+
         this.$router.push(this.redirectUrl);
       } else if (res) {
+        this.changeBodyStyle();
+
         this.$router.push('/homepage');
         // window.location.reload();
+      }
+    },
+
+    changeBodyStyle() {
+      // Get the body element
+      const body = document.body;
+
+      // Change the style property (e.g., overflow) as needed
+      body.style.overflow = 'visible';
+      const modal = document.querySelector('.modal-backdrop');
+      if (modal) {
+        // Check if the modal has the 'show' class
+        if (modal.classList.contains('show')) {
+          // Remove the 'show' class
+          modal.classList.remove('show');
+
+          // Add the 'hide' class
+          modal.classList.add('hide');
+          modal.remove();
+
+          // Alternatively, you can use Bootstrap's modal method to hide the modal
+          // $(modal).modal('hide');
+        }
       }
     },
 
