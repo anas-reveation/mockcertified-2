@@ -55,7 +55,7 @@
           </div>
           <div class="col-lg-7 col-xl-5 d-flex d-lg-none">
             <div
-              class="collapse navbar-collapse navbar_collapse_cus justify-content-start"
+              class="collapse navbar-collapse navbar_collapse_cus justify-content-start z_index_0"
               id="navbarSupportedContent"
             >
               <ul class="navbar-nav mb-2 mb-lg-0 active_link h-100 ms-3">
@@ -78,11 +78,20 @@
                     >
                   </NuxtLink>
                 </li>
+                <li class="nav-item">
+                  <NuxtLink to="/blogs">
+                    <a
+                      class="nav-link font-size-16 me-3"
+                      :class="{ active: $route.path === '/blogs' }"
+                      >Blogs</a
+                    >
+                  </NuxtLink>
+                </li>
               </ul>
             </div>
             <div
               v-if="isNavbarOpen"
-              class="d-block d-lg-none bottom-0 left-0 position-fixed navbar_collapse_div"
+              class="d-block d-lg-none bottom-0 left-0 position-fixed navbar_collapse_div z_index_3"
             >
               <div class="d-flex flex-column">
                 <button
@@ -288,7 +297,7 @@ export default {
   display: block;
 }
 .navbar_collapse_div {
-  height: 35%;
+  height: 30vh;
   background-color: white;
   width: 100%;
   padding: 10%;
@@ -302,6 +311,14 @@ export default {
 }
 .right_0 {
   right: 0;
+}
+
+.z_index_3 {
+  z-index: 3;
+}
+
+.z_index_0 {
+  z-index: 0;
 }
 
 // .navbar_content {

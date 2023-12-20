@@ -14,11 +14,15 @@
     </div>
     <div class="container">
       <div class="row gy-4">
-        <div v-for="i in 3" class="col-12 col-md-6 col-lg-4">
-          <div class="blog_card_s p-3">
+        <div v-for="(data, i) in perspectiveData" :key="i" class="col-12 col-md-6 col-lg-4">
+          <div class="blog_card_s">
             <div class="d-flex flex-column">
-              <img src="~assets/images/popular_card.svg" alt="card_blog" class="w-100" />
-              <div class="">
+              <img
+                :src="$urlFor(data?.images[0]?.image?.asset?._ref).url()"
+                :alt="`${data?.images[0].alt}`"
+                class="w-100 height_200"
+              />
+              <div class="p-3">
                 <div class="d-flex align-items-center font-size-14 my-3">
                   <div class="">
                     <p class="bg_green mb-0 p-2">AWS</p>
@@ -26,14 +30,15 @@
                   <p class="mb-0 ms-3">5 min read</p>
                 </div>
                 <h4 class="fw-bolder font_family_poppins_bold font-size-24 mb-3">
-                  Travelling as a way of self-discovery and progress
+                  {{ data?.title }}
                 </h4>
                 <p class="font-size-14 font-size-lg-16 mb-2`">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim
-                  in eros.
+                  {{ data?.subtitle }}
                 </p>
                 <div class="d-flex align-items-center my-3">
-                  <p class="font-size-16 mb-0">Read More</p>
+                  <a :href="data?.link" target="_blank">
+                    <p class="font-size-16 mb-0">Read More</p>
+                  </a>
                   <img src="~assets/images/blog_arrow.svg" alt="arrow" class="ms-2" />
                 </div>
               </div>
@@ -45,11 +50,57 @@
   </div>
 </template>
 
+<script>
+import { groq } from '@nuxtjs/sanity';
+
+export default {
+  data() {
+    return {
+      perspectiveData: [],
+      isFetched: false,
+    };
+  },
+
+  methods: {
+    formatCreatedAt(createdAt) {
+      if (!createdAt) {
+        return ''; // Return an empty string or handle it as per your requirement
+      }
+
+      try {
+        const dateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+        const formattedDate = new Date(createdAt).toLocaleDateString('en-US', dateOptions);
+        return formattedDate;
+      } catch (error) {
+        console.error('Error formatting date:', error);
+        return ''; // Return an empty string or handle it as per your requirement
+      }
+    },
+  },
+
+  async mounted() {
+    try {
+      const query = groq`*[_type == "perspective"] | order( _updatedAt asc) {_createdAt, images, title, subtitle, link }`;
+      this.perspectiveData = await this.$sanity.fetch(query);
+      this.isFetched = true;
+
+      // Log the perspectiveData to the console
+      console.log('Perspective Data:', this.perspectiveData);
+    } catch (error) {
+      console.error('Error fetching perspective data:', error);
+    }
+  },
+};
+</script>
+
 <style scoped lang="scss">
 .bg_green {
   background-color: rgba(244, 244, 244, 1);
 }
 .blog_card_s {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
+}
+.height_200 {
+  height: 200px;
 }
 </style>
