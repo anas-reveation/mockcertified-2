@@ -29,9 +29,13 @@
                 </div>
               </div>
               <div>
-                <p class="fw-bolder font-size-16 text-primary text-decoration-underline pt-4 mb-0">
-                  Explore
-                </p>
+                <NuxtLink :to="`/categories/${item.slug}`">
+                  <p
+                    class="fw-bolder font-size-16 text-primary text-decoration-underline pt-4 mb-0"
+                  >
+                    Explore
+                  </p>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -51,24 +55,28 @@ export default {
           description:
             'From AWS basics to advanced topics, our mock tests ensure you are confident in readiness for any AWS certification test.',
           image: 'aws_cat.svg', // Replace with your actual image path
+          slug: 'aws',
         },
         {
           title: 'Google',
           description:
             'Prepare for certifications or enhance cloud skills with our realistic tests to ace those Google Cloud certification tests.',
           image: 'google_cat.svg', // Replace with your actual image path
+          slug: 'google',
         },
         {
           title: 'Microsoft',
           description:
             'Master Microsoft Azure certifications with our realistic and comprehensive mock tests. Excel confidently!',
           image: 'microsoft_cat.svg', // Replace with your actual image path
+          slug: 'microsoft',
         },
         {
           title: 'Project Management',
           description:
             'Get PMP-ready with our focused Mock Tests. Master the exam through realistic simulations and comprehensive assessments.',
           image: 'pm_cat.svg', // Replace with your actual image path
+          slug: 'pmi',
         },
       ],
     };

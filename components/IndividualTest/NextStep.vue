@@ -21,7 +21,13 @@
                   Returning Users:
                 </h6>
                 <p class="font-size-16 font-size-md-18 font_weight_600">
-                  <span class="text-primary text-decoration-underline">Log in</span>
+                  <span
+                    class="text-primary text-decoration-underline cursor_pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal_0"
+                  >
+                    Log in</span
+                  >
                   to continue an application.
                 </p>
               </div>
@@ -30,7 +36,12 @@
                   First-Time Users:
                 </h6>
                 <p class="font-size-16 font-size-md-18 font_weight_600">
-                  <span class="text-primary text-decoration-underline">Create an account </span>
+                  <span
+                    class="text-primary text-decoration-underline cursor_pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal_1"
+                    >Create an account
+                  </span>
                   to start a new application
                 </p>
               </div>
@@ -42,6 +53,9 @@
         </div>
       </div>
     </div>
+    <LoginCover />
+    <SignUpCover />
+    <ForgetPasswordCover />
   </div>
 </template>
 
@@ -78,6 +92,10 @@
 .login_btn:hover {
   background-color: var(--primary);
   color: white;
+}
+
+.cursor_pointer {
+  cursor: pointer;
 }
 
 @include media-breakpoint-up(md) {
