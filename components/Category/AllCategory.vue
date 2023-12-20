@@ -19,13 +19,17 @@
           :key="category.id"
           class="col-12 col-md-6 col-lg-4"
         >
-          <div class="card h-100 d-flex flex-row p-3 align-items-center">
-            <img :src="category.image" alt="category_img" class="card_img" />
-            <div class="ms-3">
-              <p class="fw-bolder font-size-18 mb-0">{{ category.name }}</p>
-              <!-- <p class="fw-light font-size-14">lorem ipsum dolor</p> -->
+          <NuxtLink :to="`/categories/${category.slug}`" :key="category.id">
+            <div class="card h-100 d-flex flex-row p-3 align-items-center">
+              <img :src="category.image" alt="category_img" class="card_img" />
+              <div class="ms-3">
+                <p class="fw-bolder font-size-18 mb-0" :title="category.name">
+                  {{ category.name }}
+                </p>
+                <!-- <p class="fw-light font-size-14">lorem ipsum dolor</p> -->
+              </div>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
     </div>

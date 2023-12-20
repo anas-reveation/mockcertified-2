@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   layout: 'homePageLayout',
 
@@ -84,45 +83,6 @@ export default {
         },
       ],
     };
-  },
-
-  data() {
-    return {
-      allCategories: [],
-      searchQuery: '',
-      allCategoriesFilter: [],
-      isHovering: false,
-    };
-  },
-
-  computed: {
-    ...mapState(['isLoaderHidden']),
-    ...mapState('testManagement', ['categories']),
-  },
-
-  async mounted() {
-    this.setIsLoaderHidden(true);
-    if (!this.categories.length) {
-      await this.getAllCategories();
-    }
-    this.allCategories = this.categories;
-    this.allCategoriesFilter = [...this.allCategories].sort((a, b) => {
-      const nameA = a.name.toLowerCase(); // Convert names to lowercase for case-insensitive sorting
-      const nameB = b.name.toLowerCase();
-      if (nameA < nameB) {
-        return -1; // nameA comes before nameB
-      }
-      if (nameA > nameB) {
-        return 1; // nameA comes after nameB
-      }
-      return 0; // names are equal
-    });
-    this.setIsLoaderHidden(false);
-  },
-
-  methods: {
-    ...mapMutations(['setIsLoaderHidden']),
-    ...mapActions('testManagement', ['getAllCategories']),
   },
 };
 </script>
