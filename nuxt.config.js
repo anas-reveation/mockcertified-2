@@ -115,12 +115,12 @@ export default {
       routes.push(
         {
           name: 'category-slug',
-          path: '/:_categoriesId',
+          path: '/:categoriesId',
           component: resolve(__dirname, 'pages/categories/_categoriesId.vue'),
         },
         {
           name: 'blog-slug',
-          path: '/:_blogslug',
+          path: '/:blogslug',
           component: resolve(__dirname, 'pages/blog/_blogslug.vue'),
         },
       );
