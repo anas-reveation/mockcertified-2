@@ -109,4 +109,21 @@ export default {
   //     },
   //   },
   // },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push(
+        {
+          name: 'category-slug',
+          path: '/:_categoriesId',
+          component: resolve(__dirname, 'pages/categories/_categoriesId.vue'),
+        },
+        {
+          name: 'blog-slug',
+          path: '/:_blogslug',
+          component: resolve(__dirname, 'pages/blog/_blogslug.vue'),
+        },
+      );
+    },
+  },
 };
