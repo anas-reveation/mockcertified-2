@@ -74,10 +74,7 @@ export default {
           property: 'og:description',
           content: `Excel in ${this.categoryName} certifications with our mock tests. Expertly crafted simulations for comprehensive preparation. Your success starts here!`,
         },
-        {
-          name: 'keywords',
-          content: `${this.categoryName}, Mock Test Categories`,
-        },
+
         {
           hid: 'og:type',
           property: 'og:type',
