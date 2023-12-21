@@ -3,23 +3,19 @@
     <h2
       class="text-black font-size-24 font-size-md-28 font-size-lg-44 fw-bolder text-center font_family_poppins_bold mb-5"
     >
-      Our Latest Mock <span class="text-primary"> Test Programs</span>
+      Our Latest Mock <span class="text-primary">Test Programs</span>
     </h2>
     <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div
-          v-for="(slide, index) in totalSlides"
+          v-for="(chunk, index) in featuredTestChunks"
           :key="index"
           class="carousel-item"
           :class="{ active: index === 0 }"
         >
           <div class="container">
             <div class="row g-3">
-              <div
-                v-for="(card, cardIndex) in getCardsForSlide(index)"
-                :key="cardIndex"
-                class="col-12"
-              >
+              <div v-for="(card, cardIndex) in chunk" :key="cardIndex" class="col-12">
                 <div class="row justify-content-between py-4 px-0 p-lg-4 border_bottom">
                   <div class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <img src="@/assets/images/latest_card.svg" alt="card_1" class="w-100 h-100" />
@@ -31,17 +27,20 @@
                       <p
                         class="fw-bolder font_family_poppins_bold font-size-18 font-size-md-20 font-size-lg-22"
                       >
-                        Lorem ipsum dolor sit amet
+                        {{ card.title }}
                       </p>
                       <p class="font-size-14">
-                        Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo ostrud
-                        exercitation consequat.ipsum dolamet, secteturempor uq Ut enim ad minim
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo
+                        {{ card.description }}
+                        <img
+                          src="@/assets/images/card_star.svg"
+                          alt="card_star"
+                          class="card_star"
+                        />
                       </p>
-                      <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
                     </div>
-                    <p class="fw-bolder font_family_poppins_bold font-size-16 mb-0">$80.00</p>
+                    <p class="fw-bolder font_family_poppins_bold font-size-16 mb-0">
+                      {{ formatPrice(card.price) }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -49,6 +48,7 @@
           </div>
         </div>
       </div>
+
       <div class="carousel-indicators">
         <div>
           <button
@@ -66,9 +66,9 @@
             type="button"
             :data-bs-target="`#${carouselId}`"
             :data-bs-slide-to="i - 1"
-            :class="{ active: i === 2 }"
-            :aria-label="'Slide ' + i - 1"
-            :aria-current="{ true: i == 2 }"
+            :class="{ active: i === 1 }"
+            :aria-label="'Slide ' + i"
+            :aria-current="{ true: i === 1 }"
           >
             <div class="carousel-indicator-num text-center">{{ i }}</div>
           </button>
@@ -89,39 +89,52 @@
 </template>
 
 <script>
+import { Storage } from '@capacitor/storage';
+
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
+  middleware: ['authenticated'],
+
   data() {
     return {
-      cards: [], // To store the API response
-      carouselId: 'carouselExampleControlsLatest', // ID for the carousel
+      carouselId: 'carouselExampleControlsLatest',
     };
   },
-  computed: {
-    totalSlides() {
-      // Calculate the total number of slides based on the number of cards
-      return Math.ceil(this.cards.length / 5);
-    },
-  },
-  methods: {
-    getCardsForSlide(slideIndex) {
-      // Calculate the start and end index for cards in the current slide
-      const startIndex = slideIndex * 5;
-      const endIndex = startIndex + 5;
-      // Return the subset of cards for the current slide
-      return this.cards.slice(startIndex, endIndex);
-    },
-  },
-  mounted() {
-    // Fetch data from the API and update the 'cards' array
-    // Replace the following line with your actual API call
-    this.cards = Array.from({ length: 16 }, (_, index) => ({
-      title: `Card ${index + 1}`,
-      description: `Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo
-                      ipsum dolamet, secteturempor uq `,
-      image: `~assets/images/latest_card.svg`,
-    }));
 
-    // Add an event listener to update screenWidth on window resize
+  computed: {
+    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests', 'platform']),
+    ...mapState('auth', ['user']),
+    ...mapState('testManagement', ['allApprovedTests']),
+    featuredTestChunks() {
+      const chunkSize = 5;
+      const totalChunks = Math.ceil(this.allApprovedTests.length / chunkSize);
+      return Array.from({ length: totalChunks }, (_, index) => {
+        const startIndex = index * chunkSize;
+        const endIndex = startIndex + chunkSize;
+        return this.allApprovedTests.slice(startIndex, endIndex);
+      });
+    },
+    totalSlides() {
+      return this.featuredTestChunks.length;
+    },
+  },
+
+  async mounted() {
+    this.setIsLoaderHidden(true);
+
+    if (!this.allApprovedTests.length) {
+      await this.getAllApprovedTests();
+    }
+
+    this.setIsLoaderHidden(false);
+  },
+
+  methods: {
+    ...mapActions('testManagement', ['getAllApprovedTests']),
+    ...mapMutations(['setIsLoaderHidden']),
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
   },
 };
 </script>

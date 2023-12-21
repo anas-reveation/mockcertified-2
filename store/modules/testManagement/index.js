@@ -6,6 +6,7 @@ const state = () => ({
   categories: [],
   featuredTests: [],
   recentlyAddedTests: [],
+  allApprovedTests: [],
 });
 
 const getters = {};

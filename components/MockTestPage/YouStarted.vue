@@ -17,7 +17,7 @@
     <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div
-          v-for="(slide, index) in totalSlides"
+          v-for="(chunk, index) in startedTestChunks"
           :key="index"
           class="carousel-item"
           :class="{ active: index === 0 }"
@@ -25,7 +25,7 @@
           <div class="container">
             <div class="row g-3">
               <div
-                v-for="(card, cardIndex) in getCardsForSlide(index)"
+                v-for="(card, cardIndex) in chunk"
                 :key="cardIndex"
                 class="col-12 col-md-6 col-xl-3"
               >
@@ -74,39 +74,52 @@
 </template>
 
 <script>
+import { Storage } from '@capacitor/storage';
+
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
+  middleware: ['authenticated'],
+
   data() {
     return {
-      cards: [], // To store the API response
-      carouselId: 'carouselExampleControls', // ID for the carousel
+      carouselId: 'carouselExampleControlsLatest_1',
     };
   },
-  computed: {
-    totalSlides() {
-      // Calculate the total number of slides based on the number of cards
-      return Math.ceil(this.cards.length / 4);
-    },
-  },
-  methods: {
-    getCardsForSlide(slideIndex) {
-      // Calculate the start and end index for cards in the current slide
-      const startIndex = slideIndex * 4;
-      const endIndex = startIndex + 4;
-      // Return the subset of cards for the current slide
-      return this.cards.slice(startIndex, endIndex);
-    },
-  },
-  mounted() {
-    // Fetch data from the API and update the 'cards' array
-    // Replace the following line with your actual API call
-    this.cards = Array.from({ length: 16 }, (_, index) => ({
-      title: `Card_${index + 1}`,
-      description: `Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo
-                    ipsum dolamet, secteturempor uq `,
-      image: `~assets/images/you_started_card.svg`,
-    }));
 
-    // Add an event listener to update screenWidth on window resize
+  computed: {
+    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests', 'platform']),
+    ...mapState('auth', ['user']),
+    ...mapState('testManagement', ['allApprovedTests']),
+    startedTestChunks() {
+      const chunkSize = 4;
+      const totalChunks = Math.ceil(this.allApprovedTests.length / chunkSize);
+      return Array.from({ length: totalChunks }, (_, index) => {
+        const startIndex = index * chunkSize;
+        const endIndex = startIndex + chunkSize;
+        return this.allApprovedTests.slice(startIndex, endIndex);
+      });
+    },
+    totalSlides() {
+      return this.startedTestChunks.length;
+    },
+  },
+
+  async mounted() {
+    this.setIsLoaderHidden(true);
+
+    if (!this.allApprovedTests.length) {
+      await this.getAllApprovedTests();
+    }
+
+    this.setIsLoaderHidden(false);
+  },
+
+  methods: {
+    ...mapActions('testManagement', ['getAllApprovedTests']),
+    ...mapMutations(['setIsLoaderHidden']),
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
   },
 };
 </script>
