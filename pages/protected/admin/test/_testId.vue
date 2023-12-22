@@ -25,7 +25,7 @@
         :price="testDetail.price"
         :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
         :credit="testDetail.credit"
-        :blogLink="testDetail.blog_link"
+        :blogLink="testDetail?.blog_link"
       />
 
       <div class="mt-4 pb-2" v-for="(question, index) in testQuestions" :key="index">

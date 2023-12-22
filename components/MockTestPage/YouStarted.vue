@@ -14,7 +14,18 @@
         <p>Trending</p>
       </div>
     </div> -->
-    <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
+
+    <div v-if="isLoaderHidden && !this.allApprovedTests.length" class="row gy-3">
+      <div v-for="i in 4" :key="i" class="col-12 col-md-6 col-lg-3" data-aos="zoom-in">
+        <AnimatedPlaceholder class="w-100" height="200px" />
+      </div>
+    </div>
+    <div
+      v-if="this.allApprovedTests.length"
+      :id="carouselId"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
       <div class="carousel-inner">
         <div
           v-for="(chunk, index) in startedTestChunks"
@@ -32,17 +43,19 @@
                 <div class="card">
                   <!-- Card content goes here using the 'card' object -->
                   <img
-                    src="~assets/images/you_started_card.svg"
+                    :src="`/_nuxt/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`"
                     :alt="'card_' + cardIndex"
                     class="w-100"
                   />
                   <div class="p-3">
-                    <p class="fw-bolder font_family_poppins_bold font-size-18">{{ card.title }}</p>
+                    <p class="fw-bolder font_family_poppins_bold font-size-18">
+                      {{ card.title }}
+                    </p>
                     <p class="font-size-14 mb-2 font_family_poppins_light">
                       {{ card.description }}
                     </p>
                     <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <NuxtLink :to="{ name: 'mockslug', params: { mockslug: card.title } }">
+                    <NuxtLink :to="`/${card.slug}`">
                       <p
                         class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
                       >

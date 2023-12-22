@@ -7,40 +7,57 @@
     </h2>
     <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div
-          v-for="(chunk, index) in featuredTestChunks"
-          :key="index"
-          class="carousel-item"
-          :class="{ active: index === 0 }"
-        >
-          <div class="container">
-            <div class="row g-3">
-              <div v-for="(card, cardIndex) in chunk" :key="cardIndex" class="col-12">
-                <div class="row justify-content-between py-4 px-0 p-lg-4 border_bottom">
-                  <div class="col-12 col-lg-4 mb-3 mb-lg-0">
-                    <img src="@/assets/images/latest_card.svg" alt="card_1" class="w-100 h-100" />
-                  </div>
-                  <div
-                    class="col-12 col-lg-8 d-flex flex-column justify-content-between ps-3 ps-lg-4 mb-4 mb-lg-0"
-                  >
-                    <div class="mb-4 mb-xl-0">
-                      <p
-                        class="fw-bolder font_family_poppins_bold font-size-18 font-size-md-20 font-size-lg-22"
-                      >
-                        {{ card.title }}
-                      </p>
-                      <p class="font-size-14">
-                        {{ card.description }}
+        <div v-if="isLoaderHidden && !this.allApprovedTests.length" class="row gy-3">
+          <div
+            v-for="(i, index) in 5"
+            :key="i"
+            class="col-12"
+            data-aos="zoom-in"
+            :class="{ 'carousel-item': true, active: index === 0 }"
+          >
+            <AnimatedPlaceholder class="w-100 my-3" height="200px" />
+          </div>
+        </div>
+        <div v-if="!isLoaderHidden && this.allApprovedTests.length">
+          <div
+            v-for="(chunk, index) in featuredTestChunks"
+            :key="index"
+            class="carousel-item"
+            :class="{ active: index === 0 }"
+          >
+            <div class="container">
+              <div class="row g-3">
+                <div v-for="(card, cardIndex) in chunk" :key="cardIndex" class="col-12">
+                  <div class="row justify-content-between py-4 px-0 p-lg-4 border_bottom">
+                    <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+                      <img
+                        :src="`/_nuxt/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`"
+                        alt="card_1"
+                        class="w-100 h-100"
+                      />
+                    </div>
+                    <div
+                      class="col-12 col-lg-8 d-flex flex-column justify-content-between ps-3 ps-lg-4 mb-4 mb-lg-0"
+                    >
+                      <div class="mb-4 mb-xl-0">
+                        <p
+                          class="fw-bolder font_family_poppins_bold font-size-18 font-size-md-20 font-size-lg-22"
+                        >
+                          {{ card.title }}
+                        </p>
+                        <p class="font-size-14">
+                          {{ card.description }}
+                        </p>
                         <img
                           src="@/assets/images/card_star.svg"
                           alt="card_star"
                           class="card_star"
                         />
+                      </div>
+                      <p class="fw-bolder font_family_poppins_bold font-size-16 mb-0">
+                        {{ formatPrice(card.price) }}
                       </p>
                     </div>
-                    <p class="fw-bolder font_family_poppins_bold font-size-16 mb-0">
-                      {{ formatPrice(card.price) }}
-                    </p>
                   </div>
                 </div>
               </div>

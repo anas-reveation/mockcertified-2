@@ -109,4 +109,14 @@ export default {
   //     },
   //   },
   // },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'mocktest-slug',
+        path: '/:mockslug',
+        component: resolve(__dirname, 'pages/mocktest/_mockslug.vue'),
+      });
+    },
+  },
 };
