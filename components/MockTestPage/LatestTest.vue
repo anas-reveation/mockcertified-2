@@ -31,7 +31,9 @@
                   <div class="row justify-content-between py-4 px-0 p-lg-4 border_bottom">
                     <div class="col-12 col-lg-4 mb-3 mb-lg-0">
                       <img
-                        :src="`/_nuxt/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`"
+                        :src="
+                          require(`@/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`)
+                        "
                         alt="card_1"
                         class="w-100 h-100"
                       />

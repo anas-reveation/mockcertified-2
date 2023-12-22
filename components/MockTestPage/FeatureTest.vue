@@ -45,7 +45,7 @@
                   <div class="row justify-content-between p-4">
                     <div class="col-12 col-lg-5 order-2 order-lg-0">
                       <img
-                        :src="`/_nuxt/assets/images/test_${index}.svg`"
+                        :src="require(`@/assets/images/test_${index}.svg`)"
                         alt="card_1"
                         class="w-100 h-100"
                       />

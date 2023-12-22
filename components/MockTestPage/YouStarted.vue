@@ -43,7 +43,7 @@
                 <div class="card">
                   <!-- Card content goes here using the 'card' object -->
                   <img
-                    :src="`/_nuxt/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`"
+                    :src="require(`@/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`)"
                     :alt="'card_' + cardIndex"
                     class="w-100"
                   />
