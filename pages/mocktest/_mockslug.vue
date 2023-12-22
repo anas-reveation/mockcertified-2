@@ -4,7 +4,7 @@ e
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ $route.params.mockslug }}
+          {{ $route.params.mockslug }} {{ testSlug }}
         </h2>
       </div>
     </div>
@@ -121,9 +121,142 @@ e
 </template>
 
 <script>
+import { Share } from '@capacitor/share';
+import { mapState, mapActions, mapMutations } from 'vuex';
+import { Browser } from '@capacitor/browser';
 export default {
   layout: 'homePageLayout',
-  name: 'mockslug',
+
+  middleware: ['authenticated'],
+
+  head() {
+    return {
+      title: `${this.testDetail && this.testDetail.title}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${this.testDetail && this.testDetail.description}`,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: `${this.testDetail && this.testDetail.description}`,
+        },
+        {
+          name: 'keywords',
+          content: `${this.testDetail && this.testDetail.title}, Mockcertified App`,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: `${this.testDetail && this.testDetail.description}`,
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
+
+  data() {
+    return {
+      testDetail: null,
+      isPurchased: false,
+      isUserOwner: false,
+      stripeUrl: null,
+      promocode: '',
+      newPrice: null,
+      sampleQuestions: [],
+      testId: null,
+    };
+  },
+
+  async asyncData({ params }) {
+    const testSlug = params.mockslug;
+    return { testSlug };
+  },
+
+  computed: {
+    ...mapState(['isLoading', 'isLoaderHidden']),
+
+    totalMarks() {
+      if (this.testDetail) {
+        let totalMarks = 0;
+        this.testDetail.questions.items.map((ques) => {
+          totalMarks += ques.marks;
+        });
+        return totalMarks;
+      }
+    },
+  },
+
+  async mounted() {
+    this.setIsLoaderHidden(true);
+    this.testId = await this.getTestIdBySlug(this.testSlug);
+    this.testDetail = await this.getTestDetail(this.testId);
+    this.SET_LOADER(true);
+
+    if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
+      this.SET_LOADER(false);
+      this.setIsLoaderHidden(false);
+      return;
+    }
+
+    this.SET_LOADER(false);
+    this.setIsLoaderHidden(false);
+  },
+
+  methods: {
+    ...mapActions('testManagement', [
+      'getTestDetail',
+      'getSampleQuestions',
+      'getUserTests',
+      'getTestIdBySlug',
+    ]),
+    ...mapMutations(['SET_LOADER', 'setIsLoaderHidden', 'setRedirectUrl']),
+  },
 };
 </script>
 

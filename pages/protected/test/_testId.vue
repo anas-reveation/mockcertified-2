@@ -17,7 +17,7 @@
         :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
         :shareFunc="shareTest"
         :credit="testDetail.credit"
-        :blogLink="testDetail.blog_link"
+        :blogLink="testDetail?.blog_link"
       />
 
       <div class="text-center mt-3">

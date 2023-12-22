@@ -10,7 +10,7 @@
       :fullName="`${user.first_name} ${user.last_name}`"
       :shareFunc="shareTest"
       :credit="testDetail.credit"
-      :blogLink="testDetail.blog_link"
+      :blogLink="testDetail?.blog_link"
       :rejectDescription="testDetail.reject_description"
       :isDescEdit="true"
       :descEditFun="descEditFun"

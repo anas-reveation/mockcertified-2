@@ -143,7 +143,7 @@ export default {
     },
     blogLink: {
       type: String,
-      default: '',
+      default: 'www.google.com',
     },
     rejectDescription: {
       type: String,

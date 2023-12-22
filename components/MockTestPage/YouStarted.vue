@@ -14,10 +14,21 @@
         <p>Trending</p>
       </div>
     </div> -->
-    <div :id="carouselId" class="carousel slide" data-bs-ride="carousel">
+
+    <div v-if="isLoaderHidden && !this.allApprovedTests.length" class="row gy-3">
+      <div v-for="i in 4" :key="i" class="col-12 col-md-6 col-lg-3" data-aos="zoom-in">
+        <AnimatedPlaceholder class="w-100" height="200px" />
+      </div>
+    </div>
+    <div
+      v-if="this.allApprovedTests.length"
+      :id="carouselId"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
       <div class="carousel-inner">
         <div
-          v-for="(slide, index) in totalSlides"
+          v-for="(chunk, index) in startedTestChunks"
           :key="index"
           class="carousel-item"
           :class="{ active: index === 0 }"
@@ -25,24 +36,26 @@
           <div class="container">
             <div class="row g-3">
               <div
-                v-for="(card, cardIndex) in getCardsForSlide(index)"
+                v-for="(card, cardIndex) in chunk"
                 :key="cardIndex"
                 class="col-12 col-md-6 col-xl-3"
               >
                 <div class="card">
                   <!-- Card content goes here using the 'card' object -->
                   <img
-                    src="~assets/images/you_started_card.svg"
+                    :src="`/_nuxt/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`"
                     :alt="'card_' + cardIndex"
                     class="w-100"
                   />
                   <div class="p-3">
-                    <p class="fw-bolder font_family_poppins_bold font-size-18">{{ card.title }}</p>
+                    <p class="fw-bolder font_family_poppins_bold font-size-18">
+                      {{ card.title }}
+                    </p>
                     <p class="font-size-14 mb-2 font_family_poppins_light">
                       {{ card.description }}
                     </p>
                     <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <NuxtLink :to="{ name: 'mockslug', params: { mockslug: card.title } }">
+                    <NuxtLink :to="`/${card.slug}`">
                       <p
                         class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
                       >
@@ -74,39 +87,52 @@
 </template>
 
 <script>
+import { Storage } from '@capacitor/storage';
+
+import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
+  middleware: ['authenticated'],
+
   data() {
     return {
-      cards: [], // To store the API response
-      carouselId: 'carouselExampleControls', // ID for the carousel
+      carouselId: 'carouselExampleControlsLatest_1',
     };
   },
-  computed: {
-    totalSlides() {
-      // Calculate the total number of slides based on the number of cards
-      return Math.ceil(this.cards.length / 4);
-    },
-  },
-  methods: {
-    getCardsForSlide(slideIndex) {
-      // Calculate the start and end index for cards in the current slide
-      const startIndex = slideIndex * 4;
-      const endIndex = startIndex + 4;
-      // Return the subset of cards for the current slide
-      return this.cards.slice(startIndex, endIndex);
-    },
-  },
-  mounted() {
-    // Fetch data from the API and update the 'cards' array
-    // Replace the following line with your actual API call
-    this.cards = Array.from({ length: 16 }, (_, index) => ({
-      title: `Card_${index + 1}`,
-      description: `Lorum dolor sit amet, consectetur uadipelioeiusmpocididunt ut labo
-                    ipsum dolamet, secteturempor uq `,
-      image: `~assets/images/you_started_card.svg`,
-    }));
 
-    // Add an event listener to update screenWidth on window resize
+  computed: {
+    ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests', 'platform']),
+    ...mapState('auth', ['user']),
+    ...mapState('testManagement', ['allApprovedTests']),
+    startedTestChunks() {
+      const chunkSize = 4;
+      const totalChunks = Math.ceil(this.allApprovedTests.length / chunkSize);
+      return Array.from({ length: totalChunks }, (_, index) => {
+        const startIndex = index * chunkSize;
+        const endIndex = startIndex + chunkSize;
+        return this.allApprovedTests.slice(startIndex, endIndex);
+      });
+    },
+    totalSlides() {
+      return this.startedTestChunks.length;
+    },
+  },
+
+  async mounted() {
+    this.setIsLoaderHidden(true);
+
+    if (!this.allApprovedTests.length) {
+      await this.getAllApprovedTests();
+    }
+
+    this.setIsLoaderHidden(false);
+  },
+
+  methods: {
+    ...mapActions('testManagement', ['getAllApprovedTests']),
+    ...mapMutations(['setIsLoaderHidden']),
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
   },
 };
 </script>

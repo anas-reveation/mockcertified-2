@@ -160,6 +160,32 @@ export default {
     }
   },
 
+  async getAllApprovedTests({ commit }) {
+    commit('SET_LOADER', true, { root: true });
+
+    try {
+      const allApprovedTestData = await API.graphql({
+        query: listTestsByStatus,
+        variables: { status: 'APPROVED', limit: 10000 },
+      });
+
+      const allApprovedTest = allApprovedTestData.data.listTestsByStatus.items;
+      commit('setAllApprovedTests', allApprovedTest);
+      commit('SET_LOADER', false, { root: true });
+    } catch (err) {
+      commit('SET_LOADER', false, { root: true });
+      this.$swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 7000,
+      });
+    }
+  },
+
   async getAllCategories({ commit, dispatch }) {
     commit('SET_LOADER', true, { root: true });
 

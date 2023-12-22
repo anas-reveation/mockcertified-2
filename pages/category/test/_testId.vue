@@ -20,7 +20,7 @@
         :fullName="`${testDetail.created_by.first_name} ${testDetail.created_by.last_name}`"
         :shareFunc="shareTest"
         :credit="testDetail.credit"
-        :blogLink="testDetail.blog_link"
+        :blogLink="testDetail?.blog_link"
         :isDescEdit="this.user && this.user.id === this.testDetail.user_id"
         :descEditFun="descEditFun"
         :userId="`${testDetail.user_id}`"
@@ -289,6 +289,7 @@ export default {
       this.$router.push('/homepage');
       return;
     }
+    console.log(this.testDetail);
 
     this.sampleQuestions = await this.getSampleQuestions(this.testId);
 

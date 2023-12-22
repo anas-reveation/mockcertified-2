@@ -14,4 +14,7 @@ export default {
   setCategories(state, categories) {
     state.categories = categories;
   },
+  setAllApprovedTests(state, allApprovedTests) {
+    state.allApprovedTests = allApprovedTests;
+  },
 };

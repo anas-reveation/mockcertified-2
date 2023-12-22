@@ -123,6 +123,11 @@ export default {
           path: '/:blogslug',
           component: resolve(__dirname, 'pages/blog/_blogslug.vue'),
         },
+        {
+          name: 'mocktest-slug',
+          path: '/:mockslug',
+          component: resolve(__dirname, 'pages/mocktest/_mockslug.vue'),
+        },
       );
     },
   },
