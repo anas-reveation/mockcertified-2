@@ -112,11 +112,23 @@ export default {
 
   router: {
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'mocktest-slug',
-        path: '/:mockslug',
-        component: resolve(__dirname, 'pages/mocktest/_mockslug.vue'),
-      });
+      routes.push(
+        {
+          name: 'category-slug',
+          path: '/:categoriesId',
+          component: resolve(__dirname, 'pages/categories/_categoriesId.vue'),
+        },
+        {
+          name: 'blog-slug',
+          path: '/:blogslug',
+          component: resolve(__dirname, 'pages/blog/_blogslug.vue'),
+        },
+        {
+          name: 'mocktest-slug',
+          path: '/:mockslug',
+          component: resolve(__dirname, 'pages/mocktest/_mockslug.vue'),
+        },
+      );
     },
   },
 };

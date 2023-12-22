@@ -19,7 +19,7 @@
           :key="category.id"
           class="col-12 col-md-6 col-lg-4"
         >
-          <NuxtLink :to="`/categories/${category.slug}`" :key="category.id">
+          <NuxtLink :to="`/${category.slug}`" :key="category.id">
             <div class="card h-100 d-flex flex-row p-3 align-items-center">
               <img :src="category.image" alt="category_img" class="card_img" />
               <div class="ms-3">

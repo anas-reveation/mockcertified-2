@@ -57,27 +57,24 @@ export default {
 
   head() {
     return {
-      title: `${this.categoryName}`,
+      title: `${this.categoryName} Mock Tests: Ace Your ${this.categoryName} Certifications`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
+          content: `Excel in ${this.categoryName} certifications with our mock tests. Expertly crafted simulations for comprehensive preparation. Your success starts here!`,
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: `${this.categoryName} - Mockcertified App`,
+          content: `${this.categoryName} Mock Tests: Ace Your ${this.categoryName} Certifications`,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
+          content: `Excel in ${this.categoryName} certifications with our mock tests. Expertly crafted simulations for comprehensive preparation. Your success starts here!`,
         },
-        {
-          name: 'keywords',
-          content: `${this.categoryName}, Mock Test Categories`,
-        },
+
         {
           hid: 'og:type',
           property: 'og:type',
@@ -99,12 +96,12 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: `${this.categoryName} - Mockcertified App`,
+          content: `${this.categoryName} Mock Tests: Ace Your ${this.categoryName} Certifications`,
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: `Get a variety of ${this.categoryName} practise tests. Choose the ${this.categoryName} sub-categorized designation exam that you desire. And begin your test right now.`,
+          content: `Excel in ${this.categoryName} certifications with our mock tests. Expertly crafted simulations for comprehensive preparation. Your success starts here!`,
         },
 
         {
