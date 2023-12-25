@@ -4,7 +4,7 @@ e
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ $route.params.mockslug }} {{ testSlug }}
+          {{ $route.params.mockslug }} {{ $route.params.number }}
         </h2>
       </div>
     </div>
@@ -14,13 +14,10 @@ e
           <h2
             class="font-size-24 font-size-md-28 font-size-lg-50 fw-bolder text-black font_family_poppins_bold"
           >
-            AWS
+            {{ testDetail?.title }}
           </h2>
           <p class="font-size-12 font-size-lg-14 fw-light my-2 font_family_poppins_light">
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquimmodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-            euLorem ipsum dolor sit Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquimmodo consequat. Duis aute irure
+            {{ testDetail?.description }}
           </p>
           <div class="row font-size-14 font-size-md-16 align-items-center text-primary">
             <div class="col-4 col-md-2 col-xl-2">
@@ -30,11 +27,11 @@ e
               class="col-10 col-md-6 col-lg-5 d-flex align-items-center justify-content-between mt-2 mt-md-0"
             >
               <div class="div_circle"></div>
-              <p class="mb-0">40 min</p>
+              <p class="mb-0">{{ testDetail?.time_limit }} min</p>
               <div class="div_circle"></div>
-              <p class="mb-0">40 questions</p>
+              <p class="mb-0">{{ testDetail?.questions?.items?.length }} questions</p>
               <div class="div_circle"></div>
-              <p class="mb-0">80 marks</p>
+              <p class="mb-0">{{ totalMarks }} marks</p>
             </div>
             <div
               class="col-10 col-md-6 col-lg-5 d-flex flex-column flex-md-row justify-content-between mt-2 mt-lg-0"
@@ -42,7 +39,10 @@ e
               <div class="border_left">
                 <P class="text-black mb-0 py-1 ps-0 ps-md-2"
                   >Created By
-                  <span class="text-primary font_family_poppins_bold">John Smith</span>
+                  <span class="text-primary font_family_poppins_bold"
+                    >{{ testDetail?.created_by?.first_name }}
+                    {{ testDetail?.created_by?.last_name }}</span
+                  >
                 </P>
               </div>
               <div class="border_left">
@@ -56,9 +56,11 @@ e
           <div class="card">
             <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
             <div class="d-flex flex-column p-3">
-              <p class="fw-bolder font_family_poppins_bold font-size-18">Lorum dolor sit amet</p>
+              <p class="fw-bolder font_family_poppins_bold font-size-18">
+                {{ testDetail?.description }}
+              </p>
               <div class="show_price py-2 px-3">
-                <p class="fw-bolder font-size-22 mb-0">$ 80.00</p>
+                <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}.00</p>
               </div>
             </div>
           </div>
@@ -107,9 +109,11 @@ e
         <div class="card">
           <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
           <div class="d-flex flex-column p-3">
-            <p class="fw-bolder font_family_poppins_bold font-size-18">Lorum dolor sit amet</p>
+            <p class="fw-bolder font_family_poppins_bold font-size-18">
+              {{ testDetail?.description }}
+            </p>
             <div class="show_price py-2 px-3">
-              <p class="fw-bolder font-size-22 mb-0">$ 80.00</p>
+              <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}</p>
             </div>
           </div>
         </div>
@@ -215,6 +219,7 @@ export default {
 
   async asyncData({ params }) {
     const testSlug = params.mockslug;
+
     return { testSlug };
   },
 

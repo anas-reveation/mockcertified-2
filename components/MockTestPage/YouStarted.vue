@@ -55,7 +55,12 @@
                       {{ card.description }}
                     </p>
                     <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <NuxtLink :to="`/${card.slug}`">
+                    <NuxtLink
+                      :to="{
+                        path: `mocktest/${card.slug}`,
+                        params: { mockslug: card.slug },
+                      }"
+                    >
                       <p
                         class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
                       >
