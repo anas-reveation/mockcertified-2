@@ -112,7 +112,6 @@ export default {
       this.isFetched = true;
 
       // Log the perspectiveData to the console
-      console.log('Perspective Data:', this.perspectiveData);
     } catch (error) {
       console.error('Error fetching perspective data:', error);
     }
