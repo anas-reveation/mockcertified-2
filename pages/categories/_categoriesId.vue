@@ -27,7 +27,12 @@
         </div>
       </div>
       <div class="container">
-        <div class="row g-4">
+        <div v-if="isLoaderHidden" class="row mt-4">
+          <div v-for="i in 6" :key="i" class="col-12 col-md-4 col-sm-6" data-aos="zoom-in">
+            <AnimatedPlaceholder width="200px" borderRadius="50px" class="m-2" />
+          </div>
+        </div>
+        <div v-if="allCategoriesFilter.length" class="row g-4">
           <div
             v-for="category in allCategoriesFilter"
             :key="category.id"
