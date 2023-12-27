@@ -10,6 +10,7 @@
     <HomePageOurBlogs />
     <HomePageHelpHand />
     <HomePageStudentReview />
+    <SignUpCover />
   </div>
 </template>
 

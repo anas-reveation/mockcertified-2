@@ -47,7 +47,7 @@
                         >
                           {{ card.title }}
                         </p>
-                        <p class="font-size-14">
+                        <p class="font-size-14 description_lines">
                           {{ card.description }}
                         </p>
                         <img
@@ -178,5 +178,12 @@ export default {
 
 .border_bottom {
   border-bottom: 2px solid #c4c4c4;
+}
+
+.description_lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to show */
+  -webkit-box-orient: vertical;
 }
 </style>

@@ -16,7 +16,13 @@
               your time better, and enjoy tests without straining your eyes in front of the screen
               for hours.
             </p>
-            <button class="banner_btn me-3 mt-3">JOIN FOR FREE</button>
+            <button
+              class="banner_btn me-3 mt-3"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal_1"
+            >
+              JOIN FOR FREE
+            </button>
           </div>
         </div>
         <div class="col-10 col-md-5 mt-4 mt-md-0">

@@ -25,7 +25,7 @@
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   Project Management
                 </p>
-                <p class="font-size-14 text-start font_family_poppins_light">
+                <p class="font-size-14 text-start font_family_poppins_light description_lines">
                   Score a solid 75 on our Mock Tests, and you're all set for PMP success! Ace PMP
                   with realistic simulations and assessments.
                 </p>
@@ -48,7 +48,7 @@
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   Google Cloud Architect
                 </p>
-                <p class="font-size-14 text-start font_family_poppins_light">
+                <p class="font-size-14 text-start font_family_poppins_light description_lines">
                   Engage in realistic scenarios and diverse assessments that align with the Google
                   Cloud Architect certification’s specific objectives.
                 </p>
@@ -71,7 +71,7 @@
                 <p class="fw-bolder text-start font_family_poppins_bold font-size-18">
                   Microsoft Azure
                 </p>
-                <p class="font-size-14 text-start font_family_poppins_light">
+                <p class="font-size-14 text-start font_family_poppins_light description_lines">
                   Tailored to Azure's challenges, this test ensures expertise in cloud solutions,
                   virtual networks, and Microsoft Azure services.
                 </p>
@@ -121,6 +121,13 @@
 }
 .card_star {
   width: 100px;
+}
+
+.description_lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 @include media-breakpoint-up(md) {
