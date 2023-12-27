@@ -28,7 +28,9 @@
             >
               JOIN FOR FREE
             </button>
-            <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
+            <NuxtLink to="/categories">
+              <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
+            </NuxtLink>
           </div>
         </div>
       </div>

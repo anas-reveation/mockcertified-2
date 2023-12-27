@@ -15,13 +15,13 @@
       </div>
     </div> -->
 
-    <div v-if="isLoaderHidden && !this.allApprovedTests.length" class="row gy-3">
+    <div v-if="isLoaderHidden && !this.recentlyAddedTests.length" class="row gy-3">
       <div v-for="i in 4" :key="i" class="col-12 col-md-6 col-lg-3" data-aos="zoom-in">
         <AnimatedPlaceholder class="w-100" height="200px" />
       </div>
     </div>
     <div
-      v-if="this.allApprovedTests.length"
+      v-if="this.recentlyAddedTests.length"
       :id="carouselId"
       class="carousel slide"
       data-bs-ride="carousel"
@@ -31,7 +31,7 @@
           v-for="(chunk, index) in startedTestChunks"
           :key="index"
           class="carousel-item"
-          :class="{ active: index === 0 }"
+          :class="{ active: index === 1 }"
         >
           <div class="container pb-2">
             <div class="row g-3">
@@ -117,14 +117,14 @@ export default {
   computed: {
     ...mapState(['isLoading', 'isLoaderHidden', 'allCreatedTests', 'platform']),
     ...mapState('auth', ['user']),
-    ...mapState('testManagement', ['allApprovedTests']),
+    ...mapState('testManagement', ['allApprovedTests', 'recentlyAddedTests']),
     startedTestChunks() {
       const chunkSize = 4;
-      const totalChunks = Math.ceil(this.allApprovedTests.length / chunkSize);
+      const totalChunks = Math.ceil(this.recentlyAddedTests.length / chunkSize);
       return Array.from({ length: totalChunks }, (_, index) => {
         const startIndex = index * chunkSize;
         const endIndex = startIndex + chunkSize;
-        return this.allApprovedTests.slice(startIndex, endIndex);
+        return this.recentlyAddedTests.slice(startIndex, endIndex);
       });
     },
     totalSlides() {
@@ -135,15 +135,14 @@ export default {
   async mounted() {
     this.setIsLoaderHidden(true);
 
-    if (!this.allApprovedTests.length) {
-      await this.getAllApprovedTests();
+    if (!this.recentlyAddedTests.length) {
+      await this.getRecentlyAddedTests();
     }
-
     this.setIsLoaderHidden(false);
   },
 
   methods: {
-    ...mapActions('testManagement', ['getAllApprovedTests']),
+    ...mapActions('testManagement', ['getAllApprovedTests', 'getRecentlyAddedTests']),
     ...mapMutations(['setIsLoaderHidden']),
     formatPrice(price) {
       return parseFloat(price).toFixed(2);
