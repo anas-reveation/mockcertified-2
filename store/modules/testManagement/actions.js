@@ -110,7 +110,7 @@ export default {
     try {
       const allRecentlyAddedTestData = await API.graphql({
         query: listTestsByStatus,
-        variables: { status: 'APPROVED', sortDirection: 'DESC', limit: 3 },
+        variables: { status: 'APPROVED', sortDirection: 'DESC', limit: 10 },
       });
 
       const allRecentlyAddedTest = allRecentlyAddedTestData.data.listTestsByStatus.items;

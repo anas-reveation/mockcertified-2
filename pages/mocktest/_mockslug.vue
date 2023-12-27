@@ -4,18 +4,23 @@ e
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ $route.params.mockslug }} {{ $route.params.number }}
+          {{ $route.params.mockslug }}
         </h2>
       </div>
     </div>
     <div class="container">
       <div class="row mt-5 pt-5">
-        <div class="col-12 col-xl-8 d-flex flex-column border_bottom">
+        <div class="col-12 col-xl-8">
           <h2
             class="font-size-24 font-size-md-28 font-size-lg-50 fw-bolder text-black font_family_poppins_bold"
           >
             {{ testDetail?.title }}
           </h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-xl-8 d-flex flex-column border_bottom">
           <p class="font-size-12 font-size-lg-14 fw-light my-2 font_family_poppins_light">
             {{ testDetail?.description }}
           </p>
@@ -24,7 +29,7 @@ e
               <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
             </div>
             <div
-              class="col-10 col-md-6 col-lg-5 d-flex align-items-center justify-content-between mt-2 mt-md-0"
+              class="col-10 col-md-6 col-lg-4 d-flex align-items-center justify-content-between mt-2 mt-md-0"
             >
               <div class="div_circle"></div>
               <p class="mb-0">{{ testDetail?.time_limit }} min</p>
@@ -34,7 +39,7 @@ e
               <p class="mb-0">{{ totalMarks }} marks</p>
             </div>
             <div
-              class="col-10 col-md-6 col-lg-5 d-flex flex-column flex-md-row justify-content-between mt-2 mt-lg-0"
+              class="col-10 col-md-6 col-lg-6 d-flex flex-column flex-md-row justify-content-between mt-2 mt-lg-0"
             >
               <div class="border_left">
                 <P class="text-black mb-0 py-1 ps-0 ps-md-2"
@@ -50,14 +55,18 @@ e
               </div>
             </div>
           </div>
-          <button class="login_btn my-4">Start Test</button>
+          <button class="login_btn my-4" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
+            Start Test
+          </button>
         </div>
         <div class="col-4 d-none d-xl-flex">
-          <div class="card">
-            <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
+          <div class="test_card">
+            <div class="h_300">
+              <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100 h-100 card_img" />
+            </div>
             <div class="d-flex flex-column p-3">
               <p class="fw-bolder font_family_poppins_bold font-size-18">
-                {{ testDetail?.description }}
+                {{ testDetail?.title }}
               </p>
               <div class="show_price py-2 px-3">
                 <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}.00</p>
@@ -121,6 +130,7 @@ e
     </div>
     <MockTestPageLatestTest class="mt-5" />
     <IndividualTestNextStep />
+    <SignUpCover />
   </div>
 </template>
 
@@ -308,7 +318,7 @@ export default {
   border-bottom: 2px solid #a5a5a5;
 }
 
-.card {
+.test_card {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
 }
 .show_price {
@@ -327,6 +337,12 @@ export default {
 }
 .card_star_1 {
   height: 15px;
+}
+.h_300 {
+  height: 300px;
+}
+.card_img {
+  object-fit: cover;
 }
 
 @include media-breakpoint-up(md) {

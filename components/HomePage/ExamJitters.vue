@@ -22,7 +22,9 @@
             unique adaptability sets us apart from other platforms. With Mockcertified, individuals
             can take the next step in their careers with confidence and ease.
           </p>
-          <button class="login_btn mt-3 mt-md-5">Learn More</button>
+          <NuxtLink to="/mocktest">
+            <button class="login_btn mt-3 mt-md-5">Learn More</button>
+          </NuxtLink>
         </div>
       </div>
     </div>
