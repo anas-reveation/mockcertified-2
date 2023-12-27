@@ -33,40 +33,50 @@
           class="carousel-item"
           :class="{ active: index === 0 }"
         >
-          <div class="container">
+          <div class="container pb-2">
             <div class="row g-3">
               <div
                 v-for="(card, cardIndex) in chunk"
                 :key="cardIndex"
                 class="col-12 col-md-6 col-xl-3"
               >
-                <div class="card">
-                  <!-- Card content goes here using the 'card' object -->
-                  <img
-                    :src="require(`@/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`)"
-                    :alt="'card_' + cardIndex"
-                    class="w-100"
-                  />
-                  <div class="p-3">
-                    <p class="fw-bolder font_family_poppins_bold font-size-18">
-                      {{ card.title }}
-                    </p>
-                    <p class="font-size-14 mb-2 font_family_poppins_light">
-                      {{ card.description }}
-                    </p>
-                    <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                    <NuxtLink
-                      :to="{
-                        path: `mocktest/${card.slug}`,
-                        params: { mockslug: card.slug },
-                      }"
-                    >
-                      <p
-                        class="fw-bolder font-size-16 text-primary text-decoration-underline pt-5 mb-0"
-                      >
-                        Explore
-                      </p>
-                    </NuxtLink>
+                <div class="started_card d-flex flex-column h-100">
+                  <div>
+                    <img
+                      :src="
+                        require(`@/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`)
+                      "
+                      :alt="`card_${cardIndex + 1}`"
+                      class="w-100 card_height"
+                    />
+                  </div>
+                  <div class="p-3 flex-grow-1 d-flex flex-column justify-content-between">
+                    <div class="h-100 flex-grow-1 d-flex flex-column justify-content-between">
+                      <div>
+                        <p class="fw-bolder font_family_poppins_bold font-size-18 mb-1">
+                          {{ card.title }}
+                        </p>
+                        <p class="font-size-14 font_family_poppins_light mb-1 description_lines">
+                          {{ card.description }}
+                        </p>
+                      </div>
+                      <div>
+                        <img
+                          src="@/assets/images/card_star.svg"
+                          alt="card_star"
+                          class="card_star"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <NuxtLink :to="`/mocktest/${card.slug}`">
+                        <p
+                          class="fw-bolder font-size-16 text-primary text-decoration-underline pt-4 mb-0"
+                        >
+                          Explore
+                        </p>
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,11 +155,19 @@ export default {
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';
 
-.card {
+.started_card {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
+  background-color: white;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }
 .card_star {
   width: 100px;
+  align-self: flex-end; /* Align to the end of the flex container */
+}
+.card_height {
+  max-height: 100%; /* Ensure image does not exceed the card height */
 }
 .carousel-indicators {
   padding-top: 20px;
@@ -171,5 +189,11 @@ export default {
 }
 .border_bottom {
   border-bottom: 2px solid #c4c4c4;
+}
+.description_lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to show */
+  -webkit-box-orient: vertical;
 }
 </style>

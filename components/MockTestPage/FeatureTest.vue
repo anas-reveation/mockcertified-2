@@ -59,7 +59,7 @@
                         >
                           {{ featuredTest.title }}
                         </p>
-                        <p class="font-size-14">{{ featuredTest.description }}</p>
+                        <p class="font-size-14 description_lines">{{ featuredTest.description }}</p>
                         <img
                           src="@/assets/images/card_star.svg"
                           alt="card_star"
@@ -230,5 +230,12 @@ export default {
 
 .carousel-indicators .active {
   background-color: #343a40; /* Dark grey color for active indicator */
+}
+
+.description_lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Number of lines to show */
+  -webkit-box-orient: vertical;
 }
 </style>

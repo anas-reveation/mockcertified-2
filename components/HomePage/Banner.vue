@@ -21,7 +21,13 @@
             </p>
           </div>
           <div class="d-flex mt-2">
-            <button class="banner_btn me-2 me-md-3">JOIN FOR FREE</button>
+            <button
+              class="banner_btn me-2 me-md-3"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal_1"
+            >
+              JOIN FOR FREE
+            </button>
             <button class="banner_btn ms-2 me-md-3">EXPLORE</button>
           </div>
         </div>
