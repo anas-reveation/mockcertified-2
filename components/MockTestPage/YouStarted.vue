@@ -26,7 +26,7 @@
       class="carousel slide"
       data-bs-ride="carousel"
     >
-      <div class="carousel-inner">
+      <div class="carousel-inner mb-4">
         <div
           v-for="(chunk, index) in startedTestChunks"
           :key="index"

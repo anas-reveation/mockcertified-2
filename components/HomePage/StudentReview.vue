@@ -25,13 +25,17 @@
         <div class="col-12 col-md-10 px-3">
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
+              <div
+                v-for="(testimonial, index) in testimonials"
+                :key="index"
+                :class="{ 'carousel-item': true, active: index === 0 }"
+              >
                 <div class="container">
                   <div class="row align-items-center justify-content-center">
                     <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
                       <div class="circle-container p-2">
                         <img
-                          src="~assets/images/review_student.svg"
+                          :src="require(`@/assets/images/review_${index}.svg`)"
                           alt="review_student"
                           class="circle-image"
                         />
@@ -41,9 +45,7 @@
                       <p
                         class="font-size-16 font-size-md-18 font-size-lg-20 text-center text-lg-start"
                       >
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestium vel lectus
-                        in dolor porttitor cursus nec ac odio. Nullam in imperdiet lacus. Lorem
-                        ipsum dolor sit amet, consectetur adsj dhnipiscing elit. “
+                        {{ testimonial.review }}
                       </p>
                       <div
                         class="d-flex align-items-center justify-content-center justify-content-lg-start pt-3"
@@ -51,79 +53,10 @@
                         <img src="~assets/images/comma.svg" alt="comma" />
                         <div class="d-flex flex-column ms-3">
                           <h6 class="font-size-24 fw-bolder mb-0 font_family_poppins_bold">
-                            John Smith
+                            {{ testimonial.name }}
                           </h6>
-                          <p class="font-size-14 mb-0">Project Manager</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container">
-                  <div class="row align-items-center justify-content-center">
-                    <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
-                      <div class="circle-container p-2">
-                        <img
-                          src="~assets/images/review_student.svg"
-                          alt="review_student"
-                          class="circle-image"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-12 col-lg-8 pt-3 pt-lg-0">
-                      <p
-                        class="font-size-16 font-size-md-18 font-size-lg-20 text-center text-lg-start"
-                      >
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestium vel lectus
-                        in dolor porttitor cursus nec ac odio. Nullam in imperdiet lacus. Lorem
-                        ipsum dolor sit amet, consectetur adsj dhnipiscing elit. “
-                      </p>
-                      <div
-                        class="d-flex align-items-center justify-content-center justify-content-lg-start pt-3"
-                      >
-                        <img src="~assets/images/comma.svg" alt="comma" />
-                        <div class="d-flex flex-column align-items-center ms-3">
-                          <h6 class="font-size-24 fw-bolder mb-0 font_family_poppins_bold">
-                            John Smith
-                          </h6>
-                          <p class="font-size-14 mb-0">Project Manager</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container">
-                  <div class="row align-items-center justify-content-center">
-                    <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
-                      <div class="circle-container p-2">
-                        <img
-                          src="~assets/images/review_student.svg"
-                          alt="review_student"
-                          class="circle-image"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-12 col-lg-8 pt-3 pt-lg-0">
-                      <p
-                        class="font-size-16 font-size-md-18 font-size-lg-20 text-center text-lg-start"
-                      >
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestium vel lectus
-                        in dolor porttitor cursus nec ac odio. Nullam in imperdiet lacus. Lorem
-                        ipsum dolor sit amet, consectetur adsj dhnipiscing elit. “
-                      </p>
-                      <div
-                        class="d-flex align-items-center justify-content-center justify-content-lg-start pt-3"
-                      >
-                        <img src="~assets/images/comma.svg" alt="comma" />
-                        <div class="d-flex flex-column align-items-center ms-3">
-                          <h6 class="font-size-24 fw-bolder mb-0 font_family_poppins_bold">
-                            John Smith
-                          </h6>
-                          <p class="font-size-14 mb-0">Project Manager</p>
+                          <!-- Assuming you have a role property in your testimonial data -->
+                          <p class="font-size-14 mb-0">{{ testimonial.role }}</p>
                         </div>
                       </div>
                     </div>
@@ -133,24 +66,14 @@
             </div>
             <div v-if="screenWidth < 767" class="carousel-indicators">
               <button
+                v-for="(testimonial, index) in testimonials"
+                :key="index"
                 type="button"
                 data-bs-target="#carouselExampleControls"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
+                :data-bs-slide-to="index"
+                :class="{ active: index === 0 }"
+                :aria-current="index === 0 ? 'true' : null"
+                :aria-label="`Slide ${index + 1}`"
               ></button>
             </div>
           </div>
@@ -179,6 +102,37 @@ export default {
   data() {
     return {
       screenWidth: typeof window !== 'undefined' ? window.innerWidth : 0,
+      testimonials: [
+        {
+          name: 'Emily Johnson',
+          review:
+            'Fantastic resource! The PMP mock tests provided a realistic exam environment. They covered the breadth of topics, and the detailed explanations after each question helped me understand the concepts thoroughly.',
+        },
+
+        {
+          name: 'Jessica Robinson',
+          review:
+            'I owe my success to these Azure Architect Associate mock tests. They provided a solid foundation and allowed me to fine-tune my skills. The format and difficulty level were spot-on!',
+        },
+
+        {
+          name: 'Jordan Turner',
+          review:
+            "I'm impressed! These mock tests prepared me thoroughly for the Google Cloud Architect certification. The explanations were clear, and the questions covered the entire spectrum of the exam.",
+        },
+
+        {
+          name: 'Derek Foster',
+          review:
+            'Highly recommend these ITIL 4 Foundation mock tests. They covered the material thoroughly, and the practice exams gave me a real sense of what to expect. A reliable resource for ITIL aspirants.',
+        },
+
+        {
+          name: 'Jason Adams',
+          review:
+            'A big thank you to this platform for the Six Sigma Green Belt mock tests. The variety of questions and scenarios prepared me comprehensively, and the feedback was immensely helpful in fine-tuning my skills.',
+        },
+      ],
     };
   },
   created() {

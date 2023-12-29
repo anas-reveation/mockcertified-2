@@ -125,7 +125,7 @@ export default {
     ...mapState('auth', ['user']),
     ...mapState('testManagement', ['allApprovedTests']),
     featuredTestChunks() {
-      const chunkSize = 5;
+      const chunkSize = 10;
       const totalChunks = Math.ceil(this.allApprovedTests.length / chunkSize);
       return Array.from({ length: totalChunks }, (_, index) => {
         const startIndex = index * chunkSize;

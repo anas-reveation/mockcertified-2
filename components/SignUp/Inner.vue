@@ -80,6 +80,7 @@
                   required
                   placeholder="Enter Your Password"
                 />
+
                 <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
                   <img
                     v-if="isPasswordVisible"
@@ -94,6 +95,9 @@
                     alt="eye"
                   />
                 </div>
+                <p class="font-size-10">
+                  Password must be 8+ chars, incl. uppercase, lowercase, number, & special character
+                </p>
                 <div
                   v-if="errors.password.isVisiable"
                   class="position-absolute p-1 bg-white text-danger border border-2 border-danger rounded font_family_roboto font_size_14 password_format_position"
@@ -300,6 +304,7 @@ export default {
       email: '',
       code: '',
     },
+    temporaryEmail: null,
     userId: null,
     passwordMatched: false,
     isDisabled: true,
@@ -451,13 +456,30 @@ export default {
     async registerLocal() {
       try {
         this.sendEmail();
+
         const userData = await this.register(this.registerForm);
         if (!userData) {
+          // Handle registration failure
+          // ...
           return;
         }
+        // Store the email temporarily
+        this.temporaryEmail = this.registerForm.email;
         this.userId = userData.userSub;
-        this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
+
+        // this.temporaryEmail = this.registerForm.email;
+
+        // this.step = this.steps.confirm;
+
+        // const userData = await this.register(this.registerForm);
+        // if (!userData) {
+        //   return;
+        // }
+        // this.userId = userData.userSub;
+
+        // this.confirmForm.email = this.registerForm.email;
+        // this.step = this.steps.confirm;
         this.$swal.fire({
           toast: true,
           position: 'top-end',
@@ -482,7 +504,7 @@ export default {
 
     async confirmLocal() {
       try {
-        const res = await this.confirmRegistration(this.confirmForm);
+        const res = await this.confirmRegistration(this.temporaryEmail, this.confirmForm.code);
         if (!res) {
           this.$swal.fire({
             toast: true,
@@ -495,6 +517,18 @@ export default {
           });
           return;
         }
+        this.registerForm.email = this.temporaryEmail;
+
+        // this.registerForm.email = this.temporaryEmail;
+        // this.userId = userData.userSub;
+
+        // const userData = await this.register(this.registerForm);
+        // if (!userData) {
+        //   // Handle registration failure
+        //   // ...
+        //   return;
+        // }
+
         // Till now User is present only in cognito is not in DB. In login function (action file) we are making user object in DB
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);

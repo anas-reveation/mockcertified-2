@@ -24,34 +24,32 @@ e
           <p class="font-size-12 font-size-lg-14 fw-light my-2 font_family_poppins_light">
             {{ testDetail?.description }}
           </p>
-          <div class="row font-size-14 font-size-md-16 align-items-center text-primary">
+          <div class="row d-flex flex-column font-size-14 font-size-md-16 text-primary">
             <div class="col-4 col-md-2 col-xl-2">
               <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
             </div>
-            <div
-              class="col-10 col-md-6 col-lg-4 d-flex align-items-center justify-content-between mt-2 mt-md-0"
-            >
-              <div class="div_circle"></div>
-              <p class="mb-0">{{ testDetail?.time_limit }} min</p>
-              <div class="div_circle"></div>
-              <p class="mb-0">{{ testDetail?.questions?.items?.length }} questions</p>
-              <div class="div_circle"></div>
-              <p class="mb-0">{{ totalMarks }} marks</p>
-            </div>
-            <div
-              class="col-10 col-md-6 col-lg-6 d-flex flex-column flex-md-row justify-content-between mt-2 mt-lg-0"
-            >
-              <div class="border_left">
-                <P class="text-black mb-0 py-1 ps-0 ps-md-2"
-                  >Created By
-                  <span class="text-primary font_family_poppins_bold"
-                    >{{ testDetail?.created_by?.first_name }}
-                    {{ testDetail?.created_by?.last_name }}</span
-                  >
-                </P>
+            <div class="d-flex flex-column flex-lg-row col-10 col-md-8 col-lg-12">
+              <div class="d-flex align-items-center justify-content-between mt-2 mt-md-0">
+                <div class="div_circle mx-2"></div>
+                <p class="mb-0">{{ testDetail?.time_limit }} min</p>
+                <div class="div_circle mx-2"></div>
+                <p class="mb-0">{{ testDetail?.questions?.items?.length }} questions</p>
+                <div class="div_circle mx-2"></div>
+                <p class="mb-0">{{ totalMarks }} marks</p>
               </div>
-              <div class="border_left">
-                <P class="mb-0 py-1 ps-0 ps-md-2 text-decoration-underline">Watch Video </P>
+              <div class="d-flex flex-column flex-md-row">
+                <div class="border_left ms-2">
+                  <P class="text-black mb-0 py-1 ps-0 ps-md-2"
+                    >Created By
+                    <span class="text-primary font_family_poppins_bold"
+                      >{{ testDetail?.created_by?.first_name }}
+                      {{ testDetail?.created_by?.last_name }}</span
+                    >
+                  </P>
+                </div>
+                <div class="border_left ms-2">
+                  <P class="mb-0 py-1 ps-0 ps-md-2 text-decoration-underline">Watch Video </P>
+                </div>
               </div>
             </div>
           </div>
@@ -69,7 +67,7 @@ e
                 {{ testDetail?.title }}
               </p>
               <div class="show_price py-2 px-3">
-                <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}.00</p>
+                <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}</p>
               </div>
             </div>
           </div>
@@ -81,9 +79,12 @@ e
           <div class="row">
             <div class="col-10">
               <div class="row gy-3">
-                <div v-for="i in 6" class="col-12 col-md-6 col-lg-4 d-flex align-items-center">
+                <div
+                  v-for="i in benefitsData"
+                  class="col-12 col-md-6 col-lg-4 d-flex align-items-center"
+                >
                   <img src="~assets/images/tick.svg" alt="tick" class="tick_width" />
-                  <p class="font-size-14 mb-0 ms-2">Lorem ipsum dolor sit ame</p>
+                  <p class="font-size-14 mb-0 ms-2">{{ i }}</p>
                 </div>
               </div>
             </div>
@@ -94,7 +95,7 @@ e
         <div class="col-12 col-xl-10 d-flex flex-column py-4">
           <p class="font-size-18 font_family_poppins_bold">Featured reviews</p>
           <div class="row gy-3">
-            <div v-for="i in 3" class="col-12 col-md-6 col-lg-4">
+            <div v-for="data in testimonials" class="col-12 col-md-6 col-lg-4">
               <div class="">
                 <div class="d-flex align-items-center">
                   <img
@@ -102,13 +103,10 @@ e
                     alt="test_card_icon"
                     class="test_card_icon"
                   />
-                  <p class="font_family_poppins_bold text-primary mb-0 mx-2">Joe Smith</p>
+                  <p class="font_family_poppins_bold text-primary mb-0 mx-2">{{ data.name }}</p>
                   <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star_1" />
                 </div>
-                <p class="font-size-14 font_family_poppins_light mt-2">
-                  “Ut enim ad minim veniam, quis nostru etion ullamco laboris nisi ut aliquip ex ea
-                  comodo consequat. Duis aute irure dolor in reprehe”
-                </p>
+                <p class="font-size-14 font_family_poppins_light mt-2">“{{ data.review }}”</p>
               </div>
             </div>
           </div>
@@ -224,6 +222,45 @@ export default {
       newPrice: null,
       sampleQuestions: [],
       testId: null,
+      benefitsData: [
+        'Cloud skills',
+        'Database proficiency',
+        'Career growth',
+        'Data security',
+        'Scalability',
+        'Industry relevance',
+      ],
+      testimonials: [
+        {
+          name: 'Emily Johnson',
+          review:
+            'Fantastic resource! The PMP mock tests provided a realistic exam environment. They covered the breadth of topics, and the detailed explanations after each question helped me understand the concepts thoroughly.',
+        },
+
+        {
+          name: 'Jessica Robinson',
+          review:
+            'I owe my success to these Azure Architect Associate mock tests. They provided a solid foundation and allowed me to fine-tune my skills. The format and difficulty level were spot-on!',
+        },
+
+        {
+          name: 'Jordan Turner',
+          review:
+            "I'm impressed! These mock tests prepared me thoroughly for the Google Cloud Architect certification. The explanations were clear, and the questions covered the entire spectrum of the exam.",
+        },
+
+        {
+          name: 'Derek Foster',
+          review:
+            'Highly recommend these ITIL 4 Foundation mock tests. They covered the material thoroughly, and the practice exams gave me a real sense of what to expect. A reliable resource for ITIL aspirants.',
+        },
+
+        {
+          name: 'Jason Adams',
+          review:
+            'A big thank you to this platform for the Six Sigma Green Belt mock tests. The variety of questions and scenarios prepared me comprehensively, and the feedback was immensely helpful in fine-tuning my skills.',
+        },
+      ],
     };
   },
 
@@ -323,7 +360,7 @@ export default {
 }
 .show_price {
   background: rgba(255, 193, 7, 0.21);
-  width: 120px;
+  width: 150px;
   border-radius: 35px;
 }
 .tick_width {
