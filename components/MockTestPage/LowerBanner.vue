@@ -9,14 +9,14 @@
             <h2
               class="font-size-24 font-size-md-28 font-size-lg-50 fw-bolder text-black font_family_poppins_bold"
             >
-              Lorem ipsum dolor sit, <span class="text-primary">consectetur adipiscin </span>
+              Step into Certification Success:
+              <span class="text-primary">Your Journey Awaits! </span>
             </h2>
             <p class="font-size-12 font-size-lg-14 fw-light my-3 font_family_poppins_light">
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquimmodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-              dolore euLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquimmodo consequat.
+              Ready to crush Google, AWS, PMP, and other certifications? Our mock tests are designed
+              to prepare you comprehensively. They guide you through and share expert tips. It's not
+              just practice; it's your unique path to certification success. Every test is a step
+              toward your incredible success story.
             </p>
           </div>
         </div>

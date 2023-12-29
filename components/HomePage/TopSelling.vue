@@ -30,11 +30,11 @@
                   with realistic simulations and assessments.
                 </p>
                 <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                <p
+                <!-- <p
                   class="fw-bolder text-start font-size-16 text-primary text-decoration-underline pt-5"
                 >
                   Explore
-                </p>
+                </p> -->
               </div>
               <!-- Card content goes here -->
             </div>
@@ -53,11 +53,11 @@
                   Cloud Architect certification’s specific objectives.
                 </p>
                 <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                <p
+                <!-- <p
                   class="fw-bolder text-start font-size-16 text-primary text-decoration-underline pt-5"
                 >
                   Explore
-                </p>
+                </p> -->
               </div>
               <!-- Card content goes here -->
             </div>
@@ -76,16 +76,25 @@
                   virtual networks, and Microsoft Azure services.
                 </p>
                 <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
-                <p
+                <!-- <p
                   class="fw-bolder text-start font-size-16 text-primary text-decoration-underline pt-5"
                 >
                   Explore
-                </p>
+                </p> -->
               </div>
               <!-- Card content goes here -->
             </div>
           </div>
         </div>
+        <NuxtLink to="/mocktest">
+          <div class="d-flex justify-content-end">
+            <p
+              class="fw-bolder text-start font-size-20 text-primary text-decoration-underline mb-0"
+            >
+              Explore
+            </p>
+          </div>
+        </NuxtLink>
       </div>
     </div>
   </div>

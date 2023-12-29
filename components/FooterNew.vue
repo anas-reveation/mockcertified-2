@@ -22,10 +22,10 @@
             <NuxtLink to="/categories">
               <p class="text-white">Categories</p>
             </NuxtLink>
-            <NuxtLink to="mocktest">
+            <NuxtLink to="/mocktest">
               <p class="mx-3 text-white">Mock Tests</p>
             </NuxtLink>
-            <NuxtLink to="/blog">
+            <NuxtLink to="/blogpage">
               <p class="text-white">Blogs</p>
             </NuxtLink>
           </div>
