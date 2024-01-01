@@ -80,7 +80,6 @@
                   required
                   placeholder="Enter Your Password"
                 />
-
                 <div class="position-relative" @click="isPasswordVisible = !isPasswordVisible">
                   <img
                     v-if="isPasswordVisible"
@@ -304,7 +303,6 @@ export default {
       email: '',
       code: '',
     },
-    temporaryEmail: null,
     userId: null,
     passwordMatched: false,
     isDisabled: true,
@@ -456,30 +454,13 @@ export default {
     async registerLocal() {
       try {
         this.sendEmail();
-
         const userData = await this.register(this.registerForm);
         if (!userData) {
-          // Handle registration failure
-          // ...
           return;
         }
-        // Store the email temporarily
-        this.temporaryEmail = this.registerForm.email;
         this.userId = userData.userSub;
+        this.confirmForm.email = this.registerForm.email;
         this.step = this.steps.confirm;
-
-        // this.temporaryEmail = this.registerForm.email;
-
-        // this.step = this.steps.confirm;
-
-        // const userData = await this.register(this.registerForm);
-        // if (!userData) {
-        //   return;
-        // }
-        // this.userId = userData.userSub;
-
-        // this.confirmForm.email = this.registerForm.email;
-        // this.step = this.steps.confirm;
         this.$swal.fire({
           toast: true,
           position: 'top-end',
@@ -504,7 +485,7 @@ export default {
 
     async confirmLocal() {
       try {
-        const res = await this.confirmRegistration(this.temporaryEmail, this.confirmForm.code);
+        const res = await this.confirmRegistration(this.confirmForm);
         if (!res) {
           this.$swal.fire({
             toast: true,
@@ -517,18 +498,6 @@ export default {
           });
           return;
         }
-        this.registerForm.email = this.temporaryEmail;
-
-        // this.registerForm.email = this.temporaryEmail;
-        // this.userId = userData.userSub;
-
-        // const userData = await this.register(this.registerForm);
-        // if (!userData) {
-        //   // Handle registration failure
-        //   // ...
-        //   return;
-        // }
-
         // Till now User is present only in cognito is not in DB. In login function (action file) we are making user object in DB
         const form = { email: this.registerForm.email, password: this.registerForm.password };
         await this.login(form);

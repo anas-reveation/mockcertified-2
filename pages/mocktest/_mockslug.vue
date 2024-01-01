@@ -95,11 +95,11 @@ e
         <div class="col-12 col-xl-10 d-flex flex-column py-4">
           <p class="font-size-18 font_family_poppins_bold">Featured reviews</p>
           <div class="row gy-3">
-            <div v-for="data in testimonials" class="col-12 col-md-6 col-lg-4">
+            <div v-for="(data, index) in testimonials" class="col-12 col-md-6 col-lg-4">
               <div class="">
                 <div class="d-flex align-items-center">
                   <img
-                    src="~assets/images/test_card_icon.svg"
+                    :src="require(`@/assets/images/review_${index}.svg`)"
                     alt="test_card_icon"
                     class="test_card_icon"
                   />
@@ -371,6 +371,7 @@ export default {
 }
 .test_card_icon {
   height: 30px;
+  border-radius: 15px;
 }
 .card_star_1 {
   height: 15px;
