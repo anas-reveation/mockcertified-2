@@ -1,4 +1,3 @@
-e
 <template>
   <div>
     <div class="bg_div">
@@ -312,7 +311,7 @@ export default {
 
   async mounted() {
     this.setIsLoaderHidden(true);
-    this.testId = await this.getTestIdBySlug(this.testSlug);
+    this.testId = await this.getTestIdBySlug(this.$route.params.mockslug);
     this.testDetail = await this.getTestDetail(this.testId);
     this.SET_LOADER(true);
 
