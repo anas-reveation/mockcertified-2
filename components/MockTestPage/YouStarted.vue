@@ -56,9 +56,11 @@
                         <p class="fw-bolder font_family_poppins_bold font-size-18 mb-1">
                           {{ card.title }}
                         </p>
-                        <p class="font-size-14 font_family_poppins_light mb-1 description_lines">
-                          {{ card.description }}
-                        </p>
+                        <p
+                          class="font-size-14 font_family_poppins_light mb-1 description_lines"
+                          v-html="card.description"
+                          ref="container"
+                        ></p>
                       </div>
                       <div>
                         <img
@@ -69,7 +71,16 @@
                       </div>
                     </div>
                     <div>
-                      <NuxtLink :to="`/mocktest/${card.slug}`">
+                      <!-- <NuxtLink :to="`/mocktest/${card.slug}`"> -->
+                      <NuxtLink
+                        :to="{
+                          name: 'mocktest-mockslug',
+                          params: {
+                            mockslug: card.slug,
+                            imageIndex: ((cardIndex + index * 4) % 7) + 0,
+                          },
+                        }"
+                      >
                         <p
                           class="fw-bolder font-size-16 text-primary text-decoration-underline pt-4 mb-0"
                         >

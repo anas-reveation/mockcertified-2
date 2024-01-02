@@ -4,7 +4,7 @@ e
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ $route.params.mockslug }}
+          {{ testDetail?.title }}
         </h2>
       </div>
     </div>
@@ -21,9 +21,11 @@ e
 
       <div class="row">
         <div class="col-12 col-xl-8 d-flex flex-column border_bottom">
-          <p class="font-size-12 font-size-lg-14 fw-light my-2 font_family_poppins_light">
-            {{ testDetail?.description }}
-          </p>
+          <div
+            class="font-size-12 font-size-lg-14 fw-light my-2 font_family_poppins_light"
+            v-html="editTestDescContent"
+            ref="container"
+          ></div>
           <div class="row d-flex flex-column font-size-14 font-size-md-16 text-primary">
             <div class="col-4 col-md-2 col-xl-2">
               <img src="@/assets/images/card_star.svg" alt="card_star" class="card_star" />
@@ -60,15 +62,29 @@ e
         <div class="col-4 d-none d-xl-flex">
           <div class="test_card">
             <div class="h_300">
-              <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100 h-100 card_img" />
+              <img
+                :src="require(`@/assets/images/test_${this.$route.params.imageIndex}.svg`)"
+                :alt="altText"
+                class="w-100 h-100 card_img"
+              />
             </div>
             <div class="d-flex flex-column p-3">
               <p class="fw-bolder font_family_poppins_bold font-size-18">
                 {{ testDetail?.title }}
               </p>
-              <div class="show_price py-2 px-3">
-                <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}</p>
-              </div>
+              <span
+                v-if="testDetail?.price"
+                class="bg_price rounded-pill px-3 py-2 font-size-22 fw-bolder price_width"
+              >
+                {{ formatedPrice }}
+              </span>
+
+              <span
+                v-if="priceZero"
+                class="text-success rounded-pill px-3 py-2 bg_price_green font-size-22 fw-bolder price_width"
+              >
+                Free
+              </span>
             </div>
           </div>
         </div>
@@ -120,7 +136,19 @@ e
               {{ testDetail?.description }}
             </p>
             <div class="show_price py-2 px-3">
-              <p class="fw-bolder font-size-22 mb-0">$ {{ testDetail?.price }}</p>
+              <span
+                v-if="testDetail?.price"
+                class="bg_price rounded-pill px-3 py-2 font-size-22 fw-bolder price_width"
+              >
+                {{ formatedPrice }}
+              </span>
+
+              <span
+                v-if="priceZero"
+                class="text-success rounded-pill px-3 py-2 bg_price_green font-size-22 fw-bolder price_width"
+              >
+                Free
+              </span>
             </div>
           </div>
         </div>
@@ -222,6 +250,10 @@ export default {
       newPrice: null,
       sampleQuestions: [],
       testId: null,
+      priceZero: false,
+      formatedPrice: 0,
+      editTestDescContent: '',
+      altText: 'Card Image Alt Text', // Set the alt text as needed
       benefitsData: [
         'Cloud skills',
         'Database proficiency',
@@ -264,12 +296,6 @@ export default {
     };
   },
 
-  async asyncData({ params }) {
-    const testSlug = params.mockslug;
-
-    return { testSlug };
-  },
-
   computed: {
     ...mapState(['isLoading', 'isLoaderHidden']),
 
@@ -295,6 +321,26 @@ export default {
       this.setIsLoaderHidden(false);
       return;
     }
+    if (this.testDetail.price === 0) {
+      // this.price = '$0.00';
+      this.priceZero = true;
+    }
+    this.editTestDescContent = this.testDetail.description;
+    // this.wordLength = this.description.trim().split(' ').length;
+
+    if (this.testDetail.price && typeof this.testDetail.price === 'number') {
+      this.formatedPrice = `$${this.formatPrice(this.testDetail.price)}`;
+    } else if (this.testDetail.price) {
+      this.formatedPrice = this.testDetail.price;
+    }
+
+    this.$nextTick(() => {
+      const container = this.$refs.container;
+      this.containerHeight = container.scrollHeight;
+      if (this.containerHeight < 100) {
+        this.seeMoreBtn = false;
+      }
+    });
 
     this.SET_LOADER(false);
     this.setIsLoaderHidden(false);
@@ -308,6 +354,12 @@ export default {
       'getTestIdBySlug',
     ]),
     ...mapMutations(['SET_LOADER', 'setIsLoaderHidden', 'setRedirectUrl']),
+    formatPrice(price) {
+      return parseFloat(price).toFixed(2);
+    },
+    async inputShow(ff) {
+      this.editTestDescContent = ff;
+    },
   },
 };
 </script>
@@ -381,6 +433,17 @@ export default {
 }
 .card_img {
   object-fit: cover;
+}
+
+.bg_price {
+  background: rgba(255, 193, 7, 0.21);
+}
+
+.bg_price_green {
+  background: rgba(76, 175, 80, 0.3);
+}
+.price_width {
+  width: 35%;
 }
 
 @include media-breakpoint-up(md) {

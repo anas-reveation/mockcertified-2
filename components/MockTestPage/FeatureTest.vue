@@ -59,7 +59,11 @@
                         >
                           {{ featuredTest.title }}
                         </p>
-                        <p class="font-size-14 description_lines">{{ featuredTest.description }}</p>
+                        <p
+                          class="font-size-14 description_lines"
+                          v-html="featuredTest.description"
+                          ref="container"
+                        ></p>
                         <img
                           src="@/assets/images/card_star.svg"
                           alt="card_star"
