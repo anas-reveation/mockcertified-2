@@ -47,9 +47,11 @@
                         >
                           {{ card.title }}
                         </p>
-                        <p class="font-size-14 description_lines">
-                          {{ card.description }}
-                        </p>
+                        <p
+                          class="font-size-14 description_lines"
+                          v-html="card.description"
+                          ref="container"
+                        ></p>
                         <img
                           src="@/assets/images/card_star.svg"
                           alt="card_star"
