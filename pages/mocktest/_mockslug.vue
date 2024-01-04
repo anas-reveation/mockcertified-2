@@ -132,7 +132,7 @@
           <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
           <div class="d-flex flex-column p-3">
             <p class="fw-bolder font_family_poppins_bold font-size-18">
-              {{ testDetail?.description }}
+              {{ testDetail?.title }}
             </p>
             <div class="show_price py-2 px-3">
               <span
@@ -409,11 +409,7 @@ export default {
 .test_card {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
 }
-.show_price {
-  background: rgba(255, 193, 7, 0.21);
-  width: 150px;
-  border-radius: 35px;
-}
+
 .tick_width {
   width: 17px;
 }
