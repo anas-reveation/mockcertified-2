@@ -175,7 +175,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
         },
         {
           hid: 'og:title',
@@ -185,7 +185,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
         },
         {
           name: 'keywords',
@@ -217,7 +217,7 @@ export default {
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
         },
 
         {

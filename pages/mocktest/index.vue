@@ -23,6 +23,77 @@ export default {
   middleware: ['authenticated'],
   components: { VueSlickCarousel },
 
+  head() {
+    return {
+      title: `Mock Test Hub: Latest & Greatest for Your Success!`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Unleash success with our top-rated mock tests. Stay updated with the latest and featured simulations. Your ultimate preparation journey begins now!`,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: `Mock Test Hub: Latest & Greatest for Your Success!`,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: `Unleash success with our top-rated mock tests. Stay updated with the latest and featured simulations. Your ultimate preparation journey begins now!`,
+        },
+        {
+          name: 'keywords',
+          content: `Mock Test Hub: Latest & Greatest for Your Success!, Mockcertified App`,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+
+        // Twitter Meta Tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: `Mock Test Hub: Latest & Greatest for Your Success!`,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: `Unleash success with our top-rated mock tests. Stay updated with the latest and featured simulations. Your ultimate preparation journey begins now!`,
+        },
+
+        {
+          hid: 'twitter:domain',
+          property: 'twitter:domain',
+          content: process.env.DOMAIN,
+        },
+        {
+          hid: 'twitter:url',
+          property: 'twitter:url',
+          content: `https://${process.env.DOMAIN}/${this.$router.currentRoute.name}`,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: `https://${process.env.DOMAIN}${require('~/assets/images/logo_with_name.svg')}`,
+        },
+      ],
+    };
+  },
+
   data() {
     return {
       // hasRunBefore: false,

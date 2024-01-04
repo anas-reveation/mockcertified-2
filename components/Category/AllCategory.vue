@@ -92,8 +92,8 @@ export default {
   border-radius: 10px;
 }
 .card_img {
-  width: 85px;
-  height: 85px;
+  width: 70px;
+  height: 70px;
 }
 
 @include media-breakpoint-up(md) {
