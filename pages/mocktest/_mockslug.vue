@@ -132,7 +132,7 @@
           <img src="@/assets/images/card_1.svg" alt="card_1" class="w-100" />
           <div class="d-flex flex-column p-3">
             <p class="fw-bolder font_family_poppins_bold font-size-18">
-              {{ testDetail?.description }}
+              {{ testDetail?.title }}
             </p>
             <div class="show_price py-2 px-3">
               <span
@@ -170,27 +170,32 @@ export default {
 
   head() {
     return {
-      title: `${this.testDetail && this.testDetail.title}`,
+      title: `${
+        this.testDetail && this.testDetail.title
+      }: Enhance Skills with Realistic Mock Exams`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+          content: `${
+            this.testDetail && this.testDetail.title
+          }: Enhance Skills with Realistic Mock Exams`,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
-        {
-          name: 'keywords',
-          content: `${this.testDetail && this.testDetail.title}, Mockcertified App`,
-        },
+
         {
           hid: 'og:type',
           property: 'og:type',
@@ -212,12 +217,16 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+          content: `${
+            this.testDetail && this.testDetail.title
+          }: Enhance Skills with Realistic Mock Exams`,
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: `${this.testDetail && this.testDetail.description}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
 
         {
@@ -409,11 +418,7 @@ export default {
 .test_card {
   box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.09);
 }
-.show_price {
-  background: rgba(255, 193, 7, 0.21);
-  width: 150px;
-  border-radius: 35px;
-}
+
 .tick_width {
   width: 17px;
 }
