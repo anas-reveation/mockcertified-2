@@ -166,8 +166,6 @@ import { Browser } from '@capacitor/browser';
 export default {
   layout: 'homePageLayout',
 
-  middleware: ['authenticated'],
-
   head() {
     return {
       title: `${
