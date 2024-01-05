@@ -72,10 +72,10 @@
                     </NuxtLink>
                   </li>
                   <li class="nav-item" @click="closeNavbar">
-                    <NuxtLink to="/mocktest">
+                    <NuxtLink to="/mock-test">
                       <a
                         class="nav-link font-size-16 me-3"
-                        :class="{ active: $route.path === '/mocktest' }"
+                        :class="{ active: $route.path === '/mock-test' }"
                         >Mock Tests</a
                       >
                     </NuxtLink>
@@ -150,10 +150,10 @@
                   </NuxtLink>
                 </li>
                 <li class="nav-item">
-                  <NuxtLink to="/mocktest">
+                  <NuxtLink to="/mock-test">
                     <a
                       class="nav-link font-size-16 me-3"
-                      :class="{ active: $route.path === '/mocktest' }"
+                      :class="{ active: $route.path === '/mock-test' }"
                       >Mock Tests</a
                     >
                   </NuxtLink>

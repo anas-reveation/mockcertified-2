@@ -71,10 +71,10 @@
                       </div>
                     </div>
                     <div>
-                      <!-- <NuxtLink :to="`/mocktest/${card.slug}`"> -->
+                      <!-- <NuxtLink :to="`/mock-test/${card.slug}`"> -->
                       <NuxtLink
                         :to="{
-                          name: 'mocktest-mockslug',
+                          name: 'mock-test-mockslug',
                           params: {
                             mockslug: card.slug,
                             imageIndex: ((cardIndex + index * 4) % 7) + 0,

@@ -86,7 +86,7 @@
             </div>
           </div>
         </div>
-        <NuxtLink to="/mocktest">
+        <NuxtLink to="/mock-test">
           <div class="d-flex justify-content-end">
             <p
               class="fw-bolder text-start font-size-20 text-primary text-decoration-underline mb-0"

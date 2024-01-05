@@ -81,6 +81,26 @@ export default {
 
   sitemap: {
     hostname: `https://${process.env.DOMAIN}`,
+    routes: [
+      '/mock-test/az-400-devops-engineer-expert-exam',
+      '/mock-test/cloud-engineer-exam',
+      '/mock-test/six-sigma-green-belt',
+      '/mock-test/certified-ethical-hacker-exam',
+      '/mock-test/aws-certified-devops-engineer',
+      '/mock-test/project-management-professional-pmp-free',
+      '/mock-test/cisco-certified-network-associate',
+      '/mock-test/aws-certified-devops-engineer-professional-paid',
+      '/mock-test/project-management-professional-pmp-paid',
+      '/mock-test/cloud-architect-free',
+      '/mock-test/cloud-architect-paid',
+      '/mock-test/itil-4-foundation-exam-paid',
+    ],
+    exclude: [
+      '/category',
+      '/homepagenew', // You can use wildcards
+      '/blogpage',
+      '/blogsOld', // You can also use regular expressions
+    ],
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
