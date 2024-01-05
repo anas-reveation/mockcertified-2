@@ -170,27 +170,32 @@ export default {
 
   head() {
     return {
-      title: `${this.testDetail && this.testDetail.title}`,
+      title: `${
+        this.testDetail && this.testDetail.title
+      }: Enhance Skills with Realistic Mock Exams`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+          content: `${
+            this.testDetail && this.testDetail.title
+          }: Enhance Skills with Realistic Mock Exams`,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
-        {
-          name: 'keywords',
-          content: `${this.testDetail && this.testDetail.title}, Mockcertified App`,
-        },
+
         {
           hid: 'og:type',
           property: 'og:type',
@@ -212,12 +217,16 @@ export default {
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: `${this.testDetail && this.testDetail.title} - Mockcertified App`,
+          content: `${
+            this.testDetail && this.testDetail.title
+          }: Enhance Skills with Realistic Mock Exams`,
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: `${this.testDetail && this.testDetail.description.slice(0, 400)}`,
+          content: `Prepare for ${
+            this.testDetail && this.testDetail.title
+          } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
 
         {
