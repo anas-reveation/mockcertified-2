@@ -60,7 +60,7 @@
         </div>
         <div class="col-4 d-none d-xl-flex">
           <div class="test_card">
-            <div class="h_300">
+            <div class="h_400">
               <img
                 :src="require(`@/assets/images/test_${this.$route.params.imageIndex}.svg`)"
                 :alt="altText"
@@ -432,8 +432,8 @@ export default {
 .card_star_1 {
   height: 15px;
 }
-.h_300 {
-  height: 300px;
+.h_400 {
+  height: 400px;
 }
 .card_img {
   object-fit: cover;
