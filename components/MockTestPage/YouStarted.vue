@@ -143,14 +143,31 @@ export default {
     },
   },
 
-  async mounted() {
-    this.setIsLoaderHidden(true);
+  async asyncData({ store }) {
+    const post = 'anas';
+    console.log(post, 'post data ');
 
-    if (!this.recentlyAddedTests.length) {
-      await this.getRecentlyAddedTests();
+    try {
+      // Fetch data using store dispatch
+      await store.dispatch('testManagement/getRecentlyAddedTests');
+
+      // Access the fetched data
+
+      return { post };
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return { post };
     }
-    this.setIsLoaderHidden(false);
   },
+
+  // async mounted() {
+  //   this.setIsLoaderHidden(true);
+
+  //   if (!this.recentlyAddedTests.length) {
+  //     await this.getRecentlyAddedTests();
+  //   }
+  //   this.setIsLoaderHidden(false);
+  // },
 
   methods: {
     ...mapActions('testManagement', ['getAllApprovedTests', 'getRecentlyAddedTests']),

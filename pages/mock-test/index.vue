@@ -20,7 +20,6 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   layout: 'homePageLayout',
 
-  middleware: ['authenticated'],
   components: { VueSlickCarousel },
 
   head() {
@@ -123,23 +122,40 @@ export default {
     ...mapState('testManagement', ['featuredTests', 'recentlyAddedTests']),
   },
 
-  async mounted() {
-    // if (!this.user) {
-    //   this.$router.push('/');
-    // }
-    this.setIsLoaderHidden(true);
+  // async mounted() {
+  //   // if (!this.user) {
+  //   //   this.$router.push('/');
+  //   // }
+  //   this.setIsLoaderHidden(true);
 
-    if (!this.featuredTests.length) {
-      await this.getAllFeaturedTest();
+  //   if (!this.featuredTests.length) {
+  //     await this.getAllFeaturedTest();
+  //   }
+
+  //   if (!this.recentlyAddedTests.length) {
+  //     await this.getRecentlyAddedTests();
+  //   }
+
+  //   this.setIsLoaderHidden(false);
+
+  //   this.isFetched = true;
+  // },
+  async asyncData({ store }) {
+    const post = 'anas';
+    console.log(post, 'post data ');
+
+    try {
+      // Fetch data using store dispatch
+      await store.dispatch('testManagement/getAllFeaturedTest');
+      await store.dispatch('testManagement/getRecentlyAddedTests');
+
+      // Access the fetched data
+
+      return { post };
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return { post };
     }
-
-    if (!this.recentlyAddedTests.length) {
-      await this.getRecentlyAddedTests();
-    }
-
-    this.setIsLoaderHidden(false);
-
-    this.isFetched = true;
   },
 
   methods: {
