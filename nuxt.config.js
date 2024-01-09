@@ -1,6 +1,8 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
+  target: 'server',
+
   // If you don't want to display the progress bar between the routes
   loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
