@@ -1,4 +1,6 @@
 export default {
+  ssr: true,
+
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
   target: 'server',
@@ -116,6 +118,8 @@ export default {
   // router: {
   //   middleware: 'redirectBlog',
   // },
+
+  buildDir: 'dist/server',
 
   generate: {
     fallback: true,
