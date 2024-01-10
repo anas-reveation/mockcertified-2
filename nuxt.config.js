@@ -119,6 +119,8 @@ export default {
   //   middleware: 'redirectBlog',
   // },
 
+  buildDir: 'dist',
+
   generate: {
     fallback: true,
   },
