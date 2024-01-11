@@ -1,9 +1,9 @@
 export default {
-  ssr: true,
+  // ssr: true,
 
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
-  target: 'server',
+  // target: 'server',
 
   // If you don't want to display the progress bar between the routes
   loading: false,
@@ -53,7 +53,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/amplify.js', mode: 'client' },
+    { src: '~/plugins/amplify.js' },
     { src: '~/plugins/auth.js', mode: 'client' },
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/getLocalData.js', mode: 'client' },
@@ -119,7 +119,7 @@ export default {
   //   middleware: 'redirectBlog',
   // },
 
-  buildDir: 'dist',
+  // buildDir: 'dist',
 
   generate: {
     fallback: true,
