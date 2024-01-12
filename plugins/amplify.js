@@ -2,7 +2,8 @@ import { Amplify, Analytics } from 'aws-amplify';
 import awsConfig from '~/aws-exports';
 
 // Overwrite Oauth(socialAuth) for current domain
-let domain = window.location.origin;
+// let domain = window.location.origin;
+let domain = 'mockcertified.com';
 
 const newConfig = {
   ...awsConfig,

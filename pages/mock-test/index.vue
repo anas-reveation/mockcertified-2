@@ -151,7 +151,7 @@ export default {
 
       // Access the fetched data
 
-      return { post };
+      return {};
     } catch (error) {
       console.error('Error fetching data:', error);
       return { post };

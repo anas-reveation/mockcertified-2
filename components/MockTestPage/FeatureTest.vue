@@ -44,11 +44,11 @@
                 >
                   <div class="row justify-content-between p-4">
                     <div class="col-12 col-lg-5 order-2 order-lg-0">
-                      <img
+                      <!-- <img
                         :src="require(`@/assets/images/test_${index}.svg`)"
                         alt="card_1"
                         class="w-100 h-100"
-                      />
+                      /> -->
                     </div>
                     <div
                       class="col-12 col-lg-7 d-flex flex-column justify-content-between ps-3 ps-lg-4 mb-4 mb-lg-0"

@@ -67,6 +67,11 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  layout: 'homePageLayout',
+};
+</script>
 
 <style scoped lang="scss">
 @import '~/assets/css/bootstrapBreakpoint.scss';

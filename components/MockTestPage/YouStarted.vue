@@ -42,13 +42,13 @@
               >
                 <div class="started_card d-flex flex-column h-100">
                   <div>
-                    <img
+                    <!-- <img
                       :src="
                         require(`@/assets/images/test_${((cardIndex + index * 4) % 7) + 0}.svg`)
                       "
                       :alt="`card_${cardIndex + 1}`"
                       class="w-100 card_height"
-                    />
+                    /> -->
                   </div>
                   <div class="p-3 flex-grow-1 d-flex flex-column justify-content-between">
                     <div class="h-100 flex-grow-1 d-flex flex-column justify-content-between">
@@ -143,22 +143,22 @@ export default {
     },
   },
 
-  async asyncData({ store }) {
-    const post = 'anas';
-    console.log(post, 'post data ');
+  // async asyncData({ store }) {
+  //   const post = 'anas';
+  //   console.log(post, 'post data ');
 
-    try {
-      // Fetch data using store dispatch
-      await store.dispatch('testManagement/getRecentlyAddedTests');
+  //   try {
+  //     // Fetch data using store dispatch
+  //     await store.dispatch('testManagement/getRecentlyAddedTests');
 
-      // Access the fetched data
+  //     // Access the fetched data
 
-      return { post };
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return { post };
-    }
-  },
+  //     return { post };
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     return { post };
+  //   }
+  // },
 
   // async mounted() {
   //   this.setIsLoaderHidden(true);

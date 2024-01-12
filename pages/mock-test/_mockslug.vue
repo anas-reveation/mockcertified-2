@@ -1,9 +1,13 @@
 <template>
   <div>
+    <h1>{{ testDetails?.title }}</h1>
+  </div>
+
+  <!-- <div>
     <div class="bg_div">
       <div class="container py-5">
         <h2 class="font-size-28 font-size-md-38 font_family_poppins_bold text-white my-4">
-          {{ testDetail?.title }}
+          {{ testDetail?.title }} {{ testDetail }}
         </h2>
       </div>
     </div>
@@ -156,7 +160,7 @@
     <MockTestPageLatestTest class="mt-5" />
     <IndividualTestNextStep />
     <SignUpCover />
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -166,19 +170,131 @@ import { Browser } from '@capacitor/browser';
 export default {
   layout: 'homePageLayout',
 
-  middleware: ['authenticated'],
+  data() {
+    return {
+      testDetail: null,
+      isPurchased: false,
+      isUserOwner: false,
+      stripeUrl: null,
+      promocode: '',
+      newPrice: null,
+      sampleQuestions: [],
+      testId: null,
+      priceZero: false,
+      formatedPrice: 0,
+      editTestDescContent: '',
+      altText: 'Card Image Alt Text', // Set the alt text as needed
+      benefitsData: [
+        'Cloud skills',
+        'Database proficiency',
+        'Career growth',
+        'Data security',
+        'Scalability',
+        'Industry relevance',
+      ],
+      testimonials: [
+        {
+          name: 'Emily Johnson',
+          review:
+            'Fantastic resource! The PMP mock tests provided a realistic exam environment. They covered the breadth of topics, and the detailed explanations after each question helped me understand the concepts thoroughly.',
+        },
+
+        {
+          name: 'Jessica Robinson',
+          review:
+            'I owe my success to these Azure Architect Associate mock tests. They provided a solid foundation and allowed me to fine-tune my skills. The format and difficulty level were spot-on!',
+        },
+
+        {
+          name: 'Jordan Turner',
+          review:
+            "I'm impressed! These mock tests prepared me thoroughly for the Google Cloud Architect certification. The explanations were clear, and the questions covered the entire spectrum of the exam.",
+        },
+
+        {
+          name: 'Derek Foster',
+          review:
+            'Highly recommend these ITIL 4 Foundation mock tests. They covered the material thoroughly, and the practice exams gave me a real sense of what to expect. A reliable resource for ITIL aspirants.',
+        },
+
+        {
+          name: 'Jason Adams',
+          review:
+            'A big thank you to this platform for the Six Sigma Green Belt mock tests. The variety of questions and scenarios prepared me comprehensively, and the feedback was immensely helpful in fine-tuning my skills.',
+        },
+      ],
+    };
+  },
+
+  async asyncData({ params, store }) {
+    const testSlug = params.mockslug;
+    console.log('test slug id ', testSlug);
+
+    // Set loader hidden
+    // store.dispatch('setIsLoaderHidden', true);
+
+    try {
+      // Get testId by slug
+      const testId = await store.dispatch('testManagement/getTestIdBySlug', testSlug);
+      console.log(testId, 'testId');
+
+      // Get testDetail
+      const testDetails = await store.dispatch('testManagement/getTestDetail', testId);
+      console.log(testDetails, 'testDetail');
+
+      // Set loader
+      store.commit('SET_LOADER', true);
+
+      if (!testDetails || testDetails.status !== 'APPROVED') {
+        // Set loader and loader hidden
+        store.commit('SET_LOADER', false);
+        store.dispatch('setIsLoaderHidden', false);
+        return { testDetails: null };
+      }
+
+      // Handle price
+      if (testDetails.price === 0) {
+        store.commit('SET_PRICE_ZERO', true);
+      }
+
+      // Set description content
+      // store.commit('SET_EDIT_TEST_DESC_CONTENT', testDetail.description);
+
+      // Format price
+      // if (testDetail.price && typeof testDetail.price === 'number') {
+      //   store.commit('SET_FORMATTED_PRICE', `$${store.getters.formatPrice(testDetail.price)}`);
+      // } else if (testDetail.price) {
+      //   store.commit('SET_FORMATTED_PRICE', testDetail.price);
+      // }
+
+      // Set container height
+      // await store.dispatch('setContainerHeight');
+
+      // Set loader and loader hidden
+      store.commit('SET_LOADER', false);
+      store.dispatch('setIsLoaderHidden', false);
+      console.log(testDetails, 'test full detail');
+
+      return { testDetails: testDetails };
+    } catch (error) {
+      // Handle errors if necessary
+      console.error('Error in asyncData:', error);
+      return { testDetail: null };
+    }
+  },
 
   head() {
     return {
-      title: `${
-        this.testDetail && this.testDetail.title
-      }: Enhance Skills with Realistic Mock Exams`,
+      title: this.testDetails
+        ? `${this.testDetails?.title}: Enhance Skills with Realistic Mock Exams`
+        : 'Default Title',
+
       meta: [
         {
           hid: 'description',
           name: 'description',
           content: `Prepare for ${
-            this.testDetail && this.testDetail.title
+            this.testDetails && this.testDetails.title
           } with realistic mock tests. Assess your skills, strengthen weaknesses, and boost confidence for exam success. `,
         },
         {
@@ -248,111 +364,121 @@ export default {
     };
   },
 
-  data() {
-    return {
-      testDetail: null,
-      isPurchased: false,
-      isUserOwner: false,
-      stripeUrl: null,
-      promocode: '',
-      newPrice: null,
-      sampleQuestions: [],
-      testId: null,
-      priceZero: false,
-      formatedPrice: 0,
-      editTestDescContent: '',
-      altText: 'Card Image Alt Text', // Set the alt text as needed
-      benefitsData: [
-        'Cloud skills',
-        'Database proficiency',
-        'Career growth',
-        'Data security',
-        'Scalability',
-        'Industry relevance',
-      ],
-      testimonials: [
-        {
-          name: 'Emily Johnson',
-          review:
-            'Fantastic resource! The PMP mock tests provided a realistic exam environment. They covered the breadth of topics, and the detailed explanations after each question helped me understand the concepts thoroughly.',
-        },
-
-        {
-          name: 'Jessica Robinson',
-          review:
-            'I owe my success to these Azure Architect Associate mock tests. They provided a solid foundation and allowed me to fine-tune my skills. The format and difficulty level were spot-on!',
-        },
-
-        {
-          name: 'Jordan Turner',
-          review:
-            "I'm impressed! These mock tests prepared me thoroughly for the Google Cloud Architect certification. The explanations were clear, and the questions covered the entire spectrum of the exam.",
-        },
-
-        {
-          name: 'Derek Foster',
-          review:
-            'Highly recommend these ITIL 4 Foundation mock tests. They covered the material thoroughly, and the practice exams gave me a real sense of what to expect. A reliable resource for ITIL aspirants.',
-        },
-
-        {
-          name: 'Jason Adams',
-          review:
-            'A big thank you to this platform for the Six Sigma Green Belt mock tests. The variety of questions and scenarios prepared me comprehensively, and the feedback was immensely helpful in fine-tuning my skills.',
-        },
-      ],
-    };
-  },
-
   computed: {
     ...mapState(['isLoading', 'isLoaderHidden']),
 
-    totalMarks() {
-      if (this.testDetail) {
-        let totalMarks = 0;
-        this.testDetail.questions.items.map((ques) => {
-          totalMarks += ques.marks;
-        });
-        return totalMarks;
-      }
-    },
+    // totalMarks() {
+    //   if (this.testDetail) {
+    //     let totalMarks = 0;
+    //     this.testDetail.questions.items.map((ques) => {
+    //       totalMarks += ques.marks;
+    //     });
+    //     return totalMarks;
+    //   }
+    // },
   },
 
-  async mounted() {
-    this.setIsLoaderHidden(true);
-    this.testId = await this.getTestIdBySlug(this.$route.params.mockslug);
-    this.testDetail = await this.getTestDetail(this.testId);
-    this.SET_LOADER(true);
+  // async mounted() {
+  //   this.setIsLoaderHidden(true);
+  //   this.testId = await this.getTestIdBySlug(this.$route.params.mockslug);
+  //   this.testDetail = await this.getTestDetail(this.testId);
+  //   this.SET_LOADER(true);
 
-    if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
-      this.SET_LOADER(false);
-      this.setIsLoaderHidden(false);
-      return;
-    }
-    if (this.testDetail.price === 0) {
-      // this.price = '$0.00';
-      this.priceZero = true;
-    }
-    this.editTestDescContent = this.testDetail.description;
-    // this.wordLength = this.description.trim().split(' ').length;
+  //   if (!this.testDetail || this.testDetail.status !== 'APPROVED') {
+  //     this.SET_LOADER(false);
+  //     this.setIsLoaderHidden(false);
+  //     return;
+  //   }
+  //   if (this.testDetail.price === 0) {
+  //     // this.price = '$0.00';
+  //     this.priceZero = true;
+  //   }
+  //   this.editTestDescContent = this.testDetail.description;
+  //   // this.wordLength = this.description.trim().split(' ').length;
 
-    if (this.testDetail.price && typeof this.testDetail.price === 'number') {
-      this.formatedPrice = `$${this.formatPrice(this.testDetail.price)}`;
-    } else if (this.testDetail.price) {
-      this.formatedPrice = this.testDetail.price;
-    }
+  //   if (this.testDetail.price && typeof this.testDetail.price === 'number') {
+  //     this.formatedPrice = `$${this.formatPrice(this.testDetail.price)}`;
+  //   } else if (this.testDetail.price) {
+  //     this.formatedPrice = this.testDetail.price;
+  //   }
 
-    this.$nextTick(() => {
-      const container = this.$refs.container;
-      this.containerHeight = container.scrollHeight;
-      if (this.containerHeight < 100) {
-        this.seeMoreBtn = false;
-      }
-    });
+  //   this.$nextTick(() => {
+  //     const container = this.$refs.container;
+  //     this.containerHeight = container.scrollHeight;
+  //     if (this.containerHeight < 100) {
+  //       this.seeMoreBtn = false;
+  //     }
+  //   });
 
-    this.SET_LOADER(false);
-    this.setIsLoaderHidden(false);
-  },
+  //   this.SET_LOADER(false);
+  //   this.setIsLoaderHidden(false);
+  // },
+
+  // async asyncData({ params, store }) {
+  //   const data = {
+  //     isLoading: false,
+  //     isLoaderHidden: false,
+  //     totalMarks: 0,
+  //     containerHeight: 0,
+  //     seeMoreBtn: true,
+  //   };
+
+  //   data.isLoading = true;
+  //   store.commit('SET_LOADER', true);
+  //   store.commit('setIsLoaderHidden', true);
+
+  //   try {
+  //     const testId = await store.dispatch('testManagement/getTestIdBySlug', params.mockslug);
+  //     const testDetail = await store.dispatch('testManagement/getTestDetail', testId);
+
+  //     if (!testDetail || testDetail.status !== 'APPROVED') {
+  //       store.commit('SET_LOADER', false);
+  //       store.commit('setIsLoaderHidden', false);
+  //       return data;
+  //     }
+
+  //     if (testDetail.price === 0) {
+  //       data.priceZero = true;
+  //     }
+
+  //     data.editTestDescContent = testDetail.description;
+
+  //     if (testDetail.price && typeof testDetail.price === 'number') {
+  //       data.formatedPrice = `$${parseFloat(testDetail.price).toFixed(2)}`;
+  //     } else if (testDetail.price) {
+  //       data.formatedPrice = testDetail.price;
+  //     }
+
+  //     // Wait for the next tick to get the container height
+  //     await new Promise((resolve) => setTimeout(resolve, 0));
+
+  //     // const container = document.getElementById('container'); // Adjust this to match your HTML structure
+  //     // data.containerHeight = container.scrollHeight;
+
+  //     // if (data.containerHeight < 100) {
+  //     //   data.seeMoreBtn = false;
+  //     // }
+
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     return data;
+  //   } finally {
+  //     store.commit('SET_LOADER', false);
+  //     store.commit('setIsLoaderHidden', false);
+  //   }
+  // },
+
+  // mounted() {
+  //   // This lifecycle hook is still available for client-side code
+  //   this.$nextTick(() => {
+  //     const container = document.getElementById('container'); // Adjust this to match your HTML structure
+  //     this.containerHeight = container.scrollHeight;
+  //     if (this.containerHeight < 100) {
+  //       this.seeMoreBtn = false;
+  //     }
+  //   });
+  // },
 
   methods: {
     ...mapActions('testManagement', [
