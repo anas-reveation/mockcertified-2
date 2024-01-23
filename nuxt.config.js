@@ -8,6 +8,9 @@ export default {
   // If you don't want to display the progress bar between the routes
   loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
+  server: {
+    port: 40936
+  },
   head: {
     title: 'Mockcertified App',
     titleTemplate: ' %s - Mockcertified App',
@@ -115,9 +118,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // router: {
-  //   middleware: 'redirectBlog',
-  // },
+  router: {
+     middleware: 'healthcheck',
+  },
 
   // buildDir: 'dist',
 
