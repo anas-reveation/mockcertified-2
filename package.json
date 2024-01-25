@@ -2,13 +2,10 @@
   "name": "mock-certified",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "16.20.0"
-  },
   "scripts": {
     "dev": "set NODE_ENV=development&& npm run config && nuxt",
     "config": "node ./generate_capacitor_config.js",
-    "build": "nuxt build",
+    "build": "nuxt build --openssl-legacy-provider",
     "start": "nuxt start",
     "cap-build": "set NODE_ENV=production&& npm run config && nuxt build --mode development && cap copy",
     "cap-generate": "set NODE_ENV=production&& npm run config && nuxt generate --mode development && cap copy",
@@ -51,7 +48,7 @@
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.8.3",
     "core-js": "^3.19.3",
-    "nuxt": "^2.15.8",
+    "nuxt": "^2.17.1",
     "stripe": "^10.7.0",
     "uuid": "^9.0.0",
     "vue": "^2.6.14",
