@@ -1,0 +1,367 @@
+[
+  {
+    "name": "blogpage",
+    "path": "/blogpage",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\blogpage.vue",
+    "chunkName": "pages/blogpage",
+    "url": "/blogpage",
+    "_name": "_74b35320"
+  },
+  {
+    "name": "blogs",
+    "path": "/blogs",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\blogs\\\\index.vue",
+    "chunkName": "pages/blogs/index",
+    "url": "/blogs",
+    "_name": "_c5e7ece0"
+  },
+  {
+    "name": "blogsOld",
+    "path": "/blogsOld",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\blogsOld.vue",
+    "chunkName": "pages/blogsOld",
+    "url": "/blogsOld",
+    "_name": "_06be5a76"
+  },
+  {
+    "name": "categories",
+    "path": "/categories",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\categories\\\\index.vue",
+    "chunkName": "pages/categories/index",
+    "url": "/categories",
+    "_name": "_69916d52"
+  },
+  {
+    "name": "category",
+    "path": "/category",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\category\\\\index.vue",
+    "chunkName": "pages/category/index",
+    "url": "/category",
+    "_name": "_bb1e0116"
+  },
+  {
+    "name": "contact-us",
+    "path": "/contact-us",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\contact-us.vue",
+    "chunkName": "pages/contact-us",
+    "url": "/contact-us",
+    "_name": "_4fa8ba9a"
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\dashboard.vue",
+    "chunkName": "pages/dashboard",
+    "url": "/dashboard",
+    "_name": "_602b7e35"
+  },
+  {
+    "name": "faq",
+    "path": "/faq",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\faq.vue",
+    "chunkName": "pages/faq",
+    "url": "/faq",
+    "_name": "_ce256f12"
+  },
+  {
+    "name": "homepage",
+    "path": "/homepage",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\homepage.vue",
+    "chunkName": "pages/homepage",
+    "url": "/homepage",
+    "_name": "_506f8b5d"
+  },
+  {
+    "name": "homepagenew",
+    "path": "/homepagenew",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\homepagenew.vue",
+    "chunkName": "pages/homepagenew",
+    "url": "/homepagenew",
+    "_name": "_fdc77d5a"
+  },
+  {
+    "name": "mock-test",
+    "path": "/mock-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\mock-test\\\\index.vue",
+    "chunkName": "pages/mock-test/index",
+    "url": "/mock-test",
+    "_name": "_e4f13ca8"
+  },
+  {
+    "name": "payment-cancel",
+    "path": "/payment-cancel",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\payment-cancel.vue",
+    "chunkName": "pages/payment-cancel",
+    "url": "/payment-cancel",
+    "_name": "_6d1820d0"
+  },
+  {
+    "name": "payment-success",
+    "path": "/payment-success",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\payment-success.vue",
+    "chunkName": "pages/payment-success",
+    "url": "/payment-success",
+    "_name": "_4aa0c41d"
+  },
+  {
+    "name": "privacy-policy",
+    "path": "/privacy-policy",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\privacy-policy.vue",
+    "chunkName": "pages/privacy-policy",
+    "url": "/privacy-policy",
+    "_name": "_25c1e4c6"
+  },
+  {
+    "name": "search",
+    "path": "/search",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\search.vue",
+    "chunkName": "pages/search",
+    "url": "/search",
+    "_name": "_6b8abdd7"
+  },
+  {
+    "name": "terms-conditions",
+    "path": "/terms-conditions",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\terms-conditions.vue",
+    "chunkName": "pages/terms-conditions",
+    "url": "/terms-conditions",
+    "_name": "_5cb009a6"
+  },
+  {
+    "name": "user-test",
+    "path": "/user-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\user-test.vue",
+    "chunkName": "pages/user-test",
+    "url": "/user-test",
+    "_name": "_532354f5"
+  },
+  {
+    "name": "auth-forgotpassword",
+    "path": "/auth/forgotpassword",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\auth\\\\forgotpassword.vue",
+    "chunkName": "pages/auth/forgotpassword",
+    "url": "/auth/forgotpassword",
+    "_name": "_54d438d5"
+  },
+  {
+    "name": "auth-login",
+    "path": "/auth/login",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\auth\\\\login.vue",
+    "chunkName": "pages/auth/login",
+    "url": "/auth/login",
+    "_name": "_14d6e022"
+  },
+  {
+    "name": "auth-resend-code",
+    "path": "/auth/resend-code",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\auth\\\\resend-code.vue",
+    "chunkName": "pages/auth/resend-code",
+    "url": "/auth/resend-code",
+    "_name": "_22090938"
+  },
+  {
+    "name": "auth-signup",
+    "path": "/auth/signup",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\auth\\\\signup.vue",
+    "chunkName": "pages/auth/signup",
+    "url": "/auth/signup",
+    "_name": "_5b41dda2"
+  },
+  {
+    "name": "protected-account",
+    "path": "/protected/account",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\account.vue",
+    "chunkName": "pages/protected/account",
+    "url": "/protected/account",
+    "_name": "_0ff7b0ee"
+  },
+  {
+    "name": "protected-admin",
+    "path": "/protected/admin",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\index.vue",
+    "chunkName": "pages/protected/admin/index",
+    "url": "/protected/admin",
+    "_name": "_a387c99c"
+  },
+  {
+    "name": "protected-attempted-test",
+    "path": "/protected/attempted-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\attempted-test.vue",
+    "chunkName": "pages/protected/attempted-test",
+    "url": "/protected/attempted-test",
+    "_name": "_3c4dffe2"
+  },
+  {
+    "name": "protected-create-test",
+    "path": "/protected/create-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\create-test.vue",
+    "chunkName": "pages/protected/create-test",
+    "url": "/protected/create-test",
+    "_name": "_1bdb1bf8"
+  },
+  {
+    "name": "protected-created-test",
+    "path": "/protected/created-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\created-test\\\\index.vue",
+    "chunkName": "pages/protected/created-test/index",
+    "url": "/protected/created-test",
+    "_name": "_88644148"
+  },
+  {
+    "name": "protected-purchased-test",
+    "path": "/protected/purchased-test",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\purchased-test.vue",
+    "chunkName": "pages/protected/purchased-test",
+    "url": "/protected/purchased-test",
+    "_name": "_2ff5966b"
+  },
+  {
+    "name": "protected-user-dashboard",
+    "path": "/protected/user-dashboard",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\user-dashboard.vue",
+    "chunkName": "pages/protected/user-dashboard",
+    "url": "/protected/user-dashboard",
+    "_name": "_32199de1"
+  },
+  {
+    "name": "protected-admin-category",
+    "path": "/protected/admin/category",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\index.vue",
+    "chunkName": "pages/protected/admin/category/index",
+    "url": "/protected/admin/category",
+    "_name": "_aecf0418"
+  },
+  {
+    "name": "protected-admin-feedback",
+    "path": "/protected/admin/feedback",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\feedback.vue",
+    "chunkName": "pages/protected/admin/feedback",
+    "url": "/protected/admin/feedback",
+    "_name": "_6cfa45d5"
+  },
+  {
+    "name": "protected-admin-search-feedback",
+    "path": "/protected/admin/search-feedback",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\search-feedback\\\\index.vue",
+    "chunkName": "pages/protected/admin/search-feedback/index",
+    "url": "/protected/admin/search-feedback",
+    "_name": "_48c886d8"
+  },
+  {
+    "name": "protected-admin-category-add-category",
+    "path": "/protected/admin/category/add-category",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\add-category.vue",
+    "chunkName": "pages/protected/admin/category/add-category",
+    "url": "/protected/admin/category/add-category",
+    "_name": "_cbb2a110"
+  },
+  {
+    "name": "protected-admin-category-add-subcategory",
+    "path": "/protected/admin/category/add-subcategory",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\add-subcategory.vue",
+    "chunkName": "pages/protected/admin/category/add-subcategory",
+    "url": "/protected/admin/category/add-subcategory",
+    "_name": "_04d52cb4"
+  },
+  {
+    "name": "protected-admin-category-edit-category",
+    "path": "/protected/admin/category/edit-category",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\edit-category.vue",
+    "chunkName": "pages/protected/admin/category/edit-category",
+    "url": "/protected/admin/category/edit-category",
+    "_name": "_48004903"
+  },
+  {
+    "name": "protected-admin-category-edit-subcategory",
+    "path": "/protected/admin/category/edit-subcategory",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\edit-subcategory.vue",
+    "chunkName": "pages/protected/admin/category/edit-subcategory",
+    "url": "/protected/admin/category/edit-subcategory",
+    "_name": "_22282349"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "url": "/",
+    "_name": "_77c14c1a"
+  },
+  {
+    "name": "protected-admin-category-categoryId",
+    "path": "/protected/admin/category/:categoryId",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\category\\\\_categoryId.vue",
+    "chunkName": "pages/protected/admin/category/_categoryId",
+    "_name": "_587cb20c"
+  },
+  {
+    "name": "protected-admin-test-testId",
+    "path": "/protected/admin/test/:testId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\admin\\\\test\\\\_testId.vue",
+    "chunkName": "pages/protected/admin/test/_testId",
+    "_name": "_03b9b8fa"
+  },
+  {
+    "name": "protected-test-result-attemptedId",
+    "path": "/protected/test/result/:attemptedId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\test\\\\result\\\\_attemptedId.vue",
+    "chunkName": "pages/protected/test/result/_attemptedId",
+    "_name": "_73d1c1e6"
+  },
+  {
+    "name": "protected-test-start-test-testId",
+    "path": "/protected/test/start-test/:testId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\test\\\\start-test\\\\_testId.vue",
+    "chunkName": "pages/protected/test/start-test/_testId",
+    "_name": "_d88e0bc4"
+  },
+  {
+    "name": "category-test-testId",
+    "path": "/category/test/:testId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\category\\\\test\\\\_testId.vue",
+    "chunkName": "pages/category/test/_testId",
+    "_name": "_44b3aa3d"
+  },
+  {
+    "name": "protected-created-test-createdTestId",
+    "path": "/protected/created-test/:createdTestId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\created-test\\\\_createdTestId.vue",
+    "chunkName": "pages/protected/created-test/_createdTestId",
+    "_name": "_216a2b3c"
+  },
+  {
+    "name": "protected-test-testId",
+    "path": "/protected/test/:testId?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\protected\\\\test\\\\_testId.vue",
+    "chunkName": "pages/protected/test/_testId",
+    "_name": "_28a80fca"
+  },
+  {
+    "name": "blogs-blogslug",
+    "path": "/blogs/:blogslug",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\blogs\\\\_blogslug.vue",
+    "chunkName": "pages/blogs/_blogslug",
+    "_name": "_58b90b6a"
+  },
+  {
+    "name": "categories-categoriesId",
+    "path": "/categories/:categoriesId",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\categories\\\\_categoriesId.vue",
+    "chunkName": "pages/categories/_categoriesId",
+    "_name": "_f049988a"
+  },
+  {
+    "name": "category-categoryId",
+    "path": "/category/:categoryId",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\category\\\\_categoryId.vue",
+    "chunkName": "pages/category/_categoryId",
+    "_name": "_910d788a"
+  },
+  {
+    "name": "mock-test-mockslug",
+    "path": "/mock-test/:mockslug?",
+    "component": "C:\\\\MOCk\\\\mock-certified-mobileapp\\\\pages\\\\mock-test\\\\_mockslug.vue",
+    "chunkName": "pages/mock-test/_mockslug",
+    "_name": "_5e43976e"
+  }
+]

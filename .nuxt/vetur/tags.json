@@ -1,0 +1,218 @@
+{
+  "SanityContent": {
+    "description": "Auto imported from node_modules/@nuxtjs/sanity/dist/components/sanity-content.js"
+  },
+  "SanityFile": {
+    "description": "Auto imported from node_modules/@nuxtjs/sanity/dist/components/sanity-file.js"
+  },
+  "SanityImage": {
+    "description": "Auto imported from node_modules/@nuxtjs/sanity/dist/components/sanity-image.js"
+  },
+  "AnimatedPlaceholder": {
+    "description": "Auto imported from components/AnimatedPlaceholder.vue"
+  },
+  "FooterDesktop": {
+    "description": "Auto imported from components/FooterDesktop.vue"
+  },
+  "FooterNavbar": {
+    "description": "Auto imported from components/FooterNavbar.vue"
+  },
+  "FooterNew": {
+    "description": "Auto imported from components/FooterNew.vue"
+  },
+  "HomeScrollerBanner": {
+    "description": "Auto imported from components/HomeScrollerBanner.vue"
+  },
+  "Login": {
+    "description": "Auto imported from components/login.vue"
+  },
+  "Navbar": {
+    "description": "Auto imported from components/Navbar.vue"
+  },
+  "NavbarAuth": {
+    "description": "Auto imported from components/NavbarAuth.vue"
+  },
+  "NavbarDesktop": {
+    "description": "Auto imported from components/NavbarDesktop.vue"
+  },
+  "NavbarLogo": {
+    "description": "Auto imported from components/NavbarLogo.vue"
+  },
+  "NavbarNew": {
+    "description": "Auto imported from components/NavbarNew.vue"
+  },
+  "SampleQuestion": {
+    "description": "Auto imported from components/SampleQuestion.vue"
+  },
+  "SearcBar": {
+    "description": "Auto imported from components/SearcBar.vue"
+  },
+  "SearchInput": {
+    "description": "Auto imported from components/SearchInput.vue"
+  },
+  "TestCards": {
+    "description": "Auto imported from components/TestCards.vue"
+  },
+  "TestCardsSkeleton": {
+    "description": "Auto imported from components/TestCardsSkeleton.vue"
+  },
+  "TestDetail": {
+    "description": "Auto imported from components/TestDetail.vue"
+  },
+  "TestInstructions": {
+    "description": "Auto imported from components/TestInstructions.vue"
+  },
+  "TestQuestion": {
+    "description": "Auto imported from components/TestQuestion.vue"
+  },
+  "TiptapEditor": {
+    "description": "Auto imported from components/TiptapEditor.vue"
+  },
+  "BlogSlugPageBanner": {
+    "description": "Auto imported from components/BlogSlugPage/Banner.vue"
+  },
+  "CategoryAllCategory": {
+    "description": "Auto imported from components/Category/AllCategory.vue"
+  },
+  "CategoryBanner": {
+    "description": "Auto imported from components/Category/Banner.vue"
+  },
+  "CategoryPotentialYour": {
+    "description": "Auto imported from components/Category/PotentialYour.vue"
+  },
+  "CategoryYouKnow": {
+    "description": "Auto imported from components/Category/YouKnow.vue"
+  },
+  "BlogsPageBanner": {
+    "description": "Auto imported from components/BlogsPage/Banner.vue"
+  },
+  "BlogsPageFeatureBlogs": {
+    "description": "Auto imported from components/BlogsPage/FeatureBlogs.vue"
+  },
+  "BlogsPagePopular": {
+    "description": "Auto imported from components/BlogsPage/Popular.vue"
+  },
+  "ForgetPasswordCover": {
+    "description": "Auto imported from components/ForgetPassword/Cover.vue"
+  },
+  "ForgetPasswordInner": {
+    "description": "Auto imported from components/ForgetPassword/Inner.vue"
+  },
+  "IndividualTestNavigateLinks": {
+    "description": "Auto imported from components/IndividualTest/NavigateLinks.vue"
+  },
+  "IndividualTestNextStep": {
+    "description": "Auto imported from components/IndividualTest/NextStep.vue"
+  },
+  "HomePageBanner": {
+    "description": "Auto imported from components/HomePage/Banner.vue"
+  },
+  "HomePageExamJitters": {
+    "description": "Auto imported from components/HomePage/ExamJitters.vue"
+  },
+  "HomePageExprienceTest": {
+    "description": "Auto imported from components/HomePage/ExprienceTest.vue"
+  },
+  "HomePageHelpHand": {
+    "description": "Auto imported from components/HomePage/HelpHand.vue"
+  },
+  "HomePageLookingFor": {
+    "description": "Auto imported from components/HomePage/LookingFor.vue"
+  },
+  "HomePageOurBlogs": {
+    "description": "Auto imported from components/HomePage/OurBlogs.vue"
+  },
+  "HomePageStudentReview": {
+    "description": "Auto imported from components/HomePage/StudentReview.vue"
+  },
+  "HomePageTopSelling": {
+    "description": "Auto imported from components/HomePage/TopSelling.vue"
+  },
+  "HomePageWhyUs": {
+    "description": "Auto imported from components/HomePage/WhyUs.vue"
+  },
+  "HomePageYourWallet": {
+    "description": "Auto imported from components/HomePage/YourWallet.vue"
+  },
+  "HomeContactUs": {
+    "description": "Auto imported from components/Home/ContactUs.vue"
+  },
+  "HomeElevateYourSkills": {
+    "description": "Auto imported from components/Home/ElevateYourSkills.vue"
+  },
+  "HomeExamJitters": {
+    "description": "Auto imported from components/Home/ExamJitters.vue"
+  },
+  "HomeExperienceTest": {
+    "description": "Auto imported from components/Home/ExperienceTest.vue"
+  },
+  "HomeFreshPerspectives": {
+    "description": "Auto imported from components/Home/FreshPerspectives.vue"
+  },
+  "HomeLookingFor": {
+    "description": "Auto imported from components/Home/LookingFor.vue"
+  },
+  "HomeNotConvinced": {
+    "description": "Auto imported from components/Home/NotConvinced.vue"
+  },
+  "HomeOurClients": {
+    "description": "Auto imported from components/Home/OurClients.vue"
+  },
+  "HomeSellYourTest": {
+    "description": "Auto imported from components/Home/SellYourTest.vue"
+  },
+  "HomeTopSellingTests": {
+    "description": "Auto imported from components/Home/TopSellingTests.vue"
+  },
+  "HomeWhyUs": {
+    "description": "Auto imported from components/Home/WhyUs.vue"
+  },
+  "HomeYourWallet": {
+    "description": "Auto imported from components/Home/YourWallet.vue"
+  },
+  "LoginCover": {
+    "description": "Auto imported from components/Login/Cover.vue"
+  },
+  "LoginInner": {
+    "description": "Auto imported from components/Login/Inner.vue"
+  },
+  "SignUpCover": {
+    "description": "Auto imported from components/SignUp/Cover.vue"
+  },
+  "SignUpInner": {
+    "description": "Auto imported from components/SignUp/Inner.vue"
+  },
+  "MockTestPageBanner": {
+    "description": "Auto imported from components/MockTestPage/Banner.vue"
+  },
+  "MockTestPageFeatureTest": {
+    "description": "Auto imported from components/MockTestPage/FeatureTest.vue"
+  },
+  "MockTestPageLatestTest": {
+    "description": "Auto imported from components/MockTestPage/LatestTest.vue"
+  },
+  "MockTestPageLowerBanner": {
+    "description": "Auto imported from components/MockTestPage/LowerBanner.vue"
+  },
+  "MockTestPageYouStarted": {
+    "description": "Auto imported from components/MockTestPage/YouStarted.vue"
+  },
+  "UserDashboardAlexa": {
+    "description": "Auto imported from components/UserDashboard/Alexa.vue"
+  },
+  "UserDashboardBalance": {
+    "description": "Auto imported from components/UserDashboard/Balance.vue"
+  },
+  "UserDashboardBottomBanner": {
+    "description": "Auto imported from components/UserDashboard/BottomBanner.vue"
+  },
+  "UserDashboardCertificates": {
+    "description": "Auto imported from components/UserDashboard/Certificates.vue"
+  },
+  "UserDashboardSupport": {
+    "description": "Auto imported from components/UserDashboard/Support.vue"
+  },
+  "UserDashboardTest": {
+    "description": "Auto imported from components/UserDashboard/Test.vue"
+  }
+}
